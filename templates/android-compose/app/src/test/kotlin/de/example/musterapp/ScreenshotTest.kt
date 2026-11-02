@@ -22,7 +22,6 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.text.TextLayoutResult
-import androidx.compose.ui.text.style.TextOverflow
 import com.github.takahirom.roborazzi.ExperimentalRoborazziApi
 import com.github.takahirom.roborazzi.captureScreenRoboImage
 import de.sebaro_ventures.design.SebaroTone
@@ -76,21 +75,6 @@ private val SEARCH_LABEL: (String) -> List<TextWaiver> = {
 private val NOTE_LABEL: (String) -> List<TextWaiver> = {
     listOf(TextWaiver("SbTextField: label „Notiz (optional)“ only as one TalkBack text", 1) { text, condition, _ ->
         text == "Notiz, optional" && condition == "no text layout"
-    })
-}
-
-/**
- * SbBarChart draws each slot's weekday and number on one line (softWrap = false, overflow Visible) and leaves out,
- * at large text, those that do not fit (spec/08 §16). For such a text Compose's semantics layout wraps it anyway, so
- * it reports a text taller than its box, though the drawing shows one line (looked at in both scales). Waived: only
- * „taller“, only for a non-wrapping, overflow-visible text without a line break, only on the data screen, with the
- * number of such slot texts per run (at 1.0 the seven numbers, at 2.0 also the weekdays that no longer fit their slot).
- */
-private val BAR_SLOTS: (String) -> List<TextWaiver> = { tag ->
-    val expected = mapOf("light-fs1.0" to 7, "dark-fs1.0" to 7, "light-fs2.0" to 11, "dark-fs2.0" to 12).getValue(tag)
-    listOf(TextWaiver("SbBarChart slot text on one line", expected) { _, condition, r ->
-        condition == "taller" && r != null && !r.layoutInput.softWrap &&
-            r.layoutInput.overflow == TextOverflow.Visible && '\n' !in r.layoutInput.text.text
     })
 }
 
@@ -186,7 +170,7 @@ private val SCREENS = listOf(
         it.onNodeWithContentDescription("Schließen").performClick()
     }) { Form(edit = true) },
     Case("12-settings", "Sprache") { Settings() },
-    Case("13-data", "Zahlen", waivers = BAR_SLOTS) { DataScreen(navigation = { Nav(1) }) },
+    Case("13-data", "Zahlen") { DataScreen(navigation = { Nav(1) }) },
     Case("14-detail-long-word", "Abholen: $LONG_WORD, bis Freitag.") {
         DetailScreen(entry = LONG_WORD_ENTRY, onBack = {}, onEdit = {}, onFinish = {}, onDelete = {})
     },
@@ -195,7 +179,7 @@ private val SCREENS = listOf(
 
 /** The data screen at full length, in an 8000 dp window, so every part of it can be looked at. */
 private val TALL_SCREENS = listOf(
-    Case("13-data-full", "Zahlen", waivers = BAR_SLOTS) { DataScreen(navigation = { Nav(1) }) },
+    Case("13-data-full", "Zahlen") { DataScreen(navigation = { Nav(1) }) },
 )
 
 @RunWith(RobolectricTestRunner::class)

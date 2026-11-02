@@ -21,28 +21,88 @@ public struct SbDarkArea<Content: View>: View {
     }
 }
 
-/// The camera's flash as a switch with its word (D106 (16); *provisional, agent*): the `flash` icon and „Blitz aus“ or
-/// „Blitz an“, 48 pt high; VoiceOver hears „Blitz“, a switch, and its state. Pressed fill, the focus ring.
-public struct SbFlashSwitch: View {
-    @Binding var on: Bool
+/// The camera's flash (D120 (1)): the system's automatic flash, always on, or off.
+public enum SbFlashMode: CaseIterable, Sendable { case auto, on, off }
+
+/// The camera's flash as a key with its word (D120 (1)): the `flash` icon and „Blitz: Auto“, „Blitz an“ or „Blitz aus“,
+/// 48 pt high, that opens the system menu with `modes` („Auto“, „An“, „Aus“) and the check mark at the chosen one
+/// (`SbMenuContent`, as `SbOverflowMenu`). VoiceOver hears the key's word, a button, and „Menü öffnen“ as its hint.
+public struct SbFlashMenu: View {
+    @Binding var mode: SbFlashMode
+    let modes: [SbFlashMode]
     private var context = SbContext()
-    public init(on: Binding<Bool>) { self._on = on }
+
+    public init(mode: Binding<SbFlashMode>, modes: [SbFlashMode] = SbFlashMode.allCases) {
+        self._mode = mode
+        self.modes = modes
+    }
+
+    /// The key's word: „Blitz: Auto“, „Blitz an“, „Blitz aus“.
+    static func word(_ m: SbMessages, _ mode: SbFlashMode) -> String {
+        switch mode { case .auto: m.flashAuto; case .on: m.flashOn; case .off: m.flashOff }
+    }
+
+    /// The menu's rows in the order of `modes`, the check at `mode`.
+    static func items(_ m: SbMessages, mode: SbFlashMode, modes: [SbFlashMode],
+                      choose: @escaping (SbFlashMode) -> Void) -> [SbMenuItem] {
+        modes.map { f in
+            let entry = switch f { case .auto: m.flashModeAuto; case .on: m.flashModeOn; case .off: m.flashModeOff }
+            return SbMenuItem(entry, checked: f == mode) { choose(f) }
+        }
+    }
+
     public var body: some View {
         let m = context.messages
-        Button { on.toggle() } label: {
+        let word = Self.word(m, mode)
+        Menu {
+            SbMenuContent(Self.items(m, mode: mode, modes: modes) { mode = $0 })
+        } label: {
             HStack(spacing: SebaroSpace.s2) {
                 SbIcon("flash", size: SebaroSize.iconLg, color: context.tone.text)
-                SbWrapText(on ? m.flashOn : m.flashOff).sbFont(.label).foregroundStyle(context.tone.text)
+                SbWrapText(word).sbFont(.label).foregroundStyle(context.tone.text)
             }
             .padding(.horizontal, SebaroSpace.s3)
             .frame(minHeight: SebaroSize.targetTouch)
             .contentShape(Rectangle())
         }
-        .buttonStyle(SbFillPressStyle())
+        .menuIndicator(.hidden)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text(m.flash))
-        .accessibilityValue(Text(on ? m.checkOn : m.checkOff))
-        .accessibilityAddTraits(.isToggle)
+        .accessibilityLabel(Text(word))
+        .accessibilityHint(Text(m.openMenu))
+        .accessibilityAddTraits(.isButton)
+    }
+}
+
+/// The flash as it was before D120 (1): on or off. It now draws `SbFlashMenu` with „An“ and „Aus“ only.
+/// `SbFlashMenu(mode:)` is preferred for new code (it offers „Auto“); the same two ways there are
+/// `SbFlashMenu(mode: …, modes: [.on, .off])`. Not marked deprecated on purpose (CHECKS.md §46.10): an app that builds
+/// with warnings as errors keeps building after a package update.
+public struct SbFlashSwitch: View {
+    @Binding var on: Bool
+    public init(on: Binding<Bool>) { self._on = on }
+    public var body: some View {
+        SbFlashMenu(mode: Binding(get: { on ? .on : .off }, set: { on = $0 == .on }), modes: [.on, .off])
+    }
+}
+
+/// What the camera may do (D120 (2)). The app keeps the platform's permission logic (`AVCaptureDevice`, the system's
+/// question, the settings) and passes the state it knows: `granted` shows the preview; `notAsked` shows `reason` (the
+/// app's sentence what the camera is for) with „Kamera erlauben“ (`onAsk` asks the system); `denied` shows the calm
+/// sentence (`text` or „Die Kamera ist nicht erlaubt. …“) with „Einstellungen öffnen“ and, with `onImport`, „Aus Galerie
+/// importieren“.
+public enum SbCameraPermission {
+    case granted
+    case notAsked(reason: String, onAsk: () -> Void)
+    case denied(onOpenSettings: () -> Void, onImport: (() -> Void)? = nil, text: String? = nil)
+
+    /// The words in the preview's place: the sentence, the primary action and the secondary one (nil = none);
+    /// nil for `granted`.
+    func words(_ m: SbMessages) -> (sentence: String, primary: String, secondary: String?)? {
+        switch self {
+        case .granted: nil
+        case let .notAsked(reason, _): (reason, m.cameraAllow, nil)
+        case let .denied(_, onImport, text): (text ?? m.cameraDenied, m.recordSettings, onImport == nil ? nil : m.cameraImport)
+        }
     }
 }
 
@@ -78,12 +138,27 @@ public struct SbPhotoOutline: View {
 }
 
 /// The camera that takes pages (spec/02 §3.32; D106 (16), (17), (20)–(22)), always in the dark area: the top bar with
-/// „Kamera schließen“, `title` and, when the camera has a flash (`flashOn` not nil), `SbFlashSwitch`; the `preview` in
+/// „Kamera schließen“, `title` and, when the camera has a flash (`flash`, or the older two-way `flashOn`, not nil),
+/// `SbFlashMenu` (D120 (1)); the `preview` in
 /// the middle (the app's AVCaptureVideoPreviewLayer view: sebaro brings no camera library) with the found page's
 /// `outline`; under it the finder's state as glyph and word („sucht Blatt“, „Blatt erkannt“; `findWord` = the app's
 /// own) and, with `thumbnail`, the pages taken so far (`SbCaptureStrip`, only to look at, D107 (7)); at the bottom the
 /// one primary action „Seite aufnehmen“ with the count as its hint („2 Seiten bisher“). No flash of the picture and no
 /// sound of its own (D106 (20)). `captureState` shows the work of keeping a page in the action itself (D48).
+/// `actions` = the app's icon buttons in the top bar before the flash („Aus Galerie importieren“); `captureHint` = the
+/// app's sentence in place of the count (a help sentence or „Bleibt auf diesem Gerät.“; both provisional, agent).
+/// D119 (2): with `onDone` and pages taken, the key „Fertig (2)“ at the end of the row of pages leads to the pages; with
+/// `onSave` and `onDiscard` and pages taken, the close X asks first with `SbUnsavedDialog` („Scan sichern?“,
+/// „Abbrechen“ · „Verwerfen“ · „Sichern“, `saveHint` under „Sichern“); without pages it calls `onClose` at once.
+/// D120 (2): `permission` other than `.granted` puts a sentence in the preview's place: before the system's question
+/// the app's sentence and „Kamera erlauben“ as the primary action; after a denial the calm sentence, „Einstellungen
+/// öffnen“ as the primary action and, with `onImport`, „Aus Galerie importieren“ under the sentence. Then no flash, no
+/// outline and no finder's state.
+/// `closeAsking` (2026-11-01, provisional, agent) holds the X's question from outside, as Compose's `closeAsking`; nil =
+/// the frame holds it. A sheet around the camera cannot be swiped away while the X would ask. The flash menu is the
+/// system's `Menu`, whose open state SwiftUI does not hand out, so it has no `flashExpanded` here (Compose has one).
+/// The type keeps its two parameters `SbCameraFrame<Preview, Thumb>` from before `actions` (CHECKS.md §46.10): the
+/// app's actions are held as `AnyView`, so an app's explicit type such as `SbCameraFrame<Color, Color>` still compiles.
 public struct SbCameraFrame<Preview: View, Thumb: View>: View {
     let title: String
     let find: SbCameraFind
@@ -92,18 +167,34 @@ public struct SbCameraFrame<Preview: View, Thumb: View>: View {
     let onClose: () -> Void
     let outline: [CGPoint]?
     let flashOn: Binding<Bool>?
+    let flash: Binding<SbFlashMode>?
+    let permission: SbCameraPermission
     let findWord: String?
     let captureLabel: String?
     let captureState: SbActionState
     let haptics: Bool
     let thumbnail: ((Int) -> Thumb)?
+    let onDone: (() -> Void)?
+    let onSave: (() -> Void)?
+    let onDiscard: (() -> Void)?
+    let saveHint: SbDataPathHint?
+    let captureHint: String?
+    let actions: AnyView
     let preview: Preview
+    let closeAsking: Binding<Bool>?
+    @State private var asking = false
     private var context = SbContext()
 
-    public init(_ title: String, find: SbCameraFind, pageCount: Int, onCapture: @escaping () -> Void,
+    /// `closeAsking` has its own overloads without a default (CHECKS.md §47.6): the forms without it keep their
+    /// signatures (below, in the extension), so a reference to an initializer of D120 still binds.
+    public init<Actions: View>(_ title: String, find: SbCameraFind, pageCount: Int, onCapture: @escaping () -> Void,
                 onClose: @escaping () -> Void, outline: [CGPoint]? = nil, flashOn: Binding<Bool>? = nil,
                 findWord: String? = nil, captureLabel: String? = nil, captureState: SbActionState = .idle,
-                haptics: Bool = true, thumbnail: ((Int) -> Thumb)? = nil, @ViewBuilder preview: () -> Preview) {
+                haptics: Bool = true, thumbnail: ((Int) -> Thumb)? = nil, onDone: (() -> Void)? = nil,
+                onSave: (() -> Void)? = nil, onDiscard: (() -> Void)? = nil, saveHint: SbDataPathHint? = nil,
+                captureHint: String? = nil, flash: Binding<SbFlashMode>? = nil,
+                permission: SbCameraPermission = .granted, closeAsking: Binding<Bool>?,
+                @ViewBuilder actions: () -> Actions, @ViewBuilder preview: () -> Preview) {
         self.title = title
         self.find = find
         self.pageCount = pageCount
@@ -111,12 +202,21 @@ public struct SbCameraFrame<Preview: View, Thumb: View>: View {
         self.onClose = onClose
         self.outline = outline
         self.flashOn = flashOn
+        self.flash = flash
+        self.permission = permission
         self.findWord = findWord
         self.captureLabel = captureLabel
         self.captureState = captureState
         self.haptics = haptics
         self.thumbnail = thumbnail
+        self.onDone = onDone
+        self.onSave = onSave
+        self.onDiscard = onDiscard
+        self.saveHint = saveHint
+        self.captureHint = captureHint
+        self.actions = AnyView(actions())
         self.preview = preview()
+        self.closeAsking = closeAsking
     }
 
     public var body: some View {
@@ -126,25 +226,33 @@ public struct SbCameraFrame<Preview: View, Thumb: View>: View {
                 // the flash switch beside the title while both fit, else under it (AX5 on 320 pt)
                 ViewThatFits(in: .horizontal) {
                     HStack(spacing: SebaroSpace.s1) {
-                        SbIconButton("close", label: m.cameraClose, action: onClose)
+                        SbIconButton("close", label: m.cameraClose, action: close)
                         Text(title).sbFont(.title).lineLimit(1).fixedSize()
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .accessibilityAddTraits(.isHeader)
-                        if let flashOn { SbFlashSwitch(on: flashOn).fixedSize() }
+                        actions
+                        flashKey.fixedSize()
                     }
                     VStack(alignment: .leading, spacing: 0) {
                         HStack(alignment: .top, spacing: SebaroSpace.s1) {
-                            SbIconButton("close", label: m.cameraClose, action: onClose)
+                            SbIconButton("close", label: m.cameraClose, action: close)
                             SbWrapText(title, style: .title).frame(maxWidth: .infinity, alignment: .leading)
                                 .accessibilityAddTraits(.isHeader)
                         }
-                        if let flashOn { SbFlashSwitch(on: flashOn) }
+                        HStack(spacing: SebaroSpace.s1) {
+                            actions
+                            flashKey
+                        }
                     }
                 }
                 .padding(.horizontal, SebaroSpace.s1)
                 ZStack {
-                    preview
-                    if let outline { SbPhotoOutline(outline) }
+                    if let ask = permission.words(m) {
+                        askView(ask)
+                    } else {
+                        preview
+                        if let outline { SbPhotoOutline(outline) }
+                    }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .clipped()
@@ -154,25 +262,222 @@ public struct SbCameraFrame<Preview: View, Thumb: View>: View {
                     ScrollView { foot }.frame(maxHeight: SebaroSize.targetTouch * 5)
                 }
             }
+            // the question only while its grounds hold: pages taken and both ways given; when the pages drop to 0 or
+            // the app takes `onSave` / `onDiscard` away, it closes and stays closed until the X is pressed again
+            .sbScanUnsavedDialog(isPresented: Binding(get: { askingNow && canAsk }, set: { setAsking($0) }),
+                                 pageCount: pageCount, saveHint: saveHint, haptics: haptics,
+                                 onSave: { onSave?() }, onDiscard: { onDiscard?() })
+            // watched as the pair of question and grounds, from the first appearance on (CHECKS.md §47.6): a held or
+            // restored `true` without its grounds is reported back as false at once, also when the app sets it while
+            // the grounds stay away, so it cannot open later when pages arrive
+            .onChange(of: Self.keptQuestion(askingNow, pageCount: pageCount, confirms: confirms) != askingNow,
+                      initial: true) { _, invalid in
+                if invalid { setAsking(false) }
+            }
+            // the system's way out of a sheet (swipe down) does not skip the question while the X would ask
+            // (2026-11-01, provisional, agent; the Android back gesture's match)
+            .interactiveDismissDisabled(canAsk)
         }
+    }
+
+    private var confirms: Bool { onSave != nil && onDiscard != nil }
+    /// The X's question: held by the app (`closeAsking`, 2026-11-01, provisional, agent) or by the frame.
+    private var askingNow: Bool { closeAsking?.wrappedValue ?? asking }
+    func setAsking(_ value: Bool) {
+        if let closeAsking { closeAsking.wrappedValue = value } else { asking = value }
+    }
+    private var canAsk: Bool { Self.closeAsks(pageCount: pageCount, confirms: confirms) }
+
+    /// The open question after a change of the pages or the ways (CHECKS.md §46.10): it stays open only while the X
+    /// would still ask; once closed it never reopens by itself.
+    static func keptQuestion(_ asking: Bool, pageCount: Int, confirms: Bool) -> Bool {
+        asking && closeAsks(pageCount: pageCount, confirms: confirms)
+    }
+
+    /// The flash key (D120 (1)) while the camera may run: `flash`, else the older two-way `flashOn` with „An“ and „Aus“.
+    @ViewBuilder private var flashKey: some View {
+        if permission.words(context.messages) == nil {
+            if let flash {
+                SbFlashMenu(mode: flash)
+            } else if let flashOn {
+                SbFlashMenu(mode: Binding(get: { flashOn.wrappedValue ? .on : .off },
+                                          set: { flashOn.wrappedValue = $0 == .on }), modes: [.on, .off])
+            }
+        }
+    }
+
+    /// The preview's place without the camera (D120 (2)): the sentence in body, centred, and the import key; centred
+    /// while it fits, else it scrolls from its top (AX5 on 320 pt).
+    private func askView(_ ask: (sentence: String, primary: String, secondary: String?)) -> some View {
+        let content = VStack(spacing: SebaroSpace.s4) {
+            SbWrapText(ask.sentence, style: .body).multilineTextAlignment(.center)
+            if ask.secondary != nil, case let .denied(_, onImport?, _) = permission {
+                Button(ask.secondary ?? "", action: onImport).buttonStyle(SbSecondaryButtonStyle())
+            }
+        }
+        .padding(.horizontal, SebaroSpacing.gutter)
+        .padding(.vertical, SebaroSpace.s4)
+        .frame(maxWidth: .infinity)
+        return ViewThatFits(in: .vertical) {
+            content.frame(maxHeight: .infinity)
+            ScrollView { content }
+        }
+    }
+
+    /// The close X (D119 (2)): asks while pages exist and the app gave `onSave` and `onDiscard`, else closes at once.
+    func close() {
+        if canAsk { setAsking(true) } else { onClose() }
+    }
+
+    /// Whether the close X asks first (D119 (2)): with pages taken and both ways given.
+    static func closeAsks(pageCount: Int, confirms: Bool) -> Bool { confirms && pageCount > 0 }
+
+    /// The word of the done key, „Fertig (2)“, or nil while there is no page or no `onDone` (D119 (2)).
+    static func doneWord(_ m: SbMessages, pageCount: Int, hasDone: Bool, locale: Locale) -> String? {
+        guard hasDone, pageCount > 0 else { return nil }
+        return m.cameraDone(pageCount, SbMessages.formatCount(pageCount, locale: locale))
+    }
+
+    var doneKey: String? {
+        Self.doneWord(context.messages, pageCount: pageCount, hasDone: onDone != nil, locale: context.currentLocale)
     }
 
     private var foot: some View {
         let m = context.messages
         return VStack(alignment: .leading, spacing: SebaroSpace.s3) {
+            if permission.words(m) == nil {
             HStack(alignment: .firstTextBaseline, spacing: SebaroSpace.s1) {
                 SbIcon(find == .found ? "success--filled" : "pending--16", size: SebaroSize.iconSm,
                        color: find == .found ? .sbSuccess : context.tone.textMuted)
                 SbWrapText(findWord ?? (find == .found ? m.cameraFound : m.cameraLooking), style: .caption)
             }
             .accessibilityElement(children: .combine)
-            if let thumbnail, pageCount > 0 { SbCaptureStrip(count: pageCount, thumbnail: thumbnail) }
-            SbPrimaryActionBar(SbPrimaryActionModel(captureLabel ?? m.capturePage,
-                                                    hint: m.capturedSoFar(pageCount, SbMessages.formatCount(pageCount, locale: context.currentLocale)),
-                                                    state: captureState, haptics: haptics, action: onCapture))
+            }
+            if (thumbnail != nil && pageCount > 0) || doneKey != nil {
+                // the pages and „Fertig (2)“ at the row's end; under each other when both do not fit (AX5)
+                ViewThatFits(in: .horizontal) {
+                    HStack(spacing: SebaroSpace.s3) { pagesAndDone }
+                    VStack(alignment: .trailing, spacing: SebaroSpace.s2) { pagesAndDone }
+                }
+            }
+            switch permission {
+            case .granted:
+                SbPrimaryActionBar(SbPrimaryActionModel(captureLabel ?? m.capturePage,
+                                                        hint: captureHint ?? m.capturedSoFar(pageCount, SbMessages.formatCount(pageCount, locale: context.currentLocale)),
+                                                        state: captureState, haptics: haptics, action: onCapture))
+            case let .notAsked(_, onAsk):
+                SbPrimaryActionBar(SbPrimaryActionModel(m.cameraAllow, haptics: haptics, action: onAsk))
+            case let .denied(onOpenSettings, _, _):
+                SbPrimaryActionBar(SbPrimaryActionModel(m.recordSettings, haptics: haptics, action: onOpenSettings))
+            }
         }
         .padding(.top, SebaroSpace.s3)
         .padding(.horizontal, SebaroSpacing.gutter)
+    }
+
+    @ViewBuilder private var pagesAndDone: some View {
+        if let thumbnail, pageCount > 0 {
+            SbCaptureStrip(count: pageCount, thumbnail: thumbnail).frame(maxWidth: .infinity, alignment: .leading)
+        } else {
+            Spacer(minLength: 0)
+        }
+        if let doneKey, let onDone {
+            Button(doneKey, action: onDone).buttonStyle(SbSecondaryButtonStyle()).fixedSize()
+        }
+    }
+}
+
+public extension SbCameraFrame {
+    /// The camera without actions of the app's own (the form before `actions`; source compatible).
+    init(_ title: String, find: SbCameraFind, pageCount: Int, onCapture: @escaping () -> Void,
+         onClose: @escaping () -> Void, outline: [CGPoint]? = nil, flashOn: Binding<Bool>? = nil,
+         findWord: String? = nil, captureLabel: String? = nil, captureState: SbActionState = .idle,
+         haptics: Bool = true, thumbnail: ((Int) -> Thumb)? = nil, onDone: (() -> Void)? = nil,
+         onSave: (() -> Void)? = nil, onDiscard: (() -> Void)? = nil, saveHint: SbDataPathHint? = nil,
+         captureHint: String? = nil, flash: Binding<SbFlashMode>? = nil, permission: SbCameraPermission = .granted,
+         closeAsking: Binding<Bool>?, @ViewBuilder preview: () -> Preview) {
+        self.init(title, find: find, pageCount: pageCount, onCapture: onCapture, onClose: onClose, outline: outline,
+                  flashOn: flashOn, findWord: findWord, captureLabel: captureLabel, captureState: captureState,
+                  haptics: haptics, thumbnail: thumbnail, onDone: onDone, onSave: onSave, onDiscard: onDiscard,
+                  saveHint: saveHint, captureHint: captureHint, flash: flash, permission: permission,
+                  closeAsking: closeAsking, actions: { EmptyView() }, preview: preview)
+    }
+
+    /// The form of D120 with the app's actions, before `closeAsking` (kept with its signature, CHECKS.md §47.6).
+    init<Actions: View>(_ title: String, find: SbCameraFind, pageCount: Int, onCapture: @escaping () -> Void,
+                        onClose: @escaping () -> Void, outline: [CGPoint]? = nil, flashOn: Binding<Bool>? = nil,
+                        findWord: String? = nil, captureLabel: String? = nil, captureState: SbActionState = .idle,
+                        haptics: Bool = true, thumbnail: ((Int) -> Thumb)? = nil, onDone: (() -> Void)? = nil,
+                        onSave: (() -> Void)? = nil, onDiscard: (() -> Void)? = nil, saveHint: SbDataPathHint? = nil,
+                        captureHint: String? = nil, flash: Binding<SbFlashMode>? = nil,
+                        permission: SbCameraPermission = .granted,
+                        @ViewBuilder actions: () -> Actions, @ViewBuilder preview: () -> Preview) {
+        self.init(title, find: find, pageCount: pageCount, onCapture: onCapture, onClose: onClose, outline: outline,
+                  flashOn: flashOn, findWord: findWord, captureLabel: captureLabel, captureState: captureState,
+                  haptics: haptics, thumbnail: thumbnail, onDone: onDone, onSave: onSave, onDiscard: onDiscard,
+                  saveHint: saveHint, captureHint: captureHint, flash: flash, permission: permission,
+                  closeAsking: nil, actions: actions, preview: preview)
+    }
+
+    /// The form of D120 without actions, before `closeAsking` (kept with its signature, CHECKS.md §47.6).
+    init(_ title: String, find: SbCameraFind, pageCount: Int, onCapture: @escaping () -> Void,
+         onClose: @escaping () -> Void, outline: [CGPoint]? = nil, flashOn: Binding<Bool>? = nil,
+         findWord: String? = nil, captureLabel: String? = nil, captureState: SbActionState = .idle,
+         haptics: Bool = true, thumbnail: ((Int) -> Thumb)? = nil, onDone: (() -> Void)? = nil,
+         onSave: (() -> Void)? = nil, onDiscard: (() -> Void)? = nil, saveHint: SbDataPathHint? = nil,
+         captureHint: String? = nil, flash: Binding<SbFlashMode>? = nil, permission: SbCameraPermission = .granted,
+         @ViewBuilder preview: () -> Preview) {
+        self.init(title, find: find, pageCount: pageCount, onCapture: onCapture, onClose: onClose, outline: outline,
+                  flashOn: flashOn, findWord: findWord, captureLabel: captureLabel, captureState: captureState,
+                  haptics: haptics, thumbnail: thumbnail, onDone: onDone, onSave: onSave, onDiscard: onDiscard,
+                  saveHint: saveHint, captureHint: captureHint, flash: flash, permission: permission,
+                  closeAsking: nil, actions: { EmptyView() }, preview: preview)
+    }
+}
+
+/// The words of the question before an unsaved scan is left (D119 (2), D121): „Scan sichern?“ and „Ohne Sichern gehen
+/// die 2 Seiten verloren.“ (the singular for one page).
+enum SbScanQuestion {
+    static func words(_ m: SbMessages, pageCount: Int, locale: Locale) -> (title: String, message: String) {
+        (m.scanUnsavedTitle, m.scanUnsavedText(pageCount, SbMessages.formatCount(pageCount, locale: locale)))
+    }
+}
+
+struct SbScanUnsavedQuestion: ViewModifier {
+    let isPresented: Binding<Bool>
+    let pageCount: Int
+    let saveHint: SbDataPathHint?
+    let haptics: Bool
+    let onSave: () -> Void
+    let onDiscard: () -> Void
+    private var context = SbContext()
+
+    init(isPresented: Binding<Bool>, pageCount: Int, saveHint: SbDataPathHint?, haptics: Bool,
+         onSave: @escaping () -> Void, onDiscard: @escaping () -> Void) {
+        self.isPresented = isPresented
+        self.pageCount = pageCount
+        self.saveHint = saveHint
+        self.haptics = haptics
+        self.onSave = onSave
+        self.onDiscard = onDiscard
+    }
+
+    func body(content: Content) -> some View {
+        let w = SbScanQuestion.words(context.messages, pageCount: pageCount, locale: context.currentLocale)
+        content.sbUnsavedDialog(isPresented: isPresented, title: w.title, message: w.message, saveHint: saveHint,
+                                haptics: haptics, onSave: onSave, onDiscard: onDiscard)
+    }
+}
+
+public extension View {
+    /// The question before an unsaved scan is left (D119 (2), D121): „Scan sichern?“, „Abbrechen“ · „Verwerfen“ ·
+    /// „Sichern“, the words of `SbMessages`. The camera's X asks with it; so does the page view of an unsaved scan when
+    /// it is left (its back button), which the app's screen around `SbPageView` shows (provisional, agent).
+    func sbScanUnsavedDialog(isPresented: Binding<Bool>, pageCount: Int, saveHint: SbDataPathHint? = nil,
+                             haptics: Bool = true, onSave: @escaping () -> Void,
+                             onDiscard: @escaping () -> Void) -> some View {
+        modifier(SbScanUnsavedQuestion(isPresented: isPresented, pageCount: pageCount, saveHint: saveHint,
+                                       haptics: haptics, onSave: onSave, onDiscard: onDiscard))
     }
 }
 
@@ -342,14 +647,19 @@ public enum SbPhotoFilter: CaseIterable, Sendable { case original, grayscale, bl
 
 /// The filter of a page (spec/02 §3.32; D106 (23)): the words as single-choice chips under the big page, which shows the
 /// result at once („Original“, „Graustufen“, „Schwarzweiß“); no small preview pictures. The app applies the filter.
+/// D120 (3): `allPages` not nil adds the switch row „Für alle Seiten“ under the words; the app starts it at true and,
+/// while it is false, applies the filter only to the page shown. Nil (one page) = no row.
 public struct SbFilterChoice: View {
     @Binding var selected: SbPhotoFilter
     let filters: [SbPhotoFilter]
+    let allPages: Binding<Bool>?
     private var context = SbContext()
 
-    public init(selected: Binding<SbPhotoFilter>, filters: [SbPhotoFilter] = SbPhotoFilter.allCases) {
+    public init(selected: Binding<SbPhotoFilter>, filters: [SbPhotoFilter] = SbPhotoFilter.allCases,
+                allPages: Binding<Bool>? = nil) {
         self._selected = selected
         self.filters = filters
+        self.allPages = allPages
     }
 
     public var body: some View {
@@ -357,42 +667,76 @@ public struct SbFilterChoice: View {
         let words = filters.map { f in
             switch f { case .original: m.filterOriginal; case .grayscale: m.filterGrayscale; case .blackWhite: m.filterBlackWhite }
         }
-        SbChips(m.filterGroup, labels: words,
-                selected: Binding(get: { Set([filters.firstIndex(of: selected) ?? 0]) },
-                                  set: { if let i = $0.first { selected = filters[i] } }),
-                single: true)
+        VStack(alignment: .leading, spacing: SebaroSpace.s2) {
+            SbChips(m.filterGroup, labels: words,
+                    selected: Binding(get: { Set([filters.firstIndex(of: selected) ?? 0]) },
+                                      set: { if let i = $0.first { selected = filters[i] } }),
+                    single: true)
+            if let allPages { SbSwitchRow(m.filterAllPages, isOn: allPages) }
+        }
     }
 }
 
 /// A user's photo in a list or grid (spec/02 §3.32; D106 (24)): the `photo` as it is, never dimmed or tinted in dark mode,
 /// with the border hairline, radius control, no shadow; `label` under it in caption text-muted („Seite 2“). VoiceOver
 /// hears `name` („Seite 2 von „Mietvertrag““), never a guessed description. With `onTap` the whole is one target of at
-/// least 48 pt with the pressed fill around the picture. `aspect` = width / height (A4 upright by default).
+/// least 48 pt with the pressed fill around the picture. `aspect` = width / height (A4 upright by default). `detail` =
+/// a second line under the label in caption text-muted („Graustufen“); `name` nil = the silent form for a picture beside
+/// words that already say it (a list row's lead), only without `onTap` (2026-11-01, provisional, agent). The iPhone has
+/// no ⋮ on a tile: its menu is the long press the app attaches (`.contextMenu`, D91 I3a; spec/12 §5).
 public struct SbPhotoThumb<Photo: View>: View {
-    let name: String
+    let name: String?
     let label: String?
+    let detail: String?
     let onTap: (() -> Void)?
     let aspect: CGFloat
+    let beside: Bool
     let photo: Photo
     private var context = SbContext()
 
-    public init(_ name: String, label: String? = nil, onTap: (() -> Void)? = nil, aspect: CGFloat = 210.0 / 297.0,
-                @ViewBuilder photo: () -> Photo) {
+    public init(_ name: String?, label: String? = nil, detail: String? = nil, onTap: (() -> Void)? = nil,
+                aspect: CGFloat = 210.0 / 297.0, @ViewBuilder photo: () -> Photo) {
+        self.init(name, label: label, detail: detail, onTap: onTap, aspect: aspect, beside: false, photo: photo)
+    }
+
+    /// `beside` = true (2026-11-01, provisional, agent): the form for large text, the picture at the start (64 pt
+    /// wide) and the words beside it at its top, for a list of one column instead of a grid; the app switches to it.
+    /// Its own overload without a default (CHECKS.md §47.6), so `SbPhotoThumb<Color>.init(_:label:detail:onTap:aspect:photo:)`
+    /// still binds.
+    public init(_ name: String?, label: String? = nil, detail: String? = nil, onTap: (() -> Void)? = nil,
+                aspect: CGFloat = 210.0 / 297.0, beside: Bool, @ViewBuilder photo: () -> Photo) {
+        precondition(name != nil || onTap == nil, "SbPhotoThumb with onTap needs a name")
         self.name = name
         self.label = label
+        self.detail = detail
         self.onTap = onTap
         self.aspect = aspect
+        self.beside = beside
         self.photo = photo()
     }
 
     public var body: some View {
         let shape = RoundedRectangle(cornerRadius: SebaroRadius.control, style: .continuous)
-        let inner = VStack(alignment: .leading, spacing: SebaroSpace.s1) {
-            photo
-                .aspectRatio(aspect, contentMode: .fit)
-                .clipShape(shape)
-                .overlay(shape.strokeBorder(context.tone.border, lineWidth: SebaroBorderWidth.hairline))
+        let picture = photo
+            .aspectRatio(aspect, contentMode: .fit)
+            .clipShape(shape)
+            .overlay(shape.strokeBorder(context.tone.border, lineWidth: SebaroBorderWidth.hairline))
+        let words = VStack(alignment: .leading, spacing: SebaroSpace.s1) {
             if let label { SbWrapText(label, style: .caption).foregroundStyle(context.tone.textMuted) }
+            if let detail { SbWrapText(detail, style: .caption).foregroundStyle(context.tone.textMuted).monospacedDigit() }
+        }
+        let inner = Group {
+            if beside {
+                HStack(alignment: .top, spacing: SebaroSpace.s3) {
+                    picture.frame(width: SebaroSize.targetTouch + SebaroSpace.s4)
+                    words.frame(maxWidth: .infinity, alignment: .leading)
+                }
+            } else {
+                VStack(alignment: .leading, spacing: SebaroSpace.s1) {
+                    picture
+                    words
+                }
+            }
         }
         .frame(minWidth: SebaroSize.targetTouch, minHeight: SebaroSize.targetTouch)
         Group {
@@ -403,8 +747,9 @@ public struct SbPhotoThumb<Photo: View>: View {
             }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text(name))
+        .accessibilityLabel(Text(name ?? ""))
         .accessibilityAddTraits(onTap == nil ? .isImage : [.isImage, .isButton])
+        .accessibilityHidden(name == nil)
     }
 }
 

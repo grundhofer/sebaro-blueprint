@@ -98,34 +98,127 @@ public struct SbToneChoice: View {
 
 /// A switch row (spec/02 §2.6, 2026-10-26; provisional, agent): [title] in body, the optional [help] sentence in caption
 /// `text-muted` under it, the system toggle at the end in `sbAccent` (never lime); at least 56 pt, the whole row
-/// toggles, VoiceOver reads title, help and state as one element. `SbMotionSetting` is built on it.
+/// toggles, VoiceOver reads title, help and state as one element. `SbMotionSetting` is built on it. [icon] (2026-10-31;
+/// provisional, agent) = an optional leading icon by its sprite name („shake“), 24 pt in `text-muted` before the
+/// title, hidden from VoiceOver (the row's name stays the title); it mirrors in RTL with the row. Once a word of title or
+/// help would not fit beside icon and switch (AX5 on a 320 pt phone, „Schütteln“), the switch goes to a line of its own
+/// under the words, at the end (CHECKS §45.5, as the web's `data-sb-fit="stack"`): measured by the widest word, so no
+/// word is broken while that form holds it; a word too wide even for the whole line is hyphenated (`SbWrapText`).
 public struct SbSwitchRow: View {
     let title: String
+    let icon: String?
     let help: String?
     @Binding var isOn: Bool
-    private var context = SbContext()
     @ScaledMetric(relativeTo: .body) private var rowHeight: CGFloat = SebaroSize.controlLg
 
-    public init(_ title: String, help: String? = nil, isOn: Binding<Bool>) {
+    public init(_ title: String, icon: String? = nil, help: String? = nil, isOn: Binding<Bool>) {
         self.title = title
+        self.icon = icon
         self.help = help
         self._isOn = isOn
     }
 
     public var body: some View {
-        Toggle(isOn: $isOn) {
-            VStack(alignment: .leading, spacing: SebaroSpace.s0_5) {
-                Text(title).sbFont(.body).foregroundStyle(context.tone.text)
-                if let help {
-                    Text(help).sbFont(.caption).foregroundStyle(context.tone.textMuted)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
+        // beside: the label's ideal width is that of its widest word (SbWordsWide), so ViewThatFits takes this form
+        // exactly while every word fits beside icon and switch; else the switch under the words
+        ViewThatFits(in: .horizontal) {
+            Toggle(isOn: $isOn) {
+                SbSwitchRowLabel(title: title, help: help, icon: icon, byWords: true)
             }
+            Toggle(isOn: $isOn) {
+                SbSwitchRowLabel(title: title, help: help, icon: icon)
+            }
+            .toggleStyle(SbSwitchUnderWords())
         }
         .tint(Color.sbAccent)
         .padding(.horizontal, SebaroSpacing.gutter)
         .padding(.vertical, SebaroSpace.s2)
         .frame(minHeight: rowHeight)
+    }
+}
+
+/// The label of `SbSwitchRow`: the optional leading icon (24 pt, `text-muted`, 12 pt before the words, as a list
+/// row's lead, spec/02 §3.3) and title and help; an HStack, so the icon stands at the start side in either direction.
+/// Title and help are `SbWrapText` (words whole, an overlong word hyphenated, D99 (1), D101 (9)). [byWords]: the ideal
+/// width (no width offered) is the icon, its gap and the widest word, not the words on one line (`SbWordsWide`).
+struct SbSwitchRowLabel: View {
+    let title: String
+    let help: String?
+    let icon: String?
+    let byWords: Bool
+    private var context = SbContext()
+
+    init(title: String, help: String?, icon: String?, byWords: Bool = false) {
+        self.title = title
+        self.help = help
+        self.icon = icon
+        self.byWords = byWords
+    }
+
+    private var label: some View {
+        HStack(alignment: .center, spacing: SebaroSpace.s3) {
+            if let icon { SbIcon(icon, size: SebaroSize.iconLg, color: context.tone.textMuted) }
+            VStack(alignment: .leading, spacing: SebaroSpace.s0_5) {
+                SbWrapText(title, style: .body).foregroundStyle(context.tone.text)
+                if let help {
+                    SbWrapText(help, style: .caption).foregroundStyle(context.tone.textMuted)
+                }
+            }
+        }
+    }
+
+    var body: some View {
+        if byWords {
+            SbWordsWide(extra: icon == nil ? 0 : SebaroSize.iconLg + SebaroSpace.s3) {
+                label
+                // the words on one line in their fonts, measured but never drawn
+                ForEach(Array(SbHyphenation.words(title).enumerated()), id: \.offset) { _, w in
+                    Text(w).sbFont(.body).fixedSize().hidden().accessibilityHidden(true)
+                }
+                ForEach(Array(SbHyphenation.words(help ?? "").enumerated()), id: \.offset) { _, w in
+                    Text(w).sbFont(.caption).fixedSize().hidden().accessibilityHidden(true)
+                }
+            }
+        } else {
+            label
+        }
+    }
+}
+
+/// The first child laid out as offered; offered no width (an ideal size, `ViewThatFits`) it is as wide as [extra] and
+/// the widest of the other children (the word probes), so a row knows whether every word fits beside its switch.
+struct SbWordsWide: Layout {
+    let extra: CGFloat
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        guard let first = subviews.first else { return .zero }
+        guard proposal.width == nil else { return first.sizeThatFits(proposal) }
+        let w = extra + (subviews.dropFirst().map { $0.sizeThatFits(.unspecified).width }.max() ?? 0)
+        return CGSize(width: w, height: first.sizeThatFits(ProposedViewSize(width: w, height: nil)).height)
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        for (i, s) in subviews.enumerated() {
+            if i == 0 {
+                s.place(at: bounds.origin, proposal: ProposedViewSize(width: bounds.width, height: bounds.height))
+            } else {
+                s.place(at: bounds.origin, proposal: .zero)
+            }
+        }
+    }
+}
+
+/// The switch under the words, at the end (the start side in RTL mirrors with the stack): the words take the whole
+/// line. VoiceOver reads the system toggle with the label as its name; the drawn words are hidden from it, so they are
+/// not read twice.
+struct SbSwitchUnderWords: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        VStack(alignment: .trailing, spacing: SebaroSpace.s1) {
+            configuration.label
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .accessibilityHidden(true)
+            Toggle(configuration).toggleStyle(.automatic).labelsHidden()
+        }
     }
 }
 

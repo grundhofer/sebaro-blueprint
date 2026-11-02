@@ -887,6 +887,17 @@ body.sb-page { container: sb-page sb-content / inline-size; }
   min-block-size: var(--sb-size-target-touch);
   font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking);
 }
+/* an optional leading icon, as a list row's __lead (spec/02 §2.6): 24 px, text-muted, aria-hidden; the label after it
+   takes the room, so the switch stays at the end; the start side mirrors in RTL with the flex row. Once a word of the
+   label would break beside the switch, sb-fit.js sets data-sb-fit="stack" (measured, §45.5): the label takes the line
+   beside the icon and the switch wraps to a line of its own, at the end. Without the script the switch wraps where the
+   label would keep less than about six characters (6em) */
+.sb-switch-row:has(> .sb-switch-row__lead) { flex-wrap: wrap; row-gap: var(--sb-space-1); }
+.sb-switch-row__lead { flex: none; display: flex; color: var(--sb-color-text-muted); }
+.sb-switch-row__lead + * { flex: 1 1 0; min-inline-size: 0; }
+:root:not([data-sb-fit-ready]) .sb-switch-row__lead + * { flex-basis: 6em; }
+.sb-switch-row[data-sb-fit="stack"] > .sb-switch-row__lead + * { flex-basis: calc(100% - var(--sb-size-icon-lg) - var(--sb-space-3)); }
+.sb-switch-row__lead ~ .sb-switch { margin-inline-start: auto; }
 .sb-switch {
   position: relative; flex: none; inline-size: 52px; block-size: var(--sb-size-target-touch); margin: 0; padding: 0;
   border: 0; border-radius: var(--sb-radius-pill); background: transparent; color: var(--sb-color-on-accent); cursor: pointer;
@@ -2652,6 +2663,16 @@ button.sb-side-nav__item {
 }
 .sb-dialog:has(.sb-dialog__body) :is(.sb-dialog__title, .sb-dialog__actions) { flex: none; }
 .sb-dialog__actions[data-sb-fit="stack"] { flex-direction: column; align-items: stretch; }
+/* an action with its data-path line (D98 V4, spec/10 §3.4; spec/02 §4.6, the unsaved dialog's „Sichern“):
+   div.sb-dialog__action holds the key and its p.sb-action-hint right after it, so a screen reader reads the line right
+   after the key. In one row the keys stand top-aligned, the key ends flush with the row and the line ends with its key,
+   also when it is wider than the key and wraps (D115, as D113 in Compose); stacked (data-sb-fit="stack") the key takes
+   the full width and the line is centred under it */
+.sb-dialog__actions:not([data-sb-fit="stack"]):has(> .sb-dialog__action) { align-items: flex-start; }
+.sb-dialog__action { display: flex; flex-direction: column; align-items: flex-end; min-inline-size: 0; max-inline-size: 100%; }
+.sb-dialog__action > .sb-action-hint { text-align: end; }
+.sb-dialog__actions[data-sb-fit="stack"] > .sb-dialog__action { align-items: stretch; }
+.sb-dialog__actions[data-sb-fit="stack"] > .sb-dialog__action > .sb-action-hint { text-align: center; }
 /* the input dialog (D102 (38), spec/02 §4.6): an sb-field under the title (and its text), the submit verb a secondary action */
 .sb-dialog__text + .sb-field { margin-block-start: var(--sb-space-4); }
 /* a failure without a field (D102 (23); spec/02 §4.6): above the actions, built like the action zone's message: the
@@ -2851,7 +2872,8 @@ dialog.sb-sheet > form { margin: 0; }
 /* a dialog of a window (spec/02 §4.12; per D103 the denser form, provisional, agent): the dialog carries data-sb-density="window"
    itself (it opens in the top layer, outside the window) or stands in the scope; its actions take the compact
    secondary action's 32 px and label type, the danger action too (its 45° cut stays); 48 px again under touch */
-:is(.sb-dialog[data-sb-density="window"], [data-sb-density="window"] .sb-dialog) .sb-dialog__actions > :is(.sb-secondary-action, .sb-danger-action) {
+:is(.sb-dialog[data-sb-density="window"], [data-sb-density="window"] .sb-dialog) .sb-dialog__actions > :is(.sb-secondary-action, .sb-danger-action),
+:is(.sb-dialog[data-sb-density="window"], [data-sb-density="window"] .sb-dialog) .sb-dialog__action > :is(.sb-secondary-action, .sb-danger-action) {
   min-block-size: var(--sb-size-control-sm); padding-inline: var(--sb-space-3);
   font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking);
 }
@@ -3311,7 +3333,7 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
   [data-sb-density="window"] :is(.sb-side-nav__item, .sb-menu__item, .sb-list-row), .sb-row { min-block-size: var(--sb-size-target-touch); }
   .sb-icon-button--compact { inline-size: var(--sb-size-target-touch); block-size: var(--sb-size-target-touch); }
   .sb-secondary-action--compact { min-block-size: var(--sb-size-target-touch); }
-  :is(.sb-dialog[data-sb-density="window"], [data-sb-density="window"] .sb-dialog) .sb-dialog__actions > :is(.sb-secondary-action, .sb-danger-action) { min-block-size: var(--sb-size-target-touch); }
+  :is(.sb-dialog[data-sb-density="window"], [data-sb-density="window"] .sb-dialog) :is(.sb-dialog__actions, .sb-dialog__action) > :is(.sb-secondary-action, .sb-danger-action) { min-block-size: var(--sb-size-target-touch); }
 }
 
 /* ===================================================================== 7b desktop windows, round 6 sketch answers (spec/02 §4.19-§4.24) */

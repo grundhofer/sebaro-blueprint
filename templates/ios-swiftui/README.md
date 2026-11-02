@@ -240,9 +240,11 @@ Was die Vorlage nicht kann oder anders macht als die Spezifikation, damit es nie
   Ausnahme (393 pt: drei, 320 pt: vier). Ob VoiceOver sie anspricht, ist nicht geprüft.
 
 - **Kurzmeldung bei AX5 auf 320 pt.** Mit „Rückgängig“ ist die Kurzmeldung (`sbToastHost`) dort höher als der
-  Platz über der Aktionszone: „Rückgängig“ steht teils unter der Hauptaktion (in den Bildern
-  `list-toast-*-ax5-320.png` gesehen). Die Textprüfung sieht das nicht (Tasten misst sie nicht, und verdeckt ist nicht
-  abgeschnitten). Im Bedienungshilfen-Baum ist die Taste ein eigenes Element; mit VoiceOver nicht geprüft. Bitte an die Werkstatt.
+  Platz über der Aktionszone. Seit dem Export aus `45f1921` steht sie ganz über der Hauptaktion, aber die letzte Zeile
+  ihres Satzes fehlt: Von „„Balkon bepflanzen“ ausgeblendet“ sind nur die ersten beiden Zeilen zu sehen, dann
+  „Rückgängig“ (in den Bildern `list-toast-*-ax5-320.png` unter iOS 27.0 gesehen; bei 393 pt steht der Satz ganz). Die
+  Textprüfung sieht das nicht. Im Bedienungshilfen-Baum ist die Taste ein eigenes Element; mit VoiceOver nicht
+  geprüft. Bitte an die Werkstatt.
 - **Weitere Bilder bei AX5 auf 320 pt**, wie das Paket sie zeichnet, gesehen und nicht geändert: Die Schritte trennen
   alle drei Wörter („Na-me“, „Da-ten“, „Fer-tig“), statt nur das aktuelle zu zeigen (vgl. STA-06, D100); im
   Abweichungsdiagramm bricht „Mobilität“ ohne Strich und „−15 %“ vor dem Prozentzeichen; Titel von Dialogen werden

@@ -211,6 +211,24 @@ public struct SbMessages: Sendable {
     public var zoomFit: String
     public var zoomFitted: String
     public var zoomValue: @Sendable (_ value: String) -> String
+    /// The camera's „Fertig (2)“ and the question of its close X while pages exist (D119 (2); 2026-11-01).
+    public var cameraDone: @Sendable (_ count: Int, _ formatted: String) -> String
+    public var scanUnsavedTitle: String
+    public var scanUnsavedText: @Sendable (_ count: Int, _ formatted: String) -> String
+    /// D120 (2026-11-01): the flash key's „Blitz: Auto“ and its menu „Auto“, „An“, „Aus“; the camera's permission words
+    /// „Kamera erlauben“, the calm sentence after a denial and „Aus Galerie importieren“; the filter's „Für alle Seiten“.
+    public var flashAuto: String
+    public var flashModeAuto: String
+    public var flashModeOn: String
+    public var flashModeOff: String
+    public var cameraAllow: String
+    public var cameraDenied: String
+    public var cameraImport: String
+    public var filterAllPages: String
+    /// 2026-11-01 (provisional, agent; spec/07 §4.3): the toast after a page of an unsaved scan is removed, „Seite
+    /// entfernt“ without the number the next page takes, and its action „Rückgängig“.
+    public var pageRemoved: String
+    public var undo: String
 
     public static let de = SbMessages(
         themeGroup: "Hell oder Dunkel", themeSystem: "Wie das System", themeLight: "Hell", themeDark: "Dunkel",
@@ -317,7 +335,14 @@ public struct SbMessages: Sendable {
         zoomIn: "Vergrößern",
         zoomFit: "Einpassen",
         zoomFitted: "eingepasst",
-        zoomValue: { "Zoom \($0)" })
+        zoomValue: { "Zoom \($0)" },
+        cameraDone: { "Fertig (\($1))" }, scanUnsavedTitle: "Scan sichern?",
+        scanUnsavedText: { $0 == 1 ? "Ohne Sichern geht die Seite verloren." : "Ohne Sichern gehen die \($1) Seiten verloren." },
+        flashAuto: "Blitz: Auto", flashModeAuto: "Auto", flashModeOn: "An", flashModeOff: "Aus",
+        cameraAllow: "Kamera erlauben",
+        cameraDenied: "Die Kamera ist nicht erlaubt. Du kannst das in den Einstellungen ändern.",
+        cameraImport: "Aus Galerie importieren", filterAllPages: "Für alle Seiten",
+        pageRemoved: "Seite entfernt", undo: "Rückgängig")
 
     public static let en = SbMessages(
         themeGroup: "Light or dark", themeSystem: "Like the system", themeLight: "Light", themeDark: "Dark",
@@ -424,7 +449,14 @@ public struct SbMessages: Sendable {
         zoomIn: "Zoom in",
         zoomFit: "Fit",
         zoomFitted: "fitted",
-        zoomValue: { "Zoom \($0)" })
+        zoomValue: { "Zoom \($0)" },
+        cameraDone: { "Done (\($1))" }, scanUnsavedTitle: "Save scan?",
+        scanUnsavedText: { $0 == 1 ? "Without saving, the page is lost." : "Without saving, the \($1) pages are lost." },
+        flashAuto: "Flash: auto", flashModeAuto: "Auto", flashModeOn: "On", flashModeOff: "Off",
+        cameraAllow: "Allow camera",
+        cameraDenied: "The camera isn’t allowed. You can change that in Settings.",
+        cameraImport: "Import from gallery", filterAllPages: "For all pages",
+        pageRemoved: "Page removed", undo: "Undo")
 
     /// The table of a language („de“, „de-AT“, „en-GB“); an unknown language gets German.
     public static func forLanguage(_ identifier: String) -> SbMessages {

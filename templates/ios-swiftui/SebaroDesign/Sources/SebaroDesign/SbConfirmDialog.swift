@@ -132,8 +132,9 @@ public enum SbDataPathHint: Sendable, Equatable {
 
 /// The unsaved-changes dialog itself (`sbUnsavedDialog(…)` presents it): „Abbrechen“ · „Verwerfen“ · „Sichern“.
 /// Confirming „Verwerfen“ plays the stronger pulse as a deletion does (spec/03 §18), only with `haptics`. `saveHint`
-/// stands directly under „Sichern“ in caption, text-muted: start-aligned with the key in one row, centred under the
-/// full-width key when the keys are stacked (spec/10 §3.4); VoiceOver reads it right after „Sichern“.
+/// stands directly under „Sichern“ in caption, text-muted: in one row it ends with the key, which ends flush with the
+/// other keys, also when the line is wider and wraps (D115, as D113 in Compose); centred under the full-width key when
+/// the keys are stacked (spec/10 §3.4); VoiceOver reads it right after „Sichern“.
 public struct SbUnsavedDialog: View {
     let title: String
     let message: String
@@ -171,10 +172,10 @@ public struct SbUnsavedDialog: View {
                 onDiscard()
             }
             if let saveHint {
-                VStack(alignment: fill ? .center : .leading, spacing: SebaroSpace.s2) {
+                VStack(alignment: fill ? .center : .trailing, spacing: SebaroSpace.s2) {
                     SbDialogButton(save ?? context.messages.save, fill: fill, action: onSave)
                     Text(saveHint.resolved(context.messages)).sbFont(.caption).foregroundStyle(context.tone.textMuted)
-                        .multilineTextAlignment(fill ? .center : .leading)
+                        .multilineTextAlignment(fill ? .center : .trailing)
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 .frame(maxWidth: fill ? .infinity : nil)

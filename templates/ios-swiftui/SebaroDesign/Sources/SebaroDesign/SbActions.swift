@@ -88,6 +88,11 @@ public struct SbPrimaryAction: View {
 }
 
 struct SbPrimaryActionLabel: View {
+    /// Kept free above and below the label in every state (spec/08 §5, D99 (1); 2026-11-01, CHECKS.md §47): the 2 pt
+    /// outline, the 6 pt busy bar and a 4 pt gap, so the bar never touches a descender at a large text size and the
+    /// height does not jump when the work starts; at the default size the 56 pt hold it.
+    static let verticalInset = SebaroX.primaryActionOutlineWidth + SebaroX.primaryActionProgressHeight + SebaroSpace.s1
+
     let model: SbPrimaryActionModel
     private var context = SbContext()
     init(model: SbPrimaryActionModel) { self.model = model }
@@ -104,7 +109,12 @@ struct SbPrimaryActionLabel: View {
             SbWrapText(shown.text, style: .bodyStrong, center: true)
         }
         .padding(.horizontal, SebaroSpace.s6)
+        .padding(.vertical, Self.verticalInset)
         .frame(maxWidth: .infinity, minHeight: SebaroSize.controlLg)
+        // never shorter than the label (CHECKS.md §47.7): a frame with only a minimum height takes a smaller height
+        // offered by a full stack (AX5 on 320 pt: 60 pt for a 355 pt label) and the centred label was cut at its top
+        // and bottom, the inset with it
+        .fixedSize(horizontal: false, vertical: true)
         .overlay(alignment: .bottomLeading) {
             if case .busy(_, let fraction) = model.state {
                 SbActionProgressBar(fraction: fraction, reduceMotion: context.reduceMotion)
@@ -175,9 +185,16 @@ struct SbActionProgressBar: View {
 /// glyph in danger, the sentence in text, announced).
 public struct SbPrimaryActionBar: View {
     let model: SbPrimaryActionModel
+    var focus: AccessibilityFocusState<Bool>.Binding?
     private var context = SbContext()
 
     public init(_ model: SbPrimaryActionModel) { self.model = model }
+
+    /// With VoiceOver's focus bound to the action (`SbScreen(primaryActionFocus:)`, 2026-11-01, provisional, agent).
+    init(_ model: SbPrimaryActionModel, focus: AccessibilityFocusState<Bool>.Binding?) {
+        self.model = model
+        self.focus = focus
+    }
 
     public var body: some View {
         VStack(spacing: SebaroSpace.s2) {
@@ -195,7 +212,11 @@ public struct SbPrimaryActionBar: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
-            SbPrimaryAction(model)
+            if let focus {
+                SbPrimaryAction(model).accessibilityFocused(focus)
+            } else {
+                SbPrimaryAction(model)
+            }
             if let hint = model.hint {
                 Text(hint).sbFont(.caption).foregroundStyle(context.tone.textMuted).multilineTextAlignment(.center)
             }
@@ -255,11 +276,37 @@ public struct SbErrorDetails: View {
     }
 }
 
+/// The hidden polite status line of spec/07 §4.3 (D116 (1); 2026-11-01, CHECKS.md §47): which change of the text is
+/// announced. A new, non-empty sentence is said once; nil, empty or the same sentence again says nothing.
+enum SbStatusRegionRule {
+    static func said(_ old: String?, _ new: String?) -> String? {
+        guard let new, !new.isEmpty, new != old else { return nil }
+        return new
+    }
+}
+
+public extension View {
+    /// The hidden polite status line (spec/07 §4.3, D116 (1); provisional, agent): a change the view shows itself (a
+    /// page turned or rotated, a filter applied) is announced to VoiceOver as `text` without moving the focus and
+    /// without any visible line („Seite 2 gedreht“). nil or empty says nothing. Not for errors and not for a removed
+    /// entry (its toast with „Rückgängig“). Compose: `SbStatusRegion(text)`.
+    func sbStatusRegion(_ text: String?) -> some View {
+        onChange(of: text) { old, new in
+            if let s = SbStatusRegionRule.said(old, new) { SbAnnounce.polite(s) }
+        }
+    }
+}
+
 // MARK: - Other actions: never filled (spec/08 §6)
 
 /// Secondary action: 48 pt, 1 pt border-strong outline, radius 8, label body-strong in text; pressed `pressedFill`.
 /// „Bearbeiten“, „Abbrechen“ in the dialog.
 public struct SbSecondaryButtonStyle: ButtonStyle {
+    /// Kept free above and below the label (spec/08 §6; CHECKS.md §48, 2026-11-01, provisional, agent): 12 pt
+    /// (`SebaroSpace.s3`), the room the primary action keeps (`SbPrimaryActionLabel.verticalInset`), so a two-line label
+    /// at a large text size no longer stands 2–3 pt from the outline; at the default size the 48 pt hold it.
+    static let verticalInset = SebaroSpace.s3
+
     @Environment(\.isEnabled) private var enabled
     @Environment(\.isFocused) private var focused
     @Environment(\.sebaroTone) private var tone
@@ -271,6 +318,7 @@ public struct SbSecondaryButtonStyle: ButtonStyle {
             .sbFont(.bodyStrong)
             .foregroundStyle(enabled ? tone.text : tone.textMuted)
             .padding(.horizontal, SebaroSpacing.insetControl)
+            .padding(.vertical, Self.verticalInset)
             .frame(minHeight: SebaroSize.controlMd)
             .background(configuration.isPressed ? tone.pressedFill : tone.bg, in: shape)
             .overlay(shape.strokeBorder(tone.borderStrong, lineWidth: SebaroBorderWidth.control))

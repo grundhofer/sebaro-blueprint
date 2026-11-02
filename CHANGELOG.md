@@ -11,6 +11,23 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+## 2.18.1 · 2026-11-02
+
+Korrektur: Die Startvorlagen folgen dem Werkstatt-Commit `45f1921`. Keine Regel ist neu oder geändert.
+
+- `templates/ios-swiftui/`: das Swift-Paket `SebaroDesign/` neu aus `45f1921` (vorher `2cc6e8f`) mit
+  `tools/sebaro-sync.sh`. Die Hauptaktion hält bei AX5 ihre ganze Höhe und wird nicht mehr oben und unten
+  abgeschnitten; dazu neue Teile wie die stille Statuszeile `sbStatusRegion`. Der Code der App bleibt unverändert.
+  Die Lücke „Kurzmeldung bei AX5 auf 320&nbsp;pt“ im README ist neu beschrieben: Die Kurzmeldung steht jetzt ganz über
+  der Hauptaktion, aber die letzte Zeile ihres Satzes fehlt.
+- `templates/android-compose/`: das Paket `sebaro-compose` 1.10.11 statt 1.10.3 (`gradle/libs.versions.toml`,
+  ihr README, das Beispiel mit `--tag`, `templates/README.md`). Die Vorlage baut ihr `SbMessages` nicht selbst, braucht also keine neuen Wörter.
+  Die Ausnahme der Textprüfung für die Beschriftungen von `SbBarChart` fällt weg: Das Paket meldet keine davon mehr
+  als zu hoch, und eine veraltete Ausnahme schlägt fehl.
+- `templates/website-astro/`, `templates/webapp-vite/`, `templates/desktop-tauri/`: die Kopie des Web-Exports in
+  `public/sebaro/` neu aus `docs/sebaro/` (vorher `2560ef3`), mit dem `sebaro-sync.mjs` jeder Vorlage.
+- `src/og/head/inputs.json`: neu gestempelt nach dem Abgleich der Icons. Die Vorschaubilder selbst sind gleich geblieben.
+
 ## 2.18.0 · 2026-10-30
 
 Neue Startvorlage für iOS (D112: die Vorlage trägt den gefilterten iOS-Export). Keine Regel ist neu oder geändert. Eine neue Vorlage ist eine Nebenversion.

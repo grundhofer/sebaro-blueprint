@@ -162,12 +162,23 @@ struct SbPlainFocusStyle: ButtonStyle {
 public struct SbScreen<Content: View>: View {
     let primaryAction: SbPrimaryActionModel?
     let tabs: SbTabBar?
+    let primaryActionFocus: AccessibilityFocusState<Bool>.Binding?
     let content: Content
     private var context = SbContext()
 
     public init(primaryAction: SbPrimaryActionModel? = nil, tabs: SbTabBar? = nil, @ViewBuilder content: () -> Content) {
+        self.init(primaryAction: primaryAction, tabs: tabs, primaryActionFocus: nil, content: content)
+    }
+
+    /// `primaryActionFocus` (2026-11-01, provisional, agent): VoiceOver's focus bound to the primary action, so the app
+    /// can move it there (after removing the last entry of a list whose add action is the primary action, spec/02 §3.3).
+    /// Its own overload without a default (CHECKS.md §47.6): the form above keeps its signature, so a reference such as
+    /// `SbScreen<Color>.init(primaryAction:tabs:content:)` still binds.
+    public init(primaryAction: SbPrimaryActionModel? = nil, tabs: SbTabBar? = nil,
+                primaryActionFocus: AccessibilityFocusState<Bool>.Binding?, @ViewBuilder content: () -> Content) {
         self.primaryAction = primaryAction
         self.tabs = tabs
+        self.primaryActionFocus = primaryActionFocus
         self.content = content()
     }
 
@@ -178,7 +189,7 @@ public struct SbScreen<Content: View>: View {
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 if primaryAction != nil || tabs != nil {
                     VStack(spacing: 0) {
-                        if let primaryAction { SbPrimaryActionBar(primaryAction) }
+                        if let primaryAction { SbPrimaryActionBar(primaryAction, focus: primaryActionFocus) }
                         if let tabs { tabs }
                     }
                     .background(context.tone.bg.ignoresSafeArea(edges: .bottom))
