@@ -11,6 +11,10 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+Werkzeug, keine Regeländerung: `tools/check_site.py` (Gruppe TPLEXP) vergleicht die Kopien des Web-Exports in den
+Startvorlagen mit `docs/sebaro/` und schlägt bei veralteten Kopien fehl; der iOS-Export-Commit warnt nur.
+Selbsttest: `python3 tools/test_check_site.py`.
+
 ## 2.18.1 · 2026-11-02
 
 Korrektur: Die Startvorlagen folgen dem Werkstatt-Commit `45f1921`. Keine Regel ist neu oder geändert.

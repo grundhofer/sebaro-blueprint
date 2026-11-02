@@ -41,6 +41,11 @@ Groups
   TERM   retired names do not appear in pages, fragments, rules or docs (D71: only "sebaro Sans" and "sebaro Mono");
          the font licence files in docs/sebaro/ keep the authors' copyright as the OFL requires, and so do the copies of
          the export in the starter templates (the exact paths of TEMPLATE_EXPORTS, not scanned; see template_files())
+  TPLEXP each web export copy in the starter templates (the three public/sebaro/ folders of TEMPLATE_EXPORTS) has the
+         same file list and byte-identical files as docs/sebaro/ (only dotfiles, which the template's sebaro-sync.mjs
+         never copies, are ignored); the error names the template, the first differing files and its sync command.
+         Warning: the iOS template's SebaroDesign/sebaro-export.json names another sebaroDesign commit than
+         docs/GUIDE-SYNC.json (a different target, so only the commit is compared)
 """
 from __future__ import annotations
 
@@ -81,6 +86,42 @@ VAR_SB = re.compile(r"var\(\s*(--sb-[A-Za-z0-9_-]*[A-Za-z0-9_])(?![-*…A-Za-z0-
 # the only copies of the web export in templates/, each a verified snapshot (npm run sebaro:verify checks it)
 TEMPLATE_EXPORTS = ("templates/website-astro/public/sebaro/", "templates/webapp-vite/public/sebaro/",
                     "templates/desktop-tauri/public/sebaro/", "templates/ios-swiftui/SebaroDesign/")
+
+
+def export_diff(src: Path, dst: Path) -> list[str]:
+    """Differences between two export folders as 'missing: f', 'extra: f' or 'differs: f' (dotfiles ignored, as the
+    templates' sebaro-sync.mjs never copies them); sorted by path."""
+    def listing(base: Path) -> set[str]:
+        return {p.relative_to(base).as_posix() for p in base.rglob("*")
+                if p.is_file() and not any(part.startswith(".") for part in p.relative_to(base).parts)} \
+            if base.is_dir() else set()
+    a, b = listing(src), listing(dst)
+    out = [f"missing: {f}" for f in sorted(a - b)] + [f"extra: {f}" for f in sorted(b - a)]
+    out += [f"differs: {f}" for f in sorted(a & b) if (src / f).read_bytes() != (dst / f).read_bytes()]
+    return sorted(out, key=lambda x: x.split(": ", 1)[1])
+
+
+def template_export_findings(root: Path = ROOT) -> tuple[list[str], list[str]]:
+    """(errors, warnings) of the TPLEXP group: stale web export copies in the templates, a stale iOS export commit."""
+    errors: list[str] = []
+    warnings: list[str] = []
+    for rel in TEMPLATE_EXPORTS[:3]:
+        tpl = rel.split("/")[1]
+        diff = export_diff(root / "docs" / "sebaro", root / rel)
+        if diff:
+            errors.append(f"TPLEXP templates/{tpl}: {rel} differs from docs/sebaro/ ({len(diff)} files, first: "
+                          f"{'; '.join(diff[:5])}); fix: cd templates/{tpl} && npm run sebaro:sync")
+    try:
+        want = json.loads((root / "docs" / "GUIDE-SYNC.json").read_text(encoding="utf-8")).get("sebaroDesignCommit")
+        have = json.loads((root / "templates" / "ios-swiftui" / "SebaroDesign" / "sebaro-export.json")
+                          .read_text(encoding="utf-8")).get("sebaroDesign", {}).get("commit")
+    except (OSError, ValueError) as e:
+        return errors, warnings + [f"TPLEXP templates/ios-swiftui: cannot read the export commits ({e})"]
+    if want and have != want:
+        warnings.append(f"TPLEXP templates/ios-swiftui: SebaroDesign/sebaro-export.json is at sebaroDesign "
+                        f"{str(have)[:7]}, docs/GUIDE-SYNC.json at {str(want)[:7]}; fix: re-export with "
+                        f"--target ios (see templates/ios-swiftui/README.md)")
+    return errors, warnings
 
 
 def template_files() -> list[Path]:
@@ -542,6 +583,10 @@ def main() -> int:
                 warnings.append(f"RULES orphan example {frag.name}")
     else:
         warnings.append("RULES rules/rules.json missing")
+
+    tpl_errors, tpl_warnings = template_export_findings()
+    errors += tpl_errors
+    warnings += tpl_warnings
 
     if args.only:
         errors = [e for e in errors if args.only in e]
