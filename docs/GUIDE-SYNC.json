@@ -2,15 +2,15 @@
   "$comment": "written by tools/sync_from_design.py; do not edit",
   "system": "sebaro",
   "product": "studio",
-  "sebaroDesignCommit": "45f19217b2813aba9d5e711824e9474c543493e9",
+  "sebaroDesignCommit": "7f4b987defff51f143f7dae1462b17265ef50072",
   "sebaroDesignUncommitted": false,
-  "exportTool": "export_system.py 1.17.1",
+  "exportTool": "export_system.py 1.18.0",
   "contracts": {
     "tokens": "1.10",
     "palette": "2.6",
     "fontsConfig": 1,
     "iconSet": "sebaro-icon-set/1",
-    "brandAssetsTool": "1.8.0",
+    "brandAssetsTool": "1.9.0",
     "facts": "1.2"
   },
   "excludedProducts": 7,
