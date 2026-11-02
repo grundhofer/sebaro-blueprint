@@ -44,6 +44,8 @@ DOCS = ROOT / "docs"
 TARGET = DOCS / "sebaro"
 VENDOR = DOCS / "assets" / "vendor"
 RECORD = DOCS / "GUIDE-SYNC.json"
+TEMPLATE_COPIES = ("templates/website-astro/public/sebaro", "templates/webapp-vite/public/sebaro",
+                   "templates/desktop-tauri/public/sebaro")
 CONFIG = ROOT / "tools" / "sync.config.json"
 
 
@@ -244,6 +246,13 @@ def main() -> int:
         if TARGET.exists():
             shutil.rmtree(TARGET)
         shutil.copytree(out, TARGET)
+        # the web starter templates carry the same export as one unchanged folder (check_site.py TPLEXP compares them)
+        for tpl in TEMPLATE_COPIES:
+            dest = ROOT / tpl
+            if dest.parent.is_dir():
+                if dest.exists():
+                    shutil.rmtree(dest)
+                shutil.copytree(out, dest)
         VENDOR.mkdir(parents=True, exist_ok=True)
         for name in cfg.get("vendorSpecimens", []):
             shutil.copy2(design / "systems" / cfg["system"] / "demo" / "assets" / name, VENDOR / name)
