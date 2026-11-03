@@ -30,7 +30,7 @@
     var tone = current();
     document.querySelectorAll("[data-sb-tone-choice]").forEach(function (group) {
       group.hidden = false;
-      group.querySelectorAll('input[name="sb-tone"]').forEach(function (input) { input.checked = input.value === tone; });
+      group.querySelectorAll('input[name="sb-tone"]').forEach(function (input) { if (input.value === tone && !input.checked) input.click(); });
     });
     document.querySelectorAll("[data-sb-tone-item]").forEach(function (item) {
       item.setAttribute("aria-checked", String(item.getAttribute("data-sb-tone-item") === tone));
