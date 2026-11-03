@@ -387,8 +387,10 @@
     var c = themeChoice();
     document.querySelectorAll("[data-sb-theme-choice]").forEach(function (el) {
       var on = el.getAttribute("data-sb-theme-choice") === c;
-      if (el.tagName === "INPUT") el.checked = on;   // the radios of the settings view (F10a) carry no aria-checked
-      else el.setAttribute("aria-checked", String(on));
+      if (el.tagName === "INPUT") {
+        // Activate only the desired radio; native grouping clears the previous choice.
+        if (on && !el.checked) el.click();
+      } else el.setAttribute("aria-checked", String(on));
     });
   }
   function applyTheme(choice) {
