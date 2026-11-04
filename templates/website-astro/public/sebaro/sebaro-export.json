@@ -16,7 +16,7 @@
   "launcherOnly": false,
   "excludedProducts": 7,
   "sebaroDesign": {
-    "commit": "eb66e0ca6cd030b0220696a26724c986434a2c94",
+    "commit": "b73a7cad6961dfb98478a21804b271f79aaa3785",
     "uncommittedChanges": false
   },
   "contracts": {
@@ -211,23 +211,23 @@
     {
       "path": "icons/sprite.svg",
       "source": "systems/sebaro/icons/dist/sprite.svg",
-      "sourceSha256": "4b33572d8048a89869eb7f9f502eb0f42207cf458425c8f40555b3866d8b67e3",
-      "sha256": "4b33572d8048a89869eb7f9f502eb0f42207cf458425c8f40555b3866d8b67e3",
-      "bytes": 54932
+      "sourceSha256": "618669c7ebb0c0a27beb7a6fae464b90e64d7ae775c7a2445774a61d4dc6b35f",
+      "sha256": "618669c7ebb0c0a27beb7a6fae464b90e64d7ae775c7a2445774a61d4dc6b35f",
+      "bytes": 55251
     },
     {
       "path": "icons/sprite.css",
       "source": "systems/sebaro/icons/dist/sprite.css",
-      "sourceSha256": "df6cbf7d17581ae17dcd017737d8daf28c89be299efd14806d227fdc46e680b0",
-      "sha256": "df6cbf7d17581ae17dcd017737d8daf28c89be299efd14806d227fdc46e680b0",
+      "sourceSha256": "5e541c5d91056cb8735e84e00660cde04e4be0f1919685f0d57f38fe96f0128c",
+      "sha256": "5e541c5d91056cb8735e84e00660cde04e4be0f1919685f0d57f38fe96f0128c",
       "bytes": 1831
     },
     {
       "path": "icons/icons.json",
       "source": "systems/sebaro/icons/dist/icons.json",
-      "sourceSha256": "60db1b1dcad1391f6d8fa37051fa0c4e13e0b7573ef003ba591e897d782f2428",
-      "sha256": "60db1b1dcad1391f6d8fa37051fa0c4e13e0b7573ef003ba591e897d782f2428",
-      "bytes": 109950
+      "sourceSha256": "26bc96b8517fdb31c23f484e7627c931774454a613f0da2e59889f1289d59bd5",
+      "sha256": "26bc96b8517fdb31c23f484e7627c931774454a613f0da2e59889f1289d59bd5",
+      "bytes": 109986
     },
     {
       "path": "brand/logo/lockup-horizontal.dark.svg",
