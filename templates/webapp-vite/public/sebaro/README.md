@@ -231,7 +231,7 @@ One line per finding (`FAIL  missing in target: â€¦`, `FAIL  edited in target: â
 - `brand/inline/` comes from systems/sebaro/brand/inline/, which no sebaroDesign gate checks for freshness (it is written by a script of the system, not by tools/brand_assets.py).
 - OG images are the rendered PNGs. Their HTML templates (brand/src/og/) load tokens, fonts and scripts relative to the system folder and stay in sebaroDesign; re-render there with brand_assets.py build. They are the workshop's samples: render the site's own pages with `brand/og/render.mjs` (README, section Share images).
 - Exported for studio: tokens.json, icons.json, SebaroTheme.kt, SebaroTokens.swift and the Android in-app tiles keep only studio and the umbrella studio; no file names another product (fit for a public repository). To show other products' tiles, export with --product studio.
-- 7 excluded product(s) left out (--exclude-products, $SEBARO_EXCLUDE_PRODUCTS): no file names them, and this record keeps only their number. `--verify` needs the same list.
+- 8 excluded product(s) left out (--exclude-products, $SEBARO_EXCLUDE_PRODUCTS): no file names them, and this record keeps only their number. `--verify` needs the same list.
 
 ## Not exported
 
