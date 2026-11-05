@@ -14,9 +14,9 @@
   "kotlinPackage": null,
   "kotlinNamespace": null,
   "launcherOnly": false,
-  "excludedProducts": 7,
+  "excludedProducts": 8,
   "sebaroDesign": {
-    "commit": "c30002c01fac341717498662cd5653825a89ce68",
+    "commit": "28e30e7004c50232cbeb6df22ee4001904ecb1ef",
     "uncommittedChanges": false
   },
   "contracts": {
@@ -84,15 +84,15 @@
     {
       "path": "tokens.css",
       "source": "systems/sebaro/dist/tokens.css",
-      "sourceSha256": "8d7aeef36d475cdef12027d541be07442c62ca9f3bbc0eb71faa016a6ecc19fe",
-      "sha256": "8d7aeef36d475cdef12027d541be07442c62ca9f3bbc0eb71faa016a6ecc19fe",
+      "sourceSha256": "c6e675a754d067779aa167a2ee00d8507c2e68fc6988be947f10a1f05ea014b3",
+      "sha256": "c6e675a754d067779aa167a2ee00d8507c2e68fc6988be947f10a1f05ea014b3",
       "bytes": 43510
     },
     {
       "path": "tokens.tailwind.css",
       "source": "systems/sebaro/dist/tokens.tailwind.css",
-      "sourceSha256": "b2a9a60ed0dc76719a20c3f38849448c8d191d9121fb76a25c1537dcb7386ea4",
-      "sha256": "b2a9a60ed0dc76719a20c3f38849448c8d191d9121fb76a25c1537dcb7386ea4",
+      "sourceSha256": "a507d87e2bc63951e962719314744a178bf01a4afc77ef6debb64eed9dbb6420",
+      "sha256": "a507d87e2bc63951e962719314744a178bf01a4afc77ef6debb64eed9dbb6420",
       "bytes": 9430
     },
     {
@@ -211,23 +211,23 @@
     {
       "path": "icons/sprite.svg",
       "source": "systems/sebaro/icons/dist/sprite.svg",
-      "sourceSha256": "618669c7ebb0c0a27beb7a6fae464b90e64d7ae775c7a2445774a61d4dc6b35f",
-      "sha256": "618669c7ebb0c0a27beb7a6fae464b90e64d7ae775c7a2445774a61d4dc6b35f",
-      "bytes": 55251
+      "sourceSha256": "b1869f5fe7464204adf175182acb3fbc3ab8df16d12fb88bc55c294e2426da0b",
+      "sha256": "b1869f5fe7464204adf175182acb3fbc3ab8df16d12fb88bc55c294e2426da0b",
+      "bytes": 55825
     },
     {
       "path": "icons/sprite.css",
       "source": "systems/sebaro/icons/dist/sprite.css",
-      "sourceSha256": "5e541c5d91056cb8735e84e00660cde04e4be0f1919685f0d57f38fe96f0128c",
-      "sha256": "5e541c5d91056cb8735e84e00660cde04e4be0f1919685f0d57f38fe96f0128c",
+      "sourceSha256": "983f7682ee0784b0ecbd2820ef3f01645498554b91ecb48f2dfcb2de5f5cd3e0",
+      "sha256": "983f7682ee0784b0ecbd2820ef3f01645498554b91ecb48f2dfcb2de5f5cd3e0",
       "bytes": 1831
     },
     {
       "path": "icons/icons.json",
       "source": "systems/sebaro/icons/dist/icons.json",
-      "sourceSha256": "26bc96b8517fdb31c23f484e7627c931774454a613f0da2e59889f1289d59bd5",
-      "sha256": "26bc96b8517fdb31c23f484e7627c931774454a613f0da2e59889f1289d59bd5",
-      "bytes": 109986
+      "sourceSha256": "f30e9d664f82a94476d0648049076bd8011d432de9804e9c09cdd6a48e10c0ec",
+      "sha256": "f30e9d664f82a94476d0648049076bd8011d432de9804e9c09cdd6a48e10c0ec",
+      "bytes": 110674
     },
     {
       "path": "brand/logo/lockup-horizontal.dark.svg",
@@ -949,7 +949,7 @@
       "path": "README.md",
       "source": null,
       "sourceSha256": null,
-      "sha256": "107c2b5aeecf63696a8aa0ad34a0a1150aee9b35d7b138c8ca44cc3e714ac2c9",
+      "sha256": "0b6f3fc70ebf87c35db6375b0cc4eaa4d983436235647966ea6bcf9e674e6784",
       "bytes": 21160,
       "transform": "generated"
     }
@@ -1015,6 +1015,6 @@
     "`brand/inline/` comes from systems/sebaro/brand/inline/, which no sebaroDesign gate checks for freshness (it is written by a script of the system, not by tools/brand_assets.py).",
     "OG images are the rendered PNGs. Their HTML templates (brand/src/og/) load tokens, fonts and scripts relative to the system folder and stay in sebaroDesign; re-render there with brand_assets.py build. They are the workshop's samples: render the site's own pages with `brand/og/render.mjs` (README, section Share images).",
     "Exported for studio: tokens.json, icons.json, SebaroTheme.kt, SebaroTokens.swift and the Android in-app tiles keep only studio and the umbrella studio; no file names another product (fit for a public repository). To show other products' tiles, export with --product studio.",
-    "7 excluded product(s) left out (--exclude-products, $SEBARO_EXCLUDE_PRODUCTS): no file names them, and this record keeps only their number. `--verify` needs the same list."
+    "8 excluded product(s) left out (--exclude-products, $SEBARO_EXCLUDE_PRODUCTS): no file names them, and this record keeps only their number. `--verify` needs the same list."
   ]
 }
