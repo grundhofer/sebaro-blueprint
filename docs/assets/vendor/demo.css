@@ -41,6 +41,15 @@
 .demo-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: var(--sb-space-8) var(--sb-spacing-group); align-items: start; }
 .demo-columns--3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
 .demo-columns--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); }
+/* a window's document with its notices above it (spec/02 §3.11): a frame of fixed height, so the notice area
+   is capped by its default (40 % of the frame) and scrolls in itself */
+.demo-callout-frame {
+  display: flex; flex-direction: column; gap: var(--sb-space-4); box-sizing: border-box; block-size: 22rem; max-inline-size: 40rem;
+}
+.demo-callout-frame > .sb-callout-area { flex: none; }
+.demo-callout-doc { flex: 1 1 auto; min-block-size: 0; padding-block-start: var(--sb-space-4); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+.demo-callout-doc > * { margin: 0; }
+.demo-callout-doc > * + * { margin-block-start: var(--sb-space-2); }
 .demo-chart { inline-size: 400px; max-inline-size: 100%; }
 .demo-wide { inline-size: 520px; max-inline-size: 100%; }
 .demo-box { padding: var(--sb-space-2) 0; border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); background: var(--sb-color-bg); }
