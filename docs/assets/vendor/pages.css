@@ -52,7 +52,7 @@
 
 /* content blocks inside an app view: the gutter and the stack of a form */
 .demo-pad { padding: var(--sb-space-2) var(--sb-spacing-gutter) var(--sb-space-1); }
-.demo-form { display: grid; gap: var(--sb-space-4); padding: var(--sb-space-2) var(--sb-spacing-gutter) var(--sb-space-3); }
+.demo-form { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-4); padding: var(--sb-space-2) var(--sb-spacing-gutter) var(--sb-space-3); }   /* the column is the view's width: a long word at 200 % text never widens the form past it */
 .demo-switches { display: grid; }
 .demo-actions-start { display: flex; flex-wrap: wrap; gap: var(--sb-space-3); padding: var(--sb-space-6) var(--sb-spacing-gutter) var(--sb-space-4); }
 .demo-detail { display: grid; gap: var(--sb-space-6); padding: var(--sb-space-2) var(--sb-spacing-gutter) var(--sb-space-2); }

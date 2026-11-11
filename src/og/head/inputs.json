@@ -1,11 +1,11 @@
 {
   "$comment": "written by tools/og.mjs after a successful render; tools/check_site.py compares it (OG); do not edit",
-  "render": "1.1.0",
+  "render": "1.2.0",
   "inputs": {
     "src/og/pages.json": "c5bb47f0b6f1ee10855c5064635bfc707f59b6998fb36532b9cdcb31b0555a0d",
-    "docs/sebaro/brand/og/render.mjs": "176b06b68ada9a4e710c128b3b3469dda129657e9efda3caed4474b6d1220d38",
-    "docs/sebaro/brand/og/template.html": "c930a5766988c5a13d9cf1efed050ce22f21029c5d1bce35408a95a089a90022",
-    "docs/sebaro/brand/og/pages.schema.json": "af5f72a9735b28c60dac2e114cd0e4fb9cd6d9ac616bdb4df46de9d7665ecfcc",
+    "docs/sebaro/brand/og/render.mjs": "cb678477baa3517396ff3e532b973ebb3ebd9c756a1b2fd0722c1f6f7ba67e46",
+    "docs/sebaro/brand/og/template.html": "c601ea08a1e0d98bdf206dc593085ee3bdfdbe3f5ba6f63f5ec9dc20ebbb3fe3",
+    "docs/sebaro/brand/og/pages.schema.json": "bba4a866034dbdbe071b5d14d2e79f8e3b837f7599525c1f8de6a31fd595ae31",
     "docs/sebaro/tokens.css": "a5d6c14c5ed26630faba0a26e39befef751b66005a6b172a7e9c80d6ac574065",
     "docs/sebaro/fonts/fonts.css": "c10d1061c7a7687e73b9030b9660dafa9d81876ac787328c8bc16bbd6d929c7a",
     "docs/sebaro/fonts/web/sebaro-mono-latin-de.woff2": "2512639768811e136c441f24e94a5f365ab1c18dbceb138f181c7e67a4be5ccf",

@@ -1,3 +1,25 @@
+// D145 / DEMO-CHECK 1.14: semantic view checks, separate from paint counts.
+function sbViewTypeCount(view) {
+  var key = view.getAttribute('data-sb-view-type');
+  var keys = 'entry overview list detail form flow tool result read history search settings about state-empty state-loading state-error state-permission outside account import help'.split(' ');
+  var colour = ['entry', 'overview', 'detail', 'result', 'state-empty'];
+  var none = ['detail', 'read', 'history', 'search', 'settings', 'about'];
+  function visible(e) { return e.getClientRects().length > 0 && getComputedStyle(e).visibility !== 'hidden'; }
+  function owned(selector) { return (view.matches(selector) ? [view] : []).concat(Array.from(view.querySelectorAll(selector))).filter(function (e) { return e.closest('[data-sb-view]') === view && visible(e); }); }
+  var errors = [];
+  if (key !== null && visible(view)) {
+    if (keys.indexOf(key) < 0) errors.push('unknown');
+    if (colour.indexOf(key) < 0 && owned('.sb-product-area').length) errors.push('product-area');
+    if (none.indexOf(key) >= 0 && owned('.sb-primary-action').length) errors.push('primary');
+    // A list requires a semantic ul/ol.sb-list or .sb-listbox with role=listbox.
+    // Cards, app tiles or collection grids in that view fail even beside a valid list.
+    if (key === 'list' && (!owned('ul.sb-list, ol.sb-list, .sb-listbox[role="listbox"]').length ||
+        owned('.sb-card, .sb-app-grid, .sb-app-tile, [data-sb-collection="grid"]').length)) errors.push('list');
+  }
+  var framePrimary = view.matches('.sb-app-frame') ? Array.from(view.querySelectorAll('.sb-primary-action')).filter(visible).length : null;
+  return { viewType: key, viewTypeErrors: errors, framePrimary: framePrimary };
+}
+
 // D143 (7), D144 (6): task boundaries, not arbitrary layout wrappers (spec/02 §1.0).
 function sbControlLevels(view) {
   var boundary = '[data-sb-action-area], [data-sb-view], [data-sb-web-app-head], header, section, .sb-site-header, .sb-section, .sb-card, .sb-list-row, .sb-top-bar, .sb-toolbar, .sb-dialog__actions, .sb-window__part, .sb-window__head, .sb-window__bar, .sb-board__column, .sb-find-bar';
@@ -128,8 +150,8 @@ function sbColourCount(view) {
     });
   });
   if (products.size > 1) areaErrors.push("second product colour");
-  var levels = sbControlLevels(view);
-  var n = { outlinedAreas: levels.outlinedAreas, headerThemeButtons: levels.headerThemeButtons, productAreas: areas.length, areaErrors: areaErrors, primary: 0, place: 0, status: 0, signs: view.querySelectorAll(".sb-sign-tile").length, unknown: {}, textOnColour: 0 };
+  var levels = sbControlLevels(view), types = sbViewTypeCount(view);
+  var n = { viewType: types.viewType, viewTypeErrors: types.viewTypeErrors, framePrimary: types.framePrimary, outlinedAreas: levels.outlinedAreas, headerThemeButtons: levels.headerThemeButtons, productAreas: areas.length, areaErrors: areaErrors, primary: 0, place: 0, status: 0, signs: view.querySelectorAll(".sb-sign-tile").length, unknown: {}, textOnColour: 0 };
   view.querySelectorAll("*").forEach(function (e) {
     if (e.closest(".sb-sign-tile, .sb-keymark") || e.closest("[data-sb-view]") !== view || !e.getClientRects().length) return;
     var cs = getComputedStyle(e);
@@ -165,8 +187,15 @@ function sbColourCount(view) {
     }
   });
   var expected = view.hasAttribute("data-sb-primary-expected") ? +view.getAttribute("data-sb-primary-expected") : 1;
+  if (!view.getClientRects().length) expected = 0;
+  var frame = view.closest('.sb-app-frame');
+  if (frame && view.matches('.sb-app-frame__pane--start')) {
+    var end = frame.querySelector('.sb-app-frame__pane--end');
+    if (end && Array.from(end.querySelectorAll('.sb-primary-action')).some(function (e) { return e.getClientRects().length && getComputedStyle(e).visibility !== 'hidden'; })) expected = 0;
+  }
+  n.expected = expected;
   var unknown = Object.keys(n.unknown);
-  n.pass = n.primary === expected && unknown.length === 0 && n.textOnColour === 0 && areaErrors.length === 0 && !levels.headerThemeButtons && !levels.outlinedAreas.some(function (a) { return a.outlined > 1; });
+  n.pass = types.viewTypeErrors.length === 0 && (types.framePrimary === null || types.framePrimary <= 1) && n.primary === expected && unknown.length === 0 && n.textOnColour === 0 && areaErrors.length === 0 && !levels.headerThemeButtons && !levels.outlinedAreas.some(function (a) { return a.outlined > 1; });
   n.line = "Farbprüfung: Hauptaktion " + n.primary + " · Ort " + n.place + " · Status " + n.status + " · App-Zeichen " +
     n.signs + " · Produktflächen " + areas.length + " · Flächenfehler " + areaErrors.length + " · Farben ohne Rolle " + unknown.length + " · Text auf Farbfläche " + n.textOnColour + " · " +
     (n.pass ? "bestanden" : "nicht bestanden");
