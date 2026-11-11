@@ -55,8 +55,8 @@ Das Skript kopiert den Ordner, prüft ihn mit `checks/verify-export.mjs --strict
 - Vorschaubild je Seite aus dem Build: WEB-09 (`scripts/og.mjs` ruft `public/sebaro/brand/og/render.mjs`)
 - Druck immer hell: WEB-11 (`sb-print.js`); große Schrift: ZUG-09 (`sb-fit.js`)
 
-Geprüft mit `npm test`: jede Seite hell und dunkel, bei 320, 390 und 1440&nbsp;px, bei 100&nbsp;% und echten
-200&nbsp;% Schrift (kein seitliches Scrollen, kein abgeschnittener Text, axe ohne Verstoß, kein Fehler in der Konsole,
+Geprüft mit `npm test`: jede Seite hell und dunkel, bei 320, 390 und 1440&nbsp;px, bei 100&nbsp;% Schrift und auf
+1440&nbsp;px auch bei echten 200&nbsp;% (kein seitliches Scrollen, kein abgeschnittener Text, axe ohne Verstoß, kein Fehler in der Konsole,
 keine Verletzung der Content-Security-Policy), dazu die Wege mit der Tastatur. Eine Adresse, die es nicht gibt, muss mit
 404 und der eigenen Seite „Diese Seite gibt es nicht“ antworten.
 Jeder Fall nennt, was auf dem Bildschirm stehen muss: den HTTP-Status der Seite, den Text der einen sichtbaren

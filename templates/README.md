@@ -18,7 +18,7 @@ The three starters are complete small projects: each carries an unchanged copy o
 (copied by `npm run sebaro:sync`, checked by `npm run sebaro:verify`, i.e. `verify-export.mjs --strict`), keeps every
 word in one strings module, uses only `sb-*` classes of the export plus its own `app-*` classes with `var(--sb-*)`
 tokens, runs under a strict Content-Security-Policy and has Playwright tests (Chromium) for every screen in light and
-dark at 100 % and real 200 % text with axe. CI: `.github/workflows/templates.yml`. Names and content are invented
+dark at 100 % and, at the widest width, real 200 % text with axe. CI: `.github/workflows/templates.yml`. Names and content are invented
 („Beispielseite“, „Musterapp“); the sign tile is the umbrella sign as a placeholder.
 
 ## New project in five steps
