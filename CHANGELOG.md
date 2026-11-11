@@ -11,6 +11,14 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+Einstieg für Agenten: `AGENTS.md` ist ein kurzer Wegweiser (3 KB statt 59 KB); die frühere Fassung liegt unverändert
+als `MANUAL.md` bereit. Neu sind `design/KERN.md` (31 Kernregeln, vom Inhaber am 11.11.2026 bestätigt; sie nehmen
+D143 bis D146 auf und senken die Barrierefreiheit auf einen Boden), `design/views.md` (die 21 Ansichtstypen aus
+D145), `rules/home.json` (wo jede der 228 Regeln heute wirkt) und `templates/android-compose/BLUEPRINT.md` (der
+Technik-Bauplan für Android). Der Katalog `rules/rules.json` ist unverändert; wo eine Kernregel ihm widerspricht
+(ZEI-01, STR-01, ZUG-05, ZUG-07 bis ZUG-09), gilt die Kernregel. `tools/check_budget.py` hält die Einstiegstexte
+unter festen Größen und meldet Regeln ohne Zuhause; die CI ruft es auf.
+
 Werkzeug, keine Regeländerung: `tools/check_site.py` (Gruppe TPLEXP) vergleicht die Kopien des Web-Exports in den
 Startvorlagen mit `docs/sebaro/` und schlägt bei veralteten Kopien fehl; der iOS-Export-Commit warnt nur.
 Selbsttest: `python3 tools/test_check_site.py`.
