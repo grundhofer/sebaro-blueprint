@@ -93,7 +93,6 @@ Until the starter is brought up to this blueprint, mind these gaps:
 - It has no deploy workflow.
 - Code highlighting is switched off, because the highlighter's inline styles break the strict
   Content-Security-Policy.
-- Its tests run at 200 % text on a phone width; the blueprint asks for 200 % zoom at desktop width only.
 
 What the starter already does and the blueprint keeps: static Astro pages, the load order, the strict
 Content-Security-Policy, one share image per page, Playwright with axe on every page.

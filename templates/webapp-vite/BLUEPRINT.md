@@ -108,7 +108,6 @@ Until the starter is rebuilt from this blueprint, do not copy these parts of it:
   `localStorage`. The blueprint asks for React, react-router and zustand.
 - npm instead of pnpm; no ESLint, no Prettier, no unit tests, no size budget, no Dependabot file.
 - The copy sits in `public/sebaro/` and is loaded with `<link>` and `<script>` tags.
-- Its tests run at 200 % text on a phone width; the blueprint asks for 200 % zoom at desktop width only.
 
 What the starter already does and the blueprint keeps: every string in one module with a test, the strict
 Content-Security-Policy, Playwright with axe on every view.

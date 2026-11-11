@@ -30,6 +30,10 @@ Sicherheit, Größenbudgets, Release und Updates so, wie die bestehenden Produkt
 setzen auf React, zustand und i18next; die Startvorlagen ohne Framework folgen dem noch nicht, jeder Bauplan nennt
 am Ende die Abweichungen seiner Vorlage.
 
+Prüfungen der Startvorlagen: Große Schrift (200 %) wird nur noch auf der größten Breite geprüft, wie Kernregel 30
+es verlangt; die Fälle auf 320 bis 480 px entfallen (einer davon, das Menü der Desktop-Vorlage, schlug unregelmäßig
+fehl). Die iOS-Vorlage hat einen eigenen Ablauf `templates-ios.yml`, der nur bei Änderungen an ihr läuft.
+
 Werkzeug, keine Regeländerung: `tools/check_site.py` (Gruppe TPLEXP) vergleicht die Kopien des Web-Exports in den
 Startvorlagen mit `docs/sebaro/` und schlägt bei veralteten Kopien fehl; der iOS-Export-Commit warnt nur.
 Selbsttest: `python3 tools/test_check_site.py`.
