@@ -69,7 +69,7 @@
 (function () {
   "use strict";
   var HYST = 4;   // px: a part goes back to its wide form only when it fits this much narrower (provisional, agent)
-  var NO_HYPHENS = ".sb-opening__title, code, pre, kbd, samp, var, textarea, input, select, option, script, style, svg, math, .sb-id, " +
+  var NO_HYPHENS = ".sb-opening__title, .sb-product-area--empty .sb-product-area__line, code, pre, kbd, samp, var, textarea, input, select, option, script, style, svg, math, .sb-id, " +
     ".sb-file-name, .sb-visually-hidden, [data-sb-truncate], [translate=\"no\"], .sb-fit-probe";
   var SVGNS = "http://www.w3.org/2000/svg";
   var counter = 0;
@@ -673,7 +673,7 @@
 
   // ------------------------------------------------------------------ scheduling
   var PARTS = [
-    [".sb-opening__title", fitOpening], [".sb-segmented", fitSegmented], [".sb-progress__steps", fitSteps], [".sb-facts-line", fitFacts],
+    [".sb-opening__title, .sb-product-area--empty .sb-product-area__line", fitOpening], [".sb-segmented", fitSegmented], [".sb-progress__steps", fitSteps], [".sb-facts-line", fitFacts],
     [".sb-chart", function (fig) { if (fig.querySelector(".sb-chart__end--series")) fitSeries(fig); }],
     [".sb-chart__slots", fitSlots], [".sb-chart__diverging-head", fitHead], [".sb-top-bar", fitTopBar],
     [":is(.sb-primary-action, .sb-secondary-action, .sb-danger-action)", fitAction], [".sb-menu__item", fitMenuKeys],

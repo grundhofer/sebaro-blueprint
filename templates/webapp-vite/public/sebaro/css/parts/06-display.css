@@ -850,7 +850,10 @@ kbd, .sb-kbd {
 .sb-avatars { display: flex; align-items: center; gap: var(--sb-space-1); margin: 0; padding: 0; list-style: none; }
 
 /* empty state: start-aligned; optional spot illustration; its primary action goes to the bottom bar */
-.sb-empty { display: grid; justify-items: start; gap: var(--sb-space-2); padding: var(--sb-space-8) var(--sb-spacing-gutter); }
+.sb-empty { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: start; gap: var(--sb-space-2); padding: var(--sb-space-8) var(--sb-spacing-gutter); }
+/* the coloured head never grows past the empty state's column: at 200 % text a long word of its 40 px headline would
+   otherwise widen the column and push every line out of the view; sb-fit.js then fits the headline to this width (§3.33) */
+.sb-empty > .sb-product-area { max-inline-size: 100%; }
 .sb-empty > .sb-icon--spot { margin-block-end: var(--sb-space-2); color: var(--sb-color-text-muted); --sb-icon-tone: var(--sb-color-border); }
 .sb-empty__title { margin: 0; font: var(--sb-type-mobile-title); letter-spacing: var(--sb-type-mobile-title-tracking); }
 .sb-empty__text { margin: 0; color: var(--sb-color-text-muted); }
@@ -1018,7 +1021,7 @@ kbd, .sb-kbd {
 .sb-about-head + .sb-facts-line { padding-block-end: var(--sb-space-4); }
 /* the side gutter only in a phone view, whose content has none (like .sb-view > .sb-progress); a website section
    (.sb-container) and a window's content already bring their own */
-.sb-view .sb-about-head, .sb-view .sb-about-head + .sb-facts-line { padding-inline: var(--sb-spacing-gutter); }
+.sb-view .sb-about-head, .sb-view .sb-about-head + .sb-facts-line, .sb-view .sb-about-head + .sb-sender, .sb-view .sb-sender + .sb-facts-line { padding-inline: var(--sb-spacing-gutter); }
 
 /* audio row (D91 B11b; spec/02 §3.25): the name and the time as text on top, below it the play / pause icon button
    (48 px) and the system slider (sb-range, fill and thumb in accent like every slider) to jump in the recording; a
@@ -1701,6 +1704,9 @@ html.sb-starting > body > .sb-start, .sb-starting > .sb-start {
    400 px at 200 %, never wider than its place) and its rows keep their 16 px sides, so a row's words are not squeezed
    beside its check and its keys */
 .sb-menu { min-inline-size: min(100%, max(200px, 12.5em)); max-inline-size: max(320px, 20em); }
+/* an open menu keeps 8 px to each side of the window (2026-11-11): at 200 % on 320 px it was as wide as the window and
+   stood 8 px out of it at the end (tools/tests/menu_check.mjs, headed groups) */
+.sb-menu[popover] { min-inline-size: min(100% - 16px, max(200px, 12.5em)); max-inline-size: min(100% - 16px, max(320px, 20em)); }
 .sb-menu__item { padding-inline: min(var(--sb-space-4), 16px); }
 .sb-menu__item .sb-icon { color: var(--sb-color-text-muted); }
 .sb-menu__item:hover, .sb-menu__item.is-hover { background: var(--sb-color-hover-fill); }
@@ -1967,4 +1973,7 @@ dialog.sb-sheet > form { margin: 0; }
 .sb-product-area__detail { margin: 12px 0 0; font-size: 0.875rem; line-height: 1.5; }
 .sb-product-area__symbol { display: block; inline-size: 64px; block-size: 64px; }
 .sb-product-area__symbol > svg { inline-size: 100%; block-size: 100%; }
-.sb-product-area--empty .sb-product-area__line { font-size: 2.5rem; }
+.sb-product-area--empty .sb-product-area__line { font-size: 2.5rem; text-wrap: balance; }
+/* with sb-fit.js the headline's size follows its longest word (§3.33), so no word breaks inside itself; without the
+   script a word too long for the line still breaks (the area's overflow-wrap: anywhere) and nothing runs out of the view */
+:root[data-sb-fit-ready] .sb-product-area--empty .sb-product-area__line { overflow-wrap: normal; }
