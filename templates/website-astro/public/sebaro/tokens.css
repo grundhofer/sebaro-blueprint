@@ -1,8 +1,8 @@
 /* generated — do not edit.
- * sebaroDesign token contract 1.13 · draft "sebaro" · palette "sebaro"
- * source: systems/sebaro/tokens/tokens.json (sha256 a67aab011dec80df)
+ * sebaroDesign token contract 1.14 · draft "sebaro" · palette "sebaro"
+ * source: systems/sebaro/tokens/tokens.json (sha256 1ce6b8c317aefd2e)
  *         palettes/sebaro.json (sha256 17200a17be172cdd)
- * builder: tools/build_tokens.py 1.13.0 · spec: shared/TOKEN-CONTRACT.md
+ * builder: tools/build_tokens.py 1.14.0 · spec: shared/TOKEN-CONTRACT.md
  */
 
 /* 1. Mode-independent tokens. */
@@ -792,6 +792,38 @@
 [data-sb-product] {
   --sb-product-tile: initial;
   --sb-product-glyph: initial;
+}
+[data-sb-tile="studio"] {
+  --sb-product-tile: var(--sb-tile-studio);
+  --sb-product-glyph: var(--sb-tile-studio-glyph);
+}
+[data-sb-tile="collaboration"] {
+  --sb-product-tile: var(--sb-tile-collaboration);
+  --sb-product-glyph: var(--sb-tile-collaboration-glyph);
+}
+[data-sb-tile="everyday"] {
+  --sb-product-tile: var(--sb-tile-everyday);
+  --sb-product-glyph: var(--sb-tile-everyday-glyph);
+}
+[data-sb-tile="learning"] {
+  --sb-product-tile: var(--sb-tile-learning);
+  --sb-product-glyph: var(--sb-tile-learning-glyph);
+}
+[data-sb-tile="tools"] {
+  --sb-product-tile: var(--sb-tile-tools);
+  --sb-product-glyph: var(--sb-tile-tools-glyph);
+}
+[data-sb-tile="media"] {
+  --sb-product-tile: var(--sb-tile-media);
+  --sb-product-glyph: var(--sb-tile-media-glyph);
+}
+[data-sb-tile="money"] {
+  --sb-product-tile: var(--sb-tile-money);
+  --sb-product-glyph: var(--sb-tile-money-glyph);
+}
+[data-sb-tile="system"] {
+  --sb-product-tile: var(--sb-tile-system);
+  --sb-product-glyph: var(--sb-tile-system-glyph);
 }
 [data-sb-product="studio"] {
   --sb-product-tile: var(--sb-tile-studio);
