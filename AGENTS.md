@@ -23,7 +23,8 @@ Read in this order and stop when you have what the task needs.
    A starter with a `BLUEPRINT.md` has its technology rules there (architecture, dependencies, tests, release,
    updates). Every starter's README names what the starter does not do yet; do not copy those gaps.
 4. The sebaro copy inside the product, the folder with `sebaro-export.json`: parts, tokens, fonts, icons. Its README
-   lists the parts. Never edit it. How a product gets and updates it: [MANUAL.md](MANUAL.md) §4.
+   says how it is wired; a list of its parts with one line each does not exist yet, so search the copy by name
+   (`Sb…` in Kotlin, `sb-…` in CSS). Never edit it. How a product gets and updates it: [MANUAL.md](MANUAL.md) §4.
 
 In short (core rules 1 to 3): use what the copy has, build what is missing beside the copy, record gaps and
 deviations in the product.
