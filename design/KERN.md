@@ -1,7 +1,8 @@
 # sebaro core rules
 
 Read this before you build or change a sebaro screen. These 31 rules are the ones you have to hold in mind; the
-rest is built into the parts, the view templates ([views.md](views.md)) and the checks. `[AKT-01]` points to the
+rest is built into the parts ([parts.md](parts.md) says what a part still needs from you), the view templates
+([views.md](views.md)) and the checks. `[AKT-01]` points to the
 long catalogue `rules/rules.json` (reason and examples), `D<n>` to an owner decision. Look them up only when you
 need the reason. Where the catalogue says something else, this file wins.
 
