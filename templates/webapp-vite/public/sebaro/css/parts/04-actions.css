@@ -36,6 +36,9 @@
 .sb-top-bar--sub .sb-top-bar__title { font: var(--sb-type-mobile-title); letter-spacing: var(--sb-type-mobile-title-tracking); }
 .sb-top-bar__subtitle { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .sb-top-bar__actions { display: flex; align-items: center; flex: none; }
+/* a search view (spec/13 §3.11): the search field stands in the heading in place of the title and ends at the gutter */
+.sb-top-bar__heading > .sb-field { flex: 1 1 0; min-inline-size: 0; }
+.sb-top-bar:has(> .sb-top-bar__heading > .sb-field) { padding-inline-end: var(--sb-spacing-gutter); }
 
 /* the bottom block: primary action bar + navigation, one 2 px ink layer line on top (spec/03 §2, D46) */
 .sb-bottom-block {
