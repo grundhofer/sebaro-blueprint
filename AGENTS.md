@@ -16,12 +16,12 @@ Read in this order and stop when you have what the task needs.
    |---|---|---|
    | Android app | [`templates/android-compose/`](templates/android-compose/README.md) | Kotlin, Jetpack Compose |
    | Website | [`templates/website-astro/`](templates/website-astro/README.md) | Astro |
-   | Web app | [`templates/webapp-vite/`](templates/webapp-vite/README.md) | Vite, TypeScript |
-   | Desktop app | [`templates/desktop-tauri/`](templates/desktop-tauri/README.md) | Tauri 2 |
+   | Web app | [`templates/webapp-vite/`](templates/webapp-vite/README.md) | React, Vite, TypeScript |
+   | Desktop app | [`templates/desktop-tauri/`](templates/desktop-tauri/README.md) | Tauri 2 with the web app's UI stack |
    | iOS app | [`templates/ios-swiftui/`](templates/ios-swiftui/README.md) | frozen: kept as it is until an iOS app is scheduled |
 
-   A starter with a `BLUEPRINT.md` has its technology rules there (architecture, dependencies, tests, release,
-   updates). Every starter's README names what the starter does not do yet; do not copy those gaps.
+   Each starter's `BLUEPRINT.md` holds the technology rules (stack, structure, tests, release, updates) and ends
+   with where the starter itself still differs; do not copy those parts. iOS has no blueprint.
 4. The sebaro copy inside the product, the folder with `sebaro-export.json`: parts, tokens, fonts, icons. Its README
    says how it is wired; a list of its parts with one line each does not exist yet, so search the copy by name
    (`Sb…` in Kotlin, `sb-…` in CSS). Never edit it. How a product gets and updates it: [MANUAL.md](MANUAL.md) §4.

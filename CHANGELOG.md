@@ -24,6 +24,12 @@ Produkt und `convert.md` für den Umbau eines bestehenden Projekts. `templates/A
 die `AGENTS.md` eines Produkts, hat fünf Zeilen statt 16 KB und verweist auf Kernregeln, Ansichtstypen und den
 Bauplan der Produktart; was vorher dort stand, steht in den Kernregeln und in `MANUAL.md`.
 
+Technik-Baupläne für Website, Web-App und Desktop: `templates/website-astro/BLUEPRINT.md`,
+`templates/webapp-vite/BLUEPRINT.md` und `templates/desktop-tauri/BLUEPRINT.md` beschreiben Stack, Aufbau, Tests,
+Sicherheit, Größenbudgets, Release und Updates so, wie die bestehenden Produkte gebaut sind. Web-App und Desktop
+setzen auf React, zustand und i18next; die Startvorlagen ohne Framework folgen dem noch nicht, jeder Bauplan nennt
+am Ende die Abweichungen seiner Vorlage.
+
 Werkzeug, keine Regeländerung: `tools/check_site.py` (Gruppe TPLEXP) vergleicht die Kopien des Web-Exports in den
 Startvorlagen mit `docs/sebaro/` und schlägt bei veralteten Kopien fehl; der iOS-Export-Commit warnt nur.
 Selbsttest: `python3 tools/test_check_site.py`.
