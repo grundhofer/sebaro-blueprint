@@ -34,6 +34,12 @@ Prüfungen der Startvorlagen: Große Schrift (200 %) wird nur noch auf der grö�
 es verlangt; die Fälle auf 320 bis 480 px entfallen (einer davon, das Menü der Desktop-Vorlage, schlug unregelmäßig
 fehl). Die iOS-Vorlage hat einen eigenen Ablauf `templates-ios.yml`, der nur bei Änderungen an ihr läuft.
 
+Bauteil-Blatt: `design/parts.md` nennt je Bauteil den einen Satz, den ein Autor zusätzlich kennen muss. Grundlage
+ist eine Durchsicht der Web- und der Compose-Bauteile gegen die 54 Regeln mit dem Zuhause „Bauteil“ (aus dem Code
+gelesen, nichts gerendert): Im Web tragen die Bauteile 19 Regeln von selbst, bei 32 braucht es den Satz; in Compose
+sind es 15 und 26, vier fehlen dort noch. `rules/home.json` hält den Befund je Regel fest, `tools/check_budget.py`
+prüft, dass das Blatt jede betroffene Regel nennt.
+
 Werkzeug, keine Regeländerung: `tools/check_site.py` (Gruppe TPLEXP) vergleicht die Kopien des Web-Exports in den
 Startvorlagen mit `docs/sebaro/` und schlägt bei veralteten Kopien fehl; der iOS-Export-Commit warnt nur.
 Selbsttest: `python3 tools/test_check_site.py`.
