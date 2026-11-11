@@ -1,0 +1,777 @@
+{
+ "$comment": "Where each rule of rules.json lives since the round-8 cleanup (D145 (6)). core = design/KERN.md (ref = rule number); view = design/views.md (ref = type key); component = carried by the parts of the sebaro copy; words = writing sheet; platform-* = platform blueprint and template; check = automatic check; extra-* = optional sheet; playbook = how to start a project; workshop = concerns only who builds the system; lowered = accessibility rule above the floor of KERN rule 30, kept as built, no longer required. Confirmed by the owner on 2026-11-11 together with the core rules; whether each part carries its 'component' rules on every platform is not verified yet.",
+ "rules": {
+  "HAL-01": {
+   "home": "workshop"
+  },
+  "HAL-02": {
+   "home": "workshop"
+  },
+  "HAL-03": {
+   "home": "core",
+   "ref": 27
+  },
+  "HAL-04": {
+   "home": "core",
+   "ref": 27
+  },
+  "HAL-05": {
+   "home": "core",
+   "ref": 23
+  },
+  "HAL-06": {
+   "home": "core",
+   "ref": 11
+  },
+  "HAL-07": {
+   "home": "core",
+   "ref": 1
+  },
+  "HAL-08": {
+   "home": "playbook"
+  },
+  "HAL-09": {
+   "home": "core",
+   "ref": 27
+  },
+  "FAR-01": {
+   "home": "core",
+   "ref": 4
+  },
+  "FAR-02": {
+   "home": "core",
+   "ref": 6
+  },
+  "FAR-03": {
+   "home": "core",
+   "ref": 4
+  },
+  "FAR-04": {
+   "home": "workshop"
+  },
+  "FAR-05": {
+   "home": "core",
+   "ref": 6
+  },
+  "FAR-06": {
+   "home": "component"
+  },
+  "FAR-07": {
+   "home": "component"
+  },
+  "FAR-08": {
+   "home": "component"
+  },
+  "FAR-09": {
+   "home": "core",
+   "ref": 7
+  },
+  "FAR-11": {
+   "home": "component"
+  },
+  "FAR-12": {
+   "home": "component"
+  },
+  "FAR-14": {
+   "home": "component"
+  },
+  "FAR-15": {
+   "home": "core",
+   "ref": 7
+  },
+  "FAR-13": {
+   "home": "workshop"
+  },
+  "SCH-01": {
+   "home": "core",
+   "ref": 8
+  },
+  "SCH-02": {
+   "home": "component"
+  },
+  "SCH-03": {
+   "home": "core",
+   "ref": 8
+  },
+  "SCH-04": {
+   "home": "core",
+   "ref": 8
+  },
+  "SCH-05": {
+   "home": "component"
+  },
+  "SCH-06": {
+   "home": "component"
+  },
+  "SCH-07": {
+   "home": "platform-web"
+  },
+  "RAU-01": {
+   "home": "core",
+   "ref": 9
+  },
+  "RAU-02": {
+   "home": "component"
+  },
+  "RAU-03": {
+   "home": "platform-web"
+  },
+  "RAU-04": {
+   "home": "core",
+   "ref": 9
+  },
+  "RAU-05": {
+   "home": "core",
+   "ref": 9
+  },
+  "RAU-06": {
+   "home": "platform-desktop"
+  },
+  "RAU-07": {
+   "home": "component"
+  },
+  "FOR-01": {
+   "home": "core",
+   "ref": 11
+  },
+  "FOR-02": {
+   "home": "core",
+   "ref": 10
+  },
+  "FOR-03": {
+   "home": "core",
+   "ref": 11
+  },
+  "FOR-04": {
+   "home": "core",
+   "ref": 11
+  },
+  "FOR-05": {
+   "home": "component"
+  },
+  "FOR-06": {
+   "home": "component"
+  },
+  "EBE-01": {
+   "home": "core",
+   "ref": 10
+  },
+  "EBE-02": {
+   "home": "core",
+   "ref": 10
+  },
+  "EBE-03": {
+   "home": "component"
+  },
+  "EBE-04": {
+   "home": "component"
+  },
+  "EBE-05": {
+   "home": "core",
+   "ref": 14
+  },
+  "EBE-06": {
+   "home": "component"
+  },
+  "EBE-07": {
+   "home": "component"
+  },
+  "EBE-08": {
+   "home": "platform-desktop"
+  },
+  "BEW-01": {
+   "home": "core",
+   "ref": 23
+  },
+  "BEW-02": {
+   "home": "core",
+   "ref": 23
+  },
+  "BEW-03": {
+   "home": "component"
+  },
+  "BEW-04": {
+   "home": "core",
+   "ref": 23
+  },
+  "AKT-01": {
+   "home": "core",
+   "ref": 12
+  },
+  "AKT-02": {
+   "home": "core",
+   "ref": 12
+  },
+  "AKT-03": {
+   "home": "component"
+  },
+  "AKT-04": {
+   "home": "core",
+   "ref": 12
+  },
+  "AKT-05": {
+   "home": "core",
+   "ref": 14
+  },
+  "AKT-06": {
+   "home": "core",
+   "ref": 13
+  },
+  "AKT-07": {
+   "home": "core",
+   "ref": 15
+  },
+  "AKT-08": {
+   "home": "core",
+   "ref": 15
+  },
+  "AKT-09": {
+   "home": "core",
+   "ref": 28
+  },
+  "AKT-10": {
+   "home": "view",
+   "ref": "detail"
+  },
+  "AKT-11": {
+   "home": "core",
+   "ref": 12
+  },
+  "NAV-01": {
+   "home": "core",
+   "ref": 17
+  },
+  "NAV-02": {
+   "home": "core",
+   "ref": 17
+  },
+  "NAV-03": {
+   "home": "core",
+   "ref": 18
+  },
+  "NAV-04": {
+   "home": "core",
+   "ref": 18
+  },
+  "NAV-05": {
+   "home": "core",
+   "ref": 18
+  },
+  "NAV-06": {
+   "home": "platform-web"
+  },
+  "NAV-07": {
+   "home": "platform-web"
+  },
+  "NAV-08": {
+   "home": "component"
+  },
+  "NAV-09": {
+   "home": "platform-desktop"
+  },
+  "NAV-10": {
+   "home": "core",
+   "ref": 17
+  },
+  "NAV-11": {
+   "home": "component"
+  },
+  "LNK-01": {
+   "home": "core",
+   "ref": 19
+  },
+  "LNK-02": {
+   "home": "core",
+   "ref": 19
+  },
+  "STA-01": {
+   "home": "core",
+   "ref": 20
+  },
+  "STA-02": {
+   "home": "core",
+   "ref": 20
+  },
+  "STA-03": {
+   "home": "core",
+   "ref": 20
+  },
+  "STA-04": {
+   "home": "component"
+  },
+  "STA-05": {
+   "home": "component"
+  },
+  "STA-06": {
+   "home": "core",
+   "ref": 22
+  },
+  "STA-07": {
+   "home": "platform-desktop"
+  },
+  "STA-08": {
+   "home": "component"
+  },
+  "STA-09": {
+   "home": "words"
+  },
+  "EIN-01": {
+   "home": "core",
+   "ref": 21
+  },
+  "EIN-02": {
+   "home": "core",
+   "ref": 21
+  },
+  "EIN-03": {
+   "home": "core",
+   "ref": 4
+  },
+  "EIN-04": {
+   "home": "component"
+  },
+  "EIN-05": {
+   "home": "view",
+   "ref": "search"
+  },
+  "EIN-06": {
+   "home": "component"
+  },
+  "DAT-01": {
+   "home": "core",
+   "ref": 10
+  },
+  "DAT-02": {
+   "home": "component"
+  },
+  "DAT-03": {
+   "home": "component"
+  },
+  "DAT-04": {
+   "home": "core",
+   "ref": 24
+  },
+  "DAT-05": {
+   "home": "component"
+  },
+  "DAT-06": {
+   "home": "component"
+  },
+  "DAT-07": {
+   "home": "core",
+   "ref": 22
+  },
+  "DAT-08": {
+   "home": "component"
+  },
+  "DAT-09": {
+   "home": "component"
+  },
+  "DAT-10": {
+   "home": "component"
+  },
+  "DAT-11": {
+   "home": "component"
+  },
+  "DAT-12": {
+   "home": "component"
+  },
+  "DAT-13": {
+   "home": "component"
+  },
+  "DAT-14": {
+   "home": "component"
+  },
+  "DAT-15": {
+   "home": "view",
+   "ref": "history"
+  },
+  "DAT-16": {
+   "home": "component"
+  },
+  "DAT-17": {
+   "home": "component"
+  },
+  "TXT-01": {
+   "home": "core",
+   "ref": 26
+  },
+  "TXT-02": {
+   "home": "core",
+   "ref": 27
+  },
+  "TXT-03": {
+   "home": "core",
+   "ref": 26
+  },
+  "TXT-04": {
+   "home": "core",
+   "ref": 26
+  },
+  "TXT-05": {
+   "home": "words"
+  },
+  "TXT-06": {
+   "home": "component"
+  },
+  "TXT-07": {
+   "home": "core",
+   "ref": 21
+  },
+  "TXT-08": {
+   "home": "component"
+  },
+  "TXT-09": {
+   "home": "component"
+  },
+  "TXT-10": {
+   "home": "component"
+  },
+  "TXT-11": {
+   "home": "component"
+  },
+  "TXT-12": {
+   "home": "core",
+   "ref": 26
+  },
+  "TXT-13": {
+   "home": "words"
+  },
+  "TXT-14": {
+   "home": "words"
+  },
+  "TXT-15": {
+   "home": "component"
+  },
+  "TXT-16": {
+   "home": "words"
+  },
+  "TXT-17": {
+   "home": "component"
+  },
+  "BEL-01": {
+   "home": "core",
+   "ref": 27
+  },
+  "BEL-02": {
+   "home": "extra-evidence"
+  },
+  "BEL-03": {
+   "home": "extra-evidence"
+  },
+  "BEL-04": {
+   "home": "extra-evidence"
+  },
+  "BEL-05": {
+   "home": "extra-evidence"
+  },
+  "BEL-06": {
+   "home": "extra-evidence"
+  },
+  "BEL-07": {
+   "home": "extra-evidence"
+  },
+  "BEL-08": {
+   "home": "extra-evidence"
+  },
+  "BEL-09": {
+   "home": "core",
+   "ref": 27
+  },
+  "BEL-10": {
+   "home": "core",
+   "ref": 16
+  },
+  "ZEI-01": {
+   "home": "core",
+   "ref": 5
+  },
+  "ZEI-02": {
+   "home": "workshop"
+  },
+  "ZEI-03": {
+   "home": "workshop"
+  },
+  "ZEI-04": {
+   "home": "workshop"
+  },
+  "ZEI-05": {
+   "home": "workshop"
+  },
+  "ZEI-06": {
+   "home": "core",
+   "ref": 25
+  },
+  "ZEI-07": {
+   "home": "core",
+   "ref": 25
+  },
+  "ZEI-08": {
+   "home": "workshop"
+  },
+  "ZEI-09": {
+   "home": "workshop"
+  },
+  "ZEI-10": {
+   "home": "workshop"
+  },
+  "ZEI-11": {
+   "home": "workshop"
+  },
+  "ZEI-12": {
+   "home": "workshop"
+  },
+  "ZEI-13": {
+   "home": "view",
+   "ref": "about"
+  },
+  "ICO-01": {
+   "home": "workshop"
+  },
+  "ICO-02": {
+   "home": "workshop"
+  },
+  "ICO-03": {
+   "home": "core",
+   "ref": 25
+  },
+  "ICO-04": {
+   "home": "platform-web"
+  },
+  "ICO-05": {
+   "home": "core",
+   "ref": 25
+  },
+  "ICO-06": {
+   "home": "core",
+   "ref": 25
+  },
+  "ICO-07": {
+   "home": "view",
+   "ref": "state-empty"
+  },
+  "ICO-08": {
+   "home": "platform-desktop"
+  },
+  "BIL-01": {
+   "home": "extra-images"
+  },
+  "BIL-02": {
+   "home": "extra-images"
+  },
+  "BIL-03": {
+   "home": "extra-images"
+  },
+  "BIL-04": {
+   "home": "extra-images"
+  },
+  "BIL-05": {
+   "home": "extra-images"
+  },
+  "BIL-06": {
+   "home": "component"
+  },
+  "BIL-07": {
+   "home": "component"
+  },
+  "BIL-08": {
+   "home": "component"
+  },
+  "ZUG-01": {
+   "home": "core",
+   "ref": 30
+  },
+  "ZUG-02": {
+   "home": "core",
+   "ref": 30
+  },
+  "ZUG-03": {
+   "home": "core",
+   "ref": 30
+  },
+  "ZUG-04": {
+   "home": "core",
+   "ref": 30
+  },
+  "ZUG-05": {
+   "home": "lowered"
+  },
+  "ZUG-06": {
+   "home": "platform-web"
+  },
+  "ZUG-07": {
+   "home": "lowered"
+  },
+  "ZUG-08": {
+   "home": "lowered"
+  },
+  "ZUG-09": {
+   "home": "lowered"
+  },
+  "STR-01": {
+   "home": "core",
+   "ref": 29
+  },
+  "STR-02": {
+   "home": "workshop"
+  },
+  "STR-03": {
+   "home": "view",
+   "ref": "entry"
+  },
+  "WEB-01": {
+   "home": "platform-web"
+  },
+  "WEB-02": {
+   "home": "platform-web"
+  },
+  "WEB-03": {
+   "home": "platform-web"
+  },
+  "WEB-04": {
+   "home": "platform-web"
+  },
+  "WEB-05": {
+   "home": "view",
+   "ref": "form"
+  },
+  "WEB-06": {
+   "home": "component"
+  },
+  "WEB-07": {
+   "home": "component"
+  },
+  "WEB-08": {
+   "home": "component"
+  },
+  "WEB-09": {
+   "home": "platform-web"
+  },
+  "WEB-10": {
+   "home": "platform-web"
+  },
+  "WEB-11": {
+   "home": "platform-web"
+  },
+  "MOB-01": {
+   "home": "platform-android"
+  },
+  "MOB-02": {
+   "home": "platform-android"
+  },
+  "MOB-03": {
+   "home": "platform-android"
+  },
+  "MOB-04": {
+   "home": "view",
+   "ref": "settings"
+  },
+  "MOB-05": {
+   "home": "platform-ios"
+  },
+  "MOB-06": {
+   "home": "platform-ios"
+  },
+  "MOB-07": {
+   "home": "platform-ios"
+  },
+  "MOB-08": {
+   "home": "platform-ios"
+  },
+  "MOB-09": {
+   "home": "view",
+   "ref": "outside"
+  },
+  "MOB-10": {
+   "home": "platform-android"
+  },
+  "MOB-11": {
+   "home": "view",
+   "ref": "outside"
+  },
+  "MOB-12": {
+   "home": "component"
+  },
+  "DSK-01": {
+   "home": "platform-desktop"
+  },
+  "DSK-02": {
+   "home": "platform-desktop"
+  },
+  "DSK-03": {
+   "home": "platform-desktop"
+  },
+  "DSK-04": {
+   "home": "platform-desktop"
+  },
+  "DSK-05": {
+   "home": "platform-desktop"
+  },
+  "DSK-06": {
+   "home": "platform-desktop"
+  },
+  "DSK-07": {
+   "home": "platform-desktop"
+  },
+  "DSK-08": {
+   "home": "platform-desktop"
+  },
+  "DSK-09": {
+   "home": "platform-desktop"
+  },
+  "DSK-10": {
+   "home": "platform-desktop"
+  },
+  "DSK-11": {
+   "home": "platform-desktop"
+  },
+  "DSK-12": {
+   "home": "platform-desktop"
+  },
+  "DSK-13": {
+   "home": "platform-desktop"
+  },
+  "DSK-14": {
+   "home": "platform-desktop"
+  },
+  "DSK-15": {
+   "home": "platform-desktop"
+  },
+  "TEC-01": {
+   "home": "core",
+   "ref": 1
+  },
+  "TEC-02": {
+   "home": "platform-web"
+  },
+  "TEC-03": {
+   "home": "check"
+  },
+  "TEC-04": {
+   "home": "check"
+  },
+  "TEC-05": {
+   "home": "platform-web"
+  },
+  "TEC-06": {
+   "home": "core",
+   "ref": 31
+  },
+  "TEC-07": {
+   "home": "platform-web"
+  },
+  "TEC-08": {
+   "home": "platform-web"
+  },
+  "TEC-09": {
+   "home": "component"
+  },
+  "TEC-10": {
+   "home": "core",
+   "ref": 26
+  },
+  "TEC-11": {
+   "home": "workshop"
+  }
+ }
+}
