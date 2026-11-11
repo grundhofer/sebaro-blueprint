@@ -18,7 +18,7 @@ The three starters are complete small projects: each carries an unchanged copy o
 (copied by `npm run sebaro:sync`, checked by `npm run sebaro:verify`, i.e. `verify-export.mjs --strict`), keeps every
 word in one strings module, uses only `sb-*` classes of the export plus its own `app-*` classes with `var(--sb-*)`
 tokens, runs under a strict Content-Security-Policy and has Playwright tests (Chromium) for every screen in light and
-dark at 100 % and real 200 % text with axe. CI: `.github/workflows/templates.yml`. Names and content are invented
+dark at 100 % and, at the widest width, real 200 % text with axe. CI: `.github/workflows/templates.yml`. Names and content are invented
 („Beispielseite“, „Musterapp“); the sign tile is the umbrella sign as a placeholder.
 
 ## New project in five steps
@@ -33,7 +33,7 @@ dark at 100 % and real 200 % text with axe. CI: `.github/workflows/templates.yml
    package (`tools/sebaro-verify.py` checks the copy; a product re-exports with its id, see its README); Tauri (own
    export)/macOS → `export_system.py` in sebaroDesign (see [AGENTS.md §4](../AGENTS.md)).
 3. **Paste the agent snippet** into the project's `AGENTS.md`, fill in the export path and the product id, and name the
-   product kind (its first item says where light/dark, language, „Farbton“ and ⌘K go). Read what the starter itself
+   product kind (where light/dark and „Farbton“ go is core rule 28 of `design/KERN.md`). Read what the starter itself
    does not do yet, so it is never copied as a pattern: the section „Lücken der Vorlage“ in `website-astro/`,
    `webapp-vite/`, `desktop-tauri/` and `ios-swiftui/`, „Bekannte Grenzen“ in `android-compose/` (the agent test did
    not cover the Android and iOS templates).

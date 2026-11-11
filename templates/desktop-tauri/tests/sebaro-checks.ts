@@ -235,6 +235,8 @@ export function checkScreens(screens: Screen[], options: Options = {}) {
     for (const scheme of schemes) {
       for (const width of widths) {
         for (const scale of scales) {
+          // large text is checked at the widest width only (design/KERN.md, rule 30)
+          if (scale !== 1 && width !== Math.max(...widths)) continue;
           const label = `${screen.name} ${scheme} ${width}px ${scale * 100}%`;
           test(label, async ({ browser }) => {
             const context = await browser.newContext({

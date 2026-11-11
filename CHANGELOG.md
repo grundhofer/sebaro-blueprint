@@ -11,6 +11,29 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+Einstieg für Agenten: `AGENTS.md` ist ein kurzer Wegweiser (3 KB statt 59 KB); die frühere Fassung liegt unverändert
+als `MANUAL.md` bereit. Neu sind `design/KERN.md` (31 Kernregeln, vom Inhaber am 11.11.2026 bestätigt; sie nehmen
+D143 bis D146 auf und senken die Barrierefreiheit auf einen Boden), `design/views.md` (die 21 Ansichtstypen aus
+D145), `rules/home.json` (wo jede der 228 Regeln heute wirkt) und `templates/android-compose/BLUEPRINT.md` (der
+Technik-Bauplan für Android). Der Katalog `rules/rules.json` ist unverändert; wo eine Kernregel ihm widerspricht
+(ZEI-01, STR-01, ZUG-05, ZUG-07 bis ZUG-09), gilt die Kernregel. `tools/check_budget.py` hält die Einstiegstexte
+unter festen Größen und meldet Regeln ohne Zuhause; die CI ruft es auf.
+
+Skill und Produkt-Abschnitt: `skills/sebaro/` ist ein Agenten-Skill mit zwei Anleitungen, `new.md` für ein neues
+Produkt und `convert.md` für den Umbau eines bestehenden Projekts. `templates/AGENTS-snippet.md`, der Abschnitt für
+die `AGENTS.md` eines Produkts, hat fünf Zeilen statt 16 KB und verweist auf Kernregeln, Ansichtstypen und den
+Bauplan der Produktart; was vorher dort stand, steht in den Kernregeln und in `MANUAL.md`.
+
+Technik-Baupläne für Website, Web-App und Desktop: `templates/website-astro/BLUEPRINT.md`,
+`templates/webapp-vite/BLUEPRINT.md` und `templates/desktop-tauri/BLUEPRINT.md` beschreiben Stack, Aufbau, Tests,
+Sicherheit, Größenbudgets, Release und Updates so, wie die bestehenden Produkte gebaut sind. Web-App und Desktop
+setzen auf React, zustand und i18next; die Startvorlagen ohne Framework folgen dem noch nicht, jeder Bauplan nennt
+am Ende die Abweichungen seiner Vorlage.
+
+Prüfungen der Startvorlagen: Große Schrift (200 %) wird nur noch auf der größten Breite geprüft, wie Kernregel 30
+es verlangt; die Fälle auf 320 bis 480 px entfallen (einer davon, das Menü der Desktop-Vorlage, schlug unregelmäßig
+fehl). Die iOS-Vorlage hat einen eigenen Ablauf `templates-ios.yml`, der nur bei Änderungen an ihr läuft.
+
 Werkzeug, keine Regeländerung: `tools/check_site.py` (Gruppe TPLEXP) vergleicht die Kopien des Web-Exports in den
 Startvorlagen mit `docs/sebaro/` und schlägt bei veralteten Kopien fehl; der iOS-Export-Commit warnt nur.
 Selbsttest: `python3 tools/test_check_site.py`.

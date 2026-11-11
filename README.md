@@ -19,10 +19,13 @@ Verhalten, Funktion und die Gedanken dahinter, jede Regel mit Beispiel.
 
 ## Für Agenten
 
-Claude, Codex und andere Agenten beginnen bei [AGENTS.md](AGENTS.md) (`CLAUDE.md` verweist dorthin). Die Regeln stehen
-maschinenlesbar in [rules/rules.json](rules/rules.json) und als Markdown in [guide/RULES.md](guide/RULES.md). Für ein
-neues Projekt gibt es [Vorlagen](templates/README.md), darunter einen Abschnitt zum Einfügen in die `AGENTS.md` eines
-Produkts.
+Claude, Codex und andere Agenten beginnen bei [AGENTS.md](AGENTS.md) (`CLAUDE.md` verweist dorthin), einem kurzen
+Wegweiser. Pflichtlektüre sind die 31 Kernregeln in [design/KERN.md](design/KERN.md) und die 21 Ansichtstypen in
+[design/views.md](design/views.md). Der ganze Katalog steht zum Nachschlagen maschinenlesbar in
+[rules/rules.json](rules/rules.json) und als Markdown in [guide/RULES.md](guide/RULES.md);
+[rules/home.json](rules/home.json) sagt, wo jede seiner Regeln heute wirkt. Für ein neues Projekt gibt es
+[Vorlagen](templates/README.md), darunter einen Abschnitt zum Einfügen in die `AGENTS.md` eines Produkts. Die frühere
+lange Fassung von `AGENTS.md` liegt als [MANUAL.md](MANUAL.md) bereit.
 
 ## Woher die Werte kommen
 

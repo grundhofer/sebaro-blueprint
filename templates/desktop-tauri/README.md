@@ -60,7 +60,7 @@ Sichern).
 | alle Wörter in `src/strings.ts`, CSP ohne `unsafe-inline`, Schriften selbst gehostet | TEC-10, TXT-05, HAL-09, SCH-02 |
 | 200 % Schrift ohne seitliches Scrollen und ohne abgeschnittenen Text, axe ohne Befund | ZUG-01, ZUG-09, ZUG-06 |
 
-Getestet wird auf 390, 480 und 1440&nbsp;px, hell und dunkel, mit 100 und 200&nbsp;% Schrift (`tests/sebaro-checks.ts`),
+Getestet wird auf 390, 480 und 1440&nbsp;px, hell und dunkel, mit 100&nbsp;% Schrift und auf der größten Breite auch mit 200&nbsp;% (`tests/sebaro-checks.ts`),
 mit dem Papierkorb (eine Notiz darin gewählt, Dialog „Papierkorb leeren?“) und dem Fenster ohne offene Notiz.
 Jeder Fall nennt, was auf dem Bildschirm stehen muss: den HTTP-Status der Seite, den Text der einen sichtbaren
 Überschrift `h1`, die Ansicht (`data-sb-view` oder ein Selektor) und genau die offenen Überlagerungen (Dialoge, Popover,

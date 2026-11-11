@@ -21,6 +21,8 @@ jobs:
         run: python3 tools/check_site.py
       - name: System files untouched since the export
         run: python3 tools/sync_from_design.py --verify-local
+      - name: Size budgets of the texts agents read by default, every rule of the catalogue has a home
+        run: python3 tools/check_budget.py
   a11y:
     runs-on: ubuntu-latest
     steps:
