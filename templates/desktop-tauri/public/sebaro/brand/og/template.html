@@ -7,8 +7,8 @@
 <!-- sebaro share image, 1200 x 630, light ground like paper (spec/09 §18.1, W6a, W8a; D96). The one template of the
      workshop and of every website: brand/og/render.mjs fills it per page from a page list (brand/og/pages.schema.json)
      and renders it in Chromium; the workshop's brand/src/og/*.html are written from it (brand/src/og/*.pages.json).
-     D143/D144: neutral ground, large type, key mark alone for studio. Footer key bar carries the address
-     and sebaro. This bar follows the approved sheet as a reading for owner review. Page text also names the address.
+     D143/D144 and owner look: neutral ground, large type, no top lockup for studio. Footer key bar carries the address
+     and sebaro. The bar is the constant sender. Page text also names the address.
      D96/D97: always light, no more than three title lines; overflow fails the browser build. -->
 <link rel="stylesheet" href="{{fontsCss}}">
 <link rel="stylesheet" href="{{tokensCss}}">
@@ -20,12 +20,11 @@
     background: var(--sb-color-bg); color: var(--sb-color-text); font-family: var(--sb-font-family-ui);
     font-synthesis: none; display: grid; grid-template-rows: auto 1fr auto; row-gap: 16px;
   }
-  body.og--start { row-gap: 16px; }
+  body.og--umbrella { grid-template-rows: 1fr auto; }
   .og-product { display: flex; align-items: center; gap: 16px; min-width: 0; white-space: nowrap;
                 font-size: 28px; line-height: 36px; font-weight: var(--sb-type-title-weight);
                 letter-spacing: var(--sb-type-title-tracking); }
   .og-product svg { display: block; flex: none; width: 56px; height: 56px; }
-  .og-lockup svg { display: block; height: 56px; width: auto; color: var(--sb-color-text); }
   .og-text { align-self: center; min-width: 0; }
   .og-crumb { display: flex; align-items: center; gap: 8px; margin: 0 0 20px; white-space: nowrap;
               font-size: 26px; line-height: 36px; color: var(--sb-color-text-muted);
@@ -46,10 +45,7 @@
   .og-apps svg { display: block; flex: none; width: 48px; height: 48px; }
 </style>
 </head>
-<body class="og og--{{variant}}">
-{{#umbrella}}
-  <div class="og-lockup">{{{lockupLarge}}}</div>
-{{/umbrella}}
+<body class="og og--{{variant}}{{#umbrella}} og--umbrella{{/umbrella}}">
 {{^umbrella}}
   <div class="og-product">{{{tile}}}{{productName}}</div>
 {{/umbrella}}
