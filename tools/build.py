@@ -512,8 +512,12 @@ def llms_txt() -> str:
              f"Machine-readable rules: {SITE_URL}rules.json · Markdown: {REPO_URL}/blob/main/guide/RULES.md · "
              f"Agent entry: {REPO_URL}/blob/main/AGENTS.md", "",
              "## Building a product", "",
-             f"- [Agent snippet]({REPO_URL}/blob/main/templates/AGENTS-snippet.md): paste into the product's AGENTS.md; "
-             "its first item says per product kind where light/dark, language, tone and the ⌘K palette go",
+             f"- [Core rules]({REPO_URL}/blob/main/design/KERN.md) and [view types]({REPO_URL}/blob/main/design/views.md): "
+             "the 31 rules and 21 view types to read before any UI work",
+             f"- [Playbooks]({REPO_URL}/blob/main/skills/sebaro/SKILL.md): start a new product or convert an existing "
+             "project, as an agent skill",
+             f"- [Agent snippet]({REPO_URL}/blob/main/templates/AGENTS-snippet.md): five lines to paste into the "
+             "product's AGENTS.md",
              f"- [Starters]({REPO_URL}/blob/main/templates/README.md): website (Astro), web app (Vite), desktop (Tauri), "
              "Android (Compose); each README lists what the starter itself does not do yet",
              f"- [Screen checklist]({REPO_URL}/blob/main/templates/screen-checklist.md): walk it before a screen is done; "

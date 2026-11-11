@@ -26,7 +26,8 @@ BUDGETS = {
     "design/KERN.md": 8_000,
     "design/views.md": 4_500,
     "templates/*/BLUEPRINT.md": 10_000,
-    "skills/*/SKILL.md": 5_000,
+    "skills/*/*.md": 5_000,
+    "templates/AGENTS-snippet.md": 1_500,
 }
 HOMES = {"core", "view", "component", "words", "platform-web", "platform-android", "platform-ios",
          "platform-desktop", "check", "extra-evidence", "extra-images", "playbook", "workshop", "lowered"}

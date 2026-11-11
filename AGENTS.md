@@ -29,6 +29,12 @@ Read in this order and stop when you have what the task needs.
 In short (core rules 1 to 3): use what the copy has, build what is missing beside the copy, record gaps and
 deviations in the product.
 
+The two jobs as playbooks: [`skills/sebaro/new.md`](skills/sebaro/new.md) for a new product,
+[`skills/sebaro/convert.md`](skills/sebaro/convert.md) for an existing project. `skills/sebaro/` is an agent skill:
+link the folder into `~/.claude/skills/` (Claude Code) and `~/.agents/skills/` (Codex), and „bau das im
+sebaro-Stil um“ is enough in any project. The section a product pastes into its own `AGENTS.md`:
+[`templates/AGENTS-snippet.md`](templates/AGENTS-snippet.md).
+
 ## Look up only when needed
 
 | Need | Where |
@@ -46,7 +52,8 @@ Build, checks, release and the sync with the workshop: [MANUAL.md](MANUAL.md) §
 default these rules hold:
 
 - **Budgets in bytes**, checked in CI by `tools/check_budget.py`: this file 6,000, `design/KERN.md` 8,000,
-  `design/views.md` 4,500, a starter's `BLUEPRINT.md` 10,000. To add something, remove something.
+  `design/views.md` 4,500, a starter's `BLUEPRINT.md` 10,000, a file of a skill 5,000, the product snippet 1,500. To add something, remove
+  something.
 - **A new rule goes into a part, a starter or a check first.** It becomes a core rule only when none of those can
   carry it.
 - **No history in these files.** Who decided what and when stands in `CHANGELOG.md` and in the workshop's decision

@@ -6,7 +6,9 @@ Machine-readable rules: https://grundhofer.github.io/sebaro-guide/rules.json · 
 
 ## Building a product
 
-- [Agent snippet](https://github.com/grundhofer/sebaro-guide/blob/main/templates/AGENTS-snippet.md): paste into the product's AGENTS.md; its first item says per product kind where light/dark, language, tone and the ⌘K palette go
+- [Core rules](https://github.com/grundhofer/sebaro-guide/blob/main/design/KERN.md) and [view types](https://github.com/grundhofer/sebaro-guide/blob/main/design/views.md): the 31 rules and 21 view types to read before any UI work
+- [Playbooks](https://github.com/grundhofer/sebaro-guide/blob/main/skills/sebaro/SKILL.md): start a new product or convert an existing project, as an agent skill
+- [Agent snippet](https://github.com/grundhofer/sebaro-guide/blob/main/templates/AGENTS-snippet.md): five lines to paste into the product's AGENTS.md
 - [Starters](https://github.com/grundhofer/sebaro-guide/blob/main/templates/README.md): website (Astro), web app (Vite), desktop (Tauri), Android (Compose); each README lists what the starter itself does not do yet
 - [Screen checklist](https://github.com/grundhofer/sebaro-guide/blob/main/templates/screen-checklist.md): walk it before a screen is done; record every check in CHECKS.md (TEC-06)
 - [Agent test 2026-10](https://github.com/grundhofer/sebaro-guide/blob/main/docs/agenten-test-2026-10.md): the rules agents missed most (TEC-06, TXT-04 U+00A0, EBE-05, BEL-10, NAV-06) and why
