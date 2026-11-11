@@ -229,7 +229,7 @@
 .sb-secondary-action--compact > .sb-icon { inline-size: var(--sb-size-icon-md); block-size: var(--sb-size-icon-md); --sb-icon-stroke: var(--sb-icon-w20); }
 /* a compact switch with its word (D102 (2) „Vorschau“, (3) the sort choice): aria-pressed; on = the chip's chosen
    state (3 px accent bottom edge, link colour, title weight), never a fill */
-.sb-secondary-action--compact[aria-pressed="true"] { border-block-end: var(--sb-border-width-strong) solid var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
+:is(.sb-secondary-action--compact, .sb-text-action--compact)[aria-pressed="true"] { border-block-end: var(--sb-border-width-strong) solid var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
 .sb-secondary-action--compact > .sb-icon--16 { inline-size: var(--sb-size-icon-sm); block-size: var(--sb-size-icon-sm); --sb-icon-stroke: var(--sb-icon-w16); }
 /* a compact action whose menu or popup is open (spec/02 §4.18; provisional, agent): the hover ground stays while it is open, as
    on a menu item whose submenu is open (spec/02 §4.24), so the way to what is open stays visible; no link colour (cobalt
@@ -242,7 +242,7 @@
 /* the sort choice over a tree or list (D102 (3)): two or three compact switches with their word; the chosen one is
    pressed and shows its direction as arrow-up--16 / arrow-down--16 plus the hidden word (sb-window.js) */
 .sb-sort-choice { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1); margin: 0; padding: 0 var(--sb-space-3) var(--sb-space-1); }
-.sb-sort-choice > .sb-secondary-action--compact { padding-inline: var(--sb-space-2); }
+.sb-sort-choice > :is(.sb-secondary-action--compact, .sb-text-action--compact) { padding-inline: var(--sb-space-2); }
 .sb-sort-choice > [aria-pressed="false"] > .sb-icon { display: none; }
 .sb-tooltip > .sb-keys { margin-inline-start: var(--sb-space-2); vertical-align: bottom; }
 
@@ -756,6 +756,10 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
   font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking);
 }
 .sb-text-action--compact > .sb-icon { inline-size: var(--sb-size-icon-md); block-size: var(--sb-size-icon-md); --sb-icon-stroke: var(--sb-icon-w20); color: var(--sb-color-text-muted); }
+
+/* D143/D144: existing compact text actions in sort/find rows wrap their labels. */
+.sb-sort-choice > .sb-text-action--compact,
+.sb-find-bar .sb-text-action--compact { white-space: normal; }
 
 /* below the smallest window (480 px; a web app in a narrow browser) the words of the title bar's text actions and of
    „Menü“ give way to their icons; .sb-window__word stays for screen readers */
