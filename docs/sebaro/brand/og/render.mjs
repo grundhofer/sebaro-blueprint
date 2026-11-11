@@ -46,7 +46,7 @@ import path from "node:path";
 import { domainToUnicode, fileURLToPath, pathToFileURL } from "node:url";
 import zlib from "node:zlib";
 
-export const VERSION = "1.0.1";
+export const VERSION = "1.1.0";
 const SIZE = { width: 1200, height: 630 };
 const MAX_TITLE_LINES = 3;
 const UMBRELLA = "studio";        // the umbrella brand's product (export_system.py UMBRELLA_PRODUCT): lockup in the head
@@ -82,8 +82,8 @@ function layout() {
     sprite: locate("icons/sprite.svg", "icons/dist/sprite.svg"),
     spriteCss: locate("icons/sprite.css", "icons/dist/sprite.css"),
     inline: locate("brand/inline"),
-    lockupSmall: locate("brand/inline/lockup-horizontal.svg"),
-    lockupLarge: locate("brand/inline/lockup-horizontal-large.svg"),
+    lockupSmall: locate("brand/inline/keymark-small.svg"),
+    lockupLarge: locate("brand/inline/keymark.svg"),
     template: locate("brand/og/template.html"),
     schema: locate("brand/og/pages.schema.json"),
   };
@@ -283,7 +283,7 @@ export function viewOf(L, doc, page, htmlDir, pagesName) {
   const umbrella = product === UMBRELLA;
   return {
     lang, umbrella, title: page.title, productName: own.name, tile: own.svg, apps, crumb,
-    meta: meta.join(" · "),
+    meta: meta.join(" · "), address: shownHost(site.origin),
     variant: crumb.length || page.readingMinutes || page.date ? "page" : "start",
     docTitle: `${own.name} · ${page.title}`,
     generatedNote: `${MARK} ${VERSION} from brand/og/template.html and ${pagesName}, page ${page.id}; do not edit`,
