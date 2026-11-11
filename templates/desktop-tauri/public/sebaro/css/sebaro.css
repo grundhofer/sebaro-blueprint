@@ -606,7 +606,7 @@ html:has(.sb-bottom-block:not(.sb-window > .sb-bottom-block)) {
     .sb-site-header { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; grid-template-areas: "lockup . lang theme" "nav nav nav nav"; }
     .sb-site-header__links { display: contents; }
     .sb-site-nav { grid-area: nav; column-gap: var(--sb-space-1); }
-    .sb-language-switch { grid-area: lang; gap: var(--sb-space-1); }
+    .sb-site-header .sb-language-switch { grid-area: lang; gap: var(--sb-space-1); }
     .sb-site-nav a { padding: 0 var(--sb-space-2); }
   }
   @media (min-width: 1024px) {
@@ -618,7 +618,7 @@ html:has(.sb-bottom-block:not(.sb-window > .sb-bottom-block)) {
   .sb-site-header { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; grid-template-areas: "lockup . lang theme" "nav nav nav nav"; }
   .sb-site-header__links { display: contents; }
   .sb-site-nav { grid-area: nav; column-gap: var(--sb-space-1); }
-  .sb-language-switch { grid-area: lang; gap: var(--sb-space-1); }
+  .sb-site-header .sb-language-switch { grid-area: lang; gap: var(--sb-space-1); }   /* only in the header: the choice „DE / EN“ of a settings view keeps its place in that view's grid (D143 (7)) */
   .sb-site-nav a { padding: 0 var(--sb-space-2); }
 }
 @container sb-page (width >= 1024px) {
@@ -651,6 +651,44 @@ html:has(.sb-bottom-block:not(.sb-window > .sb-bottom-block)) {
 .sb-language-switch__option:hover > input + span, .sb-language-switch__option.is-hover > input + span { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
 .sb-language-switch__option > input:checked + span { border-block-end-color: var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-body-strong-weight); }
 .sb-language-switch__option > input:focus-visible + span, .sb-language-switch__option > input.is-focus + span { outline: var(--sb-focus-ring); outline-offset: var(--sb-focus-offset); }
+
+/* Website opening and sender (D143 (2), (5), (6), D144 (4), (5)). */
+.sb-opening { background: var(--sb-color-bg); color: var(--sb-color-text); min-inline-size: 0; padding-block-start: var(--sb-space-12); }
+.sb-opening__title {
+  margin: 0; font: var(--sb-type-opening); letter-spacing: var(--sb-type-opening-tracking);
+  max-inline-size: 100%; overflow-wrap: normal; word-break: normal; hyphens: none;
+}
+.sb-opening__zone {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: var(--sb-space-4) var(--sb-space-6); margin-block-start: var(--sb-space-10);
+  padding-block-start: var(--sb-space-4);
+  border-block-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color);
+}
+.sb-opening__zone > p { flex: 1 1 16rem; margin: 0; min-inline-size: 0; }
+.sb-opening__zone > .sb-primary-action { margin-inline-start: auto; max-inline-size: 100%; }
+.sb-product-area--picture { margin-block: var(--sb-space-8) var(--sb-space-12); }
+.sb-product-area.sb-product-area--picture { padding: clamp(8px, 4vw, 48px); }   /* px on purpose: the inset must not grow with 200 % text */
+.sb-product-area__picture {
+  display: block; inline-size: 100%; min-inline-size: 0; box-sizing: border-box;
+  background: var(--sb-color-bg); color: var(--sb-color-text);
+  border: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color);
+  border-radius: var(--sb-radius-container); overflow-wrap: break-word;
+  padding: var(--sb-space-4) clamp(8px, 4vw, 32px);
+}
+.sb-keymark { display: inline-flex; flex: none; vertical-align: middle; }
+.sb-keymark svg { display: block; block-size: 32px; inline-size: auto; }
+.sb-keymark--small svg { block-size: 20px; }
+.sb-keymark__dark { display: none !important; }
+:root[data-theme="dark"] .sb-keymark__light { display: none !important; }
+:root[data-theme="dark"] .sb-keymark__dark { display: block !important; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .sb-keymark__light { display: none !important; }
+  :root:not([data-theme="light"]) .sb-keymark__dark { display: block !important; }
+}
+.sb-sender { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: var(--sb-space-2) var(--sb-space-4); color: var(--sb-color-text-muted); }
+.sb-sender > p { margin: 0; }
+.sb-site-footer__sender { display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-2); }
 
 .sb-site-footer {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sb-space-2) var(--sb-spacing-group);
@@ -1768,6 +1806,45 @@ kbd, .sb-kbd {
 /* error details in a callout (spec/02 §3.28): the callout's glyph is a column of its own, so the details stand in the
    text column and start where the text starts, without the glyph indent they keep in a message */
 .sb-callout > .sb-details { grid-column: 2; padding-inline-start: 0; }
+/* a callout area that scrolls in itself (D142, spec/02 §3.11): notices that must not take a document's room stand
+   in div.sb-callout-area, at most --sb-callout-area-max high (default: 40 % of its container's height, more where the
+   container keeps 20rem for the rest; it needs a container of definite height, else it is not capped) and scroll in it.
+   While it holds more than it shows, sb-controls.js sets data-sb-more and --sb-more-*, and the area shows D134's sign:
+   a 3 px mark in border-strong at its end, as long as the part it shows, and the words running out into the ground
+   over the last 36 px (a mask, so it fades whatever ground is behind), never over a control and not while the focus is
+   inside; the system's scroll bar then stays hidden, the mark shows the place. Without the script the scroll bar is all.
+   The ring of the area itself stands inside its edge, so no container clips it (provisional, agent: the name, the
+   default height, the 8 px between notices, the 12 px gutter at the end, the hidden scroll bar, the inner ring).
+   --sb-callout-area-gutter (default 12 px, at least the mark and the ring: 5 px) lets a product pull the area out by its
+   gutter (margin-inline-end: calc(-1 * var(--sb-callout-area-gutter))), so the notices' frames line up with a notice
+   outside it; the gutter is always kept, so the words never wrap anew when the area starts or stops scrolling. Both
+   properties are declared on the area itself, so a product's own rule can read them (an undeclared var() without a
+   fallback is invalid, and a margin made of it is 0); a product sets another value on the area, with a selector more
+   specific than .sb-callout-area, not on a container */
+.sb-callout-area {
+  --sb-callout-area-max: max(40%, 100% - 20rem);
+  --sb-callout-area-gutter: 12px;   /* px: the mark and the ring do not grow with the text, the words keep the room */
+  display: grid; gap: var(--sb-space-2); align-content: start; box-sizing: border-box;
+  max-block-size: var(--sb-callout-area-max);
+  overflow-y: auto; padding-inline-end: max(5px, var(--sb-callout-area-gutter));
+}
+.sb-callout-area:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)); }
+.sb-callout-area[data-sb-more] {
+  scrollbar-width: none;
+  background: linear-gradient(var(--sb-color-border-strong), var(--sb-color-border-strong)) no-repeat
+    right var(--sb-focus-width) top var(--sb-more-top, 0px) / 3px var(--sb-more-length, 100%);
+}
+.sb-callout-area[data-sb-more]:dir(rtl) { background-position: left var(--sb-focus-width) top var(--sb-more-top, 0px); }
+.sb-callout-area[data-sb-more]::-webkit-scrollbar { display: none; }
+.sb-callout-area[data-sb-more]:not(:focus-within) {
+  mask-image: linear-gradient(var(--sb-color-bg), var(--sb-color-bg)),   /* a mask takes only the alpha; the ground is opaque */
+    linear-gradient(var(--sb-color-bg) var(--sb-more-fade-from, calc(100% - 36px)),
+      color-mix(in srgb, var(--sb-color-bg) calc(var(--sb-more-fade-rest, 0) * 100%), transparent) 100%);
+  mask-size: calc(3px + var(--sb-focus-width)) 100%, 100% 100%;
+  mask-position: right 0 top 0, 0 0;
+  mask-repeat: no-repeat;
+}
+.sb-callout-area[data-sb-more]:not(:focus-within):dir(rtl) { mask-position: left 0 top 0, 0 0; }
 /* a failed start before the window frame exists (spec/09 §13.1; provisional, agent: the name and the sizes): the error
    callout at the start of the empty window, under the title bar's 48 px (in px: the macOS window buttons do not grow
    with the text), as wide as a reading column */
@@ -2725,17 +2802,15 @@ dialog.sb-dialog:modal { margin: auto; }
 @keyframes sb-enter { from { opacity: 0; transform: translateY(var(--sb-x-sebaro-enter-distance)); } }
 @keyframes sb-fade-in { from { opacity: 0; } }
 
-/* the same start (D49, D52; script assets/sb-start.js): the app sign tile in the middle of the ground while the page
-   really loads, then it moves to the header tile ([data-sb-start-target]) and the ground turns transparent. Only on
-   <html data-sb-start>, only on the first call of a tab session; without the script nothing shows */
+/* D144: full product-colour start and bare symbol, then fade; first visit per tab. */
 .sb-start { display: none; }
 html.sb-starting > body > .sb-start, .sb-starting > .sb-start {
   display: grid; place-items: center; position: fixed; inset: 0; z-index: var(--sb-layer-modal);
-  background: var(--sb-color-bg); pointer-events: none;
+  background: var(--sb-product-tile); color: var(--sb-product-glyph); pointer-events: none;
 }
 .sb-starting > .sb-start { position: absolute; }   /* a replay inside one frame (position: relative on the frame) */
-.sb-start.is-moving { background: transparent; }
-.sb-start__tile { display: block; inline-size: var(--sb-x-sebaro-start-tile-size); block-size: var(--sb-x-sebaro-start-tile-size); line-height: 0; transform-origin: center; }
+
+.sb-start__tile { color: inherit; display: block; inline-size: var(--sb-x-sebaro-start-tile-size); block-size: var(--sb-x-sebaro-start-tile-size); line-height: 0; transform-origin: center; }
 .sb-start__tile > svg { inline-size: 100%; block-size: 100%; }
 
 /* bottom sheet (pickers): overlay surface, top corners 16, a title row with the close button */
@@ -3076,7 +3151,7 @@ dialog.sb-sheet > form { margin: 0; }
 .sb-secondary-action--compact > .sb-icon { inline-size: var(--sb-size-icon-md); block-size: var(--sb-size-icon-md); --sb-icon-stroke: var(--sb-icon-w20); }
 /* a compact switch with its word (D102 (2) „Vorschau“, (3) the sort choice): aria-pressed; on = the chip's chosen
    state (3 px accent bottom edge, link colour, title weight), never a fill */
-.sb-secondary-action--compact[aria-pressed="true"] { border-block-end: var(--sb-border-width-strong) solid var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
+:is(.sb-secondary-action--compact, .sb-text-action--compact)[aria-pressed="true"] { border-block-end: var(--sb-border-width-strong) solid var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-title-weight); }
 .sb-secondary-action--compact > .sb-icon--16 { inline-size: var(--sb-size-icon-sm); block-size: var(--sb-size-icon-sm); --sb-icon-stroke: var(--sb-icon-w16); }
 /* a compact action whose menu or popup is open (spec/02 §4.18; provisional, agent): the hover ground stays while it is open, as
    on a menu item whose submenu is open (spec/02 §4.24), so the way to what is open stays visible; no link colour (cobalt
@@ -3089,7 +3164,7 @@ dialog.sb-sheet > form { margin: 0; }
 /* the sort choice over a tree or list (D102 (3)): two or three compact switches with their word; the chosen one is
    pressed and shows its direction as arrow-up--16 / arrow-down--16 plus the hidden word (sb-window.js) */
 .sb-sort-choice { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-1); margin: 0; padding: 0 var(--sb-space-3) var(--sb-space-1); }
-.sb-sort-choice > .sb-secondary-action--compact { padding-inline: var(--sb-space-2); }
+.sb-sort-choice > :is(.sb-secondary-action--compact, .sb-text-action--compact) { padding-inline: var(--sb-space-2); }
 .sb-sort-choice > [aria-pressed="false"] > .sb-icon { display: none; }
 .sb-tooltip > .sb-keys { margin-inline-start: var(--sb-space-2); vertical-align: bottom; }
 
@@ -3604,6 +3679,10 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
 }
 .sb-text-action--compact > .sb-icon { inline-size: var(--sb-size-icon-md); block-size: var(--sb-size-icon-md); --sb-icon-stroke: var(--sb-icon-w20); color: var(--sb-color-text-muted); }
 
+/* D143/D144: existing compact text actions in sort/find rows wrap their labels. */
+.sb-sort-choice > .sb-text-action--compact,
+.sb-find-bar .sb-text-action--compact { white-space: normal; }
+
 /* below the smallest window (480 px; a web app in a narrow browser) the words of the title bar's text actions and of
    „Menü“ give way to their icons; .sb-window__word stays for screen readers */
 @container sb-window (max-width: 479.98px) or (max-width: 29.99em) {
@@ -3958,6 +4037,7 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
   .sb-switch[aria-checked="true"] .sb-switch__thumb, .sb-radio > input:checked::after { background: CanvasText; }
   .sb-field__control { border: 1px solid CanvasText; }
   .sb-category::before { background: CanvasText; }
+  .sb-callout-area[data-sb-more] { background-image: linear-gradient(CanvasText, CanvasText); mask-image: none; }   /* the mark in the system's text colour, no fade (spec/02 §3.11) */
   mark, .sb-mark { background: Mark; color: MarkText; border-block-end-color: MarkText; }
   /* the class colours of a scale are the data (every value is text as well): heatmap cells and legends keep them,
      framed (D91 G6a); lines and bars follow the system colours */
@@ -3981,6 +4061,7 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
    page numbers, „Weiter“ and every action zone stay off paper; evidence stays as a list; a link that leaves the site
    prints its address after the words */
 @media print {
+  .sb-callout-area { max-block-size: none; overflow: visible; mask-image: none; background: none; }   /* every notice whole on paper (spec/02 §3.11) */
   .sb-note-popover, .sb-theme-button, .sb-skip-link, .sb-bottom-block { display: none; }
   .sb-site-nav, .sb-language-switch, .sb-site-footer__links, .sb-site-footer__display, .sb-toc, .sb-pagination, .sb-pager,
   .sb-section__actions, .sb-form-grid__actions, .sb-primary-action-bar { display: none; }
@@ -4004,3 +4085,19 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
 .sb-avatar { position: relative; }
 .sb-avatar[data-sb-presence="offline"] { border-style: dashed; color: var(--sb-color-text-muted); }
 .sb-avatar__role { position: absolute; inset-block-end: calc(var(--sb-size-icon-sm) / -3); inset-inline-end: calc(var(--sb-size-icon-sm) / -3); inline-size: var(--sb-size-icon-sm); block-size: var(--sb-size-icon-sm); color: var(--sb-color-text); background: var(--sb-color-bg); border-radius: var(--sb-radius-pill); }
+
+/* sb-part: display */
+/* D143 (4): one noninteractive product area per view; product id resolves in tokens.css. */
+.sb-product-area { box-sizing: border-box; background: var(--sb-product-tile); color: var(--sb-product-glyph); padding: 24px; border-radius: var(--sb-radius-container); overflow-wrap: anywhere; }
+.sb-product-area--value, .sb-product-area--result { container-type: inline-size; }
+.sb-view__content > .sb-product-area { margin: var(--sb-space-2) var(--sb-spacing-gutter) var(--sb-space-3); }
+.sb-product-area__value { margin: 0; font-size: min(5.75rem, 34cqi); font-weight: 700; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.sb-product-area__line { margin: 8px 0 0; font-size: 1.5rem; font-weight: 700; line-height: 1.2; }
+.sb-product-area__detail { margin: 12px 0 0; font-size: 0.875rem; line-height: 1.5; }
+.sb-product-area__symbol { display: block; inline-size: 64px; block-size: 64px; }
+.sb-product-area__symbol > svg { inline-size: 100%; block-size: 100%; }
+.sb-product-area--empty .sb-product-area__line { font-size: 2.5rem; }
+/* sb-part: forced-print */
+@media (forced-colors: active) {
+  .sb-product-area, html.sb-starting > body > .sb-start, .sb-starting > .sb-start { background: Canvas; color: CanvasText; border: 1px solid CanvasText; }
+}
