@@ -889,7 +889,7 @@
     return el instanceof Element && (el.isContentEditable ||
       el.matches("input:not([type='checkbox']):not([type='radio']):not([type='button']):not([type='submit']):not([type='range']), textarea, select"));
   }
-  var AREA = ".sb-window__titlebar, .sb-window__sidebar, .sb-window__content, .sb-window__inspector, .sb-window > .sb-bottom-block";
+  var AREA = ".sb-app-frame__rail, .sb-app-frame__pane, .sb-window__titlebar, .sb-window__sidebar, .sb-window__content, .sb-window__inspector, .sb-window > .sb-bottom-block";
   // an editor (contenteditable, e.g. CodeMirror) counts as a control (spec/02 §4.20); an element with tabindex -1 does not
   // (spec/02 §4.20): roving tab stops (tabs, tree rows, list rows) are entered on their one tabindex 0, the current tab
   var NOT_ROVING = ":not([tabindex='-1'])";
@@ -897,6 +897,7 @@
                   "textarea:not([disabled])", "[contenteditable]:not([contenteditable='false'])", "[tabindex]"]
                  .map(function (x) { return x + NOT_ROVING; }).join(", ");
   function areas(win) {
+    if (win.matches(".sb-app-frame")) return Array.from(win.querySelectorAll(".sb-app-frame__rail, .sb-app-frame__pane")).filter(shown);
     var list = [win.querySelector(":scope > .sb-window__titlebar")];
     var body = win.querySelector(":scope > .sb-window__body");
     if (body) list = list.concat(Array.prototype.slice.call(body.querySelectorAll(":scope > .sb-window__sidebar, :scope > .sb-window__content, :scope > .sb-window__inspector")));
@@ -1627,6 +1628,10 @@
     }
     // window keys: not while a dialog, the palette or a menu has the keyboard
     if (event.target instanceof Element && event.target.closest("dialog[open], .sb-menu:popover-open, .sb-toast")) return;
+    var frame = event.target instanceof Element && event.target.closest(".sb-app-frame");
+    if (frame && event.key === "F6" && !event.ctrlKey && !event.metaKey && !event.altKey) {
+      event.preventDefault(); moveArea(frame, event.shiftKey); return;
+    }
     var win = windowOf(event.target);
     if (!win) return;
     if (event.key === "Escape") {   // „Zurück zu …“ of a view such as the settings (F10a)

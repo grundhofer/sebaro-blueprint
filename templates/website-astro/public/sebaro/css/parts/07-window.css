@@ -209,7 +209,13 @@
 
 /* check items in a menu (D75 „Darstellung“)
    role="menuitemradio" / "menuitemcheckbox" with aria-checked; the 16 px slot stays when off, so the words align */
-.sb-menu__group { display: grid; margin: 0; padding: 0; list-style: none; }
+.sb-menu__group { display: grid; min-inline-size: 0; margin: 0; padding: 0; list-style: none; }
+.sb-menu__heading {
+  margin: 0; padding: 8px 16px 4px;
+  font: var(--sb-type-label); font-weight: var(--sb-type-body-weight);
+  letter-spacing: var(--sb-type-label-tracking); color: var(--sb-color-text-muted);
+  white-space: normal; overflow-wrap: normal; word-break: normal; hyphens: manual;
+}
 .sb-menu__check { flex: none; display: inline-grid; place-items: center; inline-size: var(--sb-size-icon-sm); block-size: var(--sb-size-icon-sm); color: var(--sb-color-accent); }
 .sb-menu__item > .sb-menu__check > .sb-icon { visibility: hidden; color: var(--sb-color-accent); }
 .sb-menu__item[aria-checked="true"] > .sb-menu__check > .sb-icon { visibility: visible; }
@@ -907,4 +913,57 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
   [data-sb-density="window"] .sb-chip::before { inset: 6px 0; }
   [data-sb-density="window"] .sb-chip__remove { inline-size: 40px; min-block-size: var(--sb-size-target-touch); }
   [data-sb-density="window"] .sb-chip__remove:focus-visible { outline-offset: -6px; }
+}
+
+/* D145: the adaptive app frame (spec/02 §5.5, spec/13 §2). It measures its own width, never the viewport; the parent
+   supplies the width. Below 840 px it is the phone form: one pane and the bottom navigation. From 840 px: the side
+   navigation as a rail with the product tile above it, and one pane, or (--split) the list at the start and the
+   detail at the end. Each pane is an .sb-view: top bar, .sb-view__content, bottom block. No colour of its own. */
+.sb-app-frame { container: sb-app-frame / inline-size; display: flex; flex-direction: column; inline-size: 100%; min-inline-size: 0; }
+.sb-app-frame__body { flex: 1 1 auto; display: grid; grid-template-columns: minmax(0, 1fr); min-block-size: 0; }
+.sb-app-frame__rail { display: none; }
+.sb-app-frame__pane { min-inline-size: 0; min-block-size: 0; }
+.sb-app-frame__pane > [hidden] { display: none; }
+.sb-app-frame__pane--end { display: none; }
+.sb-app-frame[data-sb-pane="end"] .sb-app-frame__pane--start { display: none; }
+.sb-app-frame[data-sb-pane="end"] .sb-app-frame__pane--end { display: flex; }
+/* nothing chosen: the end pane's one quiet sentence (as .sb-doc-tabs__none) */
+.sb-app-frame__none { margin: 0; padding: var(--sb-space-6) var(--sb-spacing-gutter); color: var(--sb-color-text-muted); }
+/* the zone's state sentence shows at every width of a frame: above the action in the phone form (as a --wide view
+   below 640 px, D72), at the start of the zone in the wide form; a failure's sentence replaces it */
+.sb-app-frame__pane .sb-primary-action-bar__status { display: flex; }
+.sb-app-frame__pane .sb-primary-action-bar__status:last-child { margin-block-end: 0; }
+.sb-app-frame__pane .sb-primary-action-bar:has(.sb-primary-action-bar__message:not(:empty)) .sb-primary-action-bar__status { display: none; }
+/* a detail has no primary action (D145 (5)): its one outlined action stands in the zone, as wide as a primary action */
+.sb-app-frame__pane .sb-primary-action-bar > .sb-secondary-action { inline-size: 100%; min-block-size: var(--sb-size-control-lg); }
+:is(.sb-app-frame__rail, .sb-app-frame__pane):focus-visible { outline: var(--sb-focus-ring); outline-offset: calc(-1 * var(--sb-focus-width)); }
+@container sb-app-frame (width >= 840px) {
+  .sb-app-frame__body { grid-template-columns: var(--sb-x-sebaro-pane-sidebar) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); }
+  .sb-app-frame__body:not(:has(> .sb-app-frame__rail)) { grid-template-columns: minmax(0, 1fr); }
+  .sb-app-frame--split > .sb-app-frame__body { grid-template-columns: var(--sb-x-sebaro-pane-sidebar) 320px minmax(0, 1fr); }
+  .sb-app-frame--split > .sb-app-frame__body:not(:has(> .sb-app-frame__rail)) { grid-template-columns: 320px minmax(0, 1fr); }
+  /* the rail: the product tile above the side navigation; the tile leaves the panes' top bars */
+  .sb-app-frame__rail { display: block; inline-size: auto; overflow-y: auto; border-inline-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+  .sb-app-frame__rail > .sb-sign-tile { display: block; margin: 16px; }
+  .sb-app-frame__body:has(> .sb-app-frame__rail) .sb-top-bar__heading > .sb-sign-tile { display: none; }
+  .sb-app-frame .sb-bottom-nav { display: none; }
+  /* both panes show, each scrolls on its own, its bottom block stays at its bottom */
+  .sb-app-frame .sb-app-frame__pane, .sb-app-frame[data-sb-pane] .sb-app-frame__pane { display: flex; overflow-y: auto; overscroll-behavior: contain; }
+  .sb-app-frame__pane--end { border-inline-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+  .sb-app-frame__pane > .sb-view__content { flex: 1 0 auto; }
+  .sb-app-frame__pane > :is(.sb-view__content, .sb-progress) { box-sizing: border-box; inline-size: 100%; max-inline-size: 70ch; }   /* one column keeps a line length */
+  /* the list stands beside the detail: no way back to it in the end pane; the title starts at the gutter */
+  .sb-app-frame--split .sb-app-frame__back { display: none; }
+  .sb-app-frame--split .sb-top-bar:has(> .sb-app-frame__back:first-child) { padding-inline-start: var(--sb-spacing-gutter); }
+  /* the chosen row: the current place (3 px accent start edge and the title weight) */
+  .sb-app-frame--split .sb-list-row[aria-current="true"] { border-inline-start: var(--sb-border-width-strong) solid var(--sb-color-accent); padding-inline-start: calc(var(--sb-spacing-gutter) - var(--sb-border-width-strong)); }
+  .sb-app-frame--split .sb-list-row[aria-current="true"] .sb-list-row__title { font-weight: var(--sb-type-title-weight); }
+  /* the wide action zone (as .sb-view--wide from 640 px): the sentence at the start, the action at the end. The
+     start pane of a split frame is a phone-wide column and keeps the phone form: the sentence above its action */
+  .sb-app-frame__pane:not(.sb-app-frame--split .sb-app-frame__pane--start) .sb-primary-action-bar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-2) var(--sb-space-4); }
+  .sb-app-frame__pane:not(.sb-app-frame--split .sb-app-frame__pane--start) .sb-primary-action-bar > :is(.sb-primary-action, .sb-secondary-action) { inline-size: auto; min-inline-size: 200px; margin-inline-start: auto; padding-inline: min(var(--sb-space-6), 24px); }
+  .sb-app-frame__pane:not(.sb-app-frame--split .sb-app-frame__pane--start) .sb-primary-action-bar__status { flex: 1 1 auto; min-inline-size: 0; margin: 0; }
+  .sb-app-frame__pane:not(.sb-app-frame--split .sb-app-frame__pane--start) .sb-primary-action-bar__message { flex: 1 1 260px; margin: 0; }
+  /* Provisional reading: while the end pane holds a view with its own primary action, the start pane's is not shown. */
+  .sb-app-frame--split:has(.sb-app-frame__pane--end .sb-primary-action) .sb-app-frame__pane--start .sb-primary-action { display: none; }
 }

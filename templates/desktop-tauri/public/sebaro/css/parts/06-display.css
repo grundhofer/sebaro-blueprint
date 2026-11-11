@@ -1701,6 +1701,9 @@ html.sb-starting > body > .sb-start, .sb-starting > .sb-start {
    400 px at 200 %, never wider than its place) and its rows keep their 16 px sides, so a row's words are not squeezed
    beside its check and its keys */
 .sb-menu { min-inline-size: min(100%, max(200px, 12.5em)); max-inline-size: max(320px, 20em); }
+/* an open menu keeps 8 px to each side of the window (2026-11-11): at 200 % on 320 px it was as wide as the window and
+   stood 8 px out of it at the end (tools/tests/menu_check.mjs, headed groups) */
+.sb-menu[popover] { min-inline-size: min(100% - 16px, max(200px, 12.5em)); max-inline-size: min(100% - 16px, max(320px, 20em)); }
 .sb-menu__item { padding-inline: min(var(--sb-space-4), 16px); }
 .sb-menu__item .sb-icon { color: var(--sb-color-text-muted); }
 .sb-menu__item:hover, .sb-menu__item.is-hover { background: var(--sb-color-hover-fill); }
