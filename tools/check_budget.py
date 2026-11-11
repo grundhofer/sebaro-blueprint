@@ -12,6 +12,9 @@ Groups
         a home "core" names a rule number that design/KERN.md has, a home "view" a type key that design/views.md has
   CORE  every [ID] cited in design/KERN.md exists in rules/rules.json and has the home "core" with the number of
         the rule that cites it
+  PARTS every rule with the home "component" whose part needs something from the author on the web or on Android
+        (finding "usage" or "missing" in rules/home.json) is cited in design/parts.md, and every [ID] cited there
+        is a rule with the home "component"
 """
 import json
 import pathlib
@@ -25,6 +28,7 @@ BUDGETS = {
     "AGENTS.md": 6_000,
     "design/KERN.md": 8_000,
     "design/views.md": 4_500,
+    "design/parts.md": 8_000,
     "templates/*/BLUEPRINT.md": 10_000,
     "skills/*/*.md": 5_000,
     "templates/AGENTS-snippet.md": 1_500,
@@ -73,6 +77,21 @@ def main():
                 errors.append(f"CORE rule {number} cites {i}, which rules/rules.json does not have")
             elif home.get(i) != {"home": "core", "ref": int(number)}:
                 errors.append(f"CORE rule {number} cites {i}, but rules/home.json says {home.get(i)}")
+
+    # PARTS
+    parts = (ROOT / "design/parts.md").read_text(encoding="utf-8")
+    cited = set(re.findall(r"\b[A-Z]{3}-\d{2}\b", " ".join(re.findall(r"\[([^\]]*)\]", parts))))
+    for i, h in home.items():
+        if h.get("home") != "component":
+            continue
+        for platform in ("web", "android"):
+            if h.get(platform) not in ("carried", "usage", "missing", "n/a"):
+                errors.append(f"PARTS {i}: rules/home.json has no finding for {platform}")
+        if {h.get("web"), h.get("android")} & {"usage", "missing"} and i not in cited:
+            errors.append(f"PARTS {i}: its part needs something from the author, but design/parts.md does not cite it")
+    for i in sorted(cited):
+        if home.get(i, {}).get("home") != "component":
+            errors.append(f"PARTS design/parts.md cites {i}, which is not a rule with the home component")
 
     for line in notes:
         print(line)

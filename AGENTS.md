@@ -23,8 +23,8 @@ Read in this order and stop when you have what the task needs.
    Each starter's `BLUEPRINT.md` holds the technology rules (stack, structure, tests, release, updates) and ends
    with where the starter itself still differs; do not copy those parts. iOS has no blueprint.
 4. The sebaro copy inside the product, the folder with `sebaro-export.json`: parts, tokens, fonts, icons. Its README
-   says how it is wired; a list of its parts with one line each does not exist yet, so search the copy by name
-   (`Sb…` in Kotlin, `sb-…` in CSS). Never edit it. How a product gets and updates it: [MANUAL.md](MANUAL.md) §4.
+   says how it is wired; search it by name (`Sb…` in Kotlin, `sb-…` in CSS). Some parts leave one choice to you:
+   [`design/parts.md`](design/parts.md) has a line for each of them. Never edit the copy. How a product gets and updates it: [MANUAL.md](MANUAL.md) §4.
 
 In short (core rules 1 to 3): use what the copy has, build what is missing beside the copy, record gaps and
 deviations in the product.
@@ -52,7 +52,7 @@ Build, checks, release and the sync with the workshop: [MANUAL.md](MANUAL.md) §
 default these rules hold:
 
 - **Budgets in bytes**, checked in CI by `tools/check_budget.py`: this file 6,000, `design/KERN.md` 8,000,
-  `design/views.md` 4,500, a starter's `BLUEPRINT.md` 10,000, a file of a skill 5,000, the product snippet 1,500. To add something, remove
+  `design/views.md` 4,500, `design/parts.md` 8,000, a starter's `BLUEPRINT.md` 10,000, a file of a skill 5,000, the product snippet 1,500. To add something, remove
   something.
 - **A new rule goes into a part, a starter or a check first.** It becomes a core rule only when none of those can
   carry it.

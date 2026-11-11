@@ -1,5 +1,5 @@
 {
- "$comment": "Where each rule of rules.json lives since the round-8 cleanup (D145 (6)). core = design/KERN.md (ref = rule number); view = design/views.md (ref = type key); component = carried by the parts of the sebaro copy; words = writing sheet; platform-* = platform blueprint and template; check = automatic check; extra-* = optional sheet; playbook = how to start a project; workshop = concerns only who builds the system; lowered = accessibility rule above the floor of KERN rule 30, kept as built, no longer required. Confirmed by the owner on 2026-11-11 together with the core rules; whether each part carries its 'component' rules on every platform is not verified yet.",
+ "$comment": "Where each rule of rules.json lives since the round-8 cleanup (D145 (6)). core = design/KERN.md (ref = rule number); view = design/views.md (ref = type key); component = carried by the parts of the sebaro copy; words = writing sheet; platform-* = platform blueprint and template; check = automatic check; extra-* = optional sheet; playbook = how to start a project; workshop = concerns only who builds the system; lowered = accessibility rule above the floor of KERN rule 30, kept as built, no longer required. Confirmed by the owner on 2026-11-11 together with the core rules; for a 'component' rule, web and android give the finding of an audit of the parts on 2026-11-11 (read from the code, nothing rendered): carried = the part keeps the rule by itself, usage = the author needs the line in design/parts.md, missing = no part yet, n/a = the rule does not apply there.",
  "rules": {
   "HAL-01": {
    "home": "workshop"
@@ -54,26 +54,38 @@
    "ref": 6
   },
   "FAR-06": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "FAR-07": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
   },
   "FAR-08": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "usage"
   },
   "FAR-09": {
    "home": "core",
    "ref": 7
   },
   "FAR-11": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
   },
   "FAR-12": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "FAR-14": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "FAR-15": {
    "home": "core",
@@ -87,7 +99,9 @@
    "ref": 8
   },
   "SCH-02": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
   },
   "SCH-03": {
    "home": "core",
@@ -98,10 +112,14 @@
    "ref": 8
   },
   "SCH-05": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
   },
   "SCH-06": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "SCH-07": {
    "home": "platform-web"
@@ -111,7 +129,9 @@
    "ref": 9
   },
   "RAU-02": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "missing"
   },
   "RAU-03": {
    "home": "platform-web"
@@ -128,7 +148,9 @@
    "home": "platform-desktop"
   },
   "RAU-07": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "FOR-01": {
    "home": "core",
@@ -147,10 +169,14 @@
    "ref": 11
   },
   "FOR-05": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "n/a"
   },
   "FOR-06": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
   },
   "EBE-01": {
    "home": "core",
@@ -161,20 +187,28 @@
    "ref": 10
   },
   "EBE-03": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "EBE-04": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "EBE-05": {
    "home": "core",
    "ref": 14
   },
   "EBE-06": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "n/a"
   },
   "EBE-07": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "EBE-08": {
    "home": "platform-desktop"
@@ -188,7 +222,9 @@
    "ref": 23
   },
   "BEW-03": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "usage"
   },
   "BEW-04": {
    "home": "core",
@@ -203,7 +239,9 @@
    "ref": 12
   },
   "AKT-03": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
   },
   "AKT-04": {
    "home": "core",
@@ -264,7 +302,9 @@
    "home": "platform-web"
   },
   "NAV-08": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "missing"
   },
   "NAV-09": {
    "home": "platform-desktop"
@@ -274,7 +314,9 @@
    "ref": 17
   },
   "NAV-11": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "n/a"
   },
   "LNK-01": {
    "home": "core",
@@ -297,10 +339,14 @@
    "ref": 20
   },
   "STA-04": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "carried"
   },
   "STA-05": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "STA-06": {
    "home": "core",
@@ -310,7 +356,9 @@
    "home": "platform-desktop"
   },
   "STA-08": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "n/a"
   },
   "STA-09": {
    "home": "words"
@@ -328,69 +376,99 @@
    "ref": 4
   },
   "EIN-04": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "EIN-05": {
    "home": "view",
    "ref": "search"
   },
   "EIN-06": {
-   "home": "component"
+   "home": "component",
+   "web": "n/a",
+   "android": "usage"
   },
   "DAT-01": {
    "home": "core",
    "ref": 10
   },
   "DAT-02": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "DAT-03": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
   },
   "DAT-04": {
    "home": "core",
    "ref": 24
   },
   "DAT-05": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
   },
   "DAT-06": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
   },
   "DAT-07": {
    "home": "core",
    "ref": 22
   },
   "DAT-08": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "n/a"
   },
   "DAT-09": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "carried"
   },
   "DAT-10": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "DAT-11": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "carried"
   },
   "DAT-12": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "DAT-13": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "DAT-14": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "DAT-15": {
    "home": "view",
    "ref": "history"
   },
   "DAT-16": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
   },
   "DAT-17": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "TXT-01": {
    "home": "core",
@@ -412,23 +490,33 @@
    "home": "words"
   },
   "TXT-06": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "missing"
   },
   "TXT-07": {
    "home": "core",
    "ref": 21
   },
   "TXT-08": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "TXT-09": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "n/a"
   },
   "TXT-10": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "usage"
   },
   "TXT-11": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "missing"
   },
   "TXT-12": {
    "home": "core",
@@ -441,13 +529,17 @@
    "home": "words"
   },
   "TXT-15": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "TXT-16": {
    "home": "words"
   },
   "TXT-17": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
   },
   "BEL-01": {
    "home": "core",
@@ -569,13 +661,19 @@
    "home": "extra-images"
   },
   "BIL-06": {
-   "home": "component"
+   "home": "component",
+   "web": "carried",
+   "android": "usage"
   },
   "BIL-07": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
   },
   "BIL-08": {
-   "home": "component"
+   "home": "component",
+   "web": "n/a",
+   "android": "usage"
   },
   "ZUG-01": {
    "home": "core",
@@ -636,13 +734,19 @@
    "ref": "form"
   },
   "WEB-06": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "n/a"
   },
   "WEB-07": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "n/a"
   },
   "WEB-08": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "n/a"
   },
   "WEB-09": {
    "home": "platform-web"
@@ -690,7 +794,9 @@
    "ref": "outside"
   },
   "MOB-12": {
-   "home": "component"
+   "home": "component",
+   "web": "n/a",
+   "android": "usage"
   },
   "DSK-01": {
    "home": "platform-desktop"
@@ -764,7 +870,9 @@
    "home": "platform-web"
   },
   "TEC-09": {
-   "home": "component"
+   "home": "component",
+   "web": "usage",
+   "android": "carried"
   },
   "TEC-10": {
    "home": "core",
