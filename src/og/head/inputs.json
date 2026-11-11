@@ -1,20 +1,20 @@
 {
   "$comment": "written by tools/og.mjs after a successful render; tools/check_site.py compares it (OG); do not edit",
-  "render": "1.0.1",
+  "render": "1.1.0",
   "inputs": {
     "src/og/pages.json": "c5bb47f0b6f1ee10855c5064635bfc707f59b6998fb36532b9cdcb31b0555a0d",
-    "docs/sebaro/brand/og/render.mjs": "b5f088625b24c5bc69758150aa967c7a93538507ef1e017ee51a0db1698b758b",
-    "docs/sebaro/brand/og/template.html": "10a7ef84269e8872d09650676a6f64467c245a9cbb044d4720854aa746550afe",
+    "docs/sebaro/brand/og/render.mjs": "176b06b68ada9a4e710c128b3b3469dda129657e9efda3caed4474b6d1220d38",
+    "docs/sebaro/brand/og/template.html": "c930a5766988c5a13d9cf1efed050ce22f21029c5d1bce35408a95a089a90022",
     "docs/sebaro/brand/og/pages.schema.json": "af5f72a9735b28c60dac2e114cd0e4fb9cd6d9ac616bdb4df46de9d7665ecfcc",
-    "docs/sebaro/tokens.css": "8d7aeef36d475cdef12027d541be07442c62ca9f3bbc0eb71faa016a6ecc19fe",
+    "docs/sebaro/tokens.css": "a5d6c14c5ed26630faba0a26e39befef751b66005a6b172a7e9c80d6ac574065",
     "docs/sebaro/fonts/fonts.css": "c10d1061c7a7687e73b9030b9660dafa9d81876ac787328c8bc16bbd6d929c7a",
     "docs/sebaro/fonts/web/sebaro-mono-latin-de.woff2": "2512639768811e136c441f24e94a5f365ab1c18dbceb138f181c7e67a4be5ccf",
     "docs/sebaro/fonts/web/sebaro-sans-italic-latin-de.woff2": "3334dbd7fd7c6c6a150afd76f90783572cdd1ea6e6ece5b2f42ba90a6a61fd0f",
     "docs/sebaro/fonts/web/sebaro-sans-latin-de.woff2": "589be2f709be7e198bfa223e58a9515ffcbd4f1d652f757c2c49bc05f1bcb92d",
-    "docs/sebaro/icons/sprite.svg": "4b33572d8048a89869eb7f9f502eb0f42207cf458425c8f40555b3866d8b67e3",
-    "docs/sebaro/icons/sprite.css": "df6cbf7d17581ae17dcd017737d8daf28c89be299efd14806d227fdc46e680b0",
-    "docs/sebaro/brand/inline/tile-studio.svg": "dd16f7f3b53f825d9662e77105fc6b93e26f5744dc1c80d05cc5b7569f6e2508",
-    "docs/sebaro/brand/inline/lockup-horizontal.svg": "684f2e4b347f8b338f4a79118d2d7f6e030b3c5ef22f8c595d3cf5722a66915d",
-    "docs/sebaro/brand/inline/lockup-horizontal-large.svg": "7524d4c1686e4952ca22088314378703c1e396dea88e512695808256c782599f"
+    "docs/sebaro/icons/sprite.svg": "a49fd15ce257750fd0f00a4da8d7b4eab2ff0821bc5908c9cd4e7493eb62cf85",
+    "docs/sebaro/icons/sprite.css": "4aa531ac61b82c59365a03caeab287e3b229a5fc3c6a41fe965da7790dc7b139",
+    "docs/sebaro/brand/inline/tile-studio.svg": "4450762c4dbbab31a7a849d2daba01cf5194bfc779a84a47d84562b210e0c853",
+    "docs/sebaro/brand/inline/lockup-horizontal.svg": "da498e386569f0f60f5355ef7e0a007d76fb0fd879f07006c42d597efed38cfa",
+    "docs/sebaro/brand/inline/lockup-horizontal-large.svg": "6ad35c02a8f353fe17c801bd6aebf84b5529a2abda8cc9eb8f67808b65326134"
   }
 }
