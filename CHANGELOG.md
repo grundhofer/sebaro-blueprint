@@ -19,6 +19,11 @@ Technik-Bauplan für Android). Der Katalog `rules/rules.json` ist unverändert; 
 (ZEI-01, STR-01, ZUG-05, ZUG-07 bis ZUG-09), gilt die Kernregel. `tools/check_budget.py` hält die Einstiegstexte
 unter festen Größen und meldet Regeln ohne Zuhause; die CI ruft es auf.
 
+Skill und Produkt-Abschnitt: `skills/sebaro/` ist ein Agenten-Skill mit zwei Anleitungen, `new.md` für ein neues
+Produkt und `convert.md` für den Umbau eines bestehenden Projekts. `templates/AGENTS-snippet.md`, der Abschnitt für
+die `AGENTS.md` eines Produkts, hat fünf Zeilen statt 16 KB und verweist auf Kernregeln, Ansichtstypen und den
+Bauplan der Produktart; was vorher dort stand, steht in den Kernregeln und in `MANUAL.md`.
+
 Werkzeug, keine Regeländerung: `tools/check_site.py` (Gruppe TPLEXP) vergleicht die Kopien des Web-Exports in den
 Startvorlagen mit `docs/sebaro/` und schlägt bei veralteten Kopien fehl; der iOS-Export-Commit warnt nur.
 Selbsttest: `python3 tools/test_check_site.py`.
