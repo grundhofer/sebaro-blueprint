@@ -10,6 +10,8 @@ const a = t.pages.article;
 const nav = t.nav;
 const [worum, aufbau, umlaute, offen] = a.sections;
 const look = (kind: string) => (kind === "plain" ? null : `sb-tok-${kind}`);
+// the notes part carries DPUB-ARIA roles (BEL-02), which Astro's role type does not list
+const dpub = (role: string) => role as astroHTML.JSX.AriaRole;
 ---
 <Base lang="de" title={a.title} ogId="csv" nav="projects" self="/projekte/liste-als-csv/" view="artikel" notes>
   <div class="app-article">
@@ -62,13 +64,13 @@ const look = (kind: string) => (kind === "plain" ? null : `sb-tok-${kind}`);
         <h2 id={offen.id}>{offen.title}</h2>
         {a.offen.map((p) => <p set:html={p} />)}
       </article>
-      <section class="sb-notes" role="doc-endnotes" aria-labelledby="fn-h">
+      <section class="sb-notes" role={dpub("doc-endnotes")} aria-labelledby="fn-h">
         <h2 class="sb-notes__title" id="fn-h">{a.notesTitle}</h2>
         <ol class="sb-notes__list">
           {a.notes.map((note) => (
             <li class="sb-note" id={note.id}>
               <span class="sb-note__backs">
-                {note.backs.map((b) => <a class="sb-note__back" href={b.href} role="doc-backlink" aria-label={b.label}>{b.text}</a>)}
+                {note.backs.map((b) => <a class="sb-note__back" href={b.href} role={dpub("doc-backlink")} aria-label={b.label}>{b.text}</a>)}
               </span>
               <div class="sb-note__body"><p set:html={note.html} /></div>
             </li>
