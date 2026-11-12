@@ -5,9 +5,12 @@ import Base from "../layouts/Base.astro";
 import { strings } from "../strings.mjs";
 const s = strings.de.pages.apps;
 ---
+
 <Base lang="de" title={s.title} ogId="apps" nav="apps" self="/apps/" view="apps">
   <section class="sb-section" aria-labelledby="apps-h">
-    <h1 class="sb-page-lead__title" id="apps-h">{s.title}</h1>
+    <h1 class="sb-page-lead__title" id="apps-h">
+      {s.title}
+    </h1>
     <div class="sb-empty sb-empty--section">
       <p class="sb-empty__title">{s.emptyTitle}</p>
       <p class="sb-empty__text">{s.emptyText}</p>

@@ -41,7 +41,7 @@ Groups
   TERM   retired names do not appear in pages, fragments, rules or docs (D71: only "sebaro Sans" and "sebaro Mono");
          the font licence files in docs/sebaro/ keep the authors' copyright as the OFL requires, and so do the copies of
          the export in the starter templates (the exact paths of TEMPLATE_EXPORTS, not scanned; see template_files())
-  TPLEXP each web export copy in the starter templates (the three public/sebaro/ folders of TEMPLATE_EXPORTS) has the
+  TPLEXP each web export copy in the starter templates (the public/sebaro/ folders of TEMPLATE_MIRRORS) has the
          same file list and byte-identical files as docs/sebaro/ (only dotfiles, which the template's sebaro-sync.mjs
          never copies, are ignored); the error names the template, the first differing files and its sync command.
          Warning: the iOS template's SebaroDesign/sebaro-export.json names another sebaroDesign commit than
@@ -88,6 +88,8 @@ VAR_SB = re.compile(r"var\(\s*(--sb-[A-Za-z0-9_-]*[A-Za-z0-9_])(?![-*…A-Za-z0-
 TEMPLATE_EXPORTS = ("templates/website-astro/public/sebaro/", "templates/webapp-vite/public/sebaro/",
                     "templates/desktop-tauri/public/sebaro/", "templates/ios-swiftui/SebaroDesign/",
                     "templates/android-compose/sebaro/")
+# those of them that mirror docs/sebaro/ (TPLEXP); the website starter holds the copy of the public release instead
+TEMPLATE_MIRRORS = ("templates/webapp-vite/public/sebaro/", "templates/desktop-tauri/public/sebaro/")
 
 
 def export_diff(src: Path, dst: Path) -> list[str]:
@@ -107,7 +109,7 @@ def template_export_findings(root: Path = ROOT) -> tuple[list[str], list[str]]:
     """(errors, warnings) of the TPLEXP group: stale web export copies in the templates, a stale iOS export commit."""
     errors: list[str] = []
     warnings: list[str] = []
-    for rel in TEMPLATE_EXPORTS[:3]:
+    for rel in TEMPLATE_MIRRORS:
         tpl = rel.split("/")[1]
         diff = export_diff(root / "docs" / "sebaro", root / rel)
         if diff:

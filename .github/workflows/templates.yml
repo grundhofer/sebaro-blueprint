@@ -4,6 +4,8 @@
 # with 0 violations, no sideways scroll, no cut text, no console or Content-Security-Policy error; keyboard paths).
 # The desktop job also builds the Tauri app on Linux (debug, no bundle). Screenshots of every run are uploaded.
 # Each template's copy of the export is a snapshot: a guide sync does not touch it; update it with npm run sebaro:sync.
+# The website starter is a product like any other: it holds the copy of the public release (update-copy.mjs) and its
+# job also runs the type check, the lint and the budgets of its blueprint.
 name: templates
 on:
   push:
@@ -14,6 +16,8 @@ on:
 permissions:
   contents: read
 jobs:
+  # runs what the starter's own workflow runs (templates/website-astro/.github/workflows/ci.yml), without its weekly
+  # question for a newer release of the sebaro copy
   website-astro:
     runs-on: ubuntu-latest
     defaults:
@@ -27,12 +31,16 @@ jobs:
           cache: npm
           cache-dependency-path: templates/website-astro/package-lock.json
       - run: npm ci
-      - name: sebaro export unchanged (verify-export.mjs --strict)
+      - name: Type check (astro check)
+        run: npm run check
+      - name: Lint (ESLint, Prettier)
+        run: npm run lint
+      - name: Copy check (the sebaro copy is unchanged, the product's files are what sebaro.product.json gives)
         run: npm run sebaro:verify
       - run: npx playwright install --with-deps chromium
-      - name: Build (share images with render.mjs, then astro build)
+      - name: Build (share images, stylesheet and sprite cut to the pages, the pages, the budgets)
         run: npm run build
-      - name: Screens (light/dark, 320/390/1440 px, 100/200 % text, axe, overflow, cut text, CSP) and keyboard
+      - name: Tests (the copy's lint on the built pages, Vitest, Playwright with axe)
         run: npm test
       - if: ${{ !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2

@@ -319,7 +319,7 @@
     {
       "name": "board",
       "canonical": "board",
-      "de": "Kanban-Board (novalis, RetroBeam)",
+      "de": "Kanban-Board",
       "category": "content",
       "aliases": [
         "kanban"
@@ -363,7 +363,7 @@
     {
       "name": "book",
       "canonical": "book",
-      "de": "Doku, Lernen (Android Coden)",
+      "de": "Doku, Lernen",
       "category": "content",
       "aliases": [
         "docs"
@@ -2324,7 +2324,7 @@
     {
       "name": "home",
       "canonical": "home",
-      "de": "Start, „Heute“ in Tagwerk",
+      "de": "Start",
       "category": "navigation",
       "aliases": [],
       "tags": {
@@ -2810,7 +2810,7 @@
     {
       "name": "minus",
       "canonical": "minus",
-      "de": "Weniger (Tally)",
+      "de": "Weniger",
       "category": "actions",
       "aliases": [],
       "tags": {

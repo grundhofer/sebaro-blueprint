@@ -13,7 +13,8 @@ into docs/sebaro-product/ (favicons, manifest, head snippet, sign and tile). The
 text files) and its `check`; the raster files (favicon.ico and the PNGs) are committed and drawn by hand, with
 Playwright, when the check says they are stale:
     python3 docs/sebaro/product/product_kit.py build sebaro.product.json --copy docs/sebaro --out docs/sebaro-product --render
-The two starter templates that show a favicon carry the same declaration and folder (PRODUCT_COPIES).
+The web app starter template carries the same declaration and folder (PRODUCT_COPIES). The website starter is no
+mirror: it holds the copy of the public release (profile website) and its own declaration.
 
     python3 tools/sync_from_design.py                 # export + verify + copy
     python3 tools/sync_from_design.py --check         # exit 1 if docs/sebaro/ differs from a fresh export
@@ -53,15 +54,13 @@ DOCS = ROOT / "docs"
 TARGET = DOCS / "sebaro"
 VENDOR = DOCS / "assets" / "vendor"
 RECORD = DOCS / "GUIDE-SYNC.json"
-TEMPLATE_COPIES = ("templates/website-astro/public/sebaro", "templates/webapp-vite/public/sebaro",
-                   "templates/desktop-tauri/public/sebaro")
+TEMPLATE_COPIES = ("templates/webapp-vite/public/sebaro", "templates/desktop-tauri/public/sebaro")
 CONFIG = ROOT / "tools" / "sync.config.json"
 DECLARATION = ROOT / "sebaro.product.json"          # the guide's own declaration (the umbrella)
 PRODUCT = DOCS / "sebaro-product"                   # what the export's product kit writes from it
 KIT = Path("product") / "product_kit.py"            # inside an export
 # starter templates that show the placeholder favicon: (the declaration, the kit's folder), copies of the guide's own
-PRODUCT_COPIES = (("templates/website-astro/sebaro.product.json", "templates/website-astro/sebaro-product"),
-                  ("templates/webapp-vite/sebaro.product.json", "templates/webapp-vite/public/sebaro-product"))
+PRODUCT_COPIES = (("templates/webapp-vite/sebaro.product.json", "templates/webapp-vite/public/sebaro-product"),)
 
 
 LOCAL = ROOT / "tools" / "sync.local.json"

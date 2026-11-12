@@ -17,12 +17,31 @@ function htmlTemplates(src: string): string[] {
     let depth = 0;
     while (i < src.length) {
       const c = src[i];
-      if (c === "/" && src[i + 1] === "/") { i = src.indexOf("\n", i); if (i < 0) return src.length; continue; }
-      if (c === "/" && src[i + 1] === "*") { i = src.indexOf("*/", i) + 2; continue; }
-      if (c === '"' || c === "'") { i++; while (i < src.length && src[i] !== c) i += src[i] === "\\" ? 2 : 1; i++; continue; }
-      if (c === "`") { const tagged = /\bhtml$/.test(src.slice(Math.max(0, i - 4), i)); i = template(i + 1, tagged); continue; }
+      if (c === "/" && src[i + 1] === "/") {
+        i = src.indexOf("\n", i);
+        if (i < 0) return src.length;
+        continue;
+      }
+      if (c === "/" && src[i + 1] === "*") {
+        i = src.indexOf("*/", i) + 2;
+        continue;
+      }
+      if (c === '"' || c === "'") {
+        i++;
+        while (i < src.length && src[i] !== c) i += src[i] === "\\" ? 2 : 1;
+        i++;
+        continue;
+      }
+      if (c === "`") {
+        const tagged = /\bhtml$/.test(src.slice(Math.max(0, i - 4), i));
+        i = template(i + 1, tagged);
+        continue;
+      }
       if (c === "{") depth++;
-      if (c === "}") { if (depth === 0) return i + 1; depth--; }
+      if (c === "}") {
+        if (depth === 0) return i + 1;
+        depth--;
+      }
       i++;
     }
     return i;
@@ -30,8 +49,16 @@ function htmlTemplates(src: string): string[] {
   const template = (i: number, keep: boolean): number => {
     let text = "";
     while (i < src.length && src[i] !== "`") {
-      if (src[i] === "\\") { text += src.slice(i, i + 2); i += 2; continue; }
-      if (src[i] === "$" && src[i + 1] === "{") { text += HOLE; i = code(i + 2); continue; }
+      if (src[i] === "\\") {
+        text += src.slice(i, i + 2);
+        i += 2;
+        continue;
+      }
+      if (src[i] === "$" && src[i + 1] === "{") {
+        text += HOLE;
+        i = code(i + 2);
+        continue;
+      }
       text += src[i++];
     }
     if (keep) out.push(text);
@@ -43,11 +70,21 @@ function htmlTemplates(src: string): string[] {
 
 /** The template of an .astro file with every {…} expression replaced by HOLE. */
 function astroTemplate(src: string): string {
-  const body = src.replace(/^---[\s\S]*?\n---/, "").replace(/<!--[\s\S]*?-->/g, "").replace(/<(script|style)\b[\s\S]*?<\/\1>/g, "");
-  let out = "", depth = 0;
+  const body = src
+    .replace(/^---[\s\S]*?\n---/, "")
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<(script|style)\b[\s\S]*?<\/\1>/g, "");
+  let out = "",
+    depth = 0;
   for (const c of body) {
-    if (c === "{") { if (depth++ === 0) out += HOLE; continue; }
-    if (c === "}") { depth--; continue; }
+    if (c === "{") {
+      if (depth++ === 0) out += HOLE;
+      continue;
+    }
+    if (c === "}") {
+      depth--;
+      continue;
+    }
     if (depth === 0) out += c;
   }
   return out;
@@ -59,7 +96,13 @@ export function literalWords(file: string, name = file): string[] {
   let parts: string[];
   if (file.endsWith(".ts")) parts = htmlTemplates(src);
   else if (file.endsWith(".astro")) parts = [astroTemplate(src)];
-  else parts = [src.replace(/<!--[\s\S]*?-->/g, "").replace(/<(script|style|svg)\b[\s\S]*?<\/\1>/g, "").replace(/\{\{[^}]*\}\}/g, HOLE)];
+  else
+    parts = [
+      src
+        .replace(/<!--[\s\S]*?-->/g, "")
+        .replace(/<(script|style|svg)\b[\s\S]*?<\/\1>/g, "")
+        .replace(/\{\{[^}]*\}\}/g, HOLE),
+    ];
   const found: string[] = [];
   for (const part of parts) {
     for (const m of part.matchAll(/>([^<>]*)</g)) {
