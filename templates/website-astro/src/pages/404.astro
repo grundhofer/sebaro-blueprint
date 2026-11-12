@@ -5,16 +5,24 @@ import Base from "../layouts/Base.astro";
 import { strings } from "../strings.mjs";
 const s = strings.de.pages.notFound;
 ---
+
 <Base lang="de" title={s.title} self="/404.html" view="nicht-gefunden" primary>
   <section class="sb-section sb-page-lead" aria-labelledby="nf-h">
-    <h1 class="sb-page-lead__title" id="nf-h">{s.title}</h1>
+    <h1 class="sb-page-lead__title" id="nf-h">
+      {s.title}
+    </h1>
     <p class="sb-page-lead__text">{s.text}</p>
     <details>
       <summary>{s.details}</summary>
-      <p>{s.status}<span class="sb-mono">404</span></p>
+      <p>
+        {s.status}
+        <span class="sb-mono">404</span>
+      </p>
     </details>
     <div class="sb-section__actions">
-      <a class="sb-primary-action" href="/">{s.primary}</a>
+      <a class="sb-primary-action" href="/">
+        {s.primary}
+      </a>
     </div>
   </section>
 </Base>

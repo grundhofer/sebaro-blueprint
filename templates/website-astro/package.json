@@ -8,22 +8,37 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "sebaro:sync": "node scripts/sebaro-sync.mjs && node scripts/site-root.mjs",
-    "sebaro:verify": "node public/sebaro/checks/verify-export.mjs public/sebaro --strict",
+    "sebaro:verify": "node public/sebaro/checks/verify-export.mjs public/sebaro --strict && python3 public/sebaro/product/product_kit.py check sebaro.product.json --copy public/sebaro --out sebaro-product",
+    "sebaro:product": "python3 public/sebaro/product/product_kit.py build sebaro.product.json --copy public/sebaro --out sebaro-product --render",
+    "sebaro:lint": "sh public/sebaro/checks/lint-web.sh public/css/site.css dist",
     "og": "node scripts/og.mjs",
-    "dev": "astro dev",
-    "build": "node scripts/og.mjs && astro build",
+    "dev": "node scripts/site-root.mjs && astro dev",
+    "build": "node scripts/site-root.mjs && node scripts/og.mjs && astro build --mode pages --outDir build/pages && node scripts/cut.mjs && astro build && node scripts/budgets.mjs",
     "preview": "astro preview",
-    "test": "playwright test"
+    "check": "astro check",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "test": "npm run sebaro:lint && vitest run --dir src && playwright test"
   },
   "dependencies": {
     "astro": "7.3.8"
   },
   "devDependencies": {
+    "@astrojs/check": "0.9.12",
     "@axe-core/playwright": "4.13.0",
-    "@playwright/test": "1.63.0"
+    "@playwright/test": "1.63.0",
+    "@types/node": "22.20.5",
+    "eslint": "10.14.0",
+    "eslint-plugin-astro": "3.2.1",
+    "prettier": "3.10.1",
+    "prettier-plugin-astro": "1.1.2",
+    "purgecss": "8.0.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.2",
+    "vitest": "5.1.0"
   },
   "overrides": {
-    "vite": "8.3.4"
+    "vite": "8.3.4",
+    "playwright-core": "$@playwright/test"
   }
 }

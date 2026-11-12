@@ -2,15 +2,16 @@
 // - every page is static HTML; sebaro's own classic scripts come from public/sebaro/js/ (no islands, no frameworks)
 // - stylesheets are always files (inlineStylesheets: "never"), so the strict Content-Security-Policy in
 //   src/layouts/Base.astro needs no 'unsafe-inline'
-// - no syntax highlighter: Shiki writes style="" attributes, which that policy forbids; code is marked up with
-//   sebaro's sb-tok-* spans instead (TEC-08, TXT-10)
+// - code in Markdown is highlighted by Prism: it writes classes (.token …), which the copy's stylesheet colours.
+//   Never Shiki: it writes style="" attributes, which that policy forbids. Code in an .astro page is marked up
+//   with sebaro's sb-tok-* spans (TEC-08, TXT-10)
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
   site: "https://example.org",
   trailingSlash: "always",
   build: { format: "directory", inlineStylesheets: "never" },
-  markdown: { syntaxHighlight: false },
+  markdown: { syntaxHighlight: "prism" },
   devToolbar: { enabled: false },
   vite: { build: { assetsInlineLimit: 0 } },
 });

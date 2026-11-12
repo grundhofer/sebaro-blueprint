@@ -1,0 +1,42 @@
+# ci: on every push and pull request (BLUEPRINT.md, Build, release, updates): type check, lint, copy check, build
+# with the budgets, tests. Once a week it also asks whether a newer release of the sebaro copy exists; then update
+# the copy with `node public/sebaro/checks/update-copy.mjs`, as one commit of its own.
+name: ci
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "17 5 * * 1"
+permissions:
+  contents: read
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: Type check (astro check)
+        run: npm run check
+      - name: Lint (ESLint, Prettier)
+        run: npm run lint
+      - name: Copy check (the sebaro copy is unchanged, the product's files are what sebaro.product.json gives)
+        run: npm run sebaro:verify
+      - name: Copy check, weekly (a newer release of the sebaro copy exists)
+        if: github.event_name == 'schedule'
+        run: node public/sebaro/checks/update-copy.mjs --check
+      - run: npx playwright install --with-deps chromium
+      - name: Build (share images, stylesheet and sprite cut to the pages, the pages, the budgets)
+        run: npm run build
+      - name: Tests (the copy's lint on the built pages, Vitest, Playwright with axe)
+        run: npm test
+      - if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: screens
+          path: test-results/
+          retention-days: 7
+          if-no-files-found: ignore
