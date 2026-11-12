@@ -1,0 +1,12 @@
+# the sebaro copy and the product's files are never edited: a reformatted file is an edited copy
+src/sebaro
+sebaro-product
+sebaro.product.json
+# the screen checks as the guide's starters share them
+tests/sebaro-checks.ts
+tests/fixtures
+dist
+test-results
+playwright-report
+pnpm-lock.yaml
+*.md

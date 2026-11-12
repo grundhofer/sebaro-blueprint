@@ -1,4 +1,4 @@
-// Playwright: Chromium only (D96 (b)), against the built app served by `vite preview`.
+// Playwright: Chromium only, against the built app (dist/) served by `vite preview`. Build first: pnpm build.
 import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
@@ -9,8 +9,9 @@ export default defineConfig({
   timeout: 60_000,
   use: { baseURL: "http://127.0.0.1:4173", browserName: "chromium" },
   webServer: {
-    command: "npm run build && npm run preview",
+    command: "pnpm preview",
     url: "http://127.0.0.1:4173",
+    // with CI=1 a busy port fails the run instead of testing whatever answers there
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },
