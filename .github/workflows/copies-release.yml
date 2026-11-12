@@ -1,15 +1,21 @@
-# A pushed branch copies/<tag> becomes the draft of the release
-# <tag>, with the branch's files as its assets. The branch comes from the workshop (copies.yml there); a person
-# publishes the draft. Runs on a GitHub-hosted runner: the public guide gets no self-hosted one. The actions are
-# pinned by commit, as in templates.yml, because this job may write to the repository.
+# The branch copies/<tag> becomes the draft of the release
+# <tag>, with the branch's files as its assets. The branch comes from the workshop (copies.yml there). Started by hand
+# with the tag: a push of that branch starts nothing, because GitHub reads the workflows of a push from the pushed
+# commit and the branch holds the release's files and nothing else. A person publishes the draft. Runs on a
+# GitHub-hosted runner: the public guide gets no self-hosted one. The actions are pinned by commit, as in
+# templates.yml, because this job may write to the repository.
 name: copies-release
 on:
-  push:
-    branches: ["copies/**"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "The release tag whose branch copies/<tag> becomes the draft (v<major>.<minor>.<patch>)"
+        required: true
+        type: string
 permissions:
   contents: write
 concurrency:
-  group: copies-release-${{ github.ref_name }}
+  group: copies-release-${{ inputs.tag }}
   cancel-in-progress: false
 jobs:
   draft:
@@ -17,9 +23,11 @@ jobs:
     timeout-minutes: 10
     env:
       GH_TOKEN: ${{ github.token }}
+      COPIES_TAG: ${{ inputs.tag }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
+          ref: copies/${{ inputs.tag }}
           fetch-depth: 2
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
@@ -27,7 +35,7 @@ jobs:
       - name: The branch is one commit with the files its index names and nothing else
         run: |
           test "$(git rev-list --count HEAD)" = 1
-          node --input-type=module - "${GITHUB_REF_NAME#copies/}" <<'EOF'
+          node --input-type=module - "$COPIES_TAG" <<'EOF'
           import fs from "node:fs";
           import crypto from "node:crypto";
           const tag = process.argv[2];
@@ -35,7 +43,7 @@ jobs:
           if (!/^v\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?$/.test(tag)) fail(`the branch names no version: ${tag}`);
           const index = JSON.parse(fs.readFileSync("copies.json", "utf8"));
           if (index.tag !== tag) fail(`copies.json is of ${index.tag}, the branch of ${tag}`);
-          const named = [index.updater, ...Object.values(index.profiles)];
+          const named = [index.updater, ...(index.changes ? [index.changes] : []), ...Object.values(index.profiles)];
           const want = ["copies.json", ...named.map((f) => f.file)].sort();
           const have = fs.readdirSync(".", { withFileTypes: true }).filter((e) => e.name !== ".git");
           if (have.some((e) => !e.isFile())) fail("the branch holds something that is no file");
@@ -47,7 +55,7 @@ jobs:
             const sha256 = crypto.createHash("sha256").update(data).digest("hex");
             if (data.length !== f.bytes || sha256 !== f.sha256) fail(`${f.file} is not the file the index names`);
           }
-          fs.writeFileSync(process.env.GITHUB_ENV, `COPIES_TAG=${tag}\nCOPIES_PROFILES=${Object.keys(index.profiles).join(" ")}\n`, { flag: "a" });
+          fs.writeFileSync(process.env.GITHUB_ENV, `COPIES_PROFILES=${Object.keys(index.profiles).join(" ")}\n`, { flag: "a" });
           EOF
       - name: The release's updater writes a copy of every profile, and each copy passes its own check
         run: |
@@ -63,6 +71,6 @@ jobs:
           fi
           gh release create "$COPIES_TAG" --draft --target main --title "sebaro $COPIES_TAG" \
             --notes "Die Kopien von sebaro $COPIES_TAG, eine je Profil. Holen und aktuell halten: update-copy.mjs (README einer Kopie, Abschnitt Keep in sync)." \
-            copies.json update-copy.mjs sebaro-*.tar.gz
+            copies.json update-copy.mjs CHANGES.md sebaro-*.tar.gz
       - name: Delete the branch
-        run: git push origin --delete "$GITHUB_REF_NAME"
+        run: git push origin --delete "copies/$COPIES_TAG"

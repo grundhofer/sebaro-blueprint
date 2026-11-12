@@ -13,8 +13,10 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 Kopien ohne Werkstatt: Ein Produkt holt seine sebaro-Kopie und hält sie aktuell mit `update-copy.mjs` (Node 20,
 keine weiteren Werkzeuge). Die Kopien je Produktart (`website`, `webapp`, `desktop`, `android`) hängen als Dateien an
-einer Veröffentlichung dieses Repositories; `.github/workflows/copies-release.yml` legt sie als Entwurf an, sobald die
-Werkstatt den Zweig `copies/<Version>` schiebt, veröffentlicht wird von Hand. `AGENTS.md` (Schritt 4) nennt die drei
+einer Veröffentlichung dieses Repositories; `.github/workflows/copies-release.yml` legt sie aus dem Zweig
+`copies/<Version>` der Werkstatt als Entwurf an. Der Workflow wird von Hand mit der Version gestartet (ein Push dieses
+Zweigs startet nichts, weil der Zweig keine Workflow-Datei enthält), veröffentlicht wird von Hand. `AGENTS.md`
+(Schritt 4) nennt die drei
 Befehle. Die vier Technik-Baupläne beschreiben den neuen Stand: Android bindet die Kopie als eigenes Modul
 `:designsystem` ein, die eigenen Dateien eines Produkts (Icon, Zeichenkachel, Favicons) erzeugt der Baukasten in der
 Kopie aus `sebaro.product.json`, und die Prüfungen kommen aus der Kopie.
