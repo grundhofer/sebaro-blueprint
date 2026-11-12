@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="form_new_title">New entry</string>
+    <string name="form_edit_title">Edit entry</string>
+    <string name="form_close">Close</string>
+    <string name="form_create">Add entry</string>
+    <string name="form_save">Save changes</string>
+    <string name="form_local">Stays on this device.</string>
+    <string name="form_title_label">Title</string>
+    <string name="form_title_missing">Title is missing.</string>
+    <string name="form_priority_label">Priority</string>
+    <string name="form_note_label">Note</string>
+    <string name="form_note_counter">%1$s / %2$s</string>
+    <string name="form_note_too_long">The note is too long (%1$s / %2$s).</string>
+    <string name="form_unsaved_new_title">Save new entry?</string>
+    <string name="form_unsaved_new_text">If you discard, the title and note are lost.</string>
+    <string name="form_unsaved_edit_title">Save changes to “%1$s”?</string>
+    <string name="form_unsaved_edit_text">If you discard, the entry stays as it was.</string>
+</resources>

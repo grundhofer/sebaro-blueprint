@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="data_title">Data</string>
+
+    <string name="data_numbers">Numbers</string>
+    <string name="data_expenses_month">Spent in October</string>
+    <string name="data_integer">Whole number</string>
+    <string name="data_fraction">Fraction</string>
+    <string name="data_fraction_value">%1$s / %2$s</string>
+    <string name="data_decimal">Decimal</string>
+    <string name="data_large">Large number</string>
+    <string name="data_percent">Percent</string>
+    <string name="data_money">Amount</string>
+    <string name="data_per_month">Subscription</string>
+    <string name="data_per_month_value">%1$s a month</string>
+    <string name="data_unit">Distance</string>
+    <string name="data_unit_value">%1$s&#160;km</string>
+    <string name="data_approx">Reading time</string>
+    <string name="data_approx_value">about %1$s&#160;min</string>
+    <string name="data_rank">Rank</string>
+    <string name="data_rank_value">Place %1$s of %2$s</string>
+    <string name="data_signed_plus">+%1$s</string>
+    <string name="data_signed_minus">−%1$s</string>
+    <string name="data_signed_zero">±%1$s</string>
+
+    <string name="data_time">Time</string>
+    <string name="data_day">Day</string>
+    <string name="data_date">Date</string>
+    <string name="data_date_short">Short</string>
+    <string name="data_clock">Time of day</string>
+    <string name="data_range">Time window</string>
+    <string name="data_range_value">%1$s–%2$s</string>
+    <string name="data_span">Period</string>
+    <string name="data_duration">Duration</string>
+    <string name="data_duration_value">%1$d&#160;h %2$d&#160;min</string>
+    <string name="data_remaining">Time left</string>
+    <string name="data_remaining_value">%1$d&#160;min left</string>
+
+    <string name="data_state">State</string>
+    <string name="data_state_conflict">Conflict</string>
+    <string name="data_state_count_open">%1$s open</string>
+    <string name="data_import">Import</string>
+    <string name="data_goal_day">Daily goal</string>
+    <string name="data_step_name">Name</string>
+    <string name="data_step_data">Data</string>
+    <string name="data_step_done">Done</string>
+
+    <string name="data_categories">Categories and marks</string>
+    <string name="data_tag_household">Household</string>
+    <string name="data_tag_garden">Garden</string>
+    <string name="data_category_work">Work</string>
+    <string name="data_category_family">Family</string>
+    <string name="data_category_sport">Sport</string>
+    <string name="data_mark_sentence">Plant the balcony in spring</string>
+    <string name="data_mark_word">balcony</string>
+
+    <string name="data_technical">Technical</string>
+    <string name="data_id">ID</string>
+    <string name="data_id_value" translatable="false">E-0042</string>
+    <string name="data_version">Version</string>
+    <string name="data_version_value" translatable="false">1.4.0</string>
+    <string name="data_file">File</string>
+    <string name="data_file_value" translatable="false" tools:ignore="TypographyDashes">musterapp-export-2026-10-10.csv</string>
+    <string name="data_code_language" translatable="false">JSON</string>
+    <string name="data_code_value" translatable="false">{\n  \"id\": \"E-0042\",\n  \"done\": true\n}</string>
+
+    <string name="data_table">Table</string>
+    <string name="data_table_caption">Spent in October</string>
+    <string name="data_col_item">Item</string>
+    <string name="data_col_date">Date</string>
+    <string name="data_col_amount">Amount</string>
+    <string name="data_sum">Total</string>
+    <string name="data_expense_lock">Bike lock</string>
+    <string name="data_expense_washer">Washing machine</string>
+    <string name="data_expense_soil">Potting soil</string>
+    <string name="data_expense_boots">Hiking boots</string>
+
+    <string name="data_charts">Charts</string>
+    <string name="data_stat_steps">Average steps</string>
+    <string name="data_stat_streak">In a row</string>
+    <plurals name="data_days">
+        <item quantity="one">%1$d&#160;day</item>
+        <item quantity="other">%1$d&#160;days</item>
+    </plurals>
+    <string name="data_bar_caption">Steps per day, target %1$s</string>
+    <string name="data_line_caption">Sleep in hours, week by week</string>
+    <string name="data_share_caption">Spending by area</string>
+    <string name="data_share_home">Home</string>
+    <string name="data_share_food">Food</string>
+    <string name="data_share_leisure">Leisure</string>
+    <string name="data_goal_caption">Glasses of water today</string>
+</resources>

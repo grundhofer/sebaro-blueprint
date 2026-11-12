@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="form_new_title">Neuer Eintrag</string>
+    <string name="form_edit_title">Eintrag bearbeiten</string>
+    <string name="form_close">Schließen</string>
+    <string name="form_create">Eintrag anlegen</string>
+    <string name="form_save">Änderungen sichern</string>
+    <string name="form_local">Bleibt auf diesem Gerät.</string>
+    <string name="form_title_label">Titel</string>
+    <string name="form_title_missing">Titel fehlt.</string>
+    <string name="form_priority_label">Priorität</string>
+    <string name="form_note_label">Notiz</string>
+    <string name="form_note_counter">%1$s / %2$s</string>
+    <string name="form_note_too_long">Notiz ist zu lang (%1$s / %2$s).</string>
+    <string name="form_unsaved_new_title">Neuen Eintrag sichern?</string>
+    <string name="form_unsaved_new_text">Wenn du verwirfst, gehen Titel und Notiz verloren.</string>
+    <string name="form_unsaved_edit_title">Änderungen an „%1$s“ sichern?</string>
+    <string name="form_unsaved_edit_text">Wenn du verwirfst, bleibt der Eintrag, wie er war.</string>
+</resources>

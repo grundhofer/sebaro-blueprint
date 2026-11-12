@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="detail_state_open">offen</string>
+    <string name="detail_state_done">erledigt</string>
+    <string name="detail_edit">Eintrag bearbeiten</string>
+    <string name="detail_no_note">Keine Notiz.</string>
+    <string name="detail_created">Angelegt</string>
+    <string name="detail_priority">Priorität</string>
+    <string name="detail_finish">Eintrag abschließen</string>
+    <string name="detail_delete">Eintrag löschen</string>
+    <string name="detail_finish_title">Eintrag abschließen?</string>
+    <string name="detail_finish_text">Danach lässt sich „%1$s“ nicht mehr bearbeiten. Titel und Notiz bleiben lesbar.</string>
+    <string name="detail_finish_confirm">Abschließen</string>
+    <string name="detail_delete_title">Eintrag löschen?</string>
+    <string name="detail_delete_text">„%1$s“ und seine Notiz werden entfernt. Das lässt sich nicht rückgängig machen.</string>
+    <string name="detail_delete_confirm">Löschen</string>
+</resources>

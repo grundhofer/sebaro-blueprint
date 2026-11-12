@@ -1,107 +1,101 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
+    // R8, signing, versionCode, detekt, ktlint, Google Play and the product files in ../sebaro-product
+    id("sebaro.android.app")
 }
 
-// the Android 16 framework jar Robolectric draws with, fetched by Gradle like any dependency
-val robolectricAndroidAll = configurations.create("robolectricAndroidAll")
-
 android {
-    namespace = "de.example.musterapp"
-    // compileSdk 37: the sebaro package is compiled against it
-    compileSdk = 37
+    namespace = "de.sebaro_ventures.musterapp"
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "de.example.musterapp"
-        // minSdk 24 as the sebaro package (spec/08 §2.1); targetSdk 35 or later for edge-to-edge (spec/08 §2.2),
-        // 36 because Google Play requires it for new apps and updates
-        minSdk = 24
-        targetSdk = 36
+        applicationId = "de.sebaro_ventures.musterapp"
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        // the fallback without git or a release tag; sebaro.android.app sets both
         versionCode = 1
         versionName = "0.1.0"
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     buildFeatures {
         compose = true
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-        // java.time (dates in SbMessages, SbSortableTable) below API 26
-        isCoreLibraryDesugaringEnabled = true
-    }
-
-    // the in-app language choice needs every language in the base APK of an app bundle
+    // The theme loads the texts in the app's language, so every language stays in the base APK of a bundle.
     bundle {
         language {
             enableSplit = false
         }
     }
 
-    lint {
-        abortOnError = true
-        // the language list lives in res/xml/locales_config.xml
-        disable += "OldTargetApi"
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
     }
 
-    testOptions {
-        unitTests {
-            isIncludeAndroidResources = true
-            all { test ->
-                // Screenshots (Roborazzi): by default every run records into build/screenshots/ to look at;
-                // -Pshots=record writes the references into app/screenshots/ (git-ignored),
-                // -Pshots=verify compares a fresh drawing with them and fails on a difference.
-                val shots = providers.gradleProperty("shots").orNull
-                val dir = if (shots == null) layout.buildDirectory.dir("screenshots").get().asFile
-                else layout.projectDirectory.dir("screenshots").asFile
-                test.systemProperty("musterapp.shots.dir", dir.absolutePath)
-                if (shots == "verify") {
-                    test.systemProperty("roborazzi.test.verify", "true")
-                } else {
-                    test.systemProperty("roborazzi.test.record", "true")
-                }
-                // Robolectric draws with the Android 16 framework jar that Gradle fetched (no download in the test)
-                val androidAll = robolectricAndroidAll
-                test.inputs.files(androidAll)
-                test.systemProperty("robolectric.offline", "true")
-                test.doFirst { test.systemProperty("robolectric.dependency.dir", androidAll.singleFile.parent) }
-                // SDK 36 reaches into java.base internals that JDK 17+ closes
-                test.jvmArgs(
-                    "--add-opens=java.base/jdk.internal.access=ALL-UNNAMED",
-                    "--add-opens=java.base/java.io=ALL-UNNAMED",
-                )
-                test.maxHeapSize = "3g"
-            }
-        }
+    lint {
+        // targetSdk is the family's decision in the version catalog, not always the newest API
+        disable += "OldTargetApi"
     }
+}
+
+// Room writes the schema of every database version here; a migration is tested against it.
+room {
+    schemaDirectory("$projectDir/schemas")
+}
+
+// Render tests: Robolectric draws with the Android 16 framework jar that Gradle fetched (no download in a test),
+// Roborazzi writes the pictures to docs/screens/.
+val robolectricAndroidAll: Configuration = configurations.create("robolectricAndroidAll")
+val screens = rootProject.layout.projectDirectory.dir("docs/screens").asFile.path
+
+tasks.withType<Test>().configureEach {
+    inputs.files(robolectricAndroidAll)
+    systemProperty("roborazzi.test.record", "true")
+    systemProperty("robolectric.offline", "true")
+    systemProperty("musterapp.screens", screens)
+    jvmArgumentProviders.add(RobolectricJars(robolectricAndroidAll))
+    // SDK 36 reaches into java.base internals that JDK 17 and later close
+    jvmArgs("--add-opens=java.base/jdk.internal.access=ALL-UNNAMED", "--add-opens=java.base/java.io=ALL-UNNAMED")
+    maxHeapSize = "3g"
+    // the pictures are no declared output: every run draws them again
+    outputs.upToDateWhen { false }
+    outputs.cacheIf { false }
+}
+
+/** Tells Robolectric where the framework jar lies. */
+class RobolectricJars(
+    @get:InputFiles @get:PathSensitive(PathSensitivity.NONE) val jars: FileCollection,
+) : CommandLineArgumentProvider {
+    override fun asArguments() = listOf("-Drobolectric.dependency.dir=${jars.singleFile.parent}")
 }
 
 dependencies {
-    implementation(platform(libs.compose.bom))
-    implementation(libs.sebaro.compose)
-    implementation(libs.activity.compose)
-    coreLibraryDesugaring(libs.desugar.jdk.libs)
+    implementation(project(":designsystem"))
 
-    testImplementation(platform(libs.compose.bom))
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.room.runtime)
+    ksp(libs.room.compiler)
+    implementation(libs.datastore.preferences)
+
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.robolectric)
+    testImplementation(platform(libs.compose.bom))
     testImplementation(libs.compose.ui.test.junit4)
     testImplementation(libs.roborazzi)
-    testImplementation(libs.roborazzi.compose)
+    // the empty activity a Compose test draws in
+    debugImplementation(platform(libs.compose.bom))
     debugImplementation(libs.compose.ui.test.manifest)
     robolectricAndroidAll(libs.robolectric.android.all)
 }
-
-// sebaro's text checks over the app's Kotlin sources (tools/lint-sebaro-android.sh, needs a POSIX shell);
-// part of ./gradlew check, or run alone with ./gradlew lintSebaro
-val lintSebaro = tasks.register<Exec>("lintSebaro") {
-    group = "verification"
-    description = "Checks the Kotlin sources for sebaro parts drawn without the package's wrappers."
-    val script = rootProject.layout.projectDirectory.file("tools/lint-sebaro-android.sh")
-    val sources = layout.projectDirectory.dir("src/main/kotlin")
-    inputs.file(script)
-    inputs.dir(sources)
-    commandLine("sh", script.asFile.path, sources.asFile.path)
-}
-tasks.named("check") { dependsOn(lintSebaro) }

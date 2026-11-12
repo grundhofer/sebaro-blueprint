@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="detail_state_open">open</string>
+    <string name="detail_state_done">done</string>
+    <string name="detail_edit">Edit entry</string>
+    <string name="detail_no_note">No note.</string>
+    <string name="detail_created">Added</string>
+    <string name="detail_priority">Priority</string>
+    <string name="detail_finish">Finish entry</string>
+    <string name="detail_delete">Delete entry</string>
+    <string name="detail_finish_title">Finish entry?</string>
+    <string name="detail_finish_text">After this, “%1$s” can no longer be edited. Its title and note stay readable.</string>
+    <string name="detail_finish_confirm">Finish</string>
+    <string name="detail_delete_title">Delete entry?</string>
+    <string name="detail_delete_text">“%1$s” and its note will be removed. This cannot be undone.</string>
+    <string name="detail_delete_confirm">Delete</string>
+</resources>

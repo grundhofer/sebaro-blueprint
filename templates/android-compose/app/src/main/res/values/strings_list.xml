@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="list_title">Entries</string>
+    <string name="list_search_label">Search entries</string>
+    <string name="list_search_placeholder">Search …</string>
+    <string name="list_empty_title">No entries yet</string>
+    <string name="list_empty_text">Add your first entry and it shows up here.</string>
+    <string name="list_nohit_title">No entry with “%1$s”</string>
+    <string name="list_nohit_text">Try another word or clear the search.</string>
+    <string name="list_create">Add entry</string>
+    <string name="list_hide">Hide</string>
+    <string name="list_hidden_toast">“%1$s” hidden</string>
+    <string name="list_meta_created">added on %1$s</string>
+    <string name="list_end">There are no more entries.</string>
+    <string name="list_group_open">Open</string>
+    <string name="list_group_done">Done</string>
+</resources>

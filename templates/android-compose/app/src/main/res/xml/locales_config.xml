@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- The app's languages (TEC-10): German first, English. Android 13+ lists them in the system's app settings. -->
+<!-- The app's languages, the one list of them: Android offers them in its settings for the app, and the root theme
+     reads this file (ui/AppLocales.kt). English in values/ is the fallback, German is in values-de/. -->
 <locale-config xmlns:android="http://schemas.android.com/apk/res/android">
-    <locale android:name="de" />
     <locale android:name="en" />
+    <locale android:name="de" />
 </locale-config>
