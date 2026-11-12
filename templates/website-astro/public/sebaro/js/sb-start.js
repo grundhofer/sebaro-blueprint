@@ -1,5 +1,6 @@
 // D144 (3), spec/03 §14: full product-colour screen with the bare white symbol, then fade to the app.
-// Markup: .sb-start[data-sb-product] > .sb-start__tile with inline sign-<id>.svg. Target markers are legacy no-ops.
+// Markup: .sb-start[data-sb-product] > .sb-start__tile with the product's bare sign inline (sign/sign.svg of the
+// product kit's folder; brand/inline/sign-<id>.svg of a --target export). Target markers are legacy no-ops.
 // First visit per tab (sessionStorage sb-started); nostore opts out of storage. hold/release waits for app data,
 // fail() reveals errors immediately. The animation-end cap is duration + 500 ms. No minimum loading dwell.
 // Replay API, sb-start-done and sb-enter cleanup remain compatible. CSP-safe Web Animations API.
