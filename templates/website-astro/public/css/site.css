@@ -7,24 +7,76 @@
    no sebaro token: a media query cannot read a custom property, so the step is written here, in rem so it follows the
    reader's text size (64rem = sebaro's 1024 px step at 16 px text; at 200 % text the article keeps one column up to
    2048 px). sebaro.css switches sb-toc itself at 1024 px, so between the two the contents stand open above the text. */
-.app-article { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-spacing-group); padding-block: var(--sb-spacing-section); }
+.app-article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--sb-spacing-group);
+  padding-block: var(--sb-spacing-section);
+}
 @media (min-width: 64rem) {
   /* no sebaro token for the width of a side column: 15rem = the 240 px sidebar of NAV-04 at 16 px text, growing with it */
-  .app-article { grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); column-gap: var(--sb-spacing-gutter-wide); }
-  .app-article__toc { grid-column: 1; grid-row: 1 / span 2; }
-  .app-article__toc .sb-toc { position: sticky; inset-block-start: var(--sb-space-4); }
-  .app-article__head, .app-article__body { grid-column: 2; }
+  .app-article {
+    grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+    column-gap: var(--sb-spacing-gutter-wide);
+  }
+  .app-article__toc {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+  .app-article__toc .sb-toc {
+    position: sticky;
+    inset-block-start: var(--sb-space-4);
+  }
+  .app-article__head,
+  .app-article__body {
+    grid-column: 2;
+  }
 }
-.app-article__head { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-3); }
-.app-article__meta { margin: 0; color: var(--sb-color-text-muted); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
-.app-article__body { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-spacing-group); min-inline-size: 0; }
+.app-article__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--sb-space-3);
+}
+.app-article__meta {
+  margin: 0;
+  color: var(--sb-color-text-muted);
+  font: var(--sb-type-caption);
+  letter-spacing: var(--sb-type-caption-tracking);
+}
+.app-article__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--sb-spacing-group);
+  min-inline-size: 0;
+}
 
 /* a text page (legal pages, about): one column in reading width */
-.app-text { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-spacing-stack); max-inline-size: var(--sb-size-measure-prose); }
-.app-text > * { margin: 0; }
-.app-text h2 { margin-block-start: var(--sb-spacing-group); }
-.app-address { margin: 0; font-style: normal; }
+.app-text {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--sb-spacing-stack);
+  max-inline-size: var(--sb-size-measure-prose);
+}
+.app-text > * {
+  margin: 0;
+}
+.app-text h2 {
+  margin-block-start: var(--sb-spacing-group);
+}
+.app-address {
+  margin: 0;
+  font-style: normal;
+}
 
 /* the person on the about page: initials beside the name */
-.app-person { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-3); margin-block-end: var(--sb-spacing-group); }
-.app-person > .sb-avatars { margin: 0; padding: 0; }
+.app-person {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sb-space-3);
+  margin-block-end: var(--sb-spacing-group);
+}
+.app-person > .sb-avatars {
+  margin: 0;
+  padding: 0;
+}

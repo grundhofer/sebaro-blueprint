@@ -15,7 +15,9 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const from = path.join(root, "sebaro-product", "web");
 const skip = new Set(["head.snippet.html", "manifest.snippet.json", "theme-color.json"]);
 if (!fs.existsSync(from)) {
-  console.error("site-root: no sebaro-product/web/ (build it with public/sebaro/product/product_kit.py from sebaro.product.json)");
+  console.error(
+    "site-root: no sebaro-product/web/ (build it with public/sebaro/product/product_kit.py from sebaro.product.json)",
+  );
   process.exit(2);
 }
 for (const name of fs.readdirSync(from)) {

@@ -24,9 +24,7 @@
       }
     ]
   },
-  "outputs": [
-    "web"
-  ],
+  "outputs": ["web"],
   "web": {
     "manifest": {
       "id": "/",

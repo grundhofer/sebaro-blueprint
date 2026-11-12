@@ -6,22 +6,36 @@ import { strings } from "../strings.mjs";
 const t = strings.de;
 const s = t.pages.about;
 ---
+
 <Base lang="de" title={s.title} ogId="ueber" nav="about" self="/ueber/" view="ueber">
   <section class="sb-section" aria-labelledby="ueber-h">
-    <h1 class="sb-page-lead__title" id="ueber-h">{s.title}</h1>
+    <h1 class="sb-page-lead__title" id="ueber-h">
+      {s.title}
+    </h1>
     <div class="app-person">
-      <span class="sb-avatar" role="img" aria-label={s.personName}><span aria-hidden="true">{s.initials}</span></span>
+      <span class="sb-avatar" role="img" aria-label={s.personName}>
+        <span aria-hidden="true">{s.initials}</span>
+      </span>
       <p class="sb-type-title">{s.personName}</p>
       <span class="sb-demo-marker">{t.demo}</span>
     </div>
     <div class="app-text">
-      {s.text.map((p) => <p>{p}</p>)}
+      {s.text.map((p) => (
+        <p>{p}</p>
+      ))}
     </div>
   </section>
   <section class="sb-section" aria-labelledby="kurz-h">
-    <h2 class="sb-section__title" id="kurz-h">{s.factsTitle}</h2>
+    <h2 class="sb-section__title" id="kurz-h">
+      {s.factsTitle}
+    </h2>
     <dl class="sb-meta-list">
-      {s.facts.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+      {s.facts.map(([k, v]) => (
+        <div>
+          <dt>{k}</dt>
+          <dd>{v}</dd>
+        </div>
+      ))}
     </dl>
   </section>
 </Base>

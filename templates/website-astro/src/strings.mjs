@@ -48,7 +48,8 @@ export const strings = {
         title: "Apps",
         description: "Die Apps von Alex Beispiel.",
         emptyTitle: "Noch keine App",
-        emptyText: "Sobald die erste App erscheint, steht sie hier mit ihrer Kachel, ihren Plattformen und ihren Fakten.",
+        emptyText:
+          "Sobald die erste App erscheint, steht sie hier mit ihrer Kachel, ihren Plattformen und ihren Fakten.",
       },
       projects: {
         title: "Projekte",
@@ -88,9 +89,26 @@ export const strings = {
         // the code as tokens: [look, text]; looks are the five of TXT-10 (keyword, string, constant, comment, plain)
         code: [
           [["comment", "// eine Zeile je Eintrag, die Werte mit Semikolon getrennt"]],
-          [["keyword", "const"], ["plain", " zeile = (eintrag) => ["], ["plain", "eintrag.datum, eintrag.name, eintrag.menge"], ["plain", "].join("], ["string", "\";\""], ["plain", ");"]],
-          [["keyword", "const"], ["plain", " kopf = "], ["string", "\"datum;name;menge\""], ["plain", ";"]],
-          [["keyword", "const"], ["plain", " maximal = "], ["constant", "10000"], ["plain", ";"]],
+          [
+            ["keyword", "const"],
+            ["plain", " zeile = (eintrag) => ["],
+            ["plain", "eintrag.datum, eintrag.name, eintrag.menge"],
+            ["plain", "].join("],
+            ["string", '";"'],
+            ["plain", ");"],
+          ],
+          [
+            ["keyword", "const"],
+            ["plain", " kopf = "],
+            ["string", '"datum;name;menge"'],
+            ["plain", ";"],
+          ],
+          [
+            ["keyword", "const"],
+            ["plain", " maximal = "],
+            ["constant", "10000"],
+            ["plain", ";"],
+          ],
         ],
         umlaute: [
           "Die Datei ist in UTF-8 gespeichert, damit „Größe“ und „Straße“ so ankommen, wie du sie geschrieben hast." +
@@ -100,7 +118,8 @@ export const strings = {
             '<a class="sb-note-ref" id="fnref-1-2" href="#fn-1" role="doc-noteref" aria-label="Fußnote 1">1</a>',
         ],
         calloutTitle: "Hinweis",
-        calloutText: "Öffnet eine Tabellenkalkulation die Datei in einer einzigen Spalte, wähl beim Öffnen das Semikolon als Trennzeichen.",
+        calloutText:
+          "Öffnet eine Tabellenkalkulation die Datei in einer einzigen Spalte, wähl beim Öffnen das Semikolon als Trennzeichen.",
         offen: [
           "Noch nicht gelöst ist ein Export, der Formeln mitnimmt. Eine CSV-Datei kennt nur Werte; wer Formeln braucht, " +
             "braucht ein anderes Format.",
@@ -161,7 +180,8 @@ export const strings = {
         mail: "example@example.org",
         disputeTitle: "Streitbeilegung",
         dispute: "Ich nehme nicht an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teil.",
-        notice: "Alle Angaben sind erfunden. Was ins Impressum gehört, entscheidet das Recht, nicht diese Vorlage; sie ist keine Rechtsberatung.",
+        notice:
+          "Alle Angaben sind erfunden. Was ins Impressum gehört, entscheidet das Recht, nicht diese Vorlage; sie ist keine Rechtsberatung.",
       },
       privacy: {
         title: "Datenschutz",
@@ -176,8 +196,10 @@ export const strings = {
           ["Wahl „Hell oder Dunkel“ und Farbton", "nur in deinem Browser, nie auf dem Server", "bis du sie löschst"],
         ],
         rightsTitle: "Deine Rechte",
-        rights: "Du kannst fragen, was ich über dich gespeichert habe, und verlangen, dass ich es berichtige oder lösche. Schreib dafür an die Adresse im Impressum.",
-        notice: "Alle Angaben sind erfunden. Was eine Datenschutzerklärung enthalten muss, entscheidet das Recht, nicht diese Vorlage.",
+        rights:
+          "Du kannst fragen, was ich über dich gespeichert habe, und verlangen, dass ich es berichtige oder lösche. Schreib dafür an die Adresse im Impressum.",
+        notice:
+          "Alle Angaben sind erfunden. Was eine Datenschutzerklärung enthalten muss, entscheidet das Recht, nicht diese Vorlage.",
       },
       accessibility: {
         title: "Barrierefreiheit",
@@ -190,19 +212,42 @@ export const strings = {
         checksTitle: "Wie die Seite die Anforderungen erfüllt",
         checksIntro: "Ziel ist WCAG 2.2 Stufe AA. Geprüft wurde:",
         checks: [
-          { state: "passed", word: "bestanden", title: "axe in Chromium auf jeder Seite, hell und dunkel", meta: "bestanden am 20.10.2026 · Eigene Prüfung, automatisch" },
-          { state: "passed", word: "bestanden", title: `Doppelte Schriftgröße bei 320, 390 und 1440${nb}px`, meta: "bestanden am 20.10.2026 · Eigene Prüfung, automatisch" },
-          { state: "skipped", word: "übersprungen", title: "Bildschirmleser auf dem Telefon", meta: "übersprungen am 20.10.2026 · Eigene Prüfung, von Hand", reason: "Grund: Kein Testgerät verfügbar." },
-          { state: "open", word: "offen", title: `Vergrößerung auf 400${nb}%`, meta: "noch nicht gelaufen · Eigene Prüfung, von Hand" },
+          {
+            state: "passed",
+            word: "bestanden",
+            title: "axe in Chromium auf jeder Seite, hell und dunkel",
+            meta: "bestanden am 20.10.2026 · Eigene Prüfung, automatisch",
+          },
+          {
+            state: "passed",
+            word: "bestanden",
+            title: `Doppelte Schriftgröße bei 320, 390 und 1440${nb}px`,
+            meta: "bestanden am 20.10.2026 · Eigene Prüfung, automatisch",
+          },
+          {
+            state: "skipped",
+            word: "übersprungen",
+            title: "Bildschirmleser auf dem Telefon",
+            meta: "übersprungen am 20.10.2026 · Eigene Prüfung, von Hand",
+            reason: "Grund: Kein Testgerät verfügbar.",
+          },
+          {
+            state: "open",
+            word: "offen",
+            title: `Vergrößerung auf 400${nb}%`,
+            meta: "noch nicht gelaufen · Eigene Prüfung, von Hand",
+          },
         ],
         limitsTitle: "Bekannte Einschränkungen",
-        limits: "Mit einem Bildschirmleser auf dem Telefon ist die Seite noch nicht geprüft; ob dort jede Ansage stimmt, ist offen.",
+        limits:
+          "Mit einem Bildschirmleser auf dem Telefon ist die Seite noch nicht geprüft; ob dort jede Ansage stimmt, ist offen.",
         feedbackTitle: "Rückmeldung",
         feedbackPrefix: "Findest du eine Barriere, schreib an ",
         feedbackSuffix: `. Ich antworte innerhalb von 2${nb}Wochen.`,
         mail: "example@example.org",
         authorityTitle: "Zuständige Behörde",
-        authority: "Marktüberwachungsstelle der Länder für die Barrierefreiheit von Produkten und Dienstleistungen (MLBF).",
+        authority:
+          "Marktüberwachungsstelle der Länder für die Barrierefreiheit von Produkten und Dienstleistungen (MLBF).",
         notice: "Alle Angaben sind Beispiele. Eine echte Erklärung nennt nur, was wirklich geprüft wurde.",
       },
       notFound: {
