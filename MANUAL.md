@@ -364,7 +364,8 @@ commit.
 | Target | How to get the files |
 |---|---|
 | Website, web app (plain CSS, Astro, React, Tailwind v4) | copy `docs/sebaro/` into your project as one folder, never edit inside it; wiring in `docs/sebaro/README.md`; check the copy with `node sebaro/checks/verify-export.mjs --strict` |
-| Tauri / macOS / Android (Compose) / iOS (SwiftUI) | with a sebaroDesign checkout: `python3 tools/export_system.py sebaro --target tauri|macos|android|ios --out <dir> --product <id>` then `--verify <dir>` |
+| Tauri, Android (Compose) | the copy of a release, fetched and kept current by `update-copy.mjs` (profile `desktop` or `android`; `AGENTS.md`, step 4); the product's own files come from the kit in the copy, from `sebaro.product.json` |
+| macOS, iOS (SwiftUI) | with a sebaroDesign checkout: `python3 tools/export_system.py sebaro --target macos|ios --out <dir>` then `--verify <dir>`; the export knows no product |
 | Packages (planned, D88) | private GitHub Packages built on a workshop version tag: `@grundhofer/sebaro` (npm, web and Tauri) and a Maven artifact for Android (Compose). Their version follows the token contract, now 1.10 (since 2026-10-25), so `1.10.x`; the first is `1.10.0` (1.9 was never published). The workflow is set up; no package is published yet (the workshop CI is blocked; a self-hosted runner comes later, D95). Until then use the export. |
 
 Fonts are self-hosted (D18, D66, D68, D71): sebaro Sans + sebaro Mono, the only two families, as variable WOFF2 with
