@@ -351,6 +351,10 @@ The report's table lists the rules missed in two or three. Most came from the st
 
 ## 4 Where the system files come from
 
+> Newer than this section: a product gets and updates its copy with `update-copy.mjs` and makes its own files with
+> the kit in the copy ([AGENTS.md](AGENTS.md), step 4). What follows describes this guide's own copy and the older
+> export path.
+
 sebaro's sources (palettes, contracts, generators, gates) live in the workshop repository **sebaroDesign**. This guide
 never edits colours, fonts, icons or brand files by hand. `docs/sebaro/` is a **web export** made with sebaroDesign's
 `tools/export_system.py`; `docs/sebaro/sebaro-export.json` lists every file with sha256, and

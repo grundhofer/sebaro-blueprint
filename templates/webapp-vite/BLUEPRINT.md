@@ -88,7 +88,8 @@ Checked in CI, the build fails above the budget:
 
 - Dependabot once a week for `npm`, minor and patch updates grouped, at most five open pull requests; and for
   `github-actions`. Actions are pinned by commit.
-- The sebaro copy is updated by exporting it again, as one commit of its own.
+- The sebaro copy (profile `webapp`) is updated with `node src/sebaro/checks/update-copy.mjs`, as one commit of
+  its own. Favicons and the manifest come from the kit in the copy (`product/`), from `sebaro.product.json`.
 
 ## Before you say done
 

@@ -35,7 +35,7 @@ UI maps the code to a sentence from the string table.
   `font-src 'self'`, `object-src 'none'`, `connect-src` only the IPC addresses.
 - No outbound connection unless the product is about one. No update check that phones home; a new version is
   announced where the person got the app.
-- Use the copy made for desktop (`--target tauri`): it carries the window parts and `tokens.json`.
+- Use the copy made for desktop (profile `desktop`): it carries the window parts and `tokens.json`.
 
 ## Tests
 
@@ -63,7 +63,8 @@ are not needed at start are loaded with `lazy()`.
 - The installer is unsigned until the product has a signing certificate; the release notes say so.
 - Dependabot once a week for `npm`, `cargo` and `github-actions`, minor and patch grouped. Actions are pinned by
   commit.
-- The sebaro copy is updated by exporting it again, as one commit of its own.
+- The sebaro copy is updated with its `checks/update-copy.mjs`, as one commit of its own. The app icon comes
+  from the kit in the copy (`product/`), from `sebaro.product.json`.
 
 ## Before you say done
 

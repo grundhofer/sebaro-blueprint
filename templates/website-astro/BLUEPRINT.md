@@ -74,7 +74,9 @@ Checked on the built pages, the build fails above the budget:
 
 - Dependabot once a week for `npm`, minor and patch grouped, and for `github-actions`. Actions are pinned by
   commit.
-- The sebaro copy is updated by exporting it again, as one commit of its own; `npm run sebaro:verify` checks it.
+- The sebaro copy (profile `website`) is updated with `node public/sebaro/checks/update-copy.mjs`, as one commit
+  of its own; `npm run sebaro:verify` checks it. Favicons, manifest and the share-image sign come from the kit in
+  the copy (`product/`), from the site's `sebaro.product.json`.
 
 ## Before you say done
 
