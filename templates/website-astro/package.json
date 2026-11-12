@@ -15,7 +15,7 @@
     "dev": "node scripts/site-root.mjs && astro dev",
     "build": "node scripts/site-root.mjs && node scripts/og.mjs && astro build --mode pages --outDir build/pages && node scripts/cut.mjs && astro build && node scripts/budgets.mjs",
     "preview": "astro preview",
-    "test": "npm run sebaro:lint && playwright test"
+    "test": "npm run sebaro:lint && vitest run --dir src && playwright test"
   },
   "dependencies": {
     "astro": "7.3.8"
@@ -23,7 +23,8 @@
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",
     "@playwright/test": "1.63.0",
-    "purgecss": "8.0.0"
+    "purgecss": "8.0.0",
+    "vitest": "5.1.0"
   },
   "overrides": {
     "vite": "8.3.4"
