@@ -241,13 +241,17 @@ def block_head(_attrs: dict) -> str:
         '<script src="sebaro/js/theme-init.js"></script>',
         '<link rel="stylesheet" href="sebaro/fonts/fonts.css">',
         '<link rel="stylesheet" href="sebaro/tokens.css">',
+        # the scopes of the sample products the pages show (tile colours by product id): tokens.css lists no
+        # product any more, the export brings the samples' own stylesheet
+        '<link rel="stylesheet" href="sebaro/demo/products.css">',
         '<link rel="stylesheet" href="sebaro/icons/sprite.css">',
         '<link rel="stylesheet" href="sebaro/css/sebaro.css">',
         '<link rel="stylesheet" href="assets/vendor/demo.css">',
         '<link rel="stylesheet" href="assets/vendor/pages.css">',
         '<link rel="stylesheet" href="assets/guide.css">',
-        '<link rel="icon" href="sebaro/brand/site-root/favicon.ico" sizes="32x32">',
-        '<link rel="icon" href="sebaro/brand/site-root/icon.svg" type="image/svg+xml">',
+        # the guide's own files from the product kit (sebaro.product.json, tools/sync_from_design.py)
+        '<link rel="icon" href="sebaro-product/web/favicon.ico" sizes="32x32">',
+        '<link rel="icon" href="sebaro-product/web/icon.svg" type="image/svg+xml">',
         '<script defer src="sebaro/js/theme-button.js"></script>',
         # D91 Z3a/C4c: the footer choice „Farbton: Kühl · Warm“; W8a: paper is always light (theme-init.js applies a
         # stored tone before first paint)
