@@ -19,7 +19,7 @@ class TemplateExports(unittest.TestCase):
         (src / "css").mkdir(parents=True)
         (src / "css" / "a.css").write_text("a{}")
         (src / "tokens.css").write_text("t")
-        for rel in cs.TEMPLATE_EXPORTS[:3]:
+        for rel in cs.TEMPLATE_EXPORTS[:-1]:
             shutil.copytree(src, self.tmp / rel)
         ios = self.tmp / "templates" / "ios-swiftui" / "SebaroDesign"
         ios.mkdir(parents=True)
@@ -33,13 +33,13 @@ class TemplateExports(unittest.TestCase):
         (self.tmp / cs.TEMPLATE_EXPORTS[1] / "tokens.css").write_text("old")
         errors, _ = cs.template_export_findings(self.tmp)
         self.assertEqual(len(errors), 1)
-        self.assertIn("templates/webapp-vite", errors[0])
+        self.assertIn("templates/desktop-tauri", errors[0])
         self.assertIn("differs: tokens.css", errors[0])
         self.assertIn("npm run sebaro:sync", errors[0])
 
     def test_missing_and_extra_files_fail(self):
         (self.tmp / cs.TEMPLATE_EXPORTS[0] / "css" / "a.css").unlink()
-        (self.tmp / cs.TEMPLATE_EXPORTS[2] / "new.js").write_text("x")
+        (self.tmp / cs.TEMPLATE_EXPORTS[1] / "new.js").write_text("x")
         errors, _ = cs.template_export_findings(self.tmp)
         self.assertEqual(len(errors), 2)
         self.assertIn("missing: css/a.css", errors[0])

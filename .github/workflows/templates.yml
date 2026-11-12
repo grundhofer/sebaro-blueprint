@@ -42,6 +42,7 @@ jobs:
           retention-days: 7
           if-no-files-found: ignore
 
+  # what the starter's own workflow runs (templates/webapp-vite/.github/workflows/ci.yml), from its folder
   webapp-vite:
     runs-on: ubuntu-latest
     defaults:
@@ -49,19 +50,34 @@ jobs:
         working-directory: templates/webapp-vite
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1, pnpm as package.json names it
+        with:
+          package_json_file: templates/webapp-vite/package.json
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: "22"
-          cache: npm
-          cache-dependency-path: templates/webapp-vite/package-lock.json
-      - run: npm ci
-      - name: sebaro export unchanged (verify-export.mjs --strict)
-        run: npm run sebaro:verify
-      - run: npx playwright install --with-deps chromium
-      - name: Build (tsc + vite)
-        run: npm run build
-      - name: Screens (light/dark, 320/390/1440 px, 100/200 % text, axe, overflow, cut text, CSP) and keyboard
-        run: npm test
+          cache: pnpm
+          cache-dependency-path: templates/webapp-vite/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - name: Audit (what the app ships)
+        run: pnpm audit --prod --audit-level=high
+      - name: Lint (ESLint)
+        run: pnpm lint
+      - name: Format (Prettier)
+        run: pnpm format:check
+      - name: Type check (tsc --noEmit)
+        run: pnpm check
+      - name: The sebaro copy is unchanged, the product's files are what its declaration gives
+        run: pnpm sebaro:verify && pnpm sebaro:product
+      - name: Unit tests (Vitest)
+        run: pnpm test
+      - name: Build, with the size budgets
+        run: pnpm build
+      - name: The app's own CSS and the built page keep sebaro's rules (lint-web.sh)
+        run: pnpm sebaro:lint
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: End-to-end tests against the build (Playwright, axe)
+        run: pnpm test:e2e
       - if: ${{ !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
