@@ -19,6 +19,10 @@ Befehle. Die vier Technik-Baupläne beschreiben den neuen Stand: Android bindet 
 `:designsystem` ein, die eigenen Dateien eines Produkts (Icon, Zeichenkachel, Favicons) erzeugt der Baukasten in der
 Kopie aus `sebaro.product.json`, und die Prüfungen kommen aus der Kopie.
 
+Website-Bauplan: Das Stylesheet der Kopie ist allein größer als das CSS-Budget von 90 KB je Seite. Der Build schneidet
+es und das Icon-Sprite deshalb auf das zu, was die Seiten benutzen, mit den zwei Skripten aus dem README der Kopie.
+`purgecss` ist dafür die eine gesetzte Build-Abhängigkeit. Die Startvorlage macht das noch nicht.
+
 Einstieg für Agenten: `AGENTS.md` ist ein kurzer Wegweiser (3 KB statt 59 KB); die frühere Fassung liegt unverändert
 als `MANUAL.md` bereit. Neu sind `design/KERN.md` (31 Kernregeln, vom Inhaber am 11.11.2026 bestätigt; sie nehmen
 D143 bis D146 auf und senken die Barrierefreiheit auf einen Boden), `design/views.md` (die 21 Ansichtstypen aus
