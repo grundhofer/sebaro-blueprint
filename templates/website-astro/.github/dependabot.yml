@@ -1,0 +1,16 @@
+# Dependabot, once a week (BLUEPRINT.md, Build, release, updates): npm with minor and patch updates in one pull
+# request, and the actions of the workflows, which are pinned by commit. The sebaro copy is not a package: the weekly
+# run of the ci workflow says when a newer release exists.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
