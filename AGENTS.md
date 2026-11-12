@@ -24,7 +24,18 @@ Read in this order and stop when you have what the task needs.
    with where the starter itself still differs; do not copy those parts. iOS has no blueprint.
 4. The sebaro copy inside the product, the folder with `sebaro-export.json`: parts, tokens, fonts, icons. Its README
    says how it is wired; search it by name (`Sb…` in Kotlin, `sb-…` in CSS). Some parts leave one choice to you:
-   [`design/parts.md`](design/parts.md) has a line for each of them. Never edit the copy. How a product gets and updates it: [MANUAL.md](MANUAL.md) §4.
+   [`design/parts.md`](design/parts.md) has a line for each of them. Never edit the copy. Get it and keep it
+   current with its updater (Node 20 or newer, nothing else):
+
+   ```sh
+   curl -fsSLO https://github.com/grundhofer/sebaro-guide/releases/latest/download/update-copy.mjs
+   node update-copy.mjs --profile android --out sebaro   # or website, webapp, desktop; --packs a,b adds packs
+   node sebaro/checks/update-copy.mjs                    # later: the newest release, same profile and packs
+   ```
+
+   A copy holds the core of its product kind; its README lists the packs. The product's own files (launcher
+   icon, sign tile, favicons) are made by the kit in the copy from a `sebaro.product.json`
+   (`sebaro/product/PRODUCT-CONTRACT.md`).
 
 In short (core rules 1 to 3): use what the copy has, build what is missing beside the copy, record gaps and
 deviations in the product.

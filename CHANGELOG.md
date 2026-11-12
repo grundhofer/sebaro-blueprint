@@ -11,6 +11,14 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+Kopien ohne Werkstatt: Ein Produkt holt seine sebaro-Kopie und hält sie aktuell mit `update-copy.mjs` (Node 20,
+keine weiteren Werkzeuge). Die Kopien je Produktart (`website`, `webapp`, `desktop`, `android`) hängen als Dateien an
+einer Veröffentlichung dieses Repositories; `.github/workflows/copies-release.yml` legt sie als Entwurf an, sobald die
+Werkstatt den Zweig `copies/<Version>` schiebt, veröffentlicht wird von Hand. `AGENTS.md` (Schritt 4) nennt die drei
+Befehle. Die vier Technik-Baupläne beschreiben den neuen Stand: Android bindet die Kopie als eigenes Modul
+`:designsystem` ein, die eigenen Dateien eines Produkts (Icon, Zeichenkachel, Favicons) erzeugt der Baukasten in der
+Kopie aus `sebaro.product.json`, und die Prüfungen kommen aus der Kopie.
+
 Einstieg für Agenten: `AGENTS.md` ist ein kurzer Wegweiser (3 KB statt 59 KB); die frühere Fassung liegt unverändert
 als `MANUAL.md` bereit. Neu sind `design/KERN.md` (31 Kernregeln, vom Inhaber am 11.11.2026 bestätigt; sie nehmen
 D143 bis D146 auf und senken die Barrierefreiheit auf einen Boden), `design/views.md` (die 21 Ansichtstypen aus

@@ -6,7 +6,8 @@ differ, the blueprint wins (last section).
 
 ## Stack
 
-- One module `:app`, one activity, package `de.sebaro_ventures.<app>`. Kotlin, Jetpack Compose, minSdk 29,
+- One app module `:app` (plus `:designsystem` for the sebaro copy), one activity, package
+  `de.sebaro_ventures.<app>`. Kotlin, Jetpack Compose, minSdk 29,
   Java 21. The versions are those of this starter's `gradle/libs.versions.toml`; every app keeps the same ones.
 - Use without asking: AndroidX core, activity-compose, lifecycle, the Compose BOM, kotlinx-coroutines, Room with
   KSP, DataStore, WorkManager (only for work that must run in the background). Tests: JUnit 4, Robolectric,
@@ -69,20 +70,36 @@ fallback, German in `values-de/`.
 
 ## Design system
 
-The sebaro copy is the folder `sebaro/` at the project root. Never edit it. It is not a module; `:app` adds it as
-extra source directories:
+The sebaro copy is the folder `sebaro/` at the project root: profile `android`, the same files in every app, with
+only the packs the app uses. Never edit it. It is its own library module, `:designsystem`:
 
 ```kotlin
-val sebaro = rootProject.layout.projectDirectory.dir("sebaro")
-androidComponents {
-    onVariants { variant ->
-        variant.sources.kotlin?.addStaticSourceDirectory(sebaro.dir("kotlin").asFile.path)
-        variant.sources.res?.addStaticSourceDirectory(sebaro.dir("res").asFile.path)
-    }
+// designsystem/build.gradle.kts; :app has implementation(project(":designsystem"))
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.compose)
+    id("sebaro.android.designsystem")   // namespace, Compose, the sources sebaro/kotlin and sebaro/res
+}
+android {
+    compileSdk = libs.versions.compileSdk.get().toInt()
+    defaultConfig { minSdk = libs.versions.minSdk.get().toInt() }
+}
+dependencies {
+    api(platform(libs.compose.bom))
+    api(libs.compose.material3)
+    implementation(libs.androidx.activity.compose)
 }
 ```
 
-Every screen is rooted in `SebaroAppTheme` and built with `SbScreen` and the `Sb*` parts.
+The app's own sebaro files (launcher icon, notification icon, sign tile, start symbol, the constant `AppProduct`)
+are generated from `sebaro.product.json` into `sebaro-product/`; `sebaro.android.app` adds that folder to `:app`:
+
+```sh
+python3 sebaro/product/product_kit.py build sebaro.product.json --copy sebaro --out sebaro-product
+```
+
+Every screen is rooted in `SebaroAppTheme` and built with `SbScreen` and the `Sb*` parts. When you move an app
+from an older copy, read the first section of the copy's README: three old calls compile and go wrong.
 
 ## Tests
 
@@ -107,7 +124,7 @@ Three workflows run on the family's own runner (`vars.SEBARO_RUNNER`):
 
 | Workflow | When | What |
 |---|---|---|
-| `ci` | every push and pull request | debug build, tests, lint, detekt, ktlint, release build and bundle; fails if the release asks for INTERNET |
+| `ci` | every push and pull request | the copy's three checks (below), debug build, tests, lint, detekt, ktlint, release build and bundle; fails if the release asks for INTERNET |
 | `release` | by hand, default branch | tests and checks, signed bundle to the internal track, tag |
 | `promote` | by hand | internal track to production, or change the roll-out, without rebuilding |
 
@@ -117,8 +134,9 @@ A release to production always needs the owner's OK.
 
 - Dependabot checks `gradle` (the version catalog) and `github-actions` once a week; minor and patch updates come
   as one grouped pull request.
-- The sebaro copy and `build-logic/` are updated by exporting them again, never by hand. Each has a manifest
-  (`sebaro-export.json`, `sebaro-build-export.json`) and a `--verify` that fails on a hand edit.
+- The sebaro copy is updated with `node sebaro/checks/update-copy.mjs`, `build-logic/` by exporting it again;
+  neither by hand. Each has a manifest (`sebaro-export.json`, `sebaro-build-export.json`) and a check that fails
+  on a hand edit.
 
 ## Size and speed
 
@@ -136,13 +154,20 @@ A release to production always needs the owner's OK.
 ./gradlew :app:check                         # lint, detekt, ktlint
 ```
 
-Then verify the sebaro copy and `build-logic/` with their `--verify`, and say what you could not check.
+Then the copy's three checks, and say what you could not check:
+
+```sh
+node sebaro/checks/verify-export.mjs sebaro --strict     # the copy is unchanged
+sh sebaro/checks/lint-android.sh app/src                 # sebaro's rules; silence means none is broken
+python3 sebaro/product/product_kit.py check sebaro.product.json --copy sebaro --out sebaro-product --no-raster
+```
 
 ## Where this starter still differs
 
 Until the starter is rebuilt from this blueprint, do not copy these parts of it:
 
-- It takes sebaro from a private Maven package instead of the copy in `sebaro/`.
+- It takes sebaro from a private Maven package instead of the copy in `sebaro/` with its module and product
+  files.
 - It has no `AppContainer`, no ViewModels and a flat package; it stores data in `SharedPreferences` and a JSON
   file.
 - minSdk 24 with desugaring and Java 17 instead of minSdk 29 and Java 21.
