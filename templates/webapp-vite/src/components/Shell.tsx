@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useRef, type MouseEvent } from "react";
+import { Suspense, useLayoutEffect, useRef, type MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, Outlet, useLocation } from "react-router";
 import { LANGUAGES } from "../i18n";
@@ -23,8 +23,9 @@ export function Shell() {
   const shown = useRef(pathname);
 
   // a new view: its heading takes the focus, so keyboard and screen reader start where the content starts. Not on
-  // the first load, where the focus belongs to the browser.
-  useEffect(() => {
+  // the first load, where the focus belongs to the browser. A layout effect: the focus moves in the same step in
+  // which the heading appears, not a moment after it.
+  useLayoutEffect(() => {
     if (shown.current === pathname) return;
     shown.current = pathname;
     main.current?.querySelector("h1")?.focus();
