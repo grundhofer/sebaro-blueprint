@@ -23,7 +23,15 @@ Kopie aus `sebaro.product.json`, und die Prüfungen kommen aus der Kopie.
 
 Website-Bauplan: Das Stylesheet der Kopie ist allein größer als das CSS-Budget von 90 KB je Seite. Der Build schneidet
 es und das Icon-Sprite deshalb auf das zu, was die Seiten benutzen, mit den zwei Skripten aus dem README der Kopie.
-`purgecss` ist dafür die eine gesetzte Build-Abhängigkeit. Die Startvorlage macht das noch nicht.
+`purgecss` ist dafür die eine gesetzte Build-Abhängigkeit.
+
+Website-Startvorlage auf dem Stand ihres Bauplans: Sie ist jetzt ein Produkt wie jedes andere und hält die Kopie aus dem
+öffentlichen Release (Profil `website`, aktuell gehalten mit `update-copy.mjs`) statt eines Spiegels von `docs/sebaro/`;
+Favicons, Manifest und das Zeichen der Teilbilder kommen aus dem Baukasten der Kopie. Der Build schneidet Stylesheet und
+Icon-Sprite auf die Seiten zu (CSS je Seite 87,7 KB statt 421 KB) und prüft die Budgets des Bauplans. Neu sind
+Typprüfung (`astro check`), ESLint, Prettier, Vitest für `src/lib/`, ein `ci`-Workflow und eine Dependabot-Datei in der
+Vorlage; Code in Artikeln wird über Klassen eingefärbt. Einen `deploy`-Workflow bringt die Vorlage nicht mit, der Host
+ist Sache des Produkts.
 
 Abgleich ohne Produkt: Die Werkstatt führt keine Produktliste mehr, ihr Web-Export für diese Seite kennt kein Produkt.
 Der Guide erklärt sich deshalb selbst wie jedes Produkt (`sebaro.product.json` an der Wurzel, die Dachmarke), und der

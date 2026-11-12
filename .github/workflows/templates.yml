@@ -4,6 +4,8 @@
 # with 0 violations, no sideways scroll, no cut text, no console or Content-Security-Policy error; keyboard paths).
 # The desktop job also builds the Tauri app on Linux (debug, no bundle). Screenshots of every run are uploaded.
 # Each template's copy of the export is a snapshot: a guide sync does not touch it; update it with npm run sebaro:sync.
+# The website starter is a product like any other: it holds the copy of the public release (update-copy.mjs) and its
+# job also runs the type check, the lint and the budgets of its blueprint.
 name: templates
 on:
   push:
