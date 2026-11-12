@@ -1,6 +1,6 @@
-// format.ts: numbers, money, dates and times by the page's language (TXT-04, TXT-12, TEC-10). Everything goes through
-// Intl, then one rule: between a number and its unit stands U+00A0, never U+202F or U+2009 (some Intl outputs use those).
-import type { Lang } from "./strings";
+// format.ts: numbers, money, dates and times by the page's language. Everything goes through Intl, then one rule:
+// between a number and its unit stands U+00A0, never U+202F or U+2009 (some Intl outputs use those).
+import type { Lang } from "../i18n";
 
 const NBSP = "\u00a0";
 const clean = (s: string) => s.replace(/[\u202f\u2009]/g, NBSP);
@@ -8,7 +8,8 @@ const loc = (lang: Lang) => (lang === "de" ? "de-DE" : "en-GB");
 
 /** 10.000 (de) / 10,000 (en); digits = fixed fraction digits */
 export function num(lang: Lang, n: number, digits?: number): string {
-  const opts: Intl.NumberFormatOptions = digits === undefined ? {} : { minimumFractionDigits: digits, maximumFractionDigits: digits };
+  const opts: Intl.NumberFormatOptions =
+    digits === undefined ? {} : { minimumFractionDigits: digits, maximumFractionDigits: digits };
   return clean(new Intl.NumberFormat(loc(lang), opts).format(n));
 }
 
@@ -27,14 +28,11 @@ export function unit(lang: Lang, n: number, word: string, digits?: number): stri
   return `${num(lang, n, digits)}${NBSP}${word}`;
 }
 
-function parseDate(iso: string): Date {
-  const [y, m, d] = iso.slice(0, 10).split("-").map(Number);
-  const date = new Date(y, m - 1, d);
-  if (iso.length > 10) {
-    const [hh, mm] = iso.slice(11, 16).split(":").map(Number);
-    date.setHours(hh, mm);
-  }
-  return date;
+/** "2026-10-10" or "2026-10-10T08:12" as a local date */
+export function parseDate(iso: string): Date {
+  const [y = 0, m = 1, d = 1] = iso.slice(0, 10).split("-").map(Number);
+  const [hh = 0, mm = 0] = iso.slice(11, 16).split(":").map(Number);
+  return new Date(y, m - 1, d, hh, mm);
 }
 
 /** 10.10.2026 (de) / 2026-10-10 (en), as the guide's data page writes them */
@@ -53,12 +51,21 @@ export function dayMonth(lang: Lang, iso: string): string {
 
 /** Samstag, 10. Oktober (de) / Saturday 10 October (en) */
 export function dateLong(lang: Lang, iso: string): string {
-  return clean(new Intl.DateTimeFormat(loc(lang), { weekday: "long", day: "numeric", month: "long" }).format(parseDate(iso)));
+  return clean(
+    new Intl.DateTimeFormat(loc(lang), { weekday: "long", day: "numeric", month: "long" }).format(parseDate(iso)),
+  );
 }
 
-/** 08:12, always 24 hours (TXT-04) */
+/** Oktober 2026 (de) / October 2026 (en) */
+export function monthYear(lang: Lang, iso: string): string {
+  return clean(new Intl.DateTimeFormat(loc(lang), { month: "long", year: "numeric" }).format(parseDate(iso)));
+}
+
+/** 08:12, always 24 hours */
 export function time(lang: Lang, iso: string): string {
-  return clean(new Intl.DateTimeFormat(loc(lang), { hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(parseDate(iso)));
+  return clean(
+    new Intl.DateTimeFormat(loc(lang), { hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(parseDate(iso)),
+  );
 }
 
 /** weekday: long „Samstag“ or the two letters of chart axes and calendar heads „Sa“ */
