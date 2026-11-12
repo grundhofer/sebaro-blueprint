@@ -1,8 +1,8 @@
 /* generated — do not edit.
- * sebaroDesign token contract 1.14 · draft "sebaro" · palette "sebaro"
- * source: systems/sebaro/tokens/tokens.json (sha256 1ce6b8c317aefd2e)
- *         palettes/sebaro.json (sha256 17200a17be172cdd)
- * builder: tools/build_tokens.py 1.14.0 · spec: shared/TOKEN-CONTRACT.md
+ * sebaroDesign token contract 2.0 · draft "sebaro" · palette "sebaro"
+ * source: systems/sebaro/tokens/tokens.json (sha256 53db12e3599cdbf6)
+ *         palettes/sebaro.json (sha256 371d475a0f24873d)
+ * builder: tools/build_tokens.py 2.0.0 · spec: shared/TOKEN-CONTRACT.md
  */
 
 /* 1. Mode-independent tokens. */
@@ -824,31 +824,6 @@
 [data-sb-tile="system"] {
   --sb-product-tile: var(--sb-tile-system);
   --sb-product-glyph: var(--sb-tile-system-glyph);
-}
-[data-sb-product="studio"] {
-  --sb-product-tile: var(--sb-tile-studio);
-  --sb-product-glyph: var(--sb-tile-studio-glyph);
-}
-[data-sb-product="retrobeam"],
-[data-sb-product="novalis"] {
-  --sb-product-tile: var(--sb-tile-collaboration);
-  --sb-product-glyph: var(--sb-tile-collaboration-glyph);
-}
-[data-sb-product="tagwerk"],
-[data-sb-product="habittracker"],
-[data-sb-product="intervaltimer"],
-[data-sb-product="waterreminder"] {
-  --sb-product-tile: var(--sb-tile-everyday);
-  --sb-product-glyph: var(--sb-tile-everyday-glyph);
-}
-[data-sb-product="coden"] {
-  --sb-product-tile: var(--sb-tile-learning);
-  --sb-product-glyph: var(--sb-tile-learning-glyph);
-}
-[data-sb-product="compass"],
-[data-sb-product="tally"] {
-  --sb-product-tile: var(--sb-tile-tools);
-  --sb-product-glyph: var(--sb-tile-tools-glyph);
 }
 
 :root {
