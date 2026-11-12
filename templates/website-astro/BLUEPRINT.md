@@ -10,7 +10,8 @@ blueprint wins (last section).
   `astro check`.
 - No client framework. A page is HTML and CSS; script only where a part needs it.
 - No CSS framework: sebaro's layout parts (`sb-stack`, `sb-cluster`, the grid) space the page.
-- Any further dependency needs the owner's OK and one line with the reason in the project's docs.
+- One build dependency is set: `purgecss`, for the cut under *Size and speed*. Any further dependency needs the
+  owner's OK and one line with the reason in the project's docs.
 
 ## Structure
 
@@ -65,6 +66,11 @@ Checked on the built pages, the build fails above the budget:
 - HTML per page: 100 KB.
 - Inline script on the start page: 1.5 KB. Other scripts come from a fixed list.
 
+The copy's stylesheet alone is larger than the CSS budget, whatever its packs. The build cuts it and the icon
+sprite to what the pages use, with the two scripts the copy's README gives (*Cut the stylesheet to what the pages
+use*: `cut-css.mjs`, `cut-icons.mjs`). The cut file is loaded in place of `tokens.css` and `css/sebaro.css`. The
+copy lists what its scripts set at run time, so the site keeps no list of sebaro names of its own.
+
 ## Build, release, updates
 
 | Workflow | When | What |
@@ -91,7 +97,8 @@ Then look at every changed page in light and dark, on the phone and wide, and sa
 
 Until the starter is brought up to this blueprint, mind these gaps:
 
-- It has no type check, no lint, no unit tests, no size budget and no Dependabot file.
+- It has no type check, no lint, no unit tests, no size budget and no Dependabot file, and it does not cut the
+  stylesheet.
 - It has no deploy workflow.
 - Code highlighting is switched off, because the highlighter's inline styles break the strict
   Content-Security-Policy.
