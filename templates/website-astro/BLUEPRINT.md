@@ -95,13 +95,11 @@ Then look at every changed page in light and dark, on the phone and wide, and sa
 
 ## Where this starter still differs
 
-Until the starter is brought up to this blueprint, mind these gaps:
+- It has no `deploy` workflow: the host is the product's choice. The product adds the workflow and, where its host
+  allows it, sends the Content-Security-Policy as a header in place of the `<meta>` tag.
+- Its strings module and `src/lib/` are plain JavaScript (`.mjs`), so the build scripts read them with Node alone:
+  `astro check` reads their types and does not check them.
+- It has no `src/components/` and no `src/content/`: header and footer stand in the one layout, every text in the
+  strings module.
 
-- It has no type check, no lint, no unit tests, no size budget and no Dependabot file, and it does not cut the
-  stylesheet.
-- It has no deploy workflow.
-- Code highlighting is switched off, because the highlighter's inline styles break the strict
-  Content-Security-Policy.
-
-What the starter already does and the blueprint keeps: static Astro pages, the load order, the strict
-Content-Security-Policy, one share image per page, Playwright with axe on every page.
+Everything else in the starter follows this blueprint.
