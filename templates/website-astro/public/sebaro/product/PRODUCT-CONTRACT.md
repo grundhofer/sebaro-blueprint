@@ -166,13 +166,11 @@ All paths are relative to `--out`. Every file below is text and is produced with
   Kotlin sources. **Splash (Android 12+):** an app that shows the sebaro start names `Theme.Sebaro.Start` in its
   manifest (spec/03 of the system) and gets the bare sign on its group's tile colour; `sebaro_splash.xml` is the
   ground of an app that keeps the platform's own splash with the adaptive launcher icon (BRAND-ASSETS section 2).
-- **The start files were the target's.** Until export 1.30.0 `tools/export_system.py --target android --product
-  <id>` wrote the same five files for a listed product, from `brand/inline/sign-<id>.svg`. The kit's were those
-  bytes, except the tool the head of the two drawables names; the three values files had no head in either
-  (`test_product_kit` `Golden`, all 17 products, compared a last time before the system stopped listing products:
-  sebaro CHECKS.md §123). Now the kit is their one writer. The symbol's name is the one `SbStartSymbol.kt` of the
-  copy looks up (`sb_symbol_` + the id with `_` for `-`) and the copy's `res/raw/sebaro_symbols_keep.xml` keeps
-  under resource shrinking (`@drawable/sb_symbol_*`);
+- **The start files are the target's.** `tools/export_system.py --target android --product <id>` writes the same five
+  files for a listed product, from `brand/inline/sign-<id>.svg`. The kit's are those bytes, except the tool the head
+  of the two drawables names; the three values files have no head in either (`test_product_kit` `Golden`, all 17
+  products). The symbol's name is the one `SbStartSymbol.kt` of the copy looks up (`sb_symbol_` + the id with `_`
+  for `-`) and the copy's `res/raw/sebaro_symbols_keep.xml` keeps under resource shrinking (`@drawable/sb_symbol_*`);
   the splash symbol is named by the theme.
 - `web/` goes to the site root as it is. The README of a web copy has a table of every file with where a static
   site and an app built by a bundler serve or import it, and the icon step of a desktop app.

@@ -15,7 +15,8 @@ Starting points for new sebaro projects. Copy, then adapt; nothing here is loade
 | [`desktop-tauri/`](desktop-tauri/README.md) | runnable Tauri 2 desktop app: window frame, sidebar with the „Einstellungen“ foot, document tabs, inspector, „Menü“, ⌘K palette, the 15 fixed shortcuts, slim settings, window density |
 
 The three starters are complete small projects: each carries an unchanged copy of the web export in `public/sebaro/`
-(copied by `npm run sebaro:sync`, checked by `npm run sebaro:verify`, i.e. `verify-export.mjs --strict`), keeps every
+(copied by `npm run sebaro:sync`, checked by `npm run sebaro:verify`, i.e. `verify-export.mjs --strict`; the website
+starter holds the copy of the public release instead, profile `website`, kept current with `update-copy.mjs`), keeps every
 word in one strings module, uses only `sb-*` classes of the export plus its own `app-*` classes with `var(--sb-*)`
 tokens, runs under a strict Content-Security-Policy and has Playwright tests (Chromium) for every screen in light and
 dark at 100 % and, at the widest width, real 200 % text with axe. CI: `.github/workflows/templates.yml`. Names and content are invented
@@ -25,8 +26,8 @@ dark at 100 % and, at the widest width, real 200 % text with axe. CI: `.github/w
 
 1. **Pick the product id** and its tile group (studio, collaboration, everyday, learning, tools, media, money, system).
    A new product needs its sign drawn and checked in sebaroDesign first (rules ZEI-*).
-2. **Start from a starter or get the system files**: copy `website-astro/`, `webapp-vite/` or `desktop-tauri/` and run
-   `npm run sebaro:sync -- --from <docs/sebaro of a guide checkout>` there; else web → copy `docs/sebaro/` of this
+2. **Start from a starter or get the system files**: copy `website-astro/` (it brings its copy of the release), or
+   `webapp-vite/` or `desktop-tauri/` and run `npm run sebaro:sync -- --from <docs/sebaro of a guide checkout>` there; else web → copy `docs/sebaro/` of this
    repo into the project (e.g. `public/sebaro/`), check it with `node public/sebaro/checks/verify-export.mjs
    public/sebaro --strict`; Android → copy `android-compose/`, which takes sebaro from the Maven package `sebaro-compose`
    (read access needed, see its README); iOS → copy `ios-swiftui/`, which carries the iOS export as a local Swift

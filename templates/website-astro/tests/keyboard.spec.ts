@@ -11,7 +11,9 @@ test("the skip link comes first and leads to the content", async ({ page }) => {
   await expect(page).toHaveURL(/#inhalt$/);
 });
 
-test("„Hell oder Dunkel“ switches by keyboard, is announced and kept, twice returns to the system", async ({ page }) => {
+test("„Hell oder Dunkel“ switches by keyboard, is announced and kept, twice returns to the system", async ({
+  page,
+}) => {
   await page.emulateMedia({ colorScheme: "light" });
   await page.goto("/");
   const button = page.locator(".sb-theme-button");
@@ -75,7 +77,9 @@ test("narrow: a footnote number opens the popover, Escape closes it and focus re
 
 test("no request leaves the site (HAL-09)", async ({ page }) => {
   const foreign: string[] = [];
-  page.on("request", (r) => { if (!r.url().startsWith("http://127.0.0.1")) foreign.push(r.url()); });
+  page.on("request", (r) => {
+    if (!r.url().startsWith("http://127.0.0.1")) foreign.push(r.url());
+  });
   for (const path of ["/", "/en/", "/projekte/liste-als-csv/", "/kontakt/"]) await page.goto(path);
   expect(foreign).toEqual([]);
 });

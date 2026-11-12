@@ -40,9 +40,8 @@ Groups
          the images were rendered (render again: node tools/og.mjs, then tools/build.py)
   TERM   retired names do not appear in pages, fragments, rules or docs (D71: only "sebaro Sans" and "sebaro Mono");
          the font licence files in docs/sebaro/ keep the authors' copyright as the OFL requires, and so do the copies of
-         the export in the starter templates (the exact paths of TEMPLATE_EXPORTS and TEMPLATE_PROFILE_COPIES, not
-         scanned; see template_files())
-  TPLEXP each web export copy in the starter templates (the public/sebaro/ folders of TEMPLATE_EXPORTS) has the
+         the export in the starter templates (the exact paths of TEMPLATE_EXPORTS, not scanned; see template_files())
+  TPLEXP each web export copy in the starter templates (the public/sebaro/ folders of TEMPLATE_MIRRORS) has the
          same file list and byte-identical files as docs/sebaro/ (only dotfiles, which the template's sebaro-sync.mjs
          never copies, are ignored); the error names the template, the first differing files and its sync command.
          Warning: the iOS template's SebaroDesign/sebaro-export.json names another sebaroDesign commit than
@@ -85,11 +84,11 @@ VAR_SB = re.compile(r"var\(\s*(--sb-[A-Za-z0-9_-]*[A-Za-z0-9_])(?![-*…A-Za-z0-
 
 
 # the only copies of the web export in templates/, each a verified snapshot (npm run sebaro:verify checks it)
-TEMPLATE_EXPORTS = ("templates/website-astro/public/sebaro/", "templates/desktop-tauri/public/sebaro/",
-                    "templates/ios-swiftui/SebaroDesign/")
-# the profile copies a starter took from a public release like any product: not mirrored from docs/sebaro/, so not
-# compared with it (the starter's own verify-export.mjs --strict checks its copy)
-TEMPLATE_PROFILE_COPIES = ("templates/webapp-vite/src/sebaro/",)
+TEMPLATE_EXPORTS = ("templates/website-astro/public/sebaro/", "templates/webapp-vite/src/sebaro/",
+                    "templates/desktop-tauri/public/sebaro/", "templates/ios-swiftui/SebaroDesign/")
+# those of them that mirror docs/sebaro/ (TPLEXP); the website and web app starters hold the copy of the public
+# release instead
+TEMPLATE_MIRRORS = ("templates/desktop-tauri/public/sebaro/",)
 
 
 def export_diff(src: Path, dst: Path) -> list[str]:
@@ -109,7 +108,7 @@ def template_export_findings(root: Path = ROOT) -> tuple[list[str], list[str]]:
     """(errors, warnings) of the TPLEXP group: stale web export copies in the templates, a stale iOS export commit."""
     errors: list[str] = []
     warnings: list[str] = []
-    for rel in TEMPLATE_EXPORTS[:-1]:
+    for rel in TEMPLATE_MIRRORS:
         tpl = rel.split("/")[1]
         diff = export_diff(root / "docs" / "sebaro", root / rel)
         if diff:
@@ -131,14 +130,13 @@ def template_export_findings(root: Path = ROOT) -> tuple[list[str], list[str]]:
 def template_files() -> list[Path]:
     """Files of templates/ for TERM: what git tracks there plus new files git does not ignore (`git ls-files
     --cached --others --exclude-standard`), so what a template's install, build or tests write (git-ignored there)
-    is left out by the template's own .gitignore, never by a folder name. Left out besides: the exact copies
-    of the export in TEMPLATE_EXPORTS and TEMPLATE_PROFILE_COPIES (their font licence keeps the authors' copyright as
-    the OFL requires, like docs/sebaro/, and checks/verify-export.mjs --strict checks each against its record)."""
+    is left out by the template's own .gitignore, never by a folder name. Left out besides: the three exact copies
+    of the web export in TEMPLATE_EXPORTS (their font licence keeps the authors' copyright as the OFL requires, like
+    docs/sebaro/, and checks/verify-export.mjs --strict checks each against its record)."""
     listed = subprocess.run(["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard", "--", "templates"],
                             cwd=ROOT, capture_output=True, check=True).stdout.decode("utf-8").split("\0")
     return [ROOT / f for f in sorted(listed)
-            if f and "." in Path(f).name and not f.startswith(TEMPLATE_EXPORTS + TEMPLATE_PROFILE_COPIES)
-            and (ROOT / f).is_file()]
+            if f and "." in Path(f).name and not f.startswith(TEMPLATE_EXPORTS) and (ROOT / f).is_file()]
 
 
 def is_dont_scoped(prelude: str) -> bool:

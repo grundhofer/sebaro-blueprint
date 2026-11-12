@@ -13,11 +13,29 @@ const openFootnotePopover = async (page: Page) => {
 const narrow = (width: number, scale: number) => width < 64 * 16 * scale;
 
 checkScreens([
-  { name: "start", path: "/", heading: "Kleine Werkzeuge, ruhig gebaut.", view: '[data-sb-view="start"]', overlay: null },
-  { name: "start-en", path: "/en/", heading: "Small tools, built calmly.", view: '[data-sb-view="start-en"]', overlay: null },
+  {
+    name: "start",
+    path: "/",
+    heading: "Kleine Werkzeuge, ruhig gebaut.",
+    view: '[data-sb-view="start"]',
+    overlay: null,
+  },
+  {
+    name: "start-en",
+    path: "/en/",
+    heading: "Small tools, built calmly.",
+    view: '[data-sb-view="start-en"]',
+    overlay: null,
+  },
   { name: "apps", path: "/apps/", heading: "Apps", view: '[data-sb-view="apps"]', overlay: null },
   { name: "projekte", path: "/projekte/", heading: "Projekte", view: '[data-sb-view="projekte"]', overlay: null },
-  { name: "artikel", path: "/projekte/liste-als-csv/", heading: "Eine Liste als CSV-Datei sichern", view: '[data-sb-view="artikel"]', overlay: null },
+  {
+    name: "artikel",
+    path: "/projekte/liste-als-csv/",
+    heading: "Eine Liste als CSV-Datei sichern",
+    view: '[data-sb-view="artikel"]',
+    overlay: null,
+  },
   {
     name: "artikel-fussnote",
     path: "/projekte/liste-als-csv/",
@@ -26,14 +44,40 @@ checkScreens([
     overlay: (width, scale) => (narrow(width, scale) ? "sb-note-popover" : null),
     prepare: async (page) => {
       await openFootnotePopover(page);
-      if (!(await page.evaluate(() => matchMedia("(max-width: 63.99rem)").matches))) await expect(page).toHaveURL(/#fn-1$/);
+      if (!(await page.evaluate(() => matchMedia("(max-width: 63.99rem)").matches)))
+        await expect(page).toHaveURL(/#fn-1$/);
     },
   },
   { name: "ueber", path: "/ueber/", heading: "Über", view: '[data-sb-view="ueber"]', overlay: null },
   { name: "kontakt", path: "/kontakt/", heading: "Kontakt", view: '[data-sb-view="kontakt"]', overlay: null },
-  { name: "impressum", path: "/impressum/", heading: "Impressum Beispieldaten", view: '[data-sb-view="impressum"]', overlay: null },
-  { name: "datenschutz", path: "/datenschutz/", heading: "Datenschutz Beispieldaten", view: '[data-sb-view="datenschutz"]', overlay: null },
-  { name: "barrierefreiheit", path: "/barrierefreiheit/", heading: "Barrierefreiheit Beispieldaten", view: '[data-sb-view="barrierefreiheit"]', overlay: null },
+  {
+    name: "impressum",
+    path: "/impressum/",
+    heading: "Impressum Beispieldaten",
+    view: '[data-sb-view="impressum"]',
+    overlay: null,
+  },
+  {
+    name: "datenschutz",
+    path: "/datenschutz/",
+    heading: "Datenschutz Beispieldaten",
+    view: '[data-sb-view="datenschutz"]',
+    overlay: null,
+  },
+  {
+    name: "barrierefreiheit",
+    path: "/barrierefreiheit/",
+    heading: "Barrierefreiheit Beispieldaten",
+    view: '[data-sb-view="barrierefreiheit"]',
+    overlay: null,
+  },
   // an address that does not exist: the server answers 404 with the site's own page
-  { name: "404", path: "/gibt-es-nicht/", status: 404, heading: "Diese Seite gibt es nicht", view: '[data-sb-view="nicht-gefunden"]', overlay: null },
+  {
+    name: "404",
+    path: "/gibt-es-nicht/",
+    status: 404,
+    heading: "Diese Seite gibt es nicht",
+    view: '[data-sb-view="nicht-gefunden"]',
+    overlay: null,
+  },
 ]);

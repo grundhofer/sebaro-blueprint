@@ -79,11 +79,16 @@ export function collectCut() {
   };
   const range = document.createRange();
   const tw = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-  for (let n: Node | null; (n = tw.nextNode()); ) {
+  for (let n: Node | null; (n = tw.nextNode());) {
     const textNode = n as Text;
     if (!textNode.data.trim()) continue;
     const el = textNode.parentElement;
-    if (!el || el.closest("script, style, template, noscript, select") || !el.checkVisibility({ visibilityProperty: true })) continue;
+    if (
+      !el ||
+      el.closest("script, style, template, noscript, select") ||
+      !el.checkVisibility({ visibilityProperty: true })
+    )
+      continue;
     range.selectNodeContents(textNode);
     const rects = [...range.getClientRects()].filter((r) => r.width > 0.5 && r.height > 0.5);
     if (!rects.length) continue;
@@ -91,19 +96,28 @@ export function collectCut() {
     let ys = rects.map((rc) => [rc.top, rc.bottom]);
     for (let a: Element | null = el; a && a !== document.documentElement; a = a.parentElement) {
       const cs = getComputedStyle(a);
-      const sx = /auto|scroll/.test(cs.overflowX), sy = /auto|scroll/.test(cs.overflowY);
-      const hx = /hidden|clip/.test(cs.overflowX), hy = /hidden|clip/.test(cs.overflowY);
+      const sx = /auto|scroll/.test(cs.overflowX),
+        sy = /auto|scroll/.test(cs.overflowY);
+      const hx = /hidden|clip/.test(cs.overflowX),
+        hy = /hidden|clip/.test(cs.overflowY);
       if (!hx && !hy && !sx && !sy) continue;
       const b = a.getBoundingClientRect();
       if ((hx || hy) && (b.width <= 2 || b.height <= 2)) break;
-      const l = b.left + a.clientLeft, t = b.top + a.clientTop, r = l + a.clientWidth, btm = t + a.clientHeight;
+      const l = b.left + a.clientLeft,
+        t = b.top + a.clientTop,
+        r = l + a.clientWidth,
+        btm = t + a.clientHeight;
       let over = 0;
-      if (hx && !(cs.textOverflow === "ellipsis" && a.closest("[data-sb-truncate]"))) for (const [x0, x1] of xs) over = Math.max(over, x1 - r, l - x0);
+      if (hx && !(cs.textOverflow === "ellipsis" && a.closest("[data-sb-truncate]")))
+        for (const [x0, x1] of xs) over = Math.max(over, x1 - r, l - x0);
       if (hy) for (const [y0, y1] of ys) over = Math.max(over, y1 - btm, t - y0);
       if (over > 1) {
         const text = textNode.data.replace(/\s+/g, " ").trim().slice(0, 40);
         const key = path(el) + "|" + text;
-        if (!seen.has(key)) { seen.add(key); out.push({ text, at: path(el), frame: path(a), over: Math.round(over) }); }
+        if (!seen.has(key)) {
+          seen.add(key);
+          out.push({ text, at: path(el), frame: path(a), over: Math.round(over) });
+        }
         break;
       }
       if (sx || hx) xs = xs.map(([x0, x1]) => [Math.max(x0, l), Math.min(x1, r)]);
@@ -118,8 +132,12 @@ function openOverlays() {
   const ids = new Set<string>();
   const name = (e: Element) => e.id || `${e.localName}.${e.classList[0] ?? ""}`;
   document.querySelectorAll("dialog[open]").forEach((d) => ids.add(name(d)));
-  document.querySelectorAll("[popover]").forEach((p) => { if (p.matches(":popover-open")) ids.add(name(p)); });
-  document.querySelectorAll<HTMLElement>(".sb-toast").forEach((t) => { if (!t.hidden && t.checkVisibility()) ids.add(name(t)); });
+  document.querySelectorAll("[popover]").forEach((p) => {
+    if (p.matches(":popover-open")) ids.add(name(p));
+  });
+  document.querySelectorAll<HTMLElement>(".sb-toast").forEach((t) => {
+    if (!t.hidden && t.checkVisibility()) ids.add(name(t));
+  });
   return [...ids].sort();
 }
 
@@ -135,9 +153,12 @@ export function collectControlCuts() {
   const cut: Array<{ at: string; kind: string; text: string; over: number }> = [];
   const allowed: string[] = [];
   // a label of the field's own with text: <label>, aria-labelledby or aria-label (a title or the placeholder is none)
-  const labelled = (el: HTMLInputElement) => [...(el.labels ?? [])].some((l) => l.textContent?.trim())
-    || (el.getAttribute("aria-labelledby") ?? "").split(/\s+/).some((id) => id && document.getElementById(id)?.textContent?.trim())
-    || !!el.getAttribute("aria-label")?.trim();
+  const labelled = (el: HTMLInputElement) =>
+    [...(el.labels ?? [])].some((l) => l.textContent?.trim()) ||
+    (el.getAttribute("aria-labelledby") ?? "")
+      .split(/\s+/)
+      .some((id) => id && document.getElementById(id)?.textContent?.trim()) ||
+    !!el.getAttribute("aria-label")?.trim();
   const ctx = document.createElement("canvas").getContext("2d")!;
   const TEXTLIKE = new Set(["text", "search", "email", "url", "tel", "number", "password"]);
   const where = (el: Element) => (el.id ? `#${el.id}` : `${el.localName}[name="${el.getAttribute("name") ?? ""}"]`);
@@ -154,16 +175,30 @@ export function collectControlCuts() {
   const frameCut = (el: Element, text: string, kind: string, [x0, x1, y0, y1]: number[]) => {
     for (let a: Element | null = el.parentElement; a && a !== document.documentElement; a = a.parentElement) {
       const cs = getComputedStyle(a);
-      const sx = /auto|scroll/.test(cs.overflowX), sy = /auto|scroll/.test(cs.overflowY);
-      const hx = /hidden|clip/.test(cs.overflowX), hy = /hidden|clip/.test(cs.overflowY);
+      const sx = /auto|scroll/.test(cs.overflowX),
+        sy = /auto|scroll/.test(cs.overflowY);
+      const hx = /hidden|clip/.test(cs.overflowX),
+        hy = /hidden|clip/.test(cs.overflowY);
       if (!hx && !hy && !sx && !sy) continue;
       const b = a.getBoundingClientRect();
       if ((hx || hy) && (b.width <= 2 || b.height <= 2)) return;
-      const l = b.left + a.clientLeft, t = b.top + a.clientTop, r = l + a.clientWidth, btm = t + a.clientHeight;
+      const l = b.left + a.clientLeft,
+        t = b.top + a.clientTop,
+        r = l + a.clientWidth,
+        btm = t + a.clientHeight;
       let over = 0;
-      if (hx && !(cs.textOverflow === "ellipsis" && a.closest("[data-sb-truncate]"))) over = Math.max(over, x1 - r, l - x0);
+      if (hx && !(cs.textOverflow === "ellipsis" && a.closest("[data-sb-truncate]")))
+        over = Math.max(over, x1 - r, l - x0);
       if (hy) over = Math.max(over, y1 - btm, t - y0);
-      if (over > 1) { cut.push({ at: where(el), kind: `${kind} cut by the frame ${path(a)}`, text: text.slice(0, 40), over: Math.round(over) }); return; }
+      if (over > 1) {
+        cut.push({
+          at: where(el),
+          kind: `${kind} cut by the frame ${path(a)}`,
+          text: text.slice(0, 40),
+          over: Math.round(over),
+        });
+        return;
+      }
       if (sx || hx) [x0, x1] = [Math.max(x0, l), Math.min(x1, r)];
       if (sy || hy) [y0, y1] = [Math.max(y0, t), Math.min(y1, btm)];
     }
@@ -175,12 +210,18 @@ export function collectControlCuts() {
     const cs = getComputedStyle(el);
     const [pl, pr, pt, pb] = [cs.paddingLeft, cs.paddingRight, cs.paddingTop, cs.paddingBottom].map(parseFloat);
     const text = el.value.replace(/\s+/g, " ").trim();
-    const overX = el.scrollWidth - el.clientWidth, overY = el.scrollHeight - el.clientHeight;
+    const overX = el.scrollWidth - el.clientWidth,
+      overY = el.scrollHeight - el.clientHeight;
     const over = Math.max(/hidden|clip/.test(cs.overflowX) ? overX : 0, /hidden|clip/.test(cs.overflowY) ? overY : 0);
     if (over > 1) cut.push({ at: where(el), kind: "textarea value", text: text.slice(0, 40), over: Math.round(over) });
-    const l = box.left + el.clientLeft, t = box.top + el.clientTop;
-    frameCut(el, text, "textarea value",
-      [l + pl, l + Math.min(el.scrollWidth, el.clientWidth) - pr, t + pt, t + Math.min(el.scrollHeight, el.clientHeight) - pb]);
+    const l = box.left + el.clientLeft,
+      t = box.top + el.clientTop;
+    frameCut(el, text, "textarea value", [
+      l + pl,
+      l + Math.min(el.scrollWidth, el.clientWidth) - pr,
+      t + pt,
+      t + Math.min(el.scrollHeight, el.clientHeight) - pb,
+    ]);
   }
   for (const el of document.querySelectorAll<HTMLInputElement | HTMLSelectElement>("input, select")) {
     const isSelect = el instanceof HTMLSelectElement;
@@ -188,7 +229,8 @@ export function collectControlCuts() {
     if (!el.checkVisibility({ visibilityProperty: true })) continue;
     const box = el.getBoundingClientRect();
     if (box.width <= 2 || box.height <= 2) continue;
-    let text = "", kind = "";
+    let text = "",
+      kind = "";
     if (isSelect) [text, kind] = [el.selectedOptions[0]?.text ?? "", "select"];
     else if (el.value) [text, kind] = [el.type === "password" ? "•".repeat(el.value.length) : el.value, "value"];
     else [text, kind] = [el.placeholder, "placeholder"];
@@ -203,11 +245,18 @@ export function collectControlCuts() {
     // an icon or suffix in the field's frame that covers the part of the text box the text uses
     const used = [start, start + Math.min(width, room)];
     const frame = el.parentElement;
-    const covered = frame ? [...frame.children].filter((k) => k !== el && k.checkVisibility()).some((k) => {
-      const r = k.getBoundingClientRect();
-      return r.width > 0 && r.left < used[1] - 1 && r.right > used[0] + 1 && r.top < box.bottom && r.bottom > box.top;
-    }) : false;
-    if (covered) cut.push({ at: where(el), kind: `${kind} covered by an icon or suffix`, text: text.slice(0, 40), over: 0 });
+    const covered = frame
+      ? [...frame.children]
+          .filter((k) => k !== el && k.checkVisibility())
+          .some((k) => {
+            const r = k.getBoundingClientRect();
+            return (
+              r.width > 0 && r.left < used[1] - 1 && r.right > used[0] + 1 && r.top < box.bottom && r.bottom > box.top
+            );
+          })
+      : false;
+    if (covered)
+      cut.push({ at: where(el), kind: `${kind} covered by an icon or suffix`, text: text.slice(0, 40), over: 0 });
     // the field's visible text box against its ancestors, whatever the field does with its own text
     const top = box.top + el.clientTop;
     frameCut(el, text, kind, [used[0], used[1], top, top + el.clientHeight]);
@@ -247,9 +296,13 @@ export function checkScreens(screens: Screen[], options: Options = {}) {
             const page = await context.newPage();
             const problems: string[] = [];
             // a case that asks for an error status (a 404 page) gets Chromium's line for that one response, nothing else
-            const ownStatusLine = (m: ConsoleMessage) => (screen.status ?? 200) !== 200 && m.text().startsWith("Failed to load resource")
-              && new URL(m.location().url).pathname === new URL(screen.path, "http://x").pathname;
-            page.on("console", (m) => { if (m.type() === "error" && !ownStatusLine(m)) problems.push(`console: ${m.text()}`); });
+            const ownStatusLine = (m: ConsoleMessage) =>
+              (screen.status ?? 200) !== 200 &&
+              m.text().startsWith("Failed to load resource") &&
+              new URL(m.location().url).pathname === new URL(screen.path, "http://x").pathname;
+            page.on("console", (m) => {
+              if (m.type() === "error" && !ownStatusLine(m)) problems.push(`console: ${m.text()}`);
+            });
             page.on("pageerror", (e) => problems.push(`page error: ${e.message}`));
             await page.addInitScript(() => {
               document.addEventListener("securitypolicyviolation", (e) => {
@@ -258,7 +311,9 @@ export function checkScreens(screens: Screen[], options: Options = {}) {
             });
             if (scale !== 1) {
               const cdp = await context.newCDPSession(page);
-              await cdp.send("Page.setFontSizes", { fontSizes: { standard: Math.round(16 * scale), fixed: Math.round(13 * scale) } });
+              await cdp.send("Page.setFontSizes", {
+                fontSizes: { standard: Math.round(16 * scale), fixed: Math.round(13 * scale) },
+              });
             }
             const response = await page.goto(screen.path);
             expect(response?.status(), "HTTP status of the page").toBe(screen.status ?? 200);
@@ -267,9 +322,15 @@ export function checkScreens(screens: Screen[], options: Options = {}) {
             if (screen.prepare) await screen.prepare(page);
             // an opened overlay fades in for 200 ms even under reduced motion (BEW-04); check it once it stands (endless
             // animations such as a spinner do not count)
-            await page.waitForFunction(() => document.getAnimations().every((a) => a.playState !== "running" || a.effect?.getTiming().iterations === Infinity));
+            await page.waitForFunction(() =>
+              document
+                .getAnimations()
+                .every((a) => a.playState !== "running" || a.effect?.getTiming().iterations === Infinity),
+            );
             // let sb-fit.js and layout settle after fonts and any prepared state
-            await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(() => r(true)))));
+            await page.evaluate(
+              () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(() => r(true)))),
+            );
 
             // the screen asked for, and nothing else open
             if (screen.heading === null) await expect(page.locator("h1:visible"), "no visible h1").toHaveCount(0);
@@ -282,7 +343,9 @@ export function checkScreens(screens: Screen[], options: Options = {}) {
             const root = await page.evaluate(() => parseFloat(getComputedStyle(document.documentElement).fontSize));
             expect(root, "root text size").toBeGreaterThanOrEqual(16 * scale - 0.5);
 
-            const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+            const overflow = await page.evaluate(
+              () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+            );
             expect(overflow, "page scrolls sideways (px)").toBeLessThanOrEqual(1);
 
             const cut = await page.evaluate(collectCut);
@@ -290,16 +353,34 @@ export function checkScreens(screens: Screen[], options: Options = {}) {
 
             const controls = await page.evaluate(collectControlCuts);
             const waivers = [...(options.controlWaivers ?? []), ...(screen.controlWaivers ?? [])];
-            const waived = (c: { at: string; text: string }) => waivers.find((w) => w.at === c.at && w.text === c.text && w.scale === scale && (w.width ?? width) === width);
-            for (const c of controls.cut.filter(waived)) test.info().annotations.push({ type: "waiver", description: `${c.at} „${c.text}“ cut by ${c.over} px: ${waived(c)!.reason}` });
-            expect(controls.cut.filter((c) => !waived(c)), "control text cut by its control").toEqual([]);
+            const waived = (c: { at: string; text: string }) =>
+              waivers.find(
+                (w) => w.at === c.at && w.text === c.text && w.scale === scale && (w.width ?? width) === width,
+              );
+            for (const c of controls.cut.filter(waived))
+              test.info().annotations.push({
+                type: "waiver",
+                description: `${c.at} „${c.text}“ cut by ${c.over} px: ${waived(c)!.reason}`,
+              });
+            expect(
+              controls.cut.filter((c) => !waived(c)),
+              "control text cut by its control",
+            ).toEqual([]);
             for (const line of controls.allowed) test.info().annotations.push({ type: "D111", description: line });
 
             const axe = await new AxeBuilder({ page }).withTags(AXE_TAGS).analyze();
-            const violations = axe.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(", ")}`);
+            const violations = axe.violations.map(
+              (v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(", ")}`,
+            );
             expect(violations, "axe violations").toEqual([]);
 
-            await page.screenshot({ path: path.join(test.info().project.outputDir, "screens", `${screen.name}-${scheme}-${width}-${scale * 100}.png`) });
+            await page.screenshot({
+              path: path.join(
+                test.info().project.outputDir,
+                "screens",
+                `${screen.name}-${scheme}-${width}-${scale * 100}.png`,
+              ),
+            });
             expect(problems, "console, page errors and CSP violations").toEqual([]);
             await context.close();
           });
