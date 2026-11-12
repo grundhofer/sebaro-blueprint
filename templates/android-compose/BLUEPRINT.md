@@ -164,13 +164,8 @@ python3 sebaro/product/product_kit.py check sebaro.product.json --copy sebaro --
 
 ## Where this starter still differs
 
-Until the starter is rebuilt from this blueprint, do not copy these parts of it:
-
-- It takes sebaro from a private Maven package instead of the copy in `sebaro/` with its module and product
-  files.
-- It has no `AppContainer`, no ViewModels and a flat package; it stores data in `SharedPreferences` and a JSON
-  file.
-- minSdk 24 with desugaring and Java 17 instead of minSdk 29 and Java 21.
-- It has a language setting inside the app.
-- It has no `build-logic/`, no workflows and no Dependabot file.
-- Its screenshots stay outside git and are compared by a verify mode.
+- It carries no `build-logic/`, no detekt configuration, no `.editorconfig` and no workflows. They are the export
+  of the family's private build repository: a product runs that export first, and the starter builds only then.
+- Its data screen has no ViewModel, because it reads nothing: it is a catalogue of data kinds with invented
+  values. Do not copy that; a screen that reads something has one.
+- The render test of the data screen draws a screen 4400 dp high instead of 800 dp, so its whole length shows.
