@@ -16,6 +16,8 @@
     "build": "node scripts/site-root.mjs && node scripts/og.mjs && astro build --mode pages --outDir build/pages && node scripts/cut.mjs && astro build && node scripts/budgets.mjs",
     "preview": "astro preview",
     "check": "astro check",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
     "test": "npm run sebaro:lint && vitest run --dir src && playwright test"
   },
   "dependencies": {
@@ -26,8 +28,13 @@
     "@axe-core/playwright": "4.13.0",
     "@playwright/test": "1.63.0",
     "@types/node": "22.20.5",
+    "eslint": "10.14.0",
+    "eslint-plugin-astro": "3.2.1",
+    "prettier": "3.10.1",
+    "prettier-plugin-astro": "1.1.2",
     "purgecss": "8.0.0",
     "typescript": "6.0.3",
+    "typescript-eslint": "8.72.2",
     "vitest": "5.1.0"
   },
   "overrides": {

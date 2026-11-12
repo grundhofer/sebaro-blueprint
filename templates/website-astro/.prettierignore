@@ -1,0 +1,9 @@
+# the sebaro copy and the product's files from its kit: a reformatted file is an edited copy
+public/sebaro/
+sebaro-product/
+# the two scripts of the copy's README, kept as they stand there
+scripts/cut-css.mjs
+scripts/cut-icons.mjs
+# texts and test fixtures stay as written
+*.md
+tests/fixtures/
