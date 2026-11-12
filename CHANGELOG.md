@@ -32,6 +32,11 @@ Baukasten des Exports schreibt daraus Favicons, Manifest und Head-Snippet nach `
 Platzhalter-Icons aus demselben Ordner. Die Kachelfarben der Beispielprodukte auf den Seiten stehen nicht mehr in
 `tokens.css`, sondern in `sebaro/demo/products.css`.
 
+Befehle ohne Produkt: Die Seiten „iOS“ und „Desktop“ und `MANUAL.md` zeigten Export-Befehle mit `--product` und dem
+Ziel `tauri`, die es in der Werkstatt nicht mehr gibt. „Desktop“ zeigt jetzt den Weg über die Kopie und den Baukasten,
+„iOS“ den Export ohne Produkt; den Startbildschirm legt eine iOS-App selbst an. Die Regeln STR-01, DSK-14 und TEC-07
+nennen die alten Befehle noch; sie folgen mit der Überarbeitung der Regeln.
+
 Einstieg für Agenten: `AGENTS.md` ist ein kurzer Wegweiser (3 KB statt 59 KB); die frühere Fassung liegt unverändert
 als `MANUAL.md` bereit. Neu sind `design/KERN.md` (31 Kernregeln, vom Inhaber am 11.11.2026 bestätigt; sie nehmen
 D143 bis D146 auf und senken die Barrierefreiheit auf einen Boden), `design/views.md` (die 21 Ansichtstypen aus
