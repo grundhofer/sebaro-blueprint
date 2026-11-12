@@ -1,10 +1,14 @@
 # ci: every push and pull request. Audit, lint, format, type check, the checks of the sebaro copy, unit tests, build
-# with the size budgets, end-to-end tests against the build. This file belongs to the product that copies the
-# starter: it runs with the starter's folder as the root of the repository.
+# with the size budgets, end-to-end tests against the build. Once a week it also asks whether a newer release of the
+# sebaro copy exists; then update the copy with `node src/sebaro/checks/update-copy.mjs`, as one commit of its own.
+# This file belongs to the product that copies the starter: it runs with the starter's folder as the root of the
+# repository.
 name: ci
 on:
   push:
   pull_request:
+  schedule:
+    - cron: "17 5 * * 1"
 permissions:
   contents: read
 jobs:
@@ -28,6 +32,9 @@ jobs:
         run: pnpm check
       - name: The sebaro copy is unchanged, the product's files are what its declaration gives
         run: pnpm sebaro:verify && pnpm sebaro:product
+      - name: Copy check, weekly (a newer release of the sebaro copy exists)
+        if: github.event_name == 'schedule'
+        run: node src/sebaro/checks/update-copy.mjs --check
       - name: Unit tests (Vitest)
         run: pnpm test
       - name: Build, with the size budgets

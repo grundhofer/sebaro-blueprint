@@ -229,8 +229,7 @@ solche Stellen übernehmen. Übernimm sie nicht, sondern bau es so:
   Handy bei 200&nbsp;% schon.
 - **Kein Deploy-Workflow.** Der Host ist die Wahl des Produkts. Es ergänzt `.github/workflows/deploy.yml`: `dist/` auf
   einen statischen Host, mit einer Vorschau-Adresse je Pull Request. Der Host muss jede Adresse ohne Datei auf
-  `index.html` leiten (die Routen sind echte Pfade) und schickt die Content-Security-Policy besser als Kopfzeile. Ein
-  geplanter Lauf von `node src/sebaro/checks/update-copy.mjs --check` meldet ein neues Release der Kopie.
+  `index.html` leiten (die Routen sind echte Pfade) und schickt die Content-Security-Policy besser als Kopfzeile.
 - **Befehlspalette mit ⌘K / Strg+K fehlt.** NAV-06 verlangt sie auch in einer Web-App ohne Fenster („⌘K öffnet auch
   dort die Befehlspalette“). Die Vorlage hat sie noch nicht; das Markup steht in `docs/bauteile.html` (Befehlspalette).
   NAV-09 nennt nur Apps mit Fenster; das ist eine offene Frage an den Inhaber, keine Erlaubnis, sie wegzulassen.
