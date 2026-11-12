@@ -8,8 +8,8 @@
   ],
   "declaration": {
     "file": "sebaro.product.json",
-    "sha256": "317d18f479276a9f6394ddf125876577d0c69a300bf7c66da2cd72e271c404c0",
-    "meaning": "57e3aa80140fa0ad165bcc89cc840c5676a34438434005d55e82b9f893ce67aa"
+    "sha256": "62d116df74f618dfaf1a176e0a5cb80d11360b31484432b0e5646a89cb85462c",
+    "meaning": "14259e6d1359373ed5e71fe5685076ae00a2c5527a5b82c2b46f749860474839"
   },
   "tiles": {
     "file": "product/tiles.json",
