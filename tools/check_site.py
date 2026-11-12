@@ -83,9 +83,11 @@ SWATCH_PAGES = {"index.html", "grundlagen.html", "regeln.html"}
 VAR_SB = re.compile(r"var\(\s*(--sb-[A-Za-z0-9_-]*[A-Za-z0-9_])(?![-*…A-Za-z0-9_])")
 
 
-# the only copies of the web export in templates/, each a verified snapshot (npm run sebaro:verify checks it)
+# the only copies of the web export in templates/, each a verified snapshot (npm run sebaro:verify checks it), then
+# the iOS export and the Android starter's copy of a release (profile android; its own verify-export.mjs checks it)
 TEMPLATE_EXPORTS = ("templates/website-astro/public/sebaro/", "templates/webapp-vite/public/sebaro/",
-                    "templates/desktop-tauri/public/sebaro/", "templates/ios-swiftui/SebaroDesign/")
+                    "templates/desktop-tauri/public/sebaro/", "templates/ios-swiftui/SebaroDesign/",
+                    "templates/android-compose/sebaro/")
 
 
 def export_diff(src: Path, dst: Path) -> list[str]:
@@ -127,8 +129,8 @@ def template_export_findings(root: Path = ROOT) -> tuple[list[str], list[str]]:
 def template_files() -> list[Path]:
     """Files of templates/ for TERM: what git tracks there plus new files git does not ignore (`git ls-files
     --cached --others --exclude-standard`), so what a template's install, build or tests write (git-ignored there)
-    is left out by the template's own .gitignore, never by a folder name. Left out besides: the three exact copies
-    of the web export in TEMPLATE_EXPORTS (their font licence keeps the authors' copyright as the OFL requires, like
+    is left out by the template's own .gitignore, never by a folder name. Left out besides: the exact copies of an
+    export in TEMPLATE_EXPORTS (their font licence keeps the authors' copyright as the OFL requires, like
     docs/sebaro/, and checks/verify-export.mjs --strict checks each against its record)."""
     listed = subprocess.run(["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard", "--", "templates"],
                             cwd=ROOT, capture_output=True, check=True).stdout.decode("utf-8").split("\0")

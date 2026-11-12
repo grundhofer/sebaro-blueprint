@@ -1,0 +1,1 @@
+<resources><style name="Theme.Sebaro.Start" parent="Theme.Sebaro"><item name="android:windowSplashScreenBackground">@color/sebaro_start_background</item><item name="android:windowSplashScreenAnimatedIcon">@drawable/sb_splash_symbol_musterapp</item><item name="android:windowBackground">@color/sebaro_start_background</item></style></resources>
