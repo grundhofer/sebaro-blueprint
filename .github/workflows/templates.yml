@@ -6,6 +6,8 @@
 # Each template's copy of the export is a snapshot: a guide sync does not touch it; update it with npm run sebaro:sync.
 # The website starter is a product like any other: it holds the copy of the public release (update-copy.mjs) and its
 # job also runs the type check, the lint and the budgets of its blueprint.
+# The Android starter cannot be built here (the family's build setup is private): its job runs the three checks of
+# its copy that need no Gradle.
 name: templates
 on:
   push:
