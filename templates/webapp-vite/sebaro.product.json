@@ -1,0 +1,40 @@
+{
+  "$comment": "The guide declares itself like any sebaro product (the umbrella): tools/sync_from_design.py hands this file to the product kit of the export (docs/sebaro/product/product_kit.py), which writes docs/sebaro-product/ (favicons, manifest, head snippet, sign and tile).",
+  "schemaVersion": "1.0",
+  "id": "studio",
+  "name": "sebaro",
+  "tile": "studio",
+  "sign": {
+    "glyph": [
+      {
+        "d": "M1.6 11.5 L12 3 L22.4 11.5",
+        "paint": "stroke"
+      },
+      {
+        "d": "M2 18.5 A2.5 2.5 0 1 1 7 18.5 A2.5 2.5 0 1 1 2 18.5 Z",
+        "paint": "fill"
+      },
+      {
+        "d": "M9.5 18.5 A2.5 2.5 0 1 1 14.5 18.5 A2.5 2.5 0 1 1 9.5 18.5 Z",
+        "paint": "fill"
+      },
+      {
+        "d": "M17 18.5 A2.5 2.5 0 1 1 22 18.5 A2.5 2.5 0 1 1 17 18.5 Z",
+        "paint": "fill"
+      }
+    ]
+  },
+  "outputs": [
+    "web"
+  ],
+  "web": {
+    "manifest": {
+      "id": "/",
+      "lang": "de",
+      "dir": "ltr",
+      "start_url": "/",
+      "scope": "/",
+      "display": "browser"
+    }
+  }
+}

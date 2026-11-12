@@ -44,7 +44,7 @@ npm run sebaro:sync -- --from <Ordner mit dem Export> # sonst aus einer Kopie vo
 ```
 
 Das Skript kopiert den Ordner, prüft ihn mit `checks/verify-export.mjs --strict` und legt Favicons und Manifest aus
-`brand/site-root/` an die Wurzel. Danach `npm run build` und `npm test`, dann die kopierten Dateien committen.
+`sebaro-product/web/` an die Wurzel (dem Ordner, den das Produkt-Kit des Exports aus `sebaro.product.json` schreibt). Danach `npm run build` und `npm test`, dann die kopierten Dateien committen.
 
 ## Was die Vorlage zeigt (Regel-IDs)
 

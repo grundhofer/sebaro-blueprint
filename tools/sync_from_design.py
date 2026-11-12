@@ -7,18 +7,27 @@ what it took in docs/sebaro/sebaro-export.json (with sha256 per file) plus docs/
 outside docs/sebaro/, so that folder is the export and nothing else: a product that copies it as one folder passes the
 export's own `node sebaro/checks/verify-export.mjs --strict`.
 
+The export knows no product. The guide declares itself like any product: sebaro.product.json (the umbrella) at the
+root of this repository, and the product kit of the export (docs/sebaro/product/product_kit.py) writes its files
+into docs/sebaro-product/ (favicons, manifest, head snippet, sign and tile). The sync runs the kit's `build` (the
+text files) and its `check`; the raster files (favicon.ico and the PNGs) are committed and drawn by hand, with
+Playwright, when the check says they are stale:
+    python3 docs/sebaro/product/product_kit.py build sebaro.product.json --copy docs/sebaro --out docs/sebaro-product --render
+The two starter templates that show a favicon carry the same declaration and folder (PRODUCT_COPIES).
+
     python3 tools/sync_from_design.py                 # export + verify + copy
     python3 tools/sync_from_design.py --check         # exit 1 if docs/sebaro/ differs from a fresh export
     python3 tools/sync_from_design.py --verify-local  # exit 1 if a file in docs/sebaro/ no longer matches its sha256
                                                       # or is not part of the export
     python3 tools/sync_from_design.py --from-export DIR --exclude-from FILE --require-exclusions
-                                                      # CI: take a web export the workshop already built (it is
-                                                      # copied and verified, never changed), read exclusions from FILE
+                                                      # CI: take a web export the workshop already built
+                                                      # (export_system.py sebaro --target web; it is copied and
+                                                      # verified, never changed), read exclusions from FILE
 
 The design repository is found via --design, $SEBARO_DESIGN, or ../sebaroDesign next to this repository. It is
 needed for every mode except --verify-local (export --verify and the demo specimens come from it).
-Products to leave out are not published: their brand files are dropped and their manifest entries removed. Only their
-number is recorded, never their names. The list is the union of the git-ignored tools/sync.local.json
+Products to leave out are not published: the export leaves their sample files out, and what is left of them is
+dropped here with its manifest entry. Only their number is recorded, never their names. The list is the union of the git-ignored tools/sync.local.json
 ({"excludeProducts": [...]}), every --exclude-from FILE (the same JSON, or one id per line, # comments allowed) and the
 environment variable SEBARO_EXCLUDE_PRODUCTS (ids separated by commas or white space); the workshop's CI passes it from
 a secret, so the names never enter this public repository. --require-exclusions refuses to run with an empty list.
@@ -47,6 +56,12 @@ RECORD = DOCS / "GUIDE-SYNC.json"
 TEMPLATE_COPIES = ("templates/website-astro/public/sebaro", "templates/webapp-vite/public/sebaro",
                    "templates/desktop-tauri/public/sebaro")
 CONFIG = ROOT / "tools" / "sync.config.json"
+DECLARATION = ROOT / "sebaro.product.json"          # the guide's own declaration (the umbrella)
+PRODUCT = DOCS / "sebaro-product"                   # what the export's product kit writes from it
+KIT = Path("product") / "product_kit.py"            # inside an export
+# starter templates that show the placeholder favicon: (the declaration, the kit's folder), copies of the guide's own
+PRODUCT_COPIES = (("templates/website-astro/sebaro.product.json", "templates/website-astro/sebaro-product"),
+                  ("templates/webapp-vite/sebaro.product.json", "templates/webapp-vite/public/sebaro-product"))
 
 
 LOCAL = ROOT / "tools" / "sync.local.json"
@@ -106,15 +121,16 @@ def export(design: Path, cfg: dict, out: Path, from_export: Path | None = None) 
     # same list, so both get the guide's union through the environment, never on a command line
     env = {**os.environ, EXCLUDE_ENV: ",".join(cfg.get("excludeProducts", []))}
     if from_export is None:
-        cmd = [sys.executable, "tools/export_system.py", cfg["system"], "--target", "web", "--out", str(out),
-               "--product", cfg["product"]]
+        cmd = [sys.executable, "tools/export_system.py", cfg["system"], "--target", "web", "--out", str(out)]
         subprocess.run(cmd, cwd=design, check=True, stdout=subprocess.DEVNULL, env=env)
     else:
         rec = json.loads((from_export / "sebaro-export.json").read_text(encoding="utf-8"))
-        got = (rec.get("system", {}).get("slug"), rec.get("target"), rec.get("product"))
-        want = (cfg["system"], "web", cfg["product"])
-        if got != want:
-            sys.exit(f"{from_export} is a {got} export; the guide needs (system, target, product) = {want}")
+        got = (rec.get("system", {}).get("slug"), rec.get("target"))
+        want = (cfg["system"], "web")
+        if got != want or "product" in rec or "profile" in rec:
+            sys.exit(f"{from_export} is a {got} export"
+                     f"{' for one product' if 'product' in rec else ' of a profile' if 'profile' in rec else ''}; "
+                     f"the guide needs the whole web system without a product: (system, target) = {want}")
         shutil.copytree(from_export, out)
     subprocess.run([sys.executable, "tools/export_system.py", "--verify", str(out)], cwd=design, check=True,
                    stdout=subprocess.DEVNULL, env=env)
@@ -143,7 +159,6 @@ def export(design: Path, cfg: dict, out: Path, from_export: Path | None = None) 
     return {
         "$comment": "written by tools/sync_from_design.py; do not edit",
         "system": cfg["system"],
-        "product": cfg["product"],
         "sebaroDesignCommit": manifest.get("sebaroDesign", {}).get("commit"),
         "sebaroDesignUncommitted": manifest.get("sebaroDesign", {}).get("uncommittedChanges"),
         "exportTool": manifest.get("tool"),
@@ -152,6 +167,12 @@ def export(design: Path, cfg: dict, out: Path, from_export: Path | None = None) 
         "droppedFiles": len(dropped),
         "vendorSpecimens": vendor,
     }
+
+
+def kit(copy: Path, command: str, out: Path, *more: str) -> subprocess.CompletedProcess:
+    """Run the product kit of the export COPY on the guide's declaration."""
+    return subprocess.run([sys.executable, str(copy / KIT), command, str(DECLARATION), "--copy", str(copy),
+                           "--out", str(out), *more], capture_output=True, text=True)
 
 
 def tree_files(base: Path) -> dict[str, Path]:
@@ -199,7 +220,7 @@ def main() -> int:
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--verify-local", action="store_true")
     ap.add_argument("--from-export", type=Path, metavar="DIR",
-                    help="use this web export (built with the product of sync.config.json) instead of running one")
+                    help="use this web export (export_system.py --target web, no product) instead of running one")
     ap.add_argument("--exclude-from", type=Path, action="append", default=[], metavar="FILE",
                     help="more product ids to leave out (JSON like sync.local.json, or one id per line)")
     ap.add_argument("--require-exclusions", action="store_true",
@@ -238,6 +259,12 @@ def main() -> int:
                 src = design / "systems" / cfg["system"] / "demo" / "assets" / name
                 if not (VENDOR / name).is_file() or not filecmp.cmp(src, VENDOR / name, shallow=False):
                     diffs.append(f"vendor specimen differs: {name}")
+            # the guide's own files from the kit of the fresh export: stale when the declaration, the kit or the
+            # tiles changed (the kit's check reads the folder's record, also for the raster files)
+            stale = kit(out, "check", PRODUCT)
+            if stale.returncode != 0:
+                diffs.append(f"docs/{PRODUCT.name}/ is not what the export's kit writes from {DECLARATION.name}: "
+                             + (stale.stdout + stale.stderr).strip().replace("\n", " | ")[:600])
             for d in diffs:
                 print(d)
             print(f"check: {len(diffs)} differences against sebaroDesign {record['sebaroDesignCommit']}")
@@ -257,6 +284,23 @@ def main() -> int:
         for name in cfg.get("vendorSpecimens", []):
             shutil.copy2(design / "systems" / cfg["system"] / "demo" / "assets" / name, VENDOR / name)
         RECORD.write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        # the guide's own product files: the kit of the export writes the text files; the raster files stay as
+        # committed, and the kit's check says when they no longer belong to the build (then draw them, see above)
+        built = kit(TARGET, "build", PRODUCT)
+        if built.returncode != 0:
+            print(f"error: the product kit refused {DECLARATION.name}:\n{built.stdout}{built.stderr}", file=sys.stderr)
+            return 1
+        checked = kit(TARGET, "check", PRODUCT)
+        if checked.returncode != 0:
+            print(f"error: docs/{PRODUCT.name}/ does not pass the kit's check (raster files to draw again? "
+                  f"see the head of this file):\n{checked.stdout}{checked.stderr}", file=sys.stderr)
+            return 1
+        for decl, folder in PRODUCT_COPIES:
+            if (ROOT / decl).parent.is_dir():
+                shutil.copy2(DECLARATION, ROOT / decl)
+                if (ROOT / folder).exists():
+                    shutil.rmtree(ROOT / folder)
+                shutil.copytree(PRODUCT, ROOT / folder)
         print(f"synced sebaro from sebaroDesign {record['sebaroDesignCommit']}: "
               f"{len(tree_files(TARGET))} files, dropped {record['droppedFiles']} (excluded products)")
     return 0
