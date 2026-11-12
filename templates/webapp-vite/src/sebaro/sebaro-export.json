@@ -1,0 +1,715 @@
+{
+  "$comment": "the record of this copy, generated — do not edit. Check that the folder is unchanged: node checks/verify-export.mjs --strict. Update it: node checks/update-copy.mjs (README.md, section Keep in sync)",
+  "format": "1.0",
+  "tool": "export_system.py 1.29.0",
+  "date": "2026-11-12",
+  "system": {
+    "slug": "sebaro",
+    "name": "sebaro",
+    "status": "draft",
+    "palette": "sebaro"
+  },
+  "profile": "webapp",
+  "packs": [
+    "window",
+    "charts",
+    "table",
+    "calendar",
+    "diff",
+    "notes",
+    "facts",
+    "menu"
+  ],
+  "packsAvailable": [
+    "window",
+    "board",
+    "charts",
+    "table",
+    "calendar",
+    "media",
+    "diff",
+    "notes",
+    "facts",
+    "menu",
+    "tooltip",
+    "tabs",
+    "controls",
+    "search",
+    "sticky",
+    "form",
+    "print",
+    "tree",
+    "window-script",
+    "editor-shiki",
+    "editor-codemirror",
+    "share-images"
+  ],
+  "release": {
+    "tag": "v1.14.0",
+    "asset": "sebaro-webapp.tar.gz",
+    "sha256": "66e421245092482150b2ae1bfdd0e4e6a9831de27274c007617b8b90e5d859bd",
+    "updater": "update-copy.mjs 1.1.0",
+    "from": "https://github.com/grundhofer/sebaro-guide/releases"
+  },
+  "sebaroDesign": {
+    "commit": "17bb8f6be39cc2352f8dc7b0850a2a914528b5bf",
+    "uncommittedChanges": false,
+    "fromCommit": true
+  },
+  "contracts": {
+    "tokens": "1.14",
+    "palette": "2.7",
+    "fontsConfig": 1,
+    "iconSet": "sebaro-icon-set/1",
+    "brandAssetsTool": "1.10.0",
+    "facts": "1.3"
+  },
+  "generators": {
+    "build_tokens.py": "1.14.0",
+    "icons.py": "1.1.0",
+    "fonts.py": "1.2.0",
+    "fontTools": "4.55.3",
+    "brand_assets.py": "1.10.0",
+    "brandRenderer": {
+      "playwright": "1.63.0",
+      "browser": "153.0.8010.12"
+    }
+  },
+  "tools": {
+    "export_system.py": "1.29.0",
+    "check_palette.py": "2.7.0",
+    "build_tokens.py": "1.14.0",
+    "fonts.py": "1.2.0",
+    "icons.py": "1.1.0",
+    "brand_assets.py": "1.10.0",
+    "check_facts.py": "1.3.0"
+  },
+  "gates": [
+    {
+      "id": "palette",
+      "check": "python3 tools/check_palette.py palettes/sebaro.json",
+      "state": "passed"
+    },
+    {
+      "id": "tokens",
+      "check": "python3 tools/build_tokens.py sebaro --check",
+      "state": "passed"
+    },
+    {
+      "id": "fonts",
+      "check": "fonts/fonts.build.json hashes (drift part of fonts.py verify)",
+      "state": "passed"
+    },
+    {
+      "id": "icons",
+      "check": "python3 tools/icons.py lint sebaro && python3 tools/icons.py build sebaro --check",
+      "state": "passed"
+    },
+    {
+      "id": "brand",
+      "check": "brand/dist/build-manifest.json hashes (drift part of brand_assets.py check)",
+      "state": "passed"
+    },
+    {
+      "id": "compose",
+      "check": "python3 tools/extract_compose.py sebaro --check",
+      "state": "passed"
+    }
+  ],
+  "files": [
+    {
+      "path": "tokens.css",
+      "source": "systems/sebaro/dist/tokens.css",
+      "sourceSha256": "118a994b2d04bba2b72f18d5b0542cc2629b480600e2225a551f93cfd371528e",
+      "sha256": "4e69e87d1c28eb0c9a4678ee9ed4eded15ffe6b7f477e0584c5e4ac72a15de2b",
+      "bytes": 45138,
+      "transform": "the product scopes left out: a profile copy knows no product"
+    },
+    {
+      "path": "tokens.tailwind.css",
+      "source": "systems/sebaro/dist/tokens.tailwind.css",
+      "sourceSha256": "408896006f9857aaa7cfb8650a1312bd5c066120fe15c6df8c71cb0919286dd8",
+      "sha256": "408896006f9857aaa7cfb8650a1312bd5c066120fe15c6df8c71cb0919286dd8",
+      "bytes": 9673
+    },
+    {
+      "path": "css/sebaro.css",
+      "source": "systems/sebaro/css/sebaro.css",
+      "sourceSha256": "c36238ecfd90e130cca97cca76fadcc306ee89cfceb53fffd71bb63fca0907b0",
+      "sha256": "3b6b81ded80ba3548ad7720039aeca2f5e9e4467a5ab79bda82392bb321743e8",
+      "bytes": 343281,
+      "transform": "the rules of the profile's core and of the copy's packs (the parts and stretches that export/profiles.json gives them) of css/sebaro.css, in their order there, without the marks"
+    },
+    {
+      "path": "fonts/fonts.css",
+      "source": "systems/sebaro/fonts/fonts.css",
+      "sourceSha256": "c10d1061c7a7687e73b9030b9660dafa9d81876ac787328c8bc16bbd6d929c7a",
+      "sha256": "c10d1061c7a7687e73b9030b9660dafa9d81876ac787328c8bc16bbd6d929c7a",
+      "bytes": 2130
+    },
+    {
+      "path": "fonts/web/sebaro-sans-latin-de.woff2",
+      "source": "systems/sebaro/fonts/web/sebaro-sans-latin-de.woff2",
+      "sourceSha256": "589be2f709be7e198bfa223e58a9515ffcbd4f1d652f757c2c49bc05f1bcb92d",
+      "sha256": "589be2f709be7e198bfa223e58a9515ffcbd4f1d652f757c2c49bc05f1bcb92d",
+      "bytes": 22116
+    },
+    {
+      "path": "fonts/web/sebaro-sans-italic-latin-de.woff2",
+      "source": "systems/sebaro/fonts/web/sebaro-sans-italic-latin-de.woff2",
+      "sourceSha256": "3334dbd7fd7c6c6a150afd76f90783572cdd1ea6e6ece5b2f42ba90a6a61fd0f",
+      "sha256": "3334dbd7fd7c6c6a150afd76f90783572cdd1ea6e6ece5b2f42ba90a6a61fd0f",
+      "bytes": 22992
+    },
+    {
+      "path": "fonts/web/sebaro-mono-latin-de.woff2",
+      "source": "systems/sebaro/fonts/web/sebaro-mono-latin-de.woff2",
+      "sourceSha256": "2512639768811e136c441f24e94a5f365ab1c18dbceb138f181c7e67a4be5ccf",
+      "sha256": "2512639768811e136c441f24e94a5f365ab1c18dbceb138f181c7e67a4be5ccf",
+      "bytes": 16824
+    },
+    {
+      "path": "fonts/web/sebaro-mono-OFL.txt",
+      "source": "systems/sebaro/fonts/web/sebaro-mono-OFL.txt",
+      "sourceSha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da",
+      "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da",
+      "bytes": 4456
+    },
+    {
+      "path": "fonts/web/sebaro-sans-OFL.txt",
+      "source": "systems/sebaro/fonts/web/sebaro-sans-OFL.txt",
+      "sourceSha256": "86b4932ef0e19f8fd573ec941c3e121ae80771187ad1b854ae2b52525d452544",
+      "sha256": "86b4932ef0e19f8fd573ec941c3e121ae80771187ad1b854ae2b52525d452544",
+      "bytes": 4396
+    },
+    {
+      "path": "icons/sprite.svg",
+      "source": "systems/sebaro/icons/dist/sprite.svg",
+      "sourceSha256": "a49fd15ce257750fd0f00a4da8d7b4eab2ff0821bc5908c9cd4e7493eb62cf85",
+      "sha256": "a49fd15ce257750fd0f00a4da8d7b4eab2ff0821bc5908c9cd4e7493eb62cf85",
+      "bytes": 56773
+    },
+    {
+      "path": "icons/sprite.css",
+      "source": "systems/sebaro/icons/dist/sprite.css",
+      "sourceSha256": "4aa531ac61b82c59365a03caeab287e3b229a5fc3c6a41fe965da7790dc7b139",
+      "sha256": "4aa531ac61b82c59365a03caeab287e3b229a5fc3c6a41fe965da7790dc7b139",
+      "bytes": 1831
+    },
+    {
+      "path": "icons/icons.json",
+      "source": "systems/sebaro/icons/dist/icons.json",
+      "sourceSha256": "4544abf385f84a40b88cb39154368e3745fbcece75ce8f72433c0820e5c8533a",
+      "sha256": "0729706d6efe3a5042a426e01ff2aa83aeb71ae7dc80b29961d974215b1335e8",
+      "bytes": 112449,
+      "transform": "product names in icon descriptions, aliases and tags left out: a profile copy knows no product"
+    },
+    {
+      "path": "brand/logo/keymark-small.dark.svg",
+      "source": "systems/sebaro/brand/src/keymark-small.dark.svg",
+      "sourceSha256": "22d804c4ccb439d91acee9fb0106ebfe87c8ed193dfe7e117c875997fe7f7c1f",
+      "sha256": "22d804c4ccb439d91acee9fb0106ebfe87c8ed193dfe7e117c875997fe7f7c1f",
+      "bytes": 3570
+    },
+    {
+      "path": "brand/logo/keymark-small.svg",
+      "source": "systems/sebaro/brand/src/keymark-small.svg",
+      "sourceSha256": "47edce20d893f8f8f229f891ec71f41774d1db2e1112a2dd6738015e8e9b1783",
+      "sha256": "47edce20d893f8f8f229f891ec71f41774d1db2e1112a2dd6738015e8e9b1783",
+      "bytes": 3615
+    },
+    {
+      "path": "brand/logo/keymark.dark.svg",
+      "source": "systems/sebaro/brand/src/keymark.dark.svg",
+      "sourceSha256": "246d512d7bc1a403cb80aa07f63e27761788b1c1d4c4eed68fdb1968771dd23c",
+      "sha256": "246d512d7bc1a403cb80aa07f63e27761788b1c1d4c4eed68fdb1968771dd23c",
+      "bytes": 3579
+    },
+    {
+      "path": "brand/logo/keymark.svg",
+      "source": "systems/sebaro/brand/src/keymark.svg",
+      "sourceSha256": "224fee152c7b7a4185d8d8d8e97a53c9d49ef8c149e3354181cc739ec4321d3a",
+      "sha256": "224fee152c7b7a4185d8d8d8e97a53c9d49ef8c149e3354181cc739ec4321d3a",
+      "bytes": 3622
+    },
+    {
+      "path": "brand/logo/lockup-horizontal.dark.svg",
+      "source": "systems/sebaro/brand/src/lockup-horizontal.dark.svg",
+      "sourceSha256": "7587b34e9297496df7d5a7e9e885f5e8eea33b318e863b5b7e5d1ad0b39270ea",
+      "sha256": "7587b34e9297496df7d5a7e9e885f5e8eea33b318e863b5b7e5d1ad0b39270ea",
+      "bytes": 4284
+    },
+    {
+      "path": "brand/logo/lockup-horizontal.svg",
+      "source": "systems/sebaro/brand/src/lockup-horizontal.svg",
+      "sourceSha256": "a2fda53c5ec392f849d8c4ee2f99d70652df22740c59c96ec69847144fbf4afa",
+      "sha256": "a2fda53c5ec392f849d8c4ee2f99d70652df22740c59c96ec69847144fbf4afa",
+      "bytes": 5823
+    },
+    {
+      "path": "brand/logo/lockup-stacked.dark.svg",
+      "source": "systems/sebaro/brand/src/lockup-stacked.dark.svg",
+      "sourceSha256": "4f5e9f651622901f1110f6c5cee03e16c235d693389b41b2cc444968b03bf367",
+      "sha256": "4f5e9f651622901f1110f6c5cee03e16c235d693389b41b2cc444968b03bf367",
+      "bytes": 4237
+    },
+    {
+      "path": "brand/logo/lockup-stacked.svg",
+      "source": "systems/sebaro/brand/src/lockup-stacked.svg",
+      "sourceSha256": "ff43ac579633354497cda0eee6b1ddb61b3d2acbdca82d65d52fca8d19a4f810",
+      "sha256": "ff43ac579633354497cda0eee6b1ddb61b3d2acbdca82d65d52fca8d19a4f810",
+      "bytes": 5779
+    },
+    {
+      "path": "brand/logo/mark.dark.svg",
+      "source": "systems/sebaro/brand/src/mark.dark.svg",
+      "sourceSha256": "37d9c46d602ddbab3365b29402b1c78401842ab8ff8e59f73859cf3754cdba7f",
+      "sha256": "37d9c46d602ddbab3365b29402b1c78401842ab8ff8e59f73859cf3754cdba7f",
+      "bytes": 1087
+    },
+    {
+      "path": "brand/logo/mark.svg",
+      "source": "systems/sebaro/brand/src/mark.svg",
+      "sourceSha256": "e6d27992243ecfb0d215ec6b9847cebb4d7191db1d8296999118e6694bc41d41",
+      "sha256": "e6d27992243ecfb0d215ec6b9847cebb4d7191db1d8296999118e6694bc41d41",
+      "bytes": 1088
+    },
+    {
+      "path": "brand/logo/wordmark.dark.svg",
+      "source": "systems/sebaro/brand/src/wordmark.dark.svg",
+      "sourceSha256": "4d9bd3e562b0cb544c071ea70b7d5ef39255be258963f881aabd1ae28d651d50",
+      "sha256": "4d9bd3e562b0cb544c071ea70b7d5ef39255be258963f881aabd1ae28d651d50",
+      "bytes": 3984
+    },
+    {
+      "path": "brand/logo/wordmark.svg",
+      "source": "systems/sebaro/brand/src/wordmark.svg",
+      "sourceSha256": "da634eebc27886c7217123dc5aa3f8fe4accbf0fead96e90ed99d93efec84f33",
+      "sha256": "da634eebc27886c7217123dc5aa3f8fe4accbf0fead96e90ed99d93efec84f33",
+      "bytes": 5522
+    },
+    {
+      "path": "brand/logo/variants/lockup-horizontal-large.dark.svg",
+      "source": "systems/sebaro/brand/src/variants/lockup-horizontal-large.dark.svg",
+      "sourceSha256": "c3cd7ef44ed35f755906290d496019b6bcf2623fab69341f5b7bf2cc552649a4",
+      "sha256": "c3cd7ef44ed35f755906290d496019b6bcf2623fab69341f5b7bf2cc552649a4",
+      "bytes": 4203
+    },
+    {
+      "path": "brand/logo/variants/lockup-horizontal-large.svg",
+      "source": "systems/sebaro/brand/src/variants/lockup-horizontal-large.svg",
+      "sourceSha256": "69cef89914628fcfe908c5c1628da257f559c0980b82bcfb2cd43b22844c7312",
+      "sha256": "69cef89914628fcfe908c5c1628da257f559c0980b82bcfb2cd43b22844c7312",
+      "bytes": 5742
+    },
+    {
+      "path": "brand/logo/variants/lockup-horizontal-mono.svg",
+      "source": "systems/sebaro/brand/src/variants/lockup-horizontal-mono.svg",
+      "sourceSha256": "66320b261e107b2ab89a8ec11abedcbe8a4aeb637ee86e4f81709621b55b427c",
+      "sha256": "66320b261e107b2ab89a8ec11abedcbe8a4aeb637ee86e4f81709621b55b427c",
+      "bytes": 5639
+    },
+    {
+      "path": "brand/logo/variants/mark-large.dark.svg",
+      "source": "systems/sebaro/brand/src/variants/mark-large.dark.svg",
+      "sourceSha256": "11d509598bd0dbaba56d72b9163fab88ed0bdd1994a663f5409571436643c739",
+      "sha256": "11d509598bd0dbaba56d72b9163fab88ed0bdd1994a663f5409571436643c739",
+      "bytes": 1013
+    },
+    {
+      "path": "brand/logo/variants/mark-large.svg",
+      "source": "systems/sebaro/brand/src/variants/mark-large.svg",
+      "sourceSha256": "d98fa0cf902c8f0835f5f443a616ff1ee01eae3431d3fe9f945667fc36c35399",
+      "sha256": "d98fa0cf902c8f0835f5f443a616ff1ee01eae3431d3fe9f945667fc36c35399",
+      "bytes": 1014
+    },
+    {
+      "path": "brand/logo/variants/mark-mono.svg",
+      "source": "systems/sebaro/brand/src/variants/mark-mono.svg",
+      "sourceSha256": "74c0114c34c8e0c1a0a8fc3ed9c4a24ae1f00da6cb41cc0eb0adcc6a9cd4c39b",
+      "sha256": "74c0114c34c8e0c1a0a8fc3ed9c4a24ae1f00da6cb41cc0eb0adcc6a9cd4c39b",
+      "bytes": 883
+    },
+    {
+      "path": "brand/inline/keymark-small.dark.svg",
+      "source": "systems/sebaro/brand/inline/keymark-small.dark.svg",
+      "sourceSha256": "22d804c4ccb439d91acee9fb0106ebfe87c8ed193dfe7e117c875997fe7f7c1f",
+      "sha256": "22d804c4ccb439d91acee9fb0106ebfe87c8ed193dfe7e117c875997fe7f7c1f",
+      "bytes": 3570
+    },
+    {
+      "path": "brand/inline/keymark-small.svg",
+      "source": "systems/sebaro/brand/inline/keymark-small.svg",
+      "sourceSha256": "47edce20d893f8f8f229f891ec71f41774d1db2e1112a2dd6738015e8e9b1783",
+      "sha256": "47edce20d893f8f8f229f891ec71f41774d1db2e1112a2dd6738015e8e9b1783",
+      "bytes": 3615
+    },
+    {
+      "path": "brand/inline/keymark.dark.svg",
+      "source": "systems/sebaro/brand/inline/keymark.dark.svg",
+      "sourceSha256": "246d512d7bc1a403cb80aa07f63e27761788b1c1d4c4eed68fdb1968771dd23c",
+      "sha256": "246d512d7bc1a403cb80aa07f63e27761788b1c1d4c4eed68fdb1968771dd23c",
+      "bytes": 3579
+    },
+    {
+      "path": "brand/inline/keymark.svg",
+      "source": "systems/sebaro/brand/inline/keymark.svg",
+      "sourceSha256": "224fee152c7b7a4185d8d8d8e97a53c9d49ef8c149e3354181cc739ec4321d3a",
+      "sha256": "224fee152c7b7a4185d8d8d8e97a53c9d49ef8c149e3354181cc739ec4321d3a",
+      "bytes": 3622
+    },
+    {
+      "path": "brand/inline/lockup-horizontal-large.svg",
+      "source": "systems/sebaro/brand/inline/lockup-horizontal-large.svg",
+      "sourceSha256": "6ad35c02a8f353fe17c801bd6aebf84b5529a2abda8cc9eb8f67808b65326134",
+      "sha256": "6ad35c02a8f353fe17c801bd6aebf84b5529a2abda8cc9eb8f67808b65326134",
+      "bytes": 5870
+    },
+    {
+      "path": "brand/inline/lockup-horizontal.svg",
+      "source": "systems/sebaro/brand/inline/lockup-horizontal.svg",
+      "sourceSha256": "da498e386569f0f60f5355ef7e0a007d76fb0fd879f07006c42d597efed38cfa",
+      "sha256": "da498e386569f0f60f5355ef7e0a007d76fb0fd879f07006c42d597efed38cfa",
+      "bytes": 5865
+    },
+    {
+      "path": "brand/inline/wordmark-dark-cut.svg",
+      "source": "systems/sebaro/brand/inline/wordmark-dark-cut.svg",
+      "sourceSha256": "cc8b5c025640115985446dd55d9487c18d1564d0ea6d07e77c70b3429c51aa14",
+      "sha256": "cc8b5c025640115985446dd55d9487c18d1564d0ea6d07e77c70b3429c51aa14",
+      "bytes": 3989
+    },
+    {
+      "path": "brand/inline/wordmark.svg",
+      "source": "systems/sebaro/brand/inline/wordmark.svg",
+      "sourceSha256": "267f86ca4d6b19dca792aebdb07529a12fc6f537aecf0dfa48279816487143e7",
+      "sha256": "267f86ca4d6b19dca792aebdb07529a12fc6f537aecf0dfa48279816487143e7",
+      "bytes": 5527
+    },
+    {
+      "path": "js/theme-init.js",
+      "source": "systems/sebaro/demo/assets/theme-init.js",
+      "sourceSha256": "6d3ba8a2258cf93ee626e7907cc85d15d03fe506a9e9d26d946530572d7c970b",
+      "sha256": "6d3ba8a2258cf93ee626e7907cc85d15d03fe506a9e9d26d946530572d7c970b",
+      "bytes": 3523
+    },
+    {
+      "path": "js/theme-button.js",
+      "source": "systems/sebaro/demo/assets/theme-button.js",
+      "sourceSha256": "f533bafa8835d7ebb8834f1d5e3bffb861a4ee2e24ddb7d52503dbc52f34512f",
+      "sha256": "f533bafa8835d7ebb8834f1d5e3bffb861a4ee2e24ddb7d52503dbc52f34512f",
+      "bytes": 2222
+    },
+    {
+      "path": "js/sb-tone.js",
+      "source": "systems/sebaro/demo/assets/sb-tone.js",
+      "sourceSha256": "47f4708384a6c478e7d3f9d2db7cbae9d1495096a6cfa7b8bf92e19cdb4fdeeb",
+      "sha256": "47f4708384a6c478e7d3f9d2db7cbae9d1495096a6cfa7b8bf92e19cdb4fdeeb",
+      "bytes": 3868
+    },
+    {
+      "path": "js/sb-notes.js",
+      "source": "systems/sebaro/demo/assets/sb-notes.js",
+      "sourceSha256": "e2ed9d12d87adcf07ee90b84fcaa888b2f4b2b70e5a7c57c5f6a77d7fa093a42",
+      "sha256": "e2ed9d12d87adcf07ee90b84fcaa888b2f4b2b70e5a7c57c5f6a77d7fa093a42",
+      "bytes": 3302,
+      "pack": "notes"
+    },
+    {
+      "path": "js/sb-facts.js",
+      "source": "systems/sebaro/demo/assets/sb-facts.js",
+      "sourceSha256": "08580fe2788f23cad18b1c420f058090399fe16c9d31dfd672b5cefdd19240dc",
+      "sha256": "08580fe2788f23cad18b1c420f058090399fe16c9d31dfd672b5cefdd19240dc",
+      "bytes": 37114,
+      "pack": "facts"
+    },
+    {
+      "path": "js/sb-start.js",
+      "source": "systems/sebaro/demo/assets/sb-start.js",
+      "sourceSha256": "9ea0887aadd857cb24efe140f970196670d2eba87ff9fd81c2c651a38d968c2c",
+      "sha256": "9ea0887aadd857cb24efe140f970196670d2eba87ff9fd81c2c651a38d968c2c",
+      "bytes": 6148
+    },
+    {
+      "path": "js/sb-menu.js",
+      "source": "systems/sebaro/demo/assets/sb-menu.js",
+      "sourceSha256": "18953779b4ca148a2c8af5e035532e47d60241ad7bc83c32d778d38ba805e0a6",
+      "sha256": "18953779b4ca148a2c8af5e035532e47d60241ad7bc83c32d778d38ba805e0a6",
+      "bytes": 27966,
+      "pack": "menu"
+    },
+    {
+      "path": "js/sb-sheet.js",
+      "source": "systems/sebaro/demo/assets/sb-sheet.js",
+      "sourceSha256": "eb77869b8de89be5e14d495188cc9336e57dbcebf4e281f58b1f4fc47baa7296",
+      "sha256": "eb77869b8de89be5e14d495188cc9336e57dbcebf4e281f58b1f4fc47baa7296",
+      "bytes": 5073
+    },
+    {
+      "path": "js/sb-table.js",
+      "source": "systems/sebaro/demo/assets/sb-table.js",
+      "sourceSha256": "3e9ebc523c8c3f30ce1409d34a44993f92523c95655da431b2753b77f02733f2",
+      "sha256": "3e9ebc523c8c3f30ce1409d34a44993f92523c95655da431b2753b77f02733f2",
+      "bytes": 8666,
+      "pack": "table"
+    },
+    {
+      "path": "js/sb-chart.js",
+      "source": "systems/sebaro/demo/assets/sb-chart.js",
+      "sourceSha256": "e69962b20ac6e752eab02068800f78b89b065443b7ef4d0838118b0534f69fe3",
+      "sha256": "e69962b20ac6e752eab02068800f78b89b065443b7ef4d0838118b0534f69fe3",
+      "bytes": 6474,
+      "pack": "charts"
+    },
+    {
+      "path": "js/sb-calendar.js",
+      "source": "systems/sebaro/demo/assets/sb-calendar.js",
+      "sourceSha256": "7458b0147225b5b6093270cf041af808b4bccdabaa896661b66cefb164167092",
+      "sha256": "7458b0147225b5b6093270cf041af808b4bccdabaa896661b66cefb164167092",
+      "bytes": 13256,
+      "pack": "calendar"
+    },
+    {
+      "path": "js/sb-fit.js",
+      "source": "systems/sebaro/demo/assets/sb-fit.js",
+      "sourceSha256": "222efb9ccb4bb90b3b6f9517c38669166a46c314d4fe94b0e4985f3d20cff82d",
+      "sha256": "222efb9ccb4bb90b3b6f9517c38669166a46c314d4fe94b0e4985f3d20cff82d",
+      "bytes": 45943
+    },
+    {
+      "path": "checks/sb-colour-count.js",
+      "source": "systems/sebaro/demo/assets/sb-colour-count.js",
+      "sourceSha256": "9be9c617ed5bb48de4af834fe1c2d4aee08a56df45394729b5678ef3b6d811f8",
+      "sha256": "9be9c617ed5bb48de4af834fe1c2d4aee08a56df45394729b5678ef3b6d811f8",
+      "bytes": 15894
+    },
+    {
+      "path": "checks/verify-export.mjs",
+      "source": "tools/verify-export.mjs",
+      "sourceSha256": "04ac36fcca4491057394606529141d40ee6fe3886a9a1219a180cdacc38d2e03",
+      "sha256": "04ac36fcca4491057394606529141d40ee6fe3886a9a1219a180cdacc38d2e03",
+      "bytes": 7313
+    },
+    {
+      "path": "checks/update-copy.mjs",
+      "source": "tools/update-copy.mjs",
+      "sourceSha256": "d31a6b457fb9ea5353ab8bbd0e0e2db79c1402b2d09dbfc1b69807d25a927c80",
+      "sha256": "d31a6b457fb9ea5353ab8bbd0e0e2db79c1402b2d09dbfc1b69807d25a927c80",
+      "bytes": 37042
+    },
+    {
+      "path": "checks/lint-web.sh",
+      "source": "systems/sebaro/spec/03-signature.md",
+      "sourceSha256": "4bdbf76432e7cd8a1d75faecf6ab054808f89d4e071118b5f2710c33b5ddbe6d",
+      "sha256": "0e5a5e7a18451ebeba63bd695751698d8cbcf8059dce63a7cb87252729388c01",
+      "bytes": 3025,
+      "transform": "the sh block under „### 1.4 Checks“ of spec/03-signature.md, as tools/lint_rules.py sebaro --print colour prints it"
+    },
+    {
+      "path": "product/product_kit.py",
+      "source": "tools/product_kit.py",
+      "sourceSha256": "601803e38e85ec40625ddcb662eee8634d48eeb876097167621b2ce44714d510",
+      "sha256": "601803e38e85ec40625ddcb662eee8634d48eeb876097167621b2ce44714d510",
+      "bytes": 87130
+    },
+    {
+      "path": "product/sign_geometry.py",
+      "source": "tools/sign_geometry.py",
+      "sourceSha256": "de3d5e02db6ca4ac78b5a43ceb09cba4a5839e76c2f7fdeee8b0daf716a8971f",
+      "sha256": "de3d5e02db6ca4ac78b5a43ceb09cba4a5839e76c2f7fdeee8b0daf716a8971f",
+      "bytes": 33741
+    },
+    {
+      "path": "product/render.mjs",
+      "source": "tools/product_render.mjs",
+      "sourceSha256": "78e25d3257bacb198315d7d1ce3410e80aa4019e02db3554d33b8de7945bc443",
+      "sha256": "78e25d3257bacb198315d7d1ce3410e80aa4019e02db3554d33b8de7945bc443",
+      "bytes": 25655
+    },
+    {
+      "path": "product/product.schema.json",
+      "source": "shared/product.schema.json",
+      "sourceSha256": "3d435e3d1574865d6c011a70f6e2279b298e916645587e6ff8a9f152e4ec5352",
+      "sha256": "3d435e3d1574865d6c011a70f6e2279b298e916645587e6ff8a9f152e4ec5352",
+      "bytes": 5949
+    },
+    {
+      "path": "product/PRODUCT-CONTRACT.md",
+      "source": "shared/PRODUCT-CONTRACT.md",
+      "sourceSha256": "f0106106a9878a7dcefcbd9561c3b61543227e2d2a40168fd5e6bff26e1e166e",
+      "sha256": "f0106106a9878a7dcefcbd9561c3b61543227e2d2a40168fd5e6bff26e1e166e",
+      "bytes": 28462
+    },
+    {
+      "path": "product/tiles.json",
+      "source": "systems/sebaro/dist/tokens.json",
+      "sourceSha256": "d640dc65351fec81ba486e18b382b6dffec3a90df3c0ac26a9539672044fff9a",
+      "sha256": "daf74ab97b33e71e04a09e1eeba5d002dc89c99311095e5468657d404de1a926",
+      "bytes": 2232,
+      "transform": "generated: what the product kit needs of the system (tools/product_kit.py tiles, from dist/tokens.json, brand/brand.config.json and brand/signs.json): tile groups, foot colours, grounds, stroke masters, raster measures; no product"
+    },
+    {
+      "path": "CHANGES.md",
+      "source": "systems/sebaro/CHANGES.md",
+      "sourceSha256": "03b8089d6d08fd2b7c8e59203331807b55122aade9d023132ede180494b0114d",
+      "sha256": "03b8089d6d08fd2b7c8e59203331807b55122aade9d023132ede180494b0114d",
+      "bytes": 3781
+    },
+    {
+      "path": "LICENSE.md",
+      "source": "LICENSE.md",
+      "sourceSha256": "a81a5e6fa43b956bfba0631005d4d67feb8d70190443d3046fcf13047cd67792",
+      "sha256": "a81a5e6fa43b956bfba0631005d4d67feb8d70190443d3046fcf13047cd67792",
+      "bytes": 2695
+    },
+    {
+      "path": "css/runtime-names.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "4d15a73f94141a81e3582deaed59a4cd6c602a3066280d8f6d5e41ee9df2bc4f",
+      "bytes": 5529,
+      "transform": "generated: the names that exist only at run time (what the scripts of the core set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.window.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "830eb328bc0c9a48f90680fac26cf235db7da803a74f63b8e44cff0b8c8802a2",
+      "bytes": 2249,
+      "pack": "window",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack window set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.charts.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "b026b33760cc3cc629351ec6351db42b3d2b2ea8c2892bf5c477079eb4fa0604",
+      "bytes": 2318,
+      "pack": "charts",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack charts set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.table.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "255a9a918e41406243070000ffbf8a929364fa33f94fe6201577e07c672376dc",
+      "bytes": 2701,
+      "pack": "table",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack table set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.calendar.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "01af6076deaaedf157fe740b5c82f67f60127d0680e398130367139832cca420",
+      "bytes": 2539,
+      "pack": "calendar",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack calendar set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.diff.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "f65c35c5dc7912f9dc31bf4718771ded01074cafb38bc71b514ddb94230f320e",
+      "bytes": 1956,
+      "pack": "diff",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack diff set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.notes.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "0665addf429b85a6699f0a045984ac0f393a76ab080c1b5330263cb9fdfd5cc8",
+      "bytes": 2417,
+      "pack": "notes",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack notes set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.facts.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "fc1a651ead988e6c6ca71c18ab44888cc1144825cb2cbc26acea5b82f7c26374",
+      "bytes": 4175,
+      "pack": "facts",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack facts set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.menu.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "61f323f11bf2844eb2388c84e9e70d81a63cbe89a93c66ed8788d6f86fa726ea",
+      "bytes": 2614,
+      "pack": "menu",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack menu set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "README.md",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "5cd11ed37f36d35d2c6d26c3b1372b900a2cef20bfffe44ca9a75f0a35264e37",
+      "bytes": 58171,
+      "transform": "generated"
+    }
+  ],
+  "cssSizes": {
+    "$comment": "bytes per file for a CSS budget: as shipped and minified (comments and white space removed, nothing rewritten; a bundler's minifier gets a little less), each also gzip'ed; written when the copy is written, not compared by --verify",
+    "gzip": "gzip level 9, mtime 0, zlib 1.3.1-e00f703",
+    "files": [
+      {
+        "path": "css/sebaro.css",
+        "bytes": 343281,
+        "gzipBytes": 79094,
+        "minifiedBytes": 204305,
+        "minifiedGzipBytes": 28886
+      },
+      {
+        "path": "tokens.css",
+        "bytes": 45138,
+        "gzipBytes": 6510,
+        "minifiedBytes": 38175,
+        "minifiedGzipBytes": 4112
+      }
+    ]
+  },
+  "omitted": [
+    {
+      "what": "`tokens.json`",
+      "reason": "not in the profile webapp: read by a desktop app's build script (profile desktop); a page reads tokens.css"
+    },
+    {
+      "what": "`css/parts`",
+      "reason": "in no profile: a profile copy has one stylesheet, css/sebaro.css with the rules it chose"
+    },
+    {
+      "what": "`brand/site-root`",
+      "reason": "in no profile: favicons, web manifest and head snippet of one product: the product's own, from its declaration (product/PRODUCT-CONTRACT.md of a copy)"
+    },
+    {
+      "what": "`brand/social`",
+      "reason": "in no profile: avatar and banner of one product"
+    },
+    {
+      "what": "`brand/og/*.png`",
+      "reason": "in no profile: the workshop's rendered share images of its own products"
+    },
+    {
+      "what": "`brand/inline/sign-*.svg`",
+      "reason": "in no profile: the sign of one product"
+    },
+    {
+      "what": "`brand/inline/tile-*.svg`",
+      "reason": "in no profile: the sign tile of one product"
+    },
+    {
+      "what": "`tauri`",
+      "reason": "in no profile: the app icon of one product"
+    },
+    {
+      "what": "demo-only files in demo/assets/",
+      "reason": "`demo-completion.js`: the keys of one specimen; the app or its editor owns the keys (spec/02 §4.26); `demo.css`: specimen chrome and phone stand-ins; `pages.css`: reference page layout; `views.css`: Ansichten specimen frames and overflow box; `views.js`: Ansichten specimen wiring; app state belongs to the app"
+    }
+  ],
+  "notes": [
+    "`brand/inline/` comes from systems/sebaro/brand/inline/, which no sebaroDesign gate checks for freshness (it is written by a script of the system, not by tools/brand_assets.py)."
+  ]
+}
