@@ -1,5 +1,5 @@
 {
-  "$comment": "The guide declares itself like any sebaro product (the umbrella): tools/sync_from_design.py hands this file to the product kit of the export (docs/sebaro/product/product_kit.py), which writes docs/sebaro-product/ (favicons, manifest, head snippet, sign and tile).",
+  "$comment": "Placeholder: the umbrella sign of sebaro. A real product declares its own id, name, tile and sign here (public/sebaro/product/PRODUCT-CONTRACT.md) and writes sebaro-product/ from it with npm run sebaro:product.",
   "schemaVersion": "1.0",
   "id": "studio",
   "name": "sebaro",

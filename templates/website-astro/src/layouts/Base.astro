@@ -1,7 +1,7 @@
 ---
 // Base.astro: the frame of every page (WEB-01 load order, NAV-06/NAV-07 header, WEB-03 footer, WEB-09 share-image
 // head, WEB-10 language switch, WEB-02 „Hell oder Dunkel“, FAR-15 „Farbton“, WEB-11 print, ZUG-06 skip link).
-// Markup copied from docs/bauteile.html and docs/web.html of the sebaro guide; only sb-* classes of the export.
+// Markup copied from docs/bauteile.html and docs/web.html of the sebaro guide; only sb-* classes of the copy.
 import fs from "node:fs";
 import path from "node:path";
 import { strings } from "../strings.mjs";
@@ -30,10 +30,13 @@ const { lang, title, ogId, nav, other, self, view, primary = false, notes = fals
 const s = strings[lang];
 const root = process.cwd();
 const read = (p: string) => fs.readFileSync(path.join(root, p), "utf8");
-// WEB-01: the sprite inline at the top of the body, unchanged; the tile inline, unchanged (ZEI-07)
+// WEB-01: the sprite inline at the top of the body, unchanged
 const sprite = read("public/sebaro/icons/sprite.svg");
-// placeholder: the umbrella sign of sebaro; a real product inlines its own tile-<id>-small.svg (ZEI-03, ZEI-06)
-const tile = read("public/sebaro/brand/inline/tile-studio-small.svg");
+// the product's files from the kit of the copy (sebaro-product/, from sebaro.product.json): the sign tile, inline
+// and unchanged (ZEI-07), and the head tags of the favicons and the manifest. Placeholder: the umbrella sign of
+// sebaro; a real product declares its own sign (ZEI-03, ZEI-06)
+const tile = read("sebaro-product/sign/tile.svg");
+const productHead = read("sebaro-product/web/head.snippet.html");
 const ogFile = ogId ? path.join(root, "build", "og-head", `${ogId}.head.html`) : null;
 const ogHead = ogFile && fs.existsSync(ogFile) ? fs.readFileSync(ogFile, "utf8") : "";
 const de = lang === "de" ? self : other;
@@ -61,13 +64,7 @@ const csp = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 's
 <link rel="stylesheet" href="/sebaro/icons/sprite.css">
 <link rel="stylesheet" href="/sebaro/css/sebaro.css">
 <link rel="stylesheet" href="/css/site.css">
-<!-- the lines of sebaro-product/web/head.snippet.html (files copied to the site root by npm run sebaro:sync) -->
-<link rel="icon" href="/favicon.ico" sizes="32x32">
-<link rel="icon" href="/icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/manifest.webmanifest">
-<meta name="theme-color" content="#F4F5F8" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#13161C" media="(prefers-color-scheme: dark)">
+<Fragment set:html={productHead} />
 {other && <link rel="alternate" hreflang={lang} href={new URL(self, Astro.site).href}>}
 {other && <link rel="alternate" hreflang={lang === "de" ? "en" : "de"} href={new URL(other, Astro.site).href}>}
 <Fragment set:html={ogHead} />

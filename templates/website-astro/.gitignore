@@ -4,5 +4,11 @@ dist/
 # written by npm run build (scripts/og.mjs): share images and their head snippets
 build/
 public/og/
+# copied from sebaro-product/web/ to the site root (scripts/site-root.mjs): favicons and manifest
+public/favicon.ico
+public/icon.svg
+public/icon-*.png
+public/apple-touch-icon.png
+public/manifest.webmanifest
 test-results/
 playwright-report/
