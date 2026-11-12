@@ -13,7 +13,7 @@
     "sebaro:lint": "sh public/sebaro/checks/lint-web.sh public/css/site.css dist",
     "og": "node scripts/og.mjs",
     "dev": "node scripts/site-root.mjs && astro dev",
-    "build": "node scripts/site-root.mjs && node scripts/og.mjs && astro build",
+    "build": "node scripts/site-root.mjs && node scripts/og.mjs && astro build --mode pages --outDir build/pages && node scripts/cut.mjs && astro build",
     "preview": "astro preview",
     "test": "npm run sebaro:lint && playwright test"
   },
@@ -22,7 +22,8 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",
-    "@playwright/test": "1.63.0"
+    "@playwright/test": "1.63.0",
+    "purgecss": "8.0.0"
   },
   "overrides": {
     "vite": "8.3.4"

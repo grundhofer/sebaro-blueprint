@@ -30,8 +30,11 @@ const { lang, title, ogId, nav, other, self, view, primary = false, notes = fals
 const s = strings[lang];
 const root = process.cwd();
 const read = (p: string) => fs.readFileSync(path.join(root, p), "utf8");
-// WEB-01: the sprite inline at the top of the body, unchanged
-const sprite = read("public/sebaro/icons/sprite.svg");
+// the build loads the copy's stylesheet and icon sprite cut to what the pages use (scripts/cut.mjs); `astro dev`
+// and the first pass of the build, which the cut reads (mode "pages"), load them whole
+const cut = import.meta.env.MODE === "production";
+// WEB-01: the sprite inline at the top of the body
+const sprite = read(cut ? "build/sprite.svg" : "public/sebaro/icons/sprite.svg");
 // the product's files from the kit of the copy (sebaro-product/, from sebaro.product.json): the sign tile, inline
 // and unchanged (ZEI-07), and the head tags of the favicons and the manifest. Placeholder: the umbrella sign of
 // sebaro; a real product declares its own sign (ZEI-03, ZEI-06)
@@ -60,9 +63,11 @@ const csp = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 's
 <title>{title}{s.titleSuffix}</title>
 <script is:inline src="/sebaro/js/theme-init.js"></script>
 <link rel="stylesheet" href="/sebaro/fonts/fonts.css">
-<link rel="stylesheet" href="/sebaro/tokens.css">
+{cut
+  ? <link rel="stylesheet" href="/css/sebaro.cut.css">
+  : <link rel="stylesheet" href="/sebaro/tokens.css">}
 <link rel="stylesheet" href="/sebaro/icons/sprite.css">
-<link rel="stylesheet" href="/sebaro/css/sebaro.css">
+{!cut && <link rel="stylesheet" href="/sebaro/css/sebaro.css">}
 <link rel="stylesheet" href="/css/site.css">
 <Fragment set:html={productHead} />
 {other && <link rel="alternate" hreflang={lang} href={new URL(self, Astro.site).href}>}
