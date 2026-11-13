@@ -5,9 +5,12 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import de.sebaro_ventures.musterapp.ui.appViewModel
 
-/** The top-level place „Einstellungen“. It shares its ViewModel with the root, which reads the theme from it. */
+/**
+ * The top-level place „Einstellungen“. It shares its ViewModel with the root, which reads the theme from it.
+ * [onAbout] leads to „Über“.
+ */
 @Composable
-fun SettingsRoute(navigation: @Composable () -> Unit) {
+fun SettingsRoute(onAbout: () -> Unit, navigation: @Composable () -> Unit) {
     val viewModel = appViewModel { c -> SettingsViewModel(c.settings) }
     val state by viewModel.state.collectAsStateWithLifecycle()
     SettingsScreen(
@@ -16,6 +19,7 @@ fun SettingsRoute(navigation: @Composable () -> Unit) {
         onTone = viewModel::onTone,
         onReduceMotion = viewModel::onReduceMotion,
         onFailureSeen = viewModel::onFailureSeen,
+        onAbout = onAbout,
         navigation = navigation,
     )
 }

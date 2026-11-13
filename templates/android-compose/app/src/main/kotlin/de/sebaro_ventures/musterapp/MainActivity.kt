@@ -15,9 +15,11 @@ class MainActivity : ComponentActivity() {
         // edge to edge: SbScreen and SbTopBar take the system bar insets themselves
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+        // the start is shown once per activity start, not again after a rotation
+        val firstStart = savedInstanceState == null
         setContent {
             CompositionLocalProvider(LocalAppContainer provides appContainer) {
-                MusterappApp(onDark = ::showSystemBars)
+                MusterappApp(firstStart = firstStart, onDark = ::showSystemBars)
             }
         }
     }

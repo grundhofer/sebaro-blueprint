@@ -23,6 +23,7 @@ private fun Settings(state: SettingsUiState) {
         onTone = {},
         onReduceMotion = {},
         onFailureSeen = {},
+        onAbout = {},
         navigation = { MusterappNavigation(selected = 2, onSelect = {}) },
     )
 }

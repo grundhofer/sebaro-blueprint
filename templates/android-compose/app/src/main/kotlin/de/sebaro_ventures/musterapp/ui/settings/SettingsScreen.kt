@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import de.sebaro_ventures.design.SebaroTheme
 import de.sebaro_ventures.design.SebaroTone
+import de.sebaro_ventures.design.designsystem.SbListRow
 import de.sebaro_ventures.design.designsystem.SbMotionSetting
 import de.sebaro_ventures.design.designsystem.SbScreen
 import de.sebaro_ventures.design.designsystem.SbThemeChoice
@@ -22,8 +23,8 @@ import de.sebaro_ventures.musterapp.ui.SaveFailedCallout
 
 /**
  * View type `settings`, a top-level place: „Hell oder Dunkel“, „Farbton“ and „Bewegung immer reduzieren“ with the
- * parts and words of the copy. Every choice applies at once, so there is no primary action. The language is not
- * chosen here but in Android's settings for the app.
+ * parts and words of the copy. Every choice applies at once, so there is no primary action. The last row leads to
+ * „Über“. The language is not chosen here but in Android's settings for the app.
  */
 @Composable
 fun SettingsScreen(
@@ -32,6 +33,7 @@ fun SettingsScreen(
     onTone: (SebaroTone) -> Unit,
     onReduceMotion: (Boolean) -> Unit,
     onFailureSeen: () -> Unit,
+    onAbout: () -> Unit,
     navigation: @Composable () -> Unit,
 ) {
     val t = SebaroTheme.tokens
@@ -53,6 +55,10 @@ fun SettingsScreen(
             SbThemeChoice(mode = state.mode, onChange = onMode)
             SbToneChoice(tone = state.tone, onChange = onTone)
             SbMotionSetting(reduce = state.reduceMotion, onChange = onReduceMotion)
+            SbListRow(
+                title = sbStringResource(R.string.settings_about, sbStringResource(R.string.app_name)),
+                onClick = onAbout,
+            )
         }
     }
 }

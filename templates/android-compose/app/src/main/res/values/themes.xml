@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Theme.Sebaro comes with the sebaro copy (light in values/, dark in values-night/): the window ground before
-         the first Compose frame and the platform's own widgets. Compose screens use SebaroAppTheme. -->
-    <style name="Theme.Musterapp" parent="Theme.Sebaro" />
+    <!-- Theme.Sebaro.Start comes from the product kit (sebaro-product/): the product colour as the window ground
+         before the first Compose frame and, from Android 12, the system's start screen with the symbol. Its parent
+         Theme.Sebaro comes with the sebaro copy (light in values/, dark in values-night/) and colours the
+         platform's own widgets. Compose screens use SebaroAppTheme. -->
+    <style name="Theme.Musterapp" parent="Theme.Sebaro.Start" />
 </resources>

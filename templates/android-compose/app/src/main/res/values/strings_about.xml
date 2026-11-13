@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- „Version …“ comes with the about head from the sebaro copy; the sender's mark follows about_sender. -->
+<resources>
+    <string name="about_title">About %1$s</string>
+    <string name="about_line">Starter for apps with sebaro</string>
+    <string name="about_sender">An app by</string>
+</resources>
