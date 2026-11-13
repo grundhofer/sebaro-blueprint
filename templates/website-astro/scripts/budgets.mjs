@@ -1,17 +1,19 @@
 #!/usr/bin/env node
-// budgets.mjs: the build test of BLUEPRINT.md (Size and speed) on the built pages in dist/. Last step of
-// `npm run build`: prints the sizes of every page and exits 1 above a budget.
+// budgets.mjs: the build test of BLUEPRINT.md (Size and speed) on the built pages in dist/, in every language. A step
+// of `npm run build`: prints the sizes of every page and exits 1 above a budget.
 //   HTML per page 100 KB · CSS per page 90 KB (every stylesheet the page links, as served)
-//   inline script on the start page 1.5 KB · every other script comes from the list below
+//   inline script on the start page of each language 1.5 KB · every other script comes from the list below
 // A KB is 1000 bytes. dist/sebaro/ is the served copy, not a page of the site.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { LANGUAGES } from "../src/site.mjs";
+import { urlOf } from "../src/lib/languages.mjs";
 
 const HTML_MAX = 100_000;
 const CSS_MAX = 90_000;
 const INLINE_SCRIPT_MAX = 1_500;
-const START = "index.html";
+const STARTS = LANGUAGES.map(({ code }) => path.join(urlOf(code, ""), "index.html").slice(1));
 const SCRIPTS = ["theme-init", "theme-button", "sb-tone", "sb-print", "sb-controls", "sb-notes", "sb-fit"].map(
   (name) => `/sebaro/js/${name}.js`,
 );
@@ -52,7 +54,7 @@ for (const page of pages) {
   );
   if (size > HTML_MAX) over.push(`${page}: HTML ${bytes(size)} bytes, budget ${bytes(HTML_MAX)}`);
   if (css > CSS_MAX) over.push(`${page}: CSS ${bytes(css)} bytes, budget ${bytes(CSS_MAX)}`);
-  if (page === START && inline > INLINE_SCRIPT_MAX)
+  if (STARTS.includes(page) && inline > INLINE_SCRIPT_MAX)
     over.push(`${page}: inline script ${bytes(inline)} bytes, budget ${bytes(INLINE_SCRIPT_MAX)}`);
 }
 for (const line of over) console.error(`budgets: FAIL ${line}`);
