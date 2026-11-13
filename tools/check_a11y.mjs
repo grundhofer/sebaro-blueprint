@@ -4,11 +4,10 @@
 // sideways and no frame with overflow hidden or clip may cut a text (D100 (5), ZUG-09). The browser's default font
 // size is doubled by CDP Page.setFontSizes before the page loads, as a reader sets it, so rem and em grow and px
 // stays: the widths where the guide's layout once switched by px while the text was twice as large. The phone widths
-// at 200 % stay with the workshop's check_demo.py (OVF3, OVF4, OVF6 at 320, 360, 390 px). COUNT: an area's count in
-// the contents of regeln.html stands on the line of its word, in every run.
+// at 200 % stay with the workshop's check_demo.py (OVF3, OVF4, OVF6 at 320, 360, 390 px).
 //
-//   node tools/check_a11y.mjs                 # all docs/*.html
-//   node tools/check_a11y.mjs docs/app.html   # some pages
+//   node tools/check_a11y.mjs                   # all docs/*.html
+//   node tools/check_a11y.mjs docs/daten.html   # some pages
 //
 // Inside a .g-ex--dont specimen (not its label or note) axe color-contrast is skipped; every other rule runs there.
 // Waivers live in tools/a11y-waivers.json: {"waivers": [{"page", "rule", "target", "reason"}]}; "target" is a
@@ -118,12 +117,6 @@ async function checkCutControls(browser) {
   return bad;
 }
 
-// COUNT: an area's count in the contents (regeln.html) stands on the line of its word, not on a line of its own
-const countsAlone = () => [...document.querySelectorAll(".demo-toc li > a + .g-toc__count")].filter((c) => {
-  const a = c.previousElementSibling.getBoundingClientRect(), b = c.getBoundingClientRect();
-  return b.width > 0 && (b.top >= a.bottom - 1 || b.bottom <= a.top + 1);
-}).map((c) => c.previousElementSibling.textContent.trim());
-
 const waiverFile = JSON.parse(readFileSync(join(ROOT, "tools", "a11y-waivers.json"), "utf8"));
 const waivers = waiverFile.waivers || [];
 let failed = 0;
@@ -183,7 +176,6 @@ for (const file of pages) {
       }
     }
     if (overflow > 1) { console.log(`error: OVERFLOW ${label}: page scrolls sideways by ${overflow} px`); failed++; }
-    for (const w of await tab.evaluate(countsAlone)) { console.log(`error: COUNT ${label}: the count of „${w}“ stands on a line of its own`); failed++; }
     for (const e of errors) { console.log(`error: CONSOLE ${label}: ${e}`); failed++; }
     await ctx.close();
   }
@@ -201,7 +193,6 @@ for (const file of pages) {
       if (root < 16 * LARGE.scale - 0.5) { console.log(`error: LARGE ${label}: the text size did not take (root ${root} px)`); failed++; }
       const overflow = await tab.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       if (overflow > 1) { console.log(`error: LARGE ${label}: page scrolls sideways by ${overflow} px`); failed++; }
-      for (const w of await tab.evaluate(countsAlone)) { console.log(`error: COUNT ${label}: the count of „${w}“ stands on a line of its own`); failed++; }
       for (const c of await tab.evaluate(collectCut)) {
         console.log(`error: LARGE ${label}: "${c.text}" (${c.at}) runs ${c.over} px past ${c.frame}, which cuts it`);
         failed++;

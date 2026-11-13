@@ -8,10 +8,6 @@
 .g-header .sb-lockup { min-inline-size: 0; }
 .g-header__name { display: inline-flex; flex-wrap: wrap; column-gap: var(--sb-space-2); min-inline-size: 0; }
 .g-nav { row-gap: 0; }
-/* D92 (6): „Plattformen“ stands for web, app, ios and desktop. On one of those pages it carries aria-current="true"
- * (an item of the set, not the page) and the same place line as aria-current="page" in sebaro.css (NAV-01). */
-.g-nav a[aria-current="true"] { border-block-end-color: var(--sb-color-accent); color: var(--sb-color-link); font-weight: var(--sb-type-body-strong-weight); }
-@media (forced-colors: active) { .g-nav a[aria-current="true"] { border-color: CanvasText; } }
 /* every page listed in the footer, on a line of its own above the version line */
 .g-footer__pages { flex-basis: 100%; }
 .g-footer code { font-size: 0.875em; }
@@ -31,35 +27,6 @@
 .g-lead p + p { margin-block-start: var(--sb-space-2); }
 @media (min-width: 64rem) { .g-lead { padding-block-start: var(--sb-spacing-section-wide); } }
 
-.g-toc-list { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--sb-space-1); }
-.g-toc-list a { display: inline-flex; min-block-size: var(--sb-size-target-pointer); align-items: center; }
-/* an area's count stands after its word in the page frame's contents: sb-toc's link is a block-level flex box, which
- * put the count on a line of its own at every width; the word keeps its longest word as its least width, so a long
- * one moves the count under it instead of being squeezed */
-.demo-toc li:has(> .g-toc__count) { display: flex; flex-wrap: wrap; align-items: center; column-gap: var(--sb-space-2); }
-.demo-toc li > .g-toc__count { flex: none; }
-.g-toc__count, .g-area__count { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); }
-
-/* ------------------------------------------------------------------ rules (regeln.html) */
-.g-area__intro { margin: calc(-1 * var(--sb-space-4)) 0 var(--sb-space-8); max-inline-size: 42em; color: var(--sb-color-text-muted); }
-.g-rule { padding-block: var(--sb-space-8); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); scroll-margin-block-start: var(--sb-space-4); }
-.g-rule:target { border-block-start: var(--sb-border-width-strong) solid var(--sb-color-accent); }
-.g-rule__head { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--sb-space-3); align-items: baseline; }
-.g-rule__id { font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); color: var(--sb-color-text-muted); text-decoration: none; }
-.g-rule__id:hover { color: var(--sb-color-link); text-decoration: underline; text-decoration-thickness: 2px; }
-.g-rule__title { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
-.g-rule__meta { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-2); margin: var(--sb-space-2) 0 0; }
-.g-rule__status { display: inline-flex; align-items: center; gap: var(--sb-space-1); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
-.g-rule__status--entschieden { color: var(--sb-color-text); }
-.g-rule__text { margin: var(--sb-space-4) 0 0; max-inline-size: 42em; }
-.g-rule__example { margin-block-start: var(--sb-space-6); }
-.g-rule__more { margin-block-start: var(--sb-space-6); }
-.g-rule__more > summary { display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-pointer); cursor: pointer; color: var(--sb-color-text); text-decoration: underline; text-decoration-color: var(--sb-color-link); text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
-.g-rule__facts { margin-block-start: var(--sb-space-3); max-inline-size: 48em; }
-/* D100 (5): at 200 % text the id column leaves title and status too little room; from 24rem down (384 px at 100 %, 768 px
- * at 200 %, since a media query's rem follows the reader's text size) title and status line take the whole width */
-@media (max-width: 24rem) { .g-rule__title, .g-rule__meta { grid-column: 1 / -1; } }
-
 /* ------------------------------------------------------------------ examples: right and wrong side by side */
 .g-examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, max(300px, 18.75rem)), 1fr)); gap: var(--sb-space-6); align-items: start; }
 .g-ex { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-3); min-inline-size: 0; }
@@ -73,18 +40,13 @@
  * frame, a window shot, a video and the stage's direct content kept min(320px, 12rem) and scrolled in the stage at
  * large text; since the workshop's narrow-column parts (sebaro.css after D102: list rows, board, actions, dialogs,
  * changelog, top bar and menus stack instead of squeezing their words) most specimens reflow in the stage's own
- * width, so the minimum stays only where they do not (the two rules below). A part that cannot reflow scrolls in its
+ * width, so the minimum stays only where they do not (the rule below). A part that cannot reflow scrolls in its
  * own frame (a table, code, a wide window, the menus below); guide.js gives a stage that scrolls tabindex, role and name. A word that alone does not fit its line breaks
  * there (sb-fit.js gives that word, and only it, a hyphen) instead of being cut by a frame */
 /* a phone frame stands for a screen of at least 320 px (so does a window shot and a video): it keeps that width at large
  * text (12rem is 320 px from 167 % text on) and the stage scrolls, instead of squeezing the view to a column no phone
  * has (provisional, agent, since 2.10.0) */
-.g-ex__stage :is(.sb-phone, .g-rx-frame--phone, .g-rx-window-bad, .g-rx-c-frame:not(.g-rx-c-frame--wide), .sb-video, .sb-shots--window) { min-inline-size: min(320px, 12rem); }
-/* a stage whose specimen stands for a screen (a dialog, a sheet, a palette, a header, a window or a view drawn
- * without a phone frame) keeps the same minimum for its whole content: g-ex__stage--screen, set in the example where
- * the content does not reflow below 320 px (measured with the workshop's OVF4 and OVF6 at 200 %, guide 2.11.0); every
- * other stage reflows in its own width (provisional, agent) */
-.g-ex__stage--screen > :not(.sb-table-wrap, .sb-code, .g-rx-winscroll, .g-rx-narrow, .g-rx-narrowtext, .g-rx-d-tight) { min-inline-size: min(320px, 12rem); }
+.g-ex__stage :is(.sb-phone, .sb-video, .sb-shots--window) { min-inline-size: min(320px, 12rem); }
 /* on a narrow screen at large text (24rem is 768 px at 200 %, 384 px at 100 %) the stage keeps 8 px at its sides
  * instead of 16 px that grow with the text (32 px at 200 %), so a specimen gets nearly the width of a phone's
  * content at 320 px (provisional, agent, 2.11.0) */
@@ -101,19 +63,11 @@
 .g-source { margin-block-start: var(--sb-space-3); min-inline-size: 0; }   /* an open block never widens a grid parent: its code scrolls in its own frame (D100 (5)) */
 .g-source > summary { display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-pointer); cursor: pointer; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .g-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, max(260px, 16.25rem)), 1fr)); gap: var(--sb-space-6) var(--sb-spacing-group); align-items: start; }
-.g-mark-proposal { display: inline-flex; align-items: center; gap: var(--sb-space-1); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 
 /* ------------------------------------------------------------------ deliberate "Nicht so" specimens
  * .g-ex--dont marks a wrong example. Inside it (except its .g-ex__label and .g-ex__note) check_site.py lets colour
  * literals and box-shadow pass in CSS rules whose every selector is scoped by .g-ex--dont and in inline styles, and
  * check_a11y.mjs skips only axe color-contrast. Names, roles, keyboard and every other axe rule stay checked. */
-
-/* ------------------------------------------------------------------ reference swatches (FAR-13, vorläufig)
- * Markup: <span class="g-swatch" role="img" aria-label="Farbfeld Lindgrün" style="--g-swatch-color: var(--sb-color-primary-action)"></span>
- * followed by visible text that starts with "Farbfeld", e.g. "Farbfeld · Lindgrün · primary-action". Only on reference
- * pages (Grundlagen, Regeln, Start); never a control, never in a product. check_site.py (SWATCH) checks the name. */
-.g-swatch { display: inline-block; flex: none; vertical-align: middle; inline-size: var(--sb-space-8); block-size: var(--sb-space-8); box-sizing: border-box; border: var(--sb-border-width-hairline) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-control); background: var(--g-swatch-color, transparent); }
-.g-swatch-item { display: inline-flex; align-items: center; gap: var(--sb-space-2); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
 
 /* ------------------------------------------------------------------ tables that restack per row (shared guide pattern)
  * Markup: <div class="sb-table-wrap" role="region" aria-labelledby="…" tabindex="0"><table class="sb-table g-table-stack">.
@@ -131,12 +85,6 @@
   .g-table-stack tr > th[scope="row"], .g-table-stack tr > td:first-child { font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
   .g-table-stack tr > :is(td, th)[data-label]:not(:first-child)::before { content: attr(data-label) ": "; color: var(--sb-color-text-muted); font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); }
 }
-/* g-table-stack--large-text (rule examples, guide 2.13.1): the same restack, but only while the text is large: a screen
- * that holds fewer than 20rem (below 640 px at 200 % text, never on a phone of 320 px or more at 100 %) or a screen of
- * 1024 px or more that holds less than 64rem (as the page frame below). At 100 % the table keeps its columns as before;
- * the container exists only then (ZUG-09; provisional, agent) */
-:has(> .g-table-stack--large-text) { container: none; }
-@media (max-width: 19.99rem), (min-width: 1024px) and (max-width: 63.99rem) { :has(> .g-table-stack--large-text) { container: g-table / inline-size; } }
 
 /* long names in inline code break instead of pushing a column or the page sideways (code blocks keep their lines); a
  * file name (sb-file-name) breaks only after - . _ / where the page wrote <wbr>, an identifier (sb-id) never (D101 (6), D80) */
@@ -172,12 +120,6 @@ main .demo-box:has(> .sb-tree) { overflow-x: auto; }
  * at 100 % every specimen stays as it was */
 @media (min-width: 1024px) and (max-width: 63.99rem) { main .demo-header-specimen { container: sb-page / inline-size; } }
 
-/* ------------------------------------------------------------------ filter bar on regeln.html */
-.g-filter { display: flex; flex-wrap: wrap; align-items: end; gap: var(--sb-space-4) var(--sb-space-6); margin-block: var(--sb-space-6) 0; }
-.g-filter__count { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); font-variant-numeric: var(--sb-type-numeric-variant); }
-.g-rule[hidden], .g-area[hidden] { display: none; }
-
 @media print {
-  .g-header, .g-footer, .g-filter, .sb-theme-button { display: none; }
-  .g-rule__more { display: block; }
+  .g-header, .g-footer, .sb-theme-button { display: none; }
 }

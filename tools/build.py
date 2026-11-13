@@ -11,15 +11,15 @@ Pages in docs/*.html are hand-written. Shared parts sit between marker comments 
     <!-- guide:footer -->          … <!-- /guide:footer -->    site footer with sync state
     <!-- guide:tile id="novalis" size="48" --> … <!-- /guide:tile -->   brand/inline/tile-<id>[-small].svg
     <!-- guide:kern -->            … <!-- /guide:kern -->      index.html: the 31 core rules from design/KERN.de.md
-    <!-- guide:rules -->           … <!-- /guide:rules -->     regeln.html: every rule of rules/rules.json + its example
-    <!-- guide:rules-toc -->       … <!-- /guide:rules-toc --> regeln.html: area list
-    <!-- guide:stats -->           … <!-- /guide:stats -->     rule counts by status
 
 Markers may nest at any depth: open and close markers are paired with a stack, and markers inside generated output
-(a guide:tile in a rule fragment inside guide:rules) are filled as well. An unclosed or crossed marker stops the build.
+are filled as well. An unclosed or crossed marker stops the build.
 
-Rule examples are fragments in src/rule-examples/<RULE-ID>.html. Outputs written besides the pages:
-docs/rules.json (copy of rules/rules.json), guide/RULES.md (all rules as Markdown for agents), docs/llms.txt, and
+The site has three pages (PAGES). The addresses of the pages that went keep a minimal page each (MOVED): written whole
+by this script, it says where the content went and links to the start page; noindex, no script, no foreign request,
+no share image. tools/check_site.py lists the same files and checks them as such.
+
+Outputs written besides the pages: the pages of MOVED, docs/rules.json (copy of rules/rules.json), docs/llms.txt, and
 src/og/pages.json: the share-image page list (D96 (a), brand/og/pages.schema.json of the export), written from the
 pages themselves: per page its file, its <h1> as title and its meta description, nothing else (the pages state no
 breadcrumb, reading time or date, so every image takes the start form). tools/og.mjs renders it with the exported
@@ -29,7 +29,7 @@ gets a placeholder and the build exits 1 (render first: node tools/og.mjs, then 
 
     python3 tools/build.py          # rewrite blocks and outputs
     python3 tools/build.py --check  # exit 1 if anything would change (freshness gate)
-    python3 tools/build.py docs/app.html   # only this page (safe while others edit other pages)
+    python3 tools/build.py docs/daten.html   # only this page (safe while others edit other pages)
 Standard library only.
 """
 from __future__ import annotations
@@ -47,7 +47,6 @@ ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 SEBARO = DOCS / "sebaro"
 RULES = ROOT / "rules" / "rules.json"
-EXAMPLES = ROOT / "src" / "rule-examples"
 KERN_DE = ROOT / "design" / "KERN.de.md"     # the core rules in German, for people (check_budget.py keeps it in step)
 REPO_URL = "https://github.com/grundhofer/sebaro-guide"
 SITE_URL = "https://grundhofer.github.io/sebaro-guide/"
@@ -58,29 +57,42 @@ OG_MISSING: list[str] = []               # pages whose snippet is missing (build
 
 # file, label, icon (sprite id), one line for llms.txt
 PAGES = [
-    ("index.html", "Start", "home", "Einstieg: was sebaro ist, der Kern in neun Sätzen, Wege durch den Guide"),
-    ("regeln.html", "Regeln", "check", "Alle Gestaltungsregeln mit ID, Begründung, Prüfung und Live-Beispiel (richtig/falsch)"),
-    ("grundlagen.html", "Grundlagen", "board", "Farben, Schrift, Raum, Form, Linien, Ebenen, Bewegung: alle Tokens mit Werten"),
+    ("index.html", "Start", "home", "Einstieg: was sebaro ist, die 31 Kernregeln auf Deutsch, die Baupläne und Startvorlagen je Produktart"),
     ("bauteile.html", "Bauteile", "copy", "Alle Komponenten mit Zuständen und Markup"),
     ("daten.html", "Daten", "chart-bar", "Jede Datenart einmal dargestellt: Text, Zahlen, Zeit, Status, Listen, Tabellen, Diagramme, Code …"),
-    ("plattformen.html", "Plattformen", "smartphone", "Übersicht der vier Plattformseiten Web, App, iOS und Desktop und was je Plattform anders ist"),
-    ("web.html", "Web", "globe", "Beispiel-Website mit allen typischen Seiten und Fällen"),
-    ("app.html", "App", "file", "Beispiel-App am Handy: alle typischen Bildschirme und Zustände"),
-    ("ios.html", "iOS", "smartphone", "Dieselbe App auf dem iPhone: SwiftUI-Bausteine, Systemleisten, Sheet, Dynamic Type"),
-    ("desktop.html", "Desktop", "folder", "Beispiel-Desktop-App (Tauri/macOS): Fenster, Seitenleiste, Tabellen, Menüs, Tastatur"),
-    ("gedanken.html", "Gedanken", "book", "Die Gedanken dahinter: Haltung, Geschichte, Entscheidungen, Abwägungen"),
-    ("ausblick.html", "Ausblick", "arrow-right", "Was auf eine Wahl des Inhabers wartet, was offen ist, später kommt oder erledigt ist"),
 ]
 
-# D92 (6): the header groups the four platform pages under „Plattformen“ (a link to the overview page, no menu
-# button: spec/03 §6.1 keeps every header word visible at 390 px). On a platform page „Plattformen“ carries
-# aria-current="true" (current item of the set, not the page itself). Footer and llms.txt keep listing every page.
-PLATFORM_GROUP = "plattformen.html"
-PLATFORM_PAGES = ("web.html", "app.html", "ios.html", "desktop.html")
-
-STATUS_LABEL = {"entschieden": ("check--16", "Entschieden"), "vorläufig": ("clock--16", "Vorläufig"),
-                "offen": ("help", "Offen")}
-PLATFORM_LABEL = {"web": "Web", "mobile": "App", "desktop": "Desktop", "alle": "Alle Plattformen"}
+# the addresses of the pages that went: file, name, where the content went (one or two sentences), links (a link with
+# :// leaves the site and ends in the external-link icon); every page links to the start page
+_BLOB = f"{REPO_URL}/blob/main/"
+_HOME = ("Zur Startseite", "index.html")
+MOVED = [
+    ("regeln.html", "Regeln", "Die 31 Kernregeln stehen auf der Startseite. Den ganzen Katalog mit Begründung und "
+     "Prüfung jeder Regel findest du in rules/rules.json.",
+     [("Die 31 Kernregeln", "index.html#kern"), ("rules/rules.json", _BLOB + "rules/rules.json"), _HOME]),
+    ("grundlagen.html", "Grundlagen", "Farben, Schrift, Raum und Form kommen als Tokens aus der sebaro-Kopie in "
+     "deinem Projekt. Was du davon im Kopf haben musst, sagen die Kernregeln auf der Startseite.",
+     [("Die 31 Kernregeln", "index.html#kern"), _HOME]),
+    ("plattformen.html", "Plattformen", "Für jede Produktart gibt es einen Bauplan und eine Startvorlage: Website, "
+     "Web-App, Desktop-App und Android-App.",
+     [("Baupläne und Vorlagen", "index.html#vorlagen"), _HOME]),
+    ("web.html", "Web", "Das Beispiel für eine Website ist ihre Startvorlage, ein kleines fertiges Projekt mit Bauplan.",
+     [("Startvorlage für Websites", _BLOB + "templates/website-astro/README.md"), _HOME]),
+    ("app.html", "App", "Das Beispiel für eine Handy-App ist die Startvorlage für Android, ein kleines fertiges Projekt "
+     "mit Bauplan.",
+     [("Startvorlage für Android-Apps", _BLOB + "templates/android-compose/README.md"), _HOME]),
+    ("ios.html", "iOS", "Die Startvorlage für iOS ist eingefroren. Sie bleibt, wie sie ist, bis eine iOS-App ansteht.",
+     [("Startvorlage für iOS", _BLOB + "templates/ios-swiftui/README.md"), _HOME]),
+    ("desktop.html", "Desktop", "Das Beispiel für eine Desktop-App ist ihre Startvorlage, ein kleines fertiges Projekt "
+     "mit Bauplan.",
+     [("Startvorlage für Desktop-Apps", _BLOB + "templates/desktop-tauri/README.md"), _HOME]),
+    ("gedanken.html", "Gedanken", "Was gilt, sagen die Kernregeln auf der Startseite. Was sich wann geändert hat, "
+     "steht im Änderungsprotokoll.",
+     [("Die 31 Kernregeln", "index.html#kern"), ("Änderungsprotokoll", _BLOB + "CHANGELOG.md"), _HOME]),
+    ("ausblick.html", "Ausblick", "Was eine Startvorlage noch nicht kann, steht in ihrer README. Was sich geändert "
+     "hat, steht im Änderungsprotokoll.",
+     [("Baupläne und Vorlagen", "index.html#vorlagen"), ("Änderungsprotokoll", _BLOB + "CHANGELOG.md"), _HOME]),
+]
 
 
 def esc(s: str) -> str:
@@ -88,19 +100,16 @@ def esc(s: str) -> str:
 
 
 # Characters the shipped font subsets do not contain: rendering them would pull in a system font (D22, FNT3).
-# rules.json keeps the exact characters for agents; the HTML gets words or icons instead. Key glyphs (⌘ ⇧ ⌥ ⌃ ↩ ⎋ ⌫
+# The sources keep the exact characters; the HTML gets words or icons instead. Key glyphs (⌘ ⇧ ⌥ ⌃ ↩ ⎋ ⌫
 # ⇥) are real characters of sebaro Sans/Mono since D68 and stay. Arrows in prose stay icons (ICO-06).
 GLYPH_WORDS = {"≥": "ab", "≤": "bis", "Δ": "Delta-", "↗": "U+2197"}
 GLYPH_ICONS = {"→": ("arrow-right--16", "zu"), "←": ("arrow-left--16", "links"), "↑": ("arrow-up--16", "hoch"),
                "↓": ("arrow-down--16", "runter")}
 
 
-GLYPH_WORDS_EN = {**GLYPH_WORDS, "≥": "at least", "≤": "at most"}
-
-
-def _plain(s: str, lang: str) -> str:
+def _plain(s: str) -> str:
     out = esc(s)
-    for ch, word in (GLYPH_WORDS_EN if lang == "en" else GLYPH_WORDS).items():
+    for ch, word in GLYPH_WORDS.items():
         out = out.replace(ch, word)
     for ch, (name, label) in GLYPH_ICONS.items():
         out = out.replace(ch, f'<svg class="sb-icon sb-icon--16" role="img" aria-label="{label}" focusable="false">'
@@ -108,7 +117,7 @@ def _plain(s: str, lang: str) -> str:
     return out.replace("Delta- ", "Delta-")
 
 
-# Machine values inside rule text (D101 (6), (10), TXT-08): rules.json keeps plain text for agents; the HTML marks a
+# Machine values inside rule text (D101 (6), (10), TXT-08): the sources keep plain text; the HTML marks a
 # file name or path as <code class="sb-file-name"> with <wbr> after - . _ / (it breaks only there, never with a
 # hyphen), and a markup fragment or an attribute as <code>, so sb-fit.js never hyphenates them (D102 lane narrow, OVF6).
 _FILE_RE = (r"(?<![\w/.-])(?:[\w-]+/)*[\w-]+(?:\.[\w-]+)*\."
@@ -137,15 +146,15 @@ def _file_name(s: str, cls: str = "sb-file-name") -> str:
     return f'<code class="{cls}">' + "".join(out) + "</code>"
 
 
-def text(s: str, lang: str = "de") -> str:
+def text(s: str) -> str:
     """Escape rule text for HTML, mark file names and markup as code, and replace characters the fonts lack."""
     s = s or ""
     out, pos = [], 0
     for m in _MACHINE.finditer(s):
-        out.append(_plain(s[pos:m.start()], lang))
+        out.append(_plain(s[pos:m.start()]))
         out.append(_file_name(m.group("file")) if m.group("file") else f"<code>{esc(m.group('markup'))}</code>")
         pos = m.end()
-    out.append(_plain(s[pos:], lang))
+    out.append(_plain(s[pos:]))
     return "".join(out)
 
 
@@ -284,11 +293,7 @@ def block_header(attrs: dict) -> str:
     current = attrs.get("page", "")
     links = []
     for file, label, _icon, _desc in PAGES:
-        if file in PLATFORM_PAGES:
-            continue
         cur = ' aria-current="page"' if file == current else ""
-        if file == PLATFORM_GROUP and current in PLATFORM_PAGES:
-            cur = ' aria-current="true"'
         links.append(f'<a href="{file}"{cur}>{esc(label)}</a>')
     return "\n".join([
         '<a class="sb-skip-link" href="#inhalt">Zum Inhalt</a>',
@@ -317,7 +322,6 @@ def block_footer(_attrs: dict) -> str:
     pages = [f'    <li><a href="{file}">{esc(label)}</a></li>' for file, label, _icon, _desc in PAGES]
     return "\n".join([
         '<footer class="sb-site-footer g-footer">',
-        # D92 (6): the header groups the platform pages, so the footer lists every page directly
         '  <nav class="g-footer__pages" aria-label="Alle Seiten">',
         '  <ul class="sb-site-footer__links">',
         *pages,
@@ -336,7 +340,7 @@ def block_footer(_attrs: dict) -> str:
         f'    <li><a href="{REPO_URL}/blob/main/AGENTS.md">Für Agenten{icon("external-link--16")}</a></li>',
         '  </ul>',
         # D91 Z3a: websites put „Farbton“ in the footer under „Darstellung“ (sb-tone.js shows the hidden group). The
-        # <form> keeps these radios a group of their own: rule examples on regeln.html carry name="sb-tone" too.
+        # <form> keeps these radios a group of their own: examples on bauteile.html carry name="sb-tone" too.
         '  <section class="sb-site-footer__display" aria-labelledby="g-footer-display-h" data-sb-tone-choice hidden>',
         '    <h2 id="g-footer-display-h">Darstellung</h2>',
         '    <form class="g-footer__tone">',
@@ -353,51 +357,6 @@ def block_footer(_attrs: dict) -> str:
         '  <p class="sb-visually-hidden" role="status" data-sb-tone-status></p>',
         '</footer>',
     ])
-
-
-def render_rule(r: dict, area_title: str) -> str:
-    st_icon, st_label = STATUS_LABEL.get(r.get("status", ""), ("info", r.get("status", "")))
-    platforms = " ".join(f'<span class="sb-tag">{esc(PLATFORM_LABEL.get(p, p))}</span>' for p in r.get("platforms", []))
-    decisions = ", ".join(r.get("decisions", [])) or "–"
-    ex_path = EXAMPLES / f"{r['id']}.html"
-    # fragments may carry their own guide:tile blocks; fill them before nesting into the rules block
-    example = fill(ex_path.read_text(encoding="utf-8")).strip() if ex_path.is_file() else ""
-    parts = [
-        f'<article class="g-rule" id="{esc(r["id"])}" data-status="{esc(r.get("status", ""))}" '
-        f'data-platforms="{esc(" ".join(r.get("platforms", [])))}" aria-labelledby="{esc(r["id"])}-h">',
-        '  <header class="g-rule__head">',
-        f'    <a class="g-rule__id" href="#{esc(r["id"])}">{esc(r["id"])}</a>',
-        f'    <h3 class="g-rule__title" id="{esc(r["id"])}-h">{text(r["title"])}</h3>',
-        f'    <p class="g-rule__meta"><span class="g-rule__status g-rule__status--{esc(r.get("status", ""))}">'
-        f'{icon(st_icon)}{esc(st_label)}</span> {platforms}</p>',
-        '  </header>',
-        f'  <p class="g-rule__text">{text(r["rule"])}</p>',
-    ]
-    if example:
-        parts.append(f'  <div class="g-rule__example">\n{example}\n  </div>')
-    parts += [
-        '  <details class="g-rule__more">',
-        '    <summary>Warum, Werte und Prüfung</summary>',
-        '    <dl class="sb-meta-list g-rule__facts">',
-        f'      <div><dt>Warum</dt><dd>{text(r.get("why", ""))}</dd></div>',
-        f'      <div><dt>So</dt><dd>{text(r.get("do", ""))}</dd></div>',
-        f'      <div><dt>Nicht so</dt><dd>{text(r.get("dont", ""))}</dd></div>',
-    ]
-    if r.get("numbers"):
-        parts.append(f'      <div><dt>Werte</dt><dd>{text(r["numbers"])}</dd></div>')
-    if r.get("note"):
-        parts.append(f'      <div><dt>Hinweis</dt><dd>{text(r["note"])}</dd></div>')
-    parts += [
-        f'      <div><dt>Prüfung</dt><dd>{text(r.get("check", ""))}</dd></div>',
-        f'      <div><dt>Entscheidung</dt><dd>{esc(decisions)}</dd></div>',
-        f'      <div><dt>Geändert</dt><dd>{esc(r.get("changed", ""))}</dd></div>',
-        f'      <div><dt>Quelle</dt><dd><code class="sb-code-inline">{esc(r.get("source", ""))}</code></dd></div>',
-        f'      <div><dt lang="en">Agent</dt><dd lang="en">{text(r.get("rule_en", ""), "en")}</dd></div>',
-        '    </dl>',
-        '  </details>',
-        '</article>',
-    ]
-    return "\n".join(parts)
 
 
 # ------------------------------------------------------------------ the core rules (guide:kern)
@@ -488,51 +447,8 @@ def block_kern(_attrs: dict) -> str:
     return "\n".join(out)
 
 
-def block_rules(_attrs: dict) -> str:
-    data = rules_data()
-    out = []
-    for area in data.get("areas", []):
-        rules = [r for r in data["rules"] if r.get("area") == area["id"]]
-        if not rules:
-            continue
-        out.append(f'<section class="sb-section g-area" id="bereich-{esc(area["id"])}" '
-                   f'aria-labelledby="bereich-{esc(area["id"])}-h">')
-        out.append(f'<h2 class="sb-section__title" id="bereich-{esc(area["id"])}-h">{esc(area["title"])} '
-                   f'<span class="g-area__count">{len(rules)}</span></h2>')
-        if area.get("intro"):
-            out.append(f'<p class="g-area__intro">{esc(area["intro"])}</p>')
-        out.extend(render_rule(r, area["title"]) for r in rules)
-        out.append('</section>')
-    return "\n".join(out)
-
-
-def block_rules_toc(_attrs: dict) -> str:
-    data = rules_data()
-    items = []
-    for area in data.get("areas", []):
-        n = sum(1 for r in data["rules"] if r.get("area") == area["id"])
-        if n:
-            items.append(f'<li><a href="#bereich-{esc(area["id"])}">{esc(area["title"])}</a> '
-                         f'<span class="g-toc__count">{n}</span></li>')
-    return '<ol>\n' + "\n".join(items) + "\n</ol>"
-
-
-def block_stats(_attrs: dict) -> str:
-    rules = rules_data().get("rules", [])
-    n = {k: sum(1 for r in rules if r.get("status") == k) for k in ("entschieden", "vorläufig", "offen")}
-    return "\n".join([
-        '<ul class="sb-stats g-stats">',
-        f'  <li class="sb-stat"><p class="sb-stat__label">Regeln</p><p class="sb-stat__value">{len(rules)}</p></li>',
-        f'  <li class="sb-stat"><p class="sb-stat__label">entschieden</p><p class="sb-stat__value">{n["entschieden"]}</p></li>',
-        f'  <li class="sb-stat"><p class="sb-stat__label">vorläufig</p><p class="sb-stat__value">{n["vorläufig"]}</p></li>',
-        f'  <li class="sb-stat"><p class="sb-stat__label">offen</p><p class="sb-stat__value">{n["offen"]}</p></li>',
-        '</ul>',
-    ])
-
-
 BLOCKS = {"og": block_og, "head": block_head, "sprite": block_sprite, "header": block_header, "footer": block_footer,
-          "tile": block_tile, "kern": block_kern, "rules": block_rules, "rules-toc": block_rules_toc,
-          "stats": block_stats}
+          "tile": block_tile, "kern": block_kern}
 # one pattern for open and close markers; pairs are matched with a stack, so markers may nest at any depth
 MARKER = re.compile(r'<!-- (?P<close>/)?guide:(?P<name>[a-z-]+)(?P<attrs>(?:\s+[a-z]+="[^"]*")*)\s*-->')
 ATTR = re.compile(r'([a-z]+)="([^"]*)"')
@@ -540,8 +456,8 @@ MAX_DEPTH = 8
 
 
 def fill(text: str, depth: int = 0) -> str:
-    """Rewrite every outermost marker block; markers inside the generated output (for example guide:tile in a rule
-    fragment inside guide:rules) are filled too, at any depth. A body is always regenerated, never kept."""
+    """Rewrite every outermost marker block; markers inside the generated output are filled too, at any depth. A body
+    is always regenerated, never kept."""
     if depth > MAX_DEPTH:
         raise SystemExit(f"guide markers nested deeper than {MAX_DEPTH} levels")
     out, pos, stack = [], 0, []
@@ -572,40 +488,57 @@ def fill(text: str, depth: int = 0) -> str:
 
 # ------------------------------------------------------------------ outputs
 
-def rules_markdown() -> str:
-    data = rules_data()
-    lines = ["# sebaro rules", "",
-             "Generated by `tools/build.py` from `rules/rules.json`; do not edit. "
-             f"{len(data.get('rules', []))} rules. Live examples: {SITE_URL}regeln.html", "",
-             "Status: **entschieden** = owner decision (binding), **vorläufig** = agent decision, changeable by the "
-             "owner, **offen** = proposal, not yet a rule. `D<n>` = row n of sebaroDesign/DECISIONS.md.", ""]
-    for area in data.get("areas", []):
-        rules = [r for r in data["rules"] if r.get("area") == area["id"]]
-        if not rules:
-            continue
-        lines += [f"## {area['title']} ({area['prefix']})", ""]
-        if area.get("intro"):
-            lines += [area["intro"], ""]
-        for r in rules:
-            lines += [f"### {r['id']} {r['title']}  ·  {r.get('status', '')}  ·  {', '.join(r.get('platforms', []))}", "",
-                      r["rule"], "", f"*EN:* {r.get('rule_en', '')}", "",
-                      f"- **Warum:** {r.get('why', '')}",
-                      f"- **So:** {r.get('do', '')}",
-                      f"- **Nicht so:** {r.get('dont', '')}"]
-            if r.get("numbers"):
-                lines.append(f"- **Werte:** {r['numbers']}")
-            lines += [f"- **Prüfung:** {r.get('check', '')}",
-                      f"- **Entscheidung:** {', '.join(r.get('decisions', [])) or '–'} · **Quelle:** `{r.get('source', '')}`",
-                      ""]
-    return "\n".join(lines).rstrip() + "\n"
+def moved_page(name: str, sentences: str, links: list[tuple[str, str]]) -> str:
+    """The whole page at the address of a page that went (MOVED): one heading, where the content went, the links.
+    System stylesheets only, no script, no foreign request; a link that leaves the site gets the external-link icon,
+    whose one symbol is inlined (no request for the sprite, works from file://)."""
+    items, external = [], False
+    for label, href in links:
+        leaves = "://" in href
+        external |= leaves
+        items.append(f'    <li><a href="{esc(href)}">{text(label)}{icon("external-link--16") if leaves else ""}</a></li>')
+    sprite = (SEBARO / "icons" / "sprite.svg").read_text(encoding="utf-8")
+    symbol = re.search(r'<symbol id="external-link--16".*?</symbol>', sprite, re.S).group(0) if external else ""
+    return "\n".join([
+        "<!doctype html>",
+        '<html lang="de">',
+        "<head>",
+        "<!-- written by tools/build.py (MOVED): the address of a page that went; do not edit -->",
+        '<meta charset="utf-8">',
+        '<meta name="viewport" content="width=device-width, initial-scale=1">',
+        '<meta name="robots" content="noindex">',
+        f"<title>{esc(name)} · sebaro Guide</title>",
+        '<meta name="color-scheme" content="light dark">',
+        '<link rel="stylesheet" href="sebaro/fonts/fonts.css">',
+        '<link rel="stylesheet" href="sebaro/tokens.css">',
+        '<link rel="stylesheet" href="sebaro/icons/sprite.css">',
+        '<link rel="stylesheet" href="sebaro/css/sebaro.css">',
+        '<link rel="icon" href="sebaro-product/web/favicon.ico" sizes="32x32">',
+        '<link rel="icon" href="sebaro-product/web/icon.svg" type="image/svg+xml">',
+        "</head>",
+        '<body class="sb-page">',
+        *([f'<svg xmlns="http://www.w3.org/2000/svg" class="sb-sprite" width="0" height="0" aria-hidden="true" '
+           f'focusable="false">{symbol}</svg>'] if symbol else []),
+        '<main class="sb-container">',
+        '  <section class="sb-section sb-page-lead" aria-labelledby="moved-h">',
+        f'    <h1 class="sb-page-lead__title" id="moved-h">{esc(name)}</h1>',
+        f'    <p class="sb-page-lead__text">{text(sentences)}</p>',
+        "  </section>",
+        "  <ul>",
+        *items,
+        "  </ul>",
+        "</main>",
+        "</body>",
+        "</html>",
+        "",
+    ])
 
 
 def llms_txt() -> str:
     lines = ["# sebaro Guide", "",
-             "> The design guide of every sebaro app, website and desktop app: colour jobs, type, space, shape, "
-             "behaviour, components, data display and the reasoning behind them. German UI language (du).", "",
-             f"Machine-readable rules: {SITE_URL}rules.json · Markdown: {REPO_URL}/blob/main/guide/RULES.md · "
-             f"Agent entry: {REPO_URL}/blob/main/AGENTS.md", "",
+             "> The design guide of every sebaro app, website, web app and desktop app: the 31 core rules, one "
+             "blueprint and starter per product kind, components and data display. German UI language (du).", "",
+             f"Machine-readable rules: {SITE_URL}rules.json · Agent entry: {REPO_URL}/blob/main/AGENTS.md", "",
              "## Building a product", "",
              f"- [Core rules]({REPO_URL}/blob/main/design/KERN.md) and [view types]({REPO_URL}/blob/main/design/views.md): "
              "the 31 rules and 21 view types to read before any UI work",
@@ -631,10 +564,9 @@ def llms_txt() -> str:
 
 
 def outputs() -> dict[Path, str]:
-    out = {}
+    out = {DOCS / file: moved_page(name, sentences, links) for file, name, sentences, links in MOVED}
     if RULES.is_file():
         out[DOCS / "rules.json"] = RULES.read_text(encoding="utf-8")
-        out[ROOT / "guide" / "RULES.md"] = rules_markdown()
     out[DOCS / "llms.txt"] = llms_txt()
     out[OG_PAGES] = og_pages()
     return out
@@ -647,9 +579,6 @@ def main() -> int:
     args = ap.parse_args()
     stale = []
     files = [Path(p).resolve() for p in args.pages] if args.pages else sorted(DOCS.glob("*.html"))
-    if not args.pages:
-        # keep the guide:tile blocks inside rule fragments fresh too (they are inlined into regeln.html)
-        files += sorted(EXAMPLES.glob("*.html"))
     targets = {p: fill(p.read_text(encoding="utf-8")) for p in files}
     if not args.pages:
         targets.update(outputs())
