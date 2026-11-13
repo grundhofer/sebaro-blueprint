@@ -1,0 +1,32 @@
+# cargo-deny: what the app may ship and where its crates come from. Vulnerabilities are the job of `cargo audit`;
+# this file holds the licences, the sources and the crates that come twice. `ci` runs:
+#   cargo deny check licenses bans sources
+# No [graph] targets: the crates of every platform are checked, also those this machine never builds.
+
+[licenses]
+# Licences that ask for a notice at most, and MPL-2.0, which asks that changes to its own files stay open (the app
+# changes none). No licence that would bind the whole app (GPL, AGPL, LGPL): a crate with one fails here.
+# A new entry is a decision of the owner, with a line that says what the licence asks for.
+allow = [
+    "Apache-2.0",
+    "Apache-2.0 WITH LLVM-exception",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "MIT",
+    "MPL-2.0",
+    "Unicode-3.0",
+    "Zlib",
+]
+confidence-threshold = 0.9
+
+[bans]
+# a crate in two versions makes the app larger, but Tauri's tree has some: a warning, no failure
+multiple-versions = "warn"
+# every dependency names its version; the workspace's own crates are found by path
+wildcards = "deny"
+allow-wildcard-paths = true
+
+[sources]
+# crates.io only: no other registry, no git repository
+unknown-registry = "deny"
+unknown-git = "deny"
