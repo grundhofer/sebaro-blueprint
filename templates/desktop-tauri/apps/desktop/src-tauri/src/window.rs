@@ -1,9 +1,12 @@
 // window.rs: the main window. It is made here, not in tauri.conf.json, so it has the stored „Hell oder Dunkel“ and
-// its ground before the page paints. The four grounds come from the sebaro copy at build time (build.rs).
+// its ground before the page paints: the colour of the start, which the page shows until the app has painted; the
+// stored ground follows once the page has loaded. The grounds come from the sebaro copy and the files its kit wrote
+// for the product, at build time (build.rs).
 // On macOS the UI's own bar is the title bar (overlay style, hidden title); Windows and Linux keep the system frame.
 use musterapp_core::{Settings, Theme, Tone};
 use tauri::{
-    window::Color, App, Theme as SystemTheme, WebviewUrl, WebviewWindow, WebviewWindowBuilder,
+    webview::PageLoadEvent, window::Color, App, Theme as SystemTheme, WebviewUrl, WebviewWindow,
+    WebviewWindowBuilder,
 };
 
 include!(concat!(env!("OUT_DIR"), "/grounds.rs"));
@@ -19,6 +22,12 @@ fn mode(settings: &Settings) -> Option<SystemTheme> {
 
 fn ground(tone: Tone, dark: bool) -> Color {
     let [red, green, blue] = GROUNDS[usize::from(tone == Tone::Warm)][usize::from(dark)];
+    Color(red, green, blue, 255)
+}
+
+/// The ground of the start: the tile colour of the product's group, in light and dark alike.
+fn start() -> Color {
+    let [red, green, blue] = START;
     Color(red, green, blue, 255)
 }
 
@@ -47,25 +56,28 @@ fn init_script(settings: &Settings) -> String {
     )
 }
 
-/// Makes the main window with the stored choice.
+/// Makes the main window with the stored choice. It opens in the colour of the start; once the page has loaded, the
+/// app stands under the start and the window takes the stored ground.
 pub fn open(app: &App, settings: &Settings) -> tauri::Result<()> {
+    let stored = *settings;
     let builder = WebviewWindowBuilder::new(app, "main", WebviewUrl::App("index.html".into()))
         .title(&app.package_info().name)
         .inner_size(1200.0, 800.0)
         .min_inner_size(480.0, 400.0)
         .theme(mode(settings))
-        .background_color(ground(
-            settings.tone,
-            mode(settings) == Some(SystemTheme::Dark),
-        ))
-        .initialization_script(init_script(settings));
+        .background_color(start())
+        .initialization_script(init_script(settings))
+        .on_page_load(move |window, payload| {
+            // "follow the system": only the window itself knows which mode the system shows
+            if payload.event() == PageLoadEvent::Finished {
+                apply(&window, &stored);
+            }
+        });
     #[cfg(target_os = "macos")]
     let builder = builder
         .title_bar_style(tauri::TitleBarStyle::Overlay)
         .hidden_title(true);
-    let window = builder.build()?;
-    // "follow the system": only the window itself knows which mode the system shows
-    apply(&window, settings);
+    builder.build()?;
     Ok(())
 }
 
@@ -103,6 +115,30 @@ mod tests {
                 && !light(GROUNDS[0][1])
                 && light(GROUNDS[1][0])
                 && !light(GROUNDS[1][1])
+        );
+    }
+
+    /// The kit drew `sebaro-product/sign/tile.svg` in the colour the copy's `product/tiles.json` gives the tile group
+    /// that `sebaro.product.json` names: the window opens in that colour.
+    #[test]
+    fn the_window_opens_in_the_tile_colour_of_the_kit() {
+        let read = |file: &str| -> serde_json::Value {
+            let text = std::fs::read_to_string(format!("{}/{file}", env!("CARGO_MANIFEST_DIR")))
+                .expect("the file can be read");
+            serde_json::from_str(&text).expect("the file is JSON")
+        };
+        let declaration = read("../../../sebaro.product.json");
+        let tiles = read("../ui/src/sebaro/product/tiles.json");
+        let group = declaration["tile"]
+            .as_str()
+            .expect("the product names its tile group");
+        let colour = tiles["groups"][group]["tile"]
+            .as_str()
+            .expect("tiles.json gives the group's colour");
+        let [red, green, blue] = START;
+        assert_eq!(
+            format!("#{red:02X}{green:02X}{blue:02X}"),
+            colour.to_uppercase()
         );
     }
 
