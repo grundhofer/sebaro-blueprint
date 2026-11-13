@@ -14,7 +14,7 @@ im Menü „Mehr“ in der oberen Leiste jedes Orts.
 | Ansicht | Adresse | Was sie zeigt |
 |---|---|---|
 | Einträge | `/` | Suche, Filterchips, Liste mit Erledigtem, leerer Zustand, Stand-Satz und „Neuer Eintrag“ unten |
-| Eintrag | `/eintrag/2` | Eigenschaften, Zustand als Zeichen und Wort, „Bearbeiten“ als die eine umrandete Aktion in der Aktionszone, „Als erledigt markieren“ als Textaktion mit Kurzmeldung und „Rückgängig“, Löschen mit Dialog, endgültiger Schritt mit 45°-Kante |
+| Eintrag | `/eintrag/2` | Eigenschaften, Zustand als Zeichen und Wort, „Bearbeiten“ als die eine umrandete Aktion in der Aktionszone, „Als erledigt markieren“ als Textaktion mit Kurzmeldung und „Rückgängig“; am Ende des Inhalts „Eintrag abschließen“ als Textaktion und „Eintrag löschen“ als die eine Gefahrtaste dort, beide mit Dialog, dessen Bestätigung die 45°-Kante trägt |
 | Neuer Eintrag, Bearbeiten | `/neu`, `/bearbeiten/2` | Formular mit „(optional)“, Fehlern je Feld, Teilschritten mit „Rückgängig“, Dialog „Abbrechen“ · „Verwerfen“ · „Sichern“ |
 | Datenarten | `/daten` | jede Datenart von `docs/daten.html`: Text, Zahlen, Geld, Zeit, Kalender, Zustände, Tabellen mit Sortierung und Summe, Baum, Mehrfachauswahl, alle Diagramme, Orte, Belege |
 | Einstellungen | `/einstellungen` | „Bewegung immer reduzieren“, „Über“, der Weg zu den Pflichtseiten und zum Quelltext |
@@ -182,8 +182,9 @@ Wo die Vorlage eine dieser Regeln noch nicht ganz erfüllt, steht es unter „L�
 - Bewegung in den Einstellungen: BEW-04; Laden im Kopf: WEB-01
 - eine Hauptaktion unten in der Aktionszone, zuletzt in jeder Gruppe, mit Stand-Satz und Datenweg-Zeile: AKT-01, AKT-02,
   AKT-04, AKT-11, STA-07, EBE-08, BEL-10
-- drei Stufen von Aktionen (Kernregel 13): höchstens eine umrandete je Bereich, alles andere eine Textaktion; die
-  Gefahrtaste mit Kante nur für das, was sich nicht zurücknehmen lässt: AKT-06, AKT-07
+- drei Stufen von Aktionen (Kernregel 13): höchstens eine umrandete je Bereich, alles andere eine Textaktion; im
+  Inhalt einer Ansicht höchstens eine Gefahrtaste mit Kante, für das Löschen; ein endgültiger Schritt, der nichts
+  löscht, ist dort eine Textaktion und fragt im Dialog: AKT-06, AKT-07, AKT-08
 - Listen, Leerzustand, Suche, Chips: DAT-01, DAT-02, DAT-07, EIN-04, EIN-05, STA-09
 - Formular: EIN-01, EIN-02, STA-03, RAU-07; Dialoge: EBE-03, AKT-07, AKT-08, AKT-11, FOR-04; Kurzmeldung: EBE-05
 - Zustände und Daten: STA-01, STA-02, STA-05, STA-06, DAT-03 bis DAT-17 außer DAT-13 (Board), FOR-05, TXT-04, TXT-09, TXT-11 bis TXT-17, FAR-12, FAR-14,
@@ -249,7 +250,7 @@ die Code an eine Funktion übergibt; Zahlen und Zeichen allein (08:12, ±0) gelt
 ist die des Browsers (`beforeunload`); ihr Text ist nicht änderbar. Das Datumsfeld zeigt das Format der Browsersprache,
 nicht der Seitensprache. Audio und Video sind nicht dabei (keine Mediendateien). Die Prüfung einer Ansicht liest keine
 Pseudo-Elemente (Haken, Rahmen von Chips) und keine Fokusringe, und sie zählt die Gefahrtaste nicht als umrandete
-Aktion: die Detailansicht zeigt zwei davon nebeneinander.
+Aktion: dass die Detailansicht nur eine zeigt, prüft `tests/keyboard.spec.ts`.
 
 ## Lücken der Vorlage
 

@@ -74,6 +74,9 @@ test("delete through the dialog: Escape returns focus, „Löschen“ removes", 
 
 test("the final step that deletes nothing asks like a deletion and closes the entry", async ({ page }) => {
   await open(page, "/eintrag/2");
+  // in the content it is a text action; the one danger action there is the deletion
+  await expect(button(page, "Eintrag abschließen")).toHaveClass("sb-text-action");
+  await expect(main(page).locator(".sb-danger-action:visible")).toHaveText(["Eintrag löschen"]);
   await tabTo(page, button(page, "Eintrag abschließen"));
   await expect(button(page, "Eintrag abschließen").locator("svg")).toHaveCount(0); // no trash: nothing is deleted
   await page.keyboard.press("Enter");

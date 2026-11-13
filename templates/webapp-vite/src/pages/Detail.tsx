@@ -1,7 +1,8 @@
 // Detail.tsx: one entry: its properties, the state as glyph and word, „Als erledigt markieren“ with a toast that
 // takes it back, and the two steps that ask first: deleting, and closing for good (which deletes nothing and so
 // carries no trash). A detail view has no primary action: its one outlined action, „Bearbeiten“, stands in the
-// action zone; every other action is a text action, a step that cannot be undone keeps the danger action.
+// action zone. At the end of the content every action is a text action, also „Eintrag abschließen“; only
+// „Eintrag löschen“ is the danger action there.
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router";
@@ -109,18 +110,16 @@ export default function Detail() {
             </div>
           </dl>
           {editable && (
-            <div>
+            <div className="sb-cluster">
               <button className="sb-text-action" type="button" onClick={toggle}>
                 {t(state === "done" ? "detail.reopen" : "detail.markDone")}
               </button>
-            </div>
-          )}
-          <div className="sb-cluster">
-            {editable && (
-              <button className="sb-danger-action" type="button" onClick={() => setAsking("finish")}>
+              <button className="sb-text-action" type="button" onClick={() => setAsking("finish")}>
                 {t("detail.finish")}
               </button>
-            )}
+            </div>
+          )}
+          <div>
             <button className="sb-danger-action" type="button" onClick={() => setAsking("delete")}>
               <Icon name="trash" />
               {t("detail.delete")}
