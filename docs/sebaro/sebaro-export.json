@@ -12,7 +12,7 @@
   "target": "web",
   "excludedProducts": 8,
   "sebaroDesign": {
-    "commit": "3a4b371bdda0152ffd936cb75e86806e557c07dc",
+    "commit": "ae50278303b0ba406f1283ff02f27f28ac589cd6",
     "uncommittedChanges": false
   },
   "contracts": {
@@ -983,9 +983,9 @@
     {
       "path": "LICENSE.md",
       "source": "LICENSE.md",
-      "sourceSha256": "a81a5e6fa43b956bfba0631005d4d67feb8d70190443d3046fcf13047cd67792",
-      "sha256": "a81a5e6fa43b956bfba0631005d4d67feb8d70190443d3046fcf13047cd67792",
-      "bytes": 2695
+      "sourceSha256": "12cf7ea99a2af1784a7e49fab8e8945ab02dbfd609b35ad307c2ee616c08fa03",
+      "sha256": "12cf7ea99a2af1784a7e49fab8e8945ab02dbfd609b35ad307c2ee616c08fa03",
+      "bytes": 2699
     },
     {
       "path": "README.md",
