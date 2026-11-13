@@ -74,8 +74,8 @@ apps/desktop/src-tauri/   die Tauri-Shell
   src/main.rs             die Liste der Befehle, der Start
   src/commands.rs         die Befehle und alles, was zur Oberfläche hinübergeht: Typen, Fehlercodes
   src/window.rs           das Hauptfenster: Grund des Starts, dann Hell oder Dunkel, das Skript vor der Seite
-  build.rs                liest die vier Fenstergründe aus tokens.json der Kopie, den Grund des Starts aus
-                          sebaro-product/sign/tile.svg
+  build.rs                liest aus tokens.json der Kopie die vier Fenstergründe und den Grund des Starts
+                          (signTiles.<Gruppe>.tile, die Gruppe aus sebaro.product.json)
   tauri.conf.json         Content-Security-Policy, Installationspaket; capabilities/default.json: die Rechte
 apps/desktop/ui/          die Oberfläche (Bauplan der Web-App)
   src/main.tsx            Einstieg: das eine Fenster mit seiner Fehlergrenze; hat es gemalt, endet der Start
@@ -113,8 +113,8 @@ Fensters.
   End-to-End-Tests) tut ein Aufruf nichts.
 - **Fenster und Start.** Das Hauptfenster entsteht in Rust, nicht in `tauri.conf.json`: mit dem gespeicherten „Hell
   oder Dunkel“ und, bevor die Seite malt, in der Farbe des Starts, der Kachelfarbe der Gruppe des Produkts
-  (`build.rs` liest sie aus `sebaro-product/sign/tile.svg`, das der Baukasten der Kopie aus `sebaro.product.json`
-  schreibt). Die Seite zeigt den Start vom ersten Bild an ohne Skript: `index.html` trägt `class="sb-starting"`, und
+  (`build.rs` liest sie aus `tokens.json` der Kopie, `signTiles.<Gruppe>.tile` mit dem `tile` aus
+  `sebaro.product.json`). Die Seite zeigt den Start vom ersten Bild an ohne Skript: `index.html` trägt `class="sb-starting"`, und
   das Plugin in `vite.config.ts` schreibt das Markup der Kopie mit der ID des Produkts und seinem Zeichen
   (`sebaro-product/sign/sign.svg`) als erstes Element in den Body; die Farben gibt `sign/product.css`, das
   `src/app.css` nach `tokens.css` einbindet. Hat die App gemalt, blendet `src/lib/start.ts` den Start in 200&nbsp;ms

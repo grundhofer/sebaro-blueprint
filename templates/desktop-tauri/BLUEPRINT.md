@@ -28,8 +28,9 @@ UI maps the code to a sentence from the string table.
 ## Window and system
 
 - The main window is created in Rust, not in `tauri.conf.json`, so its ground before the first paint is the product
-  colour of the start: the tile colour of the product's group, read from the files of the copy's kit at build time.
-  The stored light or dark ground follows with the app; its colour is read from the copy's tokens at build time.
+  colour of the start: the tile colour of the product's group, `signTiles.<group>.tile` of the copy's `tokens.json`
+  with the `tile` of `sebaro.product.json`. The stored light or dark ground follows with the app. Both are read at
+  build time.
 - Theme and tone are stored by the Rust side in the app's settings file.
 - Capabilities: `core:default` plus the window permissions the app uses. Nothing else without a reason.
 - Content-Security-Policy in `tauri.conf.json`: `default-src 'none'` or `'self'`, `script-src 'self'`,

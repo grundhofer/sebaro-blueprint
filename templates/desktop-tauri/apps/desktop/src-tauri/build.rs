@@ -1,7 +1,7 @@
-// build.rs: Tauri's build step, and before it the window's grounds: the four read from the sebaro copy's tokens.json
-// (cool and warm, each light and dark), and the ground of the start, the tile colour of the product's group, read
-// from the tile the copy's kit wrote into sebaro-product/. So no colour value is ever written into the Rust code. The
-// build fails loud when a file is missing or holds no such colour.
+// build.rs: Tauri's build step, and before it the window's grounds, read from the sebaro copy's tokens.json: the four
+// of the app (cool and warm, each light and dark), and the ground of the start, the tile colour of the product's group
+// (`signTiles.<group>.tile`, the group named by `tile` in sebaro.product.json). So no colour value is ever written
+// into the Rust code. The build fails loud when a file is missing or holds no such colour.
 use std::{env, fs, path::Path};
 
 fn ground(tokens: &serde_json::Value, pointer: &str) -> [u8; 3] {
@@ -14,17 +14,6 @@ fn ground(tokens: &serde_json::Value, pointer: &str) -> [u8; 3] {
     [0, 2, 4].map(|at| {
         u8::from_str_radix(&hex[at..at + 2], 16).expect("tokens.json: a colour is #RRGGBB")
     })
-}
-
-/// The tile colour in the kit's `sign/tile.svg`: the kit draws the tile's ground first, `fill="#RRGGBB"`.
-fn tile_colour(tile: &str) -> [u8; 3] {
-    let hex = tile
-        .split("fill=\"#")
-        .nth(1)
-        .and_then(|rest| rest.get(..6))
-        .filter(|hex| hex.chars().all(|digit| digit.is_ascii_hexdigit()))
-        .expect("sebaro-product/sign/tile.svg: the tile's ground is no fill=\"#RRGGBB\"");
-    [0, 2, 4].map(|at| u8::from_str_radix(&hex[at..at + 2], 16).expect("hex digits"))
 }
 
 fn main() {
@@ -41,11 +30,15 @@ fn main() {
         ground(&tokens, "/variants/warm/light/bg"),
         ground(&tokens, "/variants/warm/dark/bg"),
     ];
-    let tile = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../../sebaro-product/sign/tile.svg");
-    println!("cargo:rerun-if-changed={}", tile.display());
-    let start = tile_colour(&fs::read_to_string(&tile).expect(
-        "sebaro-product/ has no sign/tile.svg: write it with the kit of the copy (product/product_kit.py build)",
-    ));
+    let file = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../../sebaro.product.json");
+    println!("cargo:rerun-if-changed={}", file.display());
+    let text = fs::read_to_string(&file).expect("the product has no sebaro.product.json");
+    let product: serde_json::Value =
+        serde_json::from_str(&text).expect("sebaro.product.json is no JSON");
+    let group = product["tile"]
+        .as_str()
+        .expect("sebaro.product.json names no tile group (`tile`)");
+    let start = ground(&tokens, &format!("/signTiles/{group}/tile"));
     let out = Path::new(&env::var("OUT_DIR").expect("cargo sets OUT_DIR")).join("grounds.rs");
     let code = format!(
         "/// The window grounds of the sebaro copy as red, green, blue: `GROUNDS[tone][mode]`, tone 0 cool and 1 warm,\n\

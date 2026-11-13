@@ -1,7 +1,7 @@
 // window.rs: the main window. It is made here, not in tauri.conf.json, so it has the stored „Hell oder Dunkel“ and
 // its ground before the page paints: the colour of the start, which the page shows until the app has painted. It
 // keeps that ground until the UI says the start has ended (the command start_ended), then takes the stored one. The
-// grounds come from the sebaro copy and the files its kit wrote for the product, at build time (build.rs).
+// grounds come from the sebaro copy's tokens.json, the start's by the product's tile group, at build time (build.rs).
 // On macOS the UI's own bar is the title bar (overlay style, hidden title); Windows and Linux keep the system frame.
 use musterapp_core::{Settings, Theme, Tone};
 use tauri::{
@@ -112,8 +112,8 @@ mod tests {
         );
     }
 
-    /// The kit drew `sebaro-product/sign/tile.svg` in the colour the copy's `product/tiles.json` gives the tile group
-    /// that `sebaro.product.json` names: the window opens in that colour.
+    /// build.rs reads the colour from the copy's tokens.json; the kit draws the tile and the app icon in the colour
+    /// its own `product/tiles.json` gives the group `sebaro.product.json` names. The window opens in that colour.
     #[test]
     fn the_window_opens_in_the_tile_colour_of_the_kit() {
         let read = |file: &str| -> serde_json::Value {
