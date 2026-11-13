@@ -2,7 +2,7 @@
   "$comment": "written by tools/og.mjs after a successful render; tools/check_site.py compares it (OG); do not edit",
   "render": "1.3.0",
   "inputs": {
-    "src/og/pages.json": "95ddc2c5f5dd7e34a3e53c8509fa595ca114e7d8ed3ee11740939ce4732a297b",
+    "src/og/pages.json": "b9a251828abc8538bda220beb5c982198d3f603467c3b626d6dfe1f76cc27540",
     "docs/sebaro/brand/og/render.mjs": "1959330b916644e0f4d299f66699b6f55b9918ee03221e5b0e12b46ab5654e27",
     "docs/sebaro/brand/og/template.html": "c601ea08a1e0d98bdf206dc593085ee3bdfdbe3f5ba6f63f5ec9dc20ebbb3fe3",
     "docs/sebaro/brand/og/pages.schema.json": "833f287f913d92bf09df69185401ae4a45e4d2cd296693c3517a6c418a0be653",

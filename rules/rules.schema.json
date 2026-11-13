@@ -1,6 +1,6 @@
 {
  "$schema": "https://json-schema.org/draft/2020-12/schema",
- "$id": "https://github.com/grundhofer/sebaro-guide/rules/rules.schema.json",
+ "$id": "https://github.com/grundhofer/sebaro-blueprint/rules/rules.schema.json",
  "title": "sebaro rule catalogue",
  "description": "Canonical design rules of the sebaro system. Status: entschieden = owner decision (I-row in sebaroDesign/DECISIONS.md, binding); vorläufig = agent decision or spec without an owner row; offen = proposal awaiting an owner answer.",
  "type": "object",

@@ -6,25 +6,25 @@
     "name": "sebaro Guide",
     "origin": "https://grundhofer.github.io",
     "lang": "de",
-    "imageBase": "/sebaro-guide/og/"
+    "imageBase": "/sebaro-blueprint/og/"
   },
   "pages": [
     {
       "id": "index",
-      "url": "/sebaro-guide/",
+      "url": "/sebaro-blueprint/",
       "title": "Eine Gestaltung für alles, was sebaro baut.",
       "description": "Die 31 Kernregeln von sebaro, die Baupläne und Startvorlagen je Produktart und wo du Bauteile und Daten nachschlägst.",
       "type": "website"
     },
     {
       "id": "bauteile",
-      "url": "/sebaro-guide/bauteile.html",
+      "url": "/sebaro-blueprint/bauteile.html",
       "title": "Alle Bauteile mit ihren Zuständen",
       "description": "Alle Bauteile von sebaro mit ihren Zuständen, Regeln und dem genauen Markup zum Kopieren."
     },
     {
       "id": "daten",
-      "url": "/sebaro-guide/daten.html",
+      "url": "/sebaro-blueprint/daten.html",
       "title": "Daten zeigen",
       "description": "Jede Datenart einmal so, wie sebaro sie zeigt: Text, Zahlen, Zeit, Zustand, Kategorien, Personen, Technisches, Sammlungen, Diagramme, Medien, Orte, Leeres und Belege, jeweils mit Regel."
     }

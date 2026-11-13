@@ -1,7 +1,7 @@
 # Screen checklist
 
 Walk this for every screen in **light and dark**, at **390 px and 1440 px** (desktop apps: smallest and a wide window).
-Rule ids in brackets; details in https://github.com/grundhofer/sebaro-guide/blob/main/rules/rules.json. Decisions up to D110.
+Rule ids in brackets; details in https://github.com/grundhofer/sebaro-blueprint/blob/main/rules/rules.json. Decisions up to D110.
 
 ## Before you start
 - [ ] Product kind named (website, web app without a window, web app with a window or desktop, phone app); light/dark,

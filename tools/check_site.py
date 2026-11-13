@@ -65,7 +65,7 @@ from urllib.parse import urlsplit, unquote
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 RULES = ROOT / "rules" / "rules.json"
-SITE_URL = "https://grundhofer.github.io/sebaro-guide/"   # as tools/build.py
+SITE_URL = "https://grundhofer.github.io/sebaro-blueprint/"   # as tools/build.py
 OG_DIR = DOCS / "og"
 OG_STAMP = ROOT / "src" / "og" / "head" / "inputs.json"
 OG_SIZE = (1200, 630)

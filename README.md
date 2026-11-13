@@ -4,13 +4,13 @@ Der Gestaltungsleitfaden für alles, was sebaro baut: Apps am Handy, Websites, W
 Website zeigt die 31 Kernregeln auf Deutsch, die Baupläne und Startvorlagen je Produktart und zum Nachschlagen
 Bauteile und Daten.
 
-**Ansehen:** <https://grundhofer.github.io/sebaro-guide/>
+**Ansehen:** <https://grundhofer.github.io/sebaro-blueprint/>
 
 | Seite | Inhalt |
 |---|---|
-| [Start](https://grundhofer.github.io/sebaro-guide/) | kurz, was sebaro ist; die 31 Kernregeln aus `design/KERN.de.md`; Baupläne und Startvorlagen; wo man nachschlägt |
-| [Bauteile](https://grundhofer.github.io/sebaro-guide/bauteile.html) | jede Komponente mit allen Zuständen und Markup |
-| [Daten](https://grundhofer.github.io/sebaro-guide/daten.html) | jede Datenart einmal dargestellt |
+| [Start](https://grundhofer.github.io/sebaro-blueprint/) | kurz, was sebaro ist; die 31 Kernregeln aus `design/KERN.de.md`; Baupläne und Startvorlagen; wo man nachschlägt |
+| [Bauteile](https://grundhofer.github.io/sebaro-blueprint/bauteile.html) | jede Komponente mit allen Zuständen und Markup |
+| [Daten](https://grundhofer.github.io/sebaro-blueprint/daten.html) | jede Datenart einmal dargestellt |
 
 Die Adressen der früheren Seiten (Regeln, Grundlagen, Plattformen, Web, App, iOS, Desktop, Gedanken, Ausblick) zeigen
 je eine kleine Seite, die sagt, wo der Inhalt jetzt steht; Suchmaschinen sollen sie nicht aufnehmen. Als Beispiele

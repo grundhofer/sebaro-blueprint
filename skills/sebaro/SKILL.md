@@ -11,7 +11,7 @@ way in. Everything it names lives in the sebaro kit, the repository that contain
 ## Find the kit
 
 The kit root is two folders above this file (`skills/sebaro/` inside it; resolve a symlink first). If the kit is not
-on this machine, clone `https://github.com/grundhofer/sebaro-guide` (public) and use that copy.
+on this machine, clone `https://github.com/grundhofer/sebaro-blueprint` (public) and use that copy.
 
 ## Read first
 
