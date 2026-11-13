@@ -1,0 +1,288 @@
+{
+  "app": {
+    "name": "Musterapp Desktop",
+    "title": "{{place}} · Musterapp Desktop",
+    "skip": "Skip to content",
+    "demo": "Sample data"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "close": "Close",
+    "clearSearch": "Clear search",
+    "backTo": "Back to {{name}}",
+    "noCommand": "No command matches “{{query}}”.",
+    "pixels": "{{n}} pixels",
+    "collapsed": "collapsed",
+    "keys": {
+      "shown": {
+        "Mod": "Ctrl",
+        "Ctrl": "Ctrl",
+        "Shift": "Shift",
+        "Alt": "Alt",
+        "Enter": "Enter",
+        "Escape": "Esc",
+        "Backspace": "Backspace",
+        "Delete": "Del",
+        "Tab": "Tab"
+      },
+      "spoken": {
+        "Mod": "Command",
+        "Ctrl": "Control",
+        "Shift": "Shift",
+        "Alt": "Option",
+        "Enter": "Return",
+        "Escape": "Escape",
+        "Backspace": "Delete",
+        "Delete": "Forward delete",
+        "Tab": "Tab",
+        "Up": "Up arrow",
+        "Down": "Down arrow",
+        "Left": "Left arrow",
+        "Right": "Right arrow",
+        "Comma": "Comma",
+        "Plus": "Plus",
+        "Minus": "Minus"
+      },
+      "spokenOther": {
+        "Mod": "Control",
+        "Ctrl": "Control",
+        "Alt": "Alt",
+        "Enter": "Enter",
+        "Backspace": "Backspace",
+        "Delete": "Delete"
+      }
+    }
+  },
+  "window": {
+    "place": "Place: ",
+    "tools": "Window tools",
+    "sidebar": "Sidebar",
+    "inspector": "Properties",
+    "palette": "Commands",
+    "menu": "Menu",
+    "sidebarWidth": "Width of the sidebar",
+    "inspectorWidth": "Width of the inspector"
+  },
+  "menu": {
+    "file": "File",
+    "edit": "Edit",
+    "view": "View",
+    "window": "Window",
+    "help": "Help",
+    "newNote": "New note",
+    "newWindow": "New window",
+    "open": "Open …",
+    "close": "Close",
+    "undo": "Undo",
+    "redo": "Redo",
+    "find": "Find",
+    "settings": "Settings …",
+    "trash": "Move to the bin …",
+    "restore": "Put back",
+    "emptyTrash": "Empty the bin …",
+    "sidebar": "Sidebar",
+    "inspector": "Inspector",
+    "sidebarWidth": "Width of the sidebar",
+    "narrow": "Narrow",
+    "normal": "Normal",
+    "wide": "Wide",
+    "theme": "Light or dark",
+    "tone": "Tone",
+    "motion": "Always reduce motion",
+    "textBigger": "Larger text",
+    "textSmaller": "Smaller text",
+    "palette": "Commands …",
+    "nextArea": "Next area",
+    "previousArea": "Previous area",
+    "tabForward": "Move tab forward",
+    "tabBack": "Move tab back",
+    "back": "Back",
+    "forward": "Forward",
+    "shortcuts": "Keyboard shortcuts",
+    "facts": "Facts and checks"
+  },
+  "choice": {
+    "system": "As the system",
+    "light": "Light",
+    "dark": "Dark",
+    "cool": "Cool",
+    "warm": "Warm"
+  },
+  "side": {
+    "label": "Places and folders",
+    "search": "Search the notes",
+    "searchPlaceholder": "Search …",
+    "folders": "Folders",
+    "trash": "Bin",
+    "trashTitle": "Nothing is dragged here: a note goes to the bin through “Move to the bin …” and its dialog.",
+    "settings": "Settings",
+    "noMatch": "No note matches “{{query}}”."
+  },
+  "tabs": {
+    "label": "Open notes",
+    "none": "No note is open. Choose one in a folder on the left.",
+    "changed": ", changed",
+    "close": "Close"
+  },
+  "inspector": {
+    "label": "Properties",
+    "folder": "Folder",
+    "created": "Created",
+    "changed": "Changed",
+    "words": "Words",
+    "size": "Size",
+    "sizeValue": "{{n}}\u00a0KB",
+    "empty": "No note chosen.",
+    "noFolder": "none",
+    "bin": "Bin",
+    "binNotes_zero": "empty",
+    "binNotes_one": "{{n}} note",
+    "binNotes_other": "{{n}} notes",
+    "from": "Was in",
+    "fromRoot": "no folder",
+    "restore": "Put back",
+    "emptyTrash": "Empty the bin …"
+  },
+  "status": {
+    "unsaved": "not saved",
+    "online": "online only"
+  },
+  "zone": {
+    "saved_zero": "Everything is saved.",
+    "saved_one": "{{n}} note not saved.",
+    "saved_other": "{{n}} notes not saved.",
+    "words_one": "{{n}} word",
+    "words_other": "{{n}} words",
+    "chars": "{{n}} characters",
+    "newNote": "New note",
+    "newNoteName": "New note {{n}}",
+    "trashed": "“{{name}}” is in the bin.",
+    "restored": "“{{name}}” is back in “{{folder}}”.",
+    "restoredRoot": "“{{name}}” is back with the notes.",
+    "emptied": "The bin is empty."
+  },
+  "note": {
+    "meta": "{{folder}} · changed {{when}}",
+    "empty": "Still empty. Start writing as soon as the app has an editor."
+  },
+  "palette": {
+    "label": "Commands",
+    "search": "Search a command or setting",
+    "groupFile": "Filing",
+    "groupView": "View",
+    "groupLook": "Look",
+    "groupPlaces": "Places",
+    "toneWarm": "Warm tone",
+    "find": "Search",
+    "settings": "Settings",
+    "move": "move",
+    "run": "run",
+    "close": "close",
+    "keywordsSidebar": "sidebar folders hide",
+    "keywordsInspector": "inspector hide",
+    "keywordsTheme": "light dark mode",
+    "keywordsMode": "mode",
+    "keywordsTone": "tone paper"
+  },
+  "dialog": {
+    "trashTitle": "Move “{{name}}” to the bin?",
+    "trashText": "The note “{{name}}” goes to the bin. You can put it back from there.",
+    "trashConfirm": "Move to the bin",
+    "emptyTitle": "Empty the bin?",
+    "emptyText_one": "The note “{{name}}” in the bin is deleted for good. This cannot be undone.",
+    "emptyText_other": "The {{n}} notes in the bin are deleted for good. This cannot be undone.",
+    "emptyConfirm": "Empty the bin",
+    "unsavedTitle": "Save the changes to “{{name}}”?",
+    "unsavedText": "Without saving, the changes since {{time}} are lost. The note stays.",
+    "discard": "Discard",
+    "save": "Save"
+  },
+  "shortcuts": {
+    "title": "Keyboard shortcuts",
+    "intro": "These 15 shortcuts hold in every sebaro desktop app. On Windows and Linux Ctrl stands for ⌘.",
+    "caption": "The fixed shortcuts",
+    "key": "Shortcut",
+    "what": "What it does",
+    "palette": "Open the commands",
+    "settings": "Settings",
+    "new": "Primary action: New note",
+    "open": "Open",
+    "find": "Find",
+    "sidebar": "Sidebar on or off",
+    "inspector": "Inspector on or off",
+    "areas": "Next or previous area",
+    "tabs": "Next or previous tab",
+    "close": "Close the tab",
+    "window": "New window",
+    "undo": "Undo and redo",
+    "trash": "Move to the bin …",
+    "text": "Larger or smaller text of the content",
+    "history": "Back and forward"
+  },
+  "settings": {
+    "title": "Settings",
+    "back": "Back to {{place}}",
+    "meta": "Holds for every window of Musterapp Desktop. Each choice takes effect at once.",
+    "groupLook": "Look",
+    "theme": "Light or dark",
+    "themeHelp": "“As the system” follows the setting of your computer.",
+    "tone": "Tone",
+    "toneHelp": "Warm only colours ground, text and lines, everything else stays.",
+    "motion": "Always reduce motion",
+    "motionHelp": "New things then appear without motion, they only fade in. Also holds when the system allows motion.",
+    "groupNotes": "Notes",
+    "autosave": "Save when closing",
+    "autosaveHelp": "When you close a tab with changes, the app saves without asking.",
+    "coolIsOn": "Cool tone is on.",
+    "warmIsOn": "Warm tone is on."
+  },
+  "errors": {
+    "settingsNotSaved": "The choice could not be saved. It holds until you close the app. Choose it again at the next start.",
+    "unknown": "That did not work. Try again."
+  },
+  "error": {
+    "title": "Error",
+    "text": "This part of the window could not be shown. Your notes are unchanged. Load the window again.",
+    "retry": "Try again"
+  },
+  "samples": {
+    "folders": {
+      "projekte": "Projects",
+      "journal": "Journal"
+    },
+    "notes": {
+      "wochenplan": {
+        "name": "Weekly plan",
+        "text": [
+          "This week stays quiet. Two appointments are fixed, the rest is room for what was left over.",
+          "Monday: sort the papers, then take the bicycle to the workshop. Wednesday: run for 45\u00a0min. Friday: shopping for 4 people.",
+          "Open from last week: the garden plan and two calls to return. Both fit well on Thursday."
+        ]
+      },
+      "umzug": {
+        "name": "Moving checklist",
+        "text": [
+          "Label the boxes, note the meter readings, report the new address in 6 places."
+        ]
+      },
+      "garten": {
+        "name": "Garden plan for spring with beds and planting times",
+        "text": [
+          "Three beds, each 1.2\u00a0m wide. Beans by the fence, herbs by the house."
+        ]
+      },
+      "oktober": {
+        "name": "27 October",
+        "text": [
+          "A quiet day. Read for 30\u00a0min in the evening."
+        ]
+      },
+      "einkauf": {
+        "name": "Shopping",
+        "text": [
+          "Bread, apples, 2\u00a0l of milk, coffee."
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+# The workspace: the core crate (the product's logic, no Tauri) and the Tauri shell around it.
+[workspace]
+resolver = "2"
+members = ["crates/musterapp-core", "apps/desktop/src-tauri"]
+
+# One version for the app: the shell takes it from here, and Tauri takes it from the shell (tauri.conf.json names none).
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+publish = false
+
+[workspace.dependencies]
+musterapp-core = { path = "crates/musterapp-core" }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+
+[profile.release]
+strip = true

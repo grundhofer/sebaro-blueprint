@@ -1,0 +1,29 @@
+# Dependabot: once a week. npm and cargo: minor and patch updates in one pull request each, a major one each on its
+# own, at most five open. The sebaro copy is no package: it is updated with
+# node apps/desktop/ui/src/sebaro/checks/update-copy.mjs. The pinned Rust toolchain (rust-toolchain.toml) and the
+# cargo tools named in the workflows are raised by hand.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /apps/desktop/ui
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: cargo
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
