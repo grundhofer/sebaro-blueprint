@@ -1,0 +1,99 @@
+# ci: every push and pull request, and once a week (advisories move without a push). On macOS and Linux: the audits,
+# the checks and tests of the UI, the checks and tests of the Rust side, and a debug build of the app without an
+# installer. Once a week it also asks whether a newer release of the sebaro copy exists; then update the copy with
+# `node apps/desktop/ui/src/sebaro/checks/update-copy.mjs`, as one commit of its own. `release` calls this workflow
+# before it builds the installer.
+# This file belongs to the product that copies the starter: it runs with the starter's folder as the root of the
+# repository.
+name: ci
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "23 5 * * 1"
+  workflow_call:
+permissions:
+  contents: read
+env:
+  UI: apps/desktop/ui
+jobs:
+  ci:
+    name: ci (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - name: Tauri system packages (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev \
+            libayatana-appindicator3-dev librsvg2-dev
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1, pnpm as package.json names it
+        with:
+          package_json_file: apps/desktop/ui/package.json
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22"
+          cache: pnpm
+          cache-dependency-path: apps/desktop/ui/pnpm-lock.yaml
+      - name: Rust toolchain (the one rust-toolchain.toml pins; rustup is on the runner image)
+        run: rustup show active-toolchain || rustup toolchain install
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+      - name: cargo-audit, cargo-deny and cargo-binstall (prebuilt, pinned)
+        uses: taiki-e/install-action@68a389c788b2cd04016ce8c80ee23b80d2ab3d68 # v2.88.1
+        with:
+          tool: cargo-audit@0.22.2,cargo-deny@0.20.2,cargo-binstall
+      - name: Tauri CLI (prebuilt, pinned)
+        run: cargo binstall --no-confirm --locked tauri-cli@2.12.4
+      - run: pnpm --dir "$UI" install --frozen-lockfile
+
+      - name: Audit, UI (what the app ships)
+        run: pnpm --dir "$UI" audit --prod --audit-level=high
+      - name: Audit, Rust (advisories)
+        run: cargo audit
+      - name: Audit, Rust (licences, sources, crates that come twice)
+        run: cargo deny check licenses bans sources
+
+      - name: Lint (ESLint)
+        run: pnpm --dir "$UI" lint
+      - name: Format (Prettier)
+        run: pnpm --dir "$UI" format:check
+      - name: Type check (tsc --noEmit)
+        run: pnpm --dir "$UI" check
+      - name: The sebaro copy is unchanged, the product's files are what its declaration gives
+        run: pnpm --dir "$UI" sebaro:verify && pnpm --dir "$UI" sebaro:product
+      - name: Copy check, weekly (a newer release of the sebaro copy exists)
+        if: github.event_name == 'schedule'
+        run: node "$UI/src/sebaro/checks/update-copy.mjs" --check
+      - name: Unit tests (Vitest)
+        run: pnpm --dir "$UI" test
+      - name: Build, with the size budgets
+        run: pnpm --dir "$UI" build
+      - name: The app's own CSS and the built page keep sebaro's rules (lint-web.sh)
+        run: pnpm --dir "$UI" sebaro:lint
+      - run: pnpm --dir "$UI" exec playwright install --with-deps chromium
+      - name: End-to-end tests against the built UI (Playwright, axe)
+        run: pnpm --dir "$UI" test:e2e
+
+      - name: Rust format (cargo fmt)
+        run: cargo fmt --check
+      - name: Rust lint (cargo clippy, no warnings)
+        run: cargo clippy --locked --all-targets -- -D warnings
+      - name: Rust tests (the core crate and the shell; they also write the UI's bindings)
+        run: cargo test --locked
+      - name: The committed bindings are the ones the commands give
+        run: git diff --exit-code -- apps/desktop/ui/src/ipc/bindings.ts
+      - name: The app builds (debug, no installer)
+        run: cargo tauri build --debug --no-bundle
+
+      - if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: screens-${{ matrix.os }}
+          path: apps/desktop/ui/test-results/
+          retention-days: 7
+          if-no-files-found: ignore

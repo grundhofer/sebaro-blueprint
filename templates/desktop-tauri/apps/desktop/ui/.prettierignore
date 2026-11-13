@@ -1,0 +1,12 @@
+# the sebaro copy is never edited: a reformatted file is an edited copy
+src/sebaro
+# generated from the Rust commands by `cargo test`
+src/ipc/bindings.ts
+# the screen checks as the guide's starters share them
+tests/sebaro-checks.ts
+tests/fixtures
+dist
+test-results
+playwright-report
+pnpm-lock.yaml
+*.md

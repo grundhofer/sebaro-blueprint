@@ -7,17 +7,16 @@ Starting points for new sebaro projects. Copy, then adapt; nothing here is loade
 | [`AGENTS-snippet.md`](AGENTS-snippet.md) | paste into a product repo's `AGENTS.md` / `CLAUDE.md` so every agent session there follows sebaro |
 | [`screen-checklist.md`](screen-checklist.md) | the per-screen review before a screen counts as done (both modes, 390 px and 1440 px) |
 | [`web-plain/index.html`](web-plain/index.html) | minimal website/web app page wired to an exported `sebaro/` folder, no build step |
-| [`android-compose/`](android-compose/README.md) | Android app (Kotlin, Jetpack Compose) on the copy of the public release (profile `android`, the module `:designsystem`): list, detail, form, settings, data and the three dialogs, Room and DataStore, a ViewModel per screen, JVM tests and Robolectric/Roborazzi pictures in `docs/screens/`; the family's build setup is not part of it (its README says where a product gets it); README in German |
+| [`android-compose/`](android-compose/README.md) | Android app (Kotlin, Jetpack Compose) on the copy of the public release (profile `android`, the module `:designsystem`): the start in the product colour, list, detail, form, settings with „Über“, data and the three dialogs, Room and DataStore, a ViewModel per screen, JVM tests and Robolectric/Roborazzi pictures in `docs/screens/`; the family's build setup is not part of it (its README says where a product gets it); README in German |
 | [`ios-swiftui/`](ios-swiftui/README.md) | iOS app (Swift, SwiftUI, iOS 17+) on the local Swift package `SebaroDesign/`, the filtered iOS export (D112, a snapshot updated with `tools/sebaro-sync.sh` from the workshop): tab bar, list, detail, form sheet with stepper and time row, settings with language, data and the three dialogs, a JSON file in Application Support; screenshot tests light/dark, default and AX5, 393 and 320 pt with a text check, behaviour tests, SwiftUI lint, CI on `macos-latest`; README in German |
 | [`design-exception.md`](design-exception.md) | how to ask the owner when a rule does not fit (instead of working around it) |
 | [`website-astro/`](website-astro/README.md) | runnable static website (Astro): start page DE/EN, article with footnotes, about, contact, imprint, privacy, accessibility, 404, one share image per page from the build |
 | [`webapp-vite/`](webapp-vite/README.md) | runnable web app without a window (React, TypeScript, Vite, pnpm): list with search, filter and empty state, detail, form with validation, settings, every data type of `docs/daten.html`, dialogs, toasts with undo |
-| [`desktop-tauri/`](desktop-tauri/README.md) | runnable Tauri 2 desktop app: window frame, sidebar with the „Einstellungen“ foot, document tabs, inspector, „Menü“, ⌘K palette, the 15 fixed shortcuts, slim settings, window density |
+| [`desktop-tauri/`](desktop-tauri/README.md) | runnable Tauri 2 desktop app (the web app's UI stack without a router, a Rust workspace with a core crate and generated bindings): window frame, sidebar with the „Einstellungen“ foot, document tabs, inspector, „Menü“, ⌘K palette, the 15 fixed shortcuts, slim settings, window density |
 
-The three starters are complete small projects. The website and the web app starter are products like any other: each
-holds the copy of the public release (profile `website` in `public/sebaro/`, profile `webapp` in `src/sebaro/`), kept
-current with `update-copy.mjs`; the desktop starter still carries a copy of the web export in `public/sebaro/` (copied by
-`npm run sebaro:sync`). Each checks its copy with `verify-export.mjs --strict` (`sebaro:verify`), keeps every word in one
+The three starters are complete small projects and products like any other: each holds the copy of the public release
+(profile `website` in `public/sebaro/`, `webapp` in `src/sebaro/`, `desktop` in `apps/desktop/ui/src/sebaro/`), kept
+current with `update-copy.mjs`. Each checks its copy with `verify-export.mjs --strict` (`sebaro:verify`), keeps every word in one
 place (a strings module; the web app in its i18next resources), uses only `sb-*` classes of the export plus its own `app-*` classes with `var(--sb-*)`
 tokens, runs under a strict Content-Security-Policy and has Playwright tests (Chromium) for every screen in light and
 dark at 100 % and, at the widest width, real 200 % text with axe. CI: `.github/workflows/templates.yml`. Names and content are invented
@@ -27,13 +26,13 @@ dark at 100 % and, at the widest width, real 200 % text with axe. CI: `.github/w
 
 1. **Pick the product id** and its tile group (studio, collaboration, everyday, learning, tools, media, money, system).
    A new product needs its sign drawn and checked in sebaroDesign first (rules ZEI-*).
-2. **Start from a starter or get the system files**: copy `website-astro/` or `webapp-vite/` (each brings its copy
-   of the release), or `desktop-tauri/` and run `npm run sebaro:sync -- --from <docs/sebaro of a guide checkout>` there; else web → copy `docs/sebaro/` of this
+2. **Start from a starter or get the system files**: copy `website-astro/`, `webapp-vite/` or `desktop-tauri/` (each
+   brings its copy of the release); else web → copy `docs/sebaro/` of this
    repo into the project (e.g. `public/sebaro/`), check it with `node public/sebaro/checks/verify-export.mjs
    public/sebaro --strict`; Android → copy `android-compose/`, which brings its copy of the release and builds once the
    family's build setup is exported into the product (see its README); iOS → copy `ios-swiftui/`, which carries the iOS export as a local Swift
-   package (`tools/sebaro-verify.py` checks the copy; a product re-exports with its id, see its README); Tauri (own
-   export)/macOS → `export_system.py` in sebaroDesign (see [AGENTS.md §4](../AGENTS.md)).
+   package (`tools/sebaro-verify.py` checks the copy; a product re-exports with its id, see its README); macOS →
+   `export_system.py --target macos` in sebaroDesign.
 3. **Paste the agent snippet** into the project's `AGENTS.md`, fill in the export path and the product id, and name the
    product kind (where light/dark and „Farbton“ go is core rule 28 of `design/KERN.md`). Read what the starter itself
    does not do yet, so it is never copied as a pattern: the section „Lücken der Vorlage“ in `website-astro/`,

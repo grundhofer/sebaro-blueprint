@@ -17,6 +17,8 @@ sealed interface Destination {
     /** [id] null: a new entry. */
     data class Form(val id: Long?) : Destination
 
+    data object About : Destination
+
     companion object {
         val topLevel = listOf(Entries, Data, Settings)
 
@@ -26,11 +28,13 @@ sealed interface Destination {
             Settings -> "settings"
             is Detail -> "detail:${destination.id}"
             is Form -> "form:${destination.id ?: ""}"
+            About -> "about"
         }
 
         fun decode(text: String): Destination = when {
             text == "data" -> Data
             text == "settings" -> Settings
+            text == "about" -> About
             text.startsWith("detail:") -> Detail(text.removePrefix("detail:").toLong())
             text.startsWith("form:") -> Form(text.removePrefix("form:").toLongOrNull())
             else -> Entries

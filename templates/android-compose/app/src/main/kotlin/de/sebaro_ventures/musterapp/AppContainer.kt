@@ -33,4 +33,7 @@ class AppContainer(
     val entries: EntryRepository by lazy { EntryRepository(database.entryDao()) }
 
     val settings: SettingsRepository by lazy { SettingsRepository(settingsStoreFactory()) }
+
+    /** The version name of the installed app, „1.4.0“. */
+    val version: String by lazy { context.packageManager.getPackageInfo(context.packageName, 0).versionName.orEmpty() }
 }
