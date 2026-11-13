@@ -15,7 +15,8 @@ Sprachen: Jede App und jede Website erscheint ab der ersten Version auf Deutsch 
 weitere Sprache ihre Dateien und ein Eintrag ist; eine Prüfung schlägt fehl, wenn einer Sprache ein Text fehlt. Eine
 Inhaltsseite mit Artikeln bleibt in ihrer einen Sprache (Inhaber, 13.11.2026). Kernregel 26 in beiden Fassungen und
 die Baupläne für Website, Web-App und Android sagen das jetzt; bisher erlaubten Website und Android eine Sprache. Die
-Website-Vorlage hat Englisch erst auf der Startseite (steht im Bauplan unter dem, was noch abweicht).
+Website-Vorlage zeigt jede Seite auf Deutsch und Englisch, die Sprachen stehen in einer Liste (`src/site.mjs`), und
+ihr Build bricht ab, wenn eine Seite in einer Sprache fehlt.
 
 Kopien ohne Werkstatt: Ein Produkt holt seine sebaro-Kopie und hält sie aktuell mit `update-copy.mjs` (Node 20,
 keine weiteren Werkzeuge). Die Kopien je Produktart (`website`, `webapp`, `desktop`, `android`) hängen als Dateien an

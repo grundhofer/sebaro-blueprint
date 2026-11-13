@@ -100,11 +100,12 @@ Then look at every changed page in light and dark, on the phone and wide, and sa
 
 - It has no `deploy` workflow: the host is the product's choice. The product adds the workflow and, where its host
   allows it, sends the Content-Security-Policy as a header in place of the `<meta>` tag.
-- Its strings module and `src/lib/` are plain JavaScript (`.mjs`), so the build scripts read them with Node alone:
-  `astro check` reads their types and does not check them.
-- Only the start page exists in English; the layout writes the two languages into its code instead of reading one
-  list, and no test checks that every page exists in every language.
-- It has no `src/components/` and no `src/content/`: header and footer stand in the one layout, every text in the
-  strings module.
+- Its strings modules, `src/site.mjs` and `src/lib/` are plain JavaScript (`.mjs`), so the build scripts read them
+  with Node alone: `astro check` reads their types and does not check them.
+- Its 404 page is one page with every language, not one per tree: a static host answers every missing address with
+  the one `404.html`. It names no alternates; its language link leads to the part in that language.
+- A third language also needs the copy to know it: the copy's share-image generator accepts only `de` and `en`, and
+  the copy's scripts announce in those two unless the site gives them `window.sbMessages` (TEC-10).
+- It has no `src/content/`: every text stands in the strings modules, one per language.
 
 Everything else in the starter follows this blueprint.

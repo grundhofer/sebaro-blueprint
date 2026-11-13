@@ -1,14 +1,14 @@
 import { describe, expect, test } from "vitest";
-import { PAGES, SITE } from "../strings.mjs";
+import { LANGUAGES, PAGES, SITE } from "../site.mjs";
 import { ogPages } from "./og-pages.mjs";
 
 const page = (lang: string, id: string) => ogPages(lang).pages.find((p) => p.id === id);
 
 describe("ogPages", () => {
-  test("every page with a title of its own stands in the list of its language, once", () => {
-    const ids = ["de", "en"].flatMap((lang) => ogPages(lang).pages.map((p) => p.id));
-    expect(ids.sort()).toEqual(PAGES.map((p) => p.id).sort());
-    expect(ogPages("en").pages.map((p) => p.id)).toEqual(["start-en"]);
+  test("every page with a title of its own stands in the list of every language, each with an image of its own", () => {
+    for (const { code } of LANGUAGES) expect(ogPages(code).pages).toHaveLength(PAGES.length);
+    const ids = LANGUAGES.flatMap(({ code }) => ogPages(code).pages.map((p) => p.id));
+    expect(new Set(ids).size).toBe(PAGES.length * LANGUAGES.length);
   });
 
   test("the list names the site, its product and the language", () => {
@@ -33,12 +33,20 @@ describe("ogPages", () => {
     });
   });
 
+  test("an English page stands under /en/, with its English words", () => {
+    expect(page("en", "csv-en")).toMatchObject({
+      url: "/en/projekte/liste-als-csv/",
+      title: "Save a list as a CSV file",
+      path: ["Beispielseite", "Projects", "List as CSV"],
+    });
+  });
+
   test("a header word and a page outside the header have no path", () => {
     expect(page("de", "projekte")).not.toHaveProperty("path");
     expect(page("de", "impressum")).not.toHaveProperty("path");
   });
 
-  test("a language without pages gives an empty list", () => {
-    expect(ogPages("fr").pages).toEqual([]);
+  test("a language that is not in the list fails loud", () => {
+    expect(() => ogPages("fr")).toThrow('no language "fr"');
   });
 });
