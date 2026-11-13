@@ -79,10 +79,13 @@ Start the app once and look at the changed views in light and dark. Say what you
 
 ## Where this starter still differs
 
-Until the starter is rebuilt from this blueprint, do not copy these parts of it:
+Do not copy these parts of it:
 
-- It uses no framework and sebaro's classic window scripts; the blueprint asks for React parts.
-- It reaches Rust through the global `window.__TAURI__` object instead of generated bindings.
-- It uses the web copy and reads the window ground from `tokens.css`; the blueprint asks for the desktop copy.
-- It has no core crate, no pinned Rust toolchain, no size budget, no release workflow and no Dependabot file.
-- It lacks the permission to drag the window by its title bar (named in its README).
+- The notes are sample data and their rules live in the UI (`apps/desktop/ui/src/lib/notes.ts`). The core crate
+  holds the settings alone; a product puts its documents and their rules there.
+- It offers no choice of language: the UI follows the language of the system and stores none under `sb-lang`.
+- As in the web app starter, only one of the large-text forms of the copy's `sb-fit.js` is written in React (its
+  README lists the others), and the signs of the keys (⌘, ⇧, ↑) stand in `src/lib/keys.ts`, not in the string
+  tables.
+- It was built but never started in a Tauri webview, and its `ci` and `release` have never run. Its README says
+  under „Nicht geprüft“ what that leaves open.

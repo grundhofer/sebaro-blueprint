@@ -1,11 +1,10 @@
-# The three starter templates under templates/ (website-astro, webapp-vite, desktop-tauri): each job installs its
-# template from its own package-lock.json, checks its copy of the sebaro web export (verify-export.mjs --strict),
-# builds it and runs its Playwright tests in Chromium (every screen light and dark at 100 % and, at the widest width, real 200 % text: axe
-# with 0 violations, no sideways scroll, no cut text, no console or Content-Security-Policy error; keyboard paths).
-# The desktop job also builds the Tauri app on Linux (debug, no bundle). Screenshots of every run are uploaded.
-# Each template's copy of the export is a snapshot: a guide sync does not touch it; update it with npm run sebaro:sync.
-# The website and the web app starter are products like any other: each holds the copy of the public release
-# (update-copy.mjs), and its job runs what its own ci workflow runs (type check, lint, budgets; the web app with pnpm).
+# The three web starter templates under templates/ (website-astro, webapp-vite, desktop-tauri). Each is a product
+# like any other: it holds the copy of the public release (update-copy.mjs), and its job runs what its own ci
+# workflow runs: lint, format, type check, the copy's checks (verify-export.mjs --strict, the product kit), unit
+# tests, the build with the size budgets and the Playwright tests in Chromium (every screen light and dark at 100 %
+# and, at the widest width, real 200 % text: axe with 0 violations, no sideways scroll, no cut text, no console or
+# Content-Security-Policy error; keyboard paths). The web app and the desktop starter use pnpm. The desktop job also
+# runs the Rust checks and builds the Tauri app on Linux (debug, no bundle). Screenshots of every run are uploaded.
 # The Android starter cannot be built here (the family's build setup is private): its job runs the three checks of
 # its copy that need no Gradle.
 name: templates
@@ -96,43 +95,84 @@ jobs:
           retention-days: 7
           if-no-files-found: ignore
 
+  # what the starter's own workflow runs on Linux (templates/desktop-tauri/.github/workflows/ci.yml), from its folder,
+  # without its weekly question for a newer release of the sebaro copy
   desktop-tauri:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: templates/desktop-tauri
+    env:
+      UI: apps/desktop/ui
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
-        with:
-          node-version: "22"
-          cache: npm
-          cache-dependency-path: templates/desktop-tauri/package-lock.json
       - name: Tauri system packages (Linux)
         run: |
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev \
             libayatana-appindicator3-dev librsvg2-dev
-      - name: Rust toolchain (rustup is on the runner image)
-        run: rustup toolchain install stable --profile minimal && rustup default stable
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1, pnpm as package.json names it
+        with:
+          package_json_file: templates/desktop-tauri/apps/desktop/ui/package.json
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22"
+          cache: pnpm
+          cache-dependency-path: templates/desktop-tauri/apps/desktop/ui/pnpm-lock.yaml
+      - name: Rust toolchain (the one the starter's rust-toolchain.toml pins; rustup is on the runner image)
+        run: rustup show active-toolchain || rustup toolchain install
       - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
         with:
-          workspaces: templates/desktop-tauri/src-tauri -> target
-      - run: npm ci
-      - name: sebaro export unchanged (verify-export.mjs --strict)
-        run: npm run sebaro:verify
-      - name: Frontend build (tsc + vite)
-        run: npm run build
-      - run: npx playwright install --with-deps chromium
-      - name: Screens (light/dark, 390/480/1440 px, 100/200 % text, axe, overflow, cut text, CSP) and keyboard
-        run: npm test
-      - name: Tauri app builds on Linux (debug, no bundle)
-        run: npx tauri build --debug --no-bundle
+          workspaces: templates/desktop-tauri -> target
+      - name: cargo-audit, cargo-deny and cargo-binstall (prebuilt, pinned)
+        uses: taiki-e/install-action@68a389c788b2cd04016ce8c80ee23b80d2ab3d68 # v2.88.1
+        with:
+          tool: cargo-audit@0.22.2,cargo-deny@0.20.2,cargo-binstall
+      - name: Tauri CLI (prebuilt, pinned)
+        run: cargo binstall --no-confirm --locked tauri-cli@2.12.4
+      - run: pnpm --dir "$UI" install --frozen-lockfile
+
+      - name: Audit, UI (what the app ships)
+        run: pnpm --dir "$UI" audit --prod --audit-level=high
+      - name: Audit, Rust (advisories)
+        run: cargo audit
+      - name: Audit, Rust (licences, sources, crates that come twice)
+        run: cargo deny check licenses bans sources
+
+      - name: Lint (ESLint)
+        run: pnpm --dir "$UI" lint
+      - name: Format (Prettier)
+        run: pnpm --dir "$UI" format:check
+      - name: Type check (tsc --noEmit)
+        run: pnpm --dir "$UI" check
+      - name: The sebaro copy is unchanged, the product's files are what its declaration gives
+        run: pnpm --dir "$UI" sebaro:verify && pnpm --dir "$UI" sebaro:product
+      - name: Unit tests (Vitest)
+        run: pnpm --dir "$UI" test
+      - name: Build, with the size budgets
+        run: pnpm --dir "$UI" build
+      - name: The app's own CSS and the built page keep sebaro's rules (lint-web.sh)
+        run: pnpm --dir "$UI" sebaro:lint
+      - run: pnpm --dir "$UI" exec playwright install --with-deps chromium
+      - name: End-to-end tests against the built UI (Playwright, axe)
+        run: pnpm --dir "$UI" test:e2e
+
+      - name: Rust format (cargo fmt)
+        run: cargo fmt --check
+      - name: Rust lint (cargo clippy, no warnings)
+        run: cargo clippy --locked --all-targets -- -D warnings
+      - name: Rust tests (the core crate and the shell; they also write the UI's bindings)
+        run: cargo test --locked
+      - name: The committed bindings are the ones the commands give
+        run: git diff --exit-code -- apps/desktop/ui/src/ipc/bindings.ts
+      - name: The app builds (debug, no installer)
+        run: cargo tauri build --debug --no-bundle
+
       - if: ${{ !cancelled() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: desktop-tauri-screens
-          path: templates/desktop-tauri/test-results/
+          path: templates/desktop-tauri/apps/desktop/ui/test-results/
           retention-days: 7
           if-no-files-found: ignore
 

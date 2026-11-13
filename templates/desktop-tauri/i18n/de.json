@@ -1,0 +1,288 @@
+{
+  "app": {
+    "name": "Musterapp Desktop",
+    "title": "{{place}} · Musterapp Desktop",
+    "skip": "Zum Inhalt",
+    "demo": "Beispieldaten"
+  },
+  "common": {
+    "cancel": "Abbrechen",
+    "close": "Schließen",
+    "clearSearch": "Suche leeren",
+    "backTo": "Zurück zu {{name}}",
+    "noCommand": "Kein Befehl passt zu „{{query}}“.",
+    "pixels": "{{n}} Pixel",
+    "collapsed": "zugeklappt",
+    "keys": {
+      "shown": {
+        "Mod": "Strg",
+        "Ctrl": "Strg",
+        "Shift": "Umschalt",
+        "Alt": "Alt",
+        "Enter": "Eingabe",
+        "Escape": "Esc",
+        "Backspace": "Rücktaste",
+        "Delete": "Entf",
+        "Tab": "Tab"
+      },
+      "spoken": {
+        "Mod": "Befehl",
+        "Ctrl": "Control",
+        "Shift": "Umschalt",
+        "Alt": "Wahl",
+        "Enter": "Eingabe",
+        "Escape": "Escape",
+        "Backspace": "Rückschritt",
+        "Delete": "Entfernen",
+        "Tab": "Tabulator",
+        "Up": "Pfeil nach oben",
+        "Down": "Pfeil nach unten",
+        "Left": "Pfeil nach links",
+        "Right": "Pfeil nach rechts",
+        "Comma": "Komma",
+        "Plus": "Plus",
+        "Minus": "Minus"
+      },
+      "spokenOther": {
+        "Mod": "Steuerung",
+        "Ctrl": "Steuerung",
+        "Alt": "Alt",
+        "Enter": "Eingabe",
+        "Backspace": "Rücktaste",
+        "Delete": "Entfernen"
+      }
+    }
+  },
+  "window": {
+    "place": "Ort: ",
+    "tools": "Werkzeuge des Fensters",
+    "sidebar": "Seitenleiste",
+    "inspector": "Eigenschaften",
+    "palette": "Befehle",
+    "menu": "Menü",
+    "sidebarWidth": "Breite der Seitenleiste",
+    "inspectorWidth": "Breite des Inspektors"
+  },
+  "menu": {
+    "file": "Datei",
+    "edit": "Bearbeiten",
+    "view": "Darstellung",
+    "window": "Fenster",
+    "help": "Hilfe",
+    "newNote": "Neue Notiz",
+    "newWindow": "Neues Fenster",
+    "open": "Öffnen …",
+    "close": "Schließen",
+    "undo": "Widerrufen",
+    "redo": "Wiederholen",
+    "find": "Suchen",
+    "settings": "Einstellungen …",
+    "trash": "In den Papierkorb legen …",
+    "restore": "Zurücklegen",
+    "emptyTrash": "Papierkorb leeren …",
+    "sidebar": "Seitenleiste",
+    "inspector": "Inspektor",
+    "sidebarWidth": "Breite der Seitenleiste",
+    "narrow": "Schmal",
+    "normal": "Normal",
+    "wide": "Breit",
+    "theme": "Hell oder Dunkel",
+    "tone": "Farbton",
+    "motion": "Bewegung immer reduzieren",
+    "textBigger": "Schrift größer",
+    "textSmaller": "Schrift kleiner",
+    "palette": "Befehle …",
+    "nextArea": "Nächster Bereich",
+    "previousArea": "Vorheriger Bereich",
+    "tabForward": "Reiter nach vorn",
+    "tabBack": "Reiter nach hinten",
+    "back": "Zurück",
+    "forward": "Vor",
+    "shortcuts": "Tastaturkürzel",
+    "facts": "Fakten und Prüfungen"
+  },
+  "choice": {
+    "system": "Wie das System",
+    "light": "Hell",
+    "dark": "Dunkel",
+    "cool": "Kühl",
+    "warm": "Warm"
+  },
+  "side": {
+    "label": "Orte und Ordner",
+    "search": "Notizen durchsuchen",
+    "searchPlaceholder": "Suchen …",
+    "folders": "Ordner",
+    "trash": "Papierkorb",
+    "trashTitle": "Hierher zieht man nichts: In den Papierkorb geht es über „In den Papierkorb legen …“ und den Dialog.",
+    "settings": "Einstellungen",
+    "noMatch": "Keine Notiz passt zu „{{query}}“."
+  },
+  "tabs": {
+    "label": "Offene Notizen",
+    "none": "Keine Notiz offen. Wähle eine im Ordner links.",
+    "changed": ", geändert",
+    "close": "Schließen"
+  },
+  "inspector": {
+    "label": "Eigenschaften",
+    "folder": "Ordner",
+    "created": "Angelegt",
+    "changed": "Geändert",
+    "words": "Wörter",
+    "size": "Größe",
+    "sizeValue": "{{n}}\u00a0KB",
+    "empty": "Keine Notiz gewählt.",
+    "noFolder": "keiner",
+    "bin": "Papierkorb",
+    "binNotes_zero": "leer",
+    "binNotes_one": "{{n}} Notiz",
+    "binNotes_other": "{{n}} Notizen",
+    "from": "Lag in",
+    "fromRoot": "keinem Ordner",
+    "restore": "Zurücklegen",
+    "emptyTrash": "Papierkorb leeren …"
+  },
+  "status": {
+    "unsaved": "nicht gesichert",
+    "online": "nur online"
+  },
+  "zone": {
+    "saved_zero": "Alles gesichert.",
+    "saved_one": "{{n}} Notiz nicht gesichert.",
+    "saved_other": "{{n}} Notizen nicht gesichert.",
+    "words_one": "{{n}} Wort",
+    "words_other": "{{n}} Wörter",
+    "chars": "{{n}} Zeichen",
+    "newNote": "Neue Notiz",
+    "newNoteName": "Neue Notiz {{n}}",
+    "trashed": "„{{name}}“ liegt im Papierkorb.",
+    "restored": "„{{name}}“ liegt wieder in „{{folder}}“.",
+    "restoredRoot": "„{{name}}“ liegt wieder bei den Notizen.",
+    "emptied": "Der Papierkorb ist leer."
+  },
+  "note": {
+    "meta": "{{folder}} · geändert {{when}}",
+    "empty": "Noch leer. Schreib los, sobald die App einen Editor hat."
+  },
+  "palette": {
+    "label": "Befehle",
+    "search": "Befehl oder Einstellung suchen",
+    "groupFile": "Ablage",
+    "groupView": "Ansicht",
+    "groupLook": "Darstellung",
+    "groupPlaces": "Orte",
+    "toneWarm": "Farbton Warm",
+    "find": "Suche",
+    "settings": "Einstellungen",
+    "move": "wechseln",
+    "run": "ausführen",
+    "close": "schließen",
+    "keywordsSidebar": "sidebar ordner ausblenden",
+    "keywordsInspector": "inspektor ausblenden",
+    "keywordsTheme": "hell dunkel modus",
+    "keywordsMode": "modus",
+    "keywordsTone": "farbton papier"
+  },
+  "dialog": {
+    "trashTitle": "„{{name}}“ in den Papierkorb legen?",
+    "trashText": "Die Notiz „{{name}}“ kommt in den Papierkorb. Von dort kannst du sie zurückholen.",
+    "trashConfirm": "In den Papierkorb legen",
+    "emptyTitle": "Papierkorb leeren?",
+    "emptyText_one": "Die Notiz „{{name}}“ im Papierkorb wird endgültig gelöscht. Das lässt sich nicht rückgängig machen.",
+    "emptyText_other": "Die {{n}} Notizen im Papierkorb werden endgültig gelöscht. Das lässt sich nicht rückgängig machen.",
+    "emptyConfirm": "Papierkorb leeren",
+    "unsavedTitle": "Änderungen an „{{name}}“ sichern?",
+    "unsavedText": "Ohne Sichern gehen die Änderungen seit {{time}} verloren. Die Notiz bleibt.",
+    "discard": "Verwerfen",
+    "save": "Sichern"
+  },
+  "shortcuts": {
+    "title": "Tastaturkürzel",
+    "intro": "Diese 15 Kürzel gelten in jeder sebaro-Desktop-App. Unter Windows und Linux steht Strg statt ⌘.",
+    "caption": "Die festen Kürzel",
+    "key": "Kürzel",
+    "what": "Was es tut",
+    "palette": "Befehle öffnen",
+    "settings": "Einstellungen",
+    "new": "Hauptaktion: Neue Notiz",
+    "open": "Öffnen",
+    "find": "Suchen",
+    "sidebar": "Seitenleiste ein oder aus",
+    "inspector": "Inspektor ein oder aus",
+    "areas": "Nächster oder vorheriger Bereich",
+    "tabs": "Nächster oder vorheriger Reiter",
+    "close": "Reiter schließen",
+    "window": "Neues Fenster",
+    "undo": "Widerrufen und Wiederholen",
+    "trash": "In den Papierkorb legen …",
+    "text": "Schrift des Inhalts größer oder kleiner",
+    "history": "Zurück und Vor"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "back": "Zurück zu {{place}}",
+    "meta": "Gilt für alle Fenster von Musterapp Desktop. Jede Wahl wirkt sofort.",
+    "groupLook": "Darstellung",
+    "theme": "Hell oder Dunkel",
+    "themeHelp": "„Wie das System“ folgt der Einstellung deines Rechners.",
+    "tone": "Farbton",
+    "toneHelp": "Warm färbt nur Grund, Text und Linien, alles andere bleibt.",
+    "motion": "Bewegung immer reduzieren",
+    "motionHelp": "Neues erscheint dann ohne Bewegung, es wird nur eingeblendet. Gilt auch, wenn das System Bewegung zulässt.",
+    "groupNotes": "Notizen",
+    "autosave": "Beim Schließen sichern",
+    "autosaveHelp": "Schließt du einen Reiter mit Änderungen, sichert die App ohne zu fragen.",
+    "coolIsOn": "Farbton Kühl ist an.",
+    "warmIsOn": "Farbton Warm ist an."
+  },
+  "errors": {
+    "settingsNotSaved": "Die Wahl ließ sich nicht sichern. Sie gilt, bis du die App schließt. Wähl sie beim nächsten Start noch mal.",
+    "unknown": "Das hat nicht geklappt. Versuch es noch mal."
+  },
+  "error": {
+    "title": "Fehler",
+    "text": "Dieser Teil des Fensters ließ sich nicht anzeigen. Deine Notizen sind unverändert. Lade das Fenster noch einmal.",
+    "retry": "Noch mal versuchen"
+  },
+  "samples": {
+    "folders": {
+      "projekte": "Projekte",
+      "journal": "Journal"
+    },
+    "notes": {
+      "wochenplan": {
+        "name": "Wochenplan",
+        "text": [
+          "Diese Woche bleibt ruhig. Zwei Termine stehen fest, der Rest ist Platz für Liegengebliebenes.",
+          "Montag: Unterlagen sortieren, danach das Fahrrad zur Werkstatt. Mittwoch: 45\u00a0Min. laufen. Freitag: Einkauf für 4\u00a0Personen.",
+          "Offen von letzter Woche: die Gartenplanung und zwei Rückrufe. Beides passt gut auf Donnerstag."
+        ]
+      },
+      "umzug": {
+        "name": "Umzug Checkliste",
+        "text": [
+          "Kartons beschriften, Zählerstände notieren, die neue Adresse an 6\u00a0Stellen melden."
+        ]
+      },
+      "garten": {
+        "name": "Gartenplan für das Frühjahr mit Beeten und Pflanzzeiten",
+        "text": [
+          "Drei Beete, je 1,2\u00a0m breit. Bohnen an den Zaun, Kräuter ans Haus."
+        ]
+      },
+      "oktober": {
+        "name": "27. Oktober",
+        "text": [
+          "Ein ruhiger Tag. Abends 30\u00a0Min. gelesen."
+        ]
+      },
+      "einkauf": {
+        "name": "Einkauf",
+        "text": [
+          "Brot, Äpfel, 2\u00a0l Milch, Kaffee."
+        ]
+      }
+    }
+  }
+}

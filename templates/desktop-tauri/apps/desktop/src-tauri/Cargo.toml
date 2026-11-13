@@ -1,0 +1,22 @@
+[package]
+name = "musterapp-desktop"
+description = "Musterapp Desktop (fictive): the Tauri shell around musterapp-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[build-dependencies]
+serde_json.workspace = true
+tauri-build = { version = "2.7.4", features = [] }
+
+[dependencies]
+musterapp-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tauri = { version = "2.12.5", features = ["specta"] }
+# The bindings of the UI are generated from the commands (src/main.rs, test `bindings`). Release candidates, so each
+# is pinned exactly; the three versions belong together.
+specta = { version = "=2.0.0-rc.25", features = ["derive"] }
+specta-typescript = "=0.0.12"
+tauri-specta = { version = "=2.0.0-rc.25", features = ["derive", "typescript"] }

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="no-referrer" />
+    <!-- the policy of ../src-tauri/tauri.conf.json, plus 'self' in connect-src for Vite's reload socket in
+         development. In the app both hold, so the stricter one decides; here it serves the browser and its tests -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self' ipc: http://ipc.localhost; base-uri 'self'; form-action 'self'; object-src 'none'"
+    />
+    <title>Musterapp Desktop</title>
+    <!-- theme-init.js first, before anything paints: the stored theme, tone and motion setting, which the Rust side
+         hands over before the page's scripts. A classic script of the copy, served as a file by the plugin in
+         vite.config.ts -->
+    <script src="/sebaro/js/theme-init.js" vite-ignore></script>
+    <!-- src/app.css imports the copy's stylesheets in their order, then holds the app's own rules -->
+    <link rel="stylesheet" href="/src/app.css" />
+  </head>
+  <body class="sb-page">
+    <!-- sebaro:sprite -->
+    <div id="app"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
