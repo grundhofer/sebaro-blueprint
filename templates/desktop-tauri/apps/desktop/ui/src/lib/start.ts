@@ -1,7 +1,6 @@
 // start.ts: the end of the start. index.html shows it from the first paint on (html.sb-starting): the whole window in
 // the product's colour with its white sign. Once the app has painted under it, it fades over the copy's fade of an
-// entering part; with reduced motion, the system's or „Bewegung immer reduzieren“, it goes at once.
-import { readSetting } from "./appearance";
+// entering part, under every motion setting, as the copy's sb-start.js does (D102 (52)).
 
 let ended = false;
 
@@ -12,7 +11,7 @@ export function endStart(): void {
   const root = document.documentElement;
   const start = document.querySelector<HTMLElement>("body > .sb-start");
   const over = () => root.classList.remove("sb-starting");
-  if (!start || readSetting("motion") === "reduce" || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if (!start) {
     over();
     return;
   }

@@ -117,9 +117,9 @@ Fensters.
   schreibt). Die Seite zeigt den Start vom ersten Bild an ohne Skript: `index.html` trägt `class="sb-starting"`, und
   das Plugin in `vite.config.ts` schreibt das Markup der Kopie mit der ID des Produkts und seinem Zeichen
   (`sebaro-product/sign/sign.svg`) als erstes Element in den Body; die Farben gibt `sign/product.css`, das
-  `src/app.css` nach `tokens.css` einbindet. Hat die App gemalt, blendet `src/lib/start.ts` den Start aus, bei
-  reduzierter Bewegung (System oder „Bewegung immer reduzieren“) ohne Überblenden. Ist die Seite geladen, nimmt das
-  Fenster den Grund aus `tokens.json` der Kopie (`build.rs`) für die gespeicherte Wahl. „Hell oder Dunkel“ und
+  `src/app.css` nach `tokens.css` einbindet. Hat die App gemalt, blendet `src/lib/start.ts` den Start in 200&nbsp;ms
+  aus, auch bei reduzierter Bewegung (System oder „Bewegung immer reduzieren“, D102 (52)). Ist die Seite geladen,
+  nimmt das Fenster den Grund aus `tokens.json` der Kopie (`build.rs`) für die gespeicherte Wahl. „Hell oder Dunkel“ und
   Farbton speichert die Rust-Seite in `settings.json` im Konfigurationsordner der App; vor den Skripten der Seite
   legt sie beide dorthin, wo `theme-init.js` der Kopie sie liest. Wählt die Oberfläche neu, speichert
   `set_appearance` und setzt Grund und Modus jedes Fensters.
@@ -160,7 +160,7 @@ eines:
 | `sb-tooltip.js` | nein | `parts/Tool.tsx` |
 | `sb-tone.js`, `theme-button.js` | nein | `panes/Settings.tsx`, `components/AppMenu.tsx`, `store/appearance.ts`, `lib/appearance.ts` |
 | `sb-fit.js` | nein | es schreibt in Textknoten und Bauteile, die React rendert. Übernommen ist eine seiner Formen (siehe Lücken) |
-| `sb-start.js` | nein | `lib/start.ts`, `main.tsx`. Vor dem ersten Bild muss nichts laufen: das Bild des Starts steht in `index.html`. Und bei reduzierter Bewegung blendet `sb-start.js` über, der Start hier nicht |
+| `sb-start.js` | nein | `lib/start.ts`, `main.tsx`. Vor dem ersten Bild muss nichts laufen: das Bild des Starts steht in `index.html` |
 | `sb-sheet.js` | nein | die Vorlage hat kein Sheet |
 
 Nicht in der Kopie, weil ihr Pack nicht gewählt ist: `sb-window.js` (jetzt `components/MainWindow.tsx`,
@@ -207,7 +207,7 @@ Fenster, den Tooltip, die Aufrufe an die Shell über eine Shell-Attrappe, ein En
 der sich nicht laden lässt, und dass jede Klasse von sebaro stammt oder mit `app-` beginnt.
 `tests/start.spec.ts` hält den Code der App zurück und liest das erste Bild Pixel für Pixel: das ganze Fenster in der
 Kachelfarbe (die `product/tiles.json` der Kopie der Gruppe aus `sebaro.product.json` gibt) mit dem weißen Zeichen;
-dann die App, hell und dunkel, mit Überblenden, bei reduzierter Bewegung (System oder Einstellung) ohne.
+dann die App, hell und dunkel, mit Überblenden, auch bei reduzierter Bewegung (System oder Einstellung).
 `tests/dimensions.spec.ts` liest `src/app.css`: keine Länge ohne Token oder Begründung. Dass kein Wort im Markup
 steht, prüft ESLint (`eslint.config.js`). Die Bildschirmfotos liegen danach in `test-results/screens/`.
 
@@ -222,7 +222,7 @@ der Workflow `release`.
 | Was | Budget | Gemessen |
 |---|---|---|
 | CSS des ersten Ladens | 75&nbsp;KB gzip | 28,1&nbsp;KB |
-| JavaScript beim Start | 250&nbsp;KB gzip, kein Start-Chunk über 120&nbsp;KB | 107,9&nbsp;KB, größter Chunk 106,3&nbsp;KB |
+| JavaScript beim Start | 250&nbsp;KB gzip, kein Start-Chunk über 120&nbsp;KB | 107,8&nbsp;KB, größter Chunk 106,3&nbsp;KB |
 | Schriften | 250&nbsp;KB | 61,9&nbsp;KB (drei WOFF2) |
 | Installationspaket | 12&nbsp;MB | 2,95&nbsp;MB (`.dmg`, macOS arm64, unsigniert) |
 
