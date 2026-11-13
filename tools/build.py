@@ -227,7 +227,7 @@ def og_pages() -> str:
         "$schema": "../../docs/sebaro/brand/og/pages.schema.json",
         "$comment": "written by tools/build.py from the pages (h1, meta description); do not edit. "
                     "tools/og.mjs renders it with docs/sebaro/brand/og/render.mjs (D96 (a), WEB-09).",
-        "site": {"product": "studio", "name": "sebaro Guide", "origin": f"{site.scheme}://{site.netloc}",
+        "site": {"product": "studio", "name": "sebaro Blueprint", "origin": f"{site.scheme}://{site.netloc}",
                  "lang": "de", "imageBase": site.path + "og/"},
         "pages": pages,
     }
@@ -300,8 +300,8 @@ def block_header(attrs: dict) -> str:
         '<header class="sb-site-header g-header">',
         '  <a class="sb-lockup" href="index.html">',
         f'    <span class="sb-sign-tile sb-sign-tile--32" aria-hidden="true">{tile_svg("studio", "32")}</span>',
-        # D100 (5): at 200 % text on 320 px „Guide“ goes under „sebaro“ instead of pushing the page sideways
-        '    <span class="g-header__name"><span class="sb-wordmark">sebaro</span><span class="g-header__suffix">Guide</span></span>',
+        # D100 (5): at 200 % text on 320 px „Blueprint“ goes under „sebaro“ instead of pushing the page sideways
+        '    <span class="g-header__name"><span class="sb-wordmark">sebaro</span><span class="g-header__suffix">Blueprint</span></span>',
         '  </a>',
         # NAV-07: DOM order lockup, navigation, language, theme button; the guide is German only, so no language switch
         '  <div class="sb-site-header__links">',
@@ -327,7 +327,7 @@ def block_footer(_attrs: dict) -> str:
         *pages,
         '  </ul>',
         '  </nav>',
-        f'  <p>sebaro Guide <a href="{REPO_URL}/blob/main/CHANGELOG.md">Version {esc(rules_data().get("version", "?"))}{icon("external-link--16")}</a> · '
+        f'  <p>sebaro Blueprint <a href="{REPO_URL}/blob/main/CHANGELOG.md">Version {esc(rules_data().get("version", "?"))}{icon("external-link--16")}</a> · '
         f'System sebaro, Token-Vertrag {esc(str(contracts.get("tokens", "?")))} · '
         f'aus sebaroDesign <code class="sb-code-inline">{esc(commit)}</code> · '
         # D96 (a), WEB-09: the share images end with the host; the page says it too (no text the page lacks)
@@ -507,7 +507,7 @@ def moved_page(name: str, sentences: str, links: list[tuple[str, str]]) -> str:
         '<meta charset="utf-8">',
         '<meta name="viewport" content="width=device-width, initial-scale=1">',
         '<meta name="robots" content="noindex">',
-        f"<title>{esc(name)} · sebaro Guide</title>",
+        f"<title>{esc(name)} · sebaro Blueprint</title>",
         '<meta name="color-scheme" content="light dark">',
         '<link rel="stylesheet" href="sebaro/fonts/fonts.css">',
         '<link rel="stylesheet" href="sebaro/tokens.css">',
@@ -535,7 +535,7 @@ def moved_page(name: str, sentences: str, links: list[tuple[str, str]]) -> str:
 
 
 def llms_txt() -> str:
-    lines = ["# sebaro Guide", "",
+    lines = ["# sebaro Blueprint", "",
              "> The design guide of every sebaro app, website, web app and desktop app: the 31 core rules, one "
              "blueprint and starter per product kind, components and data display. German UI language (du).", "",
              f"Machine-readable rules: {SITE_URL}rules.json · Agent entry: {REPO_URL}/blob/main/AGENTS.md", "",

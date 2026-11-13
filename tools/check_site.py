@@ -8,7 +8,7 @@ Groups
   PAGE   every docs/*.html: lang="de", <title>, exactly one <h1>, unique ids (the inlined icon sprite included: a
          section id equal to an icon id is reported as such); a page has the guide:og/head/header/footer/sprite
          blocks; a page of MOVED (the address of a page that went, written whole by tools/build.py) has none of them,
-         but <meta name="robots" content="noindex">, the title "<name> · sebaro Guide", a link to the start page and
+         but <meta name="robots" content="noindex">, the title "<name> · sebaro Blueprint", a link to the start page and
          no <script>; every MOVED file exists
   LINK   every relative href/src resolves to a file; same-page and cross-page #fragments exist; a link never points
          at an icon of the inlined sprite (only <use href> does)
@@ -329,8 +329,8 @@ def main() -> int:
             errors.append(f"PAGE {name}: {pg.h1} <h1>, expected 1")
         if name in MOVED:
             title = " ".join("".join(pg.title_text).split())
-            if not title.endswith(" · sebaro Guide"):
-                errors.append(f"PAGE {name}: title {title!r}, expected '<name> · sebaro Guide' (MOVED, tools/build.py)")
+            if not title.endswith(" · sebaro Blueprint"):
+                errors.append(f"PAGE {name}: title {title!r}, expected '<name> · sebaro Blueprint' (MOVED, tools/build.py)")
             if ("robots", "noindex") not in pg.meta:
                 errors.append(f'PAGE {name}: no <meta name="robots" content="noindex"> (MOVED, tools/build.py)')
             if pg.scripts:
@@ -490,7 +490,7 @@ def main() -> int:
                 errors.append(f"OG {name}: {len(tags.get(key, []))}x {key}, expected 1 (guide:og block; tools/build.py)")
         one = lambda key: (tags.get(key) or [""])[0]
         h1 = " ".join("".join(pg.h1_text).split())
-        expect = {"og:type": "website" if name == "index.html" else "article", "og:site_name": "sebaro Guide",
+        expect = {"og:type": "website" if name == "index.html" else "article", "og:site_name": "sebaro Blueprint",
                   "og:locale": "de_DE", "og:url": want_url, "og:title": h1, "og:description": one("description"),
                   "og:image": f"{SITE_URL}og/{stem}.png", "og:image:width": str(OG_SIZE[0]),
                   "og:image:height": str(OG_SIZE[1]), "twitter:card": "summary_large_image"}

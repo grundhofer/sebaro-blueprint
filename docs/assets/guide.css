@@ -1,10 +1,10 @@
-/* guide.css: page chrome of the sebaro Guide site. Not part of the system; products never load it.
+/* guide.css: page chrome of the sebaro Blueprint site. Not part of the system; products never load it.
  * Same discipline as sebaro.css: only var(--sb-*) tokens, no raw colours, no shadows, no tinted card grounds.
  * Classes start with "g-". Load after sebaro.css and the vendored demo/pages specimens. */
 
 /* ------------------------------------------------------------------ header and footer */
 .g-header__suffix { font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); color: var(--sb-color-text-muted); }
-/* D100 (5): at 200 % text on 320 px the lockup is wider than the row; „Guide“ then goes under „sebaro“ */
+/* D100 (5): at 200 % text on 320 px the lockup is wider than the row; „Blueprint“ then goes under „sebaro“ */
 .g-header .sb-lockup { min-inline-size: 0; }
 .g-header__name { display: inline-flex; flex-wrap: wrap; column-gap: var(--sb-space-2); min-inline-size: 0; }
 .g-nav { row-gap: 0; }
@@ -14,10 +14,11 @@
 /* a flex item takes its longest word as its minimum; the version line wraps instead (D100 (5)) */
 .g-footer > p { min-inline-size: 0; }
 /* NAV-07 order is lockup, navigation, theme button (no language switch: the guide is German only). Lockup plus
- * "Guide" (168 px) and the button (160 px) need 368 px with the gutters; on narrower pages the button label wraps
- * onto two lines instead of pushing the page sideways (measured at 320 px). */
-@container sb-page (width < 384px) {
-  .g-header .sb-theme-button { white-space: normal; max-inline-size: 7.5rem; padding-inline: var(--sb-space-3); text-align: center; }
+ * "Blueprint" (206 px in dark) and the button (163 px) need 409 px with the gutters; on narrower pages the button label
+ * wraps onto two lines instead of pushing the page sideways. At 6.5rem the header keeps one row down to 360 px; at
+ * 320 px the button goes under the lockup (measured 320 to 440 px, light and dark). */
+@container sb-page (width < 424px) {
+  .g-header .sb-theme-button { white-space: normal; max-inline-size: 6.5rem; padding-inline: var(--sb-space-3); text-align: center; }
 }
 
 /* ------------------------------------------------------------------ page lead and long-page layout */

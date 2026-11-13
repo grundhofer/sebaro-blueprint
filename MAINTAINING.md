@@ -1,4 +1,4 @@
-# MAINTAINING.md: the sebaro Guide
+# MAINTAINING.md: the sebaro Blueprint
 
 How this repository is built, checked, synced and released. Building a product starts at [AGENTS.md](AGENTS.md).
 

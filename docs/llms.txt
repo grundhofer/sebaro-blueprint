@@ -1,4 +1,4 @@
-# sebaro Guide
+# sebaro Blueprint
 
 > The design guide of every sebaro app, website, web app and desktop app: the 31 core rules, one blueprint and starter per product kind, components and data display. German UI language (du).
 

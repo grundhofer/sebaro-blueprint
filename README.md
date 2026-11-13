@@ -1,4 +1,4 @@
-# sebaro Guide
+# sebaro Blueprint
 
 Der Gestaltungsleitfaden für alles, was sebaro baut: Apps am Handy, Websites, Web-Apps und Desktop-Programme. Die
 Website zeigt die 31 Kernregeln auf Deutsch, die Baupläne und Startvorlagen je Produktart und zum Nachschlagen
