@@ -38,8 +38,11 @@ i18next (Deutsch und Englisch, ein Test hält die Schlüssel gleich); die Kopie 
 `webapp`) liegt in `src/sebaro/`, die sebaro-Bauteile sind als React-Hüllen in `src/components/parts/` gefasst. Neu sind
 ESLint, Prettier, Vitest, die Größenbudgets im Build (CSS 34 von 75 KB, JavaScript beim Start 141 von 250 KB, gzip),
 ein `ci`-Workflow und eine Dependabot-Datei. Die Ansichten sind dieselben wie zuvor. Von den klassischen Skripten der
-Kopie lädt die Vorlage nur `theme-init.js`; was sie sonst täten, ist in React geschrieben. Offen bleiben der
-App-Rahmen nach den Kernregeln 18 und 28, die übrigen Formen für große Schrift und ein `deploy`-Workflow.
+Kopie lädt die Vorlage nur `theme-init.js`; was sie sonst täten, ist in React geschrieben. Die Vorlage steht im
+App-Rahmen der Kernregeln 18 und 28: auf dem Handy die Navigation unten, ab 840 dp die Leiste am Rand und zwei Spalten,
+„Hell oder Dunkel“, Farbton und Sprache im Menü „Mehr“; je Bereich höchstens eine umrandete Aktion (Kernregel 13), und
+die Prüfung einer Ansicht aus der Kopie läuft in den Tests auf jedem Bildschirm. Der Linter prüft auch die Regeln für
+Reacts Hooks (`eslint-plugin-react-hooks`). Offen bleiben die übrigen Formen für große Schrift und ein `deploy`-Workflow.
 
 Android-Startvorlage nach ihrem Bauplan neu gebaut: die Kopie aus dem öffentlichen Release (Profil `android`) als Modul
 `:designsystem` statt des privaten Maven-Pakets, die eigenen Dateien aus dem Baukasten der Kopie, `AppContainer`, je
