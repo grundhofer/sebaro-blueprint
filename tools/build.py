@@ -10,6 +10,7 @@ Pages in docs/*.html are hand-written. Shared parts sit between marker comments 
     <!-- guide:header page="x" --> … <!-- /guide:header -->    site header; page x gets aria-current
     <!-- guide:footer -->          … <!-- /guide:footer -->    site footer with sync state
     <!-- guide:tile id="novalis" size="48" --> … <!-- /guide:tile -->   brand/inline/tile-<id>[-small].svg
+    <!-- guide:kern -->            … <!-- /guide:kern -->      index.html: the 31 core rules from design/KERN.de.md
     <!-- guide:rules -->           … <!-- /guide:rules -->     regeln.html: every rule of rules/rules.json + its example
     <!-- guide:rules-toc -->       … <!-- /guide:rules-toc --> regeln.html: area list
     <!-- guide:stats -->           … <!-- /guide:stats -->     rule counts by status
@@ -40,13 +41,14 @@ import re
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import urljoin, urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 SEBARO = DOCS / "sebaro"
 RULES = ROOT / "rules" / "rules.json"
 EXAMPLES = ROOT / "src" / "rule-examples"
+KERN_DE = ROOT / "design" / "KERN.de.md"     # the core rules in German, for people (check_budget.py keeps it in step)
 REPO_URL = "https://github.com/grundhofer/sebaro-guide"
 SITE_URL = "https://grundhofer.github.io/sebaro-guide/"
 OG_SRC = ROOT / "src" / "og"
@@ -125,14 +127,14 @@ def _extension_dot(s: str) -> int:
     return dot if 1 <= len(ext) <= 4 and all(c.isalnum() for c in ext) else -1
 
 
-def _file_name(s: str) -> str:
+def _file_name(s: str, cls: str = "sb-file-name") -> str:
     out = []
     dot = _extension_dot(s)
     for i, ch in enumerate(s):
         out.append(esc(ch))
         if ch in "-._/" and i < len(s) - 1 and i != dot:
             out.append("<wbr>")
-    return '<code class="sb-file-name">' + "".join(out) + "</code>"
+    return f'<code class="{cls}">' + "".join(out) + "</code>"
 
 
 def text(s: str, lang: str = "de") -> str:
@@ -398,6 +400,94 @@ def render_rule(r: dict, area_title: str) -> str:
     return "\n".join(parts)
 
 
+# ------------------------------------------------------------------ the core rules (guide:kern)
+
+# TXT-04 (core rule 26): a number and its unit stay on one line; KERN.de.md writes a plain space, the page U+00A0
+_UNIT = re.compile(r"(\d) ((?:px|dp|ms|s|%|€)(?!\w))")
+_SLUG = str.maketrans({"ä": "ae", "ö": "oe", "ü": "ue", "ß": "ss"})
+
+
+def _kern_inline(s: str) -> str:
+    """One paragraph of KERN.de.md as HTML: `code` as inline code (a file name breaks after - . _ /), a markdown link
+    [text](file) as a link to that file on GitHub with the external-link icon (LNK-02), the rest through text()."""
+    out, pos = [], 0
+    for m in re.finditer(r"`([^`]+)`|\[([^\]]+)\]\(([^)\s]+)\)", s):
+        out.append(text(s[pos:m.start()]))
+        code, label, target = m.groups()
+        if code is not None:
+            out.append(_file_name(code, "sb-code-inline sb-file-name") if re.fullmatch(_FILE_RE, code)
+                       else f'<code class="sb-code-inline">{esc(code)}</code>')
+        else:
+            href = urljoin(f"{REPO_URL}/blob/main/{KERN_DE.parent.relative_to(ROOT).as_posix()}/", target)
+            out.append(f'<a href="{esc(href)}">{text(label)}{icon("external-link--16")}</a>')
+        pos = m.end()
+    out.append(text(s[pos:]))
+    return _UNIT.sub(r"\1&nbsp;\2", "".join(out))
+
+
+def kern_doc() -> tuple[list[str], list[tuple[str, list[dict]]]]:
+    """(intro paragraphs, [(section heading, [rule])]) of KERN.de.md; a rule is {"n", "text", "items"}: its number, its
+    text with the bracketed references at the end, and the lines of its nested list (rule 30). The # title is left
+    out: the page has its own <h1>."""
+    intro: list[list[str]] = [[]]
+    sections: list[tuple[str, list[dict]]] = []
+    rule = None
+    for line in KERN_DE.read_text(encoding="utf-8").splitlines():
+        s = line.strip()
+        if line.startswith("# "):
+            continue
+        if line.startswith("## "):
+            sections.append((s[3:], []))
+            rule = None
+        elif not sections:
+            if s:
+                intro[-1].append(s)
+            elif intro[-1]:
+                intro.append([])
+        elif m := re.match(r"(\d+)\. (.*)", line):
+            rule = {"n": int(m.group(1)), "text": [m.group(2)], "items": []}
+            sections[-1][1].append(rule)
+        elif not s:
+            continue
+        elif rule is None:
+            raise SystemExit(f"{KERN_DE.relative_to(ROOT)}: text outside a numbered rule: {s!r}")
+        elif s.startswith("- "):
+            rule["items"].append([s[2:]])
+        elif rule["items"]:
+            rule["items"][-1].append(s)    # a nested item goes on over several lines
+        else:
+            rule["text"].append(s)
+    return [" ".join(p) for p in intro if p], sections
+
+
+def block_kern(_attrs: dict) -> str:
+    """Every section of KERN.de.md as an h2 with one numbered list that keeps the rule numbers; each rule has the id
+    regel-<n>, its bracketed references stand small in mono and are not linked."""
+    intro, sections = kern_doc()
+    out = [f'<p class="g-kern__intro">{_kern_inline(p)}</p>' for p in intro]
+    for title, rules in sections:
+        numbers = [r["n"] for r in rules]
+        if not rules or numbers != list(range(numbers[0], numbers[0] + len(numbers))):
+            raise SystemExit(f"{KERN_DE.relative_to(ROOT)}: section {title!r} has the rules {numbers}, not a run")
+        sid = "kern-" + re.sub(r"[^a-z0-9]+", "-", title.lower().translate(_SLUG)).strip("-")
+        out += [f'<section class="sb-section g-kern" id="{sid}" aria-labelledby="{sid}-h">',
+                f'<h2 class="sb-section__title" id="{sid}-h">{esc(title)}</h2>',
+                f'<ol class="g-kern__rules" start="{numbers[0]}">']
+        for r in rules:
+            body = " ".join(r["text"])
+            m = re.fullmatch(r"(.*?)\s*\[([^\]]+)\]", body)
+            line = f'<li id="regel-{r["n"]}">{_kern_inline(m.group(1) if m else body)}'
+            if m:
+                # an id or a date never breaks at its hyphen (sb-id, D80)
+                refs = re.sub(r"\b([A-Z]{3}-\d{2}|\d{4}-\d{2}-\d{2})\b", r'<span class="sb-id">\1</span>', esc(m.group(2)))
+                line += f' <span class="g-kern__refs">[{refs}]</span>'
+            if r["items"]:
+                line += "\n<ul>\n" + "\n".join(f"<li>{_kern_inline(' '.join(i))}</li>" for i in r["items"]) + "\n</ul>\n"
+            out.append(line + "</li>")
+        out += ["</ol>", "</section>"]
+    return "\n".join(out)
+
+
 def block_rules(_attrs: dict) -> str:
     data = rules_data()
     out = []
@@ -441,7 +531,8 @@ def block_stats(_attrs: dict) -> str:
 
 
 BLOCKS = {"og": block_og, "head": block_head, "sprite": block_sprite, "header": block_header, "footer": block_footer,
-          "tile": block_tile, "rules": block_rules, "rules-toc": block_rules_toc, "stats": block_stats}
+          "tile": block_tile, "kern": block_kern, "rules": block_rules, "rules-toc": block_rules_toc,
+          "stats": block_stats}
 # one pattern for open and close markers; pairs are matched with a stack, so markers may nest at any depth
 MARKER = re.compile(r'<!-- (?P<close>/)?guide:(?P<name>[a-z-]+)(?P<attrs>(?:\s+[a-z]+="[^"]*")*)\s*-->')
 ATTR = re.compile(r'([a-z]+)="([^"]*)"')
