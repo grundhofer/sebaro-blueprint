@@ -14,11 +14,12 @@
 }
 
 /* a pane scrolls in its own box at every width (sebaro.css does so from 840 px): its action zone sticks to its
-   bottom, and a focused field stops above the zone, whose height ActionZone measures */
+   bottom. A focused field stops above the zone, whose height ActionZone measures, and below the pane's top edge
+   with room for its label */
 .app-pane {
   overflow-y: auto;
   overscroll-behavior: contain;
-  scroll-padding-block-end: var(--sb-bottom-block-size, var(--sb-space-0));
+  scroll-padding-block: var(--sb-space-8) var(--sb-bottom-block-size, var(--sb-space-0));
 }
 .app-pane > .sb-view__content {
   flex: 1 0 auto;
