@@ -2,6 +2,7 @@
 // sign, then the app, light and dark. The colour is the tile colour of the product's group, the one the window opens
 // in (src-tauri/build.rs): sebaro.product.json names the group, the copy's product/tiles.json gives its colour. The
 // start fades under every motion setting, also the system's reduced motion and „Bewegung immer reduzieren“ (D102 (52)).
+// Only when it has ended does the UI tell the Rust side (start_ended), which then gives the window its stored ground.
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { expect, test, type Page } from "@playwright/test";
@@ -64,6 +65,14 @@ for (const scheme of ["light", "dark"] as const) {
       });
       page.on("pageerror", (e) => problems.push(`page error: ${e.message}`));
       if (setting) await page.addInitScript(() => localStorage.setItem("sb-motion", "reduce"));
+      // stands in for the Rust side: each command with whether the start was still on screen when it came
+      await page.addInitScript(() => {
+        const calls: [string, boolean][] = [];
+        const starting = () => document.documentElement.classList.contains("sb-starting");
+        const invoke = (command: string) => Promise.resolve(void calls.push([command, starting()]));
+        Object.assign(window, { calls, isTauri: true, __TAURI_INTERNALS__: { invoke } });
+      });
+      const calls = () => page.evaluate(() => (window as unknown as { calls: [string, boolean][] }).calls);
       const shot = (name: string) =>
         path.join(test.info().project.outputDir, "screens", `start-${scheme}-${motion}-${name}.png`);
 
@@ -81,14 +90,17 @@ for (const scheme of ["light", "dark"] as const) {
       const first = await look(page, await page.screenshot({ path: shot("1-first") }), box);
       expect(first.corners, "the whole window in the tile colour").toEqual([TILE, TILE, TILE, TILE]);
       expect(first.white, "the white sign in the middle").toBeGreaterThan(0);
+      expect(await calls(), "nothing has asked the Rust side yet").toEqual([]);
 
-      // the app runs: once it has painted, the start fades
+      // the app runs: once it has painted, the start fades; then, and only then, the window takes its stored ground
       release();
       await expect(page.locator("main h1:visible")).toHaveText("Wochenplan");
       await expect(page.locator("body > .sb-start")).toBeHidden();
       await expect(page.locator("html")).not.toHaveClass(/sb-starting/);
       const fades = await page.locator("body > .sb-start").evaluate((start) => start.getAnimations().length);
       expect(fades, "the start faded").toBe(1);
+      const ended = (await calls()).filter(([command]) => command === "start_ended");
+      expect(ended, "start_ended once, after the start").toEqual([["start_ended", false]]);
       const after = await look(page, await page.screenshot({ path: shot("2-app") }), box);
       expect(after.corners, "the app's own ground").not.toContainEqual(TILE);
       expect(problems, "console and page errors").toEqual([]);

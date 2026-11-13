@@ -9,6 +9,11 @@ export const commands = {
 	 *  keeps it. A choice that could not be stored still holds until the app closes; the error says so.
 	 */
 	setAppearance: (theme: Theme, tone: Tone) => typedError<null, CommandError>(__TAURI_INVOKE("set_appearance", { theme, tone })),
+	/**
+	 *  The start has ended in the UI: the window takes the stored ground under the app. Until then its ground is the
+	 *  colour of the start, so no other colour shows before the page has painted.
+	 */
+	startEnded: () => __TAURI_INVOKE<void>("start_ended"),
 	/**  The title the system shows for the window: „<place> · <app>“. */
 	setWindowTitle: (title: string) => __TAURI_INVOKE<void>("set_window_title", { title }),
 };

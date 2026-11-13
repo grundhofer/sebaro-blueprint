@@ -18,6 +18,17 @@ export async function storeAppearance(theme: Theme, tone: Tone): Promise<Failure
   }
 }
 
+/** The start has ended: the window takes the stored ground under the app. Until then the Rust side keeps the colour
+ *  of the start as its ground, so no other colour shows before the page has painted. */
+export async function showStoredGround(): Promise<void> {
+  if (!isTauri()) return;
+  try {
+    await commands.startEnded();
+  } catch {
+    // the colour of the start stays under the app; nothing the person could act on
+  }
+}
+
 /** The title the system shows for the window. A title the system refuses stays as it was. */
 export async function showWindowTitle(title: string): Promise<void> {
   if (!isTauri()) return;

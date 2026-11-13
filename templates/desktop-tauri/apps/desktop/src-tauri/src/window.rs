@@ -1,12 +1,11 @@
 // window.rs: the main window. It is made here, not in tauri.conf.json, so it has the stored „Hell oder Dunkel“ and
-// its ground before the page paints: the colour of the start, which the page shows until the app has painted; the
-// stored ground follows once the page has loaded. The grounds come from the sebaro copy and the files its kit wrote
-// for the product, at build time (build.rs).
+// its ground before the page paints: the colour of the start, which the page shows until the app has painted. It
+// keeps that ground until the UI says the start has ended (the command start_ended), then takes the stored one. The
+// grounds come from the sebaro copy and the files its kit wrote for the product, at build time (build.rs).
 // On macOS the UI's own bar is the title bar (overlay style, hidden title); Windows and Linux keep the system frame.
 use musterapp_core::{Settings, Theme, Tone};
 use tauri::{
-    webview::PageLoadEvent, window::Color, App, Theme as SystemTheme, WebviewUrl, WebviewWindow,
-    WebviewWindowBuilder,
+    window::Color, App, Theme as SystemTheme, WebviewUrl, WebviewWindow, WebviewWindowBuilder,
 };
 
 include!(concat!(env!("OUT_DIR"), "/grounds.rs"));
@@ -56,23 +55,17 @@ fn init_script(settings: &Settings) -> String {
     )
 }
 
-/// Makes the main window with the stored choice. It opens in the colour of the start; once the page has loaded, the
-/// app stands under the start and the window takes the stored ground.
+/// Makes the main window with the stored choice. Its ground is the colour of the start until the start has ended in
+/// the UI (`commands::start_ended`): WebKit shows the window's ground until the page has painted, even after the page
+/// has loaded.
 pub fn open(app: &App, settings: &Settings) -> tauri::Result<()> {
-    let stored = *settings;
     let builder = WebviewWindowBuilder::new(app, "main", WebviewUrl::App("index.html".into()))
         .title(&app.package_info().name)
         .inner_size(1200.0, 800.0)
         .min_inner_size(480.0, 400.0)
         .theme(mode(settings))
         .background_color(start())
-        .initialization_script(init_script(settings))
-        .on_page_load(move |window, payload| {
-            // "follow the system": only the window itself knows which mode the system shows
-            if payload.event() == PageLoadEvent::Finished {
-                apply(&window, &stored);
-            }
-        });
+        .initialization_script(init_script(settings));
     #[cfg(target_os = "macos")]
     let builder = builder
         .title_bar_style(tauri::TitleBarStyle::Overlay)
@@ -81,7 +74,8 @@ pub fn open(app: &App, settings: &Settings) -> tauri::Result<()> {
     Ok(())
 }
 
-/// Sets the mode and the ground of a window to the choice.
+/// Sets the mode and the ground of a window to the choice. For "follow the system" only the window itself knows
+/// which mode the system shows.
 pub fn apply(window: &WebviewWindow, settings: &Settings) {
     let _ = window.set_theme(mode(settings));
     let dark = match mode(settings) {

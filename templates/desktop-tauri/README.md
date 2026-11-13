@@ -118,8 +118,10 @@ Fensters.
   das Plugin in `vite.config.ts` schreibt das Markup der Kopie mit der ID des Produkts und seinem Zeichen
   (`sebaro-product/sign/sign.svg`) als erstes Element in den Body; die Farben gibt `sign/product.css`, das
   `src/app.css` nach `tokens.css` einbindet. Hat die App gemalt, blendet `src/lib/start.ts` den Start in 200&nbsp;ms
-  aus, auch bei reduzierter Bewegung (System oder „Bewegung immer reduzieren“, D102 (52)). Ist die Seite geladen,
-  nimmt das Fenster den Grund aus `tokens.json` der Kopie (`build.rs`) für die gespeicherte Wahl. „Hell oder Dunkel“ und
+  aus, auch bei reduzierter Bewegung (System oder „Bewegung immer reduzieren“, D102 (52)). Erst dann ruft sie über
+  `src/lib/shell.ts` den Befehl `start_ended`, und das Fenster nimmt den Grund aus `tokens.json` der Kopie
+  (`build.rs`) für die gespeicherte Wahl. Früher ginge nicht: WebKit zeigt den Grund des Fensters, bis die Seite gemalt
+  hat, auch wenn sie schon geladen ist. „Hell oder Dunkel“ und
   Farbton speichert die Rust-Seite in `settings.json` im Konfigurationsordner der App; vor den Skripten der Seite
   legt sie beide dorthin, wo `theme-init.js` der Kopie sie liest. Wählt die Oberfläche neu, speichert
   `set_appearance` und setzt Grund und Modus jedes Fensters.
@@ -207,7 +209,8 @@ Fenster, den Tooltip, die Aufrufe an die Shell über eine Shell-Attrappe, ein En
 der sich nicht laden lässt, und dass jede Klasse von sebaro stammt oder mit `app-` beginnt.
 `tests/start.spec.ts` hält den Code der App zurück und liest das erste Bild Pixel für Pixel: das ganze Fenster in der
 Kachelfarbe (die `product/tiles.json` der Kopie der Gruppe aus `sebaro.product.json` gibt) mit dem weißen Zeichen;
-dann die App, hell und dunkel, mit Überblenden, auch bei reduzierter Bewegung (System oder Einstellung).
+dann die App, hell und dunkel, mit Überblenden, auch bei reduzierter Bewegung (System oder Einstellung), und erst
+danach, einmal, den Aufruf `start_ended` an eine Shell-Attrappe.
 `tests/dimensions.spec.ts` liest `src/app.css`: keine Länge ohne Token oder Begründung. Dass kein Wort im Markup
 steht, prüft ESLint (`eslint.config.js`). Die Bildschirmfotos liegen danach in `test-results/screens/`.
 
@@ -222,7 +225,7 @@ der Workflow `release`.
 | Was | Budget | Gemessen |
 |---|---|---|
 | CSS des ersten Ladens | 75&nbsp;KB gzip | 28,1&nbsp;KB |
-| JavaScript beim Start | 250&nbsp;KB gzip, kein Start-Chunk über 120&nbsp;KB | 107,8&nbsp;KB, größter Chunk 106,3&nbsp;KB |
+| JavaScript beim Start | 250&nbsp;KB gzip, kein Start-Chunk über 120&nbsp;KB | 107,9&nbsp;KB, größter Chunk 106,3&nbsp;KB |
 | Schriften | 250&nbsp;KB | 61,9&nbsp;KB (drei WOFF2) |
 | Installationspaket | 12&nbsp;MB | 2,95&nbsp;MB (`.dmg`, macOS arm64, unsigniert) |
 
