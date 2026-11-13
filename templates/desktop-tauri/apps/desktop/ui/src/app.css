@@ -1,0 +1,43 @@
+/* app.css: the copy's stylesheets in their order, then the few rules this app adds around sebaro's parts. Only
+   app-* classes, only var(--sb-*) tokens, no colour values, no shadows. Everything that looks like sebaro comes from
+   the copy. */
+@import "./sebaro/fonts/fonts.css";
+@import "./sebaro/tokens.css";
+@import "./sebaro/icons/sprite.css";
+@import "./sebaro/css/sebaro.css";
+
+/* the search field at the top of the sidebar, inside the sidebar's own start padding */
+.app-side-search {
+  margin-block: var(--sb-space-2) var(--sb-space-1);
+  margin-inline: var(--sb-space-2);
+}
+
+/* the sentence when no note matches the search; empty, it takes no room */
+.app-side-none {
+  margin: 0;
+  padding-inline: var(--sb-space-4);
+  font: var(--sb-type-caption);
+  letter-spacing: var(--sb-type-caption-tracking);
+  color: var(--sb-color-text-muted);
+}
+.app-side-none:empty {
+  display: none;
+}
+
+/* ⌘+ and ⌘− change only the text of the content; panes/Content.tsx sets --app-doc-scale */
+.app-doc > p {
+  font-size: calc(var(--app-doc-scale, 1) * var(--sb-type-body-size));
+}
+
+/* the bin's actions under the inspector's list: the danger action at the end of the content */
+.app-inspector-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sb-space-2);
+  margin-block-start: var(--sb-space-4);
+}
+
+/* a pane that failed says so inside its own padding */
+.app-error {
+  padding: var(--sb-space-4);
+}
