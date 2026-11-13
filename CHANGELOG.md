@@ -41,6 +41,14 @@ ein `ci`-Workflow und eine Dependabot-Datei. Die Ansichten sind dieselben wie zu
 Kopie lädt die Vorlage nur `theme-init.js`; was sie sonst täten, ist in React geschrieben. Offen bleiben der
 App-Rahmen nach den Kernregeln 18 und 28, die übrigen Formen für große Schrift und ein `deploy`-Workflow.
 
+Desktop-Startvorlage nach ihrem Bauplan neu gebaut: die Oberfläche auf dem Stack der Web-App ohne Router (ein Fenster
+mit Bereichen), die Kopie aus dem öffentlichen Release (Profil `desktop`), ein Cargo-Workspace mit eigenem Kern-Crate,
+festgelegter Rust-Version und `Cargo.lock`; die Oberfläche ruft Rust nur über erzeugte, typisierte Bindungen, ein Fehler
+trägt einen Code, den die Oberfläche in einen Satz übersetzt. Das Fenster entsteht in Rust mit dem Grund aus den Tokens
+der Kopie und der gespeicherten Wahl „Hell oder Dunkel“; die Fensterleiste lässt sich ziehen. Neu sind die Rust-Prüfungen
+(`cargo fmt`, `clippy`, `cargo audit`, `cargo deny`), die Größenbudgets (Installer 3,0 von 12 MB), die Workflows `ci`
+und `release` und eine Dependabot-Datei. Damit spiegelt keine Vorlage mehr `docs/sebaro/`.
+
 Abgleich ohne Produkt: Die Werkstatt führt keine Produktliste mehr, ihr Web-Export für diese Seite kennt kein Produkt.
 Der Guide erklärt sich deshalb selbst wie jedes Produkt (`sebaro.product.json` an der Wurzel, die Dachmarke), und der
 Baukasten des Exports schreibt daraus Favicons, Manifest und Head-Snippet nach `docs/sebaro-product/`;

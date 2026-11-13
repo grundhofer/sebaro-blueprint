@@ -108,8 +108,8 @@ def template_export_findings(root: Path = ROOT) -> tuple[list[str], list[str]]:
 def template_files() -> list[Path]:
     """Files of templates/ for TERM: what git tracks there plus new files git does not ignore (`git ls-files
     --cached --others --exclude-standard`), so what a template's install, build or tests write (git-ignored there)
-    is left out by the template's own .gitignore, never by a folder name. Left out besides: the three exact copies
-    of the web export in TEMPLATE_EXPORTS (their font licence keeps the authors' copyright as the OFL requires, like
+    is left out by the template's own .gitignore, never by a folder name. Left out besides: the exact copies
+    of the export in TEMPLATE_EXPORTS (their font licence keeps the authors' copyright as the OFL requires, like
     docs/sebaro/, and checks/verify-export.mjs --strict checks each against its record)."""
     listed = subprocess.run(["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard", "--", "templates"],
                             cwd=ROOT, capture_output=True, check=True).stdout.decode("utf-8").split("\0")
