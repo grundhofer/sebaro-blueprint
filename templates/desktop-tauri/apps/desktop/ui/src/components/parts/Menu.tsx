@@ -172,6 +172,7 @@ function SubMenu({ entry, level, checks, went }: SubProps) {
   const menu = useRef<HTMLUListElement>(null);
   const [open, setOpen] = useState(false);
   const [side, setSide] = useState<Side | null>(null);
+  const [cameFrom, setCameFrom] = useState(""); // the name of the menu this one was opened from, for the back row
   const parent = () => item.current?.closest<HTMLElement>(".sb-menu") ?? null;
 
   const show = () => {
@@ -183,6 +184,7 @@ function SubMenu({ entry, level, checks, went }: SubProps) {
     flushSync(() => {
       setOpen(true);
       setSide(beside);
+      setCameFrom(above.getAttribute("aria-label") ?? "");
     });
     if (!beside) placeOver(list, above);
     focusItem(list, "first");
@@ -242,13 +244,13 @@ function SubMenu({ entry, level, checks, went }: SubProps) {
               type="button"
               role="menuitem"
               tabIndex={-1}
-              aria-label={t("common.backTo", { name: parent()?.getAttribute("aria-label") ?? "" })}
+              aria-label={t("common.backTo", { name: cameFrom })}
               onClick={back}
             >
               <span className="sb-menu__back-mark" aria-hidden="true">
                 <Icon name="chevron-right--16" size={16} />
               </span>
-              {parent()?.getAttribute("aria-label")}
+              {cameFrom}
             </button>
           </li>
         )}

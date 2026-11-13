@@ -57,7 +57,8 @@ festgelegter Rust-Version und `Cargo.lock`; die Oberfläche ruft Rust nur über 
 trägt einen Code, den die Oberfläche in einen Satz übersetzt. Das Fenster entsteht in Rust mit dem Grund aus den Tokens
 der Kopie und der gespeicherten Wahl „Hell oder Dunkel“; die Fensterleiste lässt sich ziehen. Neu sind die Rust-Prüfungen
 (`cargo fmt`, `clippy`, `cargo audit`, `cargo deny`), die Größenbudgets (Installer 3,0 von 12 MB), die Workflows `ci`
-und `release` und eine Dependabot-Datei. Damit spiegelt keine Vorlage mehr `docs/sebaro/`.
+und `release` und eine Dependabot-Datei. Damit spiegelt keine Vorlage mehr `docs/sebaro/`. Der Linter prüft auch die
+Regeln für Reacts Hooks (`eslint-plugin-react-hooks`).
 
 Abgleich ohne Produkt: Die Werkstatt führt keine Produktliste mehr, ihr Web-Export für diese Seite kennt kein Produkt.
 Der Guide erklärt sich deshalb selbst wie jedes Produkt (`sebaro.product.json` an der Wurzel, die Dachmarke), und der

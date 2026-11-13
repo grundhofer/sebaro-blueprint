@@ -1,7 +1,8 @@
-// eslint.config.js: ESLint with typescript-eslint. Beside the recommended rules: no promise left unhandled, no
-// `any`, no console, and no word written into JSX.
+// eslint.config.js: ESLint with typescript-eslint and the rules of React's hooks. Beside the recommended rules: no
+// promise left unhandled, no `any`, no console, and no word written into JSX.
 import js from "@eslint/js";
 import { defineConfig, globalIgnores } from "eslint/config";
+import reactHooks from "eslint-plugin-react-hooks";
 import tseslint from "typescript-eslint";
 
 const WORD = "Every word comes from the string tables (i18n/ at the root of the repository): use t() or <Trans>.";
@@ -11,6 +12,7 @@ export default defineConfig(
   globalIgnores(["dist", "src/sebaro", "src/ipc/bindings.ts", "test-results", "playwright-report"]),
   js.configs.recommended,
   tseslint.configs.recommended,
+  reactHooks.configs.flat.recommended,
   {
     files: ["**/*.{ts,tsx}"],
     languageOptions: { parserOptions: { projectService: true, tsconfigRootDir: import.meta.dirname } },
