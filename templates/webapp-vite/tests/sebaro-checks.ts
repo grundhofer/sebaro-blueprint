@@ -4,7 +4,8 @@
 //     must hold) and exactly the overlays that must be open (dialogs, popovers, toasts; none when the case says null)
 //   - the text size really took (200 %: the root is 32 px, set with CDP Page.setFontSizes BEFORE navigation, as a
 //     reader sets it in the browser; full-page screenshots lose that setting, so the shots are viewport shots)
-//   - the page does not scroll sideways (ZUG-09)
+//   - the page does not scroll sideways, and neither does a pane of an app frame, which scrolls in its own box
+//     (ZUG-09)
 //   - no text is cut by a frame with overflow hidden or clip (ZUG-09; the same reading as the guide's
 //     tools/check_a11y.mjs and the workshop's OVF4: a deliberate ellipsis with data-sb-truncate is exempt)
 //   - no value of a select, no placeholder and no value of a read-only field is cut by its control at the current text
@@ -111,6 +112,12 @@ export function collectCut() {
     }
   }
   return out;
+}
+
+/** How far the page, or a pane of an app frame (it scrolls in its own box), scrolls sideways, in px. */
+export function sidewaysScroll() {
+  const boxes = [document.documentElement, ...document.querySelectorAll(".sb-app-frame__pane")];
+  return Math.max(...boxes.map((box) => box.scrollWidth - box.clientWidth));
 }
 
 /** The ids of every open overlay: modal and non-modal dialogs, open popovers, toasts on screen. */
@@ -283,8 +290,7 @@ export function checkScreens(screens: Screen[], options: Options = {}) {
             const root = await page.evaluate(() => parseFloat(getComputedStyle(document.documentElement).fontSize));
             expect(root, "root text size").toBeGreaterThanOrEqual(16 * scale - 0.5);
 
-            const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-            expect(overflow, "page scrolls sideways (px)").toBeLessThanOrEqual(1);
+            expect(await page.evaluate(sidewaysScroll), "page or pane scrolls sideways (px)").toBeLessThanOrEqual(1);
 
             const cut = await page.evaluate(collectCut);
             expect(cut, "text cut by a frame").toEqual([]);

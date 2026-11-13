@@ -5,20 +5,24 @@
     "skip": "Zum Inhalt",
     "demo": "Beispieldaten"
   },
-  "header": {
-    "navLabel": "Hauptmenü",
-    "settings": "Einstellungen",
-    "language": "Sprache",
-    "theme": "Hell oder Dunkel"
+  "nav": {
+    "label": "Hauptmenü"
   },
-  "footer": {
-    "copyright": "© 2026 Musterapp",
-    "linksLabel": "Rechtliches und Quelltext",
-    "imprint": "Impressum",
-    "privacy": "Datenschutz",
-    "accessibility": "Barrierefreiheit",
-    "github": "GitHub",
-    "githubTitle": "Quelltext"
+  "more": {
+    "label": "Mehr",
+    "theme": "Hell oder Dunkel",
+    "light": "Hell",
+    "dark": "Dunkel",
+    "lightIsOn": "Hell ist an.",
+    "darkIsOn": "Dunkel ist an.",
+    "tone": "Farbton",
+    "cool": "Kühl",
+    "warm": "Warm",
+    "coolIsOn": "Farbton Kühl ist an.",
+    "warmIsOn": "Farbton Warm ist an.",
+    "language": "Sprache",
+    "de": "Deutsch",
+    "en": "English"
   },
   "common": {
     "back": "Zurück",
@@ -37,8 +41,6 @@
     "previousMonth": "Voriger Monat",
     "nextMonth": "Nächster Monat",
     "copied": "Kopiert",
-    "lightIsOn": "Hell ist an.",
-    "darkIsOn": "Dunkel ist an.",
     "sorted": "Sortiert nach {{column}}, {{direction}}",
     "ascending": "aufsteigend",
     "descending": "absteigend",
@@ -83,7 +85,8 @@
     "stillOpen_other": "Noch {{count}} offen.",
     "newEntry": "Neuer Eintrag",
     "due": "fällig am {{date}}",
-    "closedHidden": "abgeschlossen: "
+    "closedHidden": "abgeschlossen: ",
+    "none": "Kein Eintrag gewählt."
   },
   "detail": {
     "category": "Kategorie",
@@ -107,7 +110,7 @@
     "deleteText": "„{{title}}“ und seine Notiz werden entfernt. Das lässt sich nicht rückgängig machen.",
     "deleteConfirm": "Löschen",
     "notFoundTitle": "Diesen Eintrag gibt es nicht",
-    "notFoundText": "Vielleicht wurde er gelöscht. Zurück zur Liste geht es oben links."
+    "notFoundText": "Vielleicht wurde er gelöscht. Wähl einen anderen aus der Liste."
   },
   "form": {
     "titleNew": "Neuer Eintrag",
@@ -137,12 +140,9 @@
   },
   "settings": {
     "title": "Einstellungen",
-    "tone": "Farbton",
-    "cool": "Kühl",
-    "warm": "Warm",
     "motion": "Bewegung immer reduzieren",
     "motionHelp": "Neues erscheint dann ohne Bewegung, es wird nur eingeblendet. Gilt auch, wenn das Gerät Bewegung zulässt.",
-    "themeHint": "„Hell oder Dunkel“ steht oben im Kopf.",
+    "themeHint": "„Hell oder Dunkel“ und der Farbton stehen im Menü „Mehr“.",
     "about": "Über",
     "version": "Version",
     "storage": "Ablage",
@@ -153,8 +153,10 @@
     "resetToast_one": "1 Beispiel wiederhergestellt",
     "resetToast_other": "{{count}} Beispiele wiederhergestellt",
     "resetNone": "Alle Beispiele sind schon da.",
-    "coolIsOn": "Farbton Kühl ist an.",
-    "warmIsOn": "Farbton Warm ist an."
+    "legal": "Rechtliches und Quelltext",
+    "source": "GitHub",
+    "sourceTitle": "Quelltext",
+    "copyright": "© 2026 Musterapp"
   },
   "samples": [
     {

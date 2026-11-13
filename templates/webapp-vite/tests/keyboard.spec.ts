@@ -1,7 +1,7 @@
 // The four fixed tasks by keyboard alone: create, delete through the dialog, open a claim (evidence), switch light
-// and dark; plus Escape and the return of the focus, the form's errors, the dialog before leaving unsaved changes,
-// the toast's „Rückgängig“ and DE / EN without a reload. Last, a class check: every class on every screen is
-// sebaro's (and stands in the copy) or the app's own (app-).
+// and dark in the „Mehr“ menu; plus Escape and the return of the focus, the form's errors, the dialog before leaving
+// unsaved changes, the toast's „Rückgängig“ and the language without a reload. Last, a class check: every class on
+// every screen is sebaro's (and stands in the copy) or the app's own (app-).
 import { readFileSync, readdirSync } from "node:fs";
 import { test, expect, type Locator, type Page } from "@playwright/test";
 
@@ -21,7 +21,15 @@ async function open(page: Page, path: string) {
   await page.waitForLoadState("networkidle");
 }
 
-const heading = (page: Page) => page.locator("main h1");
+const main = (page: Page) => page.getByRole("main");
+const heading = (page: Page) => main(page).locator("h1");
+const more = (page: Page) => page.locator("[data-sb-web-app-head] [aria-haspopup=menu]");
+const row = (page: Page, name: string) => page.getByRole("menuitemradio", { name, exact: true });
+/** Opens the „Mehr“ menu, whose button has the focus, with Enter: the focus is then on its first row. */
+async function openMore(page: Page) {
+  await page.keyboard.press("Enter");
+  await expect(page.getByRole("menuitemradio").first()).toBeFocused();
+}
 const button = (page: Page, name: string) => page.getByRole("button", { name, exact: true });
 
 test("create an entry by keyboard, with the errors first", async ({ page }) => {
@@ -61,7 +69,7 @@ test("delete through the dialog: Escape returns focus, „Löschen“ removes", 
   await page.keyboard.press("Enter");
   await expect(heading(page)).toHaveText("Einträge");
   await expect(heading(page)).toBeFocused();
-  await expect(page.locator("main")).not.toContainText("Fenster putzen");
+  await expect(main(page)).not.toContainText("Fenster putzen");
 });
 
 test("the final step that deletes nothing asks like a deletion and closes the entry", async ({ page }) => {
@@ -71,7 +79,7 @@ test("the final step that deletes nothing asks like a deletion and closes the en
   await page.keyboard.press("Enter");
   await page.keyboard.press("Tab");
   await page.keyboard.press("Enter");
-  await expect(page.locator("main")).toContainText("abgeschlossen");
+  await expect(main(page)).toContainText("abgeschlossen");
   await expect(button(page, "Als erledigt markieren")).toHaveCount(0);
   // the action that had the focus is gone: the heading has it
   await expect(heading(page)).toBeFocused();
@@ -105,24 +113,64 @@ test("mark as done shows a toast; „Rückgängig“ by keyboard takes it back",
   const toast = page.locator("#app-toast");
   await expect(toast).toBeVisible();
   await expect(toast.locator("p")).toHaveText("„Wasser trinken“ erledigt");
-  await expect(page.locator("main dl")).toContainText("erledigt");
+  await expect(main(page).locator("dl")).toContainText("erledigt");
   await tabTo(page, toast.locator(".sb-toast__action"));
   await page.keyboard.press("Enter");
   await expect(toast).toBeHidden();
-  await expect(page.locator("main dl")).toContainText("offen");
+  await expect(main(page).locator("dl")).toContainText("offen");
   // the focus is back where it was before the toast
   await expect(button(page, "Als erledigt markieren")).toBeFocused();
 });
 
-test("„Hell oder Dunkel“ by keyboard switches and announces", async ({ page }) => {
+test("„Hell oder Dunkel“ in the „Mehr“ menu by keyboard switches and announces", async ({ page }) => {
   await open(page, "/");
-  await tabTo(page, page.locator(".sb-theme-button"));
+  await tabTo(page, more(page));
+  await openMore(page);
+  // the first row is „Hell“; the shown mode is the chosen one
+  await expect(row(page, "Hell")).toBeFocused();
+  await expect(row(page, "Hell")).toHaveAttribute("aria-checked", "true");
+  await expect(more(page)).toHaveAttribute("aria-expanded", "true");
+  await page.keyboard.press("ArrowDown");
   await page.keyboard.press("Enter");
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-  await expect(page.locator(".sb-site-header [role=status]")).toHaveText("Dunkel ist an.");
+  await expect(page.locator("[data-sb-web-app-head] [role=status]")).toHaveText("Dunkel ist an.");
+  // the choice closes the menu and the focus is back on its button
+  await expect(page.locator("#app-more")).toBeHidden();
+  await expect(more(page)).toBeFocused();
+  await expect(more(page)).toHaveAttribute("aria-expanded", "false");
+  // the system's own mode is never stored
+  await openMore(page);
+  await expect(row(page, "Dunkel")).toHaveAttribute("aria-checked", "true");
   await page.keyboard.press("Enter");
   await expect(page.locator("html")).not.toHaveAttribute("data-theme", /./);
   expect(await page.evaluate(() => localStorage.getItem("sb-theme"))).toBeNull();
+});
+
+test("the „Mehr“ menu: the arrows wrap, Home and End jump, Escape and Tab close it", async ({ page }) => {
+  await open(page, "/");
+  await more(page).focus();
+  await openMore(page);
+  await page.keyboard.press("ArrowUp");
+  await expect(row(page, "English")).toBeFocused();
+  await page.keyboard.press("ArrowDown");
+  await expect(row(page, "Hell")).toBeFocused();
+  await page.keyboard.press("End");
+  await expect(row(page, "English")).toBeFocused();
+  await page.keyboard.press("Home");
+  await expect(row(page, "Hell")).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(page.locator("#app-more")).toBeHidden();
+  await expect(more(page)).toBeFocused();
+  // Tab moves on and closes the menu
+  await openMore(page);
+  await page.keyboard.press("Tab");
+  await expect(page.locator("#app-more")).toBeHidden();
+  // the tone stands beside „Hell oder Dunkel“ and is stored
+  await more(page).click();
+  await row(page, "Warm").click();
+  await expect(page.locator("html")).toHaveAttribute("data-sb-tone", "warm");
+  await expect(page.locator("[data-sb-web-app-head] [role=status]")).toHaveText("Farbton Warm ist an.");
+  expect(await page.evaluate(() => localStorage.getItem("sb-tone"))).toBe("warm");
 });
 
 test("open a claim row (evidence) by keyboard", async ({ page }) => {
@@ -148,19 +196,23 @@ test("search, filter chips and the empty state", async ({ page }) => {
   await expect(page.locator("#app-results .sb-list-row")).toHaveCount(1);
 });
 
-test("DE / EN swaps every word without a reload and keeps the choice", async ({ page }) => {
+test("the language in the „Mehr“ menu swaps every word without a reload and keeps the choice", async ({ page }) => {
   await open(page, "/");
   await page.evaluate(() => ((window as unknown as { marker: number }).marker = 1));
-  await tabTo(page, page.locator('.sb-language-switch input[value="de"]'));
-  await page.keyboard.press("ArrowRight");
+  await tabTo(page, more(page));
+  await openMore(page);
+  await page.keyboard.press("End");
+  await expect(row(page, "English")).toHaveAttribute("lang", "en");
+  await page.keyboard.press("Enter");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(heading(page)).toHaveText("Entries");
-  await expect(page.locator(".sb-site-nav a")).toHaveText("Settings");
-  await expect(page.locator('.sb-language-switch input[value="en"]')).toBeFocused();
+  await expect(page.locator(".sb-bottom-nav__item")).toHaveText(["Entries", "Data types", "Settings"]);
+  await expect(more(page)).toBeFocused();
+  await expect(more(page)).toHaveAttribute("aria-label", "More");
   expect(await page.evaluate(() => (window as unknown as { marker?: number }).marker)).toBe(1);
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page.locator(".sb-theme-button")).toHaveText("Light or dark");
+  await expect(more(page)).toHaveAttribute("aria-label", "More");
 });
 
 test("only sebaro's classes (that exist) and the app's own app-* classes", async ({ page }) => {

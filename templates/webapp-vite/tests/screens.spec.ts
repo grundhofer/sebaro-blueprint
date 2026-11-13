@@ -1,6 +1,7 @@
 // Every view and every overlay state of Musterapp: light and dark, 320, 390 and 1440 px, at 100 % and, at the
 // widest width, real 200 % text; the screen asked for (heading, view, open overlays), axe, no sideways scroll, no
-// cut text or control value, no console or CSP error (tests/sebaro-checks.ts).
+// cut text or control value, no console or CSP error (tests/sebaro-checks.ts). Below 840 px the app frame shows one
+// pane and the navigation at the bottom, at 1440 px the rail and, for the list, two panes.
 import { expect, type Page } from "@playwright/test";
 import { checkScreens, type Screen } from "./sebaro-checks";
 
@@ -12,9 +13,13 @@ const press = (name: string) => async (page: Page) => {
   await page.getByRole("button", { name, exact: true }).first().click();
   await settle(page);
 };
-const english = async (page: Page) => {
-  await page.locator('.sb-language-switch label:has(input[value="en"])').click();
+/** Stores a choice the app reads at its start and loads the page again: a sub-view on a phone has no „Mehr“. */
+const stored = (key: string, value: string) => async (page: Page) => {
+  await page.evaluate(([k, v]) => localStorage.setItem(k, v), [key, value]);
+  await page.reload();
+  await page.waitForLoadState("networkidle");
 };
+const english = stored("sb-lang", "en");
 
 /** Puts `entries` into the app's storage and loads the page again, so the app starts with them. */
 const withEntries = (entries: unknown[]) => async (page: Page) => {
@@ -58,7 +63,7 @@ const screens: Screen[] = [
     prepare: async (page) => {
       await page.getByRole("button", { name: "Eintrag abschließen" }).click();
       await page.locator('#app-dlg-finish button[value="confirm"]').click();
-      await expect(page.locator("main .sb-callout")).toBeVisible();
+      await expect(page.getByRole("main").locator(".sb-callout")).toBeVisible();
       await settle(page);
     },
   },
@@ -89,6 +94,23 @@ const screens: Screen[] = [
     heading: "Rosen schneiden",
     overlay: "app-toast",
     prepare: press("Als erledigt markieren"),
+  },
+  {
+    // the „Mehr“ menu of a top-level view: „Hell oder Dunkel“, „Farbton“ and the language
+    name: "liste-mehr",
+    path: "/",
+    heading: "Einträge",
+    view: '[data-sb-view="liste"]',
+    overlay: "app-more",
+    prepare: press("Mehr"),
+  },
+  {
+    name: "liste-warm",
+    path: "/",
+    heading: "Einträge",
+    view: '[data-sb-view="liste"]',
+    overlay: null,
+    prepare: stored("sb-tone", "warm"),
   },
   { name: "neu", path: "/neu", heading: "Neuer Eintrag", view: '[data-sb-view="formular"]', overlay: null },
   {

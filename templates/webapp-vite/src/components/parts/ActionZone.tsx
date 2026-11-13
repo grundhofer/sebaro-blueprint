@@ -13,17 +13,18 @@ type Props = {
 export function ActionZone({ status, hint, children }: Props) {
   const block = useRef<HTMLDivElement>(null);
 
-  // the height of the block that sticks to the window's edge, for the scroll padding in the copy's stylesheet: a
-  // focused field stops above the block, also with large text
+  // the height of the block that sticks to the bottom of its view, for the scroll padding of the box that scrolls:
+  // a focused field stops above the block, also with large text
   useEffect(() => {
-    const root = document.documentElement;
+    const view = block.current?.parentElement;
+    if (!block.current || !view) return;
     const observer = new ResizeObserver(([entry]) => {
-      if (entry) root.style.setProperty("--sb-bottom-block-size", `${entry.target.getBoundingClientRect().height}px`);
+      if (entry) view.style.setProperty("--sb-bottom-block-size", `${entry.target.getBoundingClientRect().height}px`);
     });
-    if (block.current) observer.observe(block.current);
+    observer.observe(block.current);
     return () => {
       observer.disconnect();
-      root.style.removeProperty("--sb-bottom-block-size");
+      view.style.removeProperty("--sb-bottom-block-size");
     };
   }, []);
 

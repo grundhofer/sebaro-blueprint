@@ -20,7 +20,9 @@ export function Toast({ id, message, onHide }: Props) {
     // focus inside the toast goes back to where it was, else to the content: never to nowhere
     if (ref.current?.contains(document.activeElement)) {
       const back =
-        from.current instanceof HTMLElement && from.current.isConnected ? from.current : document.querySelector("main");
+        from.current instanceof HTMLElement && from.current.isConnected
+          ? from.current
+          : document.querySelector<HTMLElement>("main, [role='main']");
       back?.focus({ preventScroll: true });
     }
     onHide();

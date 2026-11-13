@@ -22,3 +22,4 @@ window.ResizeObserver ??= class {
   disconnect() {}
 };
 window.matchMedia ??= (query: string) => ({ matches: false, media: query }) as MediaQueryList;
+HTMLElement.prototype.hidePopover ??= () => {};
