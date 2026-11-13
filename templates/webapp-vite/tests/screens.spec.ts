@@ -1,7 +1,8 @@
 // Every view and every overlay state of Musterapp: light and dark, 320, 390 and 1440 px, at 100 % and, at the
 // widest width, real 200 % text; the screen asked for (heading, view, open overlays), axe, no sideways scroll, no
-// cut text or control value, no console or CSP error (tests/sebaro-checks.ts). Below 840 px the app frame shows one
-// pane and the navigation at the bottom, at 1440 px the rail and, for the list, two panes.
+// cut text or control value, no console or CSP error, and the copy's check of a view: its action levels and colours
+// (tests/sebaro-checks.ts). Below 840 px the app frame shows one pane and the navigation at the bottom, at 1440 px
+// the rail and, for the list, two panes.
 import { expect, type Page } from "@playwright/test";
 import { checkScreens, type Screen } from "./sebaro-checks";
 
@@ -233,4 +234,4 @@ const screens: Screen[] = [
   },
 ];
 
-checkScreens(screens);
+checkScreens(screens, { viewCheck: "src/sebaro/checks/sb-colour-count.js" });

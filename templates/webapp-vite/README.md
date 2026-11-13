@@ -14,7 +14,7 @@ im Menü „Mehr“ in der oberen Leiste jedes Orts.
 | Ansicht | Adresse | Was sie zeigt |
 |---|---|---|
 | Einträge | `/` | Suche, Filterchips, Liste mit Erledigtem, leerer Zustand, Stand-Satz und „Neuer Eintrag“ unten |
-| Eintrag | `/eintrag/2` | Eigenschaften, Zustand als Zeichen und Wort, Kurzmeldung mit „Rückgängig“, Löschen mit Dialog, endgültiger Schritt mit 45°-Kante |
+| Eintrag | `/eintrag/2` | Eigenschaften, Zustand als Zeichen und Wort, „Bearbeiten“ als die eine umrandete Aktion in der Aktionszone, „Als erledigt markieren“ als Textaktion mit Kurzmeldung und „Rückgängig“, Löschen mit Dialog, endgültiger Schritt mit 45°-Kante |
 | Neuer Eintrag, Bearbeiten | `/neu`, `/bearbeiten/2` | Formular mit „(optional)“, Fehlern je Feld, Teilschritten mit „Rückgängig“, Dialog „Abbrechen“ · „Verwerfen“ · „Sichern“ |
 | Datenarten | `/daten` | jede Datenart von `docs/daten.html`: Text, Zahlen, Geld, Zeit, Kalender, Zustände, Tabellen mit Sortierung und Summe, Baum, Mehrfachauswahl, alle Diagramme, Orte, Belege |
 | Einstellungen | `/einstellungen` | „Bewegung immer reduzieren“, „Über“, der Weg zu den Pflichtseiten und zum Quelltext |
@@ -150,14 +150,22 @@ Heute steht dort keiner.
 
 `tests/keyboard.spec.ts` prüft die vier festen Aufgaben nur mit der Tastatur, die Tasten im Menü „Mehr“ und dass jede
 Klasse von sebaro stammt oder mit `app-` beginnt. `tests/data-safety.spec.ts` prüft, dass nichts ungefragt verloren
-geht: jeder Weg aus einem Formular
-mit ungesicherten Änderungen fragt zuerst (Link, Zurück, Vor, Schließen und Neuladen; die Sprache behält den Entwurf), und
-„Beispieldaten wiederherstellen“ fügt nur fehlende Beispiele hinzu, die eigenen Einträge bleiben.
+geht: jeder Weg aus einem Formular mit ungesicherten Änderungen fragt zuerst (Link, Zurück, Vor, Schließen und
+Neuladen; die Sprache behält den Entwurf), und „Beispieldaten wiederherstellen“ fügt nur fehlende Beispiele hinzu, die
+eigenen Einträge bleiben.
 `tests/parts.spec.ts` prüft, was die Bauteile erst im Browser zeigen: Dialog und Popover geben den Fokus zurück, ein
 Klick neben den Dialog bricht ab, Aktionen ohne Platz stehen untereinander, „Kopieren“ erreicht die Zwischenablage, und
 eine Ansicht, die sich nicht laden lässt, sagt es. `tests/dimensions.spec.ts` liest `src/app.css`: keine Länge ohne
 Token oder Begründung. Dass kein Wort im Markup steht, prüft ESLint (`eslint.config.js`). Die Bildschirmfotos liegen
 danach in `test-results/screens/`.
+
+Jeder Fall von `tests/screens.spec.ts` läuft auch durch die Prüfung einer Ansicht aus der Kopie
+(`src/sebaro/checks/sb-colour-count.js`, für jedes `data-sb-view`): eine Hauptaktion, wo eine erwartet ist, und
+höchstens eine im App-Rahmen; höchstens eine umrandete Aktion je Bereich; kein Knopf „Hell oder Dunkel“ in der oberen
+Leiste; keine Farbe ohne Rolle, kein Text auf einer Farbfläche. `tests/views.spec.ts` zählt jede Ansicht dazu im Farbton
+Warm und zeigt an drei Gegenproben, dass die Prüfung scheitert: an einer zweiten umrandeten Aktion in einem Bereich, an
+einem Knopf „Hell oder Dunkel“ im Kopf, an einer zweiten Hauptaktion im Rahmen. Das Skript wird in die Seite
+ausgewertet, nicht als `<script>` eingefügt: die CSP der Seite ließe ein Inline-Skript nicht zu.
 
 Der Test nutzt außerhalb der CI einen Server, der auf Port 4173 schon läuft. Läuft dort die Vorschau eines anderen
 Projekts, prüft er dieses. Starte mit `CI=1 pnpm test:e2e`: dann bricht ein belegter Port den Lauf laut ab.
@@ -174,12 +182,14 @@ Wo die Vorlage eine dieser Regeln noch nicht ganz erfüllt, steht es unter „L�
 - Bewegung in den Einstellungen: BEW-04; Laden im Kopf: WEB-01
 - eine Hauptaktion unten in der Aktionszone, zuletzt in jeder Gruppe, mit Stand-Satz und Datenweg-Zeile: AKT-01, AKT-02,
   AKT-04, AKT-11, STA-07, EBE-08, BEL-10
+- drei Stufen von Aktionen (Kernregel 13): höchstens eine umrandete je Bereich, alles andere eine Textaktion; die
+  Gefahrtaste mit Kante nur für das, was sich nicht zurücknehmen lässt: AKT-06, AKT-07
 - Listen, Leerzustand, Suche, Chips: DAT-01, DAT-02, DAT-07, EIN-04, EIN-05, STA-09
 - Formular: EIN-01, EIN-02, STA-03, RAU-07; Dialoge: EBE-03, AKT-07, AKT-08, AKT-11, FOR-04; Kurzmeldung: EBE-05
 - Zustände und Daten: STA-01, STA-02, STA-05, STA-06, DAT-03 bis DAT-17 außer DAT-13 (Board), FOR-05, TXT-04, TXT-09, TXT-11 bis TXT-17, FAR-12, FAR-14,
   BEL-02, BEL-03, BEL-09
 - Zugang: ZUG-01 bis ZUG-04, ZUG-06, ZUG-08, ZUG-09; strenge CSP ohne Inline-Skripte und -Stile, nichts von fremden
-  Servern: HAL-09; nur Tokens: TEC-01, TEC-03 (`data-sb-view` an jeder Ansicht)
+  Servern: HAL-09; nur Tokens: TEC-01, TEC-03 (`data-sb-view` an jeder Ansicht, gezählt in den End-to-End-Tests)
 
 ## Was ein Agent behalten muss
 
@@ -202,6 +212,10 @@ Vorlage gilt zusätzlich:
 - Eine neue Ansicht ist ein `<View>`: ohne `back` ein Ort der Navigation mit Kachel und „Mehr“, mit `back` eine
   Unteransicht. Ihre Route sagt in `src/main.tsx` mit `handle`, zu welchem Ort sie gehört und ob sie eine Unteransicht
   ist; daraus baut `Shell` den Rahmen. Drei bis fünf Orte, nicht mehr (`PLACES` in `components/Shell.tsx`).
+- Höchstens eine umrandete Aktion (`sb-secondary-action`) je Bereich: Ansicht, `section`, Karte, Listenzeile, obere
+  Leiste, die Aktionen eines Dialogs. In einer Detailansicht ist es „Bearbeiten“ in der Aktionszone, in einem Formular
+  „Abbrechen“ neben der Hauptaktion; alles andere ist eine Textaktion (`sb-text-action`). „Abbrechen“ in einem Dialog
+  trägt `data-sb-dialog-cancel` und zählt nicht. Die End-to-End-Tests scheitern an einer zweiten.
 - Die Kachel in der oberen Leiste und über der Navigation am Rand ist ein Platzhalter (die Dachmarke). Ein echtes
   Produkt trägt sein eigenes Zeichen in `sebaro.product.json` ein (ZEI-03, ZEI-08).
 - Alle Befehle von „Starten“ müssen grün sein, bevor eine Ansicht fertig ist; die Prüfliste `../screen-checklist.md`
@@ -233,7 +247,9 @@ in dieser Vorlage nie gelaufen; im Guide läuft dasselbe als Job `webapp-vite`. 
 zwischen Tags und die Attribute `aria-label`, `aria-description`, `alt`, `placeholder` und `title`, keine Zeichenketten,
 die Code an eine Funktion übergibt; Zahlen und Zeichen allein (08:12, ±0) gelten als Werte. Die Frage beim Schließen
 ist die des Browsers (`beforeunload`); ihr Text ist nicht änderbar. Das Datumsfeld zeigt das Format der Browsersprache,
-nicht der Seitensprache. Audio und Video sind nicht dabei (keine Mediendateien).
+nicht der Seitensprache. Audio und Video sind nicht dabei (keine Mediendateien). Die Prüfung einer Ansicht liest keine
+Pseudo-Elemente (Haken, Rahmen von Chips) und keine Fokusringe, und sie zählt die Gefahrtaste nicht als umrandete
+Aktion: die Detailansicht zeigt zwei davon nebeneinander.
 
 ## Lücken der Vorlage
 

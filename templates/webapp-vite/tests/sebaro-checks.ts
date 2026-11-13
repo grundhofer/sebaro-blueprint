@@ -18,8 +18,12 @@
 //     it, it is a fault (a textarea that scrolls holds it). Not seen: date and time fields (the browser draws their
 //     parts), a textarea's placeholder and the open list of a select (drawn by the system)
 //   - axe-core: 0 violations of WCAG 2.0 / 2.1 / 2.2 A and AA (ZUG-01, ZUG-08)
+//   - with `viewCheck`: the copy's check of a view (checks/sb-colour-count.js) passes for every view on the screen:
+//     one primary action where one is expected and at most one in an app frame, at most one outlined action per area,
+//     no theme button in the head of a web app, no colour without a role, no text on a coloured fill (TEC-03)
 //   - no console error, no page error and no Content-Security-Policy violation
 // A viewport screenshot of each run lands in test-results/screens/ (uploaded by CI).
+import { readFileSync } from "node:fs";
 import path from "node:path";
 import { test, expect, type ConsoleMessage, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
@@ -58,6 +62,8 @@ export type Options = {
   scales?: number[];
   /** control cuts on every screen that sebaro's own CSS causes (see ControlWaiver) */
   controlWaivers?: ControlWaiver[];
+  /** the path of checks/sb-colour-count.js in the sebaro copy: every screen then runs the copy's check of a view */
+  viewCheck?: string;
 };
 
 const AXE_TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22a", "wcag22aa"];
@@ -118,6 +124,31 @@ export function collectCut() {
 export function sidewaysScroll() {
   const boxes = [document.documentElement, ...document.querySelectorAll(".sb-app-frame__pane")];
   return Math.max(...boxes.map((box) => box.scrollWidth - box.clientWidth));
+}
+
+type ViewCount = {
+  view: string; pass: boolean; line: string; primary: number; expected: number; framePrimary: number | null;
+  outlinedAreas: Array<{ area: string; outlined: number }>; headerThemeButtons: number;
+  viewType: string | null; viewTypeErrors: string[]; unknown: string[]; textOnColour: number; areaErrors: string[];
+};
+
+/** The copy's check of a view (`script`: checks/sb-colour-count.js of the sebaro copy) on every [data-sb-view] of the
+ *  page, as it is now: after the page has loaded and its transitions have ended. One line for each view that fails,
+ *  with what is wrong. The script is evaluated, not added as a tag: the page's Content-Security-Policy allows no
+ *  inline script. */
+export async function viewFaults(page: Page, script: string) {
+  const views = await page.evaluate<ViewCount[]>(`${readFileSync(script, "utf8")}
+    [...document.querySelectorAll("[data-sb-view]")].map((view) => ({ view: view.dataset.sbView, ...sbColourCount(view) }))`);
+  return views.filter((v) => !v.pass).map((v) => `${v.view}: ` + [
+    v.primary !== v.expected && `${v.primary} primary action fills, ${v.expected} expected`,
+    v.framePrimary !== null && v.framePrimary > 1 && `${v.framePrimary} primary actions in the app frame`,
+    ...v.outlinedAreas.filter((a) => a.outlined > 1).map((a) => `${a.outlined} outlined actions in the area ${a.area}`),
+    v.headerThemeButtons > 0 && "a theme button in the head of the web app",
+    v.viewTypeErrors.length > 0 && `view type ${v.viewType}: ${v.viewTypeErrors.join(", ")}`,
+    v.unknown.length > 0 && `colours without a role: ${v.unknown.join(", ")}`,
+    v.textOnColour > 0 && `${v.textOnColour} texts on a coloured fill`,
+    v.areaErrors.length > 0 && `product area: ${v.areaErrors.join(", ")}`,
+  ].filter(Boolean).join("; "));
 }
 
 /** The ids of every open overlay: modal and non-modal dialogs, open popovers, toasts on screen. */
@@ -301,6 +332,8 @@ export function checkScreens(screens: Screen[], options: Options = {}) {
             for (const c of controls.cut.filter(waived)) test.info().annotations.push({ type: "waiver", description: `${c.at} „${c.text}“ cut by ${c.over} px: ${waived(c)!.reason}` });
             expect(controls.cut.filter((c) => !waived(c)), "control text cut by its control").toEqual([]);
             for (const line of controls.allowed) test.info().annotations.push({ type: "D111", description: line });
+
+            if (options.viewCheck) expect(await viewFaults(page, options.viewCheck), "the copy's check of a view").toEqual([]);
 
             const axe = await new AxeBuilder({ page }).withTags(AXE_TAGS).analyze();
             const violations = axe.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(", ")}`);

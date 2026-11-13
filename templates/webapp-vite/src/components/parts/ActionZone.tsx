@@ -2,14 +2,14 @@ import { useEffect, useRef, type ReactNode } from "react";
 
 type Props = {
   /** the state sentence at the start of the zone */
-  status: string;
+  status?: string;
   /** the line under the action that says where the data goes */
-  hint: string;
-  /** the one primary action of the view */
+  hint?: string;
+  /** the one action of the zone: the primary action of the view or, in a detail view, its one outlined action */
   children: ReactNode;
 };
 
-/** The action zone at the bottom of a view: the state sentence, the primary action and its data-path line. */
+/** The action zone at the bottom of a view: the state sentence, the action and its data-path line. */
 export function ActionZone({ status, hint, children }: Props) {
   const block = useRef<HTMLDivElement>(null);
 
@@ -32,9 +32,9 @@ export function ActionZone({ status, hint, children }: Props) {
     <div ref={block} className="sb-bottom-block">
       <div className="sb-primary-action-bar">
         <div className="sb-primary-action-bar__message" role="status" />
-        <p className="sb-primary-action-bar__status">{status}</p>
+        {status && <p className="sb-primary-action-bar__status">{status}</p>}
         {children}
-        <p className="sb-action-hint">{hint}</p>
+        {hint && <p className="sb-action-hint">{hint}</p>}
       </div>
     </div>
   );
