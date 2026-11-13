@@ -31,7 +31,7 @@ Dateien: `…Screen.kt` (zustandslos), `…UiState.kt`, `…ViewModel.kt`, `…R
 | Bildschirm | Ansichtstyp | Was er zeigt |
 |---|---|---|
 | Einträge (`list`) | `list` | Suche, zwei Gruppen mit Zahl im Kopf, erledigte Zeilen treten zurück, Schlusssatz, leerer Zustand und „Kein Eintrag mit …“, Hauptaktion „Eintrag anlegen“ unten; im Zeilenmenü „Ausblenden“ mit Kurzmeldung und „Rückgängig“ |
-| Eintrag (`detail`) | `detail` | Zustand als Glyphe und Wort, Notiz, Eigenschaften flach; keine Hauptaktion, „Eintrag bearbeiten“ als die eine umrandete Aktion; am Ende „Eintrag abschließen“ und „Eintrag löschen“, beide mit der 45°-Kante, beide fragen zuerst |
+| Eintrag (`detail`) | `detail` | Zustand als Glyphe und Wort, Notiz, Eigenschaften flach; keine Hauptaktion, „Eintrag bearbeiten“ als die eine umrandete Aktion der Aktionszone; am Ende des Inhalts „Eintrag abschließen“ als Textaktion und „Eintrag löschen“ als die eine umrandete Aktion dort, in der Gefahrfarbe mit der 45°-Kante; beide fragen zuerst |
 | Neuer Eintrag, Eintrag bearbeiten (`form`) | `form` | Beschriftung über dem Feld, „Notiz (optional)“ mit Zähler, „Priorität“ als Segmente; die Hauptaktion bleibt drückbar und sagt „Titel fehlt.“ am Feld; „Bleibt auf diesem Gerät.“ darunter; Schließen mit Änderungen fragt „Abbrechen“ · „Verwerfen“ · „Sichern“ |
 | Daten (`data`) | ohne Hauptaktion | die Datenarten mit den Bauteilen der Kopie: Zahlen, Geld und Einheiten, Zeit, Zustand und Fortschritt, Kategorien und Markierung, Technisches, sortierbare Tabelle mit Summe, Diagramme, Bewertung |
 | Einstellungen (`settings`) | `settings` | „Hell oder Dunkel“, „Farbton“, „Bewegung immer reduzieren“; alles gilt sofort |

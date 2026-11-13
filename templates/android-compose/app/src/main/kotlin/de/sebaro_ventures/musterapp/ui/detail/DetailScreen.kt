@@ -21,6 +21,7 @@ import de.sebaro_ventures.design.designsystem.SbSecondaryAction
 import de.sebaro_ventures.design.designsystem.SbStatus
 import de.sebaro_ventures.design.designsystem.SbStatusGlyph
 import de.sebaro_ventures.design.designsystem.SbStatusTone
+import de.sebaro_ventures.design.designsystem.SbTextAction
 import de.sebaro_ventures.design.designsystem.SbTopBar
 import de.sebaro_ventures.design.designsystem.SbWrapText
 import de.sebaro_ventures.design.designsystem.sbMessages
@@ -33,9 +34,10 @@ import de.sebaro_ventures.musterapp.ui.label
 
 /**
  * View type `detail`, a sub-screen with „back“: the state as glyph and word, the note, the facts flat. A detail
- * has no primary action; „Eintrag bearbeiten“ is its one outlined action and goes once the entry is done. At the
- * end of the content stand the two steps that cannot be undone, both with the 45° cut and both asking first:
- * „Eintrag abschließen“ and, with the trash, „Eintrag löschen“.
+ * has no primary action; „Eintrag bearbeiten“ is the one outlined action of its zone and goes once the entry is
+ * done. At the end of the content stand the two steps that cannot be undone, both asking first: „Eintrag
+ * abschließen“ as a text action and „Eintrag löschen“, the one outlined action there, in the danger colour with
+ * the 45° cut and the trash.
  */
 @Composable
 fun DetailScreen(
@@ -91,7 +93,7 @@ fun DetailScreen(
             )
             Column(verticalArrangement = Arrangement.spacedBy(t.space.s4)) {
                 if (open) {
-                    SbDangerAction(
+                    SbTextAction(
                         sbStringResource(R.string.detail_finish),
                         onClick = { onAsk(DetailDialog.Finish) },
                     )
