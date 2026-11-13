@@ -60,6 +60,22 @@ class MusterappAppTest {
     }
 
     @Test
+    fun theSettingsLeadToAboutWithTheVersionOfThePackage() {
+        awaitText("Einstellungen")
+        rule.onNodeWithText("Einstellungen").performClick()
+        awaitText("Über Musterapp")
+        rule.onNodeWithText("Über Musterapp").performClick()
+
+        val context = rule.activity
+        val version = context.packageManager.getPackageInfo(context.packageName, 0).versionName
+        awaitText("Version $version")
+        rule.onNodeWithText("Eine App von").assertIsDisplayed()
+
+        rule.onNodeWithContentDescription("Zurück").performClick()
+        awaitText("Hell oder Dunkel")
+    }
+
+    @Test
     fun aDraftSurvivesANewActivityAndIsGoneOnceTheFormWasLeft() {
         awaitText("Eintrag anlegen")
         rule.onNodeWithText("Eintrag anlegen").performClick()

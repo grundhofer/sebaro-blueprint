@@ -2,4 +2,5 @@
 <!-- The words of the three settings come with their parts from the sebaro copy. -->
 <resources>
     <string name="settings_title">Settings</string>
+    <string name="settings_about">About %1$s</string>
 </resources>

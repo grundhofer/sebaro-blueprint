@@ -24,7 +24,9 @@ not exist“, mit ihm baut die Vorlage ohne weitere Änderung.
 
 ## Was die Vorlage zeigt
 
-Drei Ziele in der unteren Navigation, dazu zwei Unterseiten. Jeder Bildschirm steht in `ui/<screen>/` mit denselben
+Beim Start steht der ganze Bildschirm in der Produktfarbe mit dem weißen Symbol, dann kommt die App (Kernregel 29):
+`Theme.Sebaro.Start` im Manifest und `SbStart` über der App, beides mit den Dateien des Baukastens. Die App hat drei
+Ziele in der unteren Navigation, dazu drei Unterseiten. Jeder Bildschirm steht in `ui/<screen>/` mit denselben
 Dateien: `…Screen.kt` (zustandslos), `…UiState.kt`, `…ViewModel.kt`, `…Route.kt`, `…Samples.kt`, dazu
 `res/values*/strings_<screen>.xml` und `render/…RenderTest.kt`.
 
@@ -34,7 +36,8 @@ Dateien: `…Screen.kt` (zustandslos), `…UiState.kt`, `…ViewModel.kt`, `…R
 | Eintrag (`detail`) | `detail` | Zustand als Glyphe und Wort, Notiz, Eigenschaften flach; keine Hauptaktion, „Eintrag bearbeiten“ als die eine umrandete Aktion der Aktionszone; am Ende des Inhalts „Eintrag abschließen“ als Textaktion und „Eintrag löschen“ als die eine umrandete Aktion dort, in der Gefahrfarbe mit der 45°-Kante; beide fragen zuerst |
 | Neuer Eintrag, Eintrag bearbeiten (`form`) | `form` | Beschriftung über dem Feld, „Notiz (optional)“ mit Zähler, „Priorität“ als Segmente; die Hauptaktion bleibt drückbar und sagt „Titel fehlt.“ am Feld; „Bleibt auf diesem Gerät.“ darunter; Schließen mit Änderungen fragt „Abbrechen“ · „Verwerfen“ · „Sichern“ |
 | Daten (`data`) | ohne Hauptaktion | die Datenarten mit den Bauteilen der Kopie: Zahlen, Geld und Einheiten, Zeit, Zustand und Fortschritt, Kategorien und Markierung, Technisches, sortierbare Tabelle mit Summe, Diagramme, Bewertung |
-| Einstellungen (`settings`) | `settings` | „Hell oder Dunkel“, „Farbton“, „Bewegung immer reduzieren“; alles gilt sofort |
+| Einstellungen (`settings`) | `settings` | „Hell oder Dunkel“, „Farbton“, „Bewegung immer reduzieren“; alles gilt sofort; die letzte Zeile führt zu „Über Musterapp“ |
+| Über Musterapp (`about`) | `about` | Kachel, Name, ein Satz und die Version, darunter der Absender „Eine App von sebaro“, mit `SbAboutHead` und `SbSenderRow` der Kopie; keine Hauptaktion |
 
 Die Sprache wählt man in den Android-Einstellungen der App; in der App gibt es dafür nichts. Beim ersten Start schreibt
 die App fünf Beispieleinträge in der Sprache dieses Moments in die Datenbank. Ändert jemand Titel oder Notiz eines
@@ -53,7 +56,7 @@ app/src/main/kotlin/…/musterapp/
   MainActivity.kt  MusterappApplication.kt  AppContainer.kt
   data/      Room, DataStore, Repositories, trySave
   domain/    Entry und seine Regeln
-  ui/        MusterappApp.kt (Thema, Navigation), Destination.kt, je Bildschirm ein Paket
+  ui/        MusterappApp.kt (Thema, Navigation, Start), Destination.kt, je Bildschirm ein Paket
 app/schemas/                                        das Room-Schema jeder Version
 docs/screens/                                       die Bilder der Render-Tests
 .github/dependabot.yml                              wöchentliche Updates
@@ -69,7 +72,8 @@ oder neuer für die Prüfungen der Kopie und Python 3.10 oder neuer für den Bau
 3. Trag `id`, `name`, `tile` und dein Zeichen in `sebaro.product.json` ein und erzeug die Produktdateien neu:
    `python3 sebaro/product/product_kit.py build sebaro.product.json --copy sebaro --out sebaro-product`.
 4. Ersetz `de.sebaro_ventures.musterapp` (`namespace`, `applicationId`, Paket der Kotlin-Dateien), `rootProject.name`,
-   `Musterapp…` in den Klassennamen und `app_name`.
+   `Musterapp…` in den Klassennamen, `app_name`, die Kachel `sb_sign_musterapp` in `AboutScreen.kt` (sie heißt nach
+   deiner `id`) und die zwei Sätze in `strings_about.xml`.
 
 ```sh
 ./gradlew :app:assembleDebug          # ohne Kotlin-Warnungen
@@ -89,7 +93,8 @@ python3 sebaro/product/product_kit.py check sebaro.product.json --copy sebaro --
 Die Tests brauchen kein Gerät (Robolectric, Android 16):
 
 - `render/`: jeder Beispielzustand jedes Bildschirms hell, dunkel und bei Schriftgröße 1,3 auf 360 × 800 dp, die drei
-  Dialoge und die Kurzmeldung eingeschlossen; „Daten“ in voller Länge. Die Bilder liegen in
+  Dialoge und die Kurzmeldung eingeschlossen; „Daten“ in voller Länge; dazu der Start, wie er die App bedeckt. Die
+  Bilder liegen in
   `docs/screens/<screen>-<zustand>-<light|dark|large>.png` und werden committet. Ein grüner Test sagt nur, dass
   gezeichnet wurde: Schau die Bilder an, bevor du einen Bildschirm fertig nennst
   ([`screen-checklist.md`](../screen-checklist.md)).
@@ -97,8 +102,9 @@ Die Tests brauchen kein Gerät (Robolectric, Android 16):
   entstehen einmal und ein gelöschter bleibt gelöscht; `trySave` fängt nur Speicherfehler.
 - `ui/<screen>/`: jedes ViewModel mit dem `AppContainer` der Tests (`TestSetup.kt`: feste Uhr, ersetzte Fabriken),
   auch der Fall, dass das Schreiben scheitert.
-- `MusterappAppTest`: die ganze App von der Activity bis Room: erster Start, ein neuer Eintrag, ein Entwurf übersteht
-  eine neue Activity und ist nach dem Verlassen des Formulars weg.
+- `MusterappAppTest`: die ganze App von der Activity bis Room: erster Start, ein neuer Eintrag, der Weg von den
+  Einstellungen zu „Über“ mit der Version des Pakets, ein Entwurf übersteht eine neue Activity und ist nach dem
+  Verlassen des Formulars weg.
 
 Die Kopie aktualisierst du mit `node sebaro/checks/update-copy.mjs` (mit `--packs a,b` änderst du die Pakete), nie
 von Hand; danach liest du, was `CHANGES.md` der Kopie für dein Produkt sagt.
@@ -109,10 +115,12 @@ Was ein Produkt ergänzt und hier nicht als Muster steht:
 
 - **Build-Setup und Veröffentlichung.** Workflows, Signierung mit den vier `SEBARO_UPLOAD_*`-Werten und der Weg nach
   Google Play kommen mit dem Export; Schlüssel, Dienstkonto und Runner richtet der Inhaber je Produkt ein.
-- **Zeichen, Start und „Über“.** Die Produktdateien tragen das Zeichen der Dachmarke als Platzhalter; benutzt ist
-  davon nur das Launcher-Icon. Der Start in der Produktfarbe (`Theme.Sebaro.Start`, `SbStart`) und „Über“ mit Kachel,
-  Name, Version und Absender (Kernregel 29) fehlen, ebenso das Zeichen in der Kopfleiste. Das Play-Icon entsteht mit
-  `build --render` des Baukastens.
+- **Zeichen.** Die Produktdateien tragen das Zeichen der Dachmarke als Platzhalter. Die Kopfleiste der obersten Ziele
+  trägt kein Zeichen: Die Kopie lässt das offen (`sign` von `SbTopBar` ist optional). Die kleine Kachel (unter 32 dp)
+  und das Mitteilungs-Icon kommen nicht vor. Das Play-Icon entsteht mit `build --render` des Baukastens.
+- **„Über“ ohne Rechtliches.** Die Ansicht zeigt, was Kernregel 29 verlangt: Kachel, Name, Version und Absender.
+  Datenschutz, Impressum und die Lizenzen (die OFL-Texte der Schriften aus `sebaro/licenses/` gehören in die App)
+  ergänzt das Produkt als Zeilen darunter.
 - **„Daten“ ist ein Katalog,** kein Bildschirm eines Produkts: Er liest nichts und hat darum kein ViewModel.
 - **Breite Fenster.** Ab 840 dp verlangt Kernregel 18 eine Leiste am Rand und zwei Spalten; die Vorlage zeigt nur
   das Telefon.
@@ -125,9 +133,11 @@ Was ein Produkt ergänzt und hier nicht als Muster steht:
 - **Beispieleinträge wechseln die Sprache nicht.** Sie stehen als Text in der Datenbank.
 - **Kein Trennstrich in den Bildern.** Ein Wort, das breiter ist als seine Zeile, wird getrennt; den Strich setzt die
   Silbentrennung des Systems, die Robolectric nicht hat. Auf einem Gerät ist er nicht gesehen.
-- **Hinweise von Android Lint, die bleiben:** acht Dateien des Baukastens sind unbenutzt (Start, Zeichenkachel,
-  Mitteilungs-Icon; siehe Lücken), zwei weitere Hinweise betreffen dessen Dateien selbst, der Rest nennt neuere
-  Versionen im Katalog.
+- **Hinweise von Android Lint, die bleiben:** vier Dateien des Baukastens nennt Lint unbenutzt: die kleine Kachel
+  und das Mitteilungs-Icon (siehe Lücken), die Farbe `sebaro_splash_background`, die der Start nicht braucht, und
+  das Startsymbol, das `SbStartSymbol` über seinen Namen liest und das im Release bleibt. Zwei weitere Hinweise
+  betreffen dessen Dateien selbst, der Rest nennt neuere Versionen im Katalog.
 - **Nicht geprüft:** echtes Gerät oder Emulator, TalkBack, der Release-Build im Betrieb (er wird gebaut, mit R8, aber
   nicht gestartet), Android 10 bis 15 (die Tests laufen auf Android 16), der Sprachwechsel über die
-  Android-Einstellungen.
+  Android-Einstellungen. Vom Start zeichnen die Tests nur das Bild, das die App bedeckt: der Übergang vom Startbild
+  des Systems (ab Android 12) und das Ausblenden sind auf keinem Gerät gesehen.
