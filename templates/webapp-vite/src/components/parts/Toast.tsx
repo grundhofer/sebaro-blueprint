@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 type Message = { text: string; undo?: () => void };
@@ -15,7 +15,8 @@ export function Toast({ id, message, onHide }: Props) {
   const [written, setWritten] = useState<Message | null>(null);
   const [held, setHeld] = useState(false);
 
-  const hide = () => {
+  // `onHide` keeps its identity while a toast shows (a store's action does): a new function counts the 6 s anew
+  const hide = useCallback(() => {
     // focus inside the toast goes back to where it was, else to the content: never to nowhere
     if (ref.current?.contains(document.activeElement)) {
       const back =
@@ -23,7 +24,7 @@ export function Toast({ id, message, onHide }: Props) {
       back?.focus({ preventScroll: true });
     }
     onHide();
-  };
+  }, [onHide]);
 
   // the region is shown empty and gets its sentence two frames later, so a screen reader hears a region that was
   // already there
@@ -40,7 +41,7 @@ export function Toast({ id, message, onHide }: Props) {
     if (!message || held) return;
     const timer = window.setTimeout(hide, STAY);
     return () => window.clearTimeout(timer);
-  }, [message, held]);
+  }, [message, held, hide]);
 
   useEffect(() => {
     if (!message) return;
@@ -52,7 +53,7 @@ export function Toast({ id, message, onHide }: Props) {
     // in the capture phase and never consumed: a field or an editor gets its Escape as before
     document.addEventListener("keydown", onKey, true);
     return () => document.removeEventListener("keydown", onKey, true);
-  }, [message]);
+  }, [message, hide]);
 
   return (
     <div

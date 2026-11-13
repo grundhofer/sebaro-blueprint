@@ -195,10 +195,11 @@ axe, ESLint mit typescript-eslint und Prettier. Dazu kommen, alle nur für die E
 | `jsdom` | der Browser-Ersatz, in dem Vitest Bauteile rendert |
 | `@testing-library/react`, `@testing-library/dom` | rendern ein Bauteil im Test und finden Elemente nach Rolle und Name |
 | `@eslint/js` | die empfohlenen Regeln von ESLint selbst |
+| `eslint-plugin-react-hooks` | die empfohlenen Regeln für Reacts Hooks: Abhängigkeiten eines Effekts, nichts Unreines beim Rendern |
 | `@types/node`, `@types/react`, `@types/react-dom` | Typen |
 
 Nicht dabei, mit Absicht: `@vitejs/plugin-react` (sein Fast Refresh braucht ein Inline-Skript, das die CSP sperrt; Vite
-übersetzt JSX auch ohne es, eine Änderung lädt die Seite neu) und ein ESLint-Plugin für React (das Verbot von Wörtern im
+übersetzt JSX auch ohne es, eine Änderung lädt die Seite neu) und `eslint-plugin-react` (das Verbot von Wörtern im
 JSX leistet `no-restricted-syntax`).
 
 ## Nicht geprüft

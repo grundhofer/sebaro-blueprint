@@ -50,7 +50,7 @@ export function Tree({ labelledBy, nodes, open: startOpen = [], selected: startS
     } else if (event.key === "Enter" || event.key === " ") setSelected(node.id);
     else if (event.key.length === 1 && /\S/.test(event.key)) {
       // letters typed within 500 ms belong together; the same letter again goes on to the next row with it
-      const now = Date.now();
+      const now = event.timeStamp;
       const text = (now - typed.current.at < 500 ? typed.current.text : "") + event.key.toLowerCase();
       typed.current = { text, at: now };
       const again = [...text].every((letter) => letter === text[0]);
