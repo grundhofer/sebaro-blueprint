@@ -65,15 +65,13 @@ export function Palette({ id, open, label, searchLabel, groups, hints, onClose }
   const [query, setQuery] = useState("");
   const [active, setActive] = useState<string | null>(null);
 
-  // after every render the dialog is open exactly while `open` says so; it opens with an empty search
+  // the dialog is open exactly while `open` says so
   useEffect(() => {
     const element = dialog.current;
     if (!element || element.open === open) return;
-    if (!open) return element.close();
-    setQuery("");
-    setActive(null);
-    element.showModal();
-  });
+    if (open) element.showModal();
+    else element.close();
+  }, [open]);
 
   const words = plain(query).split(/\s+/).filter(Boolean);
   const found = groups
@@ -116,6 +114,11 @@ export function Palette({ id, open, label, searchLabel, groups, hints, onClose }
       onCancel={(event) => {
         event.preventDefault();
         close();
+      }}
+      // whichever way it closed: the next time it opens with an empty search
+      onClose={() => {
+        setQuery("");
+        setActive(null);
       }}
       onClick={(event) => event.target === event.currentTarget && close()}
     >

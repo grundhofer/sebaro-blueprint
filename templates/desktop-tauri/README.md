@@ -281,15 +281,17 @@ ESLint mit typescript-eslint, Prettier, `cargo audit` und `cargo deny`. Dazu kom
 | `serde`, `serde_json` (Rust, MIT oder Apache-2.0) | die Einstellungsdatei und was über die IPC geht; beide bringt Tauri ohnehin mit |
 | `@tauri-apps/api` (MIT oder Apache-2.0) | die IPC-Seite von Tauri 2 im Browser: die Bindings rufen ihr `invoke` |
 | `jsdom`, `@testing-library/react`, `@testing-library/dom`, `@eslint/js`, `@types/*` | wie in der Web-App-Vorlage, nur für die Entwicklung |
+| `eslint-plugin-react-hooks` | die empfohlenen Regeln für Reacts Hooks: Abhängigkeiten eines Effekts, nichts Unreines beim Rendern |
 
 Nicht dabei, mit Absicht: `@tauri-apps/cli` (die Vorlage nutzt `cargo tauri`), `@vitejs/plugin-react` (sein Fast
 Refresh braucht ein Inline-Skript, das die CSP sperrt) und ein Router.
 
 ## Nicht geprüft
 
-**Die App ist bei diesem Umbau gebaut, aber nie gestartet worden.** Nichts ist in einem echten Tauri-Fenster geprüft
-(WebKit unter macOS und Linux, WebView2 unter Windows): weder das Ziehen an der Titelleiste, die Ampel-Knöpfe, der
-Fenstergrund vor dem ersten Bild, das native Menü noch das Speichern in `settings.json`. Die Tests laufen nur in
+**Die gebaute App ist einmal unter macOS gestartet worden: Das Fenster öffnet sich und zeigt die Oberfläche.** Mehr ist
+in einem echten Tauri-Fenster nicht geprüft (WebKit unter macOS und Linux, WebView2 unter Windows): weder das Ziehen
+an der Titelleiste, die Lage der Ampel-Knöpfe, der Fenstergrund vor dem ersten Bild, das native Menü noch das Speichern
+in `settings.json`. Die Tests laufen nur in
 Chromium; die Aufrufe an Rust prüfen sie gegen eine Attrappe. Die Workflows `ci` und `release` sind in dieser Vorlage
 nie gelaufen; im Guide läuft, was `ci` unter Linux ruft, als Job `desktop-tauri`. Das `.deb` unter Linux und jeder Bau
 unter Windows sind nie entstanden. Das Verbot von Wörtern im JSX sieht Text zwischen Tags und die Attribute
