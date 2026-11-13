@@ -4,7 +4,7 @@ Lies das, bevor du einen Bildschirm in sebaro baust oder änderst. Diese 31 Rege
 steckt in den Bauteilen ([parts.md](parts.md) sagt, was ein Bauteil noch von dir braucht), den Ansichtstypen
 ([views.md](views.md)) und den Prüfungen. `[AKT-01]` verweist auf den langen Katalog `rules/rules.json` (Begründung
 und Beispiele), `D<n>` auf eine Entscheidung des Inhabers. Schlag dort nur nach, wenn du den Grund brauchst. Wo der
-Katalog etwas anderes sagt, gilt diese Datei. Sie sagt dasselbe wie die englische Fassung [KERN.md](KERN.md).
+Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md](KERN.md).
 
 ## Das System
 
@@ -87,8 +87,11 @@ Katalog etwas anderes sagt, gilt diese Datei. Sie sagt dasselbe wie die englisch
 
 26. Deutsche Oberflächen sagen „du“. Titel sind kurze Substantive. Zahlen: ein geschütztes Leerzeichen (U+00A0)
     zwischen Zahl und Einheit, „10.000“, „12,90 €“, „08:00–22:00“. Kein Text wird im Code zusammengesetzt; jede
-    Zeichenkette kommt aus der Texttabelle, damit eine zweite Sprache folgen kann.
-    [TXT-01, TXT-03, TXT-04, TXT-12, TEC-10]
+    Zeichenkette kommt aus der Texttabelle. Jede App und jede Website erscheint ab der ersten Version auf Deutsch
+    und Englisch: je Sprache eine Datei oder ein Ordner, die Sprachen an einer Stelle benannt, so dass eine weitere
+    Sprache ihre Dateien und ein Eintrag sind; eine Prüfung schlägt fehl, wenn einer Sprache ein Text fehlt. Eine
+    Inhaltsseite mit Artikeln bleibt in ihrer einen Sprache, Deutsch oder Englisch.
+    [TXT-01, TXT-03, TXT-04, TXT-12, TEC-10, Inhaber 2026-11-13]
 27. Ehrlich: keine Behauptung ohne Beleg, konkrete Fakten statt Werbesätzen, Fehler und fehlende Werte in Worten,
     Beispieldaten als „Beispieldaten“ markiert. Nichts lädt von fremden Servern.
     [HAL-03, HAL-04, HAL-09, BEL-01, BEL-09, TXT-02]

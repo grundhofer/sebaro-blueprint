@@ -36,8 +36,11 @@ public/sebaro/    the sebaro copy, never edited
 
 ## Text and language
 
-Texts live in content collections or one strings module, never inside components. German first; an English tree
-only when the pages exist in English.
+Texts live in content collections or one strings module per language, never inside components. German and English
+from the first version: every page in both, as sibling trees (`src/pages/` and `src/pages/en/`). The languages are
+named in one list that the layout and the language link read, so a further language is its tree, its strings and one
+entry. A build test fails when a page is missing in a language. A content site (articles) stays in its one language,
+German or English, and has no language link.
 
 ## Tests
 
@@ -99,6 +102,8 @@ Then look at every changed page in light and dark, on the phone and wide, and sa
   allows it, sends the Content-Security-Policy as a header in place of the `<meta>` tag.
 - Its strings module and `src/lib/` are plain JavaScript (`.mjs`), so the build scripts read them with Node alone:
   `astro check` reads their types and does not check them.
+- Only the start page exists in English; the layout writes the two languages into its code instead of reading one
+  list, and no test checks that every page exists in every language.
 - It has no `src/components/` and no `src/content/`: header and footer stand in the one layout, every text in the
   strings module.
 

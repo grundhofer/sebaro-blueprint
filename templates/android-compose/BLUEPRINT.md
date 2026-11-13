@@ -65,8 +65,9 @@ No library. `ui/<App>App.kt` keeps a saved back stack of destinations in `rememb
 All text is in string resources; number and unit are joined with `&#160;`. Read strings with the copy's
 `sbStringResource` and `sbPluralStringResource`, so plurals and digits follow the app's language. The app names its
 languages in `locales_config.xml`; the user chooses the language in Android's settings for the app, the app has no
-language setting of its own. One language: German in `values/`. With a second one: English in `values/` as the
-fallback, German in `values-de/`.
+language setting of its own. German and English from the first version: English in `values/` as the fallback,
+German in `values-de/`. A further language is one `values-<xx>/` folder and its entry in `locales_config.xml`.
+Android lint reports a string that a language lacks (`MissingTranslation`) as an error, so `check` fails.
 
 ## Design system
 
