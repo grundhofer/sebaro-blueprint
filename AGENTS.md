@@ -2,7 +2,7 @@
 
 sebaro is the design system and the technology blueprints of one family of products: phone apps, websites, web
 apps and desktop apps. A product reads and copies from this repository. German overview for the owner:
-[README.md](README.md). Site: <https://grundhofer.github.io/sebaro-guide/>.
+[README.md](README.md). Site: <https://grundhofer.github.io/sebaro-blueprint/>.
 
 ## Building or converting a product
 
@@ -29,7 +29,7 @@ Read in this order and stop when you have what the task needs.
    current with its updater (Node 20 or newer, nothing else):
 
    ```sh
-   curl -fsSLO https://github.com/grundhofer/sebaro-guide/releases/latest/download/update-copy.mjs
+   curl -fsSLO https://github.com/grundhofer/sebaro-blueprint/releases/latest/download/update-copy.mjs
    node update-copy.mjs --profile android --out sebaro   # or website, webapp, desktop; --packs a,b adds packs
    node sebaro/checks/update-copy.mjs                    # later: the newest release, same profile and packs
    ```

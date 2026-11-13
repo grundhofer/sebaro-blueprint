@@ -3,7 +3,7 @@
 
 ## Design and technology: sebaro
 
-This product follows sebaro. The kit is `https://github.com/grundhofer/sebaro-guide`; use a local checkout where
+This product follows sebaro. The kit is `https://github.com/grundhofer/sebaro-blueprint`; use a local checkout where
 there is one.
 
 - **Kind:** <Android app | website | web app | desktop app>. Its technology rules: the `BLUEPRINT.md` of the
