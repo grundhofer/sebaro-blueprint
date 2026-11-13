@@ -33,27 +33,28 @@ class TemplateExports(unittest.TestCase):
         (self.tmp / cs.TEMPLATE_MIRRORS[0] / "tokens.css").write_text("old")
         errors, _ = cs.template_export_findings(self.tmp)
         self.assertEqual(len(errors), 1)
-        self.assertIn("templates/webapp-vite", errors[0])
+        self.assertIn("templates/desktop-tauri", errors[0])
         self.assertIn("differs: tokens.css", errors[0])
         self.assertIn("npm run sebaro:sync", errors[0])
 
     def test_missing_and_extra_files_fail(self):
         (self.tmp / cs.TEMPLATE_MIRRORS[0] / "css" / "a.css").unlink()
-        (self.tmp / cs.TEMPLATE_MIRRORS[1] / "new.js").write_text("x")
+        (self.tmp / cs.TEMPLATE_MIRRORS[0] / "new.js").write_text("x")
         errors, _ = cs.template_export_findings(self.tmp)
-        self.assertEqual(len(errors), 2)
+        self.assertEqual(len(errors), 1)
         self.assertIn("missing: css/a.css", errors[0])
-        self.assertIn("extra: new.js", errors[1])
+        self.assertIn("extra: new.js", errors[0])
 
     def test_dotfile_ignored(self):
         (self.tmp / cs.TEMPLATE_MIRRORS[0] / ".DS_Store").write_text("x")
         self.assertEqual(cs.template_export_findings(self.tmp), ([], []))
 
-    def test_website_copy_is_not_compared(self):
-        # the website starter holds the copy of the public release (another profile), not a mirror of docs/sebaro/
-        copy = self.tmp / "templates" / "website-astro" / "public" / "sebaro"
-        copy.mkdir(parents=True)
-        (copy / "tokens.css").write_text("release")
+    def test_release_copies_are_not_compared(self):
+        # the website and web app starters hold the copy of the public release (a profile), not a mirror of docs/sebaro/
+        for rel in ("templates/website-astro/public/sebaro", "templates/webapp-vite/src/sebaro"):
+            copy = self.tmp / rel
+            copy.mkdir(parents=True)
+            (copy / "tokens.css").write_text("release")
         self.assertEqual(cs.template_export_findings(self.tmp), ([], []))
 
     def test_ios_commit_is_only_a_warning(self):

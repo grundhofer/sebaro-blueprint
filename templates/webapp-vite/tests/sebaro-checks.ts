@@ -188,7 +188,7 @@ export function collectControlCuts() {
     if (!el.checkVisibility({ visibilityProperty: true })) continue;
     const box = el.getBoundingClientRect();
     if (box.width <= 2 || box.height <= 2) continue;
-    let text = "", kind = "";
+    let text: string, kind: string;
     if (isSelect) [text, kind] = [el.selectedOptions[0]?.text ?? "", "select"];
     else if (el.value) [text, kind] = [el.type === "password" ? "•".repeat(el.value.length) : el.value, "value"];
     else [text, kind] = [el.placeholder, "placeholder"];
@@ -253,6 +253,7 @@ export function checkScreens(screens: Screen[], options: Options = {}) {
             page.on("pageerror", (e) => problems.push(`page error: ${e.message}`));
             await page.addInitScript(() => {
               document.addEventListener("securitypolicyviolation", (e) => {
+                // eslint-disable-next-line no-console -- runs in the page: the test reads the page's console
                 console.error(`CSP violation: ${e.violatedDirective} ${e.blockedURI || "inline"}`);
               });
             });

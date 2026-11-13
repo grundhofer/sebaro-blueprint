@@ -85,11 +85,12 @@ VAR_SB = re.compile(r"var\(\s*(--sb-[A-Za-z0-9_-]*[A-Za-z0-9_])(?![-*…A-Za-z0-
 
 # the only copies of the web export in templates/, each a verified snapshot (npm run sebaro:verify checks it), then
 # the iOS export and the Android starter's copy of a release (profile android; its own verify-export.mjs checks it)
-TEMPLATE_EXPORTS = ("templates/website-astro/public/sebaro/", "templates/webapp-vite/public/sebaro/",
+TEMPLATE_EXPORTS = ("templates/website-astro/public/sebaro/", "templates/webapp-vite/src/sebaro/",
                     "templates/desktop-tauri/public/sebaro/", "templates/ios-swiftui/SebaroDesign/",
                     "templates/android-compose/sebaro/")
-# those of them that mirror docs/sebaro/ (TPLEXP); the website starter holds the copy of the public release instead
-TEMPLATE_MIRRORS = ("templates/webapp-vite/public/sebaro/", "templates/desktop-tauri/public/sebaro/")
+# those of them that mirror docs/sebaro/ (TPLEXP); the website and web app starters hold the copy of the public
+# release instead
+TEMPLATE_MIRRORS = ("templates/desktop-tauri/public/sebaro/",)
 
 
 def export_diff(src: Path, dst: Path) -> list[str]:

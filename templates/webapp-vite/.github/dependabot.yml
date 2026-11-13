@@ -1,0 +1,16 @@
+# Dependabot: once a week. npm: minor and patch updates in one pull request, a major one each on its own, at most
+# five open. The sebaro copy is no package: it is updated with node src/sebaro/checks/update-copy.mjs.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

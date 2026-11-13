@@ -1,0 +1,43 @@
+// eslint.config.js: ESLint with typescript-eslint. Beside the recommended rules: no promise left unhandled, no
+// `any`, no console, and no word written into JSX.
+import js from "@eslint/js";
+import { defineConfig, globalIgnores } from "eslint/config";
+import tseslint from "typescript-eslint";
+
+const WORD = "Every word comes from the i18next resources (src/i18n/): use t() or <Trans>.";
+
+export default defineConfig(
+  // the sebaro copy and the product's files are never edited, so never linted
+  globalIgnores(["dist", "src/sebaro", "sebaro-product", "test-results", "playwright-report"]),
+  js.configs.recommended,
+  tseslint.configs.recommended,
+  {
+    files: ["**/*.{ts,tsx}"],
+    languageOptions: { parserOptions: { projectService: true, tsconfigRootDir: import.meta.dirname } },
+    rules: {
+      "@typescript-eslint/no-floating-promises": "error",
+      "@typescript-eslint/no-explicit-any": "error",
+      "no-console": "error",
+    },
+  },
+  {
+    files: ["src/**/*.tsx"],
+    ignores: ["src/**/*.test.tsx"],
+    rules: {
+      "no-restricted-syntax": [
+        "error",
+        // text between tags, and a string in braces between tags; signs and numbers alone are values
+        { selector: "JSXText[value=/\\p{L}/u]", message: WORD },
+        {
+          selector: ":matches(JSXElement, JSXFragment) > JSXExpressionContainer > Literal[value=/\\p{L}/u]",
+          message: WORD,
+        },
+        // the attributes a person reads or hears
+        {
+          selector: "JSXAttribute[name.name=/^(aria-label|aria-description|alt|placeholder|title)$/] > Literal",
+          message: WORD,
+        },
+      ],
+    },
+  },
+);
