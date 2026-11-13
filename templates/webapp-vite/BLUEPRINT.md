@@ -103,12 +103,10 @@ Then look at every changed view in light and dark, on the phone and wide, and sa
 
 ## Where this starter still differs
 
-Until the starter is rebuilt from this blueprint, do not copy these parts of it:
+Do not copy these parts of it:
 
-- It uses no framework: views are template strings, routes are hash routes, state sits in a module and
-  `localStorage`. The blueprint asks for React, react-router and zustand.
-- npm instead of pnpm; no ESLint, no Prettier, no unit tests, no size budget, no Dependabot file.
-- The copy sits in `public/sebaro/` and is loaded with `<link>` and `<script>` tags.
-
-What the starter already does and the blueprint keeps: every string in one module with a test, the strict
-Content-Security-Policy, Playwright with axe on every view.
+- It ships no `deploy` workflow: the host is the product's choice. Its README says what the product adds.
+- Of the large-text forms of the copy's `sb-fit.js` only one is written in React, the dialog actions that stand
+  one under the other. The README lists the others.
+- Values that read the same in every language (addresses, IDs, code samples) stand in
+  `src/components/data/values.ts`, not in the i18next resources.

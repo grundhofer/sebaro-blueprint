@@ -1,0 +1,84 @@
+import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+
+type Message = { text: string; undo?: () => void };
+type Props = { id: string; message: Message | null; onHide(): void };
+
+const STAY = 6000;
+
+/** The toast: the sentence of a result, with „Rückgängig“ where it can be taken back. It stays 6 s, counted anew
+ *  after the pointer was over it or the focus inside; Escape closes it unless a dialog or popover is open. */
+export function Toast({ id, message, onHide }: Props) {
+  const { t } = useTranslation();
+  const ref = useRef<HTMLDivElement>(null);
+  const from = useRef<Element | null>(null);
+  const [written, setWritten] = useState<Message | null>(null);
+  const [held, setHeld] = useState(false);
+
+  const hide = () => {
+    // focus inside the toast goes back to where it was, else to the content: never to nowhere
+    if (ref.current?.contains(document.activeElement)) {
+      const back =
+        from.current instanceof HTMLElement && from.current.isConnected ? from.current : document.querySelector("main");
+      back?.focus({ preventScroll: true });
+    }
+    onHide();
+  };
+
+  // the region is shown empty and gets its sentence two frames later, so a screen reader hears a region that was
+  // already there
+  useEffect(() => {
+    if (!message) return;
+    from.current = document.activeElement;
+    let frame = requestAnimationFrame(() => {
+      frame = requestAnimationFrame(() => setWritten(message));
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [message]);
+
+  useEffect(() => {
+    if (!message || held) return;
+    const timer = window.setTimeout(hide, STAY);
+    return () => window.clearTimeout(timer);
+  }, [message, held]);
+
+  useEffect(() => {
+    if (!message) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== "Escape" || event.isComposing) return;
+      const inside = event.target instanceof Node && ref.current?.contains(event.target);
+      if (inside || !document.querySelector("dialog:modal, :popover-open")) hide();
+    };
+    // in the capture phase and never consumed: a field or an editor gets its Escape as before
+    document.addEventListener("keydown", onKey, true);
+    return () => document.removeEventListener("keydown", onKey, true);
+  }, [message]);
+
+  return (
+    <div
+      ref={ref}
+      id={id}
+      className={message ? "sb-toast sb-enter" : "sb-toast"}
+      role="status"
+      hidden={!message}
+      onPointerEnter={() => setHeld(true)}
+      onPointerLeave={() => setHeld(false)}
+      onFocus={() => setHeld(true)}
+      onBlur={() => setHeld(false)}
+    >
+      <p>{message && written === message ? message.text : ""}</p>
+      {message?.undo && (
+        <button
+          className="sb-toast__action"
+          type="button"
+          onClick={() => {
+            message.undo?.();
+            hide();
+          }}
+        >
+          {t("common.undo")}
+        </button>
+      )}
+    </div>
+  );
+}

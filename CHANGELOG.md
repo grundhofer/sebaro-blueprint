@@ -33,6 +33,14 @@ Typprüfung (`astro check`), ESLint, Prettier, Vitest für `src/lib/`, ein `ci`-
 Vorlage; Code in Artikeln wird über Klassen eingefärbt. Einen `deploy`-Workflow bringt die Vorlage nicht mit, der Host
 ist Sache des Produkts.
 
+Web-App-Startvorlage nach ihrem Bauplan neu gebaut: React 19 mit TypeScript, Vite, pnpm, react-router, zustand und
+i18next (Deutsch und Englisch, ein Test hält die Schlüssel gleich); die Kopie aus dem öffentlichen Release (Profil
+`webapp`) liegt in `src/sebaro/`, die sebaro-Bauteile sind als React-Hüllen in `src/components/parts/` gefasst. Neu sind
+ESLint, Prettier, Vitest, die Größenbudgets im Build (CSS 34 von 75 KB, JavaScript beim Start 141 von 250 KB, gzip),
+ein `ci`-Workflow und eine Dependabot-Datei. Die Ansichten sind dieselben wie zuvor. Von den klassischen Skripten der
+Kopie lädt die Vorlage nur `theme-init.js`; was sie sonst täten, ist in React geschrieben. Offen bleiben der
+App-Rahmen nach den Kernregeln 18 und 28, die übrigen Formen für große Schrift und ein `deploy`-Workflow.
+
 Abgleich ohne Produkt: Die Werkstatt führt keine Produktliste mehr, ihr Web-Export für diese Seite kennt kein Produkt.
 Der Guide erklärt sich deshalb selbst wie jedes Produkt (`sebaro.product.json` an der Wurzel, die Dachmarke), und der
 Baukasten des Exports schreibt daraus Favicons, Manifest und Head-Snippet nach `docs/sebaro-product/`;

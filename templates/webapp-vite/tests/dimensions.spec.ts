@@ -10,20 +10,36 @@ const LENGTH = /(?<![\w-])\d*\.?\d+(px|rem|em|ch|vw|vh|vi|vb|vmin|vmax|cqi|cqw)\
 
 function untokenedLengths(file: string): string[] {
   const found: string[] = [];
-  let inComment = false, said = "";
-  readFileSync(file, "utf8").split("\n").forEach((line, n) => {
-    if (!line.trim()) { said = ""; return; }
-    let code = "";
-    for (let i = 0; i < line.length; i++) {
-      if (!inComment && line.startsWith("/*", i)) { inComment = true; i++; continue; }
-      if (inComment && line.startsWith("*/", i)) { inComment = false; i++; continue; }
-      if (inComment) said += line[i]; else code += line[i];
-    }
-    if (!LENGTH.test(code)) return;
-    const where = `${file.split("/").slice(-2).join("/")}:${n + 1}: ${code.trim()}`;
-    if (/@(media|container)/.test(code) && /\d(px|ch|vw|vh)\b/.test(code)) found.push(`${where} (a query steps in rem or em)`);
-    else if (!/no sebaro token/.test(said)) found.push(where);
-  });
+  let inComment = false,
+    said = "";
+  readFileSync(file, "utf8")
+    .split("\n")
+    .forEach((line, n) => {
+      if (!line.trim()) {
+        said = "";
+        return;
+      }
+      let code = "";
+      for (let i = 0; i < line.length; i++) {
+        if (!inComment && line.startsWith("/*", i)) {
+          inComment = true;
+          i++;
+          continue;
+        }
+        if (inComment && line.startsWith("*/", i)) {
+          inComment = false;
+          i++;
+          continue;
+        }
+        if (inComment) said += line[i];
+        else code += line[i];
+      }
+      if (!LENGTH.test(code)) return;
+      const where = `${file.split("/").slice(-2).join("/")}:${n + 1}: ${code.trim()}`;
+      if (/@(media|container)/.test(code) && /\d(px|ch|vw|vh)\b/.test(code))
+        found.push(`${where} (a query steps in rem or em)`);
+      else if (!/no sebaro token/.test(said)) found.push(where);
+    });
   return found;
 }
 
