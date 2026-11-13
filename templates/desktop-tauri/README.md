@@ -9,6 +9,7 @@ Notizen sind Beispieldaten.
 
 | Teil des Fensters | Was er zeigt |
 |---|---|
+| Start | das ganze Fenster in der Produktfarbe mit dem weißen Zeichen, dann die App; das Fenster öffnet schon in dieser Farbe |
 | Titelleiste | Kachel, Name, Ort, drei Werkzeuge mit Tooltip „Name Kürzel“, „Menü“ mit den fünf Gruppen und Untermenüs |
 | Seitenleiste | Suche, Baum aus Ordnern, Notizen und Papierkorb, Zustand als Zeichen und Wort, Fuß „Einstellungen“ |
 | Inhalt | Dokument-Reiter mit Punkt für „geändert“, der Text der Notiz, „Keine Notiz offen“ |
@@ -72,17 +73,19 @@ crates/musterapp-core/    die Logik des Produkts, ohne Tauri: heute die Einstell
 apps/desktop/src-tauri/   die Tauri-Shell
   src/main.rs             die Liste der Befehle, der Start
   src/commands.rs         die Befehle und alles, was zur Oberfläche hinübergeht: Typen, Fehlercodes
-  src/window.rs           das Hauptfenster: Grund, Hell oder Dunkel, das Skript vor der Seite
-  build.rs                liest die vier Fenstergründe aus tokens.json der Kopie
+  src/window.rs           das Hauptfenster: Grund des Starts, dann Hell oder Dunkel, das Skript vor der Seite
+  build.rs                liest die vier Fenstergründe aus tokens.json der Kopie, den Grund des Starts aus
+                          sebaro-product/sign/tile.svg
   tauri.conf.json         Content-Security-Policy, Installationspaket; capabilities/default.json: die Rechte
 apps/desktop/ui/          die Oberfläche (Bauplan der Web-App)
-  src/main.tsx            Einstieg: das eine Fenster mit seiner Fehlergrenze
+  src/main.tsx            Einstieg: das eine Fenster mit seiner Fehlergrenze; hat es gemalt, endet der Start
   src/panes/              ein Teil des Fensters je Datei: Sidebar, Content, Inspector, Settings (mit lazy() geladen)
   src/components/         Teile der App: App, MainWindow, TitleBar, AppMenu, CommandPalette, Dialogs, ActionZone …
     parts/                die React-Hüllen der sebaro-Bauteile
   src/commands.ts         die Befehle der App: eine Liste für Menü, Palette und Kürzel
   src/store/              zustand: Notizen, Fenster, Darstellung
-  src/lib/                Regeln als einfache Funktionen: Notizen, Kürzel, Breiten, Formate, der Weg zur Shell
+  src/lib/                Regeln als einfache Funktionen: Notizen, Kürzel, Breiten, Formate, der Weg zur Shell, das
+                          Ende des Starts
   src/ipc/bindings.ts     erzeugt aus den Rust-Befehlen, nie von Hand ändern
   src/i18n.ts             die Sprachen; die Wörter stehen in i18n/ an der Wurzel
   src/sebaro/             die sebaro-Kopie, nie ändern
@@ -108,8 +111,15 @@ Fensters.
   Satz steht in `i18n/<Sprache>.json` unter `errors.<Code>`. Ein neuer Code ohne Satz übersetzt nicht (die Typen von
   i18next), und ein Test der Shell prüft dasselbe für jede Sprache. In einem Browser ohne Shell (`vite preview`, die
   End-to-End-Tests) tut ein Aufruf nichts.
-- **Fenster.** Das Hauptfenster entsteht in Rust, nicht in `tauri.conf.json`: mit dem gespeicherten „Hell oder
-  Dunkel“ und dem Grund aus `tokens.json` der Kopie (`build.rs`), bevor die Seite malt. „Hell oder Dunkel“ und
+- **Fenster und Start.** Das Hauptfenster entsteht in Rust, nicht in `tauri.conf.json`: mit dem gespeicherten „Hell
+  oder Dunkel“ und, bevor die Seite malt, in der Farbe des Starts, der Kachelfarbe der Gruppe des Produkts
+  (`build.rs` liest sie aus `sebaro-product/sign/tile.svg`, das der Baukasten der Kopie aus `sebaro.product.json`
+  schreibt). Die Seite zeigt den Start vom ersten Bild an ohne Skript: `index.html` trägt `class="sb-starting"`, und
+  das Plugin in `vite.config.ts` schreibt das Markup der Kopie mit der ID des Produkts und seinem Zeichen
+  (`sebaro-product/sign/sign.svg`) als erstes Element in den Body; die Farben gibt `sign/product.css`, das
+  `src/app.css` nach `tokens.css` einbindet. Hat die App gemalt, blendet `src/lib/start.ts` den Start aus, bei
+  reduzierter Bewegung (System oder „Bewegung immer reduzieren“) ohne Überblenden. Ist die Seite geladen, nimmt das
+  Fenster den Grund aus `tokens.json` der Kopie (`build.rs`) für die gespeicherte Wahl. „Hell oder Dunkel“ und
   Farbton speichert die Rust-Seite in `settings.json` im Konfigurationsordner der App; vor den Skripten der Seite
   legt sie beide dorthin, wo `theme-init.js` der Kopie sie liest. Wählt die Oberfläche neu, speichert
   `set_appearance` und setzt Grund und Modus jedes Fensters.
@@ -150,7 +160,7 @@ eines:
 | `sb-tooltip.js` | nein | `parts/Tool.tsx` |
 | `sb-tone.js`, `theme-button.js` | nein | `panes/Settings.tsx`, `components/AppMenu.tsx`, `store/appearance.ts`, `lib/appearance.ts` |
 | `sb-fit.js` | nein | es schreibt in Textknoten und Bauteile, die React rendert. Übernommen ist eine seiner Formen (siehe Lücken) |
-| `sb-start.js` | nein | die Vorlage zeigt keinen Start (siehe Lücken) |
+| `sb-start.js` | nein | `lib/start.ts`, `main.tsx`. Vor dem ersten Bild muss nichts laufen: das Bild des Starts steht in `index.html`. Und bei reduzierter Bewegung blendet `sb-start.js` über, der Start hier nicht |
 | `sb-sheet.js` | nein | die Vorlage hat kein Sheet |
 
 Nicht in der Kopie, weil ihr Pack nicht gewählt ist: `sb-window.js` (jetzt `components/MainWindow.tsx`,
@@ -164,8 +174,10 @@ Nicht in der Kopie, weil ihr Pack nicht gewählt ist: `sb-window.js` (jetzt `com
 die Bauteile, die ohne Browser auskommen; `src/i18n.test.ts` prüft, dass Deutsch und Englisch dieselben Schlüssel
 haben. jsdom kennt weder CSS noch `<dialog>` noch Popover: was davon abhängt, prüfen die End-to-End-Tests.
 
-`cargo test` prüft im Kern-Crate die Einstellungen und ihre Datei, in der Shell die vier Fenstergründe, das Skript
-vor der Seite und dass jeder Fehlercode in jeder Sprache seinen Satz hat; der Test `bindings` schreibt die Bindings.
+`cargo test` prüft im Kern-Crate die Einstellungen und ihre Datei, in der Shell die vier Fenstergründe, den Grund
+des Starts (die Kachelfarbe, die `product/tiles.json` der Kopie der Gruppe aus `sebaro.product.json` gibt), das
+Skript vor der Seite und dass jeder Fehlercode in jeder Sprache seinen Satz hat; der Test `bindings` schreibt die
+Bindings.
 
 `pnpm test:e2e` lädt jede Ansicht und Überlagerung (Fenster, Einstellungen, Palette mit und ohne Treffer, „Menü“ mit
 Untermenü und Unter-Untermenü, die vier Dialoge, Papierkorb, kein offener Reiter, Suche ohne Treffer, Fehler beim
@@ -193,6 +205,9 @@ Heute steht dort keiner.
 Menü mit Pfeilen und Buchstaben, die Palette, die Reiter, die Trennlinie), den Fokus nach jedem Dialog, das schmale
 Fenster, den Tooltip, die Aufrufe an die Shell über eine Shell-Attrappe, ein Englisch sprechendes System, einen Teil,
 der sich nicht laden lässt, und dass jede Klasse von sebaro stammt oder mit `app-` beginnt.
+`tests/start.spec.ts` hält den Code der App zurück und liest das erste Bild Pixel für Pixel: das ganze Fenster in der
+Kachelfarbe (die `product/tiles.json` der Kopie der Gruppe aus `sebaro.product.json` gibt) mit dem weißen Zeichen;
+dann die App, hell und dunkel, mit Überblenden, bei reduzierter Bewegung (System oder Einstellung) ohne.
 `tests/dimensions.spec.ts` liest `src/app.css`: keine Länge ohne Token oder Begründung. Dass kein Wort im Markup
 steht, prüft ESLint (`eslint.config.js`). Die Bildschirmfotos liegen danach in `test-results/screens/`.
 
@@ -206,8 +221,8 @@ der Workflow `release`.
 
 | Was | Budget | Gemessen |
 |---|---|---|
-| CSS des ersten Ladens | 75&nbsp;KB gzip | 28,0&nbsp;KB |
-| JavaScript beim Start | 250&nbsp;KB gzip, kein Start-Chunk über 120&nbsp;KB | 107,6&nbsp;KB, größter Chunk 106,1&nbsp;KB |
+| CSS des ersten Ladens | 75&nbsp;KB gzip | 28,1&nbsp;KB |
+| JavaScript beim Start | 250&nbsp;KB gzip, kein Start-Chunk über 120&nbsp;KB | 107,9&nbsp;KB, größter Chunk 106,3&nbsp;KB |
 | Schriften | 250&nbsp;KB | 61,9&nbsp;KB (drei WOFF2) |
 | Installationspaket | 12&nbsp;MB | 2,95&nbsp;MB (`.dmg`, macOS arm64, unsigniert) |
 
@@ -228,6 +243,7 @@ Wo die Vorlage eine dieser Regeln noch nicht ganz erfüllt, steht es unter „L�
 
 | Teil | Regeln |
 |---|---|
+| Start: das ganze Fenster in der Produktfarbe mit dem weißen Zeichen, dann die App; das Fenster öffnet in dieser Farbe | Kernregel 29 (D143, D144) |
 | Fenster: Titelleiste, Seitenleiste, Inhalt, Inspektor, Aktionszone über die ganze Breite, Dichte „window“ | DSK-01, EBE-01, EBE-08, RAU-06 |
 | Titelleiste mit Kachel, Name, Ort, Werkzeugen mit Tooltip und der Taste „Menü“ mit fünf Gruppen; als Ziehfläche | DSK-06, DSK-08, NAV-10, EBE-06, EBE-07 |
 | Seitenleiste mit Suchfeld, Baum, Status als Zeichen und Wort, Fuß „Einstellungen“ | NAV-04, NAV-11, EIN-05, STA-08, TXT-09 |
@@ -238,7 +254,7 @@ Wo die Vorlage eine dieser Regeln noch nicht ganz erfüllt, steht es unter „L�
 | die 15 festen Kürzel und F6, auch als Dialog „Tastaturkürzel“ | DSK-09, ICO-08 |
 | schlanke Einstellungen (⌘,): Hell oder Dunkel, Farbton, Bewegung | DSK-02, DSK-05, FAR-15, BEW-04 |
 | „In den Papierkorb legen …“ fragt; der Papierkorb im Baum hält die Notizen, „Zurücklegen“ holt eine zurück, „Papierkorb leeren …“ fragt und löscht endgültig; Dialog vor dem Schließen „Abbrechen“ · „Verwerfen“ · „Sichern“; der Fokus danach auf einem Ziel im Fenster | AKT-07, AKT-08, AKT-11, EBE-03, FOR-04, DSK-08, ZUG-06 |
-| Fenstergrund aus der gespeicherten Wahl (`settings.json`), Sprachen in `Info.plist` | DSK-14, DSK-08 |
+| Fenstergrund nach dem Start aus der gespeicherten Wahl (`settings.json`), Sprachen in `Info.plist` | DSK-14, DSK-08 |
 | alle Wörter in `i18n/`, Deutsch und Englisch; CSP ohne `unsafe-inline`, Schriften selbst gehostet | TEC-10, TXT-05, HAL-09, SCH-02 |
 | 200 % Schrift ohne seitliches Scrollen und ohne abgeschnittenen Text, axe ohne Befund | ZUG-01, ZUG-09 |
 
@@ -265,8 +281,9 @@ Vorlage gilt zusätzlich:
   Browser von selbst schließt (Escape, ein Druck daneben), meldet das Bauteil sofort.
 - `scrollIntoView` verschiebt in Chromium auch die Stelle, von der Tab weitergeht: `reveal()` in `src/lib/focus.ts`
   rollt nur die Reihe.
-- Die Kachel in der Titelleiste und das App-Icon sind Platzhalter (die Dachmarke). Ein echtes Produkt trägt sein
-  eigenes Zeichen in `sebaro.product.json` ein (ZEI-03, ZEI-08).
+- Die Kachel in der Titelleiste, der Start (Zeichen und Farbe) und das App-Icon sind Platzhalter (die Dachmarke). Ein
+  echtes Produkt trägt sein eigenes Zeichen und seine Gruppe in `sebaro.product.json` ein (ZEI-03, ZEI-08) und
+  schreibt `sebaro-product/` neu; Start und Fenstergrund folgen beim nächsten Bau.
 - Alle Befehle von „Starten“ müssen grün sein, bevor eine Ansicht fertig ist; die Prüfliste `../screen-checklist.md`
   gilt dazu. Vor einem Release: die gebaute App starten und die Hauptwege von Hand gehen.
 
@@ -288,9 +305,10 @@ Refresh braucht ein Inline-Skript, das die CSP sperrt) und ein Router.
 
 ## Nicht geprüft
 
-**Die gebaute App ist einmal unter macOS gestartet worden: Das Fenster öffnet sich und zeigt die Oberfläche.** Mehr ist
-in einem echten Tauri-Fenster nicht geprüft (WebKit unter macOS und Linux, WebView2 unter Windows): weder das Ziehen
-an der Titelleiste, die Lage der Ampel-Knöpfe, der Fenstergrund vor dem ersten Bild, das native Menü noch das Speichern
+**Die gebaute App ist einmal unter macOS gestartet worden, noch ohne den Start: Das Fenster öffnet sich und zeigt die
+Oberfläche.** Mehr ist in einem echten Tauri-Fenster nicht geprüft (WebKit unter macOS und Linux, WebView2 unter
+Windows): weder der Start (das Fenster in der Produktfarbe vor dem ersten Bild, das Überblenden, der Wechsel zum
+gespeicherten Grund), das Ziehen an der Titelleiste, die Lage der Ampel-Knöpfe, das native Menü noch das Speichern
 in `settings.json`. Die Tests laufen nur in
 Chromium; die Aufrufe an Rust prüfen sie gegen eine Attrappe. Die Workflows `ci` und `release` sind in dieser Vorlage
 nie gelaufen; im Guide läuft, was `ci` unter Linux ruft, als Job `desktop-tauri`. Das `.deb` unter Linux und jeder Bau
@@ -326,8 +344,6 @@ solche Stellen übernehmen. Übernimm sie nicht, sondern bau es so:
 - **Natives Menü.** Die Vorlage legt keins an: unter macOS zeigt die Menüleiste das Standardmenü von Tauri, dessen
   Gruppen englisch heißen. „Darstellung“ mit „Hell oder Dunkel“ steht im „Menü“ des Fensters (Kernregel 28).
   „Neues Fenster“ ist gesperrt, mehrere Fenster baut die Vorlage nicht (DSK-12).
-- **Start mit der Produktfarbe:** Kernregel 29 gilt auf jeder Plattform; die Vorlage baut den Start nicht ein (weder
-  `data-sb-start` noch `sb-start.js`, `src/app.css` importiert `sebaro-product/sign/product.css` nicht).
 - **Release nur für macOS und Linux,** unsigniert. Ein Produkt für Windows ergänzt die Matrix in `release.yml` und
   `bundle.targets`; ein Produkt mit Zertifikat das Signieren.
 - **Frage an den Inhaber:** wie TEC-02 („klassische Skripte, keine Module“) zu einem Vite-Build passt, der die
