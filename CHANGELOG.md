@@ -47,7 +47,9 @@ Bildschirm Route, ViewModel, Zustand und Beispielzustände, Room und DataStore, 
 die Einstellungen von Android statt in der App. Jeder Bildschirm hat einen Render-Test; die Bilder liegen in
 `docs/screens/` (hell, dunkel, große Schrift). Das gemeinsame Build-Setup der Familie (Plugins, Lint-Regeln, Workflows)
 ist nicht Teil der Vorlage: Es liegt in einem privaten Repository und kommt per Export ins Produkt, erst dann baut die
-Vorlage. Offen bleiben Start und „Über“ nach Kernregel 29 und die Ansicht ab 840 dp.
+Vorlage. Die Vorlage zeigt den Start in der Produktfarbe mit dem weißen Symbol und „Über“ mit Kachel, Name, Version und
+Absender (Kernregel 29), erreichbar aus den Einstellungen; im Detail steht je Bereich höchstens eine umrandete Aktion
+(Kernregel 13). Offen bleibt die Ansicht ab 840 dp.
 
 Desktop-Startvorlage nach ihrem Bauplan neu gebaut: die Oberfläche auf dem Stack der Web-App ohne Router (ein Fenster
 mit Bereichen), die Kopie aus dem öffentlichen Release (Profil `desktop`), ein Cargo-Workspace mit eigenem Kern-Crate,
