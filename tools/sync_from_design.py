@@ -13,8 +13,8 @@ into docs/sebaro-product/ (favicons, manifest, head snippet, sign and tile). The
 text files) and its `check`; the raster files (favicon.ico and the PNGs) are committed and drawn by hand, with
 Playwright, when the check says they are stale:
     python3 docs/sebaro/product/product_kit.py build sebaro.product.json --copy docs/sebaro --out docs/sebaro-product --render
-No starter template carries the guide's declaration any more (PRODUCT_COPIES is empty): the website and web app
-starters are no mirrors, each holds the copy of the public release (its profile) and its own declaration.
+No starter template carries the guide's declaration any more (PRODUCT_COPIES is empty): the website, web app and
+desktop starters are no mirrors, each holds the copy of the public release (its profile) and its own declaration.
 
     python3 tools/sync_from_design.py                 # export + verify + copy
     python3 tools/sync_from_design.py --check         # exit 1 if docs/sebaro/ differs from a fresh export
@@ -54,7 +54,6 @@ DOCS = ROOT / "docs"
 TARGET = DOCS / "sebaro"
 VENDOR = DOCS / "assets" / "vendor"
 RECORD = DOCS / "GUIDE-SYNC.json"
-TEMPLATE_COPIES = ("templates/desktop-tauri/public/sebaro",)
 CONFIG = ROOT / "tools" / "sync.config.json"
 DECLARATION = ROOT / "sebaro.product.json"          # the guide's own declaration (the umbrella)
 PRODUCT = DOCS / "sebaro-product"                   # what the export's product kit writes from it
@@ -272,13 +271,6 @@ def main() -> int:
         if TARGET.exists():
             shutil.rmtree(TARGET)
         shutil.copytree(out, TARGET)
-        # the web starter templates carry the same export as one unchanged folder (check_site.py TPLEXP compares them)
-        for tpl in TEMPLATE_COPIES:
-            dest = ROOT / tpl
-            if dest.parent.is_dir():
-                if dest.exists():
-                    shutil.rmtree(dest)
-                shutil.copytree(out, dest)
         VENDOR.mkdir(parents=True, exist_ok=True)
         for name in cfg.get("vendorSpecimens", []):
             shutil.copy2(design / "systems" / cfg["system"] / "demo" / "assets" / name, VENDOR / name)
