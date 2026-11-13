@@ -41,11 +41,10 @@ Groups
   TERM   retired names do not appear in pages, fragments, rules or docs (D71: only "sebaro Sans" and "sebaro Mono");
          the font licence files in docs/sebaro/ keep the authors' copyright as the OFL requires, and so do the copies of
          the export in the starter templates (the exact paths of TEMPLATE_EXPORTS, not scanned; see template_files())
-  TPLEXP each web export copy in the starter templates (the public/sebaro/ folders of TEMPLATE_MIRRORS) has the
-         same file list and byte-identical files as docs/sebaro/ (only dotfiles, which the template's sebaro-sync.mjs
-         never copies, are ignored); the error names the template, the first differing files and its sync command.
-         Warning: the iOS template's SebaroDesign/sebaro-export.json names another sebaroDesign commit than
-         docs/GUIDE-SYNC.json (a different target, so only the commit is compared)
+  TPLEXP no starter template mirrors docs/sebaro/ any more: the website, web app and desktop starters hold the copy
+         of the public release, which their own verify-export.mjs --strict checks. What is left is a warning: the iOS
+         template's SebaroDesign/sebaro-export.json names another sebaroDesign commit than docs/GUIDE-SYNC.json (a
+         different target, so only the commit is compared)
 """
 from __future__ import annotations
 
@@ -83,39 +82,17 @@ SWATCH_PAGES = {"index.html", "grundlagen.html", "regeln.html"}
 VAR_SB = re.compile(r"var\(\s*(--sb-[A-Za-z0-9_-]*[A-Za-z0-9_])(?![-*…A-Za-z0-9_])")
 
 
-# the only copies of the web export in templates/, each a verified snapshot (npm run sebaro:verify checks it), then
-# the iOS export and the Android starter's copy of a release (profile android; its own verify-export.mjs checks it)
+# the only copies of the export in templates/, each a verified snapshot (its starter's sebaro:verify checks it)
 TEMPLATE_EXPORTS = ("templates/website-astro/public/sebaro/", "templates/webapp-vite/src/sebaro/",
-                    "templates/desktop-tauri/public/sebaro/", "templates/ios-swiftui/SebaroDesign/",
+                    "templates/desktop-tauri/apps/desktop/ui/src/sebaro/", "templates/ios-swiftui/SebaroDesign/",
                     "templates/android-compose/sebaro/")
-# those of them that mirror docs/sebaro/ (TPLEXP); the website and web app starters hold the copy of the public
-# release instead
-TEMPLATE_MIRRORS = ("templates/desktop-tauri/public/sebaro/",)
-
-
-def export_diff(src: Path, dst: Path) -> list[str]:
-    """Differences between two export folders as 'missing: f', 'extra: f' or 'differs: f' (dotfiles ignored, as the
-    templates' sebaro-sync.mjs never copies them); sorted by path."""
-    def listing(base: Path) -> set[str]:
-        return {p.relative_to(base).as_posix() for p in base.rglob("*")
-                if p.is_file() and not any(part.startswith(".") for part in p.relative_to(base).parts)} \
-            if base.is_dir() else set()
-    a, b = listing(src), listing(dst)
-    out = [f"missing: {f}" for f in sorted(a - b)] + [f"extra: {f}" for f in sorted(b - a)]
-    out += [f"differs: {f}" for f in sorted(a & b) if (src / f).read_bytes() != (dst / f).read_bytes()]
-    return sorted(out, key=lambda x: x.split(": ", 1)[1])
 
 
 def template_export_findings(root: Path = ROOT) -> tuple[list[str], list[str]]:
-    """(errors, warnings) of the TPLEXP group: stale web export copies in the templates, a stale iOS export commit."""
+    """(errors, warnings) of the TPLEXP group: a stale iOS export commit. No starter mirrors docs/sebaro/ any more, so
+    the group has no error of its own left."""
     errors: list[str] = []
     warnings: list[str] = []
-    for rel in TEMPLATE_MIRRORS:
-        tpl = rel.split("/")[1]
-        diff = export_diff(root / "docs" / "sebaro", root / rel)
-        if diff:
-            errors.append(f"TPLEXP templates/{tpl}: {rel} differs from docs/sebaro/ ({len(diff)} files, first: "
-                          f"{'; '.join(diff[:5])}); fix: cd templates/{tpl} && npm run sebaro:sync")
     try:
         want = json.loads((root / "docs" / "GUIDE-SYNC.json").read_text(encoding="utf-8")).get("sebaroDesignCommit")
         have = json.loads((root / "templates" / "ios-swiftui" / "SebaroDesign" / "sebaro-export.json")

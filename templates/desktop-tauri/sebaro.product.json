@@ -1,0 +1,30 @@
+{
+  "$comment": "Placeholder: the umbrella brand's declaration, so the starter has a sign and an app icon. A product writes its own id, name, tile group and sign here (apps/desktop/ui/src/sebaro/product/PRODUCT-CONTRACT.md); the kit of the copy then writes sebaro-product/ from it.",
+  "schemaVersion": "1.0",
+  "id": "studio",
+  "name": "sebaro",
+  "tile": "studio",
+  "sign": {
+    "glyph": [
+      {
+        "d": "M1.6 11.5 L12 3 L22.4 11.5",
+        "paint": "stroke"
+      },
+      {
+        "d": "M2 18.5 A2.5 2.5 0 1 1 7 18.5 A2.5 2.5 0 1 1 2 18.5 Z",
+        "paint": "fill"
+      },
+      {
+        "d": "M9.5 18.5 A2.5 2.5 0 1 1 14.5 18.5 A2.5 2.5 0 1 1 9.5 18.5 Z",
+        "paint": "fill"
+      },
+      {
+        "d": "M17 18.5 A2.5 2.5 0 1 1 22 18.5 A2.5 2.5 0 1 1 17 18.5 Z",
+        "paint": "fill"
+      }
+    ]
+  },
+  "outputs": [
+    "desktop"
+  ]
+}
