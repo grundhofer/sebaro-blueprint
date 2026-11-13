@@ -13,7 +13,7 @@
     "sebaro:lint": "sh public/sebaro/checks/lint-web.sh public/css/site.css dist",
     "og": "node scripts/og.mjs",
     "dev": "node scripts/site-root.mjs && astro dev",
-    "build": "node scripts/site-root.mjs && node scripts/og.mjs && astro build --mode pages --outDir build/pages && node scripts/cut.mjs && astro build && node scripts/budgets.mjs",
+    "build": "node scripts/site-root.mjs && node scripts/og.mjs && astro build --mode pages --outDir build/pages && node scripts/cut.mjs && astro build && node scripts/budgets.mjs && node scripts/languages.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "lint": "eslint . && prettier --check .",
