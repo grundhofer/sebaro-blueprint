@@ -428,6 +428,7 @@ test("the Rust side gets the choice and the window's title through the generated
     Object.assign(window, { calls, isTauri: true, __TAURI_INTERNALS__: { invoke } });
   });
   await load(page);
+  await expect(page.locator("html")).not.toHaveClass(/sb-starting/); // the start has ended
   await page.keyboard.press(`${MOD}+k`);
   await page.keyboard.type("Dunkel");
   await page.keyboard.press("Enter");
@@ -435,6 +436,7 @@ test("the Rust side gets the choice and the window's title through the generated
   const calls = await page.evaluate(() => (window as unknown as { calls: [string, unknown][] }).calls);
   expect(calls).toEqual([
     ["set_window_title", { title: "Wochenplan · Musterapp Desktop" }],
+    ["start_ended", {}],
     ["set_appearance", { theme: "dark", tone: "cool" }],
     ["set_window_title", { title: "Einkauf · Musterapp Desktop" }],
   ]);

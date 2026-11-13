@@ -99,6 +99,14 @@ pub fn set_appearance(app: AppHandle, theme: Theme, tone: Tone) -> Result<(), Co
     Ok(settings.save(&file)?)
 }
 
+/// The start has ended in the UI: the window takes the stored ground under the app. Until then its ground is the
+/// colour of the start, so no other colour shows before the page has painted.
+#[tauri::command]
+#[specta::specta]
+pub fn start_ended(window: WebviewWindow) {
+    window::apply(&window, &settings(window.app_handle()));
+}
+
 /// The title the system shows for the window: „<place> · <app>“.
 #[tauri::command]
 #[specta::specta]

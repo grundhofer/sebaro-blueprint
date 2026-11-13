@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" class="sb-starting">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,6 +20,10 @@
     <link rel="stylesheet" href="/src/app.css" />
   </head>
   <body class="sb-page">
+    <!-- the start from the first paint on: html.sb-starting shows the copy's .sb-start, the whole window in the
+         product's colour with its white sign, written here by the plugin in vite.config.ts. No script runs for it
+         before the app; src/lib/start.ts ends it once the app has painted -->
+    <!-- sebaro:start -->
     <!-- sebaro:sprite -->
     <div id="app"></div>
     <script type="module" src="/src/main.tsx"></script>

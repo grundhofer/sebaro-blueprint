@@ -11,6 +11,14 @@ const SERVED: Record<string, string> = {
 
 const read = (file: string) => readFileSync(new URL(file, import.meta.url));
 
+// The start: the copy's markup with the product's id from its declaration and the bare sign the kit wrote into
+// sebaro-product/. Its colours come from the product's product.css, which src/app.css imports.
+function start(): string {
+  const { id } = JSON.parse(read("../../../sebaro.product.json").toString()) as { id: string };
+  const sign = read("../../../sebaro-product/sign/sign.svg").toString().trim();
+  return `<div class="sb-start" data-sb-product="${id}" aria-hidden="true"><span class="sb-start__tile">${sign}</span></div>`;
+}
+
 function sebaro(): Plugin {
   return {
     name: "sebaro",
@@ -27,9 +35,11 @@ function sebaro(): Plugin {
       for (const [fileName, file] of Object.entries(SERVED))
         this.emitFile({ type: "asset", fileName, source: read(file) });
     },
-    // the icon sprite inline at the top of the body
+    // the start as the first element of the body, then the icon sprite inline
     transformIndexHtml(html) {
-      return html.replace("<!-- sebaro:sprite -->", () => read("src/sebaro/icons/sprite.svg").toString().trim());
+      return html
+        .replace("<!-- sebaro:start -->", start)
+        .replace("<!-- sebaro:sprite -->", () => read("src/sebaro/icons/sprite.svg").toString().trim());
     },
   };
 }

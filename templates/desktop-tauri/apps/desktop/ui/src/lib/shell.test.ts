@@ -1,5 +1,5 @@
 import { afterEach, expect, test, vi } from "vitest";
-import { showWindowTitle, storeAppearance } from "./shell";
+import { showStoredGround, showWindowTitle, storeAppearance } from "./shell";
 
 type Invoke = (command: string, args: unknown) => Promise<unknown>;
 const page = window as unknown as { isTauri?: boolean; __TAURI_INTERNALS__?: { invoke: Invoke } };
@@ -18,6 +18,16 @@ afterEach(() => {
 test("without a shell a call does nothing and fails nothing", async () => {
   expect(await storeAppearance("dark", "warm")).toBeNull();
   await showWindowTitle("Wochenplan · Musterapp Desktop");
+  await showStoredGround();
+});
+
+test("the end of the start goes to its command; a call that breaks fails nothing", async () => {
+  const invoke = vi.fn<Invoke>(() => Promise.resolve(null));
+  shell(invoke);
+  await showStoredGround();
+  expect(invoke).toHaveBeenCalledWith("start_ended", {}, undefined);
+  shell(() => Promise.reject(new Error("no channel")));
+  await showStoredGround();
 });
 
 test("the choice goes to the command with its typed arguments", async () => {

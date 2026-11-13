@@ -9,6 +9,7 @@ mod window;
 fn commands() -> tauri_specta::Builder<tauri::Wry> {
     tauri_specta::Builder::new().commands(tauri_specta::collect_commands![
         commands::set_appearance,
+        commands::start_ended,
         commands::set_window_title,
     ])
 }

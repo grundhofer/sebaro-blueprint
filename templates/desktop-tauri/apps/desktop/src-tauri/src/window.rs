@@ -1,5 +1,7 @@
 // window.rs: the main window. It is made here, not in tauri.conf.json, so it has the stored „Hell oder Dunkel“ and
-// its ground before the page paints. The four grounds come from the sebaro copy at build time (build.rs).
+// its ground before the page paints: the colour of the start, which the page shows until the app has painted. It
+// keeps that ground until the UI says the start has ended (the command start_ended), then takes the stored one. The
+// grounds come from the sebaro copy's tokens.json, the start's by the product's tile group, at build time (build.rs).
 // On macOS the UI's own bar is the title bar (overlay style, hidden title); Windows and Linux keep the system frame.
 use musterapp_core::{Settings, Theme, Tone};
 use tauri::{
@@ -19,6 +21,12 @@ fn mode(settings: &Settings) -> Option<SystemTheme> {
 
 fn ground(tone: Tone, dark: bool) -> Color {
     let [red, green, blue] = GROUNDS[usize::from(tone == Tone::Warm)][usize::from(dark)];
+    Color(red, green, blue, 255)
+}
+
+/// The ground of the start: the tile colour of the product's group, in light and dark alike.
+fn start() -> Color {
+    let [red, green, blue] = START;
     Color(red, green, blue, 255)
 }
 
@@ -47,29 +55,27 @@ fn init_script(settings: &Settings) -> String {
     )
 }
 
-/// Makes the main window with the stored choice.
+/// Makes the main window with the stored choice. Its ground is the colour of the start until the start has ended in
+/// the UI (`commands::start_ended`): WebKit shows the window's ground until the page has painted, even after the page
+/// has loaded.
 pub fn open(app: &App, settings: &Settings) -> tauri::Result<()> {
     let builder = WebviewWindowBuilder::new(app, "main", WebviewUrl::App("index.html".into()))
         .title(&app.package_info().name)
         .inner_size(1200.0, 800.0)
         .min_inner_size(480.0, 400.0)
         .theme(mode(settings))
-        .background_color(ground(
-            settings.tone,
-            mode(settings) == Some(SystemTheme::Dark),
-        ))
+        .background_color(start())
         .initialization_script(init_script(settings));
     #[cfg(target_os = "macos")]
     let builder = builder
         .title_bar_style(tauri::TitleBarStyle::Overlay)
         .hidden_title(true);
-    let window = builder.build()?;
-    // "follow the system": only the window itself knows which mode the system shows
-    apply(&window, settings);
+    builder.build()?;
     Ok(())
 }
 
-/// Sets the mode and the ground of a window to the choice.
+/// Sets the mode and the ground of a window to the choice. For "follow the system" only the window itself knows
+/// which mode the system shows.
 pub fn apply(window: &WebviewWindow, settings: &Settings) {
     let _ = window.set_theme(mode(settings));
     let dark = match mode(settings) {
@@ -103,6 +109,30 @@ mod tests {
                 && !light(GROUNDS[0][1])
                 && light(GROUNDS[1][0])
                 && !light(GROUNDS[1][1])
+        );
+    }
+
+    /// build.rs reads the colour from the copy's tokens.json; the kit draws the tile and the app icon in the colour
+    /// its own `product/tiles.json` gives the group `sebaro.product.json` names. The window opens in that colour.
+    #[test]
+    fn the_window_opens_in_the_tile_colour_of_the_kit() {
+        let read = |file: &str| -> serde_json::Value {
+            let text = std::fs::read_to_string(format!("{}/{file}", env!("CARGO_MANIFEST_DIR")))
+                .expect("the file can be read");
+            serde_json::from_str(&text).expect("the file is JSON")
+        };
+        let declaration = read("../../../sebaro.product.json");
+        let tiles = read("../ui/src/sebaro/product/tiles.json");
+        let group = declaration["tile"]
+            .as_str()
+            .expect("the product names its tile group");
+        let colour = tiles["groups"][group]["tile"]
+            .as_str()
+            .expect("tiles.json gives the group's colour");
+        let [red, green, blue] = START;
+        assert_eq!(
+            format!("#{red:02X}{green:02X}{blue:02X}"),
+            colour.to_uppercase()
         );
     }
 
