@@ -1,0 +1,18 @@
+# Once a week: the version catalog and the actions of the workflows. Minor and patch updates come as one grouped
+# pull request per ecosystem, a major update as its own.
+version: 2
+updates:
+  - package-ecosystem: gradle
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]

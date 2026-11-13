@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- German: „du“, German quotation marks, U+00A0 (&#160;) between a number and its unit. -->
+<resources>
+    <string name="nav_entries">Einträge</string>
+    <string name="nav_data">Daten</string>
+    <string name="nav_settings">Einstellungen</string>
+
+    <string name="demo_marker">Beispieldaten</string>
+    <string name="save_failed">Konnte nicht gesichert werden.</string>
+
+    <string name="priority_low">Niedrig</string>
+    <string name="priority_normal">Normal</string>
+    <string name="priority_high">Hoch</string>
+
+    <string name="date_pattern">dd.MM.yyyy</string>
+
+    <string-array name="sample_titles">
+        <item>Fahrrad zur Inspektion bringen</item>
+        <item>Balkon bepflanzen</item>
+        <item>Steuerunterlagen sortieren</item>
+        <item>Regal im Flur aufbauen</item>
+        <item>Wasserzähler ablesen</item>
+    </string-array>
+    <string-array name="sample_notes">
+        <item>Bremsen und Licht prüfen lassen, vorher einen Termin ausmachen.</item>
+        <item>Erde, zwei Kästen und Kräuter aus dem Gartenmarkt.</item>
+        <item />
+        <item>Schrauben lagen im Karton, Wanddübel fehlen noch.</item>
+        <item>Stand notieren und an die Hausverwaltung schicken.</item>
+    </string-array>
+</resources>

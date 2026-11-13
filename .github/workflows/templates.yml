@@ -6,6 +6,8 @@
 # Each template's copy of the export is a snapshot: a guide sync does not touch it; update it with npm run sebaro:sync.
 # The website and the web app starter are products like any other: each holds the copy of the public release
 # (update-copy.mjs), and its job runs what its own ci workflow runs (type check, lint, budgets; the web app with pnpm).
+# The Android starter cannot be built here (the family's build setup is private): its job runs the three checks of
+# its copy that need no Gradle.
 name: templates
 on:
   push:
@@ -133,3 +135,26 @@ jobs:
           path: templates/desktop-tauri/test-results/
           retention-days: 7
           if-no-files-found: ignore
+
+  # The Android starter builds only with the family's build setup, an export that is not in this repository
+  # (templates/android-compose/README.md), so no Gradle build, test or lint can run here. What needs no build setup
+  # runs: the starter's sebaro copy is unchanged, its sources keep sebaro's rules, and its product files are what
+  # sebaro.product.json and the copy give.
+  android-compose:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: templates/android-compose
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22"
+      - name: sebaro copy unchanged (verify-export.mjs --strict)
+        run: node sebaro/checks/verify-export.mjs sebaro --strict
+      - name: sebaro's rules in the app's sources (lint-android.sh, silence means none is broken)
+        run: sh sebaro/checks/lint-android.sh app/src
+      - name: Product files are what sebaro.product.json and the copy give (product_kit.py check --no-raster)
+        run: >
+          python3 sebaro/product/product_kit.py check sebaro.product.json --copy sebaro --out sebaro-product
+          --no-raster

@@ -41,6 +41,14 @@ ein `ci`-Workflow und eine Dependabot-Datei. Die Ansichten sind dieselben wie zu
 Kopie lädt die Vorlage nur `theme-init.js`; was sie sonst täten, ist in React geschrieben. Offen bleiben der
 App-Rahmen nach den Kernregeln 18 und 28, die übrigen Formen für große Schrift und ein `deploy`-Workflow.
 
+Android-Startvorlage nach ihrem Bauplan neu gebaut: die Kopie aus dem öffentlichen Release (Profil `android`) als Modul
+`:designsystem` statt des privaten Maven-Pakets, die eigenen Dateien aus dem Baukasten der Kopie, `AppContainer`, je
+Bildschirm Route, ViewModel, Zustand und Beispielzustände, Room und DataStore, minSdk 29 und Java 21, die Sprache über
+die Einstellungen von Android statt in der App. Jeder Bildschirm hat einen Render-Test; die Bilder liegen in
+`docs/screens/` (hell, dunkel, große Schrift). Das gemeinsame Build-Setup der Familie (Plugins, Lint-Regeln, Workflows)
+ist nicht Teil der Vorlage: Es liegt in einem privaten Repository und kommt per Export ins Produkt, erst dann baut die
+Vorlage. Offen bleiben Start und „Über“ nach Kernregel 29 und die Ansicht ab 840 dp.
+
 Abgleich ohne Produkt: Die Werkstatt führt keine Produktliste mehr, ihr Web-Export für diese Seite kennt kein Produkt.
 Der Guide erklärt sich deshalb selbst wie jedes Produkt (`sebaro.product.json` an der Wurzel, die Dachmarke), und der
 Baukasten des Exports schreibt daraus Favicons, Manifest und Head-Snippet nach `docs/sebaro-product/`;

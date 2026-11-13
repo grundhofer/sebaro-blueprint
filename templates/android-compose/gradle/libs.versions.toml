@@ -1,31 +1,54 @@
-# Every version of the template in one place. sebaro-compose 1.10.11 is the private Maven package of the sebaro
-# design system (token contract 1.10); it brings Compose and Material 3 as api dependencies.
+# Every version of the app in one place. All sebaro Android apps keep the same ones (BLUEPRINT.md, Stack).
 [versions]
 agp = "9.3.1"
 kotlin = "2.4.10"
-# the package runs on this BOM and on 2024.12.01 (binary-checked on both, workshop CHECKS §37, §38)
+
+# current AndroidX needs compileSdk 37; the target stays Android 16 (API 36)
+compileSdk = "37"
+targetSdk = "36"
+minSdk = "29"
+
 composeBom = "2026.08.00"
 activityCompose = "1.13.0"
-sebaroCompose = "1.10.11"
-desugarJdkLibs = "2.1.5"
+lifecycle = "2.11.0"
+coroutines = "1.11.0"
+
+# KSP 2.x has its own version line, independent of Kotlin's
+ksp = "2.3.12"
+room = "2.8.5"
+datastore = "1.3.0"
+
 junit = "4.13.2"
 robolectric = "4.17"
+# the Android 16 framework jar Robolectric draws with
 robolectricAndroidAll = "16-robolectric-13921718-i7"
 roborazzi = "1.75.0"
 
 [libraries]
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
+androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+compose-material3 = { module = "androidx.compose.material3:material3" }
 compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
-sebaro-compose = { module = "de.sebaro_ventures.design:sebaro-compose", version.ref = "sebaroCompose" }
-desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugarJdkLibs" }
+
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+
 junit = { module = "junit:junit", version.ref = "junit" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 robolectric-android-all = { module = "org.robolectric:android-all-instrumented", version.ref = "robolectricAndroidAll" }
 roborazzi = { module = "io.github.takahirom.roborazzi:roborazzi", version.ref = "roborazzi" }
-roborazzi-compose = { module = "io.github.takahirom.roborazzi:roborazzi-compose", version.ref = "roborazzi" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "room" }

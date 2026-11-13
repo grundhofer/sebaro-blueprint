@@ -65,5 +65,12 @@ class TemplateExports(unittest.TestCase):
         self.assertIn("templates/ios-swiftui", warnings[0])
 
 
+class TemplateFiles(unittest.TestCase):
+    def test_copies_are_left_out_and_the_starters_own_files_are_scanned(self):
+        files = [f.relative_to(cs.ROOT).as_posix() for f in cs.template_files()]
+        self.assertIn("templates/android-compose/BLUEPRINT.md", files)
+        self.assertEqual([f for f in files if f.startswith(cs.TEMPLATE_EXPORTS)], [])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- No INTERNET permission: everything stays on this device (BEL-10). -->
+    <!-- No permission, no INTERNET: everything stays on this device. Backup and device transfer are off. -->
     <application
-        android:name=".MusterApplication"
+        android:name=".MusterappApplication"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="false"

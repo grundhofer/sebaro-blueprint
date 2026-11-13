@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The words of the three settings come with their parts from the sebaro copy. -->
+<resources>
+    <string name="settings_title">Settings</string>
+</resources>

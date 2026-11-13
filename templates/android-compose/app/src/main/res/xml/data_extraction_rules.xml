@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Nothing leaves the device (BEL-10): no cloud backup, no device transfer. A product that backs up says so in its
-     data-path line and its facts. -->
+<!-- Nothing leaves the device: no cloud backup, no device transfer. A product that backs up says so in the line
+     under its primary action. -->
 <data-extraction-rules>
     <cloud-backup>
         <exclude domain="root" />

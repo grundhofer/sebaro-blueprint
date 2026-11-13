@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Theme.Sebaro comes with the sebaro package (light in values/, dark in values-night/): the window ground
-         before the first Compose frame and the platform widgets. Compose screens use SebaroAppTheme. -->
+    <!-- Theme.Sebaro comes with the sebaro copy (light in values/, dark in values-night/): the window ground before
+         the first Compose frame and the platform's own widgets. Compose screens use SebaroAppTheme. -->
     <style name="Theme.Musterapp" parent="Theme.Sebaro" />
 </resources>

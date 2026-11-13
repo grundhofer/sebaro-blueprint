@@ -1,192 +1,133 @@
 # Musterapp: Android-Vorlage mit sebaro (Kotlin, Jetpack Compose)
 
-Ein kleines, vollständiges Android-Projekt als Startpunkt für eine App im sebaro-Design. „Musterapp“ ist ein
-erfundener Name, `de.example.musterapp` ein Platzhalter; beides ersetzt du in deinem Produkt. Erfunden sind die fünf
-Beispieleinträge und alle Werte auf dem Daten-Bildschirm; beide tragen „Beispieldaten“, ein Beispieleintrag in der
-Liste, im Detail und im Formular. Was du selbst anlegst, trägt die Marke nie (BEL-09).
-
-sebaro kommt nur aus dem privaten Maven-Paket `de.sebaro_ventures.design:sebaro-compose:1.10.11` (GitHub Packages,
-Repository `grundhofer/sebaroDesign`). Die App baut keine sebaro-Bauteile nach und schreibt keine Farbe selbst: Alles,
-was nach sebaro aussieht, kommt aus den Compose-Wrappern des Pakets (`SebaroAppTheme`, `SbScreen`, `SbTopBar`,
-`SbNavigationBar`, `SbListRow`, `SbTextField`, `SbConfirmDialog` …); eigene Teile nehmen nur Tokens aus
-`SebaroTheme`.
+Ein kleines, vollständiges Android-Projekt als Startpunkt für eine App der sebaro-Familie, gebaut nach dem
+[Android-Bauplan](BLUEPRINT.md). Wo Vorlage und Bauplan sich noch unterscheiden, steht in dessen letztem Abschnitt.
+„Musterapp“, `de.sebaro_ventures.musterapp` und das Zeichen (das der Dachmarke, als Platzhalter) ersetzt du in deinem
+Produkt. Alle Einträge und Werte sind erfunden und tragen „Beispieldaten“; was du selbst anlegst, trägt die Marke nie.
 
 | | |
 |---|---|
-| Sprache, UI | Kotlin, Jetpack Compose, ohne Navigation-Bibliothek |
-| minSdk / targetSdk / compileSdk | 24 / 36 / 37 (minSdk 24 wie das Paket, targetSdk ab 35 für Edge-to-Edge, 36 weil Google Play es verlangt; compileSdk 37, weil das Paket damit gebaut ist) |
-| Gradle | Wrapper 9.7.1, alle Versionen in `gradle/libs.versions.toml` (AGP 9.3.1, Kotlin-Compose-Plugin 2.4.10) |
-| Compose | BOM 2026.08.00, `activity-compose` 1.13.0; das Paket läuft auch auf BOM 2024.12.01 (siehe „Bekannte Grenzen“) |
-| Sprachen | Deutsch (`res/values`), Englisch (`res/values-en`); die Wörter der Wrapper kommen aus `SbMessages` |
+| Sprache, UI | Kotlin, Jetpack Compose, eine Activity, Navigation ohne Bibliothek |
+| minSdk / targetSdk / compileSdk | 29 / 36 / 37, Java 21 |
+| Module | `:app` und `:designsystem` (die sebaro-Kopie in `sebaro/`, Profil `android`, Pakete `charts` und `table`) |
+| Daten | Room für die Einträge, DataStore für die Einstellungen, die Uhr aus dem `AppContainer` |
+| Sprachen | Englisch in `res/values/` (Rückfall), Deutsch in `res/values-de/`; die Liste steht in `res/xml/locales_config.xml` |
+| Versionen | alle in `gradle/libs.versions.toml` |
+
+## Das Build-Setup gehört nicht zur Vorlage
+
+Die Plugins `sebaro.android.app` und `sebaro.android.designsystem` (`build-logic/`), die detekt-Regeln, die
+`.editorconfig` und die Workflows `ci`, `release` und `promote` sind das gemeinsame Build-Setup der Familie. Es liegt
+in einem privaten Repository und kommt per Export in dein Produkt, so wie die sebaro-Kopie; die Vorlage nennt die
+beiden Plugins nur und bringt keinen Ersatz mit. Ohne den Export endet Gradle mit „Included build '…/build-logic' does
+not exist“, mit ihm baut die Vorlage ohne weitere Änderung.
 
 ## Was die Vorlage zeigt
 
-Drei Ziele in der unteren Navigation (NAV-02, NAV-03: Icon und Wort, nur oberste Ebene), dazu zwei Unterseiten mit
-Zurück oder Schließen (NAV-05). Jeder Bildschirm hat `SbScreen` als Wurzel unter `SebaroAppTheme` (MOB-01) und
-höchstens eine Hauptaktion, unten (AKT-01, AKT-02).
+Drei Ziele in der unteren Navigation, dazu zwei Unterseiten. Jeder Bildschirm steht in `ui/<screen>/` mit denselben
+Dateien: `…Screen.kt` (zustandslos), `…UiState.kt`, `…ViewModel.kt`, `…Route.kt`, `…Samples.kt`, dazu
+`res/values*/strings_<screen>.xml` und `render/…RenderTest.kt`.
 
-| Bildschirm | Datei | Was er zeigt | Regeln |
-|---|---|---|---|
-| Einträge (Liste) | `ListScreen.kt` | Suche mit „Suche leeren“, Gruppen mit Zahl im Kopf („Offen 3“), erledigte Zeilen treten zurück, Schlusssatz, leerer Zustand „Noch keine Einträge“ und „Kein Eintrag mit …“, Hauptaktion „Eintrag anlegen“ unten, „Beispieldaten“ in jeder Zeile eines Beispieleintrags; im Zeilenmenü „Ausblenden“ mit Kurzmeldung „„…“ ausgeblendet“ · „Rückgängig“ | DAT-01, DAT-02, DAT-07, HAL-05, EIN-05, TXT-05, BEL-09, EBE-05, AKT-04 |
-| Eintrag (Detail) | `DetailScreen.kt` | „Beispieldaten“ unter dem Titel eines Beispieleintrags, Zustand als Glyphe und Wort, Notiz, Eigenschaften flach, Hauptaktion „Eintrag bearbeiten“ in der Aktionszone; am Ende des Inhalts „Eintrag abschließen“ (endgültig, löscht nichts: 45°-Kante ohne Papierkorb) und „Eintrag löschen“ (Kante mit Papierkorb), beide fragen zuerst; ein erledigter Eintrag hat keine Hauptaktion mehr | BEL-09, STA-01, STA-02, DAT-03, AKT-01, AKT-02, AKT-07, AKT-08, FOR-04, EBE-03, TXT-04 |
-| Neuer Eintrag / Eintrag bearbeiten (Formular) | `FormScreen.kt` | „Beispieldaten“, solange Titel und Notiz eines Beispieleintrags unverändert sind, Beschriftung über dem Feld, „Notiz (optional)“ mit Zähler, Pflichtfeld ohne Zeichen; die Hauptaktion bleibt drückbar und sagt „Titel fehlt.“ am leeren Feld, der Fokus geht dorthin; „Priorität“ als Segmente, bei großer Schrift als Auswahlfeld; „Bleibt auf diesem Gerät.“ unter der Hauptaktion; Schließen mit Änderungen fragt „Abbrechen“ · „Verwerfen“ · „Sichern“ | BEL-09, EIN-01, EIN-02, STA-03, EIN-04, ZUG-09, BEL-10, AKT-11, NAV-05 |
-| Daten | `DataScreen.kt` | die Datenarten von `docs/daten.html` mit den Wrappern: ganze Zahl, Bruch, Dezimalzahl, große Zahl, Prozent, Geld, Einheit, „etwa“, Rang, Vorzeichen; Tag, Datum, kurzes Datum, Uhrzeit, Zeitfenster, Zeitspanne, Dauer, Restzeit; die festen Zustandswörter, „Konflikt“, „2 offen“; Fortschrittsbalken, Ring, Schritte; Tags, Kategorien, Markierung; Kennung und Version in sebaro Mono, Dateiname, Codeblock; sortierbare Tabelle mit Summe im Fuß; Kennzahlen mit Sparkline, Balken mit Ziel, Linie über die Zeit mit Lücke, Anteile, Zielring; Bewertung | TXT-04, TXT-12, TXT-13, FAR-14, STA-02, STA-06, STA-09, STA-04, FAR-12, SCH-01, TXT-08, TXT-15, DAT-14, DAT-04, DAT-10, DAT-12, DAT-09, BEL-09 |
-| Einstellungen | `SettingsScreen.kt` | „Hell oder Dunkel“ (Wie das System, Hell, Dunkel), „Farbton“ (Kühl, Warm), „Bewegung immer reduzieren“, „Sprache“ (Wie das System, Deutsch, English); alles gilt sofort, keine Hauptaktion | MOB-04, AKT-09, FAR-15, BEW-04, TEC-10, AKT-01 |
+| Bildschirm | Ansichtstyp | Was er zeigt |
+|---|---|---|
+| Einträge (`list`) | `list` | Suche, zwei Gruppen mit Zahl im Kopf, erledigte Zeilen treten zurück, Schlusssatz, leerer Zustand und „Kein Eintrag mit …“, Hauptaktion „Eintrag anlegen“ unten; im Zeilenmenü „Ausblenden“ mit Kurzmeldung und „Rückgängig“ |
+| Eintrag (`detail`) | `detail` | Zustand als Glyphe und Wort, Notiz, Eigenschaften flach; keine Hauptaktion, „Eintrag bearbeiten“ als die eine umrandete Aktion; am Ende „Eintrag abschließen“ und „Eintrag löschen“, beide mit der 45°-Kante, beide fragen zuerst |
+| Neuer Eintrag, Eintrag bearbeiten (`form`) | `form` | Beschriftung über dem Feld, „Notiz (optional)“ mit Zähler, „Priorität“ als Segmente; die Hauptaktion bleibt drückbar und sagt „Titel fehlt.“ am Feld; „Bleibt auf diesem Gerät.“ darunter; Schließen mit Änderungen fragt „Abbrechen“ · „Verwerfen“ · „Sichern“ |
+| Daten (`data`) | ohne Hauptaktion | die Datenarten mit den Bauteilen der Kopie: Zahlen, Geld und Einheiten, Zeit, Zustand und Fortschritt, Kategorien und Markierung, Technisches, sortierbare Tabelle mit Summe, Diagramme, Bewertung |
+| Einstellungen (`settings`) | `settings` | „Hell oder Dunkel“, „Farbton“, „Bewegung immer reduzieren“; alles gilt sofort |
 
-Die Einträge speichert `EntryStore` auf dem Gerät, in einer kleinen JSON-Datei `entries.json` in `filesDir`
-(`org.json` aus Android, keine zusätzliche Bibliothek; jede Änderung schreibt die Datei atomar im Hintergrund). Sie
-bleiben über einen Neustart der App erhalten. Beim ersten Start legt die App die Beispieleinträge an und schreibt sie
-sofort, so bleibt ein gelöschter Beispieleintrag gelöscht. Ein Beispieleintrag merkt sich nur, welcher er ist; Titel
-und Notiz holt die App erst beim Zeigen aus `strings.xml`, darum wechseln sie mit der Sprache. Ändert jemand Titel oder
-Notiz eines Beispieleintrags, gehört er ab dann dem Menschen: Die Texte bleiben, wie sie dastehen, die Marke geht. Für
-viele Einträge oder Abfragen nimmt ein Produkt Room oder DataStore.
+Die Sprache wählt man in den Android-Einstellungen der App; in der App gibt es dafür nichts. Beim ersten Start schreibt
+die App fünf Beispieleinträge in der Sprache dieses Moments in die Datenbank. Ändert jemand Titel oder Notiz eines
+Beispieleintrags, gehört er ab dann dem Menschen und die Marke geht. Scheitert ein Schreiben (Speicher voll), steht
+„Konnte nicht gesichert werden.“ in der Hauptaktion oder in einem Hinweis, nie in einer Kurzmeldung. Das Manifest
+fragt kein Recht an, Sicherung und Geräteumzug sind aus.
 
-Dazu: die drei Einstellungen speichert `SettingsStore` und gibt sie an `SebaroAppTheme(mode, reduceMotion, tone)`
-(MOB-01); die Sprache setzt ab Android 13 das System für die App (`LocaleManager`, Liste in
-`res/xml/locales_config.xml`), darunter speichert die App sie selbst und `MainActivity` setzt sie beim Start. Die
-Statusleiste folgt der Wahl „Hell oder Dunkel“ der App, nicht nur dem System. Das Manifest fragt kein INTERNET-Recht
-an, Sicherung und Geräteumzug sind aus.
+## Aufbau
 
-Was die Vorlage bewusst **nicht** zeigt: den Start mit der Kachel (STR-01; die Musterapp lädt nichts, und ohne
-Produkt gibt es keine Kachel), das App-Zeichen in der Kopfleiste (ZEI-06, nur mit Produkt-ID), Über-Seite und
-Fakten (BEL-03, ZEI-13), Mitteilungen, Widget und Kamera (MOB-09, MOB-11, MOB-12).
-
-## Lesezugriff auf das Paket
-
-Das Paket ist privat und erbt den Zugriff des Repositorys `grundhofer/sebaroDesign`. Du brauchst Lesezugriff darauf
-und ein Token mit `read:packages`:
-
-1. Auf GitHub ein klassisches Personal Access Token mit dem Recht `read:packages` anlegen.
-2. Es Gradle geben, **nie** in diesem Ordner. Entweder in `~/.gradle/gradle.properties` (deinem Benutzerordner):
-
-   ```properties
-   gpr.user=<dein GitHub-Name>
-   gpr.key=<das Token>
-   ```
-
-   oder als Umgebungsvariablen `GITHUB_ACTOR` und `GITHUB_TOKEN`. `settings.gradle.kts` liest zuerst die beiden
-   Gradle-Eigenschaften, sonst die Variablen, und holt nur die Gruppe `de.sebaro_ventures.design` aus GitHub Packages.
-
-In GitHub Actions eines anderen Repositorys reicht dessen `GITHUB_TOKEN`, wenn die Paket-Einstellungen diesem
-Repository Zugriff geben („Manage Actions access“).
-
-### Ohne Token: das Paket lokal bauen
-
-Mit einem Checkout der Werkstatt sebaroDesign (privat) baust du dasselbe Paket selbst und legst es in dein lokales
-Maven-Verzeichnis. Die Liste der nicht veröffentlichten Produkte kommt aus der git-ignorierten
-`tools/sync.local.json` eines Guide-Checkouts; ohne sie verweigert das Werkzeug das Paket.
-
-```sh
-cd <sebaroDesign-Checkout>
-SEBARO_EXCLUDE_PRODUCTS=$(python3 -c "import json; print(','.join(json.load(open('<Guide-Checkout>/tools/sync.local.json'))['excludeProducts']))") \
-  python3 tools/package_export.py maven --out <Arbeitsordner>/maven --tag v1.10.11
-gradle -p <Arbeitsordner>/maven publishToMavenLocal     # Gradle 9.x, JDK 17+, Android SDK 37
 ```
-
-Dann baut die Vorlage mit `-PsebaroLocal=true` aus `mavenLocal()` statt aus GitHub Packages, ohne Token:
-
-```sh
-./gradlew -PsebaroLocal=true assembleDebug
+settings.gradle.kts, build.gradle.kts, gradle/      Projekt, Versionskatalog
+designsystem/build.gradle.kts                       das Modul der sebaro-Kopie
+sebaro/                                             die Kopie, nie von Hand ändern
+sebaro.product.json, sebaro-product/                die Erklärung des Produkts und was der Baukasten daraus macht
+app/src/main/kotlin/…/musterapp/
+  MainActivity.kt  MusterappApplication.kt  AppContainer.kt
+  data/      Room, DataStore, Repositories, trySave
+  domain/    Entry und seine Regeln
+  ui/        MusterappApp.kt (Thema, Navigation), Destination.kt, je Bildschirm ein Paket
+app/schemas/                                        das Room-Schema jeder Version
+docs/screens/                                       die Bilder der Render-Tests
+.github/dependabot.yml                              wöchentliche Updates
 ```
 
 ## Starten
 
-Voraussetzungen: JDK 17 oder neuer (getestet mit 21), Android SDK mit Plattform 37 (`ANDROID_HOME` oder
-`local.properties` mit `sdk.dir`). Kopier den Ordner `templates/android-compose/` in dein neues Repository, dann:
+Du brauchst JDK 21, das Android SDK mit Plattform 37 (`ANDROID_HOME` oder `local.properties` mit `sdk.dir`), Node 20
+oder neuer für die Prüfungen der Kopie und Python 3.10 oder neuer für den Baukasten.
+
+1. Kopier den Ordner `templates/android-compose/` in dein neues Repository.
+2. Exportier das Build-Setup der Familie in dieses Repository (Abschnitt oben).
+3. Trag `id`, `name`, `tile` und dein Zeichen in `sebaro.product.json` ein und erzeug die Produktdateien neu:
+   `python3 sebaro/product/product_kit.py build sebaro.product.json --copy sebaro --out sebaro-product`.
+4. Ersetz `de.sebaro_ventures.musterapp` (`namespace`, `applicationId`, Paket der Kotlin-Dateien), `rootProject.name`,
+   `Musterapp…` in den Klassennamen und `app_name`.
 
 ```sh
-./gradlew assembleDebug                 # mit Token; ohne Token: -PsebaroLocal=true anhängen
-./gradlew installDebug                  # auf ein angeschlossenes Gerät oder einen Emulator
-./gradlew lint testDebugUnitTest        # Android Lint, Verhaltens- und Bildschirmtests
-./tools/lint-sebaro-android.sh          # sebaros Textprüfungen (auch in ./gradlew check, einzeln ./gradlew lintSebaro)
+./gradlew :app:assembleDebug          # ohne Kotlin-Warnungen
+./gradlew :app:installDebug           # auf ein Gerät oder einen Emulator
 ```
 
-Oder öffne den Ordner in Android Studio. Für ein eigenes Produkt: `namespace` und `applicationId` in
-`app/build.gradle.kts`, den Paketnamen der Kotlin-Dateien und `app_name` in beiden `strings.xml` ändern.
+## Prüfen
 
-## Prüfen: Tests und Bildschirmfotos
+```sh
+./gradlew :app:testDebugUnitTest      # Tests auf der JVM, zeichnet docs/screens/ neu
+./gradlew :app:check                  # Android Lint, detekt, ktlint, Tests
+node sebaro/checks/verify-export.mjs sebaro --strict     # die Kopie ist unverändert
+sh sebaro/checks/lint-android.sh app/src                 # sebaros Regeln; keine Ausgabe heißt: nichts verletzt
+python3 sebaro/product/product_kit.py check sebaro.product.json --copy sebaro --out sebaro-product --no-raster
+```
 
-`./gradlew testDebugUnitTest` läuft auf der JVM (Robolectric mit nativer Grafik, Android 16) und braucht kein Gerät:
+Die Tests brauchen kein Gerät (Robolectric, Android 16):
 
-- `BehaviourTest`: „Titel fehlt.“ und Fokus beim leeren Pflichtfeld, der Dialog mit drei Tasten beim Schließen mit
-  Änderungen und keiner ohne, Suche und „Kein Eintrag mit …“, „Eintrag abschließen“ fragt erst und nimmt danach die
-  Hauptaktion weg; Einträge überstehen einen neuen Prozess (ein zweiter `EntryStore` liest nur die Datei des ersten:
-  Anlegen, Ändern, Abschließen, Ausblenden, Löschen); Beispieleinträge wechseln Deutsch → Englisch → Deutsch in einem
-  Prozess, ein selbst geschriebener Titel bleibt; „Beispieldaten“ nur an Beispieleinträgen, in Liste, Detail und
-  Formular.
-- `ScreenshotTest`: jeder Bildschirm (15 Zustände, auch die drei Dialoge, die Kurzmeldung, ein überlanges Wort und
-  das Bearbeiten eines Beispieleintrags) hell und dunkel, bei Schriftgröße 1,0 und 2,0 auf 360 × 800 dp, dazu der
-  Daten-Bildschirm in voller Länge. Jeder Fall sucht zuerst einen Text, der zeigt, dass sein Bildschirm oder Dialog
-  da ist. Dann prüft er jeden Text im nicht zusammengefassten Semantikbaum aller Fenster (ZUG-09): keine Zeile breiter als ihr
-  Kasten, kein Text höher, kein „…“, und nichts davon von einem umgebenden Teil abgeschnitten. Ein Text, den nur der
-  Rand eines scrollenden Bereichs schneidet, muss beim Durchscrollen jedes Bereichs (auch einer seitlich scrollenden
-  Tabelle darin) einmal ganz zu sehen sein. Ein Fall ohne gemessenen Text schlägt fehl. Das überlange Wort muss bei
-  2,0 umbrechen, und zwar nur in sich selbst oder an Leerzeichen.
-- `TextCheckTest`: prüft die Textprüfung selbst. Ein Text, den ein kleinerer Rahmen abschneidet, schlägt fehl, auch
-  in einem scrollenden Bereich nach dem Durchscrollen. Ein Text, der nie ganz in seinen Scrollbereich passt, schlägt
-  fehl. „…“ schlägt fehl, ein Fall ohne Text schlägt fehl, eine Ausnahme mit falscher Trefferzahl schlägt fehl.
-  Dreißig Zeilen in einem scrollenden Bereich bestehen.
+- `render/`: jeder Beispielzustand jedes Bildschirms hell, dunkel und bei Schriftgröße 1,3 auf 360 × 800 dp, die drei
+  Dialoge und die Kurzmeldung eingeschlossen; „Daten“ in voller Länge. Die Bilder liegen in
+  `docs/screens/<screen>-<zustand>-<light|dark|large>.png` und werden committet. Ein grüner Test sagt nur, dass
+  gezeichnet wurde: Schau die Bilder an, bevor du einen Bildschirm fertig nennst
+  ([`screen-checklist.md`](../screen-checklist.md)).
+- `data/`: die Repositories gegen Room im Speicher und DataStore in einem temporären Ordner; die Beispieleinträge
+  entstehen einmal und ein gelöschter bleibt gelöscht; `trySave` fängt nur Speicherfehler.
+- `ui/<screen>/`: jedes ViewModel mit dem `AppContainer` der Tests (`TestSetup.kt`: feste Uhr, ersetzte Fabriken),
+  auch der Fall, dass das Schreiben scheitert.
+- `MusterappAppTest`: die ganze App von der Activity bis Room: erster Start, ein neuer Eintrag, ein Entwurf übersteht
+  eine neue Activity und ist nach dem Verlassen des Formulars weg.
 
-Die PNGs (Roborazzi) liegen nicht im Repository:
+Die Kopie aktualisierst du mit `node sebaro/checks/update-copy.mjs` (mit `--packs a,b` änderst du die Pakete), nie
+von Hand; danach liest du, was `CHANGES.md` der Kopie für dein Produkt sagt.
 
-| Befehl | Wohin |
-|---|---|
-| `./gradlew testDebugUnitTest` | jedes Mal neu nach `app/build/screenshots/` zum Ansehen |
-| `./gradlew testDebugUnitTest -Pshots=record` | Referenzen nach `app/screenshots/` (git-ignoriert) |
-| `./gradlew testDebugUnitTest -Pshots=verify` | vergleicht mit diesen Referenzen, schlägt bei Abweichung fehl |
+## Lücken der Vorlage
 
-Schau die Bilder an, bevor du einen Bildschirm fertig nennst, in beiden Modi und bei 2,0
-([`screen-checklist.md`](../screen-checklist.md)).
+Was ein Produkt ergänzt und hier nicht als Muster steht:
 
-**Kein CI in dieser Vorlage.** Ein Workflow bräuchte Lesezugriff auf das private Paket. In deinem Produkt-Repository
-richtest du ihn mit dessen `GITHUB_TOKEN` ein (siehe oben).
-
-## Was ein Agent einhalten muss
-
-Kopier [`../AGENTS-snippet.md`](../AGENTS-snippet.md) in die `AGENTS.md` deines Repositorys. Für diese Vorlage
-zusätzlich:
-
-1. sebaro nur aus dem Paket; nie eine Datei daraus kopieren, ändern oder nachbauen. Fehlt ein Bauteil, frag nach
-   (Regel-ID nennen, [`design-exception.md`](../design-exception.md)), statt es selbst zu zeichnen.
-2. Jeder Bildschirm: `SbScreen` unter `SebaroAppTheme`, höchstens eine Hauptaktion, nur über
-   `SbPrimaryActionModel`; keine Material-3-Buttons, keine FAB, kein `AlertDialog`, keine `Color(0x…)` (MOB-01,
-   MOB-02).
-3. Jedes Wort in `res/values/strings.xml` und `res/values-en/strings.xml`; Zahlen, Beträge und Daten über die
-   Locale (`Formats.kt`, `sbFormatCount`, `sbMessages()`), U+00A0 zwischen Zahl und Einheit (TEC-10, TXT-04).
-4. Die Compose-BOM steht in `gradle/libs.versions.toml`; das Paket 1.10.11 läuft auf 2024.12.01 und auf 2026.08.00.
-5. Vor „fertig“: `lint`, `testDebugUnitTest`, `tools/lint-sebaro-android.sh`, die Bildschirmfotos ansehen.
-
-`tools/lint-sebaro-android.sh` sucht im Kotlin-Code nach dem, was Android Lint nicht kennt: ein eigener
-`SebaroTheme(…)`-Aufruf, `SebaroProduct` außerhalb der Kachel, die Lindgrün-Rollen außerhalb der Wrapper,
-Material-3-Buttons, FAB, `NavigationBar` oder `AlertDialog`, getönte Flächen (`…Subtle`), Zahlenplaketten, rohe Farben,
-`SbPrimaryAction(…)` statt `SbPrimaryActionModel`, ein Bildschirm ohne `SbScreen`, ein `SbNavItem` ohne Wort. Jede
-Fundstelle steht mit ihrer Regel da, Exit 1; die Liste mit den Regel-IDs steht im Kopf des Skripts. Es braucht eine
-POSIX-Shell (unter Windows Git Bash).
+- **Build-Setup und Veröffentlichung.** Workflows, Signierung mit den vier `SEBARO_UPLOAD_*`-Werten und der Weg nach
+  Google Play kommen mit dem Export; Schlüssel, Dienstkonto und Runner richtet der Inhaber je Produkt ein.
+- **Zeichen, Start und „Über“.** Die Produktdateien tragen das Zeichen der Dachmarke als Platzhalter; benutzt ist
+  davon nur das Launcher-Icon. Der Start in der Produktfarbe (`Theme.Sebaro.Start`, `SbStart`) und „Über“ mit Kachel,
+  Name, Version und Absender (Kernregel 29) fehlen, ebenso das Zeichen in der Kopfleiste. Das Play-Icon entsteht mit
+  `build --render` des Baukastens.
+- **„Daten“ ist ein Katalog,** kein Bildschirm eines Produkts: Er liest nichts und hat darum kein ViewModel.
+- **Breite Fenster.** Ab 840 dp verlangt Kernregel 18 eine Leiste am Rand und zwei Spalten; die Vorlage zeigt nur
+  das Telefon.
+- **Mitteilungen, Widget, Kamera, Arbeit im Hintergrund** (WorkManager) kommen nicht vor.
 
 ## Bekannte Grenzen
 
-- **Compose-BOM.** Das Paket 1.10.11 läuft auf beiden Compose-BOMs, 2024.12.01 und 2026.08.00 (Werkstatt, CHECKS §37, §38).
-  Diese Vorlage ist nur mit 2026.08.00 gebaut und getestet, nicht mit 2024.12.01.
-- **Platzhalter-Icon.** Das Launcher-Icon (drei Listenlinien in `sebaro_text` auf `sebaro_bg`) ist kein App-Zeichen.
-  Ein Produkt ersetzt es durch sein erzeugtes Icon (`export_system.py --target android --product <id>
-  --launcher-only` in der Werkstatt, ZEI-11); ein Platzhalter bleibt nie in einer veröffentlichten App.
-- **Überlange Wörter.** Die Notiz im Detail steht in `SbWrapText` aus dem Paket (öffentlich seit 1.10.3): Sie bricht
-  an Leerzeichen um, und nur ein Wort, das allein nicht in seine Zeile passt, wird getrennt (ZUG-09, TXT-15); nichts
-  wird abgeschnitten (im Test geprüft). Den Trennstrich zeichnet die Silbentrennung des Systems; Robolectric hat keine,
-  in den Testbildern bricht das Wort darum ohne Strich (bei 2,0 angesehen). Auf einem Gerät ist der Strich nicht
-  gesehen.
-- **Zwei Ausnahmen der Textprüfung**, jede mit genauer Trefferzahl je Lauf, sonst schlägt der Test fehl:
-  `SbSearchField` gibt sein Feld nur als Namen für TalkBack an, ohne ihn zu zeichnen (ein 0 × 0-Knoten ohne Layout);
-  `SbTextField` gibt TalkBack „Notiz, optional“ als einen Text und nimmt die gezeichneten Wörter aus dem Semantikbaum,
-  sie sind also nicht gemessen (in den Bildern stehen sie ganz). Die Ausnahme für die Beschriftungen von `SbBarChart`
-  ist mit dem Paket 1.10.11 weggefallen: Es meldet keinen dieser Texte mehr als zu hoch. Bei 2,0 lässt `SbBarChart`
-  Beschriftungen, die nicht passen, weiter gewollt weg.
-- **Was die Textprüfung nicht sieht:** einen Text, den ein anderer Teil verdeckt statt abschneidet (etwa unter der
-  Aktionszone; darum scrollt der Test vor dem Tippen ans Ende), Text, den ein Wrapper aus dem Semantikbaum nimmt, und
-  einen Wert, der in einem einzeiligen Feld seitlich weiterläuft (das ist gewollt, EIN-01).
-- **Ob 1.10.11 schon in GitHub Packages liegt,** ist hier nicht geprüft (ohne Token antwortet GitHub Packages mit
-  einem Fehler). Bis es dort liegt, nimm den lokalen Weg oben.
-- **Nicht geprüft:** echtes Gerät oder Emulator, TalkBack selbst (nur der Semantikbaum in den Tests), Android unter
-  13 mit der eigenen Sprachwahl, der Sprachwechsel über die echte Activity (der Test tauscht die Locale der
-  Zusammensetzung in einem Prozess), ein echter Prozessabbruch (der Test öffnet die Datei mit einem zweiten Speicher),
-  die Paketauflösung aus GitHub Packages mit einem echten Token, Release-Build.
+- **Kurzmeldung nach einer neuen Activity.** Die zuletzt ausgeblendete Zeile bleibt im ViewModel, bis sie
+  zurückgeholt oder eine andere ausgeblendet wird; nach einer Drehung erscheint die Kurzmeldung darum noch einmal.
+- **Beispieleinträge wechseln die Sprache nicht.** Sie stehen als Text in der Datenbank.
+- **Kein Trennstrich in den Bildern.** Ein Wort, das breiter ist als seine Zeile, wird getrennt; den Strich setzt die
+  Silbentrennung des Systems, die Robolectric nicht hat. Auf einem Gerät ist er nicht gesehen.
+- **Hinweise von Android Lint, die bleiben:** acht Dateien des Baukastens sind unbenutzt (Start, Zeichenkachel,
+  Mitteilungs-Icon; siehe Lücken), zwei weitere Hinweise betreffen dessen Dateien selbst, der Rest nennt neuere
+  Versionen im Katalog.
+- **Nicht geprüft:** echtes Gerät oder Emulator, TalkBack, der Release-Build im Betrieb (er wird gebaut, mit R8, aber
+  nicht gestartet), Android 10 bis 15 (die Tests laufen auf Android 16), der Sprachwechsel über die
+  Android-Einstellungen.

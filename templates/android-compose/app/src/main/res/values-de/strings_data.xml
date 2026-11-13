@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="data_title">Daten</string>
+
+    <string name="data_numbers">Zahlen</string>
+    <string name="data_expenses_month">Ausgaben im Oktober</string>
+    <string name="data_integer">Ganze Zahl</string>
+    <string name="data_fraction">Bruch</string>
+    <string name="data_fraction_value">%1$s / %2$s</string>
+    <string name="data_decimal">Dezimalzahl</string>
+    <string name="data_large">Große Zahl</string>
+    <string name="data_percent">Prozent</string>
+    <string name="data_money">Betrag</string>
+    <string name="data_per_month">Abo</string>
+    <string name="data_per_month_value">%1$s im Monat</string>
+    <string name="data_unit">Strecke</string>
+    <string name="data_unit_value">%1$s&#160;km</string>
+    <string name="data_approx">Lesezeit</string>
+    <string name="data_approx_value">etwa %1$s&#160;Min.</string>
+    <string name="data_rank">Rang</string>
+    <string name="data_rank_value">Platz %1$s von %2$s</string>
+    <string name="data_signed_plus">+%1$s</string>
+    <string name="data_signed_minus">−%1$s</string>
+    <string name="data_signed_zero">±%1$s</string>
+
+    <string name="data_time">Zeit</string>
+    <string name="data_day">Tag</string>
+    <string name="data_date">Datum</string>
+    <string name="data_date_short">Kurz</string>
+    <string name="data_clock">Uhrzeit</string>
+    <string name="data_range">Zeitfenster</string>
+    <string name="data_range_value">%1$s–%2$s</string>
+    <string name="data_span">Zeitspanne</string>
+    <string name="data_duration">Dauer</string>
+    <string name="data_duration_value">%1$d&#160;Std. %2$d&#160;Min.</string>
+    <string name="data_remaining">Restzeit</string>
+    <string name="data_remaining_value">noch %1$d&#160;Min.</string>
+
+    <string name="data_state">Zustand</string>
+    <string name="data_state_conflict">Konflikt</string>
+    <string name="data_state_count_open">%1$s offen</string>
+    <string name="data_import">Import</string>
+    <string name="data_goal_day">Tagesziel</string>
+    <string name="data_step_name">Name</string>
+    <string name="data_step_data">Daten</string>
+    <string name="data_step_done">Fertig</string>
+
+    <string name="data_categories">Kategorien und Markierungen</string>
+    <string name="data_tag_household">Haushalt</string>
+    <string name="data_tag_garden">Garten</string>
+    <string name="data_category_work">Arbeit</string>
+    <string name="data_category_family">Familie</string>
+    <string name="data_category_sport">Sport</string>
+    <string name="data_mark_sentence">Balkon im Frühling bepflanzen</string>
+    <string name="data_mark_word">Balkon</string>
+
+    <string name="data_technical">Technisches</string>
+    <string name="data_id">Kennung</string>
+    <string name="data_version">Version</string>
+    <string name="data_file">Datei</string>
+
+    <string name="data_table">Tabelle</string>
+    <string name="data_table_caption">Ausgaben im Oktober</string>
+    <string name="data_col_item">Posten</string>
+    <string name="data_col_date">Datum</string>
+    <string name="data_col_amount">Betrag</string>
+    <string name="data_sum">Summe</string>
+    <string name="data_expense_lock">Fahrradschloss</string>
+    <string name="data_expense_washer">Waschmaschine</string>
+    <string name="data_expense_soil">Blumenerde</string>
+    <string name="data_expense_boots">Wanderschuhe</string>
+
+    <string name="data_charts">Diagramme</string>
+    <string name="data_stat_steps">Schritte im Schnitt</string>
+    <string name="data_stat_streak" tools:ignore="Typos">In Folge</string>
+    <plurals name="data_days">
+        <item quantity="one">%1$d&#160;Tag</item>
+        <item quantity="other">%1$d&#160;Tage</item>
+    </plurals>
+    <string name="data_bar_caption">Schritte pro Tag, Ziel %1$s</string>
+    <string name="data_line_caption">Schlaf in Stunden, Woche für Woche</string>
+    <string name="data_share_caption">Ausgaben nach Bereich</string>
+    <string name="data_share_home">Wohnen</string>
+    <string name="data_share_food">Essen</string>
+    <string name="data_share_leisure">Freizeit</string>
+    <string name="data_goal_caption">Gläser Wasser heute</string>
+</resources>
