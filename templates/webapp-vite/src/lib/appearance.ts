@@ -32,9 +32,8 @@ export function systemTheme(): Theme {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
-/** The press on „Hell oder Dunkel“: the other mode of the one shown. Storing the system's own mode would mean
- *  „follow the system“, so that choice is taken away instead (null): two presses lead back to the system's mode. */
-export function otherTheme(chosen: Theme | null, system: Theme): { shown: Theme; chosen: Theme | null } {
-  const shown = (chosen ?? system) === "dark" ? "light" : "dark";
-  return { shown, chosen: shown === system ? null : shown };
+/** A choice under „Hell oder Dunkel“, as it is stored. Storing the system's own mode would mean „follow the
+ *  system“, so that choice is taken away instead (null): the page follows the system again. */
+export function storedTheme(shown: Theme, system: Theme): Theme | null {
+  return shown === system ? null : shown;
 }

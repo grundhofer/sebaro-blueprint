@@ -1,11 +1,14 @@
 // Detail.tsx: one entry: its properties, the state as glyph and word, „Als erledigt markieren“ with a toast that
 // takes it back, and the two steps that ask first: deleting, and closing for good (which deletes nothing and so
-// carries no trash). A detail view has no primary action.
+// carries no trash). A detail view has no primary action: its one outlined action, „Bearbeiten“, stands in the
+// action zone. At the end of the content every action is a text action, also „Eintrag abschließen“; only
+// „Eintrag löschen“ is the danger action there.
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router";
 import { CategoryWord } from "../components/CategoryWord";
 import { DemoMarker } from "../components/DemoMarker";
+import { ActionZone } from "../components/parts/ActionZone";
 import { Dialog } from "../components/parts/Dialog";
 import { Icon } from "../components/parts/Icon";
 import { Status } from "../components/parts/Status";
@@ -108,21 +111,15 @@ export default function Detail() {
           </dl>
           {editable && (
             <div className="sb-cluster">
-              <Link className="sb-secondary-action" to={`/bearbeiten/${id}`}>
-                <Icon name="edit" />
-                {t("detail.edit")}
-              </Link>
-              <button className="sb-secondary-action" type="button" onClick={toggle}>
+              <button className="sb-text-action" type="button" onClick={toggle}>
                 {t(state === "done" ? "detail.reopen" : "detail.markDone")}
+              </button>
+              <button className="sb-text-action" type="button" onClick={() => setAsking("finish")}>
+                {t("detail.finish")}
               </button>
             </div>
           )}
-          <div className="sb-cluster">
-            {editable && (
-              <button className="sb-danger-action" type="button" onClick={() => setAsking("finish")}>
-                {t("detail.finish")}
-              </button>
-            )}
+          <div>
             <button className="sb-danger-action" type="button" onClick={() => setAsking("delete")}>
               <Icon name="trash" />
               {t("detail.delete")}
@@ -130,6 +127,14 @@ export default function Detail() {
           </div>
         </div>
       </div>
+      {editable && (
+        <ActionZone>
+          <Link className="sb-secondary-action" to={`/bearbeiten/${id}`}>
+            <Icon name="edit" />
+            {t("detail.edit")}
+          </Link>
+        </ActionZone>
+      )}
       <Dialog
         id="app-dlg-delete"
         open={asking === "delete"}
@@ -142,7 +147,7 @@ export default function Detail() {
           })
         }
       >
-        <button className="sb-secondary-action" value="cancel">
+        <button className="sb-secondary-action" value="cancel" data-sb-dialog-cancel>
           {t("common.cancel")}
         </button>
         <button className="sb-danger-action sb-danger-action--outlined" value="confirm">
@@ -162,7 +167,7 @@ export default function Detail() {
           })
         }
       >
-        <button className="sb-secondary-action" value="cancel">
+        <button className="sb-secondary-action" value="cancel" data-sb-dialog-cancel>
           {t("common.cancel")}
         </button>
         <button className="sb-danger-action sb-danger-action--outlined" value="confirm">

@@ -1,5 +1,6 @@
 // List.tsx: „Einträge“, the list with search, filter chips and the two empty states. The primary action „Neuer
-// Eintrag“ stands in the action zone at the bottom of the view.
+// Eintrag“ stands in the action zone at the bottom of the view. From 840 px the list keeps standing at the start
+// while the entry it opened, or the form, stands beside it.
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { CategoryWord } from "../components/CategoryWord";
@@ -8,19 +9,19 @@ import { ActionZone } from "../components/parts/ActionZone";
 import { Chips } from "../components/parts/Chips";
 import { Icon } from "../components/parts/Icon";
 import { SearchField } from "../components/parts/SearchField";
-import { View, ViewTitle } from "../components/View";
+import { View } from "../components/View";
 import { useLang } from "../i18n";
 import { matches, type Entry } from "../lib/entries";
 import * as fmt from "../lib/format";
 import { useEntries } from "../store/entries";
 import { useListView } from "../store/list";
 
-function Row({ entry }: { entry: Entry }) {
+function Row({ entry, current }: { entry: Entry; current: boolean }) {
   const { t } = useTranslation();
   const lang = useLang();
   const open = entry.state === "open";
   return (
-    <li className={open ? "sb-list-row" : "sb-list-row sb-list-row--done"}>
+    <li className={open ? "sb-list-row" : "sb-list-row sb-list-row--done"} aria-current={current || undefined}>
       {!open && (
         <span className="sb-list-row__lead">
           <Icon name="success--filled-16" size={16} />
@@ -58,7 +59,7 @@ function Row({ entry }: { entry: Entry }) {
   );
 }
 
-function Group({ id, title, entries }: { id: string; title: string; entries: Entry[] }) {
+function Group({ id, title, entries, current }: { id: string; title: string; entries: Entry[]; current?: string }) {
   if (!entries.length) return null;
   return (
     <>
@@ -67,14 +68,21 @@ function Group({ id, title, entries }: { id: string; title: string; entries: Ent
       </h2>
       <ul className="sb-list" aria-labelledby={id}>
         {entries.map((entry) => (
-          <Row key={entry.id} entry={entry} />
+          <Row key={entry.id} entry={entry} current={entry.id === current} />
         ))}
       </ul>
     </>
   );
 }
 
-export function List() {
+type Props = {
+  /** an entry or the form is open: the list stands beside it */
+  beside?: boolean;
+  /** the id of the entry that is open */
+  current?: string;
+};
+
+export function List({ beside, current }: Props) {
   const { t } = useTranslation();
   const entries = useEntries((state) => state.entries);
   const { query, filter, set } = useListView();
@@ -82,10 +90,9 @@ export function List() {
   const stillOpen = entries.filter((entry) => entry.state === "open").length;
 
   return (
-    <View name="liste" title={t("list.title")}>
+    <View name="liste" title={t("list.title")} beside={beside}>
       <div className="sb-view__content">
         <div className="sb-container sb-stack">
-          <ViewTitle>{t("list.title")}</ViewTitle>
           <p>
             <Link to="/daten">{t("list.allTypes")}</Link> {entries.some((entry) => entry.demo) && <DemoMarker />}
           </p>
@@ -123,11 +130,13 @@ export function List() {
                       id="app-h-open"
                       title={t("list.headerOpen")}
                       entries={shown.filter((e) => e.state === "open")}
+                      current={current}
                     />
                     <Group
                       id="app-h-done"
                       title={t("list.headerDone")}
                       entries={shown.filter((e) => e.state !== "open")}
+                      current={current}
                     />
                     <p className="sb-list-end">{t("list.end")}</p>
                   </>

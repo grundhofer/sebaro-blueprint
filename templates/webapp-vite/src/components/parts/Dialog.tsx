@@ -8,7 +8,8 @@ type Props = {
   /** The dialog has closed with an answer: the value of the pressed action, "" for Escape or a press beside it.
    *  The owner sets `open` to false here. */
   onClose(value: string): void;
-  /** the actions: buttons with a value, the cancelling one first */
+  /** the actions: buttons with a value, the cancelling one first and marked data-sb-dialog-cancel, so the check
+   *  of a view does not count it as the dialog's one outlined action */
   children: ReactNode;
 };
 

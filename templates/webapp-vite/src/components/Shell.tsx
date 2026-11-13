@@ -1,25 +1,31 @@
 import { Suspense, useLayoutEffect, useRef, type MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, Outlet, useLocation } from "react-router";
-import { LANGUAGES } from "../i18n";
-import { useAppearance } from "../store/appearance";
-import { useToast } from "../store/toast";
+import { Link, Outlet, useLocation, useMatches } from "react-router";
+import { List } from "../pages/List";
+import { AppFrame } from "./parts/AppFrame";
 import { Icon } from "./parts/Icon";
-import { LanguageSwitch } from "./parts/LanguageSwitch";
-import { ThemeButton } from "./parts/ThemeButton";
-import { Toast } from "./parts/Toast";
 import { SignTile } from "./SignTile";
+import { PaneContext } from "./View";
 
-const SOURCE = "https://github.com/";
+// the top-level places of the app, three to five: icon and word, the current one with the filled icon
+const PLACES = [
+  { to: "/", icon: "home", label: "list.title" },
+  { to: "/daten", icon: "chart-bar", label: "data.title" },
+  { to: "/einstellungen", icon: "settings", label: "settings.title" },
+] as const;
 
-/** The shell of a web app without a window: the header with „Einstellungen“, DE / EN and „Hell oder Dunkel“, the
- *  view of the route, the footer with the required links, and the place of the one toast. */
+/** What a route says about itself (its `handle`): the top-level place it belongs to, and whether it is a
+ *  sub-view of that place. */
+export type Place = { place?: (typeof PLACES)[number]["to"]; sub?: boolean };
+
+/** The shell of a web app: the app frame with its places. The list is the place whose views open beside it: it
+ *  keeps standing in the start pane, an entry or the form stands in the end pane. */
 export function Shell() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { pathname } = useLocation();
-  const switchTheme = useAppearance((state) => state.switchTheme);
-  const toast = useToast();
-  const main = useRef<HTMLElement>(null);
+  const route = useMatches().at(-1);
+  const { place, sub } = (route?.handle ?? {}) as Place;
+  const list = place === "/";
   const shown = useRef(pathname);
 
   // a new view: its heading takes the focus, so keyboard and screen reader start where the content starts. Not on
@@ -28,70 +34,45 @@ export function Shell() {
   useLayoutEffect(() => {
     if (shown.current === pathname) return;
     shown.current = pathname;
-    main.current?.querySelector("h1")?.focus();
+    document.querySelector<HTMLElement>("#inhalt h1")?.focus();
   }, [pathname]);
 
   // the skip link moves the focus and leaves the address as it is
   const skip = (event: MouseEvent) => {
     event.preventDefault();
-    main.current?.focus();
+    document.getElementById("inhalt")?.focus();
   };
 
   return (
-    <>
+    <div className="app-window">
       <a className="sb-skip-link" href="#inhalt" onClick={skip}>
         {t("app.skip")}
       </a>
-      <header className="sb-site-header">
-        <Link className="sb-lockup" to="/">
-          <SignTile size={32} />
-          <span className="sb-wordmark" translate="no">
-            {t("app.name")}
-          </span>
-        </Link>
-        <div className="sb-site-header__links">
-          <nav className="sb-site-nav" aria-label={t("header.navLabel")}>
-            <Link to="/einstellungen" aria-current={pathname === "/einstellungen" ? "page" : undefined}>
-              {t("header.settings")}
-            </Link>
-          </nav>
-          <LanguageSwitch
-            label={t("header.language")}
-            languages={LANGUAGES}
-            value={i18n.language}
-            onChange={(language) => void i18n.changeLanguage(language)}
-          />
-        </div>
-        <ThemeButton label={t("header.theme")} onSwitch={switchTheme} />
-      </header>
-      <main ref={main} id="inhalt" tabIndex={-1}>
-        <Suspense>
-          <Outlet />
-        </Suspense>
-      </main>
-      <footer className="sb-site-footer">
-        <p>{t("footer.copyright")}</p>
-        <ul className="sb-site-footer__links" aria-label={t("footer.linksLabel")}>
-          <li>
-            <Link to="/impressum">{t("footer.imprint")}</Link>
-          </li>
-          <li>
-            <Link to="/datenschutz">{t("footer.privacy")}</Link>
-          </li>
-          <li>
-            <Link to="/barrierefreiheit">{t("footer.accessibility")}</Link>
-          </li>
-          <li>
-            <a href={SOURCE} title={t("footer.githubTitle")}>
-              {t("footer.github")}
-              <Icon name="external-link--16" size={16} />
-            </a>
-          </li>
-        </ul>
-      </footer>
-      <div className="app-toast-place">
-        <Toast id="app-toast" message={toast.message} onHide={toast.hide} />
-      </div>
-    </>
+      <AppFrame
+        name="rahmen"
+        split={list}
+        sub={sub}
+        navLabel={t("nav.label")}
+        tile={<SignTile size={32} />}
+        places={PLACES.map(({ to, icon, label }) => (
+          <Link key={to} className="sb-bottom-nav__item" to={to} aria-current={to === place ? "page" : undefined}>
+            <Icon name={to === place ? `${icon}--filled` : icon} />
+            <span className="sb-bottom-nav__label">{t(label)}</span>
+          </Link>
+        ))}
+      >
+        {list && <List beside={sub} current={route?.params.id} />}
+        <PaneContext value={list ? "end" : "start"}>
+          <Suspense>
+            <Outlet />
+          </Suspense>
+        </PaneContext>
+        {list && !sub && (
+          <div className="sb-app-frame__pane sb-app-frame__pane--end">
+            <p className="sb-app-frame__none">{t("list.none")}</p>
+          </div>
+        )}
+      </AppFrame>
+    </div>
   );
 }

@@ -1,13 +1,13 @@
 import { afterEach, expect, test } from "vitest";
-import { otherTheme, readSetting, writeSetting } from "./appearance";
+import { readSetting, storedTheme, writeSetting } from "./appearance";
 
 afterEach(() => writeSetting("tone", null));
 
-test("a press shows the other mode; the system's own mode is never stored", () => {
-  expect(otherTheme(null, "light")).toEqual({ shown: "dark", chosen: "dark" });
-  expect(otherTheme("dark", "light")).toEqual({ shown: "light", chosen: null });
-  expect(otherTheme(null, "dark")).toEqual({ shown: "light", chosen: "light" });
-  expect(otherTheme("light", "dark")).toEqual({ shown: "dark", chosen: null });
+test("the other mode than the system's is stored; the system's own mode never", () => {
+  expect(storedTheme("dark", "light")).toBe("dark");
+  expect(storedTheme("light", "light")).toBeNull();
+  expect(storedTheme("light", "dark")).toBe("light");
+  expect(storedTheme("dark", "dark")).toBeNull();
 });
 
 test("a setting stands on <html> and in the storage, where theme-init.js reads it", () => {

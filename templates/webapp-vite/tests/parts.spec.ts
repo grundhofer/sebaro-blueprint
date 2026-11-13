@@ -4,7 +4,7 @@
 import path from "node:path";
 import AxeBuilder from "@axe-core/playwright";
 import { test, expect, type Page } from "@playwright/test";
-import { collectCut } from "./sebaro-checks";
+import { collectCut, sidewaysScroll } from "./sebaro-checks";
 
 test.use({ reducedMotion: "reduce", colorScheme: "light" });
 
@@ -18,6 +18,7 @@ async function open(page: Page, path: string) {
 }
 
 const button = (page: Page, name: string) => page.getByRole("button", { name, exact: true });
+const heading = (page: Page) => page.getByRole("main").locator("h1");
 
 test("a press beside the dialog cancels it; a press inside does not", async ({ page }) => {
   await open(page, "/eintrag/2");
@@ -27,7 +28,7 @@ test("a press beside the dialog cancels it; a press inside does not", async ({ p
   await expect(dialog).toBeVisible();
   await page.mouse.click(5, 5);
   await expect(dialog).toBeHidden();
-  await expect(page.locator("main h1")).toHaveText("Rosen schneiden"); // nothing was deleted
+  await expect(heading(page)).toHaveText("Rosen schneiden"); // nothing was deleted
   await expect(button(page, "Eintrag löschen")).toBeFocused();
 });
 
@@ -39,7 +40,7 @@ test("dialog actions that do not fit one line stand one under the other, the sav
   await page.setViewportSize({ width: 320, height: 800 });
   await open(page, "/neu");
   await page.fill("#app-f-title", "Keller aufräumen");
-  await page.locator(".sb-site-nav a").click();
+  await page.getByRole("link", { name: "Zurück" }).click();
   await expect(page.locator("#app-dlg-unsaved .sb-dialog__actions")).toHaveAttribute("data-sb-fit", "stack");
   expect(new Set(await lefts()).size).toBe(1);
   // with room for one line they stand side by side again
@@ -92,7 +93,7 @@ test("a note's digit: wide, the page jumps to the note and back, and the focus g
   await expect(page.locator(".sb-note-popover")).toBeHidden();
   await page.getByRole("link", { name: "Zurück zur Aussage 2" }).click();
   await expect(page.getByRole("link", { name: "Beleg 2" })).toBeFocused();
-  await expect(page.locator("main h1")).toHaveText("Datenarten"); // a jump inside the page is no new view
+  await expect(heading(page)).toHaveText("Datenarten"); // a jump inside the page is no new view
 });
 
 test("„Kopieren“ puts the code on the clipboard and says „Kopiert“", async ({ page, context }) => {
@@ -130,12 +131,12 @@ test("the sorted table, the calendar and the tree answer the keys", async ({ pag
 test("a view that cannot be loaded says so; the shell stays and „Noch mal versuchen“ loads it", async ({ page }) => {
   await page.route(LAZY_VIEW, (route) => route.abort());
   await page.goto("/einstellungen");
-  await expect(page.locator("main h1")).toHaveText("Fehler");
-  await expect(page.locator("main")).toContainText("Deine Einträge auf diesem Gerät sind unverändert.");
-  await expect(page.locator(".sb-site-header")).toBeVisible();
+  await expect(heading(page)).toHaveText("Fehler");
+  await expect(page.getByRole("main")).toContainText("Deine Einträge auf diesem Gerät sind unverändert.");
+  await expect(page.locator(".sb-bottom-nav__item")).toHaveText(["Einträge", "Datenarten", "Einstellungen"]);
   await page.unroute(LAZY_VIEW);
   await button(page, "Noch mal versuchen").click();
-  await expect(page.locator("main h1")).toHaveText("Einstellungen");
+  await expect(heading(page)).toHaveText("Einstellungen");
 });
 
 // the error view is no case of screens.spec.ts (a failed load writes to the console, on purpose): its own checks
@@ -159,8 +160,7 @@ for (const [scheme, width, scale] of [
     await page.goto("/einstellungen");
     await expect(page.locator("h1:visible")).toHaveText(["Fehler"]);
     await page.evaluate(() => document.fonts.ready.then(() => true));
-    const sideways = () => document.documentElement.scrollWidth - document.documentElement.clientWidth;
-    expect(await page.evaluate(sideways)).toBeLessThanOrEqual(1);
+    expect(await page.evaluate(sidewaysScroll)).toBeLessThanOrEqual(1);
     expect(await page.evaluate(collectCut)).toEqual([]);
     const axe = await new AxeBuilder({ page }).withTags(AXE_TAGS).analyze();
     expect(axe.violations.map((v) => v.id)).toEqual([]);

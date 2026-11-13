@@ -1,15 +1,14 @@
 import { useTranslation } from "react-i18next";
 import { Icon } from "./parts/Icon";
-import { View, ViewTitle } from "./View";
+import { View } from "./View";
 
 /** What every route shows when it fails: what is wrong and what to do. The entries are untouched. */
-export function ErrorView() {
+export function ErrorView({ back }: { back?: string }) {
   const { t } = useTranslation();
   return (
-    <View name="fehler" title={t("error.title")}>
+    <View name="fehler" title={t("error.title")} back={back}>
       <div className="sb-view__content">
         <div className="sb-container sb-stack">
-          <ViewTitle>{t("error.title")}</ViewTitle>
           <p>{t("error.text")}</p>
           <div>
             <button className="sb-primary-action" type="button" onClick={() => window.location.reload()}>

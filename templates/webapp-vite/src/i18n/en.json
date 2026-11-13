@@ -5,20 +5,24 @@
     "skip": "Skip to content",
     "demo": "Sample data"
   },
-  "header": {
-    "navLabel": "Main menu",
-    "settings": "Settings",
-    "language": "Language",
-    "theme": "Light or dark"
+  "nav": {
+    "label": "Main menu"
   },
-  "footer": {
-    "copyright": "© 2026 Musterapp",
-    "linksLabel": "Legal and source",
-    "imprint": "Imprint",
-    "privacy": "Privacy",
-    "accessibility": "Accessibility",
-    "github": "GitHub",
-    "githubTitle": "Source code"
+  "more": {
+    "label": "More",
+    "theme": "Light or dark",
+    "light": "Light",
+    "dark": "Dark",
+    "lightIsOn": "Light is on.",
+    "darkIsOn": "Dark is on.",
+    "tone": "Tone",
+    "cool": "Cool",
+    "warm": "Warm",
+    "coolIsOn": "Cool tone is on.",
+    "warmIsOn": "Warm tone is on.",
+    "language": "Language",
+    "de": "Deutsch",
+    "en": "English"
   },
   "common": {
     "back": "Back",
@@ -37,8 +41,6 @@
     "previousMonth": "Previous month",
     "nextMonth": "Next month",
     "copied": "Copied",
-    "lightIsOn": "Light is on.",
-    "darkIsOn": "Dark is on.",
     "sorted": "Sorted by {{column}}, {{direction}}",
     "ascending": "ascending",
     "descending": "descending",
@@ -83,7 +85,8 @@
     "stillOpen_other": "{{count}} still open.",
     "newEntry": "New entry",
     "due": "due on {{date}}",
-    "closedHidden": "closed: "
+    "closedHidden": "closed: ",
+    "none": "No entry chosen."
   },
   "detail": {
     "category": "Category",
@@ -107,7 +110,7 @@
     "deleteText": "“{{title}}” and its note will be removed. This cannot be undone.",
     "deleteConfirm": "Delete",
     "notFoundTitle": "This entry does not exist",
-    "notFoundText": "It may have been deleted. The way back to the list is at the top left."
+    "notFoundText": "It may have been deleted. Choose another one from the list."
   },
   "form": {
     "titleNew": "New entry",
@@ -137,12 +140,9 @@
   },
   "settings": {
     "title": "Settings",
-    "tone": "Tone",
-    "cool": "Cool",
-    "warm": "Warm",
     "motion": "Always reduce motion",
     "motionHelp": "New things then appear without motion, they only fade in. Applies even when the device allows motion.",
-    "themeHint": "“Light or dark” is at the top in the header.",
+    "themeHint": "“Light or dark” and the tone are in the “More” menu.",
     "about": "About",
     "version": "Version",
     "storage": "Storage",
@@ -153,8 +153,10 @@
     "resetToast_one": "1 example restored",
     "resetToast_other": "{{count}} examples restored",
     "resetNone": "All examples are already there.",
-    "coolIsOn": "Cool tone is on.",
-    "warmIsOn": "Warm tone is on."
+    "legal": "Legal and source",
+    "source": "GitHub",
+    "sourceTitle": "Source code",
+    "copyright": "© 2026 Musterapp"
   },
   "samples": [
     {

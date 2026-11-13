@@ -5,16 +5,22 @@ Eine kleine, lauffähige Web-App ohne Fenster („Musterapp“, ein erfundener N
 Oberfläche besteht aus dem Markup der Bauteile der sebaro-Kopie in `src/sebaro/`; ihr Verhalten ist in React
 geschrieben (`src/components/parts/`). Alle Einträge und Werte sind Beispieldaten.
 
+Die Ansichten stehen im App-Rahmen der Kopie (Kernregeln 18 und 28). Auf dem Handy: eine Ansicht, darunter die
+Navigation mit den drei Orten „Einträge“, „Datenarten“ und „Einstellungen“; eine Unteransicht steht allein und hat
+„Zurück“. Ab 840&nbsp;px Breite: dieselbe Navigation als Leiste am Rand, und die Liste bleibt am Anfang stehen, während
+ihr Eintrag oder das Formular am Ende daneben steht. „Hell oder Dunkel“, „Farbton: Kühl · Warm“ und die Sprache stehen
+im Menü „Mehr“ in der oberen Leiste jedes Orts.
+
 | Ansicht | Adresse | Was sie zeigt |
 |---|---|---|
 | Einträge | `/` | Suche, Filterchips, Liste mit Erledigtem, leerer Zustand, Stand-Satz und „Neuer Eintrag“ unten |
-| Eintrag | `/eintrag/2` | Eigenschaften, Zustand als Zeichen und Wort, Kurzmeldung mit „Rückgängig“, Löschen mit Dialog, endgültiger Schritt mit 45°-Kante |
+| Eintrag | `/eintrag/2` | Eigenschaften, Zustand als Zeichen und Wort, „Bearbeiten“ als die eine umrandete Aktion in der Aktionszone, „Als erledigt markieren“ als Textaktion mit Kurzmeldung und „Rückgängig“; am Ende des Inhalts „Eintrag abschließen“ als Textaktion und „Eintrag löschen“ als die eine Gefahrtaste dort, beide mit Dialog, dessen Bestätigung die 45°-Kante trägt |
 | Neuer Eintrag, Bearbeiten | `/neu`, `/bearbeiten/2` | Formular mit „(optional)“, Fehlern je Feld, Teilschritten mit „Rückgängig“, Dialog „Abbrechen“ · „Verwerfen“ · „Sichern“ |
-| Einstellungen | `/einstellungen` | Farbton Kühl · Warm, „Bewegung immer reduzieren“ |
 | Datenarten | `/daten` | jede Datenart von `docs/daten.html`: Text, Zahlen, Geld, Zeit, Kalender, Zustände, Tabellen mit Sortierung und Summe, Baum, Mehrfachauswahl, alle Diagramme, Orte, Belege |
-| Impressum, Datenschutz, Barrierefreiheit | `/impressum` … | Platzhalter für die Pflichtseiten |
+| Einstellungen | `/einstellungen` | „Bewegung immer reduzieren“, „Über“, der Weg zu den Pflichtseiten und zum Quelltext |
+| Impressum, Datenschutz, Barrierefreiheit | `/impressum` … | Platzhalter für die Pflichtseiten, Unteransichten von „Einstellungen“ |
 | jede andere Adresse | | „Diese Ansicht gibt es nicht“ |
-| eine Ansicht, die scheitert | | „Fehler“: was los ist und was du tun kannst; Kopf und Fuß bleiben stehen |
+| eine Ansicht, die scheitert | | „Fehler“: was los ist und was du tun kannst; der Rahmen bleibt stehen |
 
 ## Starten
 
@@ -42,9 +48,10 @@ pnpm sebaro:lint         # lint-web.sh der Kopie über src/app.css und die gebau
 ```
 index.html          lädt theme-init.js zuerst, dann src/app.css; das Icon-Sprite steht inline oben im body
 vite.config.ts      Vite, Vitest und das kleine Plugin für die Kopie
-src/main.tsx        Einstieg: die Routen, ihre Fehlergrenze, der Start
+src/main.tsx        Einstieg: die Routen (mit ihrem Ort im Rahmen), ihre Fehlergrenze, der Start
 src/pages/          eine Datei je Route
-src/components/     Teile der App: Shell (Kopf, Fuß, Kurzmeldung), View, ErrorView …
+src/components/     Teile der App: Shell (der App-Rahmen mit den Orten), View (eine Ansicht als Spalte des Rahmens:
+                    obere Leiste, Kurzmeldung), More (das Menü „Mehr“), ErrorView …
   parts/            die React-Hüllen der sebaro-Bauteile
   data/             die Abschnitte von „Datenarten“
 src/store/          zustand: Einträge, Darstellung, Kurzmeldung, Suche und Filter der Liste
@@ -92,8 +99,8 @@ eines:
 | Skript | Geladen | Warum, oder wo das Verhalten jetzt steht |
 |---|---|---|
 | `theme-init.js` | ja | muss vor dem ersten Bild laufen: setzt gespeichertes Hell/Dunkel, Farbton, Bewegung und Sprache an `<html>` und führt die `theme-color`-Angaben nach |
-| `theme-button.js` | nein | `parts/ThemeButton.tsx`, `lib/appearance.ts`, `store/appearance.ts` |
-| `sb-tone.js` | nein | `pages/Settings.tsx` mit `parts/Segmented.tsx`, `store/appearance.ts` |
+| `theme-button.js` | nein | eine Web-App hat keinen Knopf im Kopf: die Wahl steht im Menü „Mehr“ (`components/More.tsx`, `lib/appearance.ts`, `store/appearance.ts`) |
+| `sb-tone.js` | nein | `components/More.tsx`, `store/appearance.ts` |
 | `sb-start.js` | nein | die Vorlage zeigt keinen Start (siehe Lücken) |
 | `sb-sheet.js` | nein | die Vorlage hat kein Sheet |
 | `sb-fit.js` | nein | es schreibt in Textknoten und Bauteile, die React rendert; das hält Reacts Abgleich nicht aus. Übernommen ist eine seiner Formen (siehe Lücken) |
@@ -101,12 +108,17 @@ eines:
 | `sb-chart.js` | nein | `parts/Heatmap.tsx` |
 | `sb-table.js` | nein | `parts/SortTable.tsx`, `lib/sort.ts` |
 | `sb-notes.js` | nein | `parts/Notes.tsx` |
-| `sb-facts.js`, `sb-menu.js` | nein | kommen mit ihren Packs. Die Aussage-Zeilen rendert `parts/ClaimRow.tsx`; ein Menü hat die Vorlage nicht |
+| `sb-facts.js`, `sb-menu.js` | nein | kommen mit ihren Packs. Die Aussage-Zeilen rendert `parts/ClaimRow.tsx`, das Menü `parts/Menu.tsx` |
 
 Nicht in der Kopie, weil ihr Pack nicht gewählt ist: `sb-controls.js` (jetzt `parts/Dialog.tsx`, `Toast.tsx`,
-`Chips.tsx`, `Switch.tsx`, `ClaimRow.tsx`, `CodeBlock.tsx`, `LanguageSwitch.tsx` und `src/i18n.ts`), `sb-search.js`
-(`parts/SearchField.tsx`), `sb-tree.js` (`parts/Tree.tsx`), `sb-sticky.js` (`parts/ActionZone.tsx` misst den unteren
-Block für den Rollabstand; einen haftenden Gruppenkopf hat die Vorlage nicht).
+`Chips.tsx`, `Switch.tsx`, `ClaimRow.tsx`, `CodeBlock.tsx`; die Sprache als gespeicherte Wahl in `components/More.tsx`
+und `src/i18n.ts`), `sb-search.js` (`parts/SearchField.tsx`), `sb-tree.js` (`parts/Tree.tsx`), `sb-sticky.js`
+(`parts/ActionZone.tsx` misst den unteren Block für den Rollabstand seiner Ansicht; einen haftenden Gruppenkopf hat die
+Vorlage nicht).
+
+Den App-Rahmen der Kopie (`sb-app-frame`, `sb-bottom-nav`, `sb-top-bar`) schreiben `parts/AppFrame.tsx`,
+`components/Shell.tsx` und `components/View.tsx`. Er misst seine eigene Breite; die Höhe gibt ihm `.app-window` in
+`src/app.css`, und jede Spalte rollt für sich.
 
 ## Tests
 
@@ -115,10 +127,12 @@ Formular; `src/i18n.test.ts` prüft, dass Deutsch und Englisch dieselben Schlüs
 `<dialog>` noch Popover: was davon abhängt, prüfen die End-to-End-Tests.
 
 `pnpm test:e2e` lädt jede Ansicht und jeden Zustand (leere Liste, kein Treffer, abgeschlossener und unbekannter Eintrag,
-offene Dialoge, Kurzmeldungen, Formularfehler, lange Werte, Beleg als Popover, Englisch) hell und dunkel, bei 320, 390
-und 1440&nbsp;px, bei 100&nbsp;% und auf 1440&nbsp;px auch bei echten 200&nbsp;% Schrift (CDP `Page.setFontSizes` vor
-dem Laden). Er scheitert an seitlichem Scrollen, abgeschnittenem Text, jedem axe-Fund (WCAG 2.2 AA), Konsolenfehlern
-und CSP-Verstößen (`tests/sebaro-checks.ts`).
+offene Dialoge, das Menü „Mehr“, Kurzmeldungen, Formularfehler, lange Werte, Beleg als Popover, Englisch, Farbton Warm)
+hell und dunkel, bei 320, 390 und 1440&nbsp;px, bei 100&nbsp;% und auf 1440&nbsp;px auch bei echten 200&nbsp;% Schrift
+(CDP `Page.setFontSizes` vor dem Laden). Unter 840&nbsp;px zeigt der Rahmen eine Spalte und die Navigation unten, auf
+1440&nbsp;px die Leiste am Rand und für die Liste zwei Spalten. Er scheitert an seitlichem Scrollen der Seite oder
+einer Spalte, abgeschnittenem Text, jedem axe-Fund (WCAG 2.2 AA), Konsolenfehlern und CSP-Verstößen
+(`tests/sebaro-checks.ts`).
 Jeder Fall nennt, was auf dem Bildschirm stehen muss: den HTTP-Status der Seite, den Text der einen sichtbaren
 Überschrift `h1`, die Ansicht (`data-sb-view` oder ein Selektor) und genau die offenen Überlagerungen (Dialoge, Popover,
 Kurzmeldungen; keine, wenn der Fall `null` sagt). Er scheitert auch an Text, den ein Bedienelement selbst abschneidet: der
@@ -134,15 +148,24 @@ und den die Vorlage nicht ändern darf, nennt der Fall als `controlWaivers` mit 
 im Bericht und ist eine Bitte an die Werkstatt.
 Heute steht dort keiner.
 
-`tests/keyboard.spec.ts` prüft die vier festen Aufgaben nur mit der Tastatur und dass jede Klasse von sebaro stammt oder
-mit `app-` beginnt. `tests/data-safety.spec.ts` prüft, dass nichts ungefragt verloren geht: jeder Weg aus einem Formular
-mit ungesicherten Änderungen fragt zuerst (Link, Zurück, Vor, Schließen und Neuladen; DE / EN behält den Entwurf), und
-„Beispieldaten wiederherstellen“ fügt nur fehlende Beispiele hinzu, die eigenen Einträge bleiben.
+`tests/keyboard.spec.ts` prüft die vier festen Aufgaben nur mit der Tastatur, die Tasten im Menü „Mehr“ und dass jede
+Klasse von sebaro stammt oder mit `app-` beginnt. `tests/data-safety.spec.ts` prüft, dass nichts ungefragt verloren
+geht: jeder Weg aus einem Formular mit ungesicherten Änderungen fragt zuerst (Link, Zurück, Vor, Schließen und
+Neuladen; die Sprache behält den Entwurf), und „Beispieldaten wiederherstellen“ fügt nur fehlende Beispiele hinzu, die
+eigenen Einträge bleiben.
 `tests/parts.spec.ts` prüft, was die Bauteile erst im Browser zeigen: Dialog und Popover geben den Fokus zurück, ein
 Klick neben den Dialog bricht ab, Aktionen ohne Platz stehen untereinander, „Kopieren“ erreicht die Zwischenablage, und
 eine Ansicht, die sich nicht laden lässt, sagt es. `tests/dimensions.spec.ts` liest `src/app.css`: keine Länge ohne
 Token oder Begründung. Dass kein Wort im Markup steht, prüft ESLint (`eslint.config.js`). Die Bildschirmfotos liegen
 danach in `test-results/screens/`.
+
+Jeder Fall von `tests/screens.spec.ts` läuft auch durch die Prüfung einer Ansicht aus der Kopie
+(`src/sebaro/checks/sb-colour-count.js`, für jedes `data-sb-view`): eine Hauptaktion, wo eine erwartet ist, und
+höchstens eine im App-Rahmen; höchstens eine umrandete Aktion je Bereich; kein Knopf „Hell oder Dunkel“ in der oberen
+Leiste; keine Farbe ohne Rolle, kein Text auf einer Farbfläche. `tests/views.spec.ts` zählt jede Ansicht dazu im Farbton
+Warm und zeigt an drei Gegenproben, dass die Prüfung scheitert: an einer zweiten umrandeten Aktion in einem Bereich, an
+einem Knopf „Hell oder Dunkel“ im Kopf, an einer zweiten Hauptaktion im Rahmen. Das Skript wird in die Seite
+ausgewertet, nicht als `<script>` eingefügt: die CSP der Seite ließe ein Inline-Skript nicht zu.
 
 Der Test nutzt außerhalb der CI einen Server, der auf Port 4173 schon läuft. Läuft dort die Vorschau eines anderen
 Projekts, prüft er dieses. Starte mit `CI=1 pnpm test:e2e`: dann bricht ein belegter Port den Lauf laut ab.
@@ -151,17 +174,23 @@ Projekts, prüft er dieses. Starte mit `CI=1 pnpm test:e2e`: dann bricht ein bel
 
 Wo die Vorlage eine dieser Regeln noch nicht ganz erfüllt, steht es unter „Lücken der Vorlage“.
 
-- Kopf einer Web-App ohne Fenster mit „Einstellungen“, DE / EN als Auswahl ohne Neuladen und „Hell oder Dunkel“; Fuß mit
-  Impressum, Datenschutz, Barrierefreiheit und GitHub: NAV-06, NAV-07, WEB-02, WEB-03, WEB-10, AKT-09, TEC-10
-- Farbton und Bewegung in den Einstellungen: FAR-15, BEW-04; Laden im Kopf: WEB-01
+- App-Rahmen (Kernregeln 17, 18 und 28): Navigation unten mit drei Orten, jeder mit Icon und Wort, ab 840&nbsp;px als
+  Leiste am Rand; die Liste und ihr Eintrag in zwei Spalten; Unteransichten mit „Zurück“; keine Hauptaktion in der
+  oberen Leiste: NAV-01, NAV-02, NAV-03, NAV-05
+- „Hell oder Dunkel“, „Farbton: Kühl · Warm“ und die Sprache ohne Neuladen im Menü „Mehr“: AKT-09, FAR-15, EBE-07,
+  TEC-10; Impressum, Datenschutz, Barrierefreiheit und GitHub unter „Einstellungen“
+- Bewegung in den Einstellungen: BEW-04; Laden im Kopf: WEB-01
 - eine Hauptaktion unten in der Aktionszone, zuletzt in jeder Gruppe, mit Stand-Satz und Datenweg-Zeile: AKT-01, AKT-02,
   AKT-04, AKT-11, STA-07, EBE-08, BEL-10
+- drei Stufen von Aktionen (Kernregel 13): höchstens eine umrandete je Bereich, alles andere eine Textaktion; im
+  Inhalt einer Ansicht höchstens eine Gefahrtaste mit Kante, für das Löschen; ein endgültiger Schritt, der nichts
+  löscht, ist dort eine Textaktion und fragt im Dialog: AKT-06, AKT-07, AKT-08
 - Listen, Leerzustand, Suche, Chips: DAT-01, DAT-02, DAT-07, EIN-04, EIN-05, STA-09
 - Formular: EIN-01, EIN-02, STA-03, RAU-07; Dialoge: EBE-03, AKT-07, AKT-08, AKT-11, FOR-04; Kurzmeldung: EBE-05
 - Zustände und Daten: STA-01, STA-02, STA-05, STA-06, DAT-03 bis DAT-17 außer DAT-13 (Board), FOR-05, TXT-04, TXT-09, TXT-11 bis TXT-17, FAR-12, FAR-14,
   BEL-02, BEL-03, BEL-09
 - Zugang: ZUG-01 bis ZUG-04, ZUG-06, ZUG-08, ZUG-09; strenge CSP ohne Inline-Skripte und -Stile, nichts von fremden
-  Servern: HAL-09; nur Tokens: TEC-01, TEC-03 (`data-sb-view` an jeder Ansicht)
+  Servern: HAL-09; nur Tokens: TEC-01, TEC-03 (`data-sb-view` an jeder Ansicht, gezählt in den End-to-End-Tests)
 
 ## Was ein Agent behalten muss
 
@@ -179,9 +208,17 @@ Vorlage gilt zusätzlich:
 - Kein `style`, kein Inline-Skript, keine `data:`-Adresse: die CSP in `index.html` bleibt so streng. Größen und Orte
   eines Diagramms kommen aus SVG-Attributen und den Haken der Kopie (`data-sb-y`, `data-sb-span`).
 - Ein Dialog, ein Popover oder eine Kurzmeldung ist genau so lange offen, wie sein Zustand in React es sagt. Was der
-  Browser von selbst schließt (Escape), meldet das Bauteil sofort; sonst laufen Bild und Zustand auseinander.
-- Die Kachel im Kopf ist ein Platzhalter (die Dachmarke). Ein echtes Produkt trägt sein eigenes Zeichen in
-  `sebaro.product.json` ein (ZEI-03, ZEI-08).
+  Browser von selbst schließt (Escape), meldet das Bauteil sofort; sonst laufen Bild und Zustand auseinander. Das Menü
+  öffnet und schließt der Browser selbst (`popovertarget`); das Bauteil führt nur `aria-expanded` nach.
+- Eine neue Ansicht ist ein `<View>`: ohne `back` ein Ort der Navigation mit Kachel und „Mehr“, mit `back` eine
+  Unteransicht. Ihre Route sagt in `src/main.tsx` mit `handle`, zu welchem Ort sie gehört und ob sie eine Unteransicht
+  ist; daraus baut `Shell` den Rahmen. Drei bis fünf Orte, nicht mehr (`PLACES` in `components/Shell.tsx`).
+- Höchstens eine umrandete Aktion (`sb-secondary-action`) je Bereich: Ansicht, `section`, Karte, Listenzeile, obere
+  Leiste, die Aktionen eines Dialogs. In einer Detailansicht ist es „Bearbeiten“ in der Aktionszone, in einem Formular
+  „Abbrechen“ neben der Hauptaktion; alles andere ist eine Textaktion (`sb-text-action`). „Abbrechen“ in einem Dialog
+  trägt `data-sb-dialog-cancel` und zählt nicht. Die End-to-End-Tests scheitern an einer zweiten.
+- Die Kachel in der oberen Leiste und über der Navigation am Rand ist ein Platzhalter (die Dachmarke). Ein echtes
+  Produkt trägt sein eigenes Zeichen in `sebaro.product.json` ein (ZEI-03, ZEI-08).
 - Alle Befehle von „Starten“ müssen grün sein, bevor eine Ansicht fertig ist; die Prüfliste `../screen-checklist.md`
   gilt dazu.
 
@@ -195,10 +232,11 @@ axe, ESLint mit typescript-eslint und Prettier. Dazu kommen, alle nur für die E
 | `jsdom` | der Browser-Ersatz, in dem Vitest Bauteile rendert |
 | `@testing-library/react`, `@testing-library/dom` | rendern ein Bauteil im Test und finden Elemente nach Rolle und Name |
 | `@eslint/js` | die empfohlenen Regeln von ESLint selbst |
+| `eslint-plugin-react-hooks` | die empfohlenen Regeln für Reacts Hooks: Abhängigkeiten eines Effekts, nichts Unreines beim Rendern |
 | `@types/node`, `@types/react`, `@types/react-dom` | Typen |
 
 Nicht dabei, mit Absicht: `@vitejs/plugin-react` (sein Fast Refresh braucht ein Inline-Skript, das die CSP sperrt; Vite
-übersetzt JSX auch ohne es, eine Änderung lädt die Seite neu) und ein ESLint-Plugin für React (das Verbot von Wörtern im
+übersetzt JSX auch ohne es, eine Änderung lädt die Seite neu) und `eslint-plugin-react` (das Verbot von Wörtern im
 JSX leistet `no-restricted-syntax`).
 
 ## Nicht geprüft
@@ -210,7 +248,9 @@ in dieser Vorlage nie gelaufen; im Guide läuft dasselbe als Job `webapp-vite`. 
 zwischen Tags und die Attribute `aria-label`, `aria-description`, `alt`, `placeholder` und `title`, keine Zeichenketten,
 die Code an eine Funktion übergibt; Zahlen und Zeichen allein (08:12, ±0) gelten als Werte. Die Frage beim Schließen
 ist die des Browsers (`beforeunload`); ihr Text ist nicht änderbar. Das Datumsfeld zeigt das Format der Browsersprache,
-nicht der Seitensprache. Audio und Video sind nicht dabei (keine Mediendateien).
+nicht der Seitensprache. Audio und Video sind nicht dabei (keine Mediendateien). Die Prüfung einer Ansicht liest keine
+Pseudo-Elemente (Haken, Rahmen von Chips) und keine Fokusringe, und sie zählt die Gefahrtaste nicht als umrandete
+Aktion: dass die Detailansicht nur eine zeigt, prüft `tests/keyboard.spec.ts`.
 
 ## Lücken der Vorlage
 
@@ -218,15 +258,27 @@ Was die Vorlage zeigt, obwohl es keiner Regel folgt, oder nicht zeigt, obwohl ei
 Probeaufgaben ([`../../docs/agenten-test-2026-10.md`](../../docs/agenten-test-2026-10.md)) haben gezeigt, dass Agenten
 solche Stellen übernehmen. Übernimm sie nicht, sondern bau es so:
 
-- **Kopf statt App-Rahmen.** Die Vorlage hat den Kopf einer Website mit „Hell oder Dunkel“ als Knopf. Die Kernregeln 18
-  und 28 verlangen für eine Web-App die Navigation unten (ab 840&nbsp;dp die Leiste am Rand) und „Hell oder Dunkel“ im
-  Menü „Mehr“. Die Ansichtstypen von `design/views.md` kommen erst noch in die Vorlagen.
+- **Ansichtstypen fehlen.** Keine Ansicht trägt `data-sb-view-type`; die Vorlagen der 21 Typen von
+  `design/views.md` kommen erst noch in die Vorlagen. Wähl für jede Ansicht ihren Typ (Kernregel 2) und setz das Attribut
+  neben `data-sb-view`: die Prüfung der Kopie (`checks/sb-colour-count.js`) liest es.
+- **App-Rahmen: was offen ist.** Die Liste rendert `Shell`, damit sie neben ihrem Eintrag stehen bleibt; ein Fehler in
+  der Liste selbst trifft darum die Fehlergrenze der Wurzel, und die Fehleransicht steht ohne Rahmen. Auf dem Handy hat
+  eine Unteransicht kein „Mehr“: Sprache, „Hell oder Dunkel“ und Farbton wählt man an einem der drei Orte. Die
+  Kurzmeldung steht in der Ansicht der Adresse und zählt ihre 6&nbsp;s nach einem Wechsel der Ansicht neu. Die
+  Navigation steht im Markup zuletzt, wie das Stylesheet der Kopie es verlangt: ab 840&nbsp;px ist die Leiste am Rand
+  die letzte Station der Tabulatortaste, obwohl sie vorn steht.
+- **Regeln für Klassen der Kopie.** `src/app.css` gibt in einer Spalte des Rahmens drei Klassen der Kopie eigene Regeln:
+  `.sb-view__content` schrumpft nicht (die Spalte rollt auch unter 840&nbsp;px für sich; die Kopie regelt das erst ab
+  840&nbsp;px), `.sb-container` behält den Rand der Spalte (ab 1024&nbsp;px nähme er den breiten Rand einer Seite), und
+  `.sb-action-hint` der Liste verschwindet mit ihrer Hauptaktion, solange das Formular daneben die Hauptaktion trägt
+  (die Kopie versteckt nur die Taste). Das sind Bitten an die Werkstatt; kopier das Muster nicht für eigene Klassen.
 - **Große Schrift ohne `sb-fit.js`.** Übernommen ist eine seiner Formen: Aktionen eines Dialogs, die nicht in eine
   Zeile passen, stehen untereinander (`parts/Dialog.tsx`). Zwei Reihen eines Diagramms bekommen ihre Legende vom
   Stylesheet der Kopie. Es fehlen: der Trennstrich in einem überlangen Wort (es bricht ohne), das Icon über den Wörtern
   einer Aktion, die Auswahl anstelle eines Segment-Schalters ohne Platz, die kurze Form der Schritte, das Auslassen von
-  Achsenbeschriftungen, die sich berühren. Auf 1440&nbsp;px bei 200&nbsp;% Schrift zeigt sich davon nichts, auf einem
-  Handy bei 200&nbsp;% schon.
+  Achsenbeschriftungen, die sich berühren. Auf 1440&nbsp;px bei 200&nbsp;% Schrift zeigt es sich in der Leiste am Rand
+  und in der Spalte der Liste: die Wörter der Navigation brechen ohne Trennstrich, und „Mehr“ rückt unter den Titel.
+  Auf einem Handy bei 200&nbsp;% zeigt sich mehr.
 - **Kein Deploy-Workflow.** Der Host ist die Wahl des Produkts. Es ergänzt `.github/workflows/deploy.yml`: `dist/` auf
   einen statischen Host, mit einer Vorschau-Adresse je Pull Request. Der Host muss jede Adresse ohne Datei auf
   `index.html` leiten (die Routen sind echte Pfade) und schickt die Content-Security-Policy besser als Kopfzeile.
@@ -242,15 +294,16 @@ solche Stellen übernehmen. Übernimm sie nicht, sondern bau es so:
   Beschreibung, Bedienung, Erfüllung, Einschränkungen, Rückmeldung, Behörde (ZUG-07) und nennt nie gelaufene
   Screenreader-Tests „offen“ (ZUG-08).
 - **Datenweg-Zeile** fehlt unter „Sichern“ im Dialog „Änderungen sichern?“ (BEL-10). `src/app.css` setzt den Abstand von
-  `.sb-action-hint` in `sb-view--wide` auf 0 und richtet die Zeile ans Ende aus, mit einer Regel für eine Klasse der
-  Kopie. Unter 640&nbsp;px Ansichtsbreite steht sie darum bündig unter der Aktion; erst ab 640&nbsp;px gibt der
-  Zeilenabstand der Leiste 8&nbsp;px. BEL-10 will sie 8&nbsp;px unter der Hauptaktion und zentriert.
-- **Abstand am Kind:** `.app-view-title` setzt `margin-block-start`; den Abstand trägt das Elternteil (`sb-stack`,
-  RAU-07). Kopier das Muster nicht für eigene Klassen.
+  `.sb-action-hint` in der Aktionszone einer Spalte auf 0 und richtet die Zeile ans Ende aus, mit einer Regel für eine
+  Klasse der Kopie. Unter 840&nbsp;px Rahmenbreite und in der Spalte der Liste steht sie darum bündig unter der Aktion;
+  erst die breite Form der Zone gibt mit ihrem Zeilenabstand 8&nbsp;px. BEL-10 will sie 8&nbsp;px unter der Hauptaktion
+  und zentriert.
 - **Nicht eingebaut, obwohl die Regeln gelten:** der Start in der Produktfarbe (Kernregel 29: `index.html` hat weder
-  `data-sb-start` noch `sb-start.js`, `src/app.css` importiert `sebaro-product/sign/product.css` nicht), das
-  Vorschaubild der Startseite (WEB-09) und Markup, das ohne Skript den richtigen Zustand zeigt (TEC-02 gilt für `web`;
-  die Ansichten rendert hier React). Bau den Start und WEB-09 ein.
+  `data-sb-start` noch `sb-start.js`, `src/app.css` importiert `sebaro-product/sign/product.css` nicht), „Über“ mit
+  Kachel, Name und dem Absender „von sebaro“ (Kernregel 29: „Über“ in den Einstellungen nennt nur Version und Ablage,
+  und der Name der App steht seit dem App-Rahmen nur noch im Titel des Dokuments), das Vorschaubild der Startseite
+  (WEB-09) und Markup, das ohne Skript den richtigen Zustand zeigt (TEC-02 gilt für `web`; die Ansichten rendert hier
+  React). Bau den Start, „Über“ und WEB-09 ein.
 - **Frage an den Inhaber:** ob WEB-11 („Drucke jede Website hell“, `sb-print.js`) für eine Web-App gilt, und wie
   TEC-02 („klassische Skripte, keine Module“) zu einem Vite-Build passt, der die Oberfläche als Modul ausliefert. Frag
   mit den IDs, statt es selbst zu entscheiden.
@@ -258,5 +311,7 @@ solche Stellen übernehmen. Übernimm sie nicht, sondern bau es so:
   gelaufene mit Grund.
 - **Die Bauteile in `parts/` können weniger als die Skripte der Kopie.** Der Baum kennt weder ⌘↓ noch Ordner, die sich
   beim Wählen öffnen, noch Ebenen tiefer als acht. Die Kurzmeldung zählt ihre 6&nbsp;s nach einer Pause neu. Ein Klick
-  neben den Dialog bricht immer ab (er hat keine Felder, deren Text verloren ginge). Kalender und Heatmap kennen nur
-  die Leserichtung von links nach rechts.
+  neben den Dialog bricht immer ab (er hat keine Felder, deren Text verloren ginge). Das Menü kennt nur Gruppen mit
+  einer Wahl: keine Befehle, keine Untermenüs, keine Wahl durch Tippen eines Buchstabens, kein Öffnen mit den
+  Pfeiltasten auf der Taste; es steht immer unter seiner Taste und schließt, sobald die Seite rollt oder das Fenster
+  seine Größe ändert. Kalender, Heatmap und Menü kennen nur die Leserichtung von links nach rechts.

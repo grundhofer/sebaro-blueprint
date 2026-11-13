@@ -19,7 +19,7 @@ import { TimeSection } from "../components/data/TimeSection";
 import { DemoMarker } from "../components/DemoMarker";
 import { ActionZone } from "../components/parts/ActionZone";
 import { Icon } from "../components/parts/Icon";
-import { View, ViewTitle } from "../components/View";
+import { View } from "../components/View";
 import { toCsv } from "../lib/entries";
 import { useEntries } from "../store/entries";
 
@@ -41,7 +41,6 @@ export default function DataTypes() {
       <div className="sb-view__content">
         <div className="sb-container">
           <div className="sb-stack">
-            <ViewTitle>{t("data.title")}</ViewTitle>
             <p>
               {t("data.intro")} <DemoMarker />
             </p>

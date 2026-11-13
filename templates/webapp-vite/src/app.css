@@ -6,8 +6,27 @@
 @import "./sebaro/icons/sprite.css";
 @import "./sebaro/css/sebaro.css";
 
-.app-view-title {
-  margin-block-start: var(--sb-space-6);
+/* the window gives the app frame its height (no sebaro token: the height of the window itself), so the navigation
+   stays at the bottom and the panes scroll */
+.app-window {
+  display: flex;
+  block-size: 100dvh;
+}
+
+/* a pane scrolls in its own box at every width (sebaro.css does so from 840 px): its action zone sticks to its
+   bottom. A focused field stops above the zone, whose height ActionZone measures, and below the pane's top edge
+   with room for its label */
+.app-pane {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-padding-block: var(--sb-space-8) var(--sb-bottom-block-size, var(--sb-space-0));
+}
+.app-pane > .sb-view__content {
+  flex: 1 0 auto;
+}
+/* the content of a pane starts where its top bar starts: sb-container would take a page's wide gutter from 1024 px */
+.app-pane .sb-container {
+  padding-inline: var(--sb-spacing-gutter);
 }
 
 /* the data page: specimens stand apart from each other inside a section */
@@ -50,24 +69,32 @@
   border: var(--sb-border-width-hairline) solid var(--sb-color-border);
 }
 
-/* BEL-10: the data-path line stands directly under its action. In a wide view sebaro.css puts the zone in one wrapping
-   row (state sentence, action); the line takes a row of its own there, under the action at the row's end */
-.sb-view--wide .sb-primary-action-bar > .sb-action-hint {
+/* BEL-10: the data-path line stands directly under its action. From 840 px of the frame sebaro.css puts the zone in
+   one wrapping row (state sentence, action); the line takes a row of its own there, under the action at the row's
+   end */
+.app-pane .sb-primary-action-bar > .sb-action-hint {
   flex: 1 1 100%;
   margin: 0;
   text-align: end;
 }
+/* while the end pane holds the frame's primary action, sebaro.css hides the list's: its data-path line goes with it */
+.sb-app-frame--split:has(.sb-app-frame__pane--end .sb-primary-action) .sb-app-frame__pane--start .sb-action-hint {
+  display: none;
+}
 
-/* the one place of the toast (EBE-05): sebaro draws the toast, the app places it; at the bottom of the screen, above
-   the action zone's line, never covering the primary action's row on a phone (it is shown only after an action
-   outside the zone) */
+/* the one place of the toast (EBE-05): sebaro draws the toast, the app places it; at the bottom of its pane, above
+   the action zone and the navigation, never covering them. The place takes no room: the toast stands over the
+   content */
 .app-toast-place {
-  position: fixed;
-  inset-inline: var(--sb-spacing-gutter);
-  inset-block-end: calc(var(--sb-space-4) + env(safe-area-inset-bottom));
+  position: sticky;
+  inset-block-end: calc(var(--sb-bottom-block-size, var(--sb-space-0)) + var(--sb-space-4));
   z-index: var(--sb-layer-toast);
   display: flex;
+  flex: none;
+  align-items: flex-end;
   justify-content: center;
+  block-size: 0;
+  padding-inline: var(--sb-spacing-gutter);
   pointer-events: none;
 }
 .app-toast-place > .sb-toast {

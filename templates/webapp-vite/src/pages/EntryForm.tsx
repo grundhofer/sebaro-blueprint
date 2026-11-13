@@ -238,8 +238,9 @@ function Form({ entry }: { entry?: Entry }) {
                 )}
               </Field>
               <div>
-                <button className="sb-secondary-action" type="button" onClick={addStep}>
-                  <Icon name="plus" />
+                {/* the form's one outlined action is „Abbrechen“ */}
+                <button className="sb-text-action" type="button" onClick={addStep}>
+                  <Icon name="plus--16" size={16} />
                   {t("form.stepAdd")}
                 </button>
               </div>
@@ -264,7 +265,7 @@ function Form({ entry }: { entry?: Entry }) {
         text={t("form.unsavedText")}
         onClose={onAnswer}
       >
-        <button className="sb-secondary-action" value="cancel">
+        <button className="sb-secondary-action" value="cancel" data-sb-dialog-cancel>
           {t("common.cancel")}
         </button>
         <button className="sb-danger-action sb-danger-action--outlined" value="discard">

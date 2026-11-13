@@ -1,5 +1,5 @@
 // Nothing the user typed or stored is lost without a question: every way out of a form with unsaved changes asks
-// first (a link, Back, Forward, closing or reloading; DE / EN keeps the draft), and „Beispieldaten
+// first (a link, Back, Forward, closing or reloading; the language keeps the draft), and „Beispieldaten
 // wiederherstellen“ adds the missing examples without touching the user's entries.
 import { test, expect, type Page } from "@playwright/test";
 
@@ -10,7 +10,10 @@ async function open(page: Page, path: string) {
   await page.waitForLoadState("networkidle");
 }
 
-const heading = (page: Page) => page.locator("main h1");
+const main = (page: Page) => page.getByRole("main");
+const heading = (page: Page) => main(page).locator("h1");
+// a place of the navigation: with the form open it stands in the rail (the tests run at desktop width)
+const settings = (page: Page) => page.locator('.sb-bottom-nav__item[href="/einstellungen"]');
 const unsaved = (page: Page) => page.locator("#app-dlg-unsaved");
 const button = (page: Page, name: string) => page.getByRole("button", { name, exact: true });
 const stored = (page: Page) =>
@@ -41,7 +44,7 @@ async function heldBack(page: Page) {
 test("a link asks first; „Abbrechen“ stays with the draft", async ({ page }) => {
   await open(page, "/neu");
   await dirtyForm(page);
-  await page.locator(".sb-site-nav a").click();
+  await settings(page).click();
   await heldBack(page);
   await unsaved(page).locator('button[value="cancel"]').click();
   await expect(unsaved(page)).toHaveJSProperty("open", false);
@@ -57,12 +60,12 @@ test("Back asks first; „Verwerfen“ then goes where Back went", async ({ page
   await heldBack(page);
   await unsaved(page).locator('button[value="discard"]').click();
   await expect(heading(page)).toHaveText("Einträge");
-  await expect(page.locator("main")).not.toContainText("Keller aufräumen");
+  await expect(main(page)).not.toContainText("Keller aufräumen");
 });
 
 test("Forward asks first; „Sichern“ stores the entry and then goes forward", async ({ page }) => {
   await open(page, "/neu");
-  await page.locator(".sb-site-nav a").click();
+  await settings(page).click();
   await expect(heading(page)).toHaveText("Einstellungen");
   await page.goBack();
   await dirtyForm(page);
@@ -72,13 +75,13 @@ test("Forward asks first; „Sichern“ stores the entry and then goes forward",
   await unsaved(page).locator('button[value="save"]').click();
   await expect(heading(page)).toHaveText("Einstellungen");
   await open(page, "/");
-  await expect(page.locator("main")).toContainText("Keller aufräumen");
+  await expect(main(page)).toContainText("Keller aufräumen");
 });
 
 test("„Sichern“ in the question shows what is wrong and stays, when the draft has a fault", async ({ page }) => {
   await open(page, "/neu");
   await dirtyForm(page);
-  await page.locator(".sb-site-nav a").click();
+  await settings(page).click();
   await unsaved(page).locator('button[value="save"]').click();
   await expect(unsaved(page)).toHaveJSProperty("open", false);
   await expect(heading(page)).toHaveText("Neuer Eintrag");
@@ -86,11 +89,13 @@ test("„Sichern“ in the question shows what is wrong and stays, when the draf
   await expect(page.locator("#app-f-effort")).toBeFocused();
 });
 
-test("DE / EN keeps every typed value and the unsaved state", async ({ page }) => {
+test("the language keeps every typed value and the unsaved state", async ({ page }) => {
   await open(page, "/neu");
   await dirtyForm(page);
   await page.fill("#app-f-step", "Kisten holen");
-  await page.locator('.sb-language-switch label:has(input[value="en"])').click();
+  // the form stands beside the list, whose top bar carries „Mehr“
+  await page.getByRole("button", { name: "Mehr", exact: true }).click();
+  await page.getByRole("menuitemradio", { name: "English" }).click();
   await expect(heading(page)).toHaveText("New entry");
   await expect(page.locator("#app-f-title")).toHaveValue("Keller aufräumen");
   await expect(page.locator("#app-f-cat")).toHaveValue("home");
