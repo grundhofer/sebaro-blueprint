@@ -81,8 +81,11 @@ need the reason. Where the catalogue says something else, this file wins.
 ## Words
 
 26. German UI says „du“. Titles are short nouns. Numbers: U+00A0 between number and unit, „10.000“, „12,90 €“,
-    „08:00–22:00“. No text built in code; every string comes from the string table, so a second language can
-    follow. [TXT-01, TXT-03, TXT-04, TXT-12, TEC-10]
+    „08:00–22:00“. No text built in code; every string comes from the string table. Every app and website ships in
+    German and English from its first version: one file or folder per language, the languages named in one place,
+    so a further language is its files plus one entry; a check fails when a language lacks a string. A content site
+    (articles) stays in its one language, German or English. [TXT-01, TXT-03, TXT-04, TXT-12, TEC-10, owner
+    2026-11-13]
 27. Honest: no claim without proof, concrete facts instead of slogans, failures and missing values said in words,
     sample data marked „Beispieldaten“. Nothing loads from third-party servers.
     [HAL-03, HAL-04, HAL-09, BEL-01, BEL-09, TXT-02]

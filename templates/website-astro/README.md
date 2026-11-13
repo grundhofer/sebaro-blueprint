@@ -1,7 +1,7 @@
 # Startvorlage: Website mit Astro
 
 Eine kleine statische Website („Beispielseite“, erfunden) mit Astro und sebaro, so gebaut, wie der
-[sebaro Guide](https://grundhofer.github.io/sebaro-guide/web.html) es vorschreibt: Kopf mit Lockup, den vier Wörtern,
+[sebaro Guide](https://grundhofer.github.io/sebaro-guide/) es vorschreibt: Kopf mit Lockup, den vier Wörtern,
 DE / EN und „Hell oder Dunkel“, Fußzeile mit Impressum, Datenschutz, Barrierefreiheit und „Darstellung“, ein Artikel
 mit Fußnoten, eine Seite „Über“, die Pflichtseiten, eine 404-Seite und ein Vorschaubild je Seite.
 Kopier den Ordner, ersetz Namen und Inhalte, behalte die Regeln. Die Regeln zur Technik stehen in

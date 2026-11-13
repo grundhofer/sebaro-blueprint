@@ -31,9 +31,9 @@ component or a store. A server part, where the product has one, is its own packa
 
 ## Text and language
 
-Every string comes from the i18next resources, German and English from the start. A test checks that both
-languages have the same keys; the linter forbids literal strings in JSX. The chosen language is stored under
-`sb-lang`.
+Every string comes from the i18next resources, German and English from the start; a further language is one more
+file in `src/i18n/` and its entry in `src/i18n.ts`. A test checks that all languages have the same keys; the linter
+forbids literal strings in JSX. The chosen language is stored under `sb-lang`.
 
 ## Errors
 

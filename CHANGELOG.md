@@ -11,6 +11,12 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+Sprachen: Jede App und jede Website erscheint ab der ersten Version auf Deutsch und Englisch, so gebaut, dass eine
+weitere Sprache ihre Dateien und ein Eintrag ist; eine Prüfung schlägt fehl, wenn einer Sprache ein Text fehlt. Eine
+Inhaltsseite mit Artikeln bleibt in ihrer einen Sprache (Inhaber, 13.11.2026). Kernregel 26 in beiden Fassungen und
+die Baupläne für Website, Web-App und Android sagen das jetzt; bisher erlaubten Website und Android eine Sprache. Die
+Website-Vorlage hat Englisch erst auf der Startseite (steht im Bauplan unter dem, was noch abweicht).
+
 Kopien ohne Werkstatt: Ein Produkt holt seine sebaro-Kopie und hält sie aktuell mit `update-copy.mjs` (Node 20,
 keine weiteren Werkzeuge). Die Kopien je Produktart (`website`, `webapp`, `desktop`, `android`) hängen als Dateien an
 einer Veröffentlichung dieses Repositories; `.github/workflows/copies-release.yml` legt sie aus dem Zweig
@@ -107,6 +113,16 @@ prüft, dass das Blatt jede betroffene Regel nennt.
 Werkzeug, keine Regeländerung: `tools/check_site.py` (Gruppe TPLEXP) vergleicht die Kopien des Web-Exports in den
 Startvorlagen mit `docs/sebaro/` und schlägt bei veralteten Kopien fehl; der iOS-Export-Commit warnt nur.
 Selbsttest: `python3 tools/test_check_site.py`.
+
+Drei Seiten statt zwölf, keine Regeländerung: Die Startseite sagt kurz, was sebaro ist, zeigt die 31 Kernregeln auf
+Deutsch aus `design/KERN.de.md` (Block `guide:kern`, jede Regel unter `index.html#regel-<n>`), die Baupläne und
+Startvorlagen je Produktart und wo man nachschlägt; Bauteile und Daten bleiben. Regeln, Grundlagen, Plattformen, Web,
+App, iOS, Desktop, Gedanken und Ausblick entfallen mit ihren Stilen, Skripten und Vorschaubildern, den 228
+Regelbeispielen in `src/rule-examples/` und `guide/RULES.md`; an ihren Adressen sagt eine kleine Seite ohne Skript
+(noindex), wohin der Inhalt ging. Auf Bauteile und Daten führt eine Regel-ID zu ihrer Kernregel, wenn
+`rules/home.json` sie dort führt, sonst steht sie als Code ohne Link. `MANUAL.md` ist durch das kurze
+`MAINTAINING.md` ersetzt. `tools/check_budget.py` prüft, dass `design/KERN.de.md` dieselben Abschnitte, Regeln und
+Verweise hat wie `design/KERN.md`.
 
 ## 2.18.1 · 2026-11-02
 
