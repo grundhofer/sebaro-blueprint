@@ -14,7 +14,10 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 Neuer Name: Das Repository heißt jetzt `grundhofer/sebaro-blueprint`, die Seite liegt unter
 <https://grundhofer.github.io/sebaro-blueprint/> (Inhaber, 13.11.2026). GitHub leitet die alten Adressen des
 Repositorys weiter, auch die Releases, aus denen `update-copy.mjs` die Kopien holt; die alte Seitenadresse leitet es
-nicht weiter. Die Kopien eines Produkts nennen den neuen Namen mit dem nächsten Release.
+nicht weiter. Die Kopien eines Produkts nennen den neuen Namen mit dem nächsten Release. Die Seite heißt jetzt
+auch sichtbar „sebaro Blueprint“: im Kopf, in den Seitentiteln, in der Fußzeile und als Name beim Teilen. Weil das Wort
+breiter ist als „Guide“, bricht die Beschriftung des Knopfs „Hell oder Dunkel“ schon unter 424 px um; so bleibt der
+Kopf ab 360 px einzeilig.
 
 Sprachen: Jede App und jede Website erscheint ab der ersten Version auf Deutsch und Englisch, so gebaut, dass eine
 weitere Sprache ihre Dateien und ein Eintrag ist; eine Prüfung schlägt fehl, wenn einer Sprache ein Text fehlt. Eine

@@ -2,7 +2,7 @@
   "name": "sebaro-guide-checks",
   "version": "0.0.0",
   "private": true,
-  "description": "Browser checks of the sebaro Guide (axe-core in Chromium). Not a package; never published.",
+  "description": "Browser checks of the sebaro Blueprint (axe-core in Chromium). Not a package; never published.",
   "license": "UNLICENSED",
   "engines": { "node": ">=20" },
   "scripts": { "a11y": "node tools/check_a11y.mjs" },

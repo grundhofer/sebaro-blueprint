@@ -3,7 +3,7 @@
   "$comment": "written by tools/build.py from the pages (h1, meta description); do not edit. tools/og.mjs renders it with docs/sebaro/brand/og/render.mjs (D96 (a), WEB-09).",
   "site": {
     "product": "studio",
-    "name": "sebaro Guide",
+    "name": "sebaro Blueprint",
     "origin": "https://grundhofer.github.io",
     "lang": "de",
     "imageBase": "/sebaro-blueprint/og/"
