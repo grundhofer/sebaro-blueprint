@@ -1,0 +1,102 @@
+# release: a version tag (v0.1.0). It runs `ci`, builds the installer on macOS (a disk image) and on Linux (a
+# Debian package), holds it to the size budget, and puts both with their checksums into a draft release. A person
+# reads the draft and publishes it.
+# The installers are unsigned until the product has a signing certificate; the release notes say so.
+# This file belongs to the product that copies the starter.
+name: release
+on:
+  push:
+    tags: ["v*"]
+permissions: {}
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read
+
+  installer:
+    name: installer (${{ matrix.os }})
+    needs: ci
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - name: Tauri system packages (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev \
+            libayatana-appindicator3-dev librsvg2-dev
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1, pnpm as package.json names it
+        with:
+          package_json_file: apps/desktop/ui/package.json
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22"
+          cache: pnpm
+          cache-dependency-path: apps/desktop/ui/pnpm-lock.yaml
+      - name: Rust toolchain (the one rust-toolchain.toml pins)
+        run: rustup show active-toolchain || rustup toolchain install
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0 # v2.9.3
+      - uses: taiki-e/install-action@68a389c788b2cd04016ce8c80ee23b80d2ab3d68 # v2.88.1
+        with:
+          tool: cargo-binstall
+      - name: Tauri CLI (prebuilt, pinned)
+        run: cargo binstall --no-confirm --locked tauri-cli@2.12.4
+      - run: pnpm --dir apps/desktop/ui install --frozen-lockfile
+      - name: The tag is the version of the app (Cargo.toml, [workspace.package])
+        shell: bash
+        run: |
+          version="$(cargo pkgid -p musterapp-desktop | sed 's/.*[#@]//')"
+          test "v$version" = "$GITHUB_REF_NAME" || { echo "tag $GITHUB_REF_NAME, app version $version"; exit 1; }
+      - name: Build the installer (beforeBuildCommand builds the UI first)
+        run: cargo tauri build -- --locked
+      - name: Collect the installer
+        shell: bash
+        run: |
+          mkdir installer
+          cp target/release/bundle/dmg/*.dmg target/release/bundle/deb/*.deb installer/ 2>/dev/null || true
+          ls -l installer
+          test -n "$(ls installer)"
+      - name: Size budget (installer 12 MB)
+        shell: bash
+        run: |
+          for file in installer/*; do
+            bytes="$(wc -c < "$file")"
+            echo "$file: $bytes bytes of 12000000"
+            test "$bytes" -le 12000000
+          done
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: installer-${{ matrix.os }}
+          path: installer/
+          if-no-files-found: error
+
+  draft:
+    name: draft release
+    needs: installer
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          path: installer
+          pattern: installer-*
+          merge-multiple: true
+      - name: Checksums
+        working-directory: installer
+        run: sha256sum -- * > SHA256SUMS && cat SHA256SUMS
+      - name: Draft release with the installers and their checksums
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" installer/* --draft --verify-tag --title "$GITHUB_REF_NAME" --notes \
+          "The installers are not signed: the product has no signing certificate yet. macOS and Linux will say so when the app is opened for the first time.
+
+          Check a download: \`sha256sum --ignore-missing -c SHA256SUMS\` prints one OK line for each file you have."
