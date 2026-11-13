@@ -38,8 +38,8 @@ dark at 100 % and, at the widest width, real 200 % text with axe. CI: `.github/w
    does not do yet, so it is never copied as a pattern: the section „Lücken der Vorlage“ in `website-astro/`,
    `webapp-vite/`, `desktop-tauri/`, `ios-swiftui/` and `android-compose/` (there also „Bekannte Grenzen“; the agent test did
    not cover the Android and iOS templates).
-4. **Build screens from recipes**: `docs/app.html`, `docs/ios.html`, `docs/web.html`, `docs/desktop.html`; components from
-   `docs/bauteile.html`; data from `docs/daten.html`.
+4. **Build screens from the view types** of `design/views.md`, with the starter's screens as the example; components
+   from `docs/bauteile.html`; data from `docs/daten.html`.
 5. **Review with the checklist** in both modes; record exceptions with `design-exception.md`. In a starter, `npm test`
    (the web app: `pnpm test` and `pnpm test:e2e`) runs the automatic part (both modes, 100 % and 200 % text, the screen asked for with its heading and open overlays,
    axe, no sideways scroll, no cut text or control value, CSP; no word written into markup, no length without a token).

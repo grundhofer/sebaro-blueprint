@@ -6,8 +6,8 @@ Standard library only.
 
 Groups
   SIZE  every file an agent reads by default, and design/KERN.de.md, stays under its budget in bytes (table BUDGETS).
-        A file that does not exist yet is reported and skipped. Reference files (MANUAL.md, rules/rules.json, the site)
-        have no budget: nobody loads them by default.
+        A file that does not exist yet is reported and skipped. Reference files (MAINTAINING.md, rules/rules.json,
+        the site) have no budget: nobody loads them by default.
   HOME  every rule of rules/rules.json has exactly one home in rules/home.json and no unknown id is listed there;
         a home "core" names a rule number that design/KERN.md has, a home "view" a type key that design/views.md has
   CORE  every [ID] cited in design/KERN.md exists in rules/rules.json and has the home "core" with the number of

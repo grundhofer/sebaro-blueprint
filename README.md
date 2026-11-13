@@ -1,38 +1,39 @@
 # sebaro Guide
 
-Der Gestaltungsleitfaden für alles, was sebaro baut: Apps am Handy, Websites und Desktop-Programme. Farben, Formen,
-Verhalten, Funktion und die Gedanken dahinter, jede Regel mit Beispiel.
+Der Gestaltungsleitfaden für alles, was sebaro baut: Apps am Handy, Websites, Web-Apps und Desktop-Programme. Die
+Website zeigt die 31 Kernregeln auf Deutsch, die Baupläne und Startvorlagen je Produktart und zum Nachschlagen
+Bauteile und Daten.
 
 **Ansehen:** <https://grundhofer.github.io/sebaro-guide/>
 
 | Seite | Inhalt |
 |---|---|
-| [Start](https://grundhofer.github.io/sebaro-guide/) | der Kern in neun Sätzen, Wege durch den Guide |
-| [Regeln](https://grundhofer.github.io/sebaro-guide/regeln.html) | alle Regeln mit ID, Begründung, Prüfung und Beispiel (richtig/falsch) |
-| [Grundlagen](https://grundhofer.github.io/sebaro-guide/grundlagen.html) | Farben, Schrift, Raum, Form, Ebenen, Bewegung mit den echten Token-Werten |
+| [Start](https://grundhofer.github.io/sebaro-guide/) | kurz, was sebaro ist; die 31 Kernregeln aus `design/KERN.de.md`; Baupläne und Startvorlagen; wo man nachschlägt |
 | [Bauteile](https://grundhofer.github.io/sebaro-guide/bauteile.html) | jede Komponente mit allen Zuständen und Markup |
 | [Daten](https://grundhofer.github.io/sebaro-guide/daten.html) | jede Datenart einmal dargestellt |
-| [Plattformen](https://grundhofer.github.io/sebaro-guide/plattformen.html) | die vier Plattformseiten auf einen Blick und was je Plattform anders ist; im Kopf stehen sie unter „Plattformen“ (D92) |
-| [Web](https://grundhofer.github.io/sebaro-guide/web.html) · [App](https://grundhofer.github.io/sebaro-guide/app.html) · [iOS](https://grundhofer.github.io/sebaro-guide/ios.html) · [Desktop](https://grundhofer.github.io/sebaro-guide/desktop.html) | Beispielseiten mit allen typischen Fällen je Plattform |
-| [Gedanken](https://grundhofer.github.io/sebaro-guide/gedanken.html) | Haltung, Geschichte in sechs Runden, die Entscheidungen D72–D110, Abwägungen |
-| [Ausblick](https://grundhofer.github.io/sebaro-guide/ausblick.html) | was auf eine Wahl des Inhabers wartet, was offen ist, später kommt oder erledigt ist |
+
+Die Adressen der früheren Seiten (Regeln, Grundlagen, Plattformen, Web, App, iOS, Desktop, Gedanken, Ausblick) zeigen
+je eine kleine Seite, die sagt, wo der Inhalt jetzt steht; Suchmaschinen sollen sie nicht aufnehmen. Als Beispiele
+dienen die Startvorlagen unter [templates/](templates/README.md).
 
 ## Für Agenten
 
 Claude, Codex und andere Agenten beginnen bei [AGENTS.md](AGENTS.md) (`CLAUDE.md` verweist dorthin), einem kurzen
 Wegweiser. Pflichtlektüre sind die 31 Kernregeln in [design/KERN.md](design/KERN.md) und die 21 Ansichtstypen in
-[design/views.md](design/views.md). Der ganze Katalog steht zum Nachschlagen maschinenlesbar in
-[rules/rules.json](rules/rules.json) und als Markdown in [guide/RULES.md](guide/RULES.md);
-[rules/home.json](rules/home.json) sagt, wo jede seiner Regeln heute wirkt. Für ein neues Projekt gibt es
-[Vorlagen](templates/README.md), darunter einen Abschnitt zum Einfügen in die `AGENTS.md` eines Produkts. Die frühere
-lange Fassung von `AGENTS.md` liegt als [MANUAL.md](MANUAL.md) bereit.
+[design/views.md](design/views.md); dieselben Kernregeln auf Deutsch stehen in [design/KERN.de.md](design/KERN.de.md),
+`tools/check_budget.py` hält beide Fassungen gleich. Der ganze Katalog steht zum Nachschlagen maschinenlesbar in
+[rules/rules.json](rules/rules.json); [rules/home.json](rules/home.json) sagt, wo jede seiner Regeln heute wirkt. Für
+ein neues Projekt gibt es [Vorlagen](templates/README.md), darunter einen Abschnitt zum Einfügen in die `AGENTS.md`
+eines Produkts. Wie man dieses Repository baut, prüft, abgleicht und veröffentlicht, steht auf Englisch in
+[MAINTAINING.md](MAINTAINING.md).
 
 ## Woher die Werte kommen
 
 Die Quellen von sebaro (Paletten, Verträge, Generatoren, Prüfungen und das Entscheidungsprotokoll D1–D111) liegen in
 der Werkstatt **sebaroDesign**, einem privaten Repository. Dieser Guide schreibt keine Farbe, Schrift und kein Icon ab:
 `docs/sebaro/` ist ein geprüfter Web-Export (`tools/sync_from_design.py`), jede Datei mit Prüfsumme. Regeln ändern sich
-nur in `rules/rules.json`; `tools/build.py` erzeugt daraus die Regelseite, `guide/RULES.md` und `docs/llms.txt`.
+nur in `rules/rules.json`. `tools/build.py` setzt die Kernregeln aus `design/KERN.de.md` in die Startseite und schreibt
+`docs/rules.json`, `docs/llms.txt` und die Seiten an den früheren Adressen.
 
 ```sh
 python3 tools/sync_from_design.py   # sebaro neu aus sebaroDesign holen
@@ -45,7 +46,7 @@ python3 -m http.server -d docs 8000 # lokal ansehen
 
 ## Vorschaubilder (D96)
 
-Der Guide hält sich an seine eigene Regel WEB-09: Jede seiner Seiten hat ein Vorschaubild zum Teilen, gerendert aus
+Der Guide hält sich an seine eigene Regel WEB-09: Jede seiner drei Seiten hat ein Vorschaubild zum Teilen, gerendert aus
 der Seitenliste `src/og/pages.json` (die `tools/build.py` aus Überschrift und Beschreibung jeder Seite schreibt) mit
 dem Skript `docs/sebaro/brand/og/render.mjs` aus dem Export. `node tools/og.mjs` legt die Bilder unter `docs/og/` und
 die Kopfzeilen unter `src/og/head/` ab, `tools/build.py` setzt sie in den Kopf jeder Seite. Gerendert wird auf dem
@@ -78,8 +79,7 @@ Werte; Korrektur für Wortlaut und Beispiele.
 ## Stand
 
 Alle Beispieldaten sind erfunden. Geprüft ist im Browser (Chromium) in Hell und Dunkel bei 390 und 1440 px und bei 200 % Schrift auf 320, 360 und 390 px; echte
-Geräte, Windows, WebKit und Screenreader kommen später (D79); die CI prüft vorerst nur in Chromium (D96). Was auf eine Wahl des Inhabers wartet, steht im
-[Ausblick](https://grundhofer.github.io/sebaro-guide/ausblick.html).
+Geräte, Windows, WebKit und Screenreader kommen später (D79); die CI prüft vorerst nur in Chromium (D96).
 
 ## Lizenz
 

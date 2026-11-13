@@ -108,6 +108,16 @@ Werkzeug, keine Regeländerung: `tools/check_site.py` (Gruppe TPLEXP) vergleicht
 Startvorlagen mit `docs/sebaro/` und schlägt bei veralteten Kopien fehl; der iOS-Export-Commit warnt nur.
 Selbsttest: `python3 tools/test_check_site.py`.
 
+Drei Seiten statt zwölf, keine Regeländerung: Die Startseite sagt kurz, was sebaro ist, zeigt die 31 Kernregeln auf
+Deutsch aus `design/KERN.de.md` (Block `guide:kern`, jede Regel unter `index.html#regel-<n>`), die Baupläne und
+Startvorlagen je Produktart und wo man nachschlägt; Bauteile und Daten bleiben. Regeln, Grundlagen, Plattformen, Web,
+App, iOS, Desktop, Gedanken und Ausblick entfallen mit ihren Stilen, Skripten und Vorschaubildern, den 228
+Regelbeispielen in `src/rule-examples/` und `guide/RULES.md`; an ihren Adressen sagt eine kleine Seite ohne Skript
+(noindex), wohin der Inhalt ging. Auf Bauteile und Daten führt eine Regel-ID zu ihrer Kernregel, wenn
+`rules/home.json` sie dort führt, sonst steht sie als Code ohne Link. `MANUAL.md` ist durch das kurze
+`MAINTAINING.md` ersetzt. `tools/check_budget.py` prüft, dass `design/KERN.de.md` dieselben Abschnitte, Regeln und
+Verweise hat wie `design/KERN.md`.
+
 ## 2.18.1 · 2026-11-02
 
 Korrektur: Die Startvorlagen folgen dem Werkstatt-Commit `45f1921`. Keine Regel ist neu oder geändert.

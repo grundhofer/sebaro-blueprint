@@ -8,7 +8,8 @@ apps and desktop apps. A product reads and copies from this repository. German o
 
 Read in this order and stop when you have what the task needs.
 
-1. [`design/KERN.md`](design/KERN.md): the 31 core rules. Always.
+1. [`design/KERN.md`](design/KERN.md): the 31 core rules. Always. [`design/KERN.de.md`](design/KERN.de.md) is the
+   same text in German, for people; the site's start page shows it.
 2. [`design/views.md`](design/views.md): the 21 view types. Pick one for every screen.
 3. The starter of your product kind. It is the model for structure, wiring, tests and release:
 
@@ -52,18 +53,17 @@ sebaro-Stil um“ is enough in any project. The section a product pastes into it
 |---|---|
 | reason and examples of a rule cited as `[AKT-01]` | `rules/rules.json`; `rules/home.json` says where each of its 228 rules lives now |
 | markup of a web part with all its states, display of every kind of data | `docs/bauteile.html`, `docs/daten.html` |
-| whole example pages | `docs/web.html`, `docs/app.html`, `docs/desktop.html` |
-| details per platform and the component lists of the earlier rounds | [MANUAL.md](MANUAL.md), the former long version of this file |
+| a whole working example of a product | the starter of its kind (step 3): every screen, its tests and its release |
 | a review list per screen | [`templates/screen-checklist.md`](templates/screen-checklist.md) |
 | what changed between versions | [CHANGELOG.md](CHANGELOG.md) |
 
 ## Changing this repository
 
-Build, checks, release and the sync with the workshop: [MANUAL.md](MANUAL.md) §5. For the texts an agent reads by
-default these rules hold:
+Build, checks, release and the sync with the workshop: [MAINTAINING.md](MAINTAINING.md). For the texts an agent reads
+by default these rules hold:
 
-- **Budgets in bytes**, checked in CI by `tools/check_budget.py`: this file 6,000, `design/KERN.md` 8,000,
-  `design/views.md` 4,500, `design/parts.md` 8,000, a starter's `BLUEPRINT.md` 10,000, a file of a skill 5,000, the product snippet 1,500. To add something, remove
+- **Budgets in bytes**, checked in CI by `tools/check_budget.py`: this file 6,000, `design/KERN.md` 8,000 (its
+  German text `design/KERN.de.md` 9,000, kept in step by the same tool), `design/views.md` 4,500, `design/parts.md` 8,000, a starter's `BLUEPRINT.md` 10,000, a file of a skill 5,000, the product snippet 1,500. To add something, remove
   something.
 - **A new rule goes into a part, a starter or a check first.** It becomes a core rule only when none of those can
   carry it.
