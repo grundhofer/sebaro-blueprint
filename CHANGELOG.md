@@ -11,6 +11,15 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+Android-Bauplan: Module und Hilt. Inhaber, 14.11.2026: „module sollten erlaubt und bevorzugt sein bei apps mit etwas
+mehr funktion pflicht“ und „lass uns hilt in allen android apps einsetzen oder stark anraten bei neuen.“ Der Bauplan
+nennt jetzt die Module `:app`, `:designsystem`, `:core:*` und `:feature:*` mit einer Abhängigkeitsrichtung; Pflicht
+sind sie ab mehr als einem Bereich von Ansichten oder einem eigenen Systemdienst (Kamera, Mikrofon, Vordergrunddienst).
+Diese Schwelle ist vom Agenten formuliert, noch nicht vom Inhaber bestätigt. Abhängigkeiten kommen über Hilt mit KSP statt
+über den `AppContainer`; die Versionen (Hilt 2.60.1, AndroidX Hilt 1.4.0) stehen im Versionskatalog der Startvorlage,
+die selbst noch ein Modul mit `AppContainer` ist. Bestehende Apps mit `AppContainer` stellen bei ihrem nächsten größeren
+Umbau um. Für Bibliotheksmodule hat der Build-Export noch kein eigenes Plugin.
+
 ## 3.0.0 · 2026-11-14
 
 Hauptversion: ZUG-07 entfällt (D149 (9)), der Katalog hat 227 Regeln; acht Regeln an die Kernregeln und den heutigen

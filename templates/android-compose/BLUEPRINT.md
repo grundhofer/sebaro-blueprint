@@ -6,38 +6,43 @@ differ, the blueprint wins (last section).
 
 ## Stack
 
-- One app module `:app` (plus `:designsystem` for the sebaro copy), one activity, package
-  `de.sebaro_ventures.<app>`. Kotlin, Jetpack Compose, minSdk 29,
-  Java 21. The versions are those of this starter's `gradle/libs.versions.toml`; every app keeps the same ones.
-- Use without asking: AndroidX core, activity-compose, lifecycle, the Compose BOM, kotlinx-coroutines, Room with
+- One activity, package `de.sebaro_ventures.<app>`, modules as below. Kotlin, Jetpack Compose, minSdk 29, Java 21. The versions are those of this starter's `gradle/libs.versions.toml`; every app keeps the same ones.
+- Use without asking: AndroidX core, activity-compose, lifecycle, the Compose BOM, kotlinx-coroutines, Hilt, Room with
   KSP, DataStore, WorkManager (only for work that must run in the background). Tests: JUnit 4, Robolectric,
   Roborazzi.
-- Not used: Hilt or Koin, a navigation library, stock Material 3 controls. Any other library needs the owner's OK
+- Not used: Koin, a navigation library, stock Material 3 controls. Any other library needs the owner's OK
   and one line with the reason in the app's docs.
 - Offline by default: no INTERNET permission, no accounts, no analytics, backup off (`allowBackup="false"` and
   `dataExtractionRules`). An app that needs the network is a decided deviation of that product.
 
-## Structure
+## Modules
+
+Modules are preferred, and required once an app has more than one area of screens or its own system service
+(camera, microphone, foreground service):
 
 ```
-MainActivity.kt  <App>Application.kt  AppContainer.kt
-data/            Room, DataStore, files, repositories. No Compose.
-domain/          plain Kotlin models and rules, where the app has any
-ui/<App>App.kt   root: theme, navigation state
-ui/<screen>/     one package per screen
+:app             MainActivity, <App>Application, ui/<App>App.kt: theme, navigation, wiring
+:designsystem    the sebaro copy
+:core:model      plain Kotlin models and rules, no Android
+:core:data       Room, DataStore, files, repositories. No Compose.
+:core:<service>  one system service each, behind an interface
+:feature:<area>  the screens of one area, one package per screen
 ```
 
-Dependencies point one way: `ui` → `data` → `domain`.
+Dependencies point one way: `:app` → `:feature:*` → `:core:*`. A feature never depends on another feature; it
+exposes its routes, the rest is `internal`. A small app keeps these layers as packages: `data/`, `domain/`, `ui/`.
 
 ## Dependency injection
 
-`AppContainer(context)` holds everything that lives as long as the process: one instance, created in
-`<App>Application.onCreate`, every member `lazy`, factories as constructor parameters with defaults so a test can
-replace them. Reach it with `context.appContainer`, in Compose with `LocalAppContainer.current`. Create a
-ViewModel with `appViewModel { c -> XViewModel(c.repository, c.clock) }`; a ViewModel gets what it needs in its
-constructor, never the whole container.
+Hilt with KSP. `<App>Application` is `@HiltAndroidApp`, `MainActivity` is `@AndroidEntryPoint`. Each core module
+binds its interfaces with `@Binds` in its own `@Module @InstallIn(SingletonComponent::class)`; `@Provides` only for
+what has no constructor (Room, DataStore, `java.time.Clock`). A ViewModel is `@HiltViewModel` with
+`@Inject constructor`, fetched in its route with `hiltViewModel()`; a service is `@AndroidEntryPoint`, a worker
+`@HiltWorker`.
 
 ## A screen
+
+Paths as in a small app; in a feature module drop `ui/`.
 
 | File | Content |
 |---|---|
@@ -50,7 +55,7 @@ constructor, never the whole container.
 | `render/<Screen>RenderTest.kt` | draws every sample state (see Tests). |
 
 - Repositories read as `Flow` and write as `suspend`.
-- Time comes only from the container's `java.time.Clock`, never from `now()`.
+- Time comes only from the injected `java.time.Clock`, never from `now()`.
 - Saving that can fail: a `suspend` function catches `SQLiteException` and `IOException` only and returns the
   result; the screen shows it in the primary action or a callout, never in a toast (core rule 14).
 - Names of persisted enum entries never change. Migrations never destroy data.
@@ -75,7 +80,7 @@ The sebaro copy is the folder `sebaro/` at the project root: profile `android`, 
 only the packs the app uses. Never edit it. It is its own library module, `:designsystem`:
 
 ```kotlin
-// designsystem/build.gradle.kts; :app has implementation(project(":designsystem"))
+// designsystem/build.gradle.kts; every module with screens has implementation(project(":designsystem"))
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
@@ -108,7 +113,7 @@ from an older copy, read the first section of the copy's README: three old calls
   core rule 30) on a 360 × 800 dp phone, with Robolectric and Roborazzi on the JVM. The pictures go to
   `docs/screens/<screen>-<state>-<light|dark|large>.png` and are committed, so a changed screen shows in the diff.
   A green test only says it was drawn: look at the pictures.
-- Every ViewModel and every repository has a JVM test. Tests replace the clock and the factories of the container.
+- Every ViewModel and every repository has a JVM test that builds it directly with a fixed clock and fakes, without Hilt.
 - No instrumented tests by default.
 
 ## Build, quality, release
@@ -150,20 +155,23 @@ A release to production always needs the owner's OK.
 ## Before you say done
 
 ```sh
-./gradlew :app:assembleDebug                 # no Kotlin warnings
-./gradlew :app:testDebugUnitTest             # unit and render tests, then look at docs/screens/
-./gradlew :app:check                         # lint, detekt, ktlint
+./gradlew assembleDebug                      # no Kotlin warnings
+./gradlew testDebugUnitTest                  # unit and render tests, then look at docs/screens/
+./gradlew check                              # lint, detekt, ktlint in every module
 ```
 
 Then the copy's three checks, and say what you could not check:
 
 ```sh
 node sebaro/checks/verify-export.mjs sebaro --strict     # the copy is unchanged
-sh sebaro/checks/lint-android.sh app/src                 # sebaro's rules; silence means none is broken
+for d in app/src */*/src; do sh sebaro/checks/lint-android.sh $d; done  # silence: all kept
 python3 sebaro/product/product_kit.py check sebaro.product.json --copy sebaro --out sebaro-product --no-raster
 ```
 
 ## Where this starter still differs
+
+- It is one module wired by hand (`AppContainer`): copy its screens and tests, not its wiring.
+- The build export has no plugin for library modules yet; until then each sets namespace, SDKs and Java 21 itself.
 
 - It carries no `build-logic/`, no detekt configuration, no `.editorconfig` and no workflows. They are the export
   of the family's private build repository: a product runs that export first, and the starter builds only then.
