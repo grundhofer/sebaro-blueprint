@@ -1942,11 +1942,11 @@
    "id": "NAV-06",
    "area": "navigation",
    "title": "Website-Kopf: Lockup, vier Wörter, Sprache, Taste",
-   "rule": "Bau jeden Website-Kopf aus Dachmarken-Kachel 32 + 8 px + Wortmarke, den Wörtern „Apps“, „Projekte“, „Über“, „Kontakt“, der Sprachwahl „DE / EN“ und der Taste „Hell oder Dunkel“. Alle vier Wörter und DE / EN bleiben bei 390 px in zwei Zeilen sichtbar; es gibt keinen Menüknopf. Eine Web-App ohne Fenster lässt die vier Wörter weg: Ihr Kopf hat ihre Kachel und ihren Namen, ihre eigenen Orte und zuletzt „Einstellungen“ (eine kleine Ansicht mit „Farbton“ und „Bewegung immer reduzieren“, ohne Aktionszone), DE / EN und die Taste „Hell oder Dunkel“; ⌘K öffnet auch dort die Befehlspalette, am Ende jeder Ansicht steht der Fuß (WEB-03). Hat sie keine eigene Adresse je Sprache, ist DE / EN eine Auswahl (WEB-10). Ein langer Name bricht bei großer Schrift an der Stelle, die das Produkt in der Wortmarke mit einem weichen Trennstrich markiert („Retro-“ / „Beam“). Web-Apps mit Fenster wählen Hell oder Dunkel im Menü (DSK-05).",
-   "rule_en": "Website header: 32 px umbrella tile + 8 px + wordmark, words „Apps“, „Projekte“, „Über“, „Kontakt“ (48 px targets), „DE / EN“, „Hell oder Dunkel“; at 390 px everything stays visible in two rows, no menu button; a web app without a window drops the four words: tile and name, its own places and last „Einstellungen“ (a small view with „Farbton“ and „Bewegung immer reduzieren“, no action zone), DE / EN and „Hell oder Dunkel“; ⌘K opens the palette there too, every view ends with the footer (WEB-03); without a URL per language DE / EN is a choice (WEB-10); a long name breaks at large text where the product marks it with a soft hyphen in the wordmark; windowed web apps choose the theme in the menu (DSK-05).",
+   "rule": "Bau jeden Website-Kopf aus Dachmarken-Kachel 32 + 8 px + Wortmarke, den Wörtern „Apps“, „Projekte“, „Über“, „Kontakt“, der Sprachwahl „DE / EN“ und der Taste „Hell oder Dunkel“. Alle vier Wörter und DE / EN bleiben bei 390 px in zwei Zeilen sichtbar; es gibt keinen Menüknopf. Eine Web-App ohne Fenster lässt die vier Wörter weg: Ihr Kopf hat ihre Kachel und ihren Namen, ihre eigenen Orte und zuletzt „Einstellungen“ (eine kleine Ansicht mit „Bewegung immer reduzieren“ und „Über“, ohne Aktionszone) und das Menü „Mehr“ mit „Hell oder Dunkel“, „Farbton“ und der Sprache; ⌘K öffnet auch dort die Befehlspalette, am Ende jeder Ansicht steht der Fuß (WEB-03). Hat sie keine eigene Adresse je Sprache, ist die Sprache dort eine Auswahl (WEB-10). Ein langer Name bricht bei großer Schrift an der Stelle, die das Produkt in der Wortmarke mit einem weichen Trennstrich markiert („Retro-“ / „Beam“). Web-Apps mit Fenster wählen Hell oder Dunkel im Menü (DSK-05).",
+   "rule_en": "Website header: 32 px umbrella tile + 8 px + wordmark, words „Apps“, „Projekte“, „Über“, „Kontakt“ (48 px targets), „DE / EN“, „Hell oder Dunkel“; at 390 px everything stays visible in two rows, no menu button; a web app without a window drops the four words: tile and name, its own places and last „Einstellungen“ (a small view with „Bewegung immer reduzieren“ and „Über“, no action zone) and the „Mehr“ menu with „Hell oder Dunkel“, „Farbton“ and the language; ⌘K opens the palette there too, every view ends with the footer (WEB-03); without a URL per language the language there is a choice (WEB-10); a long name breaks at large text where the product marks it with a soft hyphen in the wordmark; windowed web apps choose the theme in the menu (DSK-05).",
    "why": "D36: „header vonn a ist toll“; D39: „Projekte ist richrtig“. D83 (4), Wortlaut „vorschlag folgen Website-Kopf bei 390 px“: neu gemessen und gekürzt, damit DE / EN in Zeile zwei bleibt. Produkt-Websites zeigen ihre eigene Kachel und den Produktnamen als Wortmarke. D102 (45), Antwort „Alle Vorschläge (Empfohlen)“ auf eine Frage der Übernahme von RetroBeam: Kopf wie NAV-06 ohne die vier Wörter, Taste „Hell oder Dunkel“ im Kopf, Farbton und Bewegung in einer kleinen Einstellungsansicht, ⌘K gilt auch hier. D104 (30): Ein langer Produktname bricht mit Strich an der sinnvollen Stelle („Retro-“ / „Beam“), wie bei Überschriften.",
-   "do": "Aktuelle Seite: 3-px-Kante unten, link-Farbe, aria-current='page'; Fuß: „Impressum“, „Datenschutz“, „Barrierefreiheit“, „GitHub“; Web-App ohne Fenster: <a class='sb-lockup'>…<span class='sb-wordmark' translate='no'>Retro&shy;Beam</span></a>, als einziges Wort „Einstellungen“ (aria-current='page' in der Ansicht), DE / EN, Taste „Hell oder Dunkel“.",
-   "dont": "Hamburger bei 390 px; „Portfolio“, „Werkstatt“, „Dashboard“ statt der festen Wörter; die Taste „Hell oder Dunkel“ in der Einstellungsansicht einer Web-App ohne Fenster noch einmal; ein langer Name ohne weichen Trennstrich, der bei großer Schrift in sich bricht, wo das Produkt eine Stelle hätte.",
+   "do": "Aktuelle Seite: 3-px-Kante unten, link-Farbe, aria-current='page'; Fuß: „Impressum“, „Datenschutz“, „Barrierefreiheit“, „GitHub“; Web-App ohne Fenster: <a class='sb-lockup'>…<span class='sb-wordmark' translate='no'>Retro&shy;Beam</span></a>, als einziges Wort „Einstellungen“ (aria-current='page' in der Ansicht), Menü „Mehr“ mit „Hell oder Dunkel“, „Farbton“ und der Sprache.",
+   "dont": "Hamburger bei 390 px; „Portfolio“, „Werkstatt“, „Dashboard“ statt der festen Wörter; die Taste „Hell oder Dunkel“ im Kopf einer Web-App ohne Fenster; ein langer Name ohne weichen Trennstrich, der bei großer Schrift in sich bricht, wo das Produkt eine Stelle hätte.",
    "numbers": "Kachel 32; Abstand 8; Wortmarke title 20/28 (670/700); Ziele 48 px; DE/EN je 48 × 48; Kopf min. 64 px; bei 390 px Zeile 2 = 348 px (hell) / 352 px (dunkel) von 358 px",
    "decisions": [
     "D36",
@@ -1955,7 +1955,8 @@
     "D75",
     "D83",
     "D102",
-    "D104"
+    "D104",
+    "D143"
    ],
    "source": "DECISIONS.md D36, D39, D83 (4); systems/sebaro/spec/03-signature.md §3.1, §6.1, §6.5; spec/07-voice.md §4.8, §5; D102 (45), D104 (30); spec/03-signature.md §6.6",
    "platforms": [
@@ -1965,7 +1966,7 @@
    "check": "check_demo.py-Strings „Apps“, „Projekte“, „Über“, „Kontakt“, „DE / EN“, „Hell oder Dunkel“; bei 390 px in beiden Modi zwei Zeilen, kein Überlauf.",
    "example_hint": "Kopf der Guide-Seite bei 390 px mit allen vier Wörtern und der Kopf einer Web-App ohne Fenster mit „Einstellungen“ und DE / EN als Auswahl; falsch: Hamburger und Mond-Icon.",
    "note": "Die untere Kante des Kopfs ist die 2-px-Tintenlinie (D46), nicht die 1-px-Haarlinie aus spec/03 §6.1. „Einstellungen“ als Weg zur Ansicht, dass „Hell oder Dunkel“ dort nicht noch einmal steht, und DE / EN auch im Kopf sind vorläufig vom Agenten. Der weiche Trennstrich steht nur in der Wortmarke der Seite, nie im Zeichen, im Manifest oder im Vorschaubild; ein Name ohne Markierung bricht ohne Strich.",
-   "changed": "2026-10-26"
+   "changed": "2026-11-14"
   },
   {
    "id": "NAV-07",
@@ -3792,8 +3793,8 @@
    "id": "ZEI-07",
    "area": "zeichen",
    "title": "Zeichen nie verändern",
-   "rule": "Färb ein Zeichen nie um, dreh, streck oder umrande es nicht und leg es nicht auf ein Foto. Auf der Kachel stehen nur das Symbol und ab 48 px das Kürzel, nie Wörter oder Namen. Kacheln kommen generiert aus brand/signs.json und werden unverändert eingebunden; bearbeite nie die eingefügten Kopien.",
-   "rule_en": "Never recolour, rotate, stretch or outline a sign or put it on a photo; a tile carries only the symbol and, from 48 px, the three-letter code, never words or names; tiles are generated from brand/signs.json and inlined unchanged.",
+   "rule": "Färb ein Zeichen nie um, dreh, streck oder umrande es nicht und leg es nicht auf ein Foto. Auf der Kachel steht nur das Symbol, kein Kürzel, nie Wörter oder Namen. Kacheln kommen generiert aus brand/signs.json und werden unverändert eingebunden; bearbeite nie die eingefügten Kopien.",
+   "rule_en": "Never recolour, rotate, stretch or outline a sign or put it on a photo; a tile carries only the symbol, no code, never words or names; tiles are generated from brand/signs.json and inlined unchanged.",
    "why": "Identität wird per Code gezeichnet (D10, seit D85 bestätigt); generierte Ausgaben bleiben reproduzierbar; die Produktfarbe lebt nur in der Kachel (D40). D85 präzisiert „nie eine Kachel mit Text“: „Wir brauchen die logos/kacheln aber mit Abkürzung“; verboten sind Wörter und Namen.",
    "do": "tools/inline_assets.py; generiertes SVG mit role img, aria-label, title.",
    "dont": "Handbearbeitete Pfade; Familienfarben im Seiten-CSS; Zeichen auf Foto; „Tagwerk“ oder „Neu“ in der Kachel.",
@@ -3802,7 +3803,8 @@
     "D10",
     "D40",
     "D57",
-    "D85"
+    "D85",
+    "D143"
    ],
    "source": "systems/sebaro/spec/03-signature.md §4.3, §4.6; spec/05-brand.md §10, §11; DECISIONS.md D85",
    "platforms": [
@@ -3811,7 +3813,7 @@
    "status": "entschieden",
    "check": "python3 tools/inline_assets.py --check; signs.py check.",
    "example_hint": "Kachel unverändert mit Kürzel; falsch: gedrehte, umrandete Kachel mit dem App-Namen darin.",
-   "changed": "2026-10-20"
+   "changed": "2026-11-14"
   },
   {
    "id": "ZEI-08",
@@ -4732,8 +4734,8 @@
    "id": "WEB-03",
    "area": "plattform-web",
    "title": "Fußzeile mit den Pflichtlinks",
-   "rule": "Schließ jede Website mit einer Fußzeile: Tintenlinie oben, Copyright-Zeile in caption/text-muted, Links „Impressum“, „Datenschutz“ und „Barrierefreiheit“ immer, „GitHub“ mit external-link--16 nur, wenn das Produkt ein öffentliches Repository hat, und immer bei einem Produkt unter der AGPL, dann mit „Quelltext“ als Hilfe im title. Dazu kommt auf jeder Website „Darstellung“ mit der Wahl „Farbton: Kühl · Warm“ (FAR-15); eine Web-App ohne Fenster lässt „Darstellung“ weg, ihr Farbton steht in ihrer Einstellungsansicht (NAV-06).",
-   "rule_en": "Site footer: ink line on top, caption copyright, links Impressum, Datenschutz, Barrierefreiheit always, GitHub (+ external-link icon) only when the product has a public repository, and always for a product under the AGPL, then with „Quelltext“ as its title; „Darstellung“ with „Farbton: Kühl · Warm“ (FAR-15) on every website; a web app without a window leaves „Darstellung“ out, its tone stands in its settings view (NAV-06).",
+   "rule": "Schließ jede Website mit einer Fußzeile: Tintenlinie oben, Copyright-Zeile in caption/text-muted, Links „Impressum“ und „Datenschutz“ immer, „Barrierefreiheit“, wenn das Produkt diese Seite hat, „GitHub“ mit external-link--16 nur, wenn das Produkt ein öffentliches Repository hat, und immer bei einem Produkt unter der AGPL, dann mit „Quelltext“ als Hilfe im title. Dazu kommt auf jeder Website „Darstellung“ mit der Wahl „Farbton: Kühl · Warm“ (FAR-15); eine Web-App ohne Fenster lässt „Darstellung“ weg, ihr Farbton steht neben „Hell oder Dunkel“ in ihrem Menü „Mehr“ (NAV-06).",
+   "rule_en": "Site footer: ink line on top, caption copyright, links Impressum and Datenschutz always, Barrierefreiheit when the product has that page, GitHub (+ external-link icon) only when the product has a public repository, and always for a product under the AGPL, then with „Quelltext“ as its title; „Darstellung“ with „Farbton: Kühl · Warm“ (FAR-15) on every website; a web app without a window leaves „Darstellung“ out, its tone stands beside „Hell oder Dunkel“ in its „Mehr“ menu (NAV-06).",
    "why": "Pflichtlinks immer am selben Ort; extern endet im Icon (D56 (2)); Ebenenlinie D46. D91 Z3a: Die Wahl des Farbtons steht im Fuß unter „Darstellung“; der Kopf behält nur „Hell oder Dunkel“. D98 (V10), Antwort „Nur bei öffentlichem Code (Empfohlen)“: „GitHub“ ist der einzige Link, der fehlen darf. D102 (48), Antwort „Alle Vorschläge (Empfohlen)“ auf eine Frage der Übernahme von RetroBeam: Der optionale Link „GitHub“ wird für AGPL-Produkte Pflicht, mit dem Wort „Quelltext“ als Hilfe im title (die AGPL verlangt, dass ein Netzdienst seinen Quelltext anbietet). D104 (29), Antwort „Alle Vorschläge (Empfohlen)“: Eine Web-App ohne Fenster hat ihren Fuß ohne „Darstellung“; der Farbton steht nur in ihrer Einstellungsansicht, wie gebaut.",
    "do": "<footer class='sb-site-footer'>…<ul class='sb-site-footer__links'>…</ul><section class='sb-site-footer__display' aria-labelledby='d' data-sb-tone-choice hidden><h2 id='d'>Darstellung</h2><fieldset class='sb-segmented'><legend>Farbton</legend>…; AGPL: <a href='…' title='Quelltext'>GitHub<svg …external-link--16…></a>; Web-App ohne Fenster: derselbe Fuß ohne sb-site-footer__display.",
    "dont": "Impressum nur im Menü; Fußzeile mit grauem Grund; die Wahl des Farbtons im Kopf; ein Link „GitHub“ ohne öffentlichen Code; ein Produkt unter der AGPL ohne „GitHub“; „Darstellung“ im Fuß einer Web-App ohne Fenster.",
@@ -4744,16 +4746,18 @@
     "D91",
     "D98",
     "D102",
-    "D104"
+    "D104",
+    "D143",
+    "D147"
    ],
    "source": "DECISIONS.md D98 (V10); systems/sebaro/spec/02-components.md §5; spec/07-voice.md §4.8, §5; spec/09-platform-web.md §4.1, §6.2; css/sebaro.css .sb-site-footer; D102 (48), D104 (29); spec/03-signature.md §6.6; spec/07-voice.md §4.8",
    "platforms": [
     "web"
    ],
    "status": "entschieden",
-   "check": "Review jeder Seite: Impressum, Datenschutz und Barrierefreiheit im Fuß; GitHub nur bei öffentlichem Repository. Ein Produkt unter der AGPL zeigt „GitHub“ mit title „Quelltext“; eine Web-App ohne Fenster hat kein „Darstellung“ im Fuß und „Farbton“ in ihrer Einstellungsansicht.",
+   "check": "Review jeder Seite: Impressum und Datenschutz im Fuß, Barrierefreiheit, wo es die Seite gibt; GitHub nur bei öffentlichem Repository. Ein Produkt unter der AGPL zeigt „GitHub“ mit title „Quelltext“; eine Web-App ohne Fenster hat kein „Darstellung“ im Fuß und „Farbton“ in ihrem Menü „Mehr“.",
    "example_hint": "Fußzeile der Guide-Seite (ihr Code ist öffentlich, deshalb mit GitHub) und der Fuß einer Web-App ohne Fenster unter der AGPL, ohne „Darstellung“; falsch: graue Fußfläche ohne Barrierefreiheit-Link.",
-   "changed": "2026-10-26",
+   "changed": "2026-11-14",
    "note": "Den Ort „Darstellung“ im Fuß hat der Inhaber gewählt (D91 Z3a), die übrige Fußzeile mit D98 bestätigt, „GitHub“ nur bei öffentlichem Code (V10). Dieser Guide zeigt den Link, weil sein Code öffentlich ist. Die englische Hilfe „Source code“ ist vorläufig vom Agenten."
   },
   {
