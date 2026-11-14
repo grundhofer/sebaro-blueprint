@@ -486,7 +486,9 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); font-variant-numeric: var(--sb-type-numeric-variant);
 }
 .sb-heatmap th { padding: 0; font: inherit; color: var(--sb-color-text-muted); text-align: center; }
-.sb-heatmap thead > tr > :first-child { inline-size: 4.5rem; }
+/* the week heads' column: 4.5rem, or as wide as its widest head on one line where that is wider (an English
+   „from 28 Sep“): sb-fit.js measures it into --sb-heatmap-heads, as Compose's SbHeatmap (CHECKS.md §130) */
+.sb-heatmap thead > tr > :first-child { inline-size: max(4.5rem, var(--sb-heatmap-heads, 0px)); }
 .sb-heatmap tbody th { text-align: start; white-space: nowrap; }
 .sb-heatmap td { position: relative; padding: 0; }
 /* narrow columns at large text (D102 lane narrow; the heatmap's day heads, D99): the figure is a container (sb-heatmap); once
