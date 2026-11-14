@@ -11,6 +11,24 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+## 2.19.0 · 2026-11-14
+
+Nebenversion: drei Regeln an die Kernregeln angeglichen (WEB-03, NAV-06, ZEI-07), keine entfällt; Kernregel 14 und 26
+geändert; neuer Name sebaro Blueprint, neue Werkstatt sebaro Foundry; die Seite auf drei Seiten zugeschnitten; die
+vier Startvorlagen auf dem Stand ihrer Baupläne. Die Kopien der Produkte kommen mit dem Release `v2.0.0`.
+
+Kernregel 14 nennt die eine Kurzmeldung ohne „Rückgängig“: die, dass etwas in die Zwischenablage kopiert wurde
+(Inhaber, 14.11.2026; so erlaubte es EBE-05 schon, die Kernregel hatte die Ausnahme ausgelassen). Die Prüfliste je
+Ansicht sagt es ebenso.
+
+Katalog an die Kernregeln angeglichen: Drei Regeln sagten noch, was spätere Entscheidungen geändert haben (wo der
+Katalog anders spricht, gelten ohnehin die Kernregeln). **WEB-03** (Fußzeile): „Impressum“ und „Datenschutz“ immer,
+„Barrierefreiheit“ nur, wenn das Produkt diese Seite hat (D147 (5): die Pflichtseite entfällt); der Farbton einer
+Web-App steht neben „Hell oder Dunkel“ in ihrem Menü „Mehr“. **NAV-06** (Website-Kopf): Eine Web-App ohne Fenster hat
+„Hell oder Dunkel“, „Farbton“ und die Sprache im Menü „Mehr“, nicht im Kopf (Kernregel 28, D143); ihre Einstellungen
+halten „Bewegung immer reduzieren“ und „Über“. **ZEI-07** (Zeichen): Die Kachel trägt nur das Symbol, kein Kürzel
+(D143 (3)).
+
 Neuer Name: Das Repository heißt jetzt `grundhofer/sebaro-blueprint`, die Seite liegt unter
 <https://grundhofer.github.io/sebaro-blueprint/> (Inhaber, 13.11.2026). GitHub leitet die alten Adressen des
 Repositorys weiter, auch die Releases, aus denen `update-copy.mjs` die Kopien holt; die alte Seitenadresse leitet es
