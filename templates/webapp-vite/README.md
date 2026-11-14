@@ -18,7 +18,7 @@ im Menü „Mehr“ in der oberen Leiste jedes Orts.
 | Eintrag | `/eintrag/2` | Eigenschaften, Zustand als Zeichen und Wort, „Bearbeiten“ als die eine umrandete Aktion in der Aktionszone, „Als erledigt markieren“ als Textaktion mit Kurzmeldung und „Rückgängig“; am Ende des Inhalts „Eintrag abschließen“ als Textaktion und „Eintrag löschen“ als die eine Gefahrtaste dort, beide mit Dialog, dessen Bestätigung die 45°-Kante trägt |
 | Neuer Eintrag, Bearbeiten | `/neu`, `/bearbeiten/2` | Formular mit „(optional)“, Fehlern je Feld, Teilschritten mit „Rückgängig“, Dialog „Abbrechen“ · „Verwerfen“ · „Sichern“ |
 | Datenarten | `/daten` | jede Datenart von `docs/daten.html`: Text, Zahlen, Geld, Zeit, Kalender, Zustände, Tabellen mit Sortierung und Summe, Baum, Mehrfachauswahl, alle Diagramme, Orte, Belege |
-| Einstellungen | `/einstellungen` | „Bewegung immer reduzieren“, „Über“, der Weg zu den Pflichtseiten und zum Quelltext |
+| Einstellungen | `/einstellungen` | „Bewegung immer reduzieren“, „Über“ mit Kachel, Name, Version und dem Absender „von sebaro“, der Weg zu den Pflichtseiten und zum Quelltext |
 | Impressum, Datenschutz, Barrierefreiheit | `/impressum` … | Platzhalter für die Pflichtseiten, Unteransichten von „Einstellungen“ |
 | jede andere Adresse | | „Diese Ansicht gibt es nicht“ |
 | eine Ansicht, die scheitert | | „Fehler“: was los ist und was du tun kannst; der Rahmen bleibt stehen |
@@ -131,8 +131,8 @@ Den App-Rahmen der Kopie (`sb-app-frame`, `sb-bottom-nav`, `sb-top-bar`) schreib
 
 ## Tests
 
-`pnpm test` (Vitest, jsdom) prüft die Logik in `src/lib/`, die Stores, die Bauteile und die Ansichten Liste und
-Formular; `src/i18n.test.ts` prüft, dass Deutsch und Englisch dieselben Schlüssel haben. jsdom kennt weder CSS noch
+`pnpm test` (Vitest, jsdom) prüft die Logik in `src/lib/`, die Stores, die Bauteile, die Ansichten Liste und
+Formular und „Über“ in den Einstellungen, deutsch und englisch; `src/i18n.test.ts` prüft, dass Deutsch und Englisch dieselben Schlüssel haben. jsdom kennt weder CSS noch
 `<dialog>` noch Popover: was davon abhängt, prüfen die End-to-End-Tests.
 
 `pnpm test:e2e` lädt jede Ansicht und jeden Zustand (leere Liste, kein Treffer, abgeschlossener und unbekannter Eintrag,
@@ -192,8 +192,8 @@ Wo die Vorlage eine dieser Regeln noch nicht ganz erfüllt, steht es unter „L�
 - „Hell oder Dunkel“, „Farbton: Kühl · Warm“ und die Sprache ohne Neuladen im Menü „Mehr“: AKT-09, FAR-15, EBE-07,
   TEC-10; Impressum, Datenschutz, Barrierefreiheit und GitHub unter „Einstellungen“
 - Bewegung in den Einstellungen: BEW-04; Laden im Kopf: WEB-01
-- Start in der Produktfarbe nur beim ersten Aufruf je Tab, 200&nbsp;ms Ausblenden bei jeder Bewegungseinstellung:
-  Kernregel 29 (D144 (3), D102 (52))
+- Start in der Produktfarbe nur beim ersten Aufruf je Tab, 200&nbsp;ms Ausblenden bei jeder Bewegungseinstellung;
+  „Über“ mit Kachel, Name, Version und „von sebaro“: Kernregel 29 (D143 (5), D144 (3), D102 (52))
 - eine Hauptaktion unten in der Aktionszone, zuletzt in jeder Gruppe, mit Stand-Satz und Datenweg-Zeile: AKT-01, AKT-02,
   AKT-04, AKT-11, STA-07, EBE-08, BEL-10
 - drei Stufen von Aktionen (Kernregel 13): höchstens eine umrandete je Bereich, alles andere eine Textaktion; im
@@ -231,7 +231,7 @@ Vorlage gilt zusätzlich:
   Leiste, die Aktionen eines Dialogs. In einer Detailansicht ist es „Bearbeiten“ in der Aktionszone, in einem Formular
   „Abbrechen“ neben der Hauptaktion; alles andere ist eine Textaktion (`sb-text-action`). „Abbrechen“ in einem Dialog
   trägt `data-sb-dialog-cancel` und zählt nicht. Die End-to-End-Tests scheitern an einer zweiten.
-- Die Kachel in der oberen Leiste und über der Navigation am Rand und der Start (Zeichen und Farbe) sind
+- Die Kachel in der oberen Leiste, über der Navigation am Rand und in „Über“ und der Start (Zeichen und Farbe) sind
   Platzhalter (die Dachmarke). Ein echtes Produkt trägt sein eigenes Zeichen in `sebaro.product.json` ein (ZEI-03,
   ZEI-08); `pnpm build` übernimmt es in den Start.
 - Alle Befehle von „Starten“ müssen grün sein, bevor eine Ansicht fertig ist; die Prüfliste `../screen-checklist.md`
@@ -313,10 +313,8 @@ solche Stellen übernehmen. Übernimm sie nicht, sondern bau es so:
   Klasse der Kopie. Unter 840&nbsp;px Rahmenbreite und in der Spalte der Liste steht sie darum bündig unter der Aktion;
   erst die breite Form der Zone gibt mit ihrem Zeilenabstand 8&nbsp;px. BEL-10 will sie 8&nbsp;px unter der Hauptaktion
   und zentriert.
-- **Nicht eingebaut, obwohl die Regeln gelten:** „Über“ mit Kachel, Name und dem Absender „von sebaro“ (Kernregel 29:
-  „Über“ in den Einstellungen nennt nur Version und Ablage, und der Name der App steht seit dem App-Rahmen nur noch im
-  Titel des Dokuments), das Vorschaubild der Startseite (WEB-09) und Markup, das ohne Skript den richtigen Zustand zeigt
-  (TEC-02 gilt für `web`; die Ansichten rendert hier React). Bau „Über“ und WEB-09 ein.
+- **Nicht eingebaut, obwohl die Regeln gelten:** das Vorschaubild der Startseite (WEB-09) und Markup, das ohne Skript
+  den richtigen Zustand zeigt (TEC-02 gilt für `web`; die Ansichten rendert hier React). Bau WEB-09 ein.
 - **Frage an den Inhaber:** ob WEB-11 („Drucke jede Website hell“, `sb-print.js`) für eine Web-App gilt, und wie
   TEC-02 („klassische Skripte, keine Module“) zu einem Vite-Build passt, der die Oberfläche als Modul ausliefert. Frag
   mit den IDs, statt es selbst zu entscheiden.
