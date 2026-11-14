@@ -4619,26 +4619,29 @@
   {
    "id": "STR-02",
    "area": "start",
-   "title": "Startkachel ohne Kürzel",
-   "rule": "Zeig in der Startkachel nur das Symbol ohne Kürzel, damit beim Flug dasselbe Bild in der 32-px-Kopfkachel ankommt.",
-   "rule_en": "The start tile shows the symbol alone (no code), matching the 32 px header tile it moves into.",
-   "why": "Inhaber D62: „startkachel ohne kürzel fliegen lassen“ (Ausnahme von D57 nur für den Start).",
-   "do": "Web: tile-<id>-small.svg; Android: SbSignTile(…, withCode = false) mit ic_stat_notify. Der Android-Systemsplash davor zeigt das Launcher-Icon mit Kürzel.",
-   "dont": "96-px-Startkachel mit „tgk“, die in eine Kachel ohne Kürzel fliegt.",
-   "numbers": "96 px → 32 px",
+   "title": "Startsymbol ohne Kachel, Fuß und Kürzel",
+   "rule": "Zeig auf dem Start nur das nackte Zeichen des Produkts in Weiß, 96 px groß in der Mitte der Fläche in der Produktfarbe (STR-01): ohne Kachel, ohne Fuß und ohne Kürzel. Das Zeichen kommt aus dem Baukasten der Kopie und wird nie von Hand gezeichnet oder umgefärbt.",
+   "rule_en": "The start shows only the product's bare sign in white, 96 px, in the middle of the product-colour screen (STR-01): no tile, no foot, no code; the sign comes from the copy's kit, never drawn or recoloured by hand.",
+   "why": "Inhaber D144 (3): Der Start ist die ganze Fläche in der Produktfarbe mit dem weißen Symbol, ohne Fuß und Kachelrahmen (spec/03 §14.1). D143 (3): Das Kürzel entfällt im Zeichen ohnehin. D148: Kernregel 29. Vorher (D62: „startkachel ohne kürzel fliegen lassen“) flog eine Startkachel ohne Kürzel in die 32-px-Kopfkachel; den Flug gibt es nicht mehr.",
+   "do": "Web: sign/sign.svg des Produktordners inline in .sb-start__tile (es malt in currentColor, die Farben gibt .sb-start[data-sb-product] mit product.css); Android: SbStart(ready, AppProduct, { SbStartSymbol(AppProduct, it) }) mit sb_symbol_<id> des Baukastens, ab Android 12 zeigt der Systemsplash dasselbe Symbol (sb_splash_symbol_<id>, Theme.Sebaro.Start).",
+   "dont": "Eine Startkachel mit Rahmen, Fuß oder Kürzel auf der Fläche; ein Symbol, das nicht weiß ist; ein Zeichen, das in den Kopf fliegt.",
+   "numbers": "96 px, dp oder pt (--sb-x-sebaro-start-tile-size)",
    "decisions": [
     "D62",
     "D57",
-    "D52"
+    "D52",
+    "D143",
+    "D144",
+    "D148"
    ],
-   "source": "DECISIONS.md D62; systems/sebaro/spec/03-signature.md §14.1; spec/08-platform-android.md §9",
+   "source": "DECISIONS.md D144 (3), D143 (3), D148; design/KERN.md Regel 29; product/PRODUCT-CONTRACT.md der Kopie (sign/sign.svg, sb_symbol_<id>); DECISIONS.md D62; systems/sebaro/spec/03-signature.md §14.1; spec/08-platform-android.md §9",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
-   "check": "Replay im Komponentenblatt: gleiches Bild vor und nach dem Flug.",
-   "example_hint": "Startkachel ohne Kürzel richtig; falsch: Startkachel mit Kürzel.",
-   "changed": "2026-10-19"
+   "check": "Replay im Komponentenblatt: das weiße Symbol ohne Kachel und Fuß auf der Fläche in der Produktfarbe; die Web-App-Vorlage prüft das erste Bild in tests/start.spec.ts (Kachelfarbe und die weißen Pixel des Zeichens).",
+   "example_hint": "Das weiße Symbol mittig auf der Produktfarbe richtig; falsch: die ganze Kachel mit Fuß auf dem Start.",
+   "changed": "2026-11-14"
   },
   {
    "id": "STR-03",
@@ -5249,9 +5252,9 @@
    "id": "DSK-01",
    "area": "plattform-desktop",
    "title": "Tauri-Fenster wie eine Web-App",
-   "rule": "Bau jede Tauri-Ansicht als sb-window (Titelleiste, Seitenleiste, Inhalt, Inspektor, Aktionszone über die ganze Breite, data-sb-density=\"window\") bzw. als sb-view sb-view--wide für einfache Fenster, Fensterteile getrennt durch Tintenlinien, Produktfarbe nur in der Titelleisten-Kachel. Halte CSP script-src 'self' (Theme-Zeile und Skripte als Dateien, Fakten als JSON-Blöcke); den Grund des Fensters wählt Rust aus der gespeicherten Wahl (DSK-14).",
-   "rule_en": "Tauri views: sb-window (title bar, sidebar, content, inspector, full-width action zone, window density) or sb-view sb-view--wide for simple windows; parts separated by ink lines, product colour only in the title-bar tile; CSP script-src 'self'; the window ground comes from the stored choice in Rust (DSK-14).",
-   "why": "Ein Tauri-Fenster ist eine Webseite in einer System-Webview; dieselben Klassen halten Web und Desktop gleich; der Start soll wie im Web aussehen (D52). D80: das Fenstergerüst ist im System gebaut, kein Nachbau in Produkten. D149 (9), Antwort „Beides ja“ des Inhabers: DSK-01 wird entschieden, sobald ein Lauf in einem echten Tauri-Fenster aufgezeichnet ist; bis dahin bleibt die Regel vorläufig.",
+   "rule": "Bau jede Tauri-Ansicht als sb-window (Titelleiste, Seitenleiste, Inhalt, Inspektor, Aktionszone über die ganze Breite, data-sb-density=\"window\") bzw. als sb-view sb-view--wide für einfache Fenster, Fensterteile getrennt durch Tintenlinien, die Produktfarbe nach ZEI-01 in der Kachel der Titelleiste, auf dem Start und in höchstens einer Produktfläche je Ansicht, nie auf Titelleiste, Seitenleiste oder Bedienelementen. Halte CSP script-src 'self' (Theme-Zeile und Skripte als Dateien, Fakten als JSON-Blöcke); den Grund des Fensters wählt Rust aus der gespeicherten Wahl (DSK-14).",
+   "rule_en": "Tauri views: sb-window (title bar, sidebar, content, inspector, full-width action zone, window density) or sb-view sb-view--wide for simple windows; parts separated by ink lines, product colour per ZEI-01 in the title-bar tile, on the start and in at most one product area per view, never on title bar, sidebar or controls; CSP script-src 'self'; the window ground comes from the stored choice in Rust (DSK-14).",
+   "why": "Ein Tauri-Fenster ist eine Webseite in einer System-Webview; dieselben Klassen halten Web und Desktop gleich; der Start soll wie im Web aussehen (D52). D80: das Fenstergerüst ist im System gebaut, kein Nachbau in Produkten. D149 (9), Antwort „Beides ja“ des Inhabers: DSK-01 wird entschieden, sobald ein Lauf in einem echten Tauri-Fenster aufgezeichnet ist; bis dahin bleibt die Regel vorläufig. D143 (4), D145 (3): Die Produktfarbe steht auch auf dem Start und in einer Produktfläche (ZEI-01, Kernregel 5).",
    "do": "<div class='sb-window sb-window--fill' data-sb-density='window'>; data-tauri-drag-region an der Titelleiste; Fenster in Rust anlegen (DSK-14); theme-init.js als Datei.",
    "dont": "Inline-Skripte; eigene Fensterklassen neben sebaro.css; weißer Blitz beim Öffnen; getönte Seitenleiste.",
    "numbers": "",
@@ -5262,7 +5265,9 @@
     "D65",
     "D80",
     "D91",
-    "D149"
+    "D149",
+    "D143",
+    "D145"
    ],
    "source": "systems/sebaro/spec/02-components.md §4.17; spec/09-platform-web.md §13, §13.1; shared/ADOPTION.md §5; DECISIONS.md D149 (9)",
    "platforms": [

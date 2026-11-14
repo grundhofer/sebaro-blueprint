@@ -37,6 +37,13 @@ Web-App-Vorlage bleiben, ein Produkt darf eine behalten; sie nennen keine Regel 
 vorläufig, ihr „Warum“ nennt den Grund aus D149 (9): BIL-04 bis zur rechtlichen Prüfung, DSK-01 bis ein Lauf in einem
 echten Tauri-Fenster aufgezeichnet ist.
 
+Zwei weitere Regeln zum Start und zur Produktfarbe: **STR-02** (Startsymbol) folgt Kernregel 29 (D144 (3)): Auf dem
+Start steht nur das nackte Zeichen in Weiß, 96&nbsp;px, ohne Kachel, Fuß und Kürzel, im Web `sign/sign.svg` des
+Produktordners, auf Android `SbStartSymbol`; die Kachel, die ohne Kürzel in den Kopf flog (D62), gibt es nicht mehr.
+**DSK-01** (Tauri-Fenster) folgt für die Produktfarbe Kernregel 5: Kachel der Titelleiste, Start und höchstens eine
+Produktfläche je Ansicht, statt „nur in der Titelleisten-Kachel“. Die Website-Vorlage nennt in ihren Lücken den Start
+nach Kernregel 29 mit dem Markup der Kopie.
+
 Startvorlagen auf Release `v2.0.0`: Die vier Startvorlagen tragen die Kopie aus `v2.0.0` (vorher `v1.14.0`), jede mit
 ihrem eigenen `update-copy.mjs` geholt. Ihre Produktordner sind einmal neu gebaut, wie es die Release-Notizen verlangen
 (Kit 1.3.0, `tiles.json` 1.2). Die Android-Vorlage trägt dazu die Quelle der Play-Vorstellungsgrafik
