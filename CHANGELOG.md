@@ -11,6 +11,13 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+## 3.0.0 · 2026-11-14
+
+Hauptversion: ZUG-07 entfällt (D149 (9)), der Katalog hat 227 Regeln; acht Regeln an die Kernregeln und den heutigen
+Code angeglichen (STR-01, STR-02, ZEI-01, ZUG-09, TEC-07, DSK-14, DSK-06, DSK-01), BIL-04 und DSK-01 sagen, warum sie
+vorläufig bleiben; die Bereiche „Zeichen“, „Start“ und „Zugang“ leiten nach den Kernregeln ein, der Eintrag „Start“ der
+Seite Bauteile zeigt den Start nach Kernregel 29; die vier Startvorlagen tragen die Kopie aus dem Release `v2.0.0`.
+
 Katalog an die Kernregeln angeglichen, der Rest: Sechs Regeln sagten noch, was spätere Entscheidungen geändert haben,
 und sagen jetzt dasselbe wie die Kernregeln und der heutige Code. **STR-01** (Start) folgt Kernregel 29 (D143, D144):
 die ganze Fläche in der Produktfarbe mit dem weißen Symbol, dann in 200&nbsp;ms die App, immer, auch bei reduzierter
