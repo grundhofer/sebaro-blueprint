@@ -102,7 +102,7 @@
    "id": "zeichen",
    "prefix": "ZEI",
    "title": "Zeichen",
-   "intro": "Jede App hat ein eigenes Zeichen; die Produktfarbe lebt nur in seiner Kachel."
+   "intro": "Jede App hat ein eigenes Zeichen; die Produktfarbe steht in seiner Kachel, auf dem Start und in höchstens einer Produktfläche je Ansicht."
   },
   {
    "id": "icons",
@@ -126,7 +126,7 @@
    "id": "start",
    "prefix": "STR",
    "title": "Start",
-   "intro": "Jedes Produkt startet gleich: die Kachel wandert in den Kopf. Eine Einführung steht anfangsbündig und hat höchstens drei Schritte."
+   "intro": "Jedes Produkt startet gleich: die ganze Fläche in der Produktfarbe mit dem weißen Symbol, dann die App. Eine Einführung steht anfangsbündig und hat höchstens drei Schritte."
   },
   {
    "id": "plattform-web",
@@ -3631,13 +3631,13 @@
   {
    "id": "ZEI-01",
    "area": "zeichen",
-   "title": "Produktfarbe nur in der Kachel",
-   "rule": "Zeig die Produktfarbe ausschließlich in der Kachel des App-Zeichens. Bildschirme, Tasten, Links, Chips, Fortschritt, Charts und Köpfe jeder App bleiben auf Kobalt und Lindgrün; ein Produkt-Theme, eigene Akzente oder data-product-Scopes gibt es nicht. Jede App nennt nur ihre Produkt-ID.",
-   "rule_en": "Product (tile) colour appears only inside the app-sign tile; screens stay on cobalt/lime; no product theme, accents or [data-product] scopes; each app only names its product id.",
-   "why": "Inhaber D40: „die Produktfarbe zeigt sich nur in der Kachel des App-Zeichens“; D54: zwei Farbquellen für eine App sollen nicht bestehen bleiben (Akzentfamilien entfallen, D63). D65 (1) für novalis: „Petrol nur in der App-Kachel“. AGENTS §1: die am leichtesten gebrochene Regel.",
-   "do": "SebaroAppTheme ohne Produkt; SbSignTile(SebaroProduct.fromId('tagwerk'), …); var(--sb-tile-<group>) nur im Zeichen; data-sb-product nur als inerter Marker am Snippet.",
-   "dont": "Tagwerk-Bildschirm mit magentafarbenem Kopf oder Fortschritt; petrolfarbene Reiter in novalis; SebaroTheme(product = …); productAccents, SebaroAccentFamily, fromBrandColor; <html data-product='tagwerk'>.",
-   "numbers": "Kachelfarben --sb-tile-<group> / --sb-tile-<group>-glyph, in beiden Modi gleich",
+   "title": "Produktfarbe: Kachel, Start und eine Produktfläche",
+   "rule": "Zeig die Produktfarbe in der Zeichenkachel der App, auf dem Startbildschirm (STR-01) und in höchstens einer Produktfläche je Ansicht, und die nur auf Einstieg, Übersicht (ein Wert), Detail mit einem Wert, Ergebnis und leerem Zustand. Nie hinter Bedienelementen oder Links: Tasten, Links, Chips, Fortschritt, Charts und Köpfe jeder App bleiben auf Kobalt und Lindgrün; ein Produkt-Theme, eigene Akzente oder data-product-Scopes gibt es nicht. Jede App erklärt sich in sebaro.product.json (Kennung und Kachelgruppe); ihre Farben kommen aus dem Baukasten der Kopie.",
+   "rule_en": "Product (tile) colour stands in the app's sign tile, on the start screen (STR-01) and in at most one product area per view, only on entry, overview (one value), detail with one value, result and the empty state; never behind controls or links: buttons, links, chips, progress, charts and headers stay cobalt/lime; no product theme, accents or [data-product] scopes; each app declares its id and tile group in sebaro.product.json and takes its colours from the copy's kit.",
+   "why": "Inhaber D143 (4): Die Produktfarbe darf in der App außerhalb der Kachel stehen, in festen Momenten (Start, Leerzustand, der eine große Wert, Ergebnis), höchstens eine Farbfläche je Ansicht, nie auf Bedienelementen; das ändert D40 („die Produktfarbe zeigt sich nur in der Kachel des App-Zeichens“). D145 (3): Eine Farbfläche tragen nur Einstieg, Übersicht, Detail mit einem Wert, Ergebnis und der leere Zustand. D148: Kernregel 5 ersetzt ZEI-01; diese Regel sagt jetzt dasselbe. Es bleibt D54: Zwei Farbquellen für eine App sollen nicht bestehen bleiben (Akzentfamilien entfallen, D63).",
+   "do": "SebaroAppTheme ohne Produkt; SbSignTile(AppProduct, painterResource(R.drawable.sb_sign_<id>), …) mit AppProduct aus dem Produktordner (android/kotlin/SebaroProductInfo.kt des Baukastens); im Web sign/tile.svg des Produktordners inline in .sb-sign-tile; eine Produktfläche als <div class='sb-product-area sb-product-area--value' data-sb-product='<id>'> mit product.css nach tokens.css, in Compose SbProductArea(AppProduct, SbProductAreaForm.Value, …); data-sb-view-type an der Ansicht, damit die Farbprüfung den Ort der Fläche prüft.",
+   "dont": "Ein Bildschirm mit Kopf, Taste, Reitern oder Fortschritt in der Produktfarbe; eine zweite Produktfläche in derselben Ansicht; eine Produktfläche in Liste, Formular, Werkzeug oder Einstellungen; eine Taste oder ein Link in der Produktfläche; SebaroTheme(product = …); productAccents, SebaroAccentFamily, fromBrandColor; SebaroProduct.fromId (seit v2.0.0 entfernt); <html data-product='…'>.",
+   "numbers": "Kachelfarben --sb-tile-<group> / --sb-tile-<group>-glyph, in beiden Modi gleich; Start und Produktfläche malen mit --sb-product-tile und --sb-product-glyph aus product.css des Produktordners; höchstens 1 Produktfläche je Ansicht",
    "decisions": [
     "D40",
     "D54",
@@ -3645,17 +3645,20 @@
     "D51",
     "D53",
     "D63",
-    "D65"
+    "D65",
+    "D143",
+    "D145",
+    "D148"
    ],
-   "source": "DECISIONS.md D40, D54, D65; systems/sebaro/spec/01-foundations.md §1.6; spec/03-signature.md §4.1, §4.3; spec/05-brand.md §0, §11; AGENTS.md §1, §4",
+   "source": "DECISIONS.md D143 (4), D145 (3), D148; design/KERN.md Regel 5; systems/sebaro/spec/02-components.md §3.33; spec/01-foundations.md §1.10; product/PRODUCT-CONTRACT.md der Kopie; DECISIONS.md D40, D54, D65; systems/sebaro/spec/01-foundations.md §1.6; spec/03-signature.md §4.1, §4.3; spec/05-brand.md §0, §11; AGENTS.md §1, §4",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
-   "check": "Lint L3 (kein data-product auf Seitenelementen); Android A1, A2; Farbprüfung zählt Kacheln als „App-Zeichen“.",
-   "example_hint": "Tagwerk-Ansicht mit Magenta nur in der 32-px-Kachel; falsch: dieselbe Ansicht mit Magenta-Kopf und Magenta-Taste.",
+   "check": "Lint L3 (kein data-product auf Seitenelementen); Android A1, A2; sb-colour-count.js der Kopie: areaErrors (höchstens eine Produktfläche je Ansicht, kein Bedienelement und keine zu kleine Schrift darin) und mit data-sb-view-type viewTypeErrors product-area (eine Fläche außerhalb von Einstieg, Übersicht, Detail, Ergebnis und leerem Zustand).",
+   "example_hint": "Eine Übersicht mit der 32-px-Kachel im Kopf und einer Produktfläche mit dem einen großen Wert; falsch: dieselbe Ansicht mit Kopf und Hauptaktion in der Produktfarbe.",
    "note": "BRIEF („Jede App bekommt eine eigene Akzentfarbe“, D34) und spec/08 §11 („family accent“) sind durch D54/D63 ersetzt.",
-   "changed": "2026-10-19"
+   "changed": "2026-11-14"
   },
   {
    "id": "ZEI-02",
@@ -4575,13 +4578,13 @@
   {
    "id": "ZUG-09",
    "area": "zugang",
-   "title": "Große Schrift: Der Platz wächst, nichts wird abgeschnitten",
-   "rule": "Lass bei großer Schrift den Platz mit dem Text wachsen, schneid nie Text ab, und lass keine Seite seitlich scrollen. Passt ein Wort nicht mehr in seinen Platz (untere Navigation, Segmente, Schrittanzeige, Kurzmeldung, Titel), wird der Platz größer und der Text bricht an Leerzeichen auf zwei Zeilen um; nur ein einzelnes Wort, das allein nicht in die Zeile passt, bekommt einen Trennstrich. Namen und Code brechen am Zeilenende ohne Trennstrich, Dateinamen nur nach - . _ /, Kennungen nie. Eine segmentierte Auswahl, deren Wörter so nicht passen, wird zum Auswahlfeld, in Compose und im Web. Passt ein Schrittwort nicht auf zwei Zeilen, zeigt die Schrittanzeige nur das Wort des aktuellen Schritts unter den Balken (STA-06). Die Faktenzeile wird zur Liste (ZEI-13), ein Diagramm mit mehreren Reihen nennt sie in der Legende (DAT-10), und zwei Felder in einer Zeile rücken untereinander. Breite Muster und Tabellen scrollen in ihrem eigenen Rahmen. Diagramme in Compose wachsen nur dort, wo Text drinsteht; Flächen, Abstände und Linien bleiben feste dp. Gewollt gekürzt wird nur, wo die Werkstatt es benennt: in einer virtualisierten Liste oder Tabelle mit fester Zeilenhöhe (der volle Name im title und im zugänglichen Namen, TXT-09), im Pfad des Fensters und bei einem Dokument-Reiter über 15 rem (DSK-10); alle drei tragen data-sb-truncate. Ein Platzhalter, der nicht in sein einzeiliges Feld passt, darf mit „…“ enden, neben einer vollständigen Beschriftung, und ein langer Wert läuft in jedem einzeiligen Feld seitlich weiter (EIN-01). Ein Teil, der etwas neben ein Wort stellt, gibt ihm Raum, statt es Buchstabe für Buchstabe zu brechen: Das Ende einer Listenzeile rückt unter den Text, der Titel einer Tafel-Spalte unter „Mehr“, die Überschrift der oberen Leiste unter Zurück und Aktionen, das Icon einer Taste über ihr Wort, die Tasten eines Dialogs untereinander und das Datum der Versionsliste über den Eintrag. Wochentage im Kopf von Heatmap und Kalender behalten zwei Buchstaben; passen sie nicht in die Spalte eines Tages, fällt jeder zweite aus dem Bild („Mo Mi Fr So“). Icons und App-Zeichen bleiben bei jeder Schriftgröße fest in px, dp oder pt, nur Text wächst. In einer Desktop-App ändern ⌘+ und ⌘− nur die Schrift des Inhalts (DSK-09); ein ganzes Fenster bei 200 % ist nur eine Prüfung der Entwicklung. In der Seitenleiste eines Fensters rutscht der Zustand einer Zeile, der nicht neben den Namen passt, mit Zeichen und Wort in eine eigene Zeile unter den Namen, auch in einer virtualisierten Zeile, deren Name gekürzt bleibt; Pfeil, Icon oder Haken vor dem Namen hängen im Startabstand der Zeile, so beginnt jede umbrochene Zeile am Anfang des Namens. Nichts wird abgeschnitten, und die Leiste scrollt nie seitlich.",
-   "rule_en": "At large text the room grows with the text, never cut text, and no page scrolls sideways: where a word no longer fits (bottom navigation, segments, steps, toast, title) the room grows and the text wraps at spaces onto two lines; only a single word that alone does not fit its line gets a hyphen; names and code break at the line end without a hyphen, file names only after - . _ /, identifiers never; a segmented control whose words still do not fit becomes a select, in Compose and on the web; once a step word does not fit two lines, the steps show only the current word under the bars (STA-06); the facts line becomes a list (ZEI-13), a chart with several series names them in its legend (DAT-10), two fields in one row go one under the other; wide specimens and tables scroll in their own frame; Compose charts grow only where text sits, areas, gaps and lines stay fixed dp. Deliberate cuts only where the workshop names them: a virtualised list or table of fixed row height (full name in title and accessible name, TXT-09), the window path and a document tab over 15 rem (DSK-10), each with data-sb-truncate. A placeholder that does not fit its one-line field may end in „…“ beside a full label, and a long value scrolls inside any one-line field (EIN-01, D111). A part that puts something beside a word gives it room instead of breaking it letter by letter: a list row's end part goes under the text, a board column's title under „Mehr“, the top bar's heading under back and actions, an action's icon above its word, dialog actions one under the other, the changelog date above its entry. Weekday heads keep two letters and every second one leaves the view where two letters do not fit („Mo Mi Fr So“). Icons and app signs stay fixed in px, dp or pt at every text size; only text grows. In a desktop app ⌘+ / ⌘− change only the content's text size (DSK-09); a whole window at 200 % is only a developer check. In a window's sidebar a row's status that does not fit beside the name goes with glyph and word onto its own line under the name, also in a virtualised row whose name stays cut; twist, icon or check hang in the row's start padding, so every wrapped line starts at the name (D108 (1)).",
-   "why": "Inhaber D99 (1), Antwort „Zweizeilig, ganze Wörter (Empfohlen)“, und D99 (2), Antwort „Nur wo Text drinsteht (Empfohlen)“. Vorher schnitt die untere Navigation in Compose bei 200 % Schrift „Statisti“ ab, die Wörter der Segmente wurden in ihren Spalten abgeschnitten, und im Web schob „Hell oder Dunkel“ den Kopf auf 558 px Breite. Wer große Schrift braucht, braucht jedes Wort ganz. D100 (1), (3), (5), (6), (7), Antworten „Nur aktuelles Wort (Empfohlen)“, „Ja, wie Compose (Empfohlen)“, „Umbrechen, Muster rahmen (Empfohlen)“, „Nach - . _ / (Empfohlen)“ und „TalkBack vollständig (Empfohlen)“, und D101 (6), (9) bis (11), Antworten „Eigene Markierung (Empfohlen)“, „Nur zu lange trennen (Empfohlen)“, „Am Zeilenende, ohne Strich (Empfohlen)“ und „Zelle passt nicht, ohne · (Empfohlen)“: Bei 200 % Schrift auf 360 px scrollten drei Musterseiten der Werkstatt seitlich, Dateinamen brachen mitten im Namen, und die Schrittanzeige trennte „Erin-ne-rung“ über drei Zeilen. D102 (35), Antwort „Alle Vorschläge (Empfohlen)“ auf die Frage der Übernahme von novalis: Einzeilig mit „…“ bleiben nur virtualisierte Listen mit fester Zeilenhöhe. Die schmalen Spalten hat die Werkstatt nach D99 (1) ohne neue Entscheidung gebaut, nachdem ihre neue Prüfung OVF6 auf ihren Musterseiten 359 Wörter fand, die bei 200 % in sich brachen, obwohl sie in ihre Zeile oder ihren Teil gepasst hätten. D104 (21), (22), (33), (34), Antworten „Alle Vorschläge (Empfohlen)“: Wochentage bleiben bei zwei Buchstaben und fallen bei Platzmangel jeden zweiten aus (nach D103 die einfachere Form statt zweier versetzter Reihen), fünf Einträge der unteren Navigation bleiben bei D99 (1), ⌘+ und ⌘− ändern auf dem Desktop nur den Inhalt (nach D103 die einfachere Form statt des ganzen Fensters bis 200 %), Icons und Kacheln bleiben fest. D108 (1), Antwort „Unter den Namen (Empfohlen)“: In novalis stand der Zustand bei großer Schrift neben einem Namen von wenigen Buchstaben; jetzt gilt in der Fensterleiste dasselbe wie in jeder Liste.",
-   "do": "Web: sebaro.css und sb-fit.js machen es selbst. sebaro.css: der Website-Kopf unter 640 px als umbrechende Zeile mit „Hell oder Dunkel“ in eigener Reihe, die Kurzmeldung setzt „Rückgängig“ unter den Satz, body.sb-page bricht ein zu langes Wort, einen Namen oder Code ohne Strich, sb-field__row setzt das kurze Feld unter das breite. sb-fit.js (am Ende des body): eine zu enge segmentierte Auswahl wird zum Auswahlfeld (die Radios bleiben der Wert im Formular), die Schritte zeigen nur das aktuelle Wort (jedes Wort in span.sb-progress__word), die Faktenzeile wird zur Liste, das Diagramm mit mehreren Reihen zeigt die Legende, und nur ein zu langes Wort bekommt einen Trennstrich (span.sb-hyphenate). Dateinamen als <code class='sb-file-name'>tagwerk-<wbr>2026-<wbr>10-<wbr>10.<wbr>csv</code>, ein Produktname mit translate='no', Kennungen als sb-id; eine gewollte Kürzung (Zeilen, Pfad und Reiter im Fenster) trägt data-sb-truncate. Die Seite nennt ihre Sprache in <html lang='de'>, damit die Trennung sie kennt. Compose: SbWrapText (ein normaler BasicText, TalkBack liest ihn Buchstabe für Buchstabe und Wort für Wort), SbNavigationBar, SbSteps, SbToast, SbTopBar, SbPrimaryAction, SbSegmented (zeigt selbst SbSelectField), SbFactsLine, SbSeriesChart, sbFileName im Hinweis und in der Metaliste; Gewollt gekürzt nur mit data-sb-truncate: eine Zeile einer virtualisierten Liste <div class='sb-row' data-sb-truncate title='Wochenplan Kalenderwoche 43'>, der Pfad sb-window__path, die Reiterliste sb-doc-tabs. Icons als <svg class='sb-icon sb-icon--20'> in px (sprite.css), in Compose SbIcon in dp, in SwiftUI in pt. Fensterzeile: sebaro.css hängt Pfeil, __icon und __check in den Startabstand (--sb-row-lead); ein Teil vor dem Namen, den sebaro nicht kennt, muss seine Breite dort hinzufügen (vorläufig vom Agenten); der Virtualisierer liest die Höhe einer Zeile mit Zustand aus einer gezeichneten Zeile.",
-   "dont": "white-space: nowrap, maxLines = 1, text-overflow: ellipsis oder eine feste Höhe an diesen Stellen; eine Kürzung mit „…“ ohne data-sb-truncate; eine Seite, die bei großer Schrift seitlich scrollt; die Schrift an einer Stelle begrenzen; ein Wort trennen, das ganz in die Zeile passt („Glas ein-getragen“); einen Trennstrich in Code, einem Namen oder einem Dateinamen; einen Dateinamen als sb-id; Flächen und Linien eines Diagramms in Compose mit der Schrift wachsen lassen; eine Fensterzeile kürzen, die nicht virtualisiert ist; ein Wort in einer schmalen Spalte Buchstabe für Buchstabe brechen, wo daneben Platz wäre; Wochentage mit einem Buchstaben; Icons, die mit der Schrift wachsen; ein ganzes Desktop-Fenster bei ⌘+ vergrößern.; ein Zustand neben einem Namen, der nur noch wenige Buchstaben zeigt.",
-   "numbers": "geprüft bei 200 % Schrift auf 320, 360 und 390 px in Hell und Dunkel (Web, Chromium, die Grundschrift des Browsers verdoppelt) und bei Schriftgröße 2,0 auf 360 dp (Compose, auf dem Rechner); eine segmentierte Auswahl wird zum Auswahlfeld, sobald eines ihrer Wörter im Titelgewicht nicht in seine Spalte passt (in Compose bei „Aus · Stündlich · Alle 2 Std.“ ab 125 %, bei „Woche · Monat · Jahr“ zwischen 170 und 200 %; im Web hängt es von der Spalte ab, bei „Aus · Stündlich · Alle 2 Std.“ auf der Werkstattseite mobile.html bei 320 px ab etwa 106 %, bei 360 px ab etwa 119 %, bei 390 px ab etwa 131 %, im Guide in Chromium gemessen), zurück erst, wenn die Wörter 4 px schmaler passen; Schritte in kurzer Form bei 2 bis 4 Schritten; Faktenliste 12 px (12 dp) zwischen den Einträgen; Heatmap-Zellen am Handy etwa 30 dp (DAT-11); Wochentagsköpfe: jeder zweite fällt aus, sobald zwei Buchstaben nicht in die Spalte eines Tages passen (Kalender: Monat schmaler als 7 × (1,33rem + 2 px), vorläufig vom Agenten); Desktop-Editor 16, 18, 20, 22, 24, 28, 32 px (vorläufig vom Agenten); Zustand unter dem Namen, sobald der gekürzte Name neben ihm weniger als min(50 %, 6em) seiner Spalte bekäme (vorläufig vom Agenten); eine Fensterzeile mit einer, zwei oder drei Zeilen bleibt bei 100 % 32, 48 oder 64 px hoch",
+   "title": "Große Schrift: Text folgt dem System",
+   "rule": "Lass Text der Schriftgröße des Systems folgen und prüf jeden Bildschirm einmal bei großer Schrift: Android Schriftgröße 1,3, Web 200 % Zoom bei Desktop-Breite. Er muss benutzbar bleiben. Ein Wort, das nicht in seinen Platz passt, bricht um oder endet mit „…“. Was die Teile der Kopie bei großer Schrift von selbst tun, bleibt, wie gebaut, und verlangt vom Produkt nichts weiter: Text bricht an Leerzeichen um, nur ein Wort, das allein nicht in die Zeile passt, bekommt einen Trennstrich (im Web sb-fit.js), Namen und Code brechen ohne Strich, eine zu enge segmentierte Auswahl wird zum Auswahlfeld, und ein Teil, der etwas neben ein Wort stellt, rückt es darunter (das Ende einer Listenzeile, das kurze von zwei Feldern, der Zustand einer Fensterzeile). Icons und App-Zeichen bleiben fest in px, dp oder pt; in einer Desktop-App ändern ⌘+ und ⌘− nur die Schrift des Inhalts (DSK-09).",
+   "rule_en": "Text follows the system text size; check each screen once at a large size (Android font scale 1.3, web 200 % zoom at desktop width): it must stay usable. A word that does not fit its room wraps or ends in „…“. What the copy's parts do at large text by themselves stays as built and asks nothing more of the product: text wraps at spaces, only a word that alone does not fit its line is hyphenated (sb-fit.js on the web), names and code break without a hyphen, a segmented control too narrow for its words becomes a select, and a part that puts something beside a word moves it below (a list row's end, the shorter of two fields, a window row's status). Icons and app signs stay fixed in px, dp or pt; in a desktop app ⌘+ / ⌘− change only the content's text size (DSK-09).",
+   "why": "Inhaber D147 (5): Die Schwelle für Barrierefreiheit sinkt auf das, was wenig kostet und normalen Nutzern nicht schadet: Text folgt der Systemgröße und wird bei einer großen Stufe geprüft, Auslassungspunkte sind erlaubt; es entfallen 200 % Schrift je Bauteil auf 320 bis 390 px und „nichts wird je abgeschnitten“. D148: Kernregel 30 führt das aus (Android Stufe 1,3, Web 200 % Zoom bei Desktop-Breite, „…“ ist erlaubt). Was D99 bis D111 für große Schrift entschieden haben (Umbruch in ganzen Wörtern, Trennstrich nur für ein zu langes Wort, Auswahlfeld statt Segmenten, Raum für ein Wort neben einem Teil, feste Icons, ⌘+ und ⌘− nur für den Inhalt), ist in den Teilen der Kopie gebaut und bleibt so.",
+   "do": "Web: die Typrollen der Tokens und die Teile der Kopie; sebaro.css und, wo die Seite es lädt, sb-fit.js (am Ende des body) machen die gebauten Formen selbst. Compose: die Sb-Bauteile, für eigenen Fließtext SbWrapText (nicht für den Wert eines Felds und nicht für Kennungen). Gewollt gekürzt wird mit text-overflow: ellipsis und data-sb-truncate (TXT-09). Prüfen wie die Startvorlagen: im Web einmal bei 200 % auf Desktop-Breite, auf Android in den Render-Tests bei Schriftgröße 1,3.",
+   "dont": "Die Schrift an einer Stelle begrenzen, sodass sie der Schriftgröße des Systems nicht folgt; Text, der hinter einer festen Höhe verschwindet, ohne „…“; Icons, die mit der Schrift wachsen; ein ganzes Desktop-Fenster bei ⌘+ vergrößern; Arbeit für große Schrift, die die normale Bedienung schlechter macht (Kernregel 30).",
+   "numbers": "je Bildschirm einmal: Android Schriftgröße 1,3, Web 200 % Zoom bei Desktop-Breite (Kernregel 30); Icons und App-Zeichen fest in px, dp oder pt",
    "decisions": [
     "D99",
     "D100",
@@ -4589,28 +4592,30 @@
     "D102",
     "D104",
     "D108",
-    "D111"
+    "D111",
+    "D147",
+    "D148"
    ],
-   "source": "DECISIONS.md D99 (1), (2), D100 (1), (3), (5) bis (7), D101 (1), (2), (6), (9) bis (12); systems/sebaro/SYSTEM.md §5; spec/02-components.md §2.1, §2.7, §3.7, §3.12, §4.2, §5, §7; spec/07-voice.md §3.1; spec/08-platform-android.md §14.7, §14.10, §14.17, §14.18, §16; spec/09-platform-web.md §3.1, §4.1; spec/10-facts.md §4.1; css/sebaro.css; demo/assets/sb-fit.js; shared/DEMO-CHECK.md §3.5; CHECKS.md §27, §28; D102 (35), D104 (21), (22), (33), (34); spec/02-components.md §3.3, §3.16, §3.21, §4.6, §4.13; spec/04-icons.md §3; shared/DEMO-CHECK.md §3.6; CHECKS.md §30.1, §30.2, §31.3, §31.4; D108 (1); spec/02-components.md §4.13; CHECKS.md §34.1, §34.3; D111 (3), (4); spec/02-components.md §2.1, §2.3; spec/08-platform-android.md §16; shared/DEMO-CHECK.md §3.5 (1.10)",
+   "source": "DECISIONS.md D147 (5), D148; design/KERN.md Regel 30; die gebauten Formen: DECISIONS.md D99 (1), (2), D100 (1), (3), (5) bis (7), D101 (1), (2), (6), (9) bis (12); systems/sebaro/SYSTEM.md §5; spec/02-components.md §2.1, §2.7, §3.7, §3.12, §4.2, §5, §7; spec/07-voice.md §3.1; spec/08-platform-android.md §14.7, §14.10, §14.17, §14.18, §16; spec/09-platform-web.md §3.1, §4.1; spec/10-facts.md §4.1; css/sebaro.css; demo/assets/sb-fit.js; shared/DEMO-CHECK.md §3.5; CHECKS.md §27, §28; D102 (35), D104 (21), (22), (33), (34); spec/02-components.md §3.3, §3.16, §3.21, §4.6, §4.13; spec/04-icons.md §3; shared/DEMO-CHECK.md §3.6; CHECKS.md §30.1, §30.2, §31.3, §31.4; D108 (1); spec/02-components.md §4.13; CHECKS.md §34.1, §34.3; D111 (3), (4); spec/02-components.md §2.1, §2.3; spec/08-platform-android.md §16; shared/DEMO-CHECK.md §3.5 (1.10)",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
-   "check": "check_demo.py 1.10.0 der Werkstatt auf jeder Seite: OVF3 (bei 200 % Schrift auf 320, 360 und 390 px, hell und dunkel, ist keine Seite breiter als das Fenster), OVF4 (kein Rahmen schneidet Text ab; ausgenommen sind ein Kasten, der scrollt, und eine Kürzung mit text-overflow: ellipsis und data-sb-truncate), OVF6 (bei 100 % und im 200-%-Lauf ist kein Wort in sich gebrochen, das in seine Zeile oder in den Teil passen würde, der es zusammendrückt; ausgenommen Code, Dateinamen, Kennungen, data-sb-truncate und die gleich breiten Spalten von unterer Navigation, Schritten, Segmenten und Reitern; ein Teil mit data-sb-narrow-ok zählt seine zusammengedrückten Wörter in einer Info-Zeile) und OVF5 (der Text eines Felds ist breiter als das Feld: ein seitlich laufender Wert und ein Platzhalter mit „…“ neben eigener Beschriftung zählen in Info-Zeilen, ein anders abgeschnittener Platzhalter ist ein Fehler; ein schreibgeschützter Wert, der nicht gesendet wird, ein gesperrtes Feld und die gewählte Möglichkeit einer Auswahl bleiben Warnungen); dazu jede Seite bei 200 % ansehen. Compose: extract_compose.py --render bei Schriftgröße 2,0 und jedes Bild ansehen.",
-   "example_hint": "Untere Navigation, Schritte, Segmente, Kurzmeldung und eine Listenzeile auf wenig Platz: „Einstel-lungen“ getrennt, „Erinnerung“ unter dem Haken, die Segmente werden zum Auswahlfeld, „Rückgängig“ steht unter dem Satz, der Status unter dem Namen; falsch: mit „…“ gekürzte Wörter in der Navigation. Dazu ein virtualisierter Baum von 240 px, in dem „nicht gesichert“ unter dem Namen steht.",
-   "note": "Im Web macht sb-fit.js die Wechsel (Auswahlfeld, kurze Schritte, Faktenliste, Legende, Trennstrich) und misst bei jeder Größe, nach einem Wechsel von Hell und Dunkel oder Farbton und sobald die Schrift geladen ist neu; ohne das Skript brechen die Wörter um und keine Seite scrollt seitlich, die Teile behalten aber ihre breite Form. Vorläufig vom Agenten gewählt (in der Werkstatt benannt): die 4 px beim Zurückwechseln, translate='no' als Zeichen eines Namens, data-sb-truncate als einzige Ausnahme für eine gewollte Kürzung, die Gruppe der Segmente ohne eigene Rolle, solange das Auswahlfeld steht. TalkBack liest Text in Compose jetzt ganz, auch Buchstabe für Buchstabe und Wort für Wort, und Dateinamen so, wie sie geschrieben sind (D100 (7)); geprüft im Semantikbaum, nicht mit TalkBack selbst; dafür kann im allerersten Bild der Trennstrich fehlen. OVF4 sieht Text in einem Eingabe- oder Auswahlfeld nicht (dafür gibt es OVF5; seit 2026-10-28 sind die 8 px hinter dem Chevron eines Auswahlfelds fest in px, so passt „Gesundheit“ in der Werkstatt bei 320 px und 200 % wieder) und keinen Text, den clip-path schneidet. In diesem Guide behält ein Handyrahmen in einem Regelbeispiel bei großer Schrift mindestens 320 px und scrollt in seinem Rahmen, ebenso ein Beispiel, das für einen ganzen Bildschirm oder ein Fenster steht (ein Dialog, ein Sheet, eine Palette, ein Kopf, eine Liste im Fenster); ein breites Fensterbild wächst mit der Schrift, wie das Fenster bei doppelter Größe aussähe (D104 (33)). Die übrigen Beispiele brechen in ihrer eigenen Breite um, soweit ihr Inhalt es kann; Codeblöcke, Tabellen, Diagramme, Zeichnungen fester Breite und einige absichtlich falsche Muster scrollen bei 200 % auf 320 px weiter in ihrem Rahmen, ohne Text abzuschneiden (die Liste steht auf dem Ausblick; vorläufig vom Agenten). Eine Spalte, die mit Absicht schmal ist, trägt data-sb-narrow-ok; OVF6 zählt ihre zusammengedrückten Wörter dann in einer Info-Zeile, statt sie zu melden, ein unnötig gebrochenes Wort bleibt ein Fehler (die schmalen Spalten zu SCH-06 und TXT-15). Eine Menüzeile, deren Wort neben dem Kürzel brechen würde, setzt das Kürzel unter das Wort, und ein langer Spaltenname der Tafel steht unter „Mehr“ (sb-fit.js und sebaro.css, Werkstatt-Commit ef6121d, vorläufig vom Agenten). Nach D103 bleibt in Kauf genommen, dass sich Karten auf der freien Fläche einer Zusammenarbeit bei 200 % überdecken können (D104 (11)). Seit D111 sind ein seitlich laufender Wert und ein Platzhalter mit „…“ erlaubt; als Warnung meldet OVF5 nur noch einen schreibgeschützten Wert, der nicht gesendet wird, ein gesperrtes Feld und die gewählte Möglichkeit einer Auswahl. Im Pfad des Fensters behält der aktuelle Ort seinen Namen, bis jeder Ort davor auf 2em geschrumpft ist (vorläufig von der Werkstatt, 2026-10-28). In Compose ist SbWrapText seit sebaro-compose 1.10.3 öffentlich: Eine App setzt eigenen Fließtext, Bildunterschriften und Beschriftungen damit, wo ein einfaches Text bei großer Schrift abgeschnitten oder zerteilt würde; nicht für den Wert eines Felds und nicht für Kennungen. Nicht geprüft: Silbentrennung auf Geräten, die Schriftgröße eines Handys, Androids Schriftskalierung und der Seitenzoom (nur die Grundschrift des Browsers), Firefox und WebKit, Screenreader.",
-   "changed": "2026-10-28"
+   "check": "Jeden Bildschirm einmal bei großer Schrift ansehen (Android 1,3, Web 200 % bei Desktop-Breite): Er bleibt benutzbar, „…“ ist erlaubt. Die Startvorlagen prüfen das in ihren Tests (Web bei 200 % auf der breitesten Breite, Android in den Render-Tests bei 1,3).",
+   "example_hint": "Ein Bildschirm bei Schriftgröße 1,3: das Wort der unteren Navigation auf zwei Zeilen, ein langer Titel endet mit „…“, die Segmente sind ein Auswahlfeld; falsch: eine Schrift, die bei großer Systemgröße klein bleibt.",
+   "note": "Gebaut ist mehr, als die Regel verlangt: Was D99 bis D111 entschieden haben (die Formen oben, im Web dazu die kurzen Schritte, die Faktenliste und die Legende von sb-fit.js), bleibt in der Kopie und ist keine Pflicht mehr. Nicht geprüft: Silbentrennung auf Geräten, Firefox und WebKit, Screenreader.",
+   "changed": "2026-11-14"
   },
   {
    "id": "STR-01",
    "area": "start",
-   "title": "Gleicher Start: Kachel wandert in den Kopf",
-   "rule": "Lass jedes Produkt auf jeder Plattform gleich starten: die 96-px-Kachel steht mittig auf bg, nur solange die App wirklich lädt, und wandert dann in 200 ms (emphasized) in die 32-px-Kachel in Kopf- oder Titelleiste; der Inhalt kommt von unten. Im Web nur beim ersten Aufruf je Browser-Tab und nur bis load, ohne Skript gar nicht. Ein Produkt, das nichts speichern will, setzt <html data-sb-start='nostore'>: Der Start erscheint dann bei jedem Laden (eine App mit einer Hülle einmal je Laden), und das Skript liest und schreibt nichts; ohne Speicher und ohne nostore erscheint er nicht. Bei reduzierter Bewegung blendet die Kachel an Ort und Stelle aus.",
-   "rule_en": "Same start everywhere: 96 px tile centred on bg while really loading, then flies to the 32 px header/title-bar tile in 200 ms (emphasized), content enters from below; on the web only on the first visit per browser tab (sessionStorage sb-started) until load; none without JS; a product that stores nothing sets data-sb-start=\"nostore\" and shows the start on every load without reading or writing storage, without storage and without nostore none; reduced motion = fade in place.",
-   "why": "Inhaber D49: „ich will überll gleichen start“; D52: „mach fest. kachel wandert in den kopf mit web“ (Web nur beim ersten Aufruf, nur während des echten Ladens); D55: „außer 3 da sind 200 ms gut“; D85: „Start „nur beim ersten Aufruf“ ja“, gemeint ist der erste Aufruf je Browser-Tab; D91 I9a: auf iOS Startbildschirm mit Grund und Kachel. D102 (51), Antwort „Alle Vorschläge (Empfohlen)“ auf eine Frage der Übernahme von RetroBeam: data-sb-start=\"nostore\" als Wahl des Produkts, für eine App, die nichts im Browser ablegen will.",
-   "do": "Web: <html data-sb-start>, sb-start.js nach theme-init.js, data-sb-start-target, data-sb-start-enter, sbStart.hold()/release() für eigene App-Daten; Tauri: Fenstergrund aus der gespeicherten Wahl (DSK-14); Android: Systemsplash ohne eigene Animation → SbStart; iOS: der Exporter schreibt mit --product den Startbildschirm (Farbe SebaroBg, Bild StartTile 96 pt), SbStart(product:ready:) wiederholt ihn als erstes Bild. Ein Produkt ohne Speicher: <html data-sb-start='nostore'>.",
-   "dont": "Startbild länger als das echte Laden; Logo-Animation; Spinner oder Ladebalken auf dem Startbild; Start bei jeder Navigation; weißer erster Frame.",
-   "numbers": "--sb-x-sebaro-start-tile-size 96px; Ziel 32 px; 200 ms (--sb-motion-duration-long) statt 320 ms der Skizze; sessionStorage sb-started",
+   "title": "Gleicher Start: die Fläche in der Produktfarbe",
+   "rule": "Lass jedes Produkt auf jeder Plattform gleich starten: die ganze Fläche in der Produktfarbe (der Kachelfarbe seiner Gruppe) mit dem weißen Symbol in der Mitte, nur solange die App wirklich lädt; dann blendet die Fläche in 200 ms zur App über, immer, auch bei reduzierter Bewegung (BEW-04). Nichts wandert und nichts schrumpft. Im Web nur beim ersten Aufruf je Browser-Tab und nur bis load (eine App mit eigenen Daten hält ihn mit sbStart.hold() und gibt ihn mit release() frei), ohne Skript gar nicht. Ein Produkt, das nichts speichern will, setzt <html data-sb-start='nostore'>: Der Start erscheint dann bei jedem Laden (eine App mit einer Hülle einmal je Laden), und das Skript liest und schreibt nichts; ohne Speicher und ohne nostore erscheint er nicht. Eine Desktop-App hält ihr Fenster bis zum Ende des Starts in der Produktfarbe (DSK-14).",
+   "rule_en": "Same start everywhere: the whole screen in the product colour (its group's tile colour) with the white symbol in the middle while the app really loads, then a 200 ms fade to the app, always, also under reduced motion (BEW-04); nothing travels or shrinks. On the web only on the first visit per browser tab (sessionStorage sb-started) until load (an app with its own data holds it with sbStart.hold() and frees it with release()); none without JS; a product that stores nothing sets data-sb-start=\"nostore\" and shows the start on every load without reading or writing storage, without storage and without nostore none. A desktop app keeps its window in the product colour until the start is over (DSK-14).",
+   "why": "Inhaber D144 (3): Eine App startet mit dem ganzen Bildschirm in der Produktfarbe und dem weißen Symbol, dann folgt die App; im Web weiter nur beim ersten Aufruf je Tab. Das ändert D49 und D62, die Kachel in der Mitte, die ohne Kürzel in den Kopf wanderte. D143 (4): Der Start ist einer der festen Momente der Produktfarbe. D148: Kernregel 29 ersetzt STR-01; diese Regel sagt jetzt dasselbe. Es bleiben D49 („ich will überll gleichen start“), D52 (im Web nur beim ersten Aufruf, nur während des echten Ladens), D55 (200 ms) und D85 (der erste Aufruf je Browser-Tab). D102 (51): data-sb-start=\"nostore\" als Wahl des Produkts, für eine App, die nichts im Browser ablegen will; D102 (52): 200 ms Ausblenden bei beiden Einstellungen der Bewegung.",
+   "do": "Web: <html data-sb-start>, sb-start.js im Kopf nach theme-init.js; als erstes Element im body <div class='sb-start' data-sb-product='<id>' aria-hidden='true'><span class='sb-start__tile'>…</span></div> mit sign/sign.svg des Produktordners inline, product.css nach tokens.css; data-sb-start-enter am Inhalt; sbStart.hold()/release() für eigene App-Daten (die Web-App-Vorlage hält den Start, bis die App gemalt hat). Ein Produkt ohne Speicher: <html data-sb-start='nostore'>. Tauri: das Fenster entsteht in der Kachelfarbe und nimmt nach dem Start den gespeicherten Grund (DSK-14). Android: Theme.Sebaro.Start im Manifest und SbStart(ready, AppProduct, { SbStartSymbol(AppProduct, it) }) über der App, nur beim ersten Start der Activity; Theme, Symbol und AppProduct schreibt der Baukasten der Kopie.",
+   "dont": "Eine Kachel, die in den Kopf wandert, oder ein Symbol, das schrumpft; Startbild länger als das echte Laden; Logo-Animation; Spinner oder Ladebalken auf dem Startbild; Start bei jeder Navigation; ein weißer oder neutraler erster Frame vor der Produktfarbe; ein Start in einer anderen Farbe als der Kachelfarbe des Produkts.",
+   "numbers": "Symbol 96 px, dp oder pt (--sb-x-sebaro-start-tile-size); Ausblenden 200 ms (--sb-x-sebaro-enter-fade-duration) bei jeder Einstellung der Bewegung; sessionStorage sb-started",
    "decisions": [
     "D49",
     "D52",
@@ -4618,17 +4623,20 @@
     "D62",
     "D85",
     "D91",
-    "D102"
+    "D102",
+    "D143",
+    "D144",
+    "D148"
    ],
-   "source": "DECISIONS.md D49, D52, D55, D85, D91 (I9a); systems/sebaro/spec/03-signature.md §14.1, §14.2; spec/01-foundations.md §7; spec/09-platform-web.md §1, §13; spec/12-platform-ios.md §10; demo/assets/sb-start.js; D102 (51); spec/03-signature.md §14 (Zeile web)",
+   "source": "DECISIONS.md D144 (3), D143 (4), D148; design/KERN.md Regel 29; systems/sebaro/spec/03-signature.md §14.1; spec/09-platform-web.md §13, §13.1; js/sb-start.js der Kopie; DECISIONS.md D49, D52, D55, D85, D91 (I9a); systems/sebaro/spec/03-signature.md §14.1, §14.2; spec/01-foundations.md §7; spec/09-platform-web.md §1, §13; spec/12-platform-ios.md §10; demo/assets/sb-start.js; D102 (51); spec/03-signature.md §14 (Zeile web)",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
-   "check": "Komponentenblatt „Start und Bewegung“ (sbStart.play(frame)) hell und dunkel; zweiter Seitenaufruf ohne Start; ungeprüft: WebKit/Tauri, Android-Splash-Übergabe (bis 160-dp-Icon vor der 96-dp-Kachel); iOS nur im Simulator als Einzelbilder gesehen, nicht als Bewegung.",
-   "example_hint": "Rahmen mit Taste „Start zeigen“: Kachel fliegt in den Kopf, Inhalt gleitet von unten; falsch: Startbild mit Spinner und Logo-Animation.",
-   "changed": "2026-10-26",
-   "note": "Der Startbildschirm des Systems auf iOS ist statisch und immer kühl; mit dem Farbton Warm ist der Schritt zum ersten Bild sichtbar."
+   "check": "Erster Aufruf: die ganze Fläche in der Kachelfarbe mit dem weißen Symbol, dann 200 ms Ausblenden, hell und dunkel und bei jeder Einstellung der Bewegung; zweiter Aufruf im selben Tab ohne Start (die Web-App-Vorlage prüft das in tests/start.spec.ts); in Tauri öffnet das Fenster in der Kachelfarbe (Test der Desktop-Vorlage); ungeprüft: WebKit und ein echtes Tauri-Fenster, die Übergabe vom Android-Splash auf Geräten.",
+   "example_hint": "Rahmen mit Taste „Start zeigen“: die Fläche in der Produktfarbe mit dem weißen Symbol blendet zur App über; falsch: Startbild mit Spinner und Logo-Animation.",
+   "changed": "2026-11-14",
+   "note": "SwiftUI ist eingefroren (D147 (4)): Der Swift-Code der iOS-Vorlage zeigt noch die Kachel, die in den Kopf wandert; eine iOS-App baut den Start nach dieser Regel, wenn sie ansteht."
   },
   {
    "id": "STR-02",
@@ -5406,9 +5414,9 @@
    "id": "DSK-06",
    "area": "plattform-desktop",
    "title": "Titelleiste je System",
-   "rule": "Mach auf macOS unsere 48-px-Leiste zur Titelleiste: Die drei Fensterknöpfe des Systems stehen an ihrem Anfang, die Leiste lässt ihnen 80 px und gibt den Platz im Vollbild zurück. Auf Windows und Linux bleibt der Rahmen des Systems mit seinen Knöpfen, dem Einrasten und dem Doppelklick; unsere Leiste steht darunter. Die Leiste ist Ziehfläche, ihr Text lässt sich nicht markieren, und der Fenstertitel des Systems lautet „<Ort> · <App>“ („Wochenplan · novalis“).",
-   "rule_en": "On macOS our 48 px bar is the title bar (system window buttons at its start, 80 px room, given back in full screen); on Windows and Linux the system frame stays (buttons, snap, double click) and our bar sits below; the bar is a drag region with unselectable text; the system window title is „<place> · <app>“.",
-   "why": "Inhaber D91 F1a: „macOS: eine Leiste über der Ampel; Windows und Linux: Systemrahmen, unsere Leiste darunter“. Eigene Fensterknöpfe auf Windows und Linux würden Einrasten, Fensterverwalter und Screenreader brechen.",
+   "rule": "Mach auf macOS unsere 48-px-Leiste zur Titelleiste: Die drei Fensterknöpfe des Systems stehen an ihrem Anfang, die Leiste lässt ihnen 80 px und gibt den Platz im Vollbild zurück. Auf Windows und Linux bleibt der Rahmen des Systems mit seinen Knöpfen, dem Einrasten und dem Doppelklick; unsere Leiste steht darunter. Die Leiste ist Ziehfläche, ihr Text lässt sich nicht markieren, und der Fenstertitel des Systems lautet „<Ort> · <App>“ („Wochenplan · novalis“). Der Pfad des Fensters (sb-window__path) ist Text, keine Navigation: Spans ohne Links, ohne nav und ol; erreicht werden die Orte über Seitenleiste, Baum und Palette, die Brotkrumen von NAV-08 sind für Seiten.",
+   "rule_en": "On macOS our 48 px bar is the title bar (system window buttons at its start, 80 px room, given back in full screen); on Windows and Linux the system frame stays (buttons, snap, double click) and our bar sits below; the bar is a drag region with unselectable text; the system window title is „<place> · <app>“. The window path (sb-window__path) is text, not navigation: spans without links, no nav or ol; places are reached through sidebar, tree and palette, NAV-08's breadcrumbs are for pages.",
+   "why": "Inhaber D91 F1a: „macOS: eine Leiste über der Ampel; Windows und Linux: Systemrahmen, unsere Leiste darunter“. Eigene Fensterknöpfe auf Windows und Linux würden Einrasten, Fensterverwalter und Screenreader brechen. Ohne neue Entscheidung, aus spec/02 §4.17 der Werkstatt: Der Pfad sagt nur, wo man ist.",
    "do": "macOS: titleBarStyle 'Overlay', hiddenTitle, trafficLightPosition 16 / 18; Windows und Linux: decorations true; <html data-sb-platform='mac'> vor dem ersten Bild; data-tauri-drag-region an __titlebar, __name und __path.",
    "dont": "Eigene Fensterknöpfe auf Windows oder Linux; data-sb-platform in einer Web-App; der Fenstertitel nur „novalis“; eine Titelleiste in Produktfarbe.",
    "numbers": "Leiste 48 px; Platz für die Fensterknöpfe 80 px (space-16 + space-4); Knöpfe bei 16 / 18",
@@ -5416,7 +5424,7 @@
     "D67",
     "D91"
    ],
-   "source": "DECISIONS.md D91 (F1a); systems/sebaro/spec/02-components.md §4.17; spec/09-platform-web.md §13.1",
+   "source": "DECISIONS.md D91 (F1a); systems/sebaro/spec/02-components.md §4.17; spec/09-platform-web.md §13.1; spec/02-components.md §4.17 (der Pfad ist Text)",
    "platforms": [
     "desktop"
    ],
@@ -5424,7 +5432,7 @@
    "check": "Muster für macOS und Windows ansehen; in einem echten Tauri-Fenster nicht geprüft (offen).",
    "example_hint": "macOS-Fenster mit Fensterknöpfen in unserer Leiste und Windows-Fenster mit Systemrahmen darüber; falsch: eigene Fensterknöpfe in Produktfarbe.",
    "note": "Nicht in einem echten Tauri-Fenster und nicht unter Windows oder Linux geprüft.",
-   "changed": "2026-10-21"
+   "changed": "2026-11-14"
   },
   {
    "id": "DSK-07",
@@ -5625,26 +5633,27 @@
    "id": "DSK-14",
    "area": "plattform-desktop",
    "title": "Fenstergrund aus der gespeicherten Wahl",
-   "rule": "Leg das Hauptfenster in Rust an, nicht in tauri.conf.json: Die App speichert „Hell oder Dunkel“ und „Farbton“ in ihrer eigenen Einstellungsdatei (appearance.json oder die eine Einstellungsdatei, die sie schon hat; der Farbton dort als „cool“ oder „warm“), wählt daraus den Grund des Fensters und das Systemthema und gibt die Wahl vor den Skripten der Seite an die Seite weiter; als sb-tone kommt nur „warm“ dort an (FAR-15). Die vier Gründe kommen beim Bauen aus dem exportierten tokens.json, nie als abgeschriebener Hex-Wert. Ändert die Seite die Wahl, setzt set_appearance Grund und Thema jedes Fensters.",
-   "rule_en": "Create the main window in Rust, not in tauri.conf.json: the app stores theme and tone in its own settings file (appearance.json or the one settings file it already has; the tone as „cool“ or „warm“), picks the window ground and system theme from it and hands the choice to the page before its scripts run (only „warm“ reaches it as sb-tone); the four grounds come from the exported tokens.json at build time, never copied hex; set_appearance updates every window.",
-   "why": "Inhaber D91 F13a: Fenster in Rust anlegen, Grund nach der gespeicherten Wahl. So öffnet ein dunkles Fenster ohne weißen Blitz, auch mit dem warmen Farbton. Ohne neue Entscheidung, aus der Übernahme von novalis (spec/09 §13.1): Eine App mit einer einzigen Einstellungsdatei braucht keine zweite; die Regel ist eine Datei, die Rust liest, bevor ein Fenster entsteht. build.rs findet tokens.json über die Konstante oder Umgebungsvariable SEBARO_EXPORT.",
-   "do": "\"windows\": [] in tauri.conf.json; build.rs liest color.bg und variants.warm.*.bg aus sebaro/tokens.json; ein Initialisierungsskript schreibt sb-theme und sb-tone für theme-init.js und setzt <html data-sb-platform>; build.rs liest tokens.json unter SEBARO_EXPORT (../ui/src/sebaro oder die Umgebungsvariable gleichen Namens).",
-   "dont": "Ein fester Fenstergrund in tauri.conf.json; Hex-Werte im Rust-Code; die Wahl nur im localStorage der Webview; das Fenster unsichtbar starten und nach dem ersten Bild zeigen.",
+   "rule": "Leg das Hauptfenster in Rust an, nicht in tauri.conf.json: Die App speichert „Hell oder Dunkel“ und „Farbton“ in ihrer eigenen Einstellungsdatei (appearance.json oder die eine Einstellungsdatei, die sie schon hat; der Farbton dort als „cool“ oder „warm“), wählt daraus den Grund des Fensters und das Systemthema und gibt die Wahl vor den Skripten der Seite an die Seite weiter; als sb-tone kommt nur „warm“ dort an (FAR-15). Bis der Start vorbei ist (sb-start-done), hat das Fenster die Kachelfarbe des Produkts, die Farbe des Starts (STR-01); dann nimmt es den gespeicherten Grund. Die Kachelfarbe (signTiles.<group>.tile, die Gruppe aus sebaro.product.json) und die vier Gründe kommen beim Bauen aus tokens.json der Kopie, nie als abgeschriebener Hex-Wert. Ändert die Seite die Wahl, setzt set_appearance Grund und Thema jedes Fensters.",
+   "rule_en": "Create the main window in Rust, not in tauri.conf.json: the app stores theme and tone in its own settings file (appearance.json or the one settings file it already has; the tone as „cool“ or „warm“), picks the window ground and system theme from it and hands the choice to the page before its scripts run (only „warm“ reaches it as sb-tone); until the start is over (sb-start-done) the window has the product's tile colour, the colour of the start (STR-01), then the stored ground; the tile colour (signTiles.<group>.tile, the group from sebaro.product.json) and the four grounds come from the copy's tokens.json at build time, never copied hex; set_appearance updates every window.",
+   "why": "Inhaber D91 F13a: Fenster in Rust anlegen, Grund nach der gespeicherten Wahl. So öffnet ein dunkles Fenster ohne weißen Blitz, auch mit dem warmen Farbton. Ohne neue Entscheidung, aus der Übernahme von novalis (spec/09 §13.1): Eine App mit einer einzigen Einstellungsdatei braucht keine zweite; die Regel ist eine Datei, die Rust liest, bevor ein Fenster entsteht. build.rs findet tokens.json über die Konstante oder Umgebungsvariable SEBARO_EXPORT. Inhaber, 13.11.2026 (Werkstatt CHECKS.md §124): Das Fenster öffnet in der Produktfarbe, dem Grund des Starts (D144 (3)); vorher stand ein gebautes Fenster etwa 0,1 s im neutralen Grund vor dem Start. Den gespeicherten Grund nimmt es erst nach dem Start, weil WebKit den Grund des Fensters zeigt, bis die Seite gemalt hat.",
+   "do": "\"windows\": [] in tauri.conf.json; build.rs liest color.bg und variants.warm.*.bg aus sebaro/tokens.json; ein Initialisierungsskript schreibt sb-theme und sb-tone für theme-init.js und setzt <html data-sb-platform>; build.rs liest tokens.json unter SEBARO_EXPORT (../ui/src/sebaro oder die Umgebungsvariable gleichen Namens). build.rs liest auch signTiles.<group>.tile aus tokens.json, die Gruppe aus tile in sebaro.product.json; das Fenster entsteht mit dieser Farbe als Grund, und nach dem Start ruft die Seite den Befehl start_ended, der den gespeicherten Grund setzt (Desktop-Vorlage: src-tauri/build.rs, src/window.rs, ui/src/lib/start.ts).",
+   "dont": "Ein fester Fenstergrund in tauri.conf.json; Hex-Werte im Rust-Code; die Wahl nur im localStorage der Webview; das Fenster unsichtbar starten und nach dem ersten Bild zeigen.; das Fenster im neutralen Grund öffnen, bevor der Start steht.",
    "numbers": "vier Gründe: kühl hell, kühl dunkel, warm hell, warm dunkel",
    "decisions": [
     "D52",
     "D75",
-    "D91"
+    "D91",
+    "D144"
    ],
-   "source": "DECISIONS.md D91 (F13a); systems/sebaro/spec/09-platform-web.md §13.1; tools/export_system.py --target tauri (tokens.json); spec/09-platform-web.md §6.2, §13.1 (Werkstatt-Commit 68ba334)",
+   "source": "DECISIONS.md D91 (F13a); systems/sebaro/spec/09-platform-web.md §13.1; tools/export_system.py --target tauri (tokens.json); spec/09-platform-web.md §6.2, §13.1 (Werkstatt-Commit 68ba334); spec/03-signature.md §14.1 (Zeile Tauri); spec/09-platform-web.md §13.1 (der Grund vor dem Start); CHECKS.md §124",
    "platforms": [
     "desktop"
    ],
    "status": "entschieden",
-   "check": "Start im Dunkeln ohne weißen Rahmen auf jedem System; der Rust-Code kompiliert; in einem echten Tauri-Fenster nicht geprüft (offen).",
+   "check": "Start im Dunkeln ohne weißen Rahmen auf jedem System; das Fenster öffnet in der Kachelfarbe (Test der Desktop-Vorlage the_window_opens_in_the_tile_colour_of_the_kit); der Rust-Code kompiliert; in einem echten Tauri-Fenster nicht geprüft (offen).",
    "example_hint": "Ein dunkles und ein warmes Fenster, die im richtigen Grund öffnen; falsch: weißer erster Rahmen vor der dunklen Ansicht.",
-   "note": "Auf macOS ist ein kurzer heller Rahmen der Webview möglich, weil Tauri dort nur den Fenstergrund setzt; nicht in einem echten Tauri-Fenster geprüft.",
-   "changed": "2026-10-26"
+   "note": "Auf macOS ist ein kurzer heller Rahmen der Webview möglich, weil Tauri dort nur den Fenstergrund setzt; nicht in einem echten Tauri-Fenster geprüft. Die Übergabe bei sb-start-done ist in keinem echten Tauri-Fenster gelaufen.",
+   "changed": "2026-11-14"
   },
   {
    "id": "DSK-15",
@@ -5821,8 +5830,8 @@
    "title": "Apps benennen auf --sb-* um",
    "rule": "Lass jede App die sebaro-Tokens unter ihren --sb-*-Namen nutzen. Apps mit eigenen Namen (z. B. novalis mit --ds-*) benennen auf --sb-* um; der Export schreibt keine fremden Namen. Neue Apps beginnen gleich mit --sb-*.",
    "rule_en": "Apps use sebaro tokens under their --sb-* names; apps with their own names (e.g. novalis --ds-*) rename to --sb-*; the export never writes foreign names; new apps start with --sb-*.",
-   "why": "Inhaber D67 (13), Wortlaut „13b“, gegen den Agentenvorschlag A (Zuordnungsdatei im Export); D4 hatte die Umbenennung angekündigt. Skizze §13: „Am Ende sauberer, alle Apps sprechen gleich.“ Von Hand übertragene Werte verletzen „eine Quelle je Wert“.",
-   "do": "export_system.py sebaro --target tauri → tokens.css wie jede andere App; in novalis alle --ds-… auf --sb-… umbenennen.",
+   "why": "Inhaber D67 (13), Wortlaut „13b“, gegen den Agentenvorschlag A (Zuordnungsdatei im Export); D4 hatte die Umbenennung angekündigt. Skizze §13: „Am Ende sauberer, alle Apps sprechen gleich.“ Von Hand übertragene Werte verletzen „eine Quelle je Wert“. D147 (3), D148: Ein Produkt bekommt sebaro nur noch als Kopie seiner Produktart aus einem Release und hält sie mit deren Updater aktuell, auch eine Desktop-App.",
+   "do": "Eine Desktop-App holt ihre Kopie wie jedes Produkt mit dem Updater der Kopie (node update-copy.mjs --profile desktop, später node <Kopie>/checks/update-copy.mjs) und nimmt tokens.css daraus wie jede andere App; in novalis alle --ds-… auf --sb-… umbenennen.",
    "dont": "Eine Zuordnungsdatei oder --names-Option, die fremde Token-Namen schreibt; Werte von Hand kopieren (TEC-01).",
    "numbers": "novalis: 32 Dateien umzubenennen (Skizze §13)",
    "decisions": [
@@ -5830,18 +5839,20 @@
     "D4",
     "D3",
     "D77",
-    "D89"
+    "D89",
+    "D147",
+    "D148"
    ],
-   "source": "DECISIONS.md D67 (13), D4, D77, D89; shared/ADOPTION.md",
+   "source": "DECISIONS.md D67 (13), D4, D77, D89; shared/ADOPTION.md; shared/PACKAGES.md §8 (update-copy.mjs)",
    "platforms": [
     "desktop",
     "web"
    ],
    "status": "entschieden",
-   "check": "Im App-Repo nach der Umbenennung: grep -rn -- '--ds-' → 0 Treffer; tokens.css kommt aus export_system.py.",
-   "example_hint": "Fluss tokens.json → export_system.py → tokens.css mit --sb-*-Namen; falsch: Zuordnungsdatei, die --ds-* schreibt.",
+   "check": "Im App-Repo nach der Umbenennung: grep -rn -- '--ds-' → 0 Treffer; tokens.css kommt aus der Kopie (update-copy.mjs).",
+   "example_hint": "Fluss Kopie (update-copy.mjs) → tokens.css mit --sb-*-Namen; falsch: Zuordnungsdatei, die --ds-* schreibt.",
    "note": "shared/ADOPTION.md ist auf dem Stand von D66–D90 (D77). Die Umbenennung geschieht im novalis-Repo, nicht in sebaroDesign; novalis übernimmt sebaro als erstes Produkt, nach den offenen Punkten der Runde 6 (D89).",
-   "changed": "2026-10-20"
+   "changed": "2026-11-14"
   },
   {
    "id": "TEC-08",

@@ -11,6 +11,26 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+Katalog an die Kernregeln angeglichen, der Rest: Sechs Regeln sagten noch, was spätere Entscheidungen geändert haben,
+und sagen jetzt dasselbe wie die Kernregeln und der heutige Code. **STR-01** (Start) folgt Kernregel 29 (D143, D144):
+die ganze Fläche in der Produktfarbe mit dem weißen Symbol, dann in 200&nbsp;ms die App, immer, auch bei reduzierter
+Bewegung (D102 (52)); im Web nur beim ersten Aufruf je Browser-Tab (`sb-start.js` nach `theme-init.js`,
+`data-sb-start="nostore"` hält ihn aus dem Speicher, `sbStart.hold()` und `release()`), in Tauri steht das Fenster bis
+zum Ende des Starts in der Kachelfarbe, auf Android `SbStart(ready, AppProduct, …)`. Keine Kachel wandert mehr in den
+Kopf. **ZEI-01** (Produktfarbe) folgt Kernregel 5 (D143, D145): Kachel, Start und höchstens eine Produktfläche je
+Ansicht, nur auf Einstieg, Übersicht, Detail mit einem Wert, Ergebnis und leerem Zustand, nie hinter Bedienelementen
+oder Links; „So“ nennt `AppProduct` aus dem Produktordner statt des seit `v2.0.0` entfernten `SebaroProduct.fromId`.
+**ZUG-09** (große Schrift) folgt Kernregel 30 (D147 (5), D148): Text folgt der Schriftgröße des Systems und wird je
+Bildschirm einmal bei großer Schrift geprüft; ein Wort, das nicht passt, bricht um oder endet mit „…“. „Nichts wird je
+abgeschnitten“ entfällt; was die Teile der Kopie bei großer Schrift von selbst tun, bleibt, wie gebaut. **TEC-07**: Eine
+Desktop-App holt ihre Kopie mit dem Updater der Kopie (`update-copy.mjs --profile desktop`), nicht mehr mit
+`export_system.py --target tauri`. **DSK-14** (Fenstergrund): Bis der Start vorbei ist (`sb-start-done`), hat das
+Fenster die Kachelfarbe des Produkts (`build.rs` liest `signTiles.<Gruppe>.tile` aus `tokens.json` der Kopie, die
+Gruppe aus `sebaro.product.json`), danach den gespeicherten Grund (Inhaber, 13.11.2026; in der Desktop-Vorlage der
+Befehl `start_ended`). **DSK-06** (Titelleiste): Der Pfad des Fensters ist Text, keine Navigation; die Brotkrumen von
+NAV-08 sind für Seiten. Die Titel von STR-01, ZEI-01 und ZUG-09 und die Einleitungen der Bereiche „Zeichen“ und „Start“
+sagen es ebenso, auf der Seite Bauteile auch die Namen dieser drei Regeln.
+
 Startvorlagen auf Release `v2.0.0`: Die vier Startvorlagen tragen die Kopie aus `v2.0.0` (vorher `v1.14.0`), jede mit
 ihrem eigenen `update-copy.mjs` geholt. Ihre Produktordner sind einmal neu gebaut, wie es die Release-Notizen verlangen
 (Kit 1.3.0, `tiles.json` 1.2). Die Android-Vorlage trägt dazu die Quelle der Play-Vorstellungsgrafik
