@@ -10,6 +10,8 @@ Pages in docs/*.html are hand-written. Shared parts sit between marker comments 
     <!-- guide:header page="x" --> … <!-- /guide:header -->    site header; page x gets aria-current
     <!-- guide:footer -->          … <!-- /guide:footer -->    site footer with sync state
     <!-- guide:tile id="novalis" size="48" --> … <!-- /guide:tile -->   brand/inline/tile-<id>[-small].svg
+    <!-- guide:tile id="tagwerk" form="sign" --> … <!-- /guide:tile -->   brand/inline/sign-<id>.svg, the bare sign
+                                                               (currentColor) the start shows
     <!-- guide:kern -->            … <!-- /guide:kern -->      index.html: the 31 core rules from design/KERN.de.md
 
 Markers may nest at any depth: open and close markers are paired with a stack, and markers inside generated output
@@ -286,6 +288,8 @@ def tile_svg(product: str, size: str) -> str:
 
 
 def block_tile(attrs: dict) -> str:
+    if attrs.get("form") == "sign":
+        return (SEBARO / "brand" / "inline" / f"sign-{attrs['id']}.svg").read_text(encoding="utf-8").strip()
     return tile_svg(attrs["id"], attrs.get("size", "48"))
 
 

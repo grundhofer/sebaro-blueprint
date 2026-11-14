@@ -47,6 +47,12 @@ nach Kernregel 29 mit dem Markup der Kopie.
 Die Einleitung des Bereichs „Zugang“ nennt den Boden der Kernregel 30 statt „WCAG 2.2 AA ist der Standard … diese
 Regeln bleiben“ (D147 (5), D148), und `source.decisions` im Katalog steht auf D1–D149 (vorher D1–D111).
 
+Seite Bauteile, Eintrag „Start“, nach Kernregel 29 und so, wie `sb-start.js` und `sebaro.css` der Kopie ihn heute
+zeigen: Die Wiederholung im Rahmen ist die ganze Fläche in der Produktfarbe mit dem weißen Zeichen
+(`.sb-start[data-sb-product]`, das nackte Zeichen statt der kleinen Kachel), Text, „So“, „Nicht so“ und Markup sagen
+es ebenso; `is-moving` und `data-sb-start-target` sind weg. Dafür kann der Block `guide:tile` mit `form="sign"` das
+nackte Zeichen einsetzen (`tools/build.py`).
+
 Startvorlagen auf Release `v2.0.0`: Die vier Startvorlagen tragen die Kopie aus `v2.0.0` (vorher `v1.14.0`), jede mit
 ihrem eigenen `update-copy.mjs` geholt. Ihre Produktordner sind einmal neu gebaut, wie es die Release-Notizen verlangen
 (Kit 1.3.0, `tiles.json` 1.2). Die Android-Vorlage trägt dazu die Quelle der Play-Vorstellungsgrafik
