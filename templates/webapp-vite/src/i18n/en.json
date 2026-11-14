@@ -185,7 +185,7 @@
     "placeholder": "Sample text. Replace it with your product's details before you publish it.",
     "imprintBody": "Provider: Sample name, Musterstraße 12, 12345 Beispielstadt. Contact: example@example.org.",
     "privacyBody": "Musterapp keeps your entries only in the browser's storage on this device. There are no analytics scripts, no advertising IDs and no cookies; the app loads nothing from other servers.",
-    "accessibilityBody": "This template is checked with axe in Chromium, at 100 and 200% text. Not checked: real screen readers, Firefox and WebKit. Never claim conformance that no check proves (ZUG-07)."
+    "accessibilityBody": "This template is checked with axe in Chromium, at 100 and 200% text. Not checked: real screen readers, Firefox and WebKit. Never claim conformance that no check proves."
   },
   "notFound": {
     "title": "This view does not exist",

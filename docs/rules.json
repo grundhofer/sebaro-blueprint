@@ -4264,7 +4264,7 @@
    "title": "Herkunft, Kennzeichnung, Alt-Text",
    "rule": "Leg neben jedes generierte Bild Rohbild, Sidecar (Prompt, Backend, Datum, Nachbearbeitung) und IPTC-Herkunft ab, vorerst im Git-Repository des Projekts; abgelehnte Versuche bleiben mit Grund liegen. Die Bildunterschrift sagt „KI-generiert, nachbearbeitet“. Dekorative Bilder haben leeres alt, Inhaltsbilder eine knappe Beschreibung, gleich für Hell und Dunkel.",
    "rule_en": "Keep raw, sidecar and IPTC trainedAlgorithmicMedia provenance next to each generated image, for now in the project's git repository (D90); keep rejected attempts with reasons; caption „KI-generiert, nachbearbeitet“; decorative alt=\"\", content images concise alt, identical for both schemes.",
-   "why": "Fehlschläge bleiben sichtbar (D15, seit D85 bestätigt); generierte Bilder sind gekennzeichnet; Zugänglichkeit. D90, Wortlaut „Kommen erstmal mit ins git oder?“: Bilder und Rohdateien bleiben vorerst im Git-Repository.",
+   "why": "Fehlschläge bleiben sichtbar (D15, seit D85 bestätigt); generierte Bilder sind gekennzeichnet; Zugänglichkeit. D90, Wortlaut „Kommen erstmal mit ins git oder?“: Bilder und Rohdateien bleiben vorerst im Git-Repository. D149 (9), Antwort „Beides ja“ des Inhabers: BIL-04 bleibt vorläufig bis zur rechtlichen Prüfung.",
    "do": "images/<name>.png + <name>.json; alt='Drei Schritte: Der Rahmen ändert sich, die drei Perlen bleiben.'",
    "dont": "Rohbild löschen; Versuch ohne Grund verwerfen; alt='Bild'.",
    "numbers": "",
@@ -4273,16 +4273,17 @@
     "D15",
     "D85",
     "D90",
-    "D92"
+    "D92",
+    "D149"
    ],
-   "source": "systems/sebaro/spec/06-imagery.md §4, §6, §7; DECISIONS.md D90, D92 (8)",
+   "source": "systems/sebaro/spec/06-imagery.md §4, §6, §7; DECISIONS.md D90, D92 (8), D149 (9)",
    "platforms": [
     "alle"
    ],
    "status": "vorläufig",
    "check": "verify.py; Sidecar vorhanden; axe image-alt.",
    "example_hint": "Zwei <figure>: dekorativ mit alt='' und Inhaltsbild mit Alt-Text und Kennzeichnung; falsch: alt='Bild' ohne Kennzeichnung.",
-   "changed": "2026-10-24",
+   "changed": "2026-11-14",
    "note": "Ob die Kennzeichnung rechtlich reicht, bleibt bis zur ersten Veröffentlichung eines Produkts mit erzeugten Bildern offen; dann wird sie rechtlich geprüft und das Ergebnis als Beleg festgehalten (D92 (8)). D98 lässt die Regel deshalb vorläufig: Rechtsprüfung vor der ersten Veröffentlichung."
   },
   {
@@ -4527,29 +4528,6 @@
    "status": "entschieden",
    "check": "Tab nach dem Laden zeigt den Sprunglink; manueller Durchlauf mit Screenshots beider Modi.",
    "example_hint": "Seitenanfang mit Sprunglink im Fokus; falsch: erster Tab landet im Logo.",
-   "changed": "2026-10-24"
-  },
-  {
-   "id": "ZUG-07",
-   "area": "zugang",
-   "title": "Erklärung zur Barrierefreiheit ehrlich",
-   "rule": "Leg für jedes Produkt, das unter das BFSG fallen kann, eine Seite „Barrierefreiheit“ an (App: Einstellungen › Über) mit Beschreibung, Bedienung, Erfüllung, Einschränkungen, Rückmeldung und Behörde. Behaupte nie Konformität, die kein Check stützt; frag den Inhaber, bevor du für einen Kunden etwas erklärst.",
-   "rule_en": "Accessibility statement page/screen with the Anlage-3 fields; never claim conformance without a run check; ask the owner before claiming for a client.",
-   "why": "BFSG § 14, Anlage 3; ob der Kunde erfasst ist und wer unterschreibt, sind Fakten des Kunden. Fehlschläge bleiben sichtbar (D15).",
-   "do": "„Bekannte Einschränkungen“ mit Plan; „keine bekannt“ nur nach manueller Prüfung.",
-   "dont": "Ergebnisse eintragen, die nicht gelaufen sind.",
-   "numbers": "BFSG seit 28.06.2025; Kleinstunternehmen < 10 Personen und ≤ 2 Mio. €; Bußgeld bis 100.000 €; EN 301 549 V3.2.1 (WCAG 2.1 AA), V4.1.1 (WCAG 2.2 AA) Zitierung voraussichtlich Dezember 2026",
-   "decisions": [
-    "D15"
-   ],
-   "source": "shared/ACCESSIBILITY-STATEMENT.md §1–§3 (Stand 2026-10-12, Teile UNVERIFIED)",
-   "platforms": [
-    "alle"
-   ],
-   "status": "vorläufig",
-   "check": "check_demo.py <Seite> 0 Fehler hell/dunkel bei 1440 und 390 px.",
-   "example_hint": "Gliederung der Erklärungsseite als sb-prose mit Abschnitt „Bekannte Einschränkungen“; falsch: „vollständig barrierefrei“ ohne Prüfung.",
-   "note": "D98 lässt die Regel vorläufig: Vor der ersten Veröffentlichung eines Produkts wird die Erklärung rechtlich geprüft; Teile der Vorlage sind noch nicht belegt (shared/ACCESSIBILITY-STATEMENT.md, UNVERIFIED).",
    "changed": "2026-10-24"
   },
   {
@@ -5273,7 +5251,7 @@
    "title": "Tauri-Fenster wie eine Web-App",
    "rule": "Bau jede Tauri-Ansicht als sb-window (Titelleiste, Seitenleiste, Inhalt, Inspektor, Aktionszone über die ganze Breite, data-sb-density=\"window\") bzw. als sb-view sb-view--wide für einfache Fenster, Fensterteile getrennt durch Tintenlinien, Produktfarbe nur in der Titelleisten-Kachel. Halte CSP script-src 'self' (Theme-Zeile und Skripte als Dateien, Fakten als JSON-Blöcke); den Grund des Fensters wählt Rust aus der gespeicherten Wahl (DSK-14).",
    "rule_en": "Tauri views: sb-window (title bar, sidebar, content, inspector, full-width action zone, window density) or sb-view sb-view--wide for simple windows; parts separated by ink lines, product colour only in the title-bar tile; CSP script-src 'self'; the window ground comes from the stored choice in Rust (DSK-14).",
-   "why": "Ein Tauri-Fenster ist eine Webseite in einer System-Webview; dieselben Klassen halten Web und Desktop gleich; der Start soll wie im Web aussehen (D52). D80: das Fenstergerüst ist im System gebaut, kein Nachbau in Produkten.",
+   "why": "Ein Tauri-Fenster ist eine Webseite in einer System-Webview; dieselben Klassen halten Web und Desktop gleich; der Start soll wie im Web aussehen (D52). D80: das Fenstergerüst ist im System gebaut, kein Nachbau in Produkten. D149 (9), Antwort „Beides ja“ des Inhabers: DSK-01 wird entschieden, sobald ein Lauf in einem echten Tauri-Fenster aufgezeichnet ist; bis dahin bleibt die Regel vorläufig.",
    "do": "<div class='sb-window sb-window--fill' data-sb-density='window'>; data-tauri-drag-region an der Titelleiste; Fenster in Rust anlegen (DSK-14); theme-init.js als Datei.",
    "dont": "Inline-Skripte; eigene Fensterklassen neben sebaro.css; weißer Blitz beim Öffnen; getönte Seitenleiste.",
    "numbers": "",
@@ -5283,9 +5261,10 @@
     "D46",
     "D65",
     "D80",
-    "D91"
+    "D91",
+    "D149"
    ],
-   "source": "systems/sebaro/spec/02-components.md §4.17; spec/09-platform-web.md §13, §13.1; shared/ADOPTION.md §5",
+   "source": "systems/sebaro/spec/02-components.md §4.17; spec/09-platform-web.md §13, §13.1; shared/ADOPTION.md §5; DECISIONS.md D149 (9)",
    "platforms": [
     "desktop"
    ],
@@ -5293,7 +5272,7 @@
    "check": "check_demo.py --csp \"default-src 'self'; style-src 'self'; script-src 'self'\"; in echter Tauri-Webview nicht verifiziert (spec/09 §15).",
    "example_hint": "sb-window mit Titelleiste, Seitenleiste, Inhalt und Aktionszone; falsch: getönte Seitenleiste mit Schatten und petrolfarbenen Reitern.",
    "note": "Titelleiste, Größen, Menü, Kürzel, Reiter, Ziehen und Ablegen, mehrere Fenster, Mitteilungen und Fenstergrund regeln DSK-06 bis DSK-15 (D91). D91 entscheidet hier nur den Fenstergrund (F13a, DSK-14). Dass das Fenstergerüst im System gebaut wird, hat der Inhaber entschieden (D80); seine Form und die CSP stehen nur in der Spezifikation und sind in keiner echten Tauri-Webview geprüft. Deshalb lässt D98 die Regel vorläufig, bis sie in einer echten Tauri-Webview mit novalis gelaufen ist (D89: erst die offenen Punkte, dann novalis).",
-   "changed": "2026-10-24"
+   "changed": "2026-11-14"
   },
   {
    "id": "DSK-02",

@@ -112,7 +112,7 @@ wird committet; `npm run sebaro:verify` prüft ihn gegen die Erklärung.
 - Kopf und Fuß: NAV-06, NAV-07, NAV-01, WEB-02, WEB-03, WEB-10, FAR-15, AKT-09, ZUG-06
 - Laden und Sicherheit: WEB-01, HAL-09, SCH-02, TEC-01, TEC-10; strenge Content-Security-Policy ohne `'unsafe-inline'`
 - Inhalt: AKT-01, AKT-04, AKT-11, DAT-01, DAT-03, DAT-05, DAT-06, DAT-07, TXT-01, TXT-03 bis TXT-08, TXT-10, TXT-17,
-  STA-02, STA-05, BEL-02, BEL-07, BEL-09, BEL-10, LNK-01, LNK-02, ZUG-07 (vorläufig)
+  STA-02, STA-05, BEL-02, BEL-07, BEL-09, BEL-10, LNK-01, LNK-02
 - Vorschaubild je Seite aus dem Build: WEB-09 (`scripts/og.mjs` ruft den Generator der Kopie über
   `public/sebaro/product/render.mjs share`)
 - Druck immer hell: WEB-11 (`sb-print.js`); große Schrift: ZUG-09 (`sb-fit.js`)

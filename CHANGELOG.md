@@ -31,6 +31,12 @@ Befehl `start_ended`). **DSK-06** (Titelleiste): Der Pfad des Fensters ist Text,
 NAV-08 sind für Seiten. Die Titel von STR-01, ZEI-01 und ZUG-09 und die Einleitungen der Bereiche „Zeichen“ und „Start“
 sagen es ebenso, auf der Seite Bauteile auch die Namen dieser drei Regeln.
 
+**ZUG-07** (Erklärung zur Barrierefreiheit) entfällt (Inhaber, 14.11.2026, D149 (9); D147 (5) hatte die Pflichtseite
+schon gestrichen). Der Katalog hat jetzt 227 Regeln. Die Seiten „Barrierefreiheit“ der Website- und der
+Web-App-Vorlage bleiben, ein Produkt darf eine behalten; sie nennen keine Regel mehr. **BIL-04** und **DSK-01** bleiben
+vorläufig, ihr „Warum“ nennt den Grund aus D149 (9): BIL-04 bis zur rechtlichen Prüfung, DSK-01 bis ein Lauf in einem
+echten Tauri-Fenster aufgezeichnet ist.
+
 Startvorlagen auf Release `v2.0.0`: Die vier Startvorlagen tragen die Kopie aus `v2.0.0` (vorher `v1.14.0`), jede mit
 ihrem eigenen `update-copy.mjs` geholt. Ihre Produktordner sind einmal neu gebaut, wie es die Release-Notizen verlangen
 (Kit 1.3.0, `tiles.json` 1.2). Die Android-Vorlage trägt dazu die Quelle der Play-Vorstellungsgrafik

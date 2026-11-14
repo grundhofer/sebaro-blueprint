@@ -185,7 +185,7 @@
     "placeholder": "Beispieltext. Ersetze ihn durch die Angaben deines Produkts, bevor du es veröffentlichst.",
     "imprintBody": "Anbieter: Beispielname, Musterstraße 12, 12345 Beispielstadt. Kontakt: example@example.org.",
     "privacyBody": "Musterapp speichert deine Einträge nur im Speicher des Browsers auf diesem Gerät. Es gibt keine Analyse-Skripte, keine Werbe-IDs und keine Cookies; die App lädt nichts von fremden Servern.",
-    "accessibilityBody": "Diese Vorlage wird in Chromium mit axe geprüft, bei 100 und 200\u00a0% Schrift. Nicht geprüft: echte Screenreader, Firefox und WebKit. Behaupte keine Konformität, die keine Prüfung belegt (ZUG-07)."
+    "accessibilityBody": "Diese Vorlage wird in Chromium mit axe geprüft, bei 100 und 200\u00a0% Schrift. Nicht geprüft: echte Screenreader, Firefox und WebKit. Behaupte keine Konformität, die keine Prüfung belegt."
   },
   "notFound": {
     "title": "Diese Ansicht gibt es nicht",
