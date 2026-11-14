@@ -25,14 +25,14 @@ dark at 100 % and, at the widest width, real 200 % text with axe. CI: `.github/w
 ## New project in five steps
 
 1. **Pick the product id** and its tile group (studio, collaboration, everyday, learning, tools, media, money, system).
-   A new product needs its sign drawn and checked in sebaroDesign first (rules ZEI-*).
+   A new product needs its sign drawn and checked in the workshop sebaro Foundry first (rules ZEI-*).
 2. **Start from a starter or get the system files**: copy `website-astro/`, `webapp-vite/` or `desktop-tauri/` (each
    brings its copy of the release); else web → copy `docs/sebaro/` of this
    repo into the project (e.g. `public/sebaro/`), check it with `node public/sebaro/checks/verify-export.mjs
    public/sebaro --strict`; Android → copy `android-compose/`, which brings its copy of the release and builds once the
    family's build setup is exported into the product (see its README); iOS → copy `ios-swiftui/`, which carries the iOS export as a local Swift
    package (`tools/sebaro-verify.py` checks the copy; a product re-exports with its id, see its README); macOS →
-   `export_system.py --target macos` in sebaroDesign.
+   `export_system.py --target macos` in the workshop sebaro Foundry.
 3. **Paste the agent snippet** into the project's `AGENTS.md`, fill in the export path and the product id, and name the
    product kind (where light/dark and „Farbton“ go is core rule 28 of `design/KERN.md`). Read what the starter itself
    does not do yet, so it is never copied as a pattern: the section „Lücken der Vorlage“ in `website-astro/`,

@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Pull the sebaro system from sebaroDesign into docs/sebaro/ (and the demo specimens into docs/assets/vendor/).
+"""Pull the sebaro system from the workshop into docs/sebaro/ (and the demo specimens into docs/assets/vendor/).
 
-sebaroDesign is the workshop: palettes, contracts, generators and gates live there. This guide never edits colours,
-fonts, icons or brand files by hand; it re-exports them with sebaroDesign's own tools/export_system.py and records
-what it took in docs/sebaro/sebaro-export.json (with sha256 per file) plus docs/GUIDE-SYNC.json. The record stays
+The workshop is sebaro Foundry (grundhofer/sebaro-foundry, until 2026-11-14 sebaroDesign): palettes, contracts,
+generators and gates live there. This guide never edits colours, fonts, icons or brand files by hand; it re-exports
+them with the workshop's own tools/export_system.py and records what it took in docs/sebaro/sebaro-export.json (with
+sha256 per file) plus docs/GUIDE-SYNC.json. The record stays
 outside docs/sebaro/, so that folder is the export and nothing else: a product that copies it as one folder passes the
 export's own `node sebaro/checks/verify-export.mjs --strict`.
 
@@ -25,7 +26,7 @@ public release (its profile) and their own declaration.
                                                       # (export_system.py sebaro --target web; it is copied and
                                                       # verified, never changed), read exclusions from FILE
 
-The design repository is found via --design, $SEBARO_DESIGN, or ../sebaroDesign next to this repository. It is
+The design repository is found via --design, $SEBARO_DESIGN, or ../sebaro-foundry next to this repository. It is
 needed for every mode except --verify-local (export --verify and the demo specimens come from it).
 Products to leave out are not published: the export leaves their sample files out, and what is left of them is
 dropped here with its manifest entry. Only their number is recorded, never their names. The list is the union of the git-ignored tools/sync.local.json
@@ -100,10 +101,10 @@ def leaks(base: Path, names: list[str]) -> list[str]:
 
 
 def find_design(arg: str | None) -> Path:
-    for cand in (arg, os.environ.get("SEBARO_DESIGN"), str(ROOT.parent / "sebaroDesign")):
+    for cand in (arg, os.environ.get("SEBARO_DESIGN"), str(ROOT.parent / "sebaro-foundry")):
         if cand and (Path(cand) / "tools" / "export_system.py").is_file():
             return Path(cand).resolve()
-    sys.exit("sebaroDesign not found: pass --design <path> or set SEBARO_DESIGN")
+    sys.exit("the workshop (../sebaro-foundry) not found: pass --design <path> or set SEBARO_DESIGN")
 
 
 def sha256(path: Path) -> str:
@@ -263,7 +264,7 @@ def main() -> int:
                              + (stale.stdout + stale.stderr).strip().replace("\n", " | ")[:600])
             for d in diffs:
                 print(d)
-            print(f"check: {len(diffs)} differences against sebaroDesign {record['sebaroDesignCommit']}")
+            print(f"check: {len(diffs)} differences against sebaro-foundry {record['sebaroDesignCommit']}")
             return 1 if diffs else 0
 
         if TARGET.exists():
@@ -284,7 +285,7 @@ def main() -> int:
             print(f"error: docs/{PRODUCT.name}/ does not pass the kit's check (raster files to draw again? "
                   f"see the head of this file):\n{checked.stdout}{checked.stderr}", file=sys.stderr)
             return 1
-        print(f"synced sebaro from sebaroDesign {record['sebaroDesignCommit']}: "
+        print(f"synced sebaro from sebaro-foundry {record['sebaroDesignCommit']}: "
               f"{len(tree_files(TARGET))} files, dropped {record['droppedFiles']} (excluded products)")
     return 0
 

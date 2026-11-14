@@ -19,6 +19,12 @@ auch sichtbar „sebaro Blueprint“: im Kopf, in den Seitentiteln, in der Fußz
 breiter ist als „Guide“, bricht die Beschriftung des Knopfs „Hell oder Dunkel“ schon unter 424 px um; so bleibt der
 Kopf ab 360 px einzeilig.
 
+Neue Werkstatt: Die private Werkstatt, aus der dieser Guide seinen Web-Export und die Kopien bekommt, heißt jetzt
+**sebaro Foundry** (`grundhofer/sebaro-foundry`, Inhaber, 13.11.2026). Sie ist auf das zugeschnitten, was Guide und
+Kopien brauchen, und ihre Geschichte ist von 1,1 GB auf 8 MB geschrumpft; die alte Werkstatt `sebaroDesign` bleibt
+als gesperrtes Archiv. `tools/sync_from_design.py` sucht sie unter `../sebaro-foundry`, die Fußzeile und die
+Abgleich-Anträge nennen den neuen Namen. An den Kopien ändert sich nur, dass Lizenz und README die Werkstatt so nennen.
+
 Sprachen: Jede App und jede Website erscheint ab der ersten Version auf Deutsch und Englisch, so gebaut, dass eine
 weitere Sprache ihre Dateien und ein Eintrag ist; eine Prüfung schlägt fehl, wenn einer Sprache ein Text fehlt. Eine
 Inhaltsseite mit Artikeln bleibt in ihrer einen Sprache (Inhaber, 13.11.2026). Kernregel 26 in beiden Fassungen und

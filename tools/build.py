@@ -329,7 +329,7 @@ def block_footer(_attrs: dict) -> str:
         '  </nav>',
         f'  <p>sebaro Blueprint <a href="{REPO_URL}/blob/main/CHANGELOG.md">Version {esc(rules_data().get("version", "?"))}{icon("external-link--16")}</a> · '
         f'System sebaro, Token-Vertrag {esc(str(contracts.get("tokens", "?")))} · '
-        f'aus sebaroDesign <code class="sb-code-inline">{esc(commit)}</code> · '
+        f'aus sebaro Foundry <code class="sb-code-inline">{esc(commit)}</code> · '
         # D96 (a), WEB-09: the share images end with the host; the page says it too (no text the page lacks)
         # the host is a name (D101 (10)): it breaks at the line end without a hyphen, here after the slash first
         f'online unter <span translate="no">{esc(SITE_URL.split("://", 1)[1].rstrip("/")).replace("/", "/<wbr>")}</span></p>',

@@ -52,10 +52,10 @@ The workshop's demo check runs from a workshop checkout:
 
 ## Sync with the workshop
 
-`docs/sebaro/` is a web export of the workshop sebaroDesign; nothing in it is edited by hand.
+`docs/sebaro/` is a web export of the workshop sebaro Foundry (`grundhofer/sebaro-foundry`); nothing in it is edited by hand.
 
 ```sh
-python3 tools/sync_from_design.py          # export ../sebaroDesign (or --design, $SEBARO_DESIGN), verify, copy
+python3 tools/sync_from_design.py          # export ../sebaro-foundry (or --design, $SEBARO_DESIGN), verify, copy
 python3 tools/sync_from_design.py --check  # exit 1 if docs/sebaro/ differs from a fresh export
 ```
 

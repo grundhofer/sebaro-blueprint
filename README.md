@@ -30,13 +30,13 @@ eines Produkts. Wie man dieses Repository baut, prüft, abgleicht und veröffent
 ## Woher die Werte kommen
 
 Die Quellen von sebaro (Paletten, Verträge, Generatoren, Prüfungen und das Entscheidungsprotokoll D1–D111) liegen in
-der Werkstatt **sebaroDesign**, einem privaten Repository. Dieser Guide schreibt keine Farbe, Schrift und kein Icon ab:
+der Werkstatt **sebaro Foundry**, einem privaten Repository. Dieser Guide schreibt keine Farbe, Schrift und kein Icon ab:
 `docs/sebaro/` ist ein geprüfter Web-Export (`tools/sync_from_design.py`), jede Datei mit Prüfsumme. Regeln ändern sich
 nur in `rules/rules.json`. `tools/build.py` setzt die Kernregeln aus `design/KERN.de.md` in die Startseite und schreibt
 `docs/rules.json`, `docs/llms.txt` und die Seiten an den früheren Adressen.
 
 ```sh
-python3 tools/sync_from_design.py   # sebaro neu aus sebaroDesign holen
+python3 tools/sync_from_design.py   # sebaro neu aus sebaro Foundry holen
 python3 tools/build.py              # Seitenblöcke und Ausgaben erzeugen
 python3 tools/check_site.py         # Seiten, Links, keine fremden Server, nur Tokens, Regeln, Änderungsprotokoll, Lizenz
 npm ci && node tools/check_a11y.mjs # axe in Hell und Dunkel bei 390 und 1440 px
@@ -64,11 +64,11 @@ Werte; Korrektur für Wortlaut und Beispiele.
 
 ## Abgleich und Pakete (eingerichtet, läuft ab dem nächsten Stand der Werkstatt)
 
-- **Automatischer Abgleich (D88):** Ein Ablauf in sebaroDesign exportiert jeden neuen Stand, sobald dessen Prüfungen
+- **Automatischer Abgleich (D88):** Ein Ablauf in sebaro Foundry exportiert jeden neuen Stand, sobald dessen Prüfungen
   grün durchgelaufen sind (seit 22.10.2026; vorher lief er neben ihnen), baut die Seiten mit den Werkzeugen dieses Repositorys und legt, wenn der Guide zurückliegt, einen Zweig `sync/<kurzer Commit>` an.
   Daraus öffnet `.github/workflows/sync-pr.yml` einen Änderungsantrag; die Prüfungen laufen mit. Nichts wird ohne
   Durchsicht übernommen, ein neuerer Abgleich schließt den älteren Antrag.
-- **Von Hand einzurichten:** der Deploy-Schlüssel mit Schreibrecht auf dieses Repository als Geheimnis in sebaroDesign,
+- **Von Hand einzurichten:** der Deploy-Schlüssel mit Schreibrecht auf dieses Repository als Geheimnis in sebaro Foundry,
   die Liste der Produkte, die der öffentliche Guide nicht zeigen darf, als zweites Geheimnis, und hier die Einstellung
   „Allow GitHub Actions to create and approve pull requests“. Bis das steht, läuft der Abgleich nicht.
 - **Private Pakete (kommt):** Bei einem Versions-Tag der Werkstatt entstehen private Pakete auf GitHub Packages:

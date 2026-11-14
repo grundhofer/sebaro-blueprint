@@ -1,7 +1,7 @@
 name: check
 on:
   push:
-    # sync/** = branches pushed by sebaroDesign's guide-sync workflow; their pull requests are opened with the
+    # sync/** = branches pushed by the guide-sync workflow of sebaro-foundry; their pull requests are opened with the
     # GITHUB_TOKEN, which starts no pull_request run, so the checks attach to the PR through this push run
     branches: [main, "sync/**"]
   pull_request:
