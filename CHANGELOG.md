@@ -11,6 +11,12 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+## 2.19.0 · 2026-11-14
+
+Nebenversion: drei Regeln an die Kernregeln angeglichen (WEB-03, NAV-06, ZEI-07), keine entfällt; Kernregel 14 und 26
+geändert; neuer Name sebaro Blueprint, neue Werkstatt sebaro Foundry; die Seite auf drei Seiten zugeschnitten; die
+vier Startvorlagen auf dem Stand ihrer Baupläne. Die Kopien der Produkte kommen mit dem Release `v2.0.0`.
+
 Kernregel 14 nennt die eine Kurzmeldung ohne „Rückgängig“: die, dass etwas in die Zwischenablage kopiert wurde
 (Inhaber, 14.11.2026; so erlaubte es EBE-05 schon, die Kernregel hatte die Ausnahme ausgelassen). Die Prüfliste je
 Ansicht sagt es ebenso.

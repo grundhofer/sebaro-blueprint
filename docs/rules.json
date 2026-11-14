@@ -1,7 +1,7 @@
 {
  "$schema": "./rules.schema.json",
- "version": "2.18.1",
- "date": "2026-11-02",
+ "version": "2.19.0",
+ "date": "2026-11-14",
  "source": {
   "repo": "sebaroDesign",
   "system": "sebaro",
