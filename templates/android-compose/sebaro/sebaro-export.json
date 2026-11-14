@@ -1,8 +1,8 @@
 {
   "$comment": "the record of this copy, generated — do not edit. Check that the folder is unchanged: node checks/verify-export.mjs --strict. Update it: node checks/update-copy.mjs (README.md, section Keep in sync)",
   "format": "1.0",
-  "tool": "export_system.py 1.29.0",
-  "date": "2026-11-12",
+  "tool": "export_system.py 1.34.0",
+  "date": "2026-11-14",
   "system": {
     "slug": "sebaro",
     "name": "sebaro",
@@ -29,42 +29,42 @@
     "templates"
   ],
   "release": {
-    "tag": "v1.14.0",
+    "tag": "v2.0.0",
     "asset": "sebaro-android.tar.gz",
-    "sha256": "01b38afafeeaac76a7b190db653820f39081fa18b5161c1be9d021e079b6d753",
+    "sha256": "8bb76613ab8a90ae70491b82c804cb6b6b3c572ee8e5f265d1f42774e70a43d1",
     "updater": "update-copy.mjs 1.1.0",
     "from": "https://github.com/grundhofer/sebaro-guide/releases"
   },
   "sebaroDesign": {
-    "commit": "17bb8f6be39cc2352f8dc7b0850a2a914528b5bf",
+    "commit": "2b3aa908fc86c2c24ec7e5855358dcc7298b3c18",
     "uncommittedChanges": false,
     "fromCommit": true
   },
   "contracts": {
-    "tokens": "1.14",
-    "palette": "2.7",
+    "tokens": "2.0",
+    "palette": "3.0",
     "fontsConfig": 1,
     "iconSet": "sebaro-icon-set/1",
-    "brandAssetsTool": "1.10.0"
+    "brandAssetsTool": "1.11.0"
   },
   "generators": {
-    "build_tokens.py": "1.14.0",
+    "build_tokens.py": "2.0.0",
     "icons.py": "1.1.0",
     "fonts.py": "1.2.0",
     "fontTools": "4.55.3",
-    "brand_assets.py": "1.10.0",
+    "brand_assets.py": "1.11.0",
     "brandRenderer": {
       "playwright": "1.63.0",
       "browser": "153.0.8010.12"
     }
   },
   "tools": {
-    "export_system.py": "1.29.0",
-    "check_palette.py": "2.7.0",
-    "build_tokens.py": "1.14.0",
+    "export_system.py": "1.34.0",
+    "check_palette.py": "3.0.0",
+    "build_tokens.py": "2.0.0",
     "fonts.py": "1.2.0",
     "icons.py": "1.1.0",
-    "brand_assets.py": "1.10.0",
+    "brand_assets.py": "1.11.0",
     "check_facts.py": "1.3.0"
   },
   "gates": [
@@ -103,10 +103,9 @@
     {
       "path": "kotlin/de/sebaro_ventures/design/SebaroTheme.kt",
       "source": "systems/sebaro/dist/SebaroTheme.kt",
-      "sourceSha256": "bf943bc02db0c24cd624cb37be9e9d27e393d185cddd17be6dafb1394835d32f",
-      "sha256": "ba4c2aff8db2af5b79b2517e1ae8261cdf99d88ee3bc5185f7efbc8678e9a620",
-      "bytes": 52261,
-      "transform": "the SebaroProduct constants and the sign tiles' product map left out but studio (the umbrella, which a wrapper names): a profile copy knows no product; a product writes SebaroProduct(\"<id>\", SebaroSignTile.<Group>)"
+      "sourceSha256": "06c3a2f727f1f3e62670a19ba8a0217293e2d223647ad1464cc4f72f67c086ce",
+      "sha256": "06c3a2f727f1f3e62670a19ba8a0217293e2d223647ad1464cc4f72f67c086ce",
+      "bytes": 50904
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/icons/SebaroIcons.kt",
@@ -181,39 +180,39 @@
     {
       "path": "res/values/sebaro_colors.xml",
       "source": "systems/sebaro/dist/tokens.json",
-      "sourceSha256": "d640dc65351fec81ba486e18b382b6dffec3a90df3c0ac26a9539672044fff9a",
-      "sha256": "6294d43ba70a6c42853fb21392eeb28d276d53d0478e3d97b960b826ff4fbb71",
-      "bytes": 3343,
+      "sourceSha256": "a759c7b775b9447965ba75f74d9933c0c0578f8787399a63a299d698d1a17335",
+      "sha256": "14574dfe77bacf3a79a40a198ad3abef07c093514fb72e13f5cc55b292c14b25",
+      "bytes": 3363,
       "transform": "generated: colour roles (light) as Android colour resources"
     },
     {
       "path": "res/values/sebaro_theme.xml",
       "source": "systems/sebaro/dist/tokens.json",
-      "sourceSha256": "d640dc65351fec81ba486e18b382b6dffec3a90df3c0ac26a9539672044fff9a",
-      "sha256": "8d28fd2a1135681fb6aa8e4f7f64e86afbb090fa3e7d677b92ee2b39c32f79c7",
-      "bytes": 1289,
+      "sourceSha256": "a759c7b775b9447965ba75f74d9933c0c0578f8787399a63a299d698d1a17335",
+      "sha256": "a0da7561945fbd49d895e323344c31f8d341ac8be830a434979db6c6c7f53450",
+      "bytes": 1309,
       "transform": "generated: Theme.Sebaro (light parent) from the colour resources"
     },
     {
       "path": "res/values-night/sebaro_colors.xml",
       "source": "systems/sebaro/dist/tokens.json",
-      "sourceSha256": "d640dc65351fec81ba486e18b382b6dffec3a90df3c0ac26a9539672044fff9a",
-      "sha256": "247c996b1bde806273dc0c6dd154d6130fd5146e45338b46e12833a27151e592",
-      "bytes": 3342,
+      "sourceSha256": "a759c7b775b9447965ba75f74d9933c0c0578f8787399a63a299d698d1a17335",
+      "sha256": "044a04b3c9305eaa4fcf0d71ee33fc69bc474730416411cc11832137ad68ccb6",
+      "bytes": 3362,
       "transform": "generated: colour roles (dark) as Android colour resources"
     },
     {
       "path": "res/values-night/sebaro_theme.xml",
       "source": "systems/sebaro/dist/tokens.json",
-      "sourceSha256": "d640dc65351fec81ba486e18b382b6dffec3a90df3c0ac26a9539672044fff9a",
-      "sha256": "3433215c46378154468c26cd061daa716c8b3c66ac43da29767f381874c52115",
-      "bytes": 1282,
+      "sourceSha256": "a759c7b775b9447965ba75f74d9933c0c0578f8787399a63a299d698d1a17335",
+      "sha256": "d39ef1d174444811fe1fd9a8a02f212a1f9387ff8b4c0a6f08500acd971b62bc",
+      "bytes": 1302,
       "transform": "generated: Theme.Sebaro (dark parent) from the colour resources"
     },
     {
       "path": "res/raw/sebaro_symbols_keep.xml",
       "source": "systems/sebaro/dist/tokens.json",
-      "sourceSha256": "d640dc65351fec81ba486e18b382b6dffec3a90df3c0ac26a9539672044fff9a",
+      "sourceSha256": "a759c7b775b9447965ba75f74d9933c0c0578f8787399a63a299d698d1a17335",
       "sha256": "d49e5a478ae40d1f4c2629bd1ac3c0dbbcfb4d9d365eeb7ef2818e3203fb226b",
       "bytes": 123,
       "transform": "generated: retain what the wrappers read by name under resource shrinking: the symbols selected by product id and the sender's key mark"
@@ -237,554 +236,554 @@
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SebaroAppFonts.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SebaroAppFonts.kt",
-      "sourceSha256": "e735e8d82740801a952159ff31258edaa358c7ace3895c8f4f838e94630b4f1c",
-      "sha256": "e735e8d82740801a952159ff31258edaa358c7ace3895c8f4f838e94630b4f1c",
+      "sourceSha256": "eaee38840fc1527bba0db17a5a0b351274c013e5696c112b11c0a46e14522da7",
+      "sha256": "eaee38840fc1527bba0db17a5a0b351274c013e5696c112b11c0a46e14522da7",
       "bytes": 1402
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SebaroAppTheme.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SebaroAppTheme.kt",
-      "sourceSha256": "ce2190cc18f7804ce24d6bdd7f567113f5564b261e827033504b9e5fd8579f9b",
-      "sha256": "ce2190cc18f7804ce24d6bdd7f567113f5564b261e827033504b9e5fd8579f9b",
+      "sourceSha256": "1764d39cc3040cb3630d27e3cc0c478d21039e097508c31659cf57d481aa2b18",
+      "sha256": "1764d39cc3040cb3630d27e3cc0c478d21039e097508c31659cf57d481aa2b18",
       "bytes": 6960
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbFocusRing.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbFocusRing.kt",
-      "sourceSha256": "5017a6417a57541be93b2113732211905d08607c57ca29e9f24cec9547e51bef",
-      "sha256": "5017a6417a57541be93b2113732211905d08607c57ca29e9f24cec9547e51bef",
+      "sourceSha256": "94ebec7add52f9e5df1d17b61a6fe1e74fcebf4bc03ec8f28dd75148bffd8a0d",
+      "sha256": "94ebec7add52f9e5df1d17b61a6fe1e74fcebf4bc03ec8f28dd75148bffd8a0d",
       "bytes": 12064
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbScreen.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbScreen.kt",
-      "sourceSha256": "08d0a6954d46c07050b554d771c58994a8498be3cd9cf4ea5c2bc27ce5bcdf31",
-      "sha256": "08d0a6954d46c07050b554d771c58994a8498be3cd9cf4ea5c2bc27ce5bcdf31",
+      "sourceSha256": "39de7c464ec9af540417864e4adf17ff0971b14e6c0403b14fa81fc12f02ac66",
+      "sha256": "39de7c464ec9af540417864e4adf17ff0971b14e6c0403b14fa81fc12f02ac66",
       "bytes": 33202
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbIconButton.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbIconButton.kt",
-      "sourceSha256": "e92490bb80f50bbdee70facfc241dd9f3fbe20dc4b2dae4df69ac5ab00394113",
-      "sha256": "e92490bb80f50bbdee70facfc241dd9f3fbe20dc4b2dae4df69ac5ab00394113",
+      "sourceSha256": "a0476de56cbf03ca8d8aeb5a1a67b6645383ca01d004b63767c65175fd884f50",
+      "sha256": "a0476de56cbf03ca8d8aeb5a1a67b6645383ca01d004b63767c65175fd884f50",
       "bytes": 3661
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbMessageOverList.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbMessageOverList.kt",
-      "sourceSha256": "5aa2880a7592ea07eb0132faf1c2ddf95e361a866b5fe116ed65968977336b0a",
-      "sha256": "5aa2880a7592ea07eb0132faf1c2ddf95e361a866b5fe116ed65968977336b0a",
+      "sourceSha256": "10c917e5bd7f6d556ce78bb1c2c981e7b20d3325757ef3c77be58141542c1714",
+      "sha256": "10c917e5bd7f6d556ce78bb1c2c981e7b20d3325757ef3c77be58141542c1714",
       "bytes": 5568
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbAppFrame.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbAppFrame.kt",
-      "sourceSha256": "59d15eaf81964bc31e30d51d71fb87dd70d98b59e959a4057c05816ce6ea932b",
-      "sha256": "59d15eaf81964bc31e30d51d71fb87dd70d98b59e959a4057c05816ce6ea932b",
+      "sourceSha256": "a5f00188917177899931778de450065753223ad1843285ecfcf9ed7fb41cb70a",
+      "sha256": "a5f00188917177899931778de450065753223ad1843285ecfcf9ed7fb41cb70a",
       "bytes": 12850
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbPrimaryAction.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbPrimaryAction.kt",
-      "sourceSha256": "3add7a295b5372a4d8ade29f6d404502a042eb7140769d34fa74f65812fcebae",
-      "sha256": "3add7a295b5372a4d8ade29f6d404502a042eb7140769d34fa74f65812fcebae",
+      "sourceSha256": "d0ecd1fcd9dbb38438863251329c1ce8f23741313831839c7d76901d05f08d3e",
+      "sha256": "d0ecd1fcd9dbb38438863251329c1ce8f23741313831839c7d76901d05f08d3e",
       "bytes": 23643
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbErrorDetails.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbErrorDetails.kt",
-      "sourceSha256": "1bcfc8f152021ca119b552c5ddcab640599c5c2f1196215a7b57ae766db83f02",
-      "sha256": "1bcfc8f152021ca119b552c5ddcab640599c5c2f1196215a7b57ae766db83f02",
+      "sourceSha256": "7ed438cd77a9be518ac3f00e1819993bd8abe3e853a3fc79dabbc7400d4b65e3",
+      "sha256": "7ed438cd77a9be518ac3f00e1819993bd8abe3e853a3fc79dabbc7400d4b65e3",
       "bytes": 20063
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbSecondaryAction.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbSecondaryAction.kt",
-      "sourceSha256": "7bdd45b5384a4e24fa8988ddf3151f4724e4139455a774e17e88332cc9eca223",
-      "sha256": "7bdd45b5384a4e24fa8988ddf3151f4724e4139455a774e17e88332cc9eca223",
+      "sourceSha256": "41c7bb74aa76fb4e68813f2bca44783a34b7fd390490761501d36dc0e9b76634",
+      "sha256": "41c7bb74aa76fb4e68813f2bca44783a34b7fd390490761501d36dc0e9b76634",
       "bytes": 13471
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbNavigationBar.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbNavigationBar.kt",
-      "sourceSha256": "7c3260c5abac3e12dd7308c635a9e669d4acea7bd75d55feb2ab6e29b9e9efc9",
-      "sha256": "7c3260c5abac3e12dd7308c635a9e669d4acea7bd75d55feb2ab6e29b9e9efc9",
+      "sourceSha256": "daa4fcafb8f78d7b16c4f6d6a3005aa5dda4c345863c8dfaaaf42224432b62f4",
+      "sha256": "daa4fcafb8f78d7b16c4f6d6a3005aa5dda4c345863c8dfaaaf42224432b62f4",
       "bytes": 3929
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbConfirmDialog.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbConfirmDialog.kt",
-      "sourceSha256": "031a4d8cbda5cd9d749c9bd6107d706a1aab477816c41121aa58925a0d468950",
-      "sha256": "031a4d8cbda5cd9d749c9bd6107d706a1aab477816c41121aa58925a0d468950",
+      "sourceSha256": "78a58d1c162d82b0a719839a41e7af172d237cb1313623a8da27021b576d0b84",
+      "sha256": "78a58d1c162d82b0a719839a41e7af172d237cb1313623a8da27021b576d0b84",
       "bytes": 17822
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbSignTile.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbSignTile.kt",
-      "sourceSha256": "fde94d9bb3eda0bf817b2759c86395f1eb99d5a665181e14f9cf677c248228a7",
-      "sha256": "fde94d9bb3eda0bf817b2759c86395f1eb99d5a665181e14f9cf677c248228a7",
+      "sourceSha256": "cd4225a89877f1537083fb3040f7ac20291481f7641bce76ca56c5c2f72a13a9",
+      "sha256": "cd4225a89877f1537083fb3040f7ac20291481f7641bce76ca56c5c2f72a13a9",
       "bytes": 2615
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbThemeChoice.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbThemeChoice.kt",
-      "sourceSha256": "be8a6f1c07073e8827bb74ed843b34291273eeadd27b934ccf3896f61b7af6f9",
-      "sha256": "be8a6f1c07073e8827bb74ed843b34291273eeadd27b934ccf3896f61b7af6f9",
+      "sourceSha256": "d11463dccdc34681727f371685d82a1ec7117604a1f3698041ba0321bfa9b093",
+      "sha256": "d11463dccdc34681727f371685d82a1ec7117604a1f3698041ba0321bfa9b093",
       "bytes": 6480
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbToneChoice.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbToneChoice.kt",
-      "sourceSha256": "b3003bb33fc118b65651987c9f2bc030d2cf80a2edf277a8383c2fcd04806493",
-      "sha256": "b3003bb33fc118b65651987c9f2bc030d2cf80a2edf277a8383c2fcd04806493",
+      "sourceSha256": "0f13bd030a24a1d5fdf5eba3a3091c2006bb162c276444db24690b7f1b027d51",
+      "sha256": "0f13bd030a24a1d5fdf5eba3a3091c2006bb162c276444db24690b7f1b027d51",
       "bytes": 956
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbMotionSetting.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbMotionSetting.kt",
-      "sourceSha256": "029b274b269d132b2132aa0482a2b99acf29c85b64d7dab041f5188f1a111432",
-      "sha256": "029b274b269d132b2132aa0482a2b99acf29c85b64d7dab041f5188f1a111432",
+      "sourceSha256": "7dd724e048dafeeb44bb53dab4b5a91e0fb9f8ed3612bfac8ba98dedfeabc765",
+      "sha256": "7dd724e048dafeeb44bb53dab4b5a91e0fb9f8ed3612bfac8ba98dedfeabc765",
       "bytes": 925
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbSwitchRow.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbSwitchRow.kt",
-      "sourceSha256": "f775324f77da3d522aaa2541b99827345f340cd6a3d4cd350410f9d9111f1614",
-      "sha256": "f775324f77da3d522aaa2541b99827345f340cd6a3d4cd350410f9d9111f1614",
+      "sourceSha256": "1d2befc7c6c5707ebf504018e6a84bedcd70d1eb89e7b0c3c11a55c74dcbfb2c",
+      "sha256": "1d2befc7c6c5707ebf504018e6a84bedcd70d1eb89e7b0c3c11a55c74dcbfb2c",
       "bytes": 7963
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbClaimRow.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbClaimRow.kt",
-      "sourceSha256": "b751e7be46bcf79e2c52dcd42ed7ee6c1103b47b71dca45e6b92cfc837ad7d21",
-      "sha256": "b751e7be46bcf79e2c52dcd42ed7ee6c1103b47b71dca45e6b92cfc837ad7d21",
+      "sourceSha256": "13d2cc4f1fdd7a846104d112c97e21243e4709f3e01dfd4495369472b592f761",
+      "sha256": "13d2cc4f1fdd7a846104d112c97e21243e4709f3e01dfd4495369472b592f761",
       "bytes": 5688
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbToast.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbToast.kt",
-      "sourceSha256": "c688b6cb26e19cb2706a77d0f59d6ddbc9667b7e9399af07df91e8d5c2243346",
-      "sha256": "c688b6cb26e19cb2706a77d0f59d6ddbc9667b7e9399af07df91e8d5c2243346",
+      "sourceSha256": "a1bc97804da23f909ebd7fd9f9ba2ceea88adc8fad57168bc6d13a099e8882c9",
+      "sha256": "a1bc97804da23f909ebd7fd9f9ba2ceea88adc8fad57168bc6d13a099e8882c9",
       "bytes": 11196
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbStatusRegion.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbStatusRegion.kt",
-      "sourceSha256": "2bdf91192c0ce7b6bfe7fa05b4e47394f9582f568ba3e8718724fb94e7eecdff",
-      "sha256": "2bdf91192c0ce7b6bfe7fa05b4e47394f9582f568ba3e8718724fb94e7eecdff",
+      "sourceSha256": "e8e443215dc1f64e3b0a6cefbfa7ab3dc01b5f5d021afc049488ff6c9da96326",
+      "sha256": "e8e443215dc1f64e3b0a6cefbfa7ab3dc01b5f5d021afc049488ff6c9da96326",
       "bytes": 1487
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbBottomSheet.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbBottomSheet.kt",
-      "sourceSha256": "370941e3a2baf36e845ac4978f40999bb16439e8febcce032aebd938fdb4dd9e",
-      "sha256": "370941e3a2baf36e845ac4978f40999bb16439e8febcce032aebd938fdb4dd9e",
+      "sourceSha256": "8f9b90ba0c5f443ea080ee810115f902bf46a8798e9f315e1e29fff0713aa457",
+      "sha256": "8f9b90ba0c5f443ea080ee810115f902bf46a8798e9f315e1e29fff0713aa457",
       "bytes": 7514
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbMessages.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbMessages.kt",
-      "sourceSha256": "a2315ddaa58dc9fa4193ecdf0e3e3cefbb3619fcbdc34b7737e4143689c8ddaa",
-      "sha256": "a2315ddaa58dc9fa4193ecdf0e3e3cefbb3619fcbdc34b7737e4143689c8ddaa",
+      "sourceSha256": "29ad47b5c51964cce953ec88f05b1cdb7c3c20174fa3fa6770d0ea37fb69db9a",
+      "sha256": "29ad47b5c51964cce953ec88f05b1cdb7c3c20174fa3fa6770d0ea37fb69db9a",
       "bytes": 95647
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbStatus.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbStatus.kt",
-      "sourceSha256": "427c7bb5743e9b10fb5571461c239d7770f82a10923f60b4c04dfe90151725f4",
-      "sha256": "427c7bb5743e9b10fb5571461c239d7770f82a10923f60b4c04dfe90151725f4",
+      "sourceSha256": "a2981062ce3295ec09720cc1c9c82a0ce08e52daa99ef176cbe5861871e0f4b5",
+      "sha256": "a2981062ce3295ec09720cc1c9c82a0ce08e52daa99ef176cbe5861871e0f4b5",
       "bytes": 4418
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbListRow.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbListRow.kt",
-      "sourceSha256": "3f44be8e2ebafd85b843ab562730284bd82c7f958546ecfc59d593b8dfdb9e19",
-      "sha256": "3f44be8e2ebafd85b843ab562730284bd82c7f958546ecfc59d593b8dfdb9e19",
+      "sourceSha256": "31c39ff91e7898ace7b792206a693e4359d237a8058db1d996b3f3a503af3b25",
+      "sha256": "31c39ff91e7898ace7b792206a693e4359d237a8058db1d996b3f3a503af3b25",
       "bytes": 22196
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbEmptyState.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbEmptyState.kt",
-      "sourceSha256": "ab0914bbd2f58f6a77326c0d6fe22d631ccda127ff8963971bbf6d18d60dad4e",
-      "sha256": "ab0914bbd2f58f6a77326c0d6fe22d631ccda127ff8963971bbf6d18d60dad4e",
+      "sourceSha256": "999c9c634879b4a5e40d1b87c43dbcb720788d7df1c8027df7948968c4799fba",
+      "sha256": "999c9c634879b4a5e40d1b87c43dbcb720788d7df1c8027df7948968c4799fba",
       "bytes": 2283
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbSkeleton.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbSkeleton.kt",
-      "sourceSha256": "242cd0ab21c71508beca4a7fa755c745d09366658ac4247b929efebf579d8a1e",
-      "sha256": "242cd0ab21c71508beca4a7fa755c745d09366658ac4247b929efebf579d8a1e",
+      "sourceSha256": "ca4c87a61d5d07788f45f0ea1318c28c1328630c392fec7e9229b01daa2664e4",
+      "sha256": "ca4c87a61d5d07788f45f0ea1318c28c1328630c392fec7e9229b01daa2664e4",
       "bytes": 2243
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbSteps.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbSteps.kt",
-      "sourceSha256": "3eb78a4bfe145076d9bd6538c0f08e285d4203f79405fbd05854b54749dfa02c",
-      "sha256": "3eb78a4bfe145076d9bd6538c0f08e285d4203f79405fbd05854b54749dfa02c",
+      "sourceSha256": "7f7c585125e7d68e66abec2d5a20d8ddd3e00ab14836e5060b88b5b42ee082fa",
+      "sha256": "7f7c585125e7d68e66abec2d5a20d8ddd3e00ab14836e5060b88b5b42ee082fa",
       "bytes": 8191
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbMenu.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbMenu.kt",
-      "sourceSha256": "def69ee398d741c5c675b7bed7abe58a89541a88dd86142fbb568fc7fb7e7a0d",
-      "sha256": "def69ee398d741c5c675b7bed7abe58a89541a88dd86142fbb568fc7fb7e7a0d",
+      "sourceSha256": "747604098f6d2410104dc60058188b9bd6d342b5c102401034ee22e1ec8f54a6",
+      "sha256": "747604098f6d2410104dc60058188b9bd6d342b5c102401034ee22e1ec8f54a6",
       "bytes": 15773
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbChips.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbChips.kt",
-      "sourceSha256": "316e43db9d7db8aa41b041e943137a950c448d148a26ecd3aa9ec735b8d70454",
-      "sha256": "316e43db9d7db8aa41b041e943137a950c448d148a26ecd3aa9ec735b8d70454",
+      "sourceSha256": "6f7d59ee2b79b43bdf34565f7e6b716fd79672a0484c58a71e310c400f72de88",
+      "sha256": "6f7d59ee2b79b43bdf34565f7e6b716fd79672a0484c58a71e310c400f72de88",
       "bytes": 8164
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbBarChart.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbBarChart.kt",
-      "sourceSha256": "ec579814d4d7eae72c15a1f1084b2146d593090f9565b22494e07b741ef7b010",
-      "sha256": "ec579814d4d7eae72c15a1f1084b2146d593090f9565b22494e07b741ef7b010",
+      "sourceSha256": "b2859b183300a448d1d34c741b42185df702a0b32ca4f4d46b5bd70fb1515dc5",
+      "sha256": "b2859b183300a448d1d34c741b42185df702a0b32ca4f4d46b5bd70fb1515dc5",
       "bytes": 14407
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbShareRows.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbShareRows.kt",
-      "sourceSha256": "22131bef9d6567cbfd1764e86b962433b84d3e60f01c4fc5efdd154fed2b009b",
-      "sha256": "22131bef9d6567cbfd1764e86b962433b84d3e60f01c4fc5efdd154fed2b009b",
+      "sourceSha256": "4f8ffb95875c775ec10a9d8e8af4be9609e0b437309ba7f119a885879903f530",
+      "sha256": "4f8ffb95875c775ec10a9d8e8af4be9609e0b437309ba7f119a885879903f530",
       "bytes": 7052,
       "pack": "charts"
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbStats.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbStats.kt",
-      "sourceSha256": "caefc0cf1d8a4c985ae185ff3236095b7e2c5d7033416a91dd1070fdce69a523",
-      "sha256": "caefc0cf1d8a4c985ae185ff3236095b7e2c5d7033416a91dd1070fdce69a523",
+      "sourceSha256": "b67ca3121aefacb0fefee4760119cda8e11d2d562d1847014edc207cb1cf3df0",
+      "sha256": "b67ca3121aefacb0fefee4760119cda8e11d2d562d1847014edc207cb1cf3df0",
       "bytes": 9111
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbGoalRing.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbGoalRing.kt",
-      "sourceSha256": "bd5a5318e24d1766c5de345281bd5626587af7080247e8a1e477edc2eebe30ce",
-      "sha256": "bd5a5318e24d1766c5de345281bd5626587af7080247e8a1e477edc2eebe30ce",
+      "sourceSha256": "965f21094b04ec2c8fca88969732ddb6bda86fa117caab0f922246f4e20fb5af",
+      "sha256": "965f21094b04ec2c8fca88969732ddb6bda86fa117caab0f922246f4e20fb5af",
       "bytes": 4267,
       "pack": "charts"
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbHeatmap.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbHeatmap.kt",
-      "sourceSha256": "d49ba1949b8f8d10de8da43f52fd3e6fbdfb7cfdcbf2c52f2320057e4c231d7a",
-      "sha256": "d49ba1949b8f8d10de8da43f52fd3e6fbdfb7cfdcbf2c52f2320057e4c231d7a",
-      "bytes": 18028,
+      "sourceSha256": "373c57c761a1a2809225e2e4f9bd4d07243b482eb9e9924eb2752d0c92118227",
+      "sha256": "373c57c761a1a2809225e2e4f9bd4d07243b482eb9e9924eb2752d0c92118227",
+      "bytes": 18684,
       "pack": "charts"
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbTextField.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbTextField.kt",
-      "sourceSha256": "e47e022b4e5cb930ba3c42de18b16c6886340a6827e3d662f6c51de4c407a52e",
-      "sha256": "e47e022b4e5cb930ba3c42de18b16c6886340a6827e3d662f6c51de4c407a52e",
+      "sourceSha256": "d943117a305e26201b1a54a94a0010da30aa7168e43baa8e0f3a1396eb19a55b",
+      "sha256": "d943117a305e26201b1a54a94a0010da30aa7168e43baa8e0f3a1396eb19a55b",
       "bytes": 13925
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbSearchField.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbSearchField.kt",
-      "sourceSha256": "15fcc3099ec36f45ef6be155c993ec91f0d7973cbd2dc4854cf8ab0ac69d8194",
-      "sha256": "15fcc3099ec36f45ef6be155c993ec91f0d7973cbd2dc4854cf8ab0ac69d8194",
+      "sourceSha256": "fe932e204e4445c8eab5ceb399db30af66f2db7d0b3837bfe50f926e2874dc20",
+      "sha256": "fe932e204e4445c8eab5ceb399db30af66f2db7d0b3837bfe50f926e2874dc20",
       "bytes": 4850
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbSelectField.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbSelectField.kt",
-      "sourceSha256": "60688351a6ebf487ba2f65849cba458c265f546e2403835096c62385dc05f7b5",
-      "sha256": "60688351a6ebf487ba2f65849cba458c265f546e2403835096c62385dc05f7b5",
+      "sourceSha256": "de198a94eda15e09822f5ec4dc997733d53584f557dcb4a3f9e22542665457c7",
+      "sha256": "de198a94eda15e09822f5ec4dc997733d53584f557dcb4a3f9e22542665457c7",
       "bytes": 7935
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbChoiceSheet.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbChoiceSheet.kt",
-      "sourceSha256": "891d57bff3638ca2ed409cda5d606d924052edc009754d5671a2832dd0b81c93",
-      "sha256": "891d57bff3638ca2ed409cda5d606d924052edc009754d5671a2832dd0b81c93",
+      "sourceSha256": "e4138ac716eb11b74fac19ac04603f618911f7996140b129f9ba020eea95356b",
+      "sha256": "e4138ac716eb11b74fac19ac04603f618911f7996140b129f9ba020eea95356b",
       "bytes": 10745
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbSegmented.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbSegmented.kt",
-      "sourceSha256": "3350321d1fb39fb080db371aa3c9fe34465aeedebeb80c9c8f06864f563c6575",
-      "sha256": "3350321d1fb39fb080db371aa3c9fe34465aeedebeb80c9c8f06864f563c6575",
+      "sourceSha256": "b30481d8e40488a96240ad10ac5a8af0801384eee7420e4682b812df31448fff",
+      "sha256": "b30481d8e40488a96240ad10ac5a8af0801384eee7420e4682b812df31448fff",
       "bytes": 11420
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbTabs.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbTabs.kt",
-      "sourceSha256": "b4263fe69ab0e362e131bfa01ac5574ed6991c52592c43a2c1c3724c284bc17c",
-      "sha256": "b4263fe69ab0e362e131bfa01ac5574ed6991c52592c43a2c1c3724c284bc17c",
+      "sourceSha256": "f5151084131b84e9a841ad062f3395aa8c53f9152b641cdd041f42b1646a0714",
+      "sha256": "f5151084131b84e9a841ad062f3395aa8c53f9152b641cdd041f42b1646a0714",
       "bytes": 6141
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbStickyListHeader.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbStickyListHeader.kt",
-      "sourceSha256": "f4464a961e20a6ab5baf225d70936bd9934d753997612fbdb6d49540a1a93ce9",
-      "sha256": "f4464a961e20a6ab5baf225d70936bd9934d753997612fbdb6d49540a1a93ce9",
+      "sourceSha256": "8ee853a43ab22b38f8f72fce51b3edeef921a76f114af3d339680c559a2fbb0f",
+      "sha256": "8ee853a43ab22b38f8f72fce51b3edeef921a76f114af3d339680c559a2fbb0f",
       "bytes": 2501
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbTimelineEntry.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbTimelineEntry.kt",
-      "sourceSha256": "daf998d7d896650688204f9b7aa81bfb9c80b7be27123c6b94150a76d84ff828",
-      "sha256": "daf998d7d896650688204f9b7aa81bfb9c80b7be27123c6b94150a76d84ff828",
+      "sourceSha256": "367f8193bc8bddd0a0f46fd7db17e4516a69b5b7974c7c608763173ffd81b57b",
+      "sha256": "367f8193bc8bddd0a0f46fd7db17e4516a69b5b7974c7c608763173ffd81b57b",
       "bytes": 6242
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbSenderRow.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbSenderRow.kt",
-      "sourceSha256": "42945559c2455b712fe6aa8628b85b9e7a069ae096c8e45bc54e0d3c14b36fde",
-      "sha256": "42945559c2455b712fe6aa8628b85b9e7a069ae096c8e45bc54e0d3c14b36fde",
+      "sourceSha256": "ef58375b90427276c66583f028e4c3c12ca187839b7333ea899ac66807bcec7e",
+      "sha256": "ef58375b90427276c66583f028e4c3c12ca187839b7333ea899ac66807bcec7e",
       "bytes": 2081
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbAboutHead.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbAboutHead.kt",
-      "sourceSha256": "0391809f00f14ac7c5ac5ddca88be8105c3e7bb0a3868d109bf41f6db17f836b",
-      "sha256": "0391809f00f14ac7c5ac5ddca88be8105c3e7bb0a3868d109bf41f6db17f836b",
+      "sourceSha256": "16f5fe7d6cd035b1b54cfd5ec9a38d65575db56c89628f6ca178b3d8c0e4319f",
+      "sha256": "16f5fe7d6cd035b1b54cfd5ec9a38d65575db56c89628f6ca178b3d8c0e4319f",
       "bytes": 4516
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbFactsLine.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbFactsLine.kt",
-      "sourceSha256": "abd8f8745b7a0ede0104cf63c390a66c4b2377341875cbb56077d6e12253920d",
-      "sha256": "abd8f8745b7a0ede0104cf63c390a66c4b2377341875cbb56077d6e12253920d",
+      "sourceSha256": "a2c33c59a00177c77f1b4f1dc016b0db928cc2b7142c88b41bc019d0f7a48253",
+      "sha256": "a2c33c59a00177c77f1b4f1dc016b0db928cc2b7142c88b41bc019d0f7a48253",
       "bytes": 9372
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbCallout.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbCallout.kt",
-      "sourceSha256": "a59d6e87982366892c5a38b3876ac657b952230c4255b14b7d3a6fe6eb589043",
-      "sha256": "a59d6e87982366892c5a38b3876ac657b952230c4255b14b7d3a6fe6eb589043",
+      "sourceSha256": "8cf89ea67ebb61c41582f88fbd679828c08d8e17a03a372feb033f26aa5f661e",
+      "sha256": "8cf89ea67ebb61c41582f88fbd679828c08d8e17a03a372feb033f26aa5f661e",
       "bytes": 6944
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbMetaList.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbMetaList.kt",
-      "sourceSha256": "8905eac8fe48211a10e7302296890ad3a977d52cc61ca967c9f498eb9ca395b2",
-      "sha256": "8905eac8fe48211a10e7302296890ad3a977d52cc61ca967c9f498eb9ca395b2",
+      "sourceSha256": "b393812d6b7f4f9db10b80ac997d5166c1a37403414d51b846285d25d0b79a81",
+      "sha256": "b393812d6b7f4f9db10b80ac997d5166c1a37403414d51b846285d25d0b79a81",
       "bytes": 6121
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbTag.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbTag.kt",
-      "sourceSha256": "12b9bba8fa0799f2b49e721aea7da060e1a78a0377d3b045d8d14c4546b2bc8f",
-      "sha256": "12b9bba8fa0799f2b49e721aea7da060e1a78a0377d3b045d8d14c4546b2bc8f",
+      "sourceSha256": "1af1430433ee964e6db546840bc012e4afe22f80e1eac3b5a22b8ff644c0eec8",
+      "sha256": "1af1430433ee964e6db546840bc012e4afe22f80e1eac3b5a22b8ff644c0eec8",
       "bytes": 1867
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbCard.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbCard.kt",
-      "sourceSha256": "e10974d910622990397c53656ec071cefb4c7ecb79b68db3cecc22f3386076de",
-      "sha256": "e10974d910622990397c53656ec071cefb4c7ecb79b68db3cecc22f3386076de",
+      "sourceSha256": "d40b817312dc331ab79f2d3bc9bc149aeae3eec6cdbfee82d4628ce5141d9acf",
+      "sha256": "d40b817312dc331ab79f2d3bc9bc149aeae3eec6cdbfee82d4628ce5141d9acf",
       "bytes": 7120
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbAvatar.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbAvatar.kt",
-      "sourceSha256": "254a1e446bc4a3f9472556e4ad52a35b5190aa680f3a7f1277892ff87a2c76c7",
-      "sha256": "254a1e446bc4a3f9472556e4ad52a35b5190aa680f3a7f1277892ff87a2c76c7",
+      "sourceSha256": "3a671a3c813dae36cd1354893c78e3c3f8081eea79345f0e9555e92ddf9acfec",
+      "sha256": "3a671a3c813dae36cd1354893c78e3c3f8081eea79345f0e9555e92ddf9acfec",
       "bytes": 4875
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbRating.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbRating.kt",
-      "sourceSha256": "71cd5b21f57094a83662c350ca571679e1eab7fbde9eb8be4e95939c3b407bad",
-      "sha256": "71cd5b21f57094a83662c350ca571679e1eab7fbde9eb8be4e95939c3b407bad",
+      "sourceSha256": "54e3ba38ee2e2d3324cc1e07ea33328b22a75905746889a4c10a9f6e3ad9bfe4",
+      "sha256": "54e3ba38ee2e2d3324cc1e07ea33328b22a75905746889a4c10a9f6e3ad9bfe4",
       "bytes": 2679
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbCategory.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbCategory.kt",
-      "sourceSha256": "dad8b3127291c932c7442a2d76b9743c295c63db2550c96522f7a47ef8977cd5",
-      "sha256": "dad8b3127291c932c7442a2d76b9743c295c63db2550c96522f7a47ef8977cd5",
+      "sourceSha256": "10d3385f149bdc35dd5987fc75b99896196c01ee005df8d7d8e284fc066add0e",
+      "sha256": "10d3385f149bdc35dd5987fc75b99896196c01ee005df8d7d8e284fc066add0e",
       "bytes": 2358
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbMark.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbMark.kt",
-      "sourceSha256": "3ffb218b8b523587ea06403b026a22c15b53375b2e59e3616e7db8293199cfa2",
-      "sha256": "3ffb218b8b523587ea06403b026a22c15b53375b2e59e3616e7db8293199cfa2",
+      "sourceSha256": "a2e2e3c5c1ea7be8d246ded8f266e531ccf9dc3791ce8b9d47a4ceb8ec8b22b7",
+      "sha256": "a2e2e3c5c1ea7be8d246ded8f266e531ccf9dc3791ce8b9d47a4ceb8ec8b22b7",
       "bytes": 4669
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbSignedNumber.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbSignedNumber.kt",
-      "sourceSha256": "d357ec5ab864b58ae3238e0130c5025dc62c8096bc5d6fe68c6e5edeeb0dc37e",
-      "sha256": "d357ec5ab864b58ae3238e0130c5025dc62c8096bc5d6fe68c6e5edeeb0dc37e",
+      "sourceSha256": "da2d8bc4cd7768f514ee240401fa968b376348cf02fd9829636567abdb62149b",
+      "sha256": "da2d8bc4cd7768f514ee240401fa968b376348cf02fd9829636567abdb62149b",
       "bytes": 2664
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbProgress.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbProgress.kt",
-      "sourceSha256": "2d77b16bf3c16ce315e19924df82d72a99b91439376840004fb2b6b71b2c565f",
-      "sha256": "2d77b16bf3c16ce315e19924df82d72a99b91439376840004fb2b6b71b2c565f",
+      "sourceSha256": "7bf1754fdfbab512204fb38db4d118f2b18464b8df93b2e12b1fdc31a5fa0ce2",
+      "sha256": "7bf1754fdfbab512204fb38db4d118f2b18464b8df93b2e12b1fdc31a5fa0ce2",
       "bytes": 7628
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbInputChips.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbInputChips.kt",
-      "sourceSha256": "56fcaa03e47dd175439fd15a31c584c890186e6987e9b4f3ac82e006a81cfc40",
-      "sha256": "56fcaa03e47dd175439fd15a31c584c890186e6987e9b4f3ac82e006a81cfc40",
+      "sourceSha256": "51547d82c178878014829615c554938a93c1efd8dc94c2c705cc96709d843fd6",
+      "sha256": "51547d82c178878014829615c554938a93c1efd8dc94c2c705cc96709d843fd6",
       "bytes": 4770
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbLineChart.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbLineChart.kt",
-      "sourceSha256": "298bd6ec5e24640315891c37353156c0316c14b152a98f2a7ae4b75aed73b15e",
-      "sha256": "298bd6ec5e24640315891c37353156c0316c14b152a98f2a7ae4b75aed73b15e",
+      "sourceSha256": "e75139000dda27efa922e06487a2b93d06f123a0372a1224c0aa43cdd7a5ed46",
+      "sha256": "e75139000dda27efa922e06487a2b93d06f123a0372a1224c0aa43cdd7a5ed46",
       "bytes": 27650,
       "pack": "charts"
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbHistogram.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbHistogram.kt",
-      "sourceSha256": "fc2e816994577b9e85e872c946b2c91182aa91b8c6e52b19788d2183160000f4",
-      "sha256": "fc2e816994577b9e85e872c946b2c91182aa91b8c6e52b19788d2183160000f4",
+      "sourceSha256": "6343227da7e6296322e058f79e3faf4d8b264a8a06655abc42fda31504d28384",
+      "sha256": "6343227da7e6296322e058f79e3faf4d8b264a8a06655abc42fda31504d28384",
       "bytes": 6588,
       "pack": "charts"
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbDeviationChart.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbDeviationChart.kt",
-      "sourceSha256": "78d99f9e45e0d003e00c152d762aa70971fc72e2c28cb8428c5352e9031424d9",
-      "sha256": "78d99f9e45e0d003e00c152d762aa70971fc72e2c28cb8428c5352e9031424d9",
+      "sourceSha256": "56ae10ee4c450409667ba524fab9140667157d383b4f563f91270517dfab094e",
+      "sha256": "56ae10ee4c450409667ba524fab9140667157d383b4f563f91270517dfab094e",
       "bytes": 8897,
       "pack": "charts"
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbQuote.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbQuote.kt",
-      "sourceSha256": "1ea17ff12bff87e96763e8f4b4ac30bc402c7ed8c568a6b399e19837cb18c43b",
-      "sha256": "1ea17ff12bff87e96763e8f4b4ac30bc402c7ed8c568a6b399e19837cb18c43b",
+      "sourceSha256": "f6fcca702736f5ab851c1b3a24812fba3cf513731284a25446e3ee75252da60b",
+      "sha256": "f6fcca702736f5ab851c1b3a24812fba3cf513731284a25446e3ee75252da60b",
       "bytes": 3049
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbCodeBlock.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbCodeBlock.kt",
-      "sourceSha256": "f5fa247a8264e4d293a3e347d6bb4be8aa796cfbcc07261155e0405e0e915c75",
-      "sha256": "f5fa247a8264e4d293a3e347d6bb4be8aa796cfbcc07261155e0405e0e915c75",
+      "sourceSha256": "99296155455e10688f9a5dc9cbed25e573a5eab106ea5ca3150eb8b879a13315",
+      "sha256": "99296155455e10688f9a5dc9cbed25e573a5eab106ea5ca3150eb8b879a13315",
       "bytes": 12696
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbSortableTable.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbSortableTable.kt",
-      "sourceSha256": "8baf33edfa6489004b1222db259fe11f78c44b22ef4390282b262858ff30c997",
-      "sha256": "8baf33edfa6489004b1222db259fe11f78c44b22ef4390282b262858ff30c997",
+      "sourceSha256": "eb7bce699fde960b1e109dabc1a8d736d6a6395d4a72ae43a314b1496883c591",
+      "sha256": "eb7bce699fde960b1e109dabc1a8d736d6a6395d4a72ae43a314b1496883c591",
       "bytes": 21495,
       "pack": "table"
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbIntroStep.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbIntroStep.kt",
-      "sourceSha256": "2d191213a9125b1cd9d9e05b685c08c917045ddfb50723a33cc0790b2e3d85d4",
-      "sha256": "2d191213a9125b1cd9d9e05b685c08c917045ddfb50723a33cc0790b2e3d85d4",
+      "sourceSha256": "d25ee2abc606d21a4d6c734e82bf97e28aa2816c0410aa636de806a864649ef0",
+      "sha256": "d25ee2abc606d21a4d6c734e82bf97e28aa2816c0410aa636de806a864649ef0",
       "bytes": 2899
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbNotification.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbNotification.kt",
-      "sourceSha256": "c6af04531a0fa9afc0ffd0b2c592446a407d764eb2d31dffb22c4f0c390be16b",
-      "sha256": "c6af04531a0fa9afc0ffd0b2c592446a407d764eb2d31dffb22c4f0c390be16b",
+      "sourceSha256": "fc00a991858ed83e25fbfe411249f086bb3c830bf62066cf35554e7252a4c5fb",
+      "sha256": "fc00a991858ed83e25fbfe411249f086bb3c830bf62066cf35554e7252a4c5fb",
       "bytes": 3475
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbTimeRow.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbTimeRow.kt",
-      "sourceSha256": "339ad9a9dec1cf0f293f3a8374e631dae84ca8fc7a31206efc2ccd4a8cbce495",
-      "sha256": "339ad9a9dec1cf0f293f3a8374e631dae84ca8fc7a31206efc2ccd4a8cbce495",
+      "sourceSha256": "d80ad869771e1486f16baec39f70d82d4db522e9c4dcbd713ca43d1f328e2cb2",
+      "sha256": "d80ad869771e1486f16baec39f70d82d4db522e9c4dcbd713ca43d1f328e2cb2",
       "bytes": 9298
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbStepper.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbStepper.kt",
-      "sourceSha256": "01ac62f80f33691a42fcd622f6cf665c86a2f8e7163e3141285409b1e9fcf30b",
-      "sha256": "01ac62f80f33691a42fcd622f6cf665c86a2f8e7163e3141285409b1e9fcf30b",
+      "sourceSha256": "c0405a9b32b2d309dfeca2bebbd2ead534b3a80140b336fec5213e2eb5c69a23",
+      "sha256": "c0405a9b32b2d309dfeca2bebbd2ead534b3a80140b336fec5213e2eb5c69a23",
       "bytes": 3438
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbValueTile.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbValueTile.kt",
-      "sourceSha256": "13c32c9e5bc257dd1895df1a7d6e3f23b0c22adc5e7796ef1815ba1cf0e8dab3",
-      "sha256": "13c32c9e5bc257dd1895df1a7d6e3f23b0c22adc5e7796ef1815ba1cf0e8dab3",
+      "sourceSha256": "6f42aab3ff2fe400c3cdbd83613bf2837bd35867c03de00e8d1ca8f4bfa36275",
+      "sha256": "6f42aab3ff2fe400c3cdbd83613bf2837bd35867c03de00e8d1ca8f4bfa36275",
       "bytes": 16944
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbFlowRow.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbFlowRow.kt",
-      "sourceSha256": "ea1a7be87c3be740904c67185ca738d81310f060a965146803c7439d96c1b760",
-      "sha256": "ea1a7be87c3be740904c67185ca738d81310f060a965146803c7439d96c1b760",
+      "sourceSha256": "e6ff335e0f6ce98da48892924afd492d0cb54f683bce5fd3f54b2f6e988742a4",
+      "sha256": "e6ff335e0f6ce98da48892924afd492d0cb54f683bce5fd3f54b2f6e988742a4",
       "bytes": 14242
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbProductArea.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbProductArea.kt",
-      "sourceSha256": "a68204c0550b3bfba608c3bf1080cdab9d443e2cb97abcc366ea2fdf98890bef",
-      "sha256": "a68204c0550b3bfba608c3bf1080cdab9d443e2cb97abcc366ea2fdf98890bef",
+      "sourceSha256": "92e200690eb3cefd456b0dd6cb9fb038ce932d52d15103a24f7bf370c9dd63e8",
+      "sha256": "92e200690eb3cefd456b0dd6cb9fb038ce932d52d15103a24f7bf370c9dd63e8",
       "bytes": 2083
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbStartSymbol.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbStartSymbol.kt",
-      "sourceSha256": "32061deca51fdbb71aa34de4ca70577cc61be8f90cd77c54a04b5f5f5d4cbf6a",
-      "sha256": "32061deca51fdbb71aa34de4ca70577cc61be8f90cd77c54a04b5f5f5d4cbf6a",
-      "bytes": 1087
+      "sourceSha256": "d92b7707fd52a0e8c2139252ce8327a43e73fc3d4b4eddfcb5bb5896a23504e4",
+      "sha256": "d92b7707fd52a0e8c2139252ce8327a43e73fc3d4b4eddfcb5bb5896a23504e4",
+      "bytes": 1134
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbText.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbText.kt",
-      "sourceSha256": "c1766331376208e6bd21c9a85a4759070cd625ce532d43520d54c7fda7a0fc08",
-      "sha256": "c1766331376208e6bd21c9a85a4759070cd625ce532d43520d54c7fda7a0fc08",
+      "sourceSha256": "a14c5a14110a15750ca57319ec407c6643e7c9570d43405aacad8771527ca43d",
+      "sha256": "a14c5a14110a15750ca57319ec407c6643e7c9570d43405aacad8771527ca43d",
       "bytes": 13763
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbControlColors.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbControlColors.kt",
-      "sourceSha256": "a474c5d9dfdca2ad5578307aa70bce0c7b2a054a8ddf42b125dbf3c820d3b9c8",
-      "sha256": "a474c5d9dfdca2ad5578307aa70bce0c7b2a054a8ddf42b125dbf3c820d3b9c8",
+      "sourceSha256": "e89081fcdef51c4a776a334c552fd0035a4ffa220b8329d579d6633d12da6931",
+      "sha256": "e89081fcdef51c4a776a334c552fd0035a4ffa220b8329d579d6633d12da6931",
       "bytes": 7053
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbEnter.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbEnter.kt",
-      "sourceSha256": "3f22553129304063136491ed688ecfdff760e91424777b1b1cbd423c3281d748",
-      "sha256": "3f22553129304063136491ed688ecfdff760e91424777b1b1cbd423c3281d748",
+      "sourceSha256": "b64d36ab6661dd9e2ce6e5485395b0bd02c62339ad74ef753c372a215cc2f910",
+      "sha256": "b64d36ab6661dd9e2ce6e5485395b0bd02c62339ad74ef753c372a215cc2f910",
       "bytes": 1539
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbStart.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbStart.kt",
-      "sourceSha256": "fe83550f191a9e23b5184f3fb45a15234ffaf5fa26dd6312af53930826fc2938",
-      "sha256": "fe83550f191a9e23b5184f3fb45a15234ffaf5fa26dd6312af53930826fc2938",
-      "bytes": 3400
+      "sourceSha256": "69c8fb50e98e17c602980c5203026fca9c39d33fb611b7fa0f0c96b4d2e74e0f",
+      "sha256": "69c8fb50e98e17c602980c5203026fca9c39d33fb611b7fa0f0c96b4d2e74e0f",
+      "bytes": 3135
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbLinkText.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbLinkText.kt",
-      "sourceSha256": "5cee33bc7f0c3f6e6cb33787a9eb6fcd4972adeeca9e5de4c4829cf0b0477321",
-      "sha256": "5cee33bc7f0c3f6e6cb33787a9eb6fcd4972adeeca9e5de4c4829cf0b0477321",
+      "sourceSha256": "a9677380a8e6a1eb9a62c7223d091b1d966d49e8f3b122bfd54ba1be8b234946",
+      "sha256": "a9677380a8e6a1eb9a62c7223d091b1d966d49e8f3b122bfd54ba1be8b234946",
       "bytes": 3878
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbHaptics.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbHaptics.kt",
-      "sourceSha256": "24164eae0793ee73dab8a1a16bb085494965c17edba83f0bb021ff4c2a73192e",
-      "sha256": "24164eae0793ee73dab8a1a16bb085494965c17edba83f0bb021ff4c2a73192e",
+      "sourceSha256": "b6219c11c3e120361930df8c00dfd82a18bebe06a677039c4dda58e73c92a31b",
+      "sha256": "b6219c11c3e120361930df8c00dfd82a18bebe06a677039c4dda58e73c92a31b",
       "bytes": 2265
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbFacts.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbFacts.kt",
-      "sourceSha256": "21abb427847d6e0d0cf32b8982cd97d63dfa2ac9125e3a401a84296ab3663e88",
-      "sha256": "21abb427847d6e0d0cf32b8982cd97d63dfa2ac9125e3a401a84296ab3663e88",
+      "sourceSha256": "4ad90a14939237c88c84837d1120de177037e0c9540612459344c7821718a88b",
+      "sha256": "4ad90a14939237c88c84837d1120de177037e0c9540612459344c7821718a88b",
       "bytes": 11875
     },
     {
       "path": "kotlin/de/sebaro_ventures/design/designsystem/SbFactsUi.kt",
       "source": "systems/sebaro/kotlin/de/sebaro_ventures/design/designsystem/SbFactsUi.kt",
-      "sourceSha256": "d9c4e4b20539f3b4d0696dbda2d5e6123a4cead9ecb9f308305d115dbbad818d",
-      "sha256": "d9c4e4b20539f3b4d0696dbda2d5e6123a4cead9ecb9f308305d115dbbad818d",
+      "sourceSha256": "fc3a438bfb06b88a40410fcda4a1a025052c2f5edd8422ff1a2a486e848539ce",
+      "sha256": "fc3a438bfb06b88a40410fcda4a1a025052c2f5edd8422ff1a2a486e848539ce",
       "bytes": 7624
     },
     {
@@ -797,14 +796,14 @@
     {
       "path": "checks/update-copy.mjs",
       "source": "tools/update-copy.mjs",
-      "sourceSha256": "d31a6b457fb9ea5353ab8bbd0e0e2db79c1402b2d09dbfc1b69807d25a927c80",
-      "sha256": "d31a6b457fb9ea5353ab8bbd0e0e2db79c1402b2d09dbfc1b69807d25a927c80",
-      "bytes": 37042
+      "sourceSha256": "1c49d33ff6baa100ead1b2b42c4ab21762bec0583f06c17894d3323ae6949d25",
+      "sha256": "1c49d33ff6baa100ead1b2b42c4ab21762bec0583f06c17894d3323ae6949d25",
+      "bytes": 37256
     },
     {
       "path": "checks/lint-android.sh",
       "source": "systems/sebaro/spec/08-platform-android.md",
-      "sourceSha256": "038c1c72134c12f686546014d95a97b39e4cad25035c40f448aac150d15a4aef",
+      "sourceSha256": "b9d78fcea79c35cf8f50c5cba3df5acd159d9da26ccbcb58fa686a62256dab84",
       "sha256": "3bdd971f3222d55a65f2ad52400598213ebd30967b5e080f17d6378f39cb00ed",
       "bytes": 1530,
       "transform": "the sh block under „## 15 Lint rules (Android)“ of spec/08-platform-android.md, as tools/lint_rules.py sebaro --print android prints it"
@@ -812,9 +811,9 @@
     {
       "path": "product/product_kit.py",
       "source": "tools/product_kit.py",
-      "sourceSha256": "601803e38e85ec40625ddcb662eee8634d48eeb876097167621b2ce44714d510",
-      "sha256": "601803e38e85ec40625ddcb662eee8634d48eeb876097167621b2ce44714d510",
-      "bytes": 87130
+      "sourceSha256": "844a132a7d62837ba287abef501dadef6497882c8926ce4d503b03d94c52d283",
+      "sha256": "844a132a7d62837ba287abef501dadef6497882c8926ce4d503b03d94c52d283",
+      "bytes": 96698
     },
     {
       "path": "product/sign_geometry.py",
@@ -826,9 +825,9 @@
     {
       "path": "product/render.mjs",
       "source": "tools/product_render.mjs",
-      "sourceSha256": "78e25d3257bacb198315d7d1ce3410e80aa4019e02db3554d33b8de7945bc443",
-      "sha256": "78e25d3257bacb198315d7d1ce3410e80aa4019e02db3554d33b8de7945bc443",
-      "bytes": 25655
+      "sourceSha256": "f5919612c0825bbbf1e87c53a4a0c358fc9b47c24253fb9265fd73fb0ce69367",
+      "sha256": "f5919612c0825bbbf1e87c53a4a0c358fc9b47c24253fb9265fd73fb0ce69367",
+      "bytes": 29206
     },
     {
       "path": "product/product.schema.json",
@@ -840,73 +839,45 @@
     {
       "path": "product/PRODUCT-CONTRACT.md",
       "source": "shared/PRODUCT-CONTRACT.md",
-      "sourceSha256": "f0106106a9878a7dcefcbd9561c3b61543227e2d2a40168fd5e6bff26e1e166e",
-      "sha256": "f0106106a9878a7dcefcbd9561c3b61543227e2d2a40168fd5e6bff26e1e166e",
-      "bytes": 28462
+      "sourceSha256": "9768fed30890ad0f7ee65cbabd642ae7b196f31102ea840c2be58cd19f06d91b",
+      "sha256": "9768fed30890ad0f7ee65cbabd642ae7b196f31102ea840c2be58cd19f06d91b",
+      "bytes": 31459
     },
     {
       "path": "product/tiles.json",
       "source": "systems/sebaro/dist/tokens.json",
-      "sourceSha256": "d640dc65351fec81ba486e18b382b6dffec3a90df3c0ac26a9539672044fff9a",
-      "sha256": "daf74ab97b33e71e04a09e1eeba5d002dc89c99311095e5468657d404de1a926",
-      "bytes": 2232,
-      "transform": "generated: what the product kit needs of the system (tools/product_kit.py tiles, from dist/tokens.json, brand/brand.config.json and brand/signs.json): tile groups, foot colours, grounds, stroke masters, raster measures; no product"
+      "sourceSha256": "a759c7b775b9447965ba75f74d9933c0c0578f8787399a63a299d698d1a17335",
+      "sha256": "2dc87d7bbb5f58c7294c93d7fef4e51ddff50609c646f6107cbf9cd53a79e3a7",
+      "bytes": 31908,
+      "transform": "generated: what the product kit needs of the system (tools/product_kit.py tiles, from dist/tokens.json, brand/brand.config.json, brand/signs.json and fonts/): tile groups, foot colours, grounds, stroke masters, raster measures, the name font; no product"
     },
     {
       "path": "CHANGES.md",
       "source": "systems/sebaro/CHANGES.md",
-      "sourceSha256": "03b8089d6d08fd2b7c8e59203331807b55122aade9d023132ede180494b0114d",
-      "sha256": "03b8089d6d08fd2b7c8e59203331807b55122aade9d023132ede180494b0114d",
-      "bytes": 3781
+      "sourceSha256": "af1495cc74f469ff5f60c0a67cb9c7ae8c69c6a2e29bdfa71334f4f02a725358",
+      "sha256": "af1495cc74f469ff5f60c0a67cb9c7ae8c69c6a2e29bdfa71334f4f02a725358",
+      "bytes": 10863
     },
     {
       "path": "LICENSE.md",
       "source": "LICENSE.md",
-      "sourceSha256": "a81a5e6fa43b956bfba0631005d4d67feb8d70190443d3046fcf13047cd67792",
-      "sha256": "a81a5e6fa43b956bfba0631005d4d67feb8d70190443d3046fcf13047cd67792",
-      "bytes": 2695
+      "sourceSha256": "e56667ebb06395598140f89d7aa4ccf2c5348f21913b23777c4d40ece9e2bbd9",
+      "sha256": "e56667ebb06395598140f89d7aa4ccf2c5348f21913b23777c4d40ece9e2bbd9",
+      "bytes": 2701
     },
     {
       "path": "README.md",
       "source": null,
       "sourceSha256": null,
-      "sha256": "6a154c0c92d022fc651caf3465307350ef67dc4f8f7000b87b67d1f7730369e6",
-      "bytes": 40137,
+      "sha256": "1abe9a3929f9ac7ad67b42bffde27e731f99e6db4609efb34d58e9dd0fa9756e",
+      "bytes": 39691,
       "transform": "generated"
     }
   ],
   "omitted": [
     {
-      "what": "`launcher`",
-      "reason": "not in the profile android: launcher icon, notification icon, splash colour and Play icon of one product: the product's own, from its declaration (product/PRODUCT-CONTRACT.md of a copy)"
-    },
-    {
-      "what": "`res/drawable/sb_sign_*.xml`",
-      "reason": "not in the profile android: the in-app sign tile of one product"
-    },
-    {
-      "what": "`res/drawable/sb_symbol_*.xml`",
-      "reason": "not in the profile android: the start symbol of one product"
-    },
-    {
-      "what": "`res/drawable/sb_splash_symbol_*.xml`",
-      "reason": "not in the profile android: the splash symbol of one product"
-    },
-    {
-      "what": "`res/values/sebaro_start.xml`",
-      "reason": "not in the profile android: the start colour of one product"
-    },
-    {
-      "what": "`res/values-v31/sebaro_start.xml`",
-      "reason": "not in the profile android: the splash theme of one product"
-    },
-    {
-      "what": "`res/values/sebaro_start_theme.xml`",
-      "reason": "not in the profile android: the start theme of one product"
-    },
-    {
       "what": "Compose sample screens",
-      "reason": "6 file(s) in systems/sebaro/kotlin/de/sebaro_ventures/design/sample/: the demo app's code from the spec (screens, recipes, app theme), app code rather than design system"
+      "reason": "7 file(s) in systems/sebaro/kotlin/de/sebaro_ventures/design/sample/: the demo app's code from the spec (screens, recipes, app theme), app code rather than design system"
     },
     {
       "what": "SebaroTokens.swift, dist/tokens.json",

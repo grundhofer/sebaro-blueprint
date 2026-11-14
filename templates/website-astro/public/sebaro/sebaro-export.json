@@ -1,8 +1,8 @@
 {
   "$comment": "the record of this copy, generated — do not edit. Check that the folder is unchanged: node checks/verify-export.mjs --strict. Update it: node checks/update-copy.mjs (README.md, section Keep in sync)",
   "format": "1.0",
-  "tool": "export_system.py 1.29.0",
-  "date": "2026-11-12",
+  "tool": "export_system.py 1.34.0",
+  "date": "2026-11-14",
   "system": {
     "slug": "sebaro",
     "name": "sebaro",
@@ -42,44 +42,44 @@
     "share-images"
   ],
   "release": {
-    "tag": "v1.14.0",
+    "tag": "v2.0.0",
     "asset": "sebaro-website.tar.gz",
-    "sha256": "fa37e2c0eb0f42b74687a0a18143fe574163b317a225c4447801fa7614fb24e3",
+    "sha256": "41ab6defad41ed5caeace61f62e7539152fbfdea5dc3a4761b32fd9d987386f5",
     "updater": "update-copy.mjs 1.1.0",
     "from": "https://github.com/grundhofer/sebaro-guide/releases"
   },
   "sebaroDesign": {
-    "commit": "17bb8f6be39cc2352f8dc7b0850a2a914528b5bf",
+    "commit": "2b3aa908fc86c2c24ec7e5855358dcc7298b3c18",
     "uncommittedChanges": false,
     "fromCommit": true
   },
   "contracts": {
-    "tokens": "1.14",
-    "palette": "2.7",
+    "tokens": "2.0",
+    "palette": "3.0",
     "fontsConfig": 1,
     "iconSet": "sebaro-icon-set/1",
-    "brandAssetsTool": "1.10.0",
+    "brandAssetsTool": "1.11.0",
     "facts": "1.3"
   },
   "generators": {
-    "build_tokens.py": "1.14.0",
+    "build_tokens.py": "2.0.0",
     "icons.py": "1.1.0",
     "fonts.py": "1.2.0",
     "fontTools": "4.55.3",
-    "brand_assets.py": "1.10.0",
+    "brand_assets.py": "1.11.0",
     "brandRenderer": {
       "playwright": "1.63.0",
       "browser": "153.0.8010.12"
     },
-    "brand/og/render.mjs": "1.2.0"
+    "brand/og/render.mjs": "1.3.0"
   },
   "tools": {
-    "export_system.py": "1.29.0",
-    "check_palette.py": "2.7.0",
-    "build_tokens.py": "1.14.0",
+    "export_system.py": "1.34.0",
+    "check_palette.py": "3.0.0",
+    "build_tokens.py": "2.0.0",
     "fonts.py": "1.2.0",
     "icons.py": "1.1.0",
-    "brand_assets.py": "1.10.0",
+    "brand_assets.py": "1.11.0",
     "check_facts.py": "1.3.0"
   },
   "gates": [
@@ -118,24 +118,23 @@
     {
       "path": "tokens.css",
       "source": "systems/sebaro/dist/tokens.css",
-      "sourceSha256": "118a994b2d04bba2b72f18d5b0542cc2629b480600e2225a551f93cfd371528e",
-      "sha256": "4e69e87d1c28eb0c9a4678ee9ed4eded15ffe6b7f477e0584c5e4ac72a15de2b",
-      "bytes": 45138,
-      "transform": "the product scopes left out: a profile copy knows no product"
+      "sourceSha256": "78c1fa55e484f22027ab55f4b2cfe9857002d82d8ccd6a7fd124fdc90f0b28ce",
+      "sha256": "78c1fa55e484f22027ab55f4b2cfe9857002d82d8ccd6a7fd124fdc90f0b28ce",
+      "bytes": 45136
     },
     {
       "path": "tokens.tailwind.css",
       "source": "systems/sebaro/dist/tokens.tailwind.css",
-      "sourceSha256": "408896006f9857aaa7cfb8650a1312bd5c066120fe15c6df8c71cb0919286dd8",
-      "sha256": "408896006f9857aaa7cfb8650a1312bd5c066120fe15c6df8c71cb0919286dd8",
-      "bytes": 9673
+      "sourceSha256": "59b9448353aa0c18c872e9cde99fc7f4e450c32d233a952f62aff77c977ced3e",
+      "sha256": "59b9448353aa0c18c872e9cde99fc7f4e450c32d233a952f62aff77c977ced3e",
+      "bytes": 9671
     },
     {
       "path": "css/sebaro.css",
       "source": "systems/sebaro/css/sebaro.css",
-      "sourceSha256": "c36238ecfd90e130cca97cca76fadcc306ee89cfceb53fffd71bb63fca0907b0",
-      "sha256": "fb6b7155bad13e0b3d914e6d9d05ce28b98b0af5937ff941ef8dcfbed383a99a",
-      "bytes": 202939,
+      "sourceSha256": "685322d12592764dbcb9f25aa2b5898117351c0f3690643b1decc07af986abb4",
+      "sha256": "943384bc1410b4d58a60e3746bc525b080898da494e839f6a3f806a7e57d1122",
+      "bytes": 203291,
       "transform": "the rules of the profile's core and of the copy's packs (the parts and stretches that export/profiles.json gives them) of css/sebaro.css, in their order there, without the marks"
     },
     {
@@ -387,17 +386,17 @@
     {
       "path": "brand/og/pages.schema.json",
       "source": "systems/sebaro/brand/og/pages.schema.json",
-      "sourceSha256": "bba4a866034dbdbe071b5d14d2e79f8e3b837f7599525c1f8de6a31fd595ae31",
-      "sha256": "bba4a866034dbdbe071b5d14d2e79f8e3b837f7599525c1f8de6a31fd595ae31",
-      "bytes": 5129,
+      "sourceSha256": "833f287f913d92bf09df69185401ae4a45e4d2cd296693c3517a6c418a0be653",
+      "sha256": "833f287f913d92bf09df69185401ae4a45e4d2cd296693c3517a6c418a0be653",
+      "bytes": 7263,
       "pack": "share-images"
     },
     {
       "path": "brand/og/render.mjs",
       "source": "systems/sebaro/brand/og/render.mjs",
-      "sourceSha256": "cb678477baa3517396ff3e532b973ebb3ebd9c756a1b2fd0722c1f6f7ba67e46",
-      "sha256": "cb678477baa3517396ff3e532b973ebb3ebd9c756a1b2fd0722c1f6f7ba67e46",
-      "bytes": 35997,
+      "sourceSha256": "1959330b916644e0f4d299f66699b6f55b9918ee03221e5b0e12b46ab5654e27",
+      "sha256": "1959330b916644e0f4d299f66699b6f55b9918ee03221e5b0e12b46ab5654e27",
+      "bytes": 39444,
       "pack": "share-images"
     },
     {
@@ -463,9 +462,9 @@
     {
       "path": "js/sb-fit.js",
       "source": "systems/sebaro/demo/assets/sb-fit.js",
-      "sourceSha256": "222efb9ccb4bb90b3b6f9517c38669166a46c314d4fe94b0e4985f3d20cff82d",
-      "sha256": "222efb9ccb4bb90b3b6f9517c38669166a46c314d4fe94b0e4985f3d20cff82d",
-      "bytes": 45943,
+      "sourceSha256": "68ae66e304701721a3e72a476edc2efd9831970fcd206dec8ed9dd75d05d2bdd",
+      "sha256": "68ae66e304701721a3e72a476edc2efd9831970fcd206dec8ed9dd75d05d2bdd",
+      "bytes": 47897,
       "pack": "fit"
     },
     {
@@ -485,14 +484,14 @@
     {
       "path": "checks/update-copy.mjs",
       "source": "tools/update-copy.mjs",
-      "sourceSha256": "d31a6b457fb9ea5353ab8bbd0e0e2db79c1402b2d09dbfc1b69807d25a927c80",
-      "sha256": "d31a6b457fb9ea5353ab8bbd0e0e2db79c1402b2d09dbfc1b69807d25a927c80",
-      "bytes": 37042
+      "sourceSha256": "1c49d33ff6baa100ead1b2b42c4ab21762bec0583f06c17894d3323ae6949d25",
+      "sha256": "1c49d33ff6baa100ead1b2b42c4ab21762bec0583f06c17894d3323ae6949d25",
+      "bytes": 37256
     },
     {
       "path": "checks/lint-web.sh",
       "source": "systems/sebaro/spec/03-signature.md",
-      "sourceSha256": "4bdbf76432e7cd8a1d75faecf6ab054808f89d4e071118b5f2710c33b5ddbe6d",
+      "sourceSha256": "a586a9168b39a850a69e690b4834291b9ac4d3d45856fd857f3d3cf63218155e",
       "sha256": "0e5a5e7a18451ebeba63bd695751698d8cbcf8059dce63a7cb87252729388c01",
       "bytes": 3025,
       "transform": "the sh block under „### 1.4 Checks“ of spec/03-signature.md, as tools/lint_rules.py sebaro --print colour prints it"
@@ -500,9 +499,9 @@
     {
       "path": "product/product_kit.py",
       "source": "tools/product_kit.py",
-      "sourceSha256": "601803e38e85ec40625ddcb662eee8634d48eeb876097167621b2ce44714d510",
-      "sha256": "601803e38e85ec40625ddcb662eee8634d48eeb876097167621b2ce44714d510",
-      "bytes": 87130
+      "sourceSha256": "844a132a7d62837ba287abef501dadef6497882c8926ce4d503b03d94c52d283",
+      "sha256": "844a132a7d62837ba287abef501dadef6497882c8926ce4d503b03d94c52d283",
+      "bytes": 96698
     },
     {
       "path": "product/sign_geometry.py",
@@ -514,9 +513,9 @@
     {
       "path": "product/render.mjs",
       "source": "tools/product_render.mjs",
-      "sourceSha256": "78e25d3257bacb198315d7d1ce3410e80aa4019e02db3554d33b8de7945bc443",
-      "sha256": "78e25d3257bacb198315d7d1ce3410e80aa4019e02db3554d33b8de7945bc443",
-      "bytes": 25655
+      "sourceSha256": "f5919612c0825bbbf1e87c53a4a0c358fc9b47c24253fb9265fd73fb0ce69367",
+      "sha256": "f5919612c0825bbbf1e87c53a4a0c358fc9b47c24253fb9265fd73fb0ce69367",
+      "bytes": 29206
     },
     {
       "path": "product/product.schema.json",
@@ -528,46 +527,46 @@
     {
       "path": "product/PRODUCT-CONTRACT.md",
       "source": "shared/PRODUCT-CONTRACT.md",
-      "sourceSha256": "f0106106a9878a7dcefcbd9561c3b61543227e2d2a40168fd5e6bff26e1e166e",
-      "sha256": "f0106106a9878a7dcefcbd9561c3b61543227e2d2a40168fd5e6bff26e1e166e",
-      "bytes": 28462
+      "sourceSha256": "9768fed30890ad0f7ee65cbabd642ae7b196f31102ea840c2be58cd19f06d91b",
+      "sha256": "9768fed30890ad0f7ee65cbabd642ae7b196f31102ea840c2be58cd19f06d91b",
+      "bytes": 31459
     },
     {
       "path": "product/tiles.json",
       "source": "systems/sebaro/dist/tokens.json",
-      "sourceSha256": "d640dc65351fec81ba486e18b382b6dffec3a90df3c0ac26a9539672044fff9a",
-      "sha256": "daf74ab97b33e71e04a09e1eeba5d002dc89c99311095e5468657d404de1a926",
-      "bytes": 2232,
-      "transform": "generated: what the product kit needs of the system (tools/product_kit.py tiles, from dist/tokens.json, brand/brand.config.json and brand/signs.json): tile groups, foot colours, grounds, stroke masters, raster measures; no product"
+      "sourceSha256": "a759c7b775b9447965ba75f74d9933c0c0578f8787399a63a299d698d1a17335",
+      "sha256": "2dc87d7bbb5f58c7294c93d7fef4e51ddff50609c646f6107cbf9cd53a79e3a7",
+      "bytes": 31908,
+      "transform": "generated: what the product kit needs of the system (tools/product_kit.py tiles, from dist/tokens.json, brand/brand.config.json, brand/signs.json and fonts/): tile groups, foot colours, grounds, stroke masters, raster measures, the name font; no product"
     },
     {
       "path": "CHANGES.md",
       "source": "systems/sebaro/CHANGES.md",
-      "sourceSha256": "03b8089d6d08fd2b7c8e59203331807b55122aade9d023132ede180494b0114d",
-      "sha256": "03b8089d6d08fd2b7c8e59203331807b55122aade9d023132ede180494b0114d",
-      "bytes": 3781
+      "sourceSha256": "af1495cc74f469ff5f60c0a67cb9c7ae8c69c6a2e29bdfa71334f4f02a725358",
+      "sha256": "af1495cc74f469ff5f60c0a67cb9c7ae8c69c6a2e29bdfa71334f4f02a725358",
+      "bytes": 10863
     },
     {
       "path": "LICENSE.md",
       "source": "LICENSE.md",
-      "sourceSha256": "a81a5e6fa43b956bfba0631005d4d67feb8d70190443d3046fcf13047cd67792",
-      "sha256": "a81a5e6fa43b956bfba0631005d4d67feb8d70190443d3046fcf13047cd67792",
-      "bytes": 2695
+      "sourceSha256": "e56667ebb06395598140f89d7aa4ccf2c5348f21913b23777c4d40ece9e2bbd9",
+      "sha256": "e56667ebb06395598140f89d7aa4ccf2c5348f21913b23777c4d40ece9e2bbd9",
+      "bytes": 2701
     },
     {
       "path": "css/runtime-names.json",
       "source": null,
       "sourceSha256": null,
-      "sha256": "ace4f5c7dac9b2c1a1b2cf6da54c426a7be194018341233c1940a56d90981412",
-      "bytes": 3113,
+      "sha256": "b2501686fe052883690d74bc3748b3f978344095959d257124509d58fc71bdf9",
+      "bytes": 3179,
       "transform": "generated: the names that exist only at run time (what the scripts of the core set and the state names of its rules), for cutting the stylesheet"
     },
     {
       "path": "css/runtime-names.display.json",
       "source": null,
       "sourceSha256": null,
-      "sha256": "62cdc5434312e1513da43ca813155643075a9d2d051b5bab4143956cb9f41d95",
-      "bytes": 2054,
+      "sha256": "c9f2bd099e4bc8442a37c78a58e3fbcb1cb4dd9d9c14001d850834769713443d",
+      "bytes": 2216,
       "pack": "display",
       "transform": "generated: the names that exist only at run time (what the scripts of the pack display set and the state names of its rules), for cutting the stylesheet"
     },
@@ -575,8 +574,8 @@
       "path": "css/runtime-names.notes.json",
       "source": null,
       "sourceSha256": null,
-      "sha256": "b94795f0074485316e1450dd16b5835bd7ed1769fc028f0722a6961ec54836c2",
-      "bytes": 2418,
+      "sha256": "4458d2bd5336bcb1c9fc6128b35d601d55d57a9c87929853ccf27b77d1bba2dc",
+      "bytes": 2579,
       "pack": "notes",
       "transform": "generated: the names that exist only at run time (what the scripts of the pack notes set and the state names of its rules), for cutting the stylesheet"
     },
@@ -584,8 +583,8 @@
       "path": "css/runtime-names.facts.json",
       "source": null,
       "sourceSha256": null,
-      "sha256": "125b19ed444c189bb4d8a2ea48f27df9e9dc873dcaa88e99de9a89d19e239b08",
-      "bytes": 4151,
+      "sha256": "15fe026ddd6ff2a8dd1a152ef1edbc48e7d6797789bda8881b5652e37ad6be23",
+      "bytes": 4313,
       "pack": "facts",
       "transform": "generated: the names that exist only at run time (what the scripts of the pack facts set and the state names of its rules), for cutting the stylesheet"
     },
@@ -593,8 +592,8 @@
       "path": "css/runtime-names.controls.json",
       "source": null,
       "sourceSha256": null,
-      "sha256": "12dd61e4586413a6a1ce8d3177bd0f47d9662d68916509611809c71d7a049ab4",
-      "bytes": 3425,
+      "sha256": "b78548accbc8c72b371c39ca5ec97a97e9a7a3770597b974ab01f3d78bf15b2e",
+      "bytes": 3609,
       "pack": "controls",
       "transform": "generated: the names that exist only at run time (what the scripts of the pack controls set and the state names of its rules), for cutting the stylesheet"
     },
@@ -602,8 +601,8 @@
       "path": "css/runtime-names.fit.json",
       "source": null,
       "sourceSha256": null,
-      "sha256": "7858db7cd97fd8f15154a9558e03bbfaa021a780e5695cebb5b1ebfebb9af411",
-      "bytes": 3889,
+      "sha256": "d19a59de92e73771c0d766f9cfc546e5abb2b012dd4d1171553365f0bb0be6df",
+      "bytes": 4095,
       "pack": "fit",
       "transform": "generated: the names that exist only at run time (what the scripts of the pack fit set and the state names of its rules), for cutting the stylesheet"
     },
@@ -611,8 +610,8 @@
       "path": "README.md",
       "source": null,
       "sourceSha256": null,
-      "sha256": "b039802752ea6a495e082f5103f5c068350159a24eae139a9b7ceed69d3133c8",
-      "bytes": 58032,
+      "sha256": "a4b8cd6b20fce918195cff23b49138f1a33ee36d463939857e3fca8e9be84834",
+      "bytes": 60200,
       "transform": "generated"
     }
   ],
@@ -622,15 +621,15 @@
     "files": [
       {
         "path": "css/sebaro.css",
-        "bytes": 202939,
-        "gzipBytes": 46318,
-        "minifiedBytes": 125522,
-        "minifiedGzipBytes": 18250
+        "bytes": 203291,
+        "gzipBytes": 46473,
+        "minifiedBytes": 125556,
+        "minifiedGzipBytes": 18257
       },
       {
         "path": "tokens.css",
-        "bytes": 45138,
-        "gzipBytes": 6510,
+        "bytes": 45136,
+        "gzipBytes": 6508,
         "minifiedBytes": 38175,
         "minifiedGzipBytes": 4112
       }
