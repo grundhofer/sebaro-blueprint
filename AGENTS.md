@@ -51,7 +51,7 @@ sebaro-Stil um“ is enough in any project. The section a product pastes into it
 
 | Need | Where |
 |---|---|
-| reason and examples of a rule cited as `[AKT-01]` | `rules/rules.json`; `rules/home.json` says where each of its 228 rules lives now |
+| reason and examples of a rule cited as `[AKT-01]` | `rules/rules.json`; `rules/home.json` says where each of its 227 rules lives now |
 | markup of a web part with all its states, display of every kind of data | `docs/bauteile.html`, `docs/daten.html` |
 | a whole working example of a product | the starter of its kind (step 3): every screen, its tests and its release |
 | a review list per screen | [`templates/screen-checklist.md`](templates/screen-checklist.md) |

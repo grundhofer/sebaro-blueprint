@@ -305,9 +305,9 @@ solche Stellen übernehmen. Übernimm sie nicht, sondern bau es so:
   Aktion ohne Rückgängig steht nicht im DOM.
 - **Titel als Satz:** „Diesen Eintrag gibt es nicht“ und „Diese Ansicht gibt es nicht“ in `src/i18n/de.json`.
   Bildschirmtitel sind kurze Substantive (TXT-03), etwa „Unbekannter Eintrag“; der Satz gehört in den Text darunter.
-- **Barrierefreiheit** ist ein Platzhalter, der auf der Seite „(ZUG-07)“ zeigt. Ein Produkt schreibt die sechs Teile
-  Beschreibung, Bedienung, Erfüllung, Einschränkungen, Rückmeldung, Behörde (ZUG-07) und nennt nie gelaufene
-  Screenreader-Tests „offen“ (ZUG-08).
+- **Barrierefreiheit** ist ein Platzhalter. Pflicht ist die Seite nicht mehr (D147 (5)); ein Produkt, das sie behält,
+  schreibt dort, was es geprüft hat und was nicht, behauptet keine Konformität, die keine Prüfung belegt
+  (Kernregel 27), und nennt nie gelaufene Screenreader-Tests „offen“ (ZUG-08).
 - **Datenweg-Zeile** fehlt unter „Sichern“ im Dialog „Änderungen sichern?“ (BEL-10). `src/app.css` setzt den Abstand von
   `.sb-action-hint` in der Aktionszone einer Spalte auf 0 und richtet die Zeile ans Ende aus, mit einer Regel für eine
   Klasse der Kopie. Unter 840&nbsp;px Rahmenbreite und in der Spalte der Liste steht sie darum bündig unter der Aktion;

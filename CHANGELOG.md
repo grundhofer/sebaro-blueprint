@@ -11,6 +11,55 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+## 3.0.0 · 2026-11-14
+
+Hauptversion: ZUG-07 entfällt (D149 (9)), der Katalog hat 227 Regeln; acht Regeln an die Kernregeln und den heutigen
+Code angeglichen (STR-01, STR-02, ZEI-01, ZUG-09, TEC-07, DSK-14, DSK-06, DSK-01), BIL-04 und DSK-01 sagen, warum sie
+vorläufig bleiben; die Bereiche „Zeichen“, „Start“ und „Zugang“ leiten nach den Kernregeln ein, der Eintrag „Start“ der
+Seite Bauteile zeigt den Start nach Kernregel 29; die vier Startvorlagen tragen die Kopie aus dem Release `v2.0.0`.
+
+Katalog an die Kernregeln angeglichen, der Rest: Sechs Regeln sagten noch, was spätere Entscheidungen geändert haben,
+und sagen jetzt dasselbe wie die Kernregeln und der heutige Code. **STR-01** (Start) folgt Kernregel 29 (D143, D144):
+die ganze Fläche in der Produktfarbe mit dem weißen Symbol, dann in 200&nbsp;ms die App, immer, auch bei reduzierter
+Bewegung (D102 (52)); im Web nur beim ersten Aufruf je Browser-Tab (`sb-start.js` nach `theme-init.js`,
+`data-sb-start="nostore"` hält ihn aus dem Speicher, `sbStart.hold()` und `release()`), in Tauri steht das Fenster bis
+zum Ende des Starts in der Kachelfarbe, auf Android `SbStart(ready, AppProduct, …)`. Keine Kachel wandert mehr in den
+Kopf. **ZEI-01** (Produktfarbe) folgt Kernregel 5 (D143, D145): Kachel, Start und höchstens eine Produktfläche je
+Ansicht, nur auf Einstieg, Übersicht, Detail mit einem Wert, Ergebnis und leerem Zustand, nie hinter Bedienelementen
+oder Links; „So“ nennt `AppProduct` aus dem Produktordner statt des seit `v2.0.0` entfernten `SebaroProduct.fromId`.
+**ZUG-09** (große Schrift) folgt Kernregel 30 (D147 (5), D148): Text folgt der Schriftgröße des Systems und wird je
+Bildschirm einmal bei großer Schrift geprüft; ein Wort, das nicht passt, bricht um oder endet mit „…“. „Nichts wird je
+abgeschnitten“ entfällt; was die Teile der Kopie bei großer Schrift von selbst tun, bleibt, wie gebaut. **TEC-07**: Eine
+Desktop-App holt ihre Kopie mit dem Updater der Kopie (`update-copy.mjs --profile desktop`), nicht mehr mit
+`export_system.py --target tauri`. **DSK-14** (Fenstergrund): Bis der Start vorbei ist (`sb-start-done`), hat das
+Fenster die Kachelfarbe des Produkts (`build.rs` liest `signTiles.<Gruppe>.tile` aus `tokens.json` der Kopie, die
+Gruppe aus `sebaro.product.json`), danach den gespeicherten Grund (Inhaber, 13.11.2026; in der Desktop-Vorlage der
+Befehl `start_ended`). **DSK-06** (Titelleiste): Der Pfad des Fensters ist Text, keine Navigation; die Brotkrumen von
+NAV-08 sind für Seiten. Die Titel von STR-01, ZEI-01 und ZUG-09 und die Einleitungen der Bereiche „Zeichen“ und „Start“
+sagen es ebenso, auf der Seite Bauteile auch die Namen dieser drei Regeln.
+
+**ZUG-07** (Erklärung zur Barrierefreiheit) entfällt (Inhaber, 14.11.2026, D149 (9); D147 (5) hatte die Pflichtseite
+schon gestrichen). Der Katalog hat jetzt 227 Regeln. Die Seiten „Barrierefreiheit“ der Website- und der
+Web-App-Vorlage bleiben, ein Produkt darf eine behalten; sie nennen keine Regel mehr. **BIL-04** und **DSK-01** bleiben
+vorläufig, ihr „Warum“ nennt den Grund aus D149 (9): BIL-04 bis zur rechtlichen Prüfung, DSK-01 bis ein Lauf in einem
+echten Tauri-Fenster aufgezeichnet ist.
+
+Zwei weitere Regeln zum Start und zur Produktfarbe: **STR-02** (Startsymbol) folgt Kernregel 29 (D144 (3)): Auf dem
+Start steht nur das nackte Zeichen in Weiß, 96&nbsp;px, ohne Kachel, Fuß und Kürzel, im Web `sign/sign.svg` des
+Produktordners, auf Android `SbStartSymbol`; die Kachel, die ohne Kürzel in den Kopf flog (D62), gibt es nicht mehr.
+**DSK-01** (Tauri-Fenster) folgt für die Produktfarbe Kernregel 5: Kachel der Titelleiste, Start und höchstens eine
+Produktfläche je Ansicht, statt „nur in der Titelleisten-Kachel“. Die Website-Vorlage nennt in ihren Lücken den Start
+nach Kernregel 29 mit dem Markup der Kopie.
+
+Die Einleitung des Bereichs „Zugang“ nennt den Boden der Kernregel 30 statt „WCAG 2.2 AA ist der Standard … diese
+Regeln bleiben“ (D147 (5), D148), und `source.decisions` im Katalog steht auf D1–D149 (vorher D1–D111).
+
+Seite Bauteile, Eintrag „Start“, nach Kernregel 29 und so, wie `sb-start.js` und `sebaro.css` der Kopie ihn heute
+zeigen: Die Wiederholung im Rahmen ist die ganze Fläche in der Produktfarbe mit dem weißen Zeichen
+(`.sb-start[data-sb-product]`, das nackte Zeichen statt der kleinen Kachel), Text, „So“, „Nicht so“ und Markup sagen
+es ebenso; `is-moving` und `data-sb-start-target` sind weg. Dafür kann der Block `guide:tile` mit `form="sign"` das
+nackte Zeichen einsetzen (`tools/build.py`).
+
 Startvorlagen auf Release `v2.0.0`: Die vier Startvorlagen tragen die Kopie aus `v2.0.0` (vorher `v1.14.0`), jede mit
 ihrem eigenen `update-copy.mjs` geholt. Ihre Produktordner sind einmal neu gebaut, wie es die Release-Notizen verlangen
 (Kit 1.3.0, `tiles.json` 1.2). Die Android-Vorlage trägt dazu die Quelle der Play-Vorstellungsgrafik

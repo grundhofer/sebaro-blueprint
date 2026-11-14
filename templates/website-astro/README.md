@@ -112,7 +112,7 @@ wird committet; `npm run sebaro:verify` prüft ihn gegen die Erklärung.
 - Kopf und Fuß: NAV-06, NAV-07, NAV-01, WEB-02, WEB-03, WEB-10, FAR-15, AKT-09, ZUG-06
 - Laden und Sicherheit: WEB-01, HAL-09, SCH-02, TEC-01, TEC-10; strenge Content-Security-Policy ohne `'unsafe-inline'`
 - Inhalt: AKT-01, AKT-04, AKT-11, DAT-01, DAT-03, DAT-05, DAT-06, DAT-07, TXT-01, TXT-03 bis TXT-08, TXT-10, TXT-17,
-  STA-02, STA-05, BEL-02, BEL-07, BEL-09, BEL-10, LNK-01, LNK-02, ZUG-07 (vorläufig)
+  STA-02, STA-05, BEL-02, BEL-07, BEL-09, BEL-10, LNK-01, LNK-02
 - Vorschaubild je Seite aus dem Build: WEB-09 (`scripts/og.mjs` ruft den Generator der Kopie über
   `public/sebaro/product/render.mjs share`)
 - Druck immer hell: WEB-11 (`sb-print.js`); große Schrift: ZUG-09 (`sb-fit.js`)
@@ -167,8 +167,10 @@ hat gezeigt, was ein Agent übernimmt oder übersieht. Bau es so:
   `sb-sticky.js` (DAT-15).
 - **Vorschaubilder** zeigen die Dachmarke (`product: "studio"`), solange das Produkt kein eigenes Zeichen hat (WEB-09,
   ZEI-03); ein echtes Produkt setzt seine Kachel und seinen Namen.
-- **Start mit der Kachel:** STR-01 gilt auf jeder Plattform; die Vorlage baut ihn noch nicht ein (weder
-  `data-sb-start` noch `sb-start.js`). Bau ihn ein: im Web nur beim ersten Aufruf je Browser-Tab und nur bis `load`.
+- **Start in der Produktfarbe:** STR-01 (Kernregel 29) gilt auf jeder Plattform; die Vorlage baut ihn noch nicht ein
+  (weder `data-sb-start` noch `sb-start.js`). Bau ihn ein: die ganze Fläche in der Produktfarbe mit dem weißen Zeichen
+  (`.sb-start` mit `data-sb-product` als erstes Element im Body, darin `sebaro-product/sign/sign.svg`, die Farben aus
+  `sign/product.css` nach `tokens.css`), im Web nur beim ersten Aufruf je Browser-Tab und nur bis `load`.
 - **`CHECKS.md`:** TEC-06 verlangt sie, mit jedem Befehl, Datum und Exit-Code.
 - **Port 4321:** `npm test` nutzt einen Server, der dort schon läuft (`reuseExistingServer` außerhalb der CI). Beende
   zuerst jeden anderen Server auf dem Port und starte mit `CI=1`: dann bricht ein belegter Port den Lauf laut ab,
