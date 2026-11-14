@@ -472,8 +472,7 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
 .sb-window .sb-primary-action-bar .sb-primary-action { inline-size: auto; min-inline-size: 200px; margin-inline-start: auto; padding-inline: min(var(--sb-space-6), 24px); }
 /* overlay panes: out of the grid, over the content edge, the ink line on their inner edge stays the layer line */
 /* overlay panes below 1004 / 722 px: only a pane in the window's grid (.sb-window__body >), so a sidebar or inspector
-   outside the grid stays in flow (spec/02 §4.17, D102 lane desktop); the contract for a framework counterpart without
-   sb-window.js is shared/ADOPTION.md §2.3 */
+   outside the grid stays in flow (spec/02 §4.17, D102 lane desktop) */
 @container sb-window (max-width: 1003.98px) {
   .sb-window__body > .sb-window__inspector {
     position: absolute; grid-column: auto; inset-block: 0; inset-inline-end: 0; z-index: var(--sb-layer-overlay);
