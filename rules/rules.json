@@ -5,7 +5,7 @@
  "source": {
   "repo": "sebaroDesign",
   "system": "sebaro",
-  "decisions": "D1-D111"
+  "decisions": "D1-D149"
  },
  "areas": [
   {
@@ -120,7 +120,7 @@
    "id": "zugang",
    "prefix": "ZUG",
    "title": "Zugang",
-   "intro": "WCAG 2.2 AA ist der Standard: Kontrast, ein Fokusring, große Ziele, Namen für alles. Bei einer künftigen Abwägung gegen ein anderes Ziel zieht die Barrierefreiheit den Kürzeren (D103); diese Regeln bleiben."
+   "intro": "Der Boden der Barrierefreiheit (Kernregel 30): Kontrast aus den Tokens, sichtbarer Fokus, Ziele von 48 dp oder px, ein Name für jedes Bedienelement, Status nie nur über Farbe, Text folgt der Schriftgröße des Systems. Mehr ist keine Pflicht (D147 (5), D148); was darüber hinaus gebaut ist, bleibt."
   },
   {
    "id": "start",
