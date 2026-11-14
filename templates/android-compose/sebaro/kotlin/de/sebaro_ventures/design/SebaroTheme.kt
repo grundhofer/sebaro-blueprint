@@ -1,8 +1,8 @@
 // generated — do not edit.
-// sebaroDesign token contract 1.14 · draft "sebaro" · palette "sebaro"
-// source: systems/sebaro/tokens/tokens.json (sha256 1ce6b8c317aefd2e)
-//         palettes/sebaro.json (sha256 17200a17be172cdd)
-// builder: tools/build_tokens.py 1.14.0 · spec: shared/TOKEN-CONTRACT.md
+// sebaroDesign token contract 2.0 · draft "sebaro" · palette "sebaro"
+// source: systems/sebaro/tokens/tokens.json (sha256 b20394467cd8a934)
+//         palettes/sebaro.json (sha256 371d475a0f24873d)
+// builder: tools/build_tokens.py 2.0.0 · spec: shared/TOKEN-CONTRACT.md
 // Compose bridge: SebaroTheme { } fills MaterialTheme (colorScheme, typography, shapes) and provides
 // SebaroTheme.colors / .typography / .tokens / .dataviz for everything Material 3 has no slot for.
 // Material 3 mapping target: material3 1.3 (no fixed roles; build with --m3 1.4 for material3 >= 1.4.0).
@@ -52,7 +52,7 @@ import androidx.compose.ui.unit.sp
 
 /** Contract and draft this file was generated from. */
 object SebaroBuildInfo {
-    const val CONTRACT: String = "1.14"
+    const val CONTRACT: String = "2.0"
     const val DRAFT: String = "sebaro"
     const val PALETTE: String = "sebaro"
     const val FOCUS_FOLLOWS_ACCENT: Boolean = false
@@ -303,13 +303,13 @@ fun sebaroColors(tone: SebaroTone, dark: Boolean): SebaroColors = when (tone) {
 }
 
 /**
- * A product: its id and the group of its sign tile (D54); there are no product accents. A product the
- * system does not list constructs its own, `SebaroProduct("<id>", SebaroSignTile.<Group>)`. The constants
- * are the products of the palette's `signTiles.productMap`; until contract 1.13 this was an enum of them.
+ * A product: its id and the group of its sign tile (D54); there are no product accents, and the system
+ * lists no product (D147). A product constructs its own, `SebaroProduct("<id>", SebaroSignTile.<Group>)`;
+ * the product kit writes that line from the product's declaration (`AppProduct`).
  */
 @Immutable
 class SebaroProduct(val id: String, val tile: SebaroSignTile) {
-    /** The id in PascalCase ("my-app" gives "MyApp"): the name of its constant, as the enum's `name`. */
+    /** The id in PascalCase ("my-app" gives "MyApp"). */
     val name: String = id.split('-', '_', '.').joinToString("") { it.replaceFirstChar(Char::uppercaseChar) }
 
     override fun equals(other: Any?): Boolean = other is SebaroProduct && other.id == id && other.tile == tile
@@ -317,19 +317,6 @@ class SebaroProduct(val id: String, val tile: SebaroSignTile) {
     override fun hashCode(): Int = 31 * id.hashCode() + tile.hashCode()
 
     override fun toString(): String = name
-
-    companion object {
-        val Studio = SebaroProduct(id = "studio", tile = SebaroSignTile.Studio)
-
-        /** The listed products, in the order of the palette's map. */
-        val entries: List<SebaroProduct> = listOf(Studio)
-
-        /** Look up a listed product by id (androidFactory passes the id, not a colour); throws for unknown ids. */
-        fun fromId(id: String): SebaroProduct = entries.firstOrNull { it.id == id }
-            ?: throw IllegalArgumentException(
-                "Unknown sebaro product '$id'. Allowed: " + entries.joinToString { it.id },
-            )
-    }
 }
 
 /**
@@ -346,25 +333,11 @@ enum class SebaroSignTile(val id: String, val displayName: String, val label: St
     Money(id = "money", displayName = "Grün", label = "Geld & Haushalt", tile = Color(0xFF1E7942), glyph = Color(0xFFFFFFFF)),
     System(id = "system", displayName = "Azur", label = "System & Sicherheit", tile = Color(0xFF1A89C5), glyph = Color(0xFFFFFFFF));
 
-    /** The products whose sign sits on this tile, in signTiles.productMap order (empty for a spare group). */
-    val products: List<String>
-        get() = PRODUCTS.filterValues { it == this }.keys.toList()
-
     companion object {
-        private val PRODUCTS: Map<String, SebaroSignTile> by lazy {
-            mapOf("studio" to Studio)
-        }
-
         /** Look up a group by id; throws for ids outside the checked set. */
         fun fromId(id: String): SebaroSignTile = entries.firstOrNull { it.id == id }
             ?: throw IllegalArgumentException(
                 "Unknown sebaro sign tile '$id'. Allowed: " + entries.joinToString { it.id },
-            )
-
-        /** The tile of a product key; throws for a product without a tile. */
-        fun forProduct(key: String): SebaroSignTile = PRODUCTS[key]
-            ?: throw IllegalArgumentException(
-                "No sebaro sign tile for product '$key'. Products: " + PRODUCTS.keys.joinToString(),
             )
     }
 }
@@ -850,7 +823,7 @@ data class SebaroX(
     val paneSidebarMin: Dp,
     /** D91 F3a: the largest width a divider gives the sidebar (aria-valuemax). */
     val paneSidebarMax: Dp,
-    /** spec/02 §4.17, shared/ADOPTION.md §2.3: below this width of .sb-window (240 + 2 + 480) the sidebar leaves the grid and is an overlay; the CSS container queries use the same number (they cannot read a custom property). A counterpart without sb-window.js reads the window's width against this token, never the computed style of a hidden pane. */
+    /** spec/02 §4.17: below this width of .sb-window (240 + 2 + 480) the sidebar leaves the grid and is an overlay; the CSS container queries use the same number (they cannot read a custom property). A counterpart without sb-window.js reads the window's width against this token, never the computed style of a hidden pane. */
     val paneSidebarOverlayBelow: Dp,
     /** D81, D91 F3a: start width of a window's inspector (the divider's aria-valuenow); it docks from a window of 1004 px (722 + 2 + 280; spec/02 §4.17, §4.23) and is an overlay of this width below that. */
     val paneInspector: Dp,
@@ -858,7 +831,7 @@ data class SebaroX(
     val paneInspectorMin: Dp,
     /** D91 F3a: the largest width a divider gives the inspector (aria-valuemax). */
     val paneInspectorMax: Dp,
-    /** spec/02 §4.17, shared/ADOPTION.md §2.3: below this width of .sb-window (722 + 2 + 280) the inspector leaves the grid and is an overlay; the CSS container queries use the same number. Read like pane.sidebar-overlay-below. */
+    /** spec/02 §4.17: below this width of .sb-window (722 + 2 + 280) the inspector leaves the grid and is an overlay; the CSS container queries use the same number. Read like pane.sidebar-overlay-below. */
     val paneInspectorOverlayBelow: Dp,
     /** D102 (40): the least width of a board column in the side-by-side layout, the columns sharing the rest of the board (spec/02 §3.16): a product may set --sb-x-sebaro-board-column wider for its board, never below 240 px; at large text a column still grows to 15em (D102 lane narrow). A fixed pixel value like the panes, and a least width rather than a fixed one (provisional, agent). */
     val boardColumn: Dp,

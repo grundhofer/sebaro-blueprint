@@ -11,6 +11,11 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+Startvorlagen auf Release `v2.0.0`: Die vier Startvorlagen tragen die Kopie aus `v2.0.0` (vorher `v1.14.0`), jede mit
+ihrem eigenen `update-copy.mjs` geholt. Ihre Produktordner sind einmal neu gebaut, wie es die Release-Notizen verlangen
+(Kit 1.3.0, `tiles.json` 1.2). Die Android-Vorlage trägt dazu die Quelle der Play-Vorstellungsgrafik
+(`render/android/play-feature-1024x500.svg`); ihre Rasterdateien behält sie wie bisher nicht im Repository.
+
 ## 2.19.0 · 2026-11-14
 
 Nebenversion: drei Regeln an die Kernregeln angeglichen (WEB-03, NAV-06, ZEI-07), keine entfällt; Kernregel 14 und 26
