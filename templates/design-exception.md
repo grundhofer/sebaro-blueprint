@@ -9,4 +9,4 @@ owner; until the owner decides, follow the rule.
 - **Why it does not fit:** <the concrete case, with a screenshot of both modes>
 - **Options:** A) keep the rule as is: <consequence> · B) <exception> · C) <change the rule for everyone>
 - **Recommendation:** <A/B/C and why>
-- **Decision (owner):** <date, wording>  → if C: new D-row in sebaroDesign and a rules.json change in the guide
+- **Decision (owner):** <date, wording>  → if C: new D-row in the workshop sebaro Foundry and a rules.json change in the guide
