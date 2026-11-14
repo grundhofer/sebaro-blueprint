@@ -46,9 +46,9 @@ https://github.com/grundhofer/sebaro-blueprint/blob/main/rules/rules.json. Decis
       all (STA-03, D98)
 - [ ] Required fields carry no mark; voluntary fields end their label with a grey „(optional)“ (`sb-optional`), never
       an asterisk or a „Pflichtfeld“ legend (EIN-01, D99)
-- [ ] Toast only for a reversible result outside the primary action, with „Rückgängig“, fixed duration, never for
-      errors, never to say that nothing happened (K14, EBE-05). Removing saved data asks in a dialog; only an entry of
-      an unsaved form goes with an undo toast (AKT-07, AKT-08)
+- [ ] Toast only for a reversible result outside the primary action, with „Rückgängig“ (the one without: a copy to
+      the clipboard), fixed duration, never for errors, never to say that nothing happened (K14, EBE-05).
+      Removing saved data asks in a dialog; only an entry of an unsaved form goes with an undo toast (AKT-07, AKT-08)
 - [ ] Every action that stores or sends has its data-path line „<Auslöser>. Ziel: <wohin>.“ directly under it (8 px
       under the primary action), also „Sichern“ in a dialog and the primary action of a window; local data: „Bleibt
       auf diesem Gerät.“ (BEL-10)

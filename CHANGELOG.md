@@ -11,6 +11,10 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+Kernregel 14 nennt die eine Kurzmeldung ohne „Rückgängig“: die, dass etwas in die Zwischenablage kopiert wurde
+(Inhaber, 14.11.2026; so erlaubte es EBE-05 schon, die Kernregel hatte die Ausnahme ausgelassen). Die Prüfliste je
+Ansicht sagt es ebenso.
+
 Katalog an die Kernregeln angeglichen: Drei Regeln sagten noch, was spätere Entscheidungen geändert haben (wo der
 Katalog anders spricht, gelten ohnehin die Kernregeln). **WEB-03** (Fußzeile): „Impressum“ und „Datenschutz“ immer,
 „Barrierefreiheit“ nur, wenn das Produkt diese Seite hat (D147 (5): die Pflichtseite entfällt); der Farbton einer
