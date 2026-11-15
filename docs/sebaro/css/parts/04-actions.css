@@ -5,7 +5,7 @@
 /* an empty view centres its empty state between the top bar and the bottom block (fix stage AD25) */
 .sb-view__content:has(> .sb-empty:only-child) { display: flex; flex-direction: column; justify-content: center; }
 /* a lone loading line in an empty area stands where a lone empty state would: start-aligned, in the middle of the
-   height, with the empty state's padding, its sides held at 16 px (spec/02 §3.12; provisional, agent) */
+   height, with the empty state's padding, its sides held at 16 px (spec/02 §3.12) */
 :is(.sb-view__content, .sb-window__content):has(> .sb-loading:only-child) { display: flex; flex-direction: column; align-items: flex-start; justify-content: safe center; }
 :is(.sb-view__content, .sb-window__content) > .sb-loading:only-child { box-sizing: border-box; max-inline-size: 100%; padding: var(--sb-space-8) min(var(--sb-spacing-gutter), 16px); }
 
@@ -18,7 +18,7 @@
 .sb-top-bar:has(> .sb-icon-button:first-child) { padding-inline-start: var(--sb-space-1); }
 .sb-top-bar__heading { display: flex; align-items: center; gap: var(--sb-space-3); flex: 1 1 auto; min-inline-size: 0; }
 .sb-top-bar__text { min-inline-size: 0; }
-/* narrow columns at large text (D102 lane narrow; provisional, agent): sb-fit.js measures the bar in its one-line form;
+/* narrow columns at large text (D102 lane narrow): sb-fit.js measures the bar in its one-line form;
    once a word of the title or subtitle would break there, data-sb-fit="stack" makes the bar a grid with the back button
    and the actions on the first line and the heading on its own line under them, as a large title (the reading and
    focus order stays the DOM order). Without the script the heading asks for 9rem beside the back button and the
@@ -40,21 +40,22 @@
 .sb-top-bar__heading > .sb-field { flex: 1 1 0; min-inline-size: 0; }
 .sb-top-bar:has(> .sb-top-bar__heading > .sb-field) { padding-inline-end: var(--sb-spacing-gutter); }
 
-/* the bottom block: primary action bar + navigation, one 2 px ink layer line on top (spec/03 §2, D46) */
+/* the bottom block: primary action bar + navigation, one 2 px ink layer line on top (spec/03 §2, §12, D46) */
 .sb-bottom-block {
   position: sticky; inset-block-end: 0; z-index: var(--sb-layer-sticky); background: var(--sb-color-bg);
   border-block-start: var(--sb-x-sebaro-layer-line-width) solid var(--sb-x-sebaro-layer-line-color);
   padding-block-end: env(safe-area-inset-bottom);
 }
-/* the scroll to a focused field stops above the block (CHECKS.md §86; provisional, agent): without it a browser that
+/* the scroll to a focused field stops above the block (CHECKS.md §86): without it a browser that
    scrolls only to the window's edge leaves the field under the block. sb-sticky.js measures the block; without the
    script the room is that of a bar with one line. A view that scrolls in its own box sets this on that box. */
+html { scroll-padding-block-end: var(--sb-bottom-block-size, auto); }   /* without :has the measured room of sb-sticky.js alone */
 html:has(.sb-bottom-block:not(.sb-window > .sb-bottom-block)) {
   scroll-padding-block-end: var(--sb-bottom-block-size, calc(var(--sb-size-control-lg) + 2 * var(--sb-space-3) + var(--sb-x-sebaro-layer-line-width) + env(safe-area-inset-bottom)));
 }
 .sb-primary-action-bar { padding: var(--sb-space-3) var(--sb-spacing-gutter); }
 .sb-primary-action-bar .sb-primary-action { inline-size: 100%; min-block-size: var(--sb-size-control-lg); }
-/* narrow columns at large text (D102 lane narrow, OR-22; provisional, agent): the full-width action keeps 12 px sides
+/* narrow columns at large text (D102 lane narrow, OR-22): the full-width action keeps 12 px sides
    instead of 24 (the centred label does not move while it fits) at every text size; its words wrap beside the icon
    between words, and like every action with an icon it puts the icon above them only once a word would break beside
    it (sb-fit.js below; until the review of the lane a CSS wrap did that whenever the words took two lines, also at
@@ -68,16 +69,15 @@ html:has(.sb-bottom-block:not(.sb-window > .sb-bottom-block)) {
 .sb-primary-action-bar__status, .sb-primary-action-bar__message {
   display: flex; align-items: flex-start; gap: var(--sb-space-1); margin: 0 0 var(--sb-space-2);
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
-  overflow-wrap: break-word;   /* a long word or address breaks inside the zone also where no body.sb-page carries the base rule (a window app; provisional, agent) */
+  overflow-wrap: break-word;   /* a long word or address breaks inside the zone also where no body.sb-page carries the base rule (a window app) */
 }
 .sb-primary-action-bar__status { display: none; }
 .sb-primary-action-bar__message { color: var(--sb-color-text); font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); }
 .sb-primary-action-bar__message:empty {   /* empty, it stays in the accessibility tree as a collapsed live region, so its
-   first sentence is announced (NV-J, spec/02 §4.17; display: none took the role out until the sentence came; provisional,
-   agent): out of the flow (no gap of the bar), 1 px, clipped like .sb-visually-hidden */
+   first sentence is announced (NV-J, spec/02 §4.17; display: none took the role out until the sentence came): out of the flow (no gap of the bar), 1 px, clipped like .sb-visually-hidden */
   position: absolute; inline-size: 1px; block-size: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
 }
-.sb-primary-action-bar__message .sb-icon { flex: none; margin-block-start: 4px; margin-block-start: calc((1lh - 16px) / 2); color: var(--sb-color-danger); }   /* centred on the sentence's first line at every text size: 4 px at 100 %, 16 px at 200 % (provisional, agent) */
+.sb-primary-action-bar__message .sb-icon { flex: none; margin-block-start: 4px; margin-block-start: calc((1lh - 16px) / 2); color: var(--sb-color-danger); }   /* centred on the sentence's first line at every text size: 4 px at 100 %, 16 px at 200 % */
 /* error details (D102 (23); spec/02 §3.28, spec/07 §4.1): one native <details> under an error's sentence,
    closed at first; the summary „Details“ with chevron-down--16 like the chart's „Werte als Tabelle“, the content the
    system's own text in sebaro Mono without a ground, breaking anywhere without a hyphen. Inside a message it takes a row of its own and
@@ -221,7 +221,7 @@ html:has(.sb-bottom-block:not(.sb-window > .sb-bottom-block)) {
   .sb-danger-action:focus-visible, .sb-danger-action.is-focus { outline-offset: calc(-2 * var(--sb-focus-width) - var(--sb-border-width-control)); }
 }
 
-/* disabled non-primary actions: grey, no fill change; prefer an enabled action that explains (spec/01 §1.4) */
+/* disabled non-primary actions: grey, no fill change; prefer an enabled action that explains (spec/02 §0.2, spec/01 §1.4) */
 .sb-secondary-action:disabled, .sb-secondary-action[aria-disabled="true"],
 .sb-text-action:disabled, .sb-text-action[aria-disabled="true"], .sb-toast__action:disabled,
 .sb-danger-action:disabled, .sb-danger-action[aria-disabled="true"],

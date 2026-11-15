@@ -1,22 +1,22 @@
 {
   "$comment": "written by tools/sync_from_design.py; do not edit",
   "system": "sebaro",
-  "sebaroDesignCommit": "2b3aa908fc86c2c24ec7e5855358dcc7298b3c18",
+  "sebaroDesignCommit": "e1755fa2f20d3913ddd992fa22f1524939aec9fa",
   "sebaroDesignUncommitted": false,
-  "exportTool": "export_system.py 1.34.0",
+  "exportTool": "export_system.py 1.35.0",
   "contracts": {
     "tokens": "2.0",
     "palette": "3.0",
     "fontsConfig": 1,
     "iconSet": "sebaro-icon-set/1",
-    "brandAssetsTool": "1.11.0",
+    "brandAssetsTool": "1.12.0",
     "facts": "1.3"
   },
   "excludedProducts": 8,
   "droppedFiles": 0,
   "vendorSpecimens": {
     "demo.css": "c80e2ce827c61e7593c8a0433a9fc79032f69c8b706f78b28ed93a3a1ad9b1a5",
-    "pages.css": "43e6c2085aa4968c25c8faf7e5c35a641d637c85c547fe0078fcb87722b55741",
+    "pages.css": "f94487f9c48ea8dfe8ea77bc89eabe025cc9725ad6b68d37dab4ebbeccd250c2",
     "sb-colour-count.js": "9be9c617ed5bb48de4af834fe1c2d4aee08a56df45394729b5678ef3b6d811f8"
   }
 }

@@ -13,7 +13,7 @@
 //   letters        typeahead: the next visible row whose name starts with what was typed (within 500 ms)
 //   pointer        a click chooses the row; a click on the twist (.sb-tree__twist) or a double click opens / closes it
 //   folders        a folder without a view of its own (data-sb-folder-toggle on the row or the tree, D102 (17)):
-//                  choosing it also opens or closes it (click, Enter, Space; provisional, agent: a toggle)
+//                  choosing it also opens or closes it (click, Enter, Space: a toggle)
 //   ⌘↓ (macOS)     opens the row like Enter (a folder opens, never closes), as in the Finder (D102 (17))
 //   indent         sebaro.css indents levels 1–8 by 16 px each; a row deeper than 8 gets --sb-tree-indent = level − 1
 //                  here, so every level keeps its 16 px (spec/02 §4.14), also for rows added or moved later

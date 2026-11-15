@@ -21,7 +21,7 @@
   font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); color: var(--sb-color-text);
 }
 .sb-form-grid__message:empty { display: none; }
-.sb-form-grid__message > .sb-icon { flex: none; margin-block-start: 4px; margin-block-start: calc((1lh - 16px) / 2); color: var(--sb-color-danger); }   /* centred on the first line at every text size (4 px at 100 %; provisional, agent) */
+.sb-form-grid__message > .sb-icon { flex: none; margin-block-start: 4px; margin-block-start: calc((1lh - 16px) / 2); color: var(--sb-color-danger); }   /* centred on the first line at every text size (4 px at 100 %) */
 
 /* ===================================================================== 3 header and footer (spec/03 §6) */
 

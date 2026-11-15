@@ -35,7 +35,7 @@
 /* ------------------------------------------------------------------ mobile.html: app views in phone frames */
 .demo-screens { box-sizing: border-box; max-inline-size: var(--sb-size-container-max); margin-inline: auto; padding: 0 var(--sb-spacing-gutter) var(--sb-spacing-section); }
 .demo-screens__list { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--sb-space-12) var(--sb-space-10); margin: 0; padding: 0; list-style: none; }
-/* the track may shrink below 390 px (provisional, agent; D100 (5)): a phone 320 px wide shows 320 px, so the frame
+/* the track may shrink below 390 px (D100 (5)): a phone 320 px wide shows 320 px, so the frame
    follows the screen instead of pushing the page sideways at large text */
 .demo-screen { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-2); inline-size: 390px; max-inline-size: 100%; }
 .demo-screen__title { margin: 0; font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }

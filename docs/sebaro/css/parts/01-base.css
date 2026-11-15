@@ -115,7 +115,7 @@ body.sb-page { container: sb-page sb-content / inline-size; }
 .sb-container { container: sb-content / inline-size; }
 /* a part that reaches past the text by design (a footnote digit's invisible target) must not make the page scroll
    sideways: the container clips sideways at its padding edge, so its gutter and every focus ring inside it stay
-   visible; clip makes no scroll container, sticky still works (spec/02 §5.1) */
+   visible; clip makes no scroll container, sticky still works (spec/02 §5, the sb-container row) */
 .sb-container { overflow-x: clip; }
 .sb-view--wide { container: sb-view / inline-size; }
 .sb-section { padding-block: var(--sb-spacing-section); }
