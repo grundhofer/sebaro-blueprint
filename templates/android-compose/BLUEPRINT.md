@@ -1,12 +1,12 @@
 # Android blueprint
 
-How every sebaro Android app is built under the hood: stack, structure, tests, release and updates. The design
-rules are in [`design/KERN.md`](../../design/KERN.md). This starter does not follow all of it yet; where they
+How every sebaro Android app is built. The design rules are in [`design/KERN.md`](../../design/KERN.md). This starter does not follow all of it yet; where they
 differ, the blueprint wins (last section).
 
 ## Stack
 
-- One activity, package `de.sebaro_ventures.<app>`, modules as below. Kotlin, Jetpack Compose, minSdk 29, Java 21. The versions are those of this starter's `gradle/libs.versions.toml`; every app keeps the same ones.
+- One activity, package `de.sebaro_ventures.<app>`, modules as below. Kotlin, Jetpack Compose, minSdk 29, Java 21.
+  The versions are those of this starter's `gradle/libs.versions.toml`; every app keeps the same ones.
 - Use without asking: AndroidX core, activity-compose, lifecycle, the Compose BOM, kotlinx-coroutines, Hilt, Room with
   KSP, DataStore, WorkManager (only for work that must run in the background). Tests: JUnit 4, Robolectric,
   Roborazzi.
@@ -14,6 +14,7 @@ differ, the blueprint wins (last section).
   and one line with the reason in the app's docs.
 - Offline by default: no INTERNET permission, no accounts, no analytics, backup off (`allowBackup="false"` and
   `dataExtractionRules`). An app that needs the network is a decided deviation of that product.
+- Camera: [CAMERA.md](CAMERA.md).
 
 ## Modules
 
@@ -23,8 +24,11 @@ Modules are preferred, and required once an app has more than one area of screen
 ```
 :app             MainActivity, <App>Application, ui/<App>App.kt: theme, navigation, wiring
 :designsystem    the sebaro copy
-:core:model      plain Kotlin models and rules, no Android
+:product         sebaro-product/: sign, icons, start theme, AppProduct
+:core:model      models and rules, a Kotlin/JVM module
 :core:data       Room, DataStore, files, repositories. No Compose.
+:core:ui         what several features show alike (formats, bottom navigation)
+:core:testing    render-test base and fakes (testImplementation)
 :core:<service>  one system service each, behind an interface
 :feature:<area>  the screens of one area, one package per screen
 ```
@@ -69,10 +73,9 @@ No library. `ui/<App>App.kt` keeps a saved back stack of destinations in `rememb
 
 All text is in string resources; number and unit are joined with `&#160;`. Read strings with the copy's
 `sbStringResource` and `sbPluralStringResource`, so plurals and digits follow the app's language. The app names its
-languages in `locales_config.xml`; the user chooses the language in Android's settings for the app, the app has no
-language setting of its own. German and English from the first version: English in `values/` as the fallback,
+languages in `locales_config.xml`; the user chooses one in Android's settings for the app, not in the app. German and English from the first version: English in `values/` as the fallback,
 German in `values-de/`. A further language is one `values-<xx>/` folder and its entry in `locales_config.xml`.
-Android lint reports a string that a language lacks (`MissingTranslation`) as an error, so `check` fails.
+A string that a language lacks fails `check` (lint `MissingTranslation`).
 
 ## Design system
 
@@ -118,8 +121,9 @@ from an older copy, read the first section of the copy's README: three old calls
 
 ## Build, quality, release
 
-The convention plugin `sebaro.android.app` lives in `build-logic/`, an export like the sebaro copy; never edit it
-in the app. It sets:
+The convention plugins live in `build-logic/`, an export like the sebaro copy; never edit it in the app.
+Other modules take `sebaro.android.library`, `:product` `sebaro.android.product`, modules with render tests
+`sebaro.android.rendertests`. `sebaro.android.app` sets:
 
 - R8 and resource shrinking in every release build; the build fails if an app switches them off.
 - The upload signing from the four `SEBARO_UPLOAD_*` values; versionCode is the number of commits.
@@ -130,7 +134,7 @@ Three workflows run on the family's own runner (`vars.SEBARO_RUNNER`):
 
 | Workflow | When | What |
 |---|---|---|
-| `ci` | every push and pull request | the copy's three checks (below), debug build, tests, lint, detekt, ktlint, release build and bundle; fails if the release asks for INTERNET |
+| `ci` | every push and pull request | the copy's three checks (below), debug build, tests, lint, detekt, ktlint, release build and bundle; fails if the release asks for INTERNET or for anything not in `release-permissions.txt` |
 | `release` | by hand, default branch | tests and checks, signed bundle to the internal track, tag |
 | `promote` | by hand | internal track to production, or change the roll-out, without rebuilding |
 
@@ -138,26 +142,24 @@ A release to production always needs the owner's OK.
 
 ## Updates
 
-- Dependabot checks `gradle` (the version catalog) and `github-actions` once a week; minor and patch updates come
-  as one grouped pull request.
+- Dependabot checks `gradle` and `github-actions` weekly; minor and patch updates come as one pull request.
 - The sebaro copy is updated with `node sebaro/checks/update-copy.mjs`, `build-logic/` by exporting it again;
-  neither by hand. Each has a manifest (`sebaro-export.json`, `sebaro-build-export.json`) and a check that fails
-  on a hand edit.
+  neither by hand: each has a manifest and a check that fails on a hand edit.
 
 ## Size and speed
 
-- R8 and resource shrinking are on (enforced above). An app with native libraries ships only the ABIs it needs.
+- An app with native libraries ships only the ABIs it needs.
 - Nothing blocks the main thread: database and files only in `suspend` functions and Flows. Lists are lazy and
   have stable keys.
 - `WhileSubscribed(5_000)` stops work while nobody looks at the screen.
-- There is no baseline profile and no size budget in numbers yet. Add them when a measured problem exists.
+- No baseline profile and no size budget until a measured problem needs one.
 
 ## Before you say done
 
 ```sh
 ./gradlew assembleDebug                      # no Kotlin warnings
 ./gradlew testDebugUnitTest                  # unit and render tests, then look at docs/screens/
-./gradlew check                              # lint, detekt, ktlint in every module
+./gradlew check                              # lint, detekt, ktlint
 ```
 
 Then the copy's three checks, and say what you could not check:
@@ -171,8 +173,6 @@ python3 sebaro/product/product_kit.py check sebaro.product.json --copy sebaro --
 ## Where this starter still differs
 
 - It is one module wired by hand (`AppContainer`): copy its screens and tests, not its wiring.
-- The build export has no plugin for library modules yet; until then each sets namespace, SDKs and Java 21 itself.
-
 - It carries no `build-logic/`, no detekt configuration, no `.editorconfig` and no workflows. They are the export
   of the family's private build repository: a product runs that export first, and the starter builds only then.
 - Its data screen has no ViewModel, because it reads nothing: it is a catalogue of data kinds with invented
