@@ -583,15 +583,16 @@
    "id": "FAR-09",
    "area": "farbe",
    "title": "Hell und Dunkel sind gleichwertig",
-   "rule": "Bau und prüf Hell und Dunkel als ein System mit denselben Rollen und gleichem Aufwand. Modusabhängig sind nur die Werte der Tokens, die Schriftanpassung und die Randfarbe der Hauptaktion; jede Ansicht wird in beiden Modi angesehen.",
-   "rule_en": "Light and dark are one system of equal rank with the same roles; only token values, the D40 type adjustment and the primary-action outline colour differ; every view is checked in both modes.",
-   "why": "Auftrag im BRIEF: „ich erwarte vorschläge für eine eigene dark und hell pallete“. D40 (I): Dunkelgrund „Leicht blau getönt“, Dunkelschrift kräftiger und weiter.",
+   "rule": "Bau und prüf Hell und Dunkel als ein System mit denselben Rollen und gleichem Aufwand. Modusabhängig sind nur die Werte der Tokens, die Schriftanpassung und die Randfarbe der Hauptaktion; jede Ansicht wird in beiden Modi angesehen. Ausnahme: Ein Bild, das eine Maschine liest (QR-Code, Strichcode für die Kasse), bleibt auch im Dunkelmodus dunkel auf hell, in den Farben des hellen Modus mit hellem Rand.",
+   "rule_en": "Light and dark are one system of equal rank with the same roles; only token values, the D40 type adjustment and the primary-action outline colour differ; every view is checked in both modes. Exception: an image a machine reads (a QR code, a bar code shown at a till) stays dark on light in dark mode too, in the light theme's colours with a light margin.",
+   "why": "Auftrag im BRIEF: „ich erwarte vorschläge für eine eigene dark und hell pallete“. D40 (I): Dunkelgrund „Leicht blau getönt“, Dunkelschrift kräftiger und weiter. D150, Inhaber 15.11.2026 („ja bestätige ich dir“): Scanner lesen umgekehrte Codes schlecht.",
    "do": "Screenshots hell und dunkel für jede Ansicht; Kontraste in beiden Modi messen.",
    "dont": "Dunkelmodus als Nachtrag; Dunkel-Sonderfarben im Komponentencode; helle Akzentfarbe ins Dunkle durchreichen.",
    "numbers": "Dunkler Grund --sb-color-bg #13161C",
    "decisions": [
     "D40",
-    "D44"
+    "D44",
+    "D150"
    ],
    "source": "BRIEF.md „Auftrag“; DECISIONS.md D40; systems/sebaro/spec/01-foundations.md §9; SYSTEM.md §5",
    "platforms": [
@@ -600,7 +601,7 @@
    "status": "entschieden",
    "check": "shot.py --scheme both; check_palette.py; axe/CTR1 in beiden Modi.",
    "example_hint": "Dieselbe sb-card hell und dunkel nebeneinander mit gemessenen Kontrasten; falsch: Dunkelmodus mit unleserlicher heller Akzentfarbe.",
-   "changed": "2026-10-19"
+   "changed": "2026-11-15"
   },
   {
    "id": "FAR-11",
@@ -1316,9 +1317,9 @@
    "id": "EBE-05",
    "area": "ebenen",
    "title": "Kurzmeldung nur für Umkehrbares",
-   "rule": "Zeig eine Kurzmeldung (sb-toast, role='status') nur für das umkehrbare Ergebnis einer Aktion außerhalb der Hauptaktion, aus der festen Liste der erlaubten Fälle, optional mit einer Aktion „Rückgängig“ (sb-toast__action). Sie steht 6 s, bleibt stehen, solange der Zeiger darauf liegt oder der Fokus in ihr ist, und schließt mit Escape. Nie für Fehler, nie statt des Löschdialogs, nie für das, was der Bildschirm schon zeigt, nie für Ergebnis oder Fortschritt der Hauptaktion, nie mit zwei Aktionen. Der vierte erlaubte Fall hat kein „Rückgängig“: eine Kopie in die Zwischenablage aus der Palette oder einem Menü, wenn sonst nichts sie zeigt („In die Zwischenablage kopiert“). Zum Fall des Umkehrbaren gehört auch ein Eintrag, der aus einer Liste in einem noch nicht gesicherten Formular entfernt wird: Icon-Taste „<Eintrag> entfernen“ am Zeilenende, danach „„Seite 3“ entfernt“ mit „Rückgängig“, ohne Dialog, weil nichts Gespeichertes gelöscht wird.",
-   "rule_en": "Toast only for a reversible result outside the primary action, from the fixed list of allowed cases (spec/07 §4.3), optional one action „Rückgängig“ built as sb-toast__action; fixed 6 s, stays while hovered or focused, Escape closes; never for errors, never instead of the delete dialog, never for what is visible, never for the primary action, never with two actions. The fourth allowed case has no undo: a copy to the clipboard from the palette or a menu when nothing else shows it („In die Zwischenablage kopiert“). Removing an entry from a list in an unsaved form is a reversible case too: the icon button „<Eintrag> entfernen“ at the row's end, then „„Seite 3“ entfernt“ with „Rückgängig“, no dialog.",
-   "why": "Inhaber D78, Wortlaut: „bitte so wie vorgeschlagen die Aktion als klasse bauen.“ Erlaubt sind nur: (1) ein Eintrag aus einer Zeile oder Schnellaktion („Glas eingetragen · 6 / 8“ nach dem Plus der Zeile), (2) Ausblenden, Archivieren, Verschieben, das sich zurückholen lässt, (3) eine umkehrbare Änderung per Menü oder Kürzel, deren Wirkung man nicht sieht. D39: kein „Rückgängig“ statt Dialog beim Löschen. D48 (1): die Hauptaktion zeigt ihr Ergebnis selbst. D102 (18), Antwort „Alle Vorschläge (Empfohlen)“ auf eine Frage der Übernahme von novalis: als vierter erlaubter Fall, ohne „Rückgängig“. D105 (35): „Eine Icon-Taste am Zeilenende „<Eintrag> entfernen“, danach ein Toast mit „Rückgängig“.“",
+   "rule": "Zeig eine Kurzmeldung (sb-toast, role='status') nur für das umkehrbare Ergebnis einer Aktion außerhalb der Hauptaktion, aus der festen Liste der erlaubten Fälle, optional mit einer Aktion „Rückgängig“ (sb-toast__action). Sie steht 6 s, bleibt stehen, solange der Zeiger darauf liegt oder der Fokus in ihr ist, und schließt mit Escape. Nie für Fehler, nie statt des Löschdialogs, nie für das, was der Bildschirm schon zeigt, nie für Ergebnis oder Fortschritt der Hauptaktion, nie mit zwei Aktionen. Der vierte erlaubte Fall hat kein „Rückgängig“: eine Kopie in die Zwischenablage aus der Palette oder einem Menü, wenn sonst nichts sie zeigt („In die Zwischenablage kopiert“); ab Android 13 bestätigt das System die Kopie selbst, dort entfällt die Meldung. Zum Fall des Umkehrbaren gehört auch ein Eintrag, der aus einer Liste in einem noch nicht gesicherten Formular entfernt wird: Icon-Taste „<Eintrag> entfernen“ am Zeilenende, danach „„Seite 3“ entfernt“ mit „Rückgängig“, ohne Dialog, weil nichts Gespeichertes gelöscht wird.",
+   "rule_en": "Toast only for a reversible result outside the primary action, from the fixed list of allowed cases (spec/07 §4.3), optional one action „Rückgängig“ built as sb-toast__action; fixed 6 s, stays while hovered or focused, Escape closes; never for errors, never instead of the delete dialog, never for what is visible, never for the primary action, never with two actions. The fourth allowed case has no undo: a copy to the clipboard from the palette or a menu when nothing else shows it („In die Zwischenablage kopiert“); on Android 13 and later the system confirms the copy itself, so there the toast is left out. Removing an entry from a list in an unsaved form is a reversible case too: the icon button „<Eintrag> entfernen“ at the row's end, then „„Seite 3“ entfernt“ with „Rückgängig“, no dialog.",
+   "why": "Inhaber D78, Wortlaut: „bitte so wie vorgeschlagen die Aktion als klasse bauen.“ Erlaubt sind nur: (1) ein Eintrag aus einer Zeile oder Schnellaktion („Glas eingetragen · 6 / 8“ nach dem Plus der Zeile), (2) Ausblenden, Archivieren, Verschieben, das sich zurückholen lässt, (3) eine umkehrbare Änderung per Menü oder Kürzel, deren Wirkung man nicht sieht. D39: kein „Rückgängig“ statt Dialog beim Löschen. D48 (1): die Hauptaktion zeigt ihr Ergebnis selbst. D102 (18), Antwort „Alle Vorschläge (Empfohlen)“ auf eine Frage der Übernahme von novalis: als vierter erlaubter Fall, ohne „Rückgängig“. D105 (35): „Eine Icon-Taste am Zeilenende „<Eintrag> entfernen“, danach ein Toast mit „Rückgängig“.“ D150, Inhaber 15.11.2026 („ja bestätige ich dir“): ab Android 13 zeigt das System selbst, dass kopiert wurde; eine zweite Meldung wäre doppelt.",
    "do": "Toast „Eintrag ausgeblendet“ mit <button class='sb-toast__action'>Rückgängig</button>; Web sbToast.show(toast); Compose SbToast; Kopie aus der Palette: „In die Zwischenablage kopiert“ ohne Aktion; Formular: <button class='sb-icon-button' aria-label='Seite 3 entfernen'>…#close…</button> in sb-list-row__trail, danach „„Seite 3“ entfernt“ · „Rückgängig“.",
    "dont": "„Gewohnheit gelöscht · Rückgängig“ statt Dialog; „Export fehlgeschlagen“ als Toast; „Gespeichert!“, wenn der Schalter sichtbar umsprang; Toast nach der Hauptaktion; eine eigene Dauer je Meldung.",
    "numbers": "Dauer 6 s, fest; Radius 12px; min. 48px; Padding 4 4 4 16; max. 560px; 1 Aktion höchstens",
@@ -1327,7 +1328,8 @@
     "D39",
     "D48",
     "D102",
-    "D105"
+    "D105",
+    "D150"
    ],
    "source": "DECISIONS.md D78; systems/sebaro/spec/07-voice.md §4.3; spec/02-components.md §4.8; spec/03-signature.md §7.2; D102 (18); spec/07-voice.md §4.3 (Fall 4); spec/02-components.md §4.8; D105 (35); spec/02-components.md §3.3; spec/07-voice.md §4.3 (Fall 2)",
    "platforms": [
@@ -1337,7 +1339,7 @@
    "check": "Review aller Toast-Auslöser gegen die Liste in spec/07 §4.3; keiner ist Hauptaktion, Löschen oder Fehler; Zeiger und Fokus halten die Meldung.",
    "example_hint": "Toast „Eintrag ausgeblendet“ mit sb-toast__action „Rückgängig“ und die Kopie „In die Zwischenablage kopiert“ ohne Aktion; falsch: Toast „Export fehlgeschlagen“ und „Gelöscht – Rückgängig“ ohne Dialog. Dazu ein Formular, aus dessen Liste „Seite 3“ entfernt wurde.",
    "note": "Der frühere Widerspruch (Toast „Glas eingetragen“ nach der Hauptaktion) ist aufgelöst: erlaubt ist er nach dem Plus der Zeile, nicht nach der Hauptaktion (spec/07 §4.3). Escape schließt eine gezeigte Kurzmeldung von überall (nicht, solange ein Dialog oder ein offenes Popover die Taste hat), und ihr Satz erscheint zwei Bilder nach ihr, damit Screenreader ihn hören; beides ist vorläufig vom Agenten. Eine Taste „Kopieren“, die ihr Ergebnis selbst zeigt („Kopiert“), bekommt keine Kurzmeldung. Vorläufig vom Agenten: die Wörter der Kurzmeldung beim Entfernen, das Icon close und dass der Fokus danach auf die Taste der nächsten Zeile geht, sonst der vorigen, sonst auf die Aktion zum Hinzufügen.",
-   "changed": "2026-10-26"
+   "changed": "2026-11-15"
   },
   {
    "id": "EBE-06",

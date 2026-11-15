@@ -29,6 +29,12 @@ Kotlin/JVM-Modul. Neu: das Kamera-Rezept `templates/android-compose/CAMERA.md` (
 gehört der Route, `uses-feature` nicht erforderlich, Erlaubnis erst beim Öffnen) und das Skript
 `templates/android-compose/tools/rename.py`, das die Vorlage in einem Schritt umbenennt.
 
+Kernregeln 7 und 14 aus zwei Testapps. Inhaber, 15.11.2026: „ja bestätige ich dir“ (D150). **Kernregel 7** nennt
+eine Ausnahme: Ein Bild, das eine Maschine liest (ein QR-Code, ein Strichcode für die Kasse), bleibt auch im
+Dunkelmodus dunkel auf hell, in den Farben des hellen Modus und mit einem hellen Rand; FAR-09 sagt dasselbe.
+**Kernregel 14**: Ab Android 13 bestätigt das System das Kopieren selbst, dort zeigt die App dafür keine Kurzmeldung;
+EBE-05 sagt dasselbe. Geänderte Regeln: FAR-09, EBE-05.
+
 ## 3.0.0 · 2026-11-14
 
 Hauptversion: ZUG-07 entfällt (D149 (9)), der Katalog hat 227 Regeln; acht Regeln an die Kernregeln und den heutigen

@@ -27,7 +27,8 @@ Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die engl
 6. Keine farbige Fläche hinter Text außer der Hauptaktion. Die Gründe sind die vier Grautöne der Tokens.
    [FAR-02, FAR-05]
 7. Hell und Dunkel sind gleichwertig. Jede Ansicht funktioniert in beiden und in den Farbtönen „Kühl“ und „Warm“.
-   [FAR-09, FAR-15]
+   Eine Ausnahme: Ein Bild, das eine Maschine liest (ein QR-Code, ein Strichcode für die Kasse), bleibt auch im
+   Dunkelmodus dunkel auf hell, in den Farben des hellen Modus und mit einem hellen Rand. [FAR-09, FAR-15, D150]
 
 ## Schrift, Raum, Form
 
@@ -51,7 +52,8 @@ Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die engl
     Textaktion. [AKT-06, D143]
 14. Die Hauptaktion zeigt ihren eigenen Fortschritt und ihr Ergebnis. Kein Ladekreis über der Ansicht. Eine
     Kurzmeldung nur für ein umkehrbares Ergebnis, mit „Rückgängig“; die einzige ohne sagt, dass etwas in die
-    Zwischenablage kopiert wurde. [AKT-05, EBE-05]
+    Zwischenablage kopiert wurde. Ab Android 13 bestätigt das System das Kopieren selbst: Dort zeigt die App dafür
+    keine Kurzmeldung. [AKT-05, EBE-05, D150]
 15. Wer etwas Gespeichertes löscht, wird immer in einem Dialog gefragt, der sagt, was verloren geht.
     [AKT-07, AKT-08, D119]
 16. Unter einer Aktion, die Daten irgendwohin schickt, sagt eine Zeile, wohin. Nur lokal: „Bleibt auf diesem
