@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """A product's sebaro outputs from its own declaration. Python 3.10+, standard library only.
 
-A product declares itself in `sebaro.product.json` (shared/PRODUCT-CONTRACT.md, shared/product.schema.json): its id and
-name, the group of its sign tile, its sign as paths on the 24-unit grid and what its website needs. This kit draws
-the product's sign tile, launcher layers, notification icon, the start of an Android app, favicon SVG, web manifest
-and head snippet from it and from one data file of the system, `product/tiles.json` (tile groups, foot colours,
+A product declares itself in `sebaro.product.json` (PRODUCT-CONTRACT.md and product.schema.json in product/ of a
+copy): its id and name, the group of its sign tile, its sign as paths on the 24-unit grid and what its website
+needs. This kit draws the product's sign tile, launcher layers, notification icon, the start of an Android app,
+favicon SVG, web manifest and head snippet from it and from one data file of the system, `product/tiles.json` (tile groups, foot colours,
 grounds, stroke masters, the measures of the raster files, the font of the name in the Play feature graphic).
 
     python3 product_kit.py build sebaro.product.json --copy <copy> --out <folder> [--render]
@@ -23,11 +23,11 @@ renderer beside this file (product/render.mjs, Node 20 and the product's own Pla
 own record, `sebaro-product-raster.json`. `build --render` runs it after the build. `check` compares the raster
 files with that record and with the SVGs they were drawn from, by sha256, never by pixel: missing, edited, stale.
 
-Inside sebaroDesign this file is tools/product_kit.py and tools/brand_assets.py calls its functions for the same
-outputs; a copy carries it as product/product_kit.py beside product/sign_geometry.py, the only module it imports,
-and product/render.mjs (tools/product_render.mjs here). A third command is for the maintainers of sebaro alone and
-needs the system's sources, which no copy holds: `python3 tools/product_kit.py tiles <system> --out <copy>` writes
-<copy>/product/tiles.json.
+A copy carries this file as product/product_kit.py beside product/sign_geometry.py, the only module it imports, and
+product/render.mjs. The maintainers of sebaro keep the three in tools/ of their repository, sebaro-foundry (the
+renderer as tools/product_render.mjs), where tools/brand_assets.py calls the kit's functions for the same outputs.
+There, and only there, the kit has a third command, which needs the system's sources: `python3 tools/product_kit.py
+tiles <system> --out <copy>` writes <copy>/product/tiles.json. A copy's kit does not offer it (1.3.1).
 Exit codes: 0 ok · 1 an output is missing, edited or stale (check), or a file could not be written · 2 usage or input.
 """
 from __future__ import annotations
@@ -55,15 +55,18 @@ if str(HERE) not in sys.path:
 import sign_geometry as GEO  # noqa: E402  (path data, glyphs, stroke masters, the foot tile; standard library)
 from sign_geometry import fmt  # noqa: E402
 
-TOOL_VERSION = "1.3.0"   # 1.3.0 (sebaro CHECKS.md §129, the owner's look of 2026-11-14): the Play feature graphic android/play-feature-1024x500.png (24-bit RGB) with its source render/android/play-feature-1024x500.svg: the tile's ground, line and band in the scale of the Play icon, the sign and the product's name in the name font of tiles.json, which the source embeds; tiles.json 1.2 with "font"; 1.2.0 (D148 stage 6c, sebaro CHECKS.md §120): check compares the declaration by its meaning (the record's declaration.meaning, the sha256 of its JSON with sorted keys and no white space), so a formatter's white space or key order is not „stale“, a record of 1.1 is still read by its bytes; sign/tile-small.svg for web and desktop, the tile's form below 32 px as Android's sb_sign_<id>_small; NOTICE.md, the terms of the folder's files; record 1.2; 1.1.0 (D148 stage 6a, sebaro CHECKS.md §118): the start of an Android app (sb_symbol_<id>, sb_splash_symbol_<id>, sebaro_start*.xml with Theme.Sebaro.Start), one SVG per raster file in render/ with the record's "raster" list, check reads the renderer's record (missing, edited, stale by sha256; --no-raster), build --render runs product/render.mjs, tiles.json 1.1 with the raster measures, record 1.1; 1.0.0 (D148 stage 2, sebaro CHECKS.md §114): first version
+TOOL_VERSION = "1.3.1"   # 1.3.1 (sebaro CHECKS.md §132): `tiles` is a command only in tools/ of the maintainers' repository (WORKSHOP), not in a copy, whose --help shows build and check alone; the head, two docstrings, a comment and --help name no path of the maintainers' repository as the place of the contract, and that repository by its name, sebaro-foundry; outputs unchanged; 1.3.0 (sebaro CHECKS.md §129, the owner's look of 2026-11-14): the Play feature graphic android/play-feature-1024x500.png (24-bit RGB) with its source render/android/play-feature-1024x500.svg: the tile's ground, line and band in the scale of the Play icon, the sign and the product's name in the name font of tiles.json, which the source embeds; tiles.json 1.2 with "font"; 1.2.0 (D148 stage 6c, sebaro CHECKS.md §120): check compares the declaration by its meaning (the record's declaration.meaning, the sha256 of its JSON with sorted keys and no white space), so a formatter's white space or key order is not „stale“, a record of 1.1 is still read by its bytes; sign/tile-small.svg for web and desktop, the tile's form below 32 px as Android's sb_sign_<id>_small; NOTICE.md, the terms of the folder's files; record 1.2; 1.1.0 (D148 stage 6a, sebaro CHECKS.md §118): the start of an Android app (sb_symbol_<id>, sb_splash_symbol_<id>, sebaro_start*.xml with Theme.Sebaro.Start), one SVG per raster file in render/ with the record's "raster" list, check reads the renderer's record (missing, edited, stale by sha256; --no-raster), build --render runs product/render.mjs, tiles.json 1.1 with the raster measures, record 1.1; 1.0.0 (D148 stage 2, sebaro CHECKS.md §114): first version
 SCHEMA_VERSION = "1.0"                  # sebaro.product.json (PRODUCT-CONTRACT)
 TILES_FORMAT = "1.2"                    # product/tiles.json (1.2: "font"; 1.1: "raster")
 RECORD_FORMAT = "1.2"                   # sebaro-product.json (1.2: declaration.meaning; 1.1: "raster" instead of "notProduced")
 NOTICE_NAME = "NOTICE.md"               # <folder>/NOTICE.md: under what terms the folder's files stand (1.2.0)
 RASTER_RECORD_FORMAT = "1.0"            # sebaro-product-raster.json, written by the renderer
 KIT_PATH = "product/product_kit.py"     # this file's place in a copy; the notice in every output names it
-RENDER_PATH = "product/render.mjs"      # the renderer's place in a copy (tools/product_render.mjs in sebaroDesign)
+RENDER_PATH = "product/render.mjs"      # the renderer's place in a copy (tools/product_render.mjs in sebaro-foundry)
 TILES_PATH = "product/tiles.json"
+# 1.3.1: the kit stands in tools/ of the maintainers' repository, beside systems/; only there it offers `tiles`, which
+# reads a system's sources. A copy carries the kit as product/product_kit.py and has no systems/.
+WORKSHOP = HERE.name == "tools" and (HERE.parent / "systems").is_dir()
 DECLARATION_NAME = "sebaro.product.json"
 RECORD_NAME = "sebaro-product.json"
 RASTER_RECORD_NAME = "sebaro-product-raster.json"
@@ -1652,7 +1655,7 @@ def name_font(system: pathlib.Path) -> dict:
 
 
 def system_tiles(system: pathlib.Path) -> dict:
-    """tiles_doc() of a system folder of sebaroDesign (dist/tokens.json, brand/brand.config.json, brand/signs.json, the
+    """tiles_doc() of a system folder of sebaro-foundry (dist/tokens.json, brand/brand.config.json, brand/signs.json, the
     package line of dist/SebaroTheme.kt and the name font of fonts/, name_font())."""
     system = pathlib.Path(system)
     docs = {}
@@ -1672,7 +1675,7 @@ def system_tiles(system: pathlib.Path) -> dict:
 # ============================================================================= CLI
 
 def renderer_script() -> pathlib.Path:
-    """The renderer beside this file: render.mjs in a copy, product_render.mjs in sebaroDesign's tools/."""
+    """The renderer beside this file: render.mjs in a copy, product_render.mjs in tools/ of sebaro-foundry."""
     for name in (pathlib.PurePosixPath(RENDER_PATH).name, "product_render.mjs"):
         if (HERE / name).is_file():
             return HERE / name
@@ -1733,7 +1736,7 @@ def _cmd_tiles(a) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(prog="product_kit.py", description="A product's sebaro outputs from sebaro.product.json "
-                                 "(shared/PRODUCT-CONTRACT.md).")
+                                 "(PRODUCT-CONTRACT.md in product/ of the copy).")
     ap.add_argument("--version", action="version", version=f"product_kit.py {TOOL_VERSION}")
     sub = ap.add_subparsers(dest="cmd", required=True)
     for name, func, text in (("build", _cmd_build, "write the outputs and the record into --out"),
@@ -1749,11 +1752,12 @@ def build_parser() -> argparse.ArgumentParser:
             c.add_argument("--no-raster", action="store_true",
                            help="do not compare the PNG and ICO files (a product that keeps none of them)")
         c.set_defaults(func=func)
-    t = sub.add_parser("tiles", help=f"for the maintainers of sebaro (it needs the system's sources, which no copy "
-                                     f"holds): write <out>/{TILES_PATH}")
-    t.add_argument("system", help="a system folder, or its slug under systems/")
-    t.add_argument("--out", required=True, help="the copy's folder")
-    t.set_defaults(func=_cmd_tiles)
+    if WORKSHOP:                                # 1.3.1: a copy's kit has build and check alone
+        t = sub.add_parser("tiles", help=f"for the maintainers of sebaro (it needs the system's sources, which no copy "
+                                         f"holds): write <out>/{TILES_PATH}")
+        t.add_argument("system", help="a system folder, or its slug under systems/")
+        t.add_argument("--out", required=True, help="the copy's folder")
+        t.set_defaults(func=_cmd_tiles)
     return ap
 
 

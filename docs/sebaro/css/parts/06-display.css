@@ -3,10 +3,10 @@
 
 /* status: glyph in the status colour + the word in text (never colour alone; spec/01 §1.5) */
 .sb-status {
-  display: inline-flex; align-items: flex-start; gap: var(--sb-space-1); margin: 0;   /* the words wrap beside the glyph at large text (D99 (1)); the glyph stands on the first line (provisional, agent) */
+  display: inline-flex; align-items: flex-start; gap: var(--sb-space-1); margin: 0;   /* the words wrap beside the glyph at large text (D99 (1)); the glyph stands on the first line */
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text);
   /* never wider than its place, and an element inside it (a file name) may shrink, so its words wrap beside the glyph
-     instead of the box running past its container (provisional, agent) */
+     instead of the box running past its container */
   max-inline-size: 100%;
 }
 .sb-status > :not(.sb-icon) { min-inline-size: 0; }
@@ -104,7 +104,7 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
 /* narrow columns at large text (D102 lane narrow, OR-20): the list is a container (sb-list; width from its parent, so
    not in a shrink-to-fit box without a width). Once the title would get less than about 6em beside an end part (a
    status, a time, a button), the end part goes under the text, start-aligned with it, and the title and meta get the
-   whole row; 11em + 44px = 6em for the text, about 5em for the end part, the gutters and the gap (provisional, agent).
+   whole row; 11em + 44px = 6em for the text, about 5em for the end part, the gutters and the gap.
    At 100 % that is 220 px: a phone (320 px and wider) and a 240 px sidebar keep one line; at 200 % on a phone the
    end part stands under the text */
 .sb-list { container: sb-list / inline-size; }
@@ -124,7 +124,7 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
    screen readers (<span class="sb-visually-hidden">erledigt: </span> in the title). Two class selectors, so the
    40 px win over the content heights of :has(__meta) / :has(__text) above */
 .sb-list-row.sb-list-row--done { min-block-size: 40px; padding-block: 0; color: var(--sb-color-text-muted); }
-/* a done row that is a target (its __link; the touch-target rule, provisional, agent): 48 px and the 8 px of every row, the touch
+/* a done row that is a target (its __link; the touch-target rule): 48 px and the 8 px of every row, the touch
    target of spec/01 §4 (in a window the window rows' 32 px of §7a stay) */
 .sb-list-row.sb-list-row--done:has(.sb-list-row__link):not([data-sb-density="window"] *) { min-block-size: var(--sb-size-target-touch); padding-block: var(--sb-space-2); }
 .sb-list-row--done .sb-list-row__title { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
@@ -190,7 +190,7 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
   }
 }
 /* below 64px + 10em (224 px at 100 %, 384 px at 200 %) the tile stays above the name, as on wide screens, so the name
-   and one-liner get the whole column at large text (D102 lane narrow; provisional, agent) */
+   and one-liner get the whole column at large text (D102 lane narrow) */
 @container sb-content ((width < 608px) or (width < 38em)) and (width >= calc(64px + 10em)) {
   .sb-app-card { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--sb-space-4); row-gap: var(--sb-space-1); align-items: start; padding-block: var(--sb-space-4); }
   .sb-app-card > .sb-sign-tile { grid-row: 1 / span 3; }
@@ -219,7 +219,7 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
   padding-block: var(--sb-space-6) var(--sb-space-2); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border);
 }
 .sb-app-row__name { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
-/* narrow columns at large text (D102 lane narrow; provisional, agent): below 64px + 10em of the content column the tile
+/* narrow columns at large text (D102 lane narrow): below 64px + 10em of the content column the tile
    stands above name, one-liner and meta, which then take the whole width */
 @container sb-content (width < calc(64px + 10em)) {
   .sb-app-row { grid-template-columns: minmax(0, 1fr); row-gap: var(--sb-space-2); }
@@ -313,7 +313,7 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
 /* without sb-fit.js (no data-sb-fit-ready on the root) a series chart narrower than 20em of its text takes the values
    form by itself: the legend names the series (also a hidden two-series legend), the ends keep the values. The figure
    is a container (sb-chart): its width comes from its parent, so not in a shrink-to-fit box without a width.
-   With the script the measure decides (provisional, agent) */
+   With the script the measure decides */
 .sb-chart:has(.sb-chart__end--series) { container: sb-chart / inline-size; }
 @container sb-chart (width < 20em) {
   :root:not([data-sb-fit-ready]) .sb-chart__end-name { display: none; }
@@ -333,7 +333,7 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
 /* a label that would run into the next, left out by sb-fit.js (D99 (2)); opacity, not visibility, so a screen reader
    still reads a slot that carries the value (the bar chart's „Mo 6“) */
 .sb-chart__slots > li[data-sb-fit="hidden"] { opacity: 0; }
-/* without sb-fit.js the labels never touch either (OR-3; provisional, agent): a month over its weeks wraps inside its
+/* without sb-fit.js the labels never touch either (OR-3): a month over its weeks wraps inside its
    span, 4 px short of the next, and only a month that alone does not fit its span is hyphenated („Sep-tember“, by the
    page's lang); centred slots narrower than 2em (a two-letter day at the title weight with its gap) show every second label
    from the end, narrower than 1em every fourth, so the latest stay as the script keeps them */
@@ -410,7 +410,7 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
 .sb-chart__name { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
 /* narrow columns at large text (D102 lane narrow): share rows and bars by name are a container (sb-chart-rows); once
    the name's 40 % would hold less than about 6em, the name with its value stands on its own line above its bar,
-   which then takes the whole width (provisional, agent). Deviation rows (subgrid) are not affected */
+   which then takes the whole width. Deviation rows (subgrid) are not affected */
 .sb-chart__rows:not(.sb-chart__rows--diverging) { container: sb-chart-rows / inline-size; }
 @container sb-chart-rows (width < 15em) {
   .sb-chart__row { grid-template-columns: minmax(0, 1fr); row-gap: var(--sb-space-1); }
@@ -454,7 +454,7 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
   :root:not([data-sb-fit-ready]) .sb-chart__diverging-head > :last-child { justify-self: unsafe end; }
 }
 /* right to left (OR-1): the plot's shapes and the bars of share and deviation rows mirror with their words, as
-   Compose draws them (spec/08 §14.22, §14.24): the latest point at the start (right), less towards the start with
+   Compose draws them (spec/08 §14.10, §14.22, §14.24): the latest point at the start (right), less towards the start with
    „weniger“; ticks, ends, slots and the head are grids and mirror by themselves */
 .sb-chart:dir(rtl) :is(.sb-chart__shapes, .sb-chart__row > svg) { scale: -1 1; }
 .sb-chart__rows--diverging { grid-column: 1 / -1; grid-template-columns: subgrid; row-gap: 0; }
@@ -494,7 +494,7 @@ mark[aria-current="true"], .sb-mark[aria-current="true"] { border-block-end: var
 /* narrow columns at large text (D102 lane narrow; the heatmap's day heads, D99): the figure is a container (sb-heatmap); once
    a day's column would be narrower than its two letters, the heads keep their two letters (D82; decided with D104 (21),
    BA-1) and every second one is left out of sight („Mo Mi Fr So“; per D103 the simpler of the two forms the owner
-   allowed, the other being two staggered rows; provisional, agent): a shown head stands whole and centred over its
+   allowed, the other being two staggered rows): a shown head stands whole and centred over its
    column, into the empty room of its neighbours (a text wider than its cell would start at the cell's start, so two
    empty pseudo-elements with equal negative margins take the excess out of the line and text-align centres the
    head's real width, whatever it is; the last one ends with the grid; review fix DE-R3, CHECKS.md §31.4), the
@@ -669,6 +669,7 @@ svg .sb-chart__value--current { font-weight: var(--sb-type-title-weight); }
 }
 .sb-code__copy .sb-icon { color: var(--sb-color-text-muted); }
 .sb-code__copy:hover, .sb-code__copy.is-hover { background: var(--sb-color-pressed-fill); }
+.sb-code__copy:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)); }   /* the ring inside the key: the block's overflow: hidden cut a ring outside it at its top and end */
 .sb-code pre, :where(pre.sb-code) { margin: 0; }
 .sb-code pre, pre.sb-code { box-sizing: border-box; max-inline-size: 100%; padding: var(--sb-space-4); overflow-x: auto; font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); tab-size: 4; }
 .sb-code pre:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)); }
@@ -693,26 +694,26 @@ kbd, .sb-kbd {
   color: var(--sb-color-text);
 }
 
-/* callout: glyph in the status colour + title + text inside a hairline frame; no fill, no coloured edge (spec/01 §1.1) */
+/* callout: glyph in the status colour + title + text inside a hairline frame; no fill, no coloured edge (spec/02 §3.11, spec/01 §1.1) */
 .sb-callout {
   display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--sb-space-3); align-items: start;
   margin: 0; padding: var(--sb-space-3) var(--sb-space-4); box-sizing: border-box;
   border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container);
 }
-.sb-callout > .sb-icon { margin-block-start: 2px; margin-block-start: calc((1lh - 20px) / 2); }   /* centred on the first line at every text size: 2 px at 100 % (provisional, agent) */
+.sb-callout > .sb-icon { margin-block-start: 2px; margin-block-start: calc((1lh - 20px) / 2); }   /* centred on the first line at every text size: 2 px at 100 % */
 .sb-callout__title { margin: 0; font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); }
 .sb-callout__text { margin: 0; grid-column: 2; }
 .sb-callout--note > .sb-icon { color: var(--sb-color-info); }
 .sb-callout--warning > .sb-icon { color: var(--sb-color-warning); }
 .sb-callout--error > .sb-icon { color: var(--sb-color-danger); }
 .sb-callout--success > .sb-icon { color: var(--sb-color-success); }
-/* a callout of one sentence without a title (spec/02 §3.11; provisional, agent): the sentence starts with the kind's word in
+/* a callout of one sentence without a title (spec/02 §3.11): the sentence starts with the kind's word in
    body-strong and a colon, <strong class="sb-callout__kind">Achtung:</strong>, so glyph and word stay together; __text
    then stands in the first row beside the glyph (the grid places it there) and the callout has no aria-labelledby */
 .sb-callout__kind { font-weight: var(--sb-type-body-strong-weight); }
 /* actions (D102 (39), spec/02 §3.11): secondary or text actions under the text, never the primary action (never lime);
    they wrap. „Ausblenden“ (optional): the text action with close--16 before its word, last in the actions (alone in
-   them when there are none; provisional, agent), the glyph in text-muted outside the underline */
+   them when there are none), the glyph in text-muted outside the underline */
 .sb-callout[hidden] { display: none; }
 .sb-callout__actions { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-2) var(--sb-space-3); margin-block-start: var(--sb-space-3); }
 .sb-callout__hide { gap: var(--sb-space-1); }
@@ -727,8 +728,7 @@ kbd, .sb-kbd {
    a 3 px mark in border-strong at its end, as long as the part it shows, and the words running out into the ground
    over the last 36 px (a mask, so it fades whatever ground is behind), never over a control and not while the focus is
    inside; the system's scroll bar then stays hidden, the mark shows the place. Without the script the scroll bar is all.
-   The ring of the area itself stands inside its edge, so no container clips it (provisional, agent: the name, the
-   default height, the 8 px between notices, the 12 px gutter at the end, the hidden scroll bar, the inner ring).
+   The ring of the area itself stands inside its edge, so no container clips it.
    --sb-callout-area-gutter (default 12 px, at least the mark and the ring: 5 px) lets a product pull the area out by its
    gutter (margin-inline-end: calc(-1 * var(--sb-callout-area-gutter))), so the notices' frames line up with a notice
    outside it; the gutter is always kept, so the words never wrap anew when the area starts or stops scrolling. Both
@@ -743,14 +743,15 @@ kbd, .sb-kbd {
   overflow-y: auto; padding-inline-end: max(5px, var(--sb-callout-area-gutter));
 }
 .sb-callout-area:focus-visible { outline-offset: calc(-1 * var(--sb-focus-width)); }
-.sb-callout-area[data-sb-more] {
+/* the same sign on the scrolling body of a dialog (spec/02 §4.6), which sb-controls.js measures as an area */
+:is(.sb-callout-area, .sb-dialog__body)[data-sb-more] {
   scrollbar-width: none;
   background: linear-gradient(var(--sb-color-border-strong), var(--sb-color-border-strong)) no-repeat
     right var(--sb-focus-width) top var(--sb-more-top, 0px) / 3px var(--sb-more-length, 100%);
 }
-.sb-callout-area[data-sb-more]:dir(rtl) { background-position: left var(--sb-focus-width) top var(--sb-more-top, 0px); }
-.sb-callout-area[data-sb-more]::-webkit-scrollbar { display: none; }
-.sb-callout-area[data-sb-more]:not(:focus-within) {
+:is(.sb-callout-area, .sb-dialog__body)[data-sb-more]:dir(rtl) { background-position: left var(--sb-focus-width) top var(--sb-more-top, 0px); }
+:is(.sb-callout-area, .sb-dialog__body)[data-sb-more]::-webkit-scrollbar { display: none; }
+:is(.sb-callout-area, .sb-dialog__body)[data-sb-more]:not(:focus-within) {
   mask-image: linear-gradient(var(--sb-color-bg), var(--sb-color-bg)),   /* a mask takes only the alpha; the ground is opaque */
     linear-gradient(var(--sb-color-bg) var(--sb-more-fade-from, calc(100% - 36px)),
       color-mix(in srgb, var(--sb-color-bg) calc(var(--sb-more-fade-rest, 0) * 100%), transparent) 100%);
@@ -758,12 +759,12 @@ kbd, .sb-kbd {
   mask-position: right 0 top 0, 0 0;
   mask-repeat: no-repeat;
 }
-.sb-callout-area[data-sb-more]:not(:focus-within):dir(rtl) { mask-position: left 0 top 0, 0 0; }
-/* a failed start before the window frame exists (spec/09 §13.1; provisional, agent: the name and the sizes): the error
+:is(.sb-callout-area, .sb-dialog__body)[data-sb-more]:not(:focus-within):dir(rtl) { mask-position: left 0 top 0, 0 0; }
+/* a failed start before the window frame exists (spec/09 §13.1): the error
    callout at the start of the empty window, under the title bar's 48 px (in px: the macOS window buttons do not grow
    with the text), as wide as a reading column */
 .sb-start-error { box-sizing: border-box; max-inline-size: 40rem; margin: 0; padding: 48px 16px 16px; }   /* px: the sides stay at their 100 % size, so the words keep the room at large text */
-/* the last-resort notice (spec/09 §13.1; provisional, agent): written by a small script of the page when the app
+/* the last-resort notice (spec/09 §13.1): written by a small script of the page when the app
    fails before its frame, its texts or its framework run. Tokens and this one class only; one layer above everything,
    the 2 px ink layer line at its top (a layer, D46; status colour stays on glyphs, so no coloured line), 48 px around,
    the system's message in sebaro Mono at caption size */
@@ -831,6 +832,8 @@ kbd, .sb-kbd {
 .sb-progress-ring svg { position: absolute; inset: 0; display: block; inline-size: 100%; block-size: 100%; overflow: visible; }
 .sb-progress-ring__track { fill: none; stroke: var(--sb-color-border); stroke-width: 4; }
 .sb-progress-ring__value { fill: none; stroke: var(--sb-color-text); stroke-width: 4; }   /* butt caps, like the linear bar (D85) */
+/* the full ring (100 %) is drawn without a dash: the two butt ends meeting at twelve o'clock left a hairline seam */
+.sb-progress-ring__value:is([stroke-dasharray="100 100"], [stroke-dasharray="100,100"], [stroke-dasharray="100"]) { stroke-dasharray: none; }
 .sb-progress-ring__text { position: relative; color: var(--sb-color-text); fill: currentColor; line-height: 1; white-space: nowrap; font-variant-numeric: var(--sb-type-numeric-variant); }
 .sb-loading { display: inline-flex; align-items: center; gap: var(--sb-space-2); margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .sb-loading .sb-icon { color: var(--sb-color-text); }
@@ -860,8 +863,7 @@ kbd, .sb-kbd {
 .sb-empty__title { margin: 0; font: var(--sb-type-mobile-title); letter-spacing: var(--sb-type-mobile-title-tracking); }
 .sb-empty__text { margin: 0; color: var(--sb-color-text-muted); }
 /* an empty state under a heading in an area with its own padding (a board without a column under its heading):
-   no side padding of its own, the pane form, so its title is never larger than the heading (spec/02 §3.14;
-   provisional, agent) */
+   no side padding of its own, the pane form, so its title is never larger than the heading (spec/02 §3.14) */
 .sb-empty--section { gap: var(--sb-space-1); padding: var(--sb-space-4) 0; }
 .sb-empty--section > .sb-empty__title { font: var(--sb-type-label); letter-spacing: var(--sb-type-label-tracking); }
 .sb-empty--section > .sb-empty__text { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); }
@@ -895,7 +897,7 @@ kbd, .sb-kbd {
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted);
 }
 .sb-calendar__grid td { block-size: var(--sb-calendar-cell); padding: 0; text-align: center; }
-/* day numbers at large text (guide 2.11.0 request „Tageszahlen im Kalender bei großer Schrift“; provisional, agent): a
+/* day numbers at large text (guide 2.11.0 request „Tageszahlen im Kalender bei großer Schrift“): a
    day's column is never narrower than „28“ with the drawn day's frame and 2 px inside it on each side, plus 4 px to the
    next day (2 px on each side, where the cell's inset focus ring lies); these px do not grow with the text (review of
    the lane, DE5-R2), so the least column is 2ch + 10 px: 43.6 px at 200 %, 7 × 43.6 = 305 px. Two numbers and the frame
@@ -912,12 +914,12 @@ kbd, .sb-kbd {
 }
 /* narrow columns at large text (D102 lane narrow): once a day's column is narrower than the two letters of its head,
    the heads keep their two letters (D82; D104 (21), BA-1) and every second one is left out of sight, as in the heatmap
-   (per D103 the simpler form; provisional, agent). The month is its own container (sb-calendar-month), so the test is
+   (per D103 the simpler form). The month is its own container (sb-calendar-month), so the test is
    the day's column itself, a seventh of the month: narrower than the widest two-letter head of German and English
-   („We“, about 1.52em of caption = 1.33rem) plus 2 px (review fix DE-R2, CHECKS.md §31.4; provisional, agent). A
+   („We“, about 1.52em of caption = 1.33rem) plus 2 px (review fix DE-R2, CHECKS.md §31.4). A
    shown head stands whole and centred over its column (the negative-margin pseudo-elements of the heatmap), so no
    head breaks inside its two letters; the first one starts and the last one ends with the grid, since the month has
-   no week column before it (provisional, agent); the left-out heads and abbr stay for screen readers */
+   no week column before it; the left-out heads and abbr stay for screen readers */
 .sb-calendar__month { container: sb-calendar-month / inline-size; }
 @container sb-calendar-month (width < calc(7 * (1.33rem + 2px))) {
   .sb-calendar__grid th { white-space: nowrap; }
@@ -938,7 +940,7 @@ kbd, .sb-kbd {
      to two figures + 4 px (never past its cell, and that growth stops 4 px short of the cell's width, so two days'
      frames keep their room at large text: 4 px at 200 % in a 43.6 px column, measured; review of the lane, DE5-R2),
      downwards to one line + 12 px (× text size). At 100 % both minimums
-     are at most the 40 / 32 px of the cell rule, so nothing moves (as SbCalendar, spec/08 §14.14; provisional, agent) */
+     are at most the 40 / 32 px of the cell rule, so nothing moves (as SbCalendar, spec/08 §14.14) */
   inline-size: min(100%, max(calc(var(--sb-calendar-cell) - var(--sb-space-2)), min(calc(100% - 4px), calc(2ch + var(--sb-space-1) + 2 * var(--sb-border-width-control)))));
   min-block-size: max(calc(var(--sb-calendar-cell) - var(--sb-space-2)), calc(1lh + var(--sb-space-1) + var(--sb-space-2)));
   padding-block-end: var(--sb-space-1); border: var(--sb-border-width-control) solid transparent; border-radius: var(--sb-radius-control);
@@ -967,7 +969,7 @@ kbd, .sb-kbd {
   border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); overflow-wrap: anywhere;   /* a long word wraps at 200 %, never cut */
 }
 .sb-calendar__entry:first-child { border-block-start: 0; }
-/* narrow columns at large text (D102 lane narrow; provisional, agent): once the entry's words would get less than about
+/* narrow columns at large text (D102 lane narrow): once the entry's words would get less than about
    8em beside the 3.5rem time, the time stands on its own line above them */
 .sb-calendar__entries { container: sb-calendar-entries / inline-size; }
 @container sb-calendar-entries (width < calc(3.5rem + 8em + 8px)) {
@@ -1052,7 +1054,7 @@ kbd, .sb-kbd {
   font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text);
 }
 .sb-audio__message:empty, .sb-video__message:empty { display: none; }
-:is(.sb-audio__message, .sb-video__message) > .sb-icon { flex: none; margin-block-start: 2px; margin-block-start: calc((1lh - 16px) / 2); color: var(--sb-color-danger); }   /* centred on the first line at every text size: 2 px at 100 % (provisional, agent) */
+:is(.sb-audio__message, .sb-video__message) > .sb-icon { flex: none; margin-block-start: 2px; margin-block-start: calc((1lh - 16px) / 2); color: var(--sb-color-danger); }   /* centred on the first line at every text size: 2 px at 100 % */
 
 /* video (D91 B12b; spec/02 §3.26): a native <video> with its poster in a 16:9 frame (1 px border-strong, radius 12,
    like the item card), no autoplay, nothing loads before the press (preload="none"); captions as <track>. Over the
@@ -1124,8 +1126,7 @@ kbd, .sb-kbd {
 .sb-changelog li { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: var(--sb-space-3); padding-block: var(--sb-space-3); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); }
 .sb-changelog li:first-child { border-block-start: 0; }
 /* narrow columns at large text (D102 lane narrow, OR-24): the list is a container (sb-changelog); once the text would
-   be narrower than about 10em beside the 7rem date, the date stands on its own line above it, as in the timeline
-   (provisional, agent) */
+   be narrower than about 10em beside the 7rem date, the date stands on its own line above it, as in the timeline */
 .sb-changelog { container: sb-changelog / inline-size; }
 @container sb-changelog (width < calc(7rem + 10em + 12px)) {
   .sb-changelog li { grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-1); }
@@ -1159,7 +1160,7 @@ kbd, .sb-kbd {
 .sb-board__title > .sb-category { align-self: center; }
 .sb-board__count { font-weight: var(--sb-type-caption-weight); font-variant-numeric: var(--sb-type-numeric-variant); color: var(--sb-color-text-muted); }
 .sb-board__head > .sb-icon-button { flex: none; margin-inline-start: auto; }
-/* a long one-word column name (guide 2.11.0 request „Kopf einer Tafel-Spalte mit langem Namen“; provisional, agent):
+/* a long one-word column name (guide 2.11.0 request „Kopf einer Tafel-Spalte mit langem Namen“):
    the head measures its title instead of trusting the board's width alone. The title's least width is its longest
    word with the category dot (break-word, not anywhere, so the word counts whole), and once that does not fit beside
    „Mehr“, „Mehr“ goes up to a line of its own at the end (wrap-reverse) and the title takes the column's whole width
@@ -1169,7 +1170,7 @@ kbd, .sb-kbd {
 /* the name itself may get narrower than its longest word (min-inline-size: 0 leaves the title's least width, which
    decides where „Mehr“ goes, as it is), and its words sit in a plain block, not in an anonymous flex item that never
    shrinks below its word: so a word wider than the column breaks inside the column and sb-fit.js hyphenates it. The
-   category dot stands in the name's start padding, centred on its first line (provisional, agent) */
+   category dot stands in the name's start padding, centred on its first line */
 .sb-board__title > .sb-board__name { min-inline-size: 0; }
 .sb-board__title > .sb-board__name.sb-category { display: block; position: relative; }
 .sb-board__title > .sb-board__name.sb-category:is(.sb-category--1, .sb-category--2, .sb-category--3, .sb-category--4, .sb-category--5, .sb-category--6):not(:has(> .sb-icon)) {
@@ -1179,7 +1180,7 @@ kbd, .sb-kbd {
 .sb-board__title > .sb-board__name.sb-category > .sb-icon { vertical-align: middle; margin-inline-end: var(--sb-space-2); }
 .sb-board__cards { display: grid; gap: var(--sb-space-2); margin: 0; padding: 0; list-style: none; }
 /* a card list with its own scroll frame (the product's overflow) keeps the drop line inside it: 1 px at the sides,
-   half the gap and the line above and below (spec/02 §3.16; provisional, agent) */
+   half the gap and the line above and below (spec/02 §3.16) */
 .sb-board__cards--scroll { overflow-y: auto; margin-inline: calc(-1 * var(--sb-border-width-hairline)); padding: calc((var(--sb-space-2) + var(--sb-border-width-strong)) / 2 + var(--sb-border-width-hairline)) var(--sb-border-width-hairline); }
 .sb-board__empty { margin: 0; padding-block: var(--sb-space-2); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 /* the card on a board: title in label, a grey meta line, „Mehr“ at the end of the first line */
@@ -1204,7 +1205,7 @@ kbd, .sb-kbd {
 /* a description rendered from Markdown: a compact prose dress in the card's caption: 4 px between blocks, headings in
    the caption size at the strong weight (never larger than the card's title), lists indented 1.5em as in sb-prose,
    code blocks wrap instead of scrolling; an image is never wider than the card (the renderer writes its alt text
-   instead; spec/02 §3.16; provisional, agent) */
+   instead; spec/02 §3.16) */
 .sb-board .sb-card__text > *, .sb-board .sb-card__text li > * { margin-block: 0; }
 .sb-board .sb-card__text > * + *, .sb-board .sb-card__text li + li, .sb-board .sb-card__text li > * + * { margin-block-start: var(--sb-space-1); }
 .sb-board .sb-card__text :is(h1, h2, h3, h4, h5, h6) { font: inherit; font-weight: var(--sb-type-body-strong-weight); }
@@ -1216,7 +1217,7 @@ kbd, .sb-kbd {
    product whose view keeps its own primary action; it takes the column's width with 8 px sides and wraps its words, and
    in the narrow board (below 152px + 6em) it leaves out its plus icon */
 .sb-board__add { inline-size: 100%; padding-inline: min(var(--sb-space-2), 8px); white-space: normal; text-align: center; }
-/* drag states of a card (D102 (40), spec/02 §3.16; provisional, agent), as sb-row's (spec/02 §4.22): "dragging" keeps a 2 px
+/* drag states of a card (D102 (40), spec/02 §3.16), as sb-row's (spec/02 §4.22): "dragging" keeps a 2 px
    ink frame on the card, "drop-before" / "drop-after" draw the 3 px place line in the middle of the gap between two
    cards, "drop-into" on .sb-board__column gives the column the 3 px accent frame inside its edge (an empty column, or
    its end below the last card);
@@ -1253,7 +1254,7 @@ kbd, .sb-kbd {
     .sb-board__column { flex: 0 0 calc(100% - var(--sb-space-12)); min-inline-size: 0; scroll-snap-align: start; scroll-snap-stop: always; }
   }
 }
-/* the swipe layout also below 40em of the board (D102 lane narrow, spec/02 §3.16, OR-21; provisional, agent): 640 px at 100 %,
+/* the swipe layout also below 40em of the board (D102 lane narrow, spec/02 §3.16, OR-21): 640 px at 100 %,
    1280 px at 200 %, so at large text a board in a window swipes one column at a time instead of squeezing its columns */
 @container sb-board (width < 640px) or (width < 40em) {
   .sb-board__nav:not([hidden]) {
@@ -1263,7 +1264,7 @@ kbd, .sb-kbd {
   .sb-board__columns { scroll-snap-type: x mandatory; scroll-padding-inline: var(--sb-spacing-gutter); padding: var(--sb-space-3) var(--sb-spacing-gutter); }
   .sb-board__column { flex: 0 0 calc(100% - var(--sb-space-12)); min-inline-size: 0; scroll-snap-align: start; scroll-snap-stop: always; }
 }
-/* narrow columns at large text (D102 lane narrow, spec/02 §3.16; provisional, agent): in the swipe layout the cue of the next
+/* narrow columns at large text (D102 lane narrow, spec/02 §3.16): in the swipe layout the cue of the next
    column, the sides of a column and a card's start side stay at their 100 % sizes (48, 12 and 12 px) instead of
    growing with the text, so the words keep the room; a card whose title would get less than about 6em beside „Mehr“
    puts the title on the line under it; the position bar puts „Spalte 2 von 3: …“ under its two step buttons */
@@ -1278,7 +1279,7 @@ kbd, .sb-kbd {
 }
 /* the position bar: „Spalte 2 von 3: …“ under the two step buttons once the words would get less than 8.5em between
    them (112px: two 48 px buttons and the sides; 248 px at 100 %, so a 254 px window board on a 320 px phone keeps the
-   100 % form; 384 px at 200 %; review of the lane, provisional, agent) */
+   100 % form; 384 px at 200 %; review of the lane) */
 @container sb-board (width < calc(112px + 8.5em)) {
   .sb-board__nav:not([hidden]) { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; }
   .sb-board__nav > .sb-icon-button { grid-row: 1; }
@@ -1287,7 +1288,7 @@ kbd, .sb-kbd {
 }
 /* the columns' heads and cards put their title under „Mehr“ once the title would get less than about 6em beside it
    (60px: „Mehr“ and the gap). Asked of the board, not of each column, so all columns switch together and their
-   cards stay in line (review of the lane; provisional, agent): in the swipe layout the first column, the one in view
+   cards stay in line (review of the lane): in the swipe layout the first column, the one in view
    when the board opens, keeps the board's width minus 92 px (2 × 16 px gutter, the 48 px cue, its 12 px end side), so
    the switch is below 152px + 6em of the board (248 px at 100 %, 344 px at 200 %); a middle column has 12 px less.
    Side by side a column is at least max(240px, 15em) and never switches */
@@ -1298,7 +1299,7 @@ kbd, .sb-kbd {
   .sb-board .sb-card--item > :not(.sb-icon-button, .sb-card__meta, .sb-card__text) { grid-column: 1 / -1; grid-row: 2; }
   .sb-board .sb-card--item > .sb-icon-button { grid-column: 2; grid-row: 1; }
   .sb-board .sb-card--item > .sb-card__text { grid-row: 3; }   /* the description under the title (D102 (40)) */
-  .sb-board__add > .sb-icon { display: none; }   /* the column's action keeps its words' room (D102 (36); provisional, agent) */
+  .sb-board__add > .sb-icon { display: none; }   /* the column's action keeps its words' room (D102 (36)) */
 }
 @media (prefers-reduced-motion: no-preference) {
   .sb-board__columns:not([data-sb-motion="reduce"], [data-sb-motion="reduce"] *) { scroll-behavior: smooth; }
@@ -1319,6 +1320,15 @@ kbd, .sb-kbd {
 @container scroll-state(stuck: top) {
   .sb-list-header--sticky::after { border-block-end-color: var(--sb-x-sebaro-layer-line-color); }
 }
+/* a part of the group that focus or a script scrolls into view stops under the head, not behind it (CHECKS.md §86): the
+   head's 16 px above (8 px in a window), its label line and 4 px below, plus 4 px for the focus ring. A head that a
+   product moves down with inset-block-start adds that offset itself */
+.sb-list-header--sticky + :is(ul, ol, div) * {
+  scroll-margin-block-start: calc(var(--sb-space-4) + var(--sb-type-label-size) * var(--sb-type-label-line-height) + 2 * var(--sb-space-1));
+}
+[data-sb-density="window"] .sb-list-header--sticky + :is(ul, ol, div) * {
+  scroll-margin-block-start: calc(var(--sb-space-2) + var(--sb-type-label-size) * var(--sb-type-label-line-height) + 2 * var(--sb-space-1));
+}
 
 /* timeline (D91 B4b; spec/02 §3.18): the form of sb-changelog. Date grey in a fixed column, the kind as a grey 16 px glyph (the
    warning glyph only for an event that asks for something, always with its word), a hairline between entries, no
@@ -1331,7 +1341,7 @@ kbd, .sb-kbd {
   border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border);
 }
 /* once the title's column would be narrower than the date's (7rem; large text on a phone), the date stands on its own
-   line above glyph and title, as SbTimelineEntry (spec/08 §14); 16rem + 16px = the date column twice, the sides, the
+   line above glyph and title, as SbTimelineEntry (spec/08 §14.16); 16rem + 16px = the date column twice, the sides, the
    gaps and the glyph */
 @container sb-timeline (width < calc(16rem + 16px)) {
   .sb-timeline__item { grid-template-columns: var(--sb-size-icon-sm) minmax(0, 1fr); }
@@ -1563,7 +1573,7 @@ button.sb-side-nav__item {
   background: var(--sb-elevation-overlay-surface); color: var(--sb-color-text); box-shadow: var(--sb-elevation-overlay-shadow);
   max-block-size: calc(100vh - 2 * var(--sb-spacing-gutter)); max-block-size: calc(100dvh - 2 * var(--sb-spacing-gutter));
   overflow-wrap: break-word;
-  overflow-y: auto;   /* the whole dialog scrolls in its frame also where no modal <dialog> brings it (a framework's div; provisional, agent) */
+  overflow-y: auto;   /* the whole dialog scrolls in its frame also where no modal <dialog> brings it (a framework's div) */
 }
 /* a modal dialog centres by the browser's margin: auto, which a CSS reset (`* { margin: 0 }`) removes; so it is stated here (CHECKS §77) */
 dialog.sb-dialog:modal { margin: auto; }
@@ -1572,7 +1582,7 @@ dialog.sb-dialog:modal { margin: auto; }
 .sb-dialog__title { margin: 0 0 var(--sb-space-3); font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
 .sb-dialog__text { margin: 0; font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); }
 .sb-dialog__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--sb-space-3); margin-block-start: var(--sb-space-6); }
-/* large text (NV-L; spec/02 §4.6; provisional, agent): the width above grows with the text up to the window's (35rem
+/* large text (NV-L; spec/02 §4.6): the width above grows with the text up to the window's (35rem
    = 560 px at 100 %), a long word breaks inside the dialog also where no body.sb-page carries the base rule (a window
    app), and the dialog is never taller than the window less its gutters. With div.sb-dialog__body around what stands
    between title and actions, only that body scrolls and the title and the actions stay in view (Compose's form);
@@ -1582,8 +1592,10 @@ dialog.sb-dialog:modal { margin: auto; }
 .sb-dialog > form:has(> .sb-dialog__body) { flex: 1 1 auto; }
 .sb-dialog__body {
   flex: 1 1 auto; min-block-size: 0; overflow-y: auto;
-  /* room for a field's focus ring inside the scroll box */
+  /* room for a field's focus ring inside the scroll box; at the end 12 px of the dialog's padding hold D142's mark (in
+     px, as the callout area's gutter), so the words keep their width whether it scrolls or not */
   margin: calc(-1 * var(--sb-space-1)); padding: var(--sb-space-1);
+  margin-inline-end: -12px; padding-inline-end: 12px;
 }
 /* a window lower than 25em (400 px at 100 %, 800 px at 200 %) has no room for title, actions and a useful body: there
    the body keeps its height and the whole dialog scrolls in its frame, as without the body */
@@ -1611,12 +1623,12 @@ dialog.sb-dialog:modal { margin: auto; }
   font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); color: var(--sb-color-text);
 }
 .sb-dialog__message:empty {   /* empty, it stays in the accessibility tree (role="alert"), collapsed as the action zone's
-   message (NV-J; provisional, agent) */
+   message (NV-J) */
   position: absolute; inline-size: 1px; block-size: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
 }
-.sb-dialog__message > .sb-icon { flex: none; margin-block-start: 4px; margin-block-start: calc((1lh - 16px) / 2); color: var(--sb-color-danger); }   /* centred on the first line at every text size: 4 px at 100 % (provisional, agent) */
+.sb-dialog__message > .sb-icon { flex: none; margin-block-start: 4px; margin-block-start: calc((1lh - 16px) / 2); color: var(--sb-color-danger); }   /* centred on the first line at every text size: 4 px at 100 % */
 .sb-dialog__message > :not(.sb-icon) { min-inline-size: 0; }
-/* narrow columns at large text (D102 lane narrow, OR-23; provisional, agent): the dialog's sides stay at 24 px when the
+/* narrow columns at large text (D102 lane narrow, OR-23): the dialog's sides stay at 24 px when the
    text grows (1.5rem would be 48 px at 200 % and leave the words a third of a phone), so a dialog inside a page's
    gutter keeps room for its words; top and bottom grow with the text as before */
 .sb-dialog { padding-inline: min(var(--sb-space-6), 24px); }
@@ -1702,7 +1714,7 @@ html.sb-starting > body > .sb-start, .sb-starting > .sb-start {
   border: 0; background: transparent; color: var(--sb-color-text); cursor: pointer; text-align: start;
   font: var(--sb-type-body); letter-spacing: var(--sb-type-body-tracking); overflow-wrap: anywhere;   /* large text: the words wrap, the row grows (D99 (1)) */
 }
-/* narrow columns at large text (D102 lane narrow; provisional, agent): a menu is at least 12.5em wide (200 px at 100 %,
+/* narrow columns at large text (D102 lane narrow): a menu is at least 12.5em wide (200 px at 100 %,
    400 px at 200 %, never wider than its place) and its rows keep their 16 px sides, so a row's words are not squeezed
    beside its check and its keys */
 .sb-menu { min-inline-size: min(100%, max(200px, 12.5em)); max-inline-size: max(320px, 20em); }
@@ -1790,7 +1802,7 @@ dialog.sb-sheet > form { margin: 0; }
 .sb-note:target, .sb-note.is-active { border-inline-start-color: var(--sb-color-accent); }
 /* a digit's jump puts focus on its note (sb-notes.js); no ring while the note's edge stands, the edge shows the place */
 .sb-note:is(:target:not([data-sb-past]), .is-active):focus { outline: 0; }
-/* narrow columns at large text (D102 lane narrow; provisional, agent): the list is a container (sb-notes); once the note's
+/* narrow columns at large text (D102 lane narrow): the list is a container (sb-notes); once the note's
    text would get less than about 8em beside the 48 px column of its back links, the back links stand on their own
    line above the text, which then takes the whole width */
 .sb-notes__list { container: sb-notes / inline-size; }
@@ -1804,7 +1816,7 @@ dialog.sb-sheet > form { margin: 0; }
 }
 .sb-note__back:not([href]) { text-decoration: none; }   /* a note no digit points to: its number as plain text */
 /* in a window (data-sb-density="window") the back link is a 32 px target in a 32 px column, as the window's rows and
-   tools; 48 px under touch (per D103 the denser form; provisional, agent). The two columns hold down to 40 px + 8em */
+   tools; 48 px under touch (per D103 the denser form). The two columns hold down to 40 px + 8em */
 @media not (pointer: coarse) {
   [data-sb-density="window"] .sb-note__back { min-inline-size: var(--sb-size-control-sm); min-block-size: var(--sb-size-control-sm); }
   @container sb-notes (width >= calc(40px + 8em)) {
@@ -1823,7 +1835,10 @@ dialog.sb-sheet > form { margin: 0; }
 :is(.sb-note__result, .sb-claim-row__result, .sb-stale-notice) > .sb-icon:first-child {
   position: absolute; inset-inline-start: 0; inset-block-start: 2px;
 }
-.sb-check-state .sb-icon { flex: none; margin-block-start: 4px; margin-block-start: calc((1lh - 16px) / 2); }   /* centred on the first line at every text size: 4 px at 100 % (was 2 px, 2 px above the centre; provisional, agent) */
+/* the stale notice's warning glyph is centred on its first line at every text size, as SbStaleNotice and the other
+   status glyphs are: 2 px at 100 % as before (the caption's 20 px line), more at larger text */
+.sb-stale-notice > .sb-icon:first-child { inset-block-start: calc((1lh - 16px) / 2); }
+.sb-check-state .sb-icon { flex: none; margin-block-start: 4px; margin-block-start: calc((1lh - 16px) / 2); }   /* centred on the first line at every text size: 4 px at 100 % (was 2 px, 2 px above the centre) */
 .sb-note__by { color: var(--sb-color-text-muted); }
 .sb-note__checks { display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-pointer); }
 .sb-claim-row__note .sb-note__checks { min-block-size: var(--sb-size-target-touch); }
@@ -1833,7 +1848,8 @@ dialog.sb-sheet > form { margin: 0; }
   .sb-note__checks, .sb-app-card__meta a, .sb-app-row__meta a, .sb-breadcrumb a, .sb-facts-line a { min-block-size: var(--sb-size-target-touch); }
   .sb-facts-line a { display: inline-flex; align-items: center; }
   /* 48 px reach past the digit's end only 12 px, less than the 16 px gutter the container clips at, and grow inward: a
-     digit at the line's end keeps its whole target (review r13; a digit follows its word, so never stands at the start) */
+     digit at the line's end keeps its whole target (review r13; a digit follows its word, so never stands at the start).
+     Prose outside .sb-container keeps 12 px to the end of its scroller, or its scroller grows by them (spec/02 §5) */
   .sb-note-ref::after { inset-inline: auto -12px; inline-size: max(48px, 100%); block-size: 48px; }
 }
 .sb-note__body > p:last-child, .sb-claim-row__note > p:last-child { margin-block-end: 0; }
@@ -1882,7 +1898,7 @@ dialog.sb-sheet > form { margin: 0; }
 .sb-claim-row__toggle[aria-expanded="true"] .sb-claim-row__chevron { transform: rotate(180deg); }
 /* narrow columns at large text (D102 lane narrow): the rows are a container (sb-claims); once claim and result would get
    less than about 7em beside the chevron, the chevron goes under them at the start and they take the whole row
-   (12em + 60px: the text, the chevron, the gap and the sides; provisional, agent) */
+   (12em + 60px: the text, the chevron, the gap and the sides) */
 .sb-claim-rows { container: sb-claims / inline-size; }
 @container sb-claims (width < calc(12em + 60px)) {
   .sb-claim-row__toggle { grid-template-columns: minmax(0, 1fr); }
@@ -1961,7 +1977,7 @@ dialog.sb-sheet > form { margin: 0; }
 .sb-progress__steps[data-sb-long] > .sb-progress__step::after { content: counter(sb-step); }
 .sb-progress__steps[data-sb-long] > [aria-current="step"]::after { font-weight: var(--sb-type-title-weight); text-decoration: underline; }
 .sb-progress__steps[data-sb-long] > :is([data-sb-state="done"], [data-state="done"])::after { content: none; } /* its svg check stands instead of the number */
-/* D132: no opacity change; the offline ring remains readable. Shield is provisional, agent. */
+/* D132: no opacity change; the offline ring remains readable. */
 .sb-avatar { position: relative; }
 .sb-avatar[data-sb-presence="offline"] { border-style: dashed; color: var(--sb-color-text-muted); }
 .sb-avatar__role { position: absolute; inset-block-end: calc(var(--sb-size-icon-sm) / -3); inset-inline-end: calc(var(--sb-size-icon-sm) / -3); inline-size: var(--sb-size-icon-sm); block-size: var(--sb-size-icon-sm); color: var(--sb-color-text); background: var(--sb-color-bg); border-radius: var(--sb-radius-pill); }

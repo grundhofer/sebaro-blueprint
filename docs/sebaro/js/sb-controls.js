@@ -14,13 +14,12 @@
 //                           "sb-language-change" on document (detail { lang }), on which the app swaps its words.
 //                           Each group needs a radio name of its own; a group whose name another radio shares is
 //                           renamed, with a console warning. Inside [data-sb-language-root] (a specimen) it sets that
-//                           element's lang instead and stores nothing (provisional, agent)
+//                           element's lang instead and stores nothing
 //   [data-sb-demo-progress] specimen of D48: the primary action shows its own progress („ok“ or „fail“ run)
 //   .sb-chip[aria-pressed]  aria-pressed; one chosen chip per [data-sb-single] group (filter "Alle")
 //   [data-sb-opens="id"]    opens <dialog id> as a modal; the dialog's form method="dialog" closes it; a press on the
 //                           scrim of a dialog.sb-dialog cancels it like Escape ("cancel", then close), unless the
-//                           press began inside it or a field of it has changed since it opened (spec/02 §4.6; provisional,
-//                           agent)
+//                           press began inside it or a field of it has changed since it opened (spec/02 §4.6)
 //   .sb-range__track        keeps the accent fill between the handles (--sb-range-from / --sb-range-to, 0..1)
 //   [data-sb-indeterminate] sets checkbox.indeterminate (no HTML attribute exists for it)
 //   .sb-tabs [role="tab"]   aria-selected + hidden on the tab panels (not for aria-disabled="true")
@@ -44,7 +43,8 @@
 //   .sb-callout-area        a callout area that scrolls in itself (D142, spec/02 §3.11): while it holds more than it shows it
 //                           carries data-sb-more and --sb-more-* for D134's sign (mark and fade, sebaro.css) and is a
 //                           tab stop (a tabindex the page set itself is left alone); measured again on every scroll,
-//                           size change of it or a notice in it, and for areas and notices added later
+//                           size change of it or a notice in it, and for areas and notices added later; the same for
+//                           the scrolling body of a dialog, .sb-dialog__body (D142, spec/02 §4.6)
 //   .sb-toast               sbToast.show(toast) / sbToast.hide(toast) and [data-sb-toast-show="id"]: the toast enters
 //                           (.sb-enter), stays 6 s, pauses while the pointer is over it or focus is inside (only a toast
 //                           with an action can hold focus), Escape closes it from anywhere on the page, without taking
@@ -287,7 +287,7 @@
 
   // D102 (39), spec/02 §3.11: „Ausblenden“ of a callout. "sb-callout-hide" (cancelable, bubbles) tells the product, which keeps
   // the choice; unless it is cancelled the callout gets hidden and focus, which was on the button, moves to the next
-  // control after the callout (else the one before it), never to the page's start (provisional, agent).
+  // control after the callout (else the one before it), never to the page's start.
   var FOCUSABLE = "a[href], button:not([disabled]), input:not([disabled]):not([type='hidden']), select:not([disabled]), " +
     "textarea:not([disabled]), summary, [tabindex]:not([tabindex='-1'])";
   function hideCallout(callout) {
@@ -309,7 +309,9 @@
   // left get fewer than its height. While the area scrolls it is a tab stop, so its words can be read by keys: the
   // browser scrolls a focused scroller with the arrows, Bild auf / Bild ab, Pos1 / Ende and the Space; Tab goes on to
   // the notices' actions.
+  // The scrolling body of a dialog (.sb-dialog__body, spec/02 §4.6) gets the same sign.
   var MORE_FADE = 36, MORE_LEAST = 12, MORE_PROPS = ["--sb-more-top", "--sb-more-length", "--sb-more-fade-from", "--sb-more-fade-rest"];
+  var MORE_AREAS = ".sb-callout-area, .sb-dialog__body";
   function measureArea(area) {
     var view = area.clientHeight, max = area.scrollHeight - view;
     var mine = area.getAttribute("data-sb-scroll-stop") === "";
@@ -338,7 +340,7 @@
   var areaSizes = typeof ResizeObserver === "function" ? new ResizeObserver(function (entries) {
     var seen = [];
     entries.forEach(function (e) {
-      var area = e.target.closest(".sb-callout-area");
+      var area = e.target.closest(MORE_AREAS);
       if (area && seen.indexOf(area) < 0) { seen.push(area); measureArea(area); }
     });
   }) : null;
@@ -353,21 +355,21 @@
     records.forEach(function (r) {
       Array.prototype.forEach.call(r.addedNodes, function (n) {
         if (!(n instanceof Element)) return;
-        if (n.matches(".sb-callout-area")) setupArea(n);
-        n.querySelectorAll(".sb-callout-area").forEach(setupArea);
-        if (r.target instanceof Element && r.target.matches(".sb-callout-area")) {
+        if (n.matches(MORE_AREAS)) setupArea(n);
+        n.querySelectorAll(MORE_AREAS).forEach(setupArea);
+        if (r.target instanceof Element && r.target.matches(MORE_AREAS)) {
           if (areaSizes) areaSizes.observe(n);
           measureArea(r.target);
         }
       });
-      if (r.removedNodes.length && r.target instanceof Element && r.target.matches(".sb-callout-area")) measureArea(r.target);
+      if (r.removedNodes.length && r.target instanceof Element && r.target.matches(MORE_AREAS)) measureArea(r.target);
     });
   }).observe(document.documentElement, { childList: true, subtree: true });
 
   // D78: the toast's lifetime. 6 s, the same for every toast (spec/02 §4.8); never used for errors, which stay next to
   // what failed. The timer stops while the pointer is over the toast or focus is inside it and runs on with the time
   // that was left; Escape closes it; focus that was inside goes back to where it came from.
-  // spec/02 §4.8 (provisional, agent): a live region that enters the accessibility tree together with its text is often not
+  // spec/02 §4.8: a live region that enters the accessibility tree together with its text is often not
   // announced (WebKit / VoiceOver); show() therefore unhides the toast with its sentence taken out and puts the
   // sentence back two animation frames later, when the empty region is already in the tree. The toast keeps its size
   // meanwhile (the sentence's box stays, only its text is out), and its action stays in place. Not checked with
@@ -450,7 +452,7 @@
     var x = closestIn(event, ".sb-toast");
     if (x && !(event.relatedTarget instanceof Node && x.contains(event.relatedTarget))) hold(x, "focus", false);
   });
-  // spec/02 §4.8 (provisional, agent): a toast without an action never gets focus, so Escape is heard on the whole page, in the
+  // spec/02 §4.8: a toast without an action never gets focus, so Escape is heard on the whole page, in the
   // capture phase (a palette, search or dialog that stops its Escape would otherwise keep the toast open) and never
   // consumed (no preventDefault, no stopPropagation): an editor or field gets its Escape as before. Escape that belongs
   // to an open modal dialog (sheet, palette, confirmation) or an open popover (menu, contents overlay, note, tooltip)
@@ -596,7 +598,7 @@
   window.addEventListener("resize", replaceOpenOverlays);
   window.addEventListener("scroll", replaceOpenOverlays, { passive: true, capture: true });
 
-  // .sb-dialog: a press on the scrim cancels like Escape (spec/02 §4.6; provisional, agent). Only a press that
+  // .sb-dialog: a press on the scrim cancels like Escape (spec/02 §4.6). Only a press that
   // begins and ends on the scrim (a selection dragged out of a field does not close), never a keyboard "click", and not
   // while a field has changed since the dialog opened (its values are taken when focus first enters it, which
   // showModal() does at once). A sheet (sb-sheet.js) and the palette (sb-window.js) have their own
@@ -639,7 +641,7 @@
     var roots = [];
     document.querySelectorAll("[data-sb-language-choice]").forEach(function (g) { var r = languageRoot(g); if (roots.indexOf(r) < 0) roots.push(r); });
     roots.forEach(syncLanguage);
-    document.querySelectorAll(".sb-callout-area").forEach(setupArea);
+    document.querySelectorAll(MORE_AREAS).forEach(setupArea);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();

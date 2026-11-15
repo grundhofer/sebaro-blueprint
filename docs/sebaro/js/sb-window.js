@@ -274,7 +274,7 @@
     if (el) el.focus({ preventScroll: true });
   }
   function setPane(s, open, how, stay) {   // stay: a menu command opened it, focus stays where the menu put it (D95 (b))
-    // a pane that hides while it holds focus gives focus to its visible toggle (NV-J; provisional, agent), so focus
+    // a pane that hides while it holds focus gives focus to its visible toggle (NV-J), so focus
     // never falls to the page; a menu item that hid it keeps focus where the menu puts it
     var held = !open && !s.pane.hidden && s.pane.contains(document.activeElement);
     s.pane.hidden = !open;
@@ -510,7 +510,7 @@
     if (!dlg.open) dlg.showModal();
     if (input) input.focus();
   }
-  // spec/02 §4.16 (provisional, agent): an overlay's own shortcut closes it again, the shortcut of another overlay switches to
+  // spec/02 §4.16: an overlay's own shortcut closes it again, the shortcut of another overlay switches to
   // that one. The openers are the controls that announce the chord in aria-keyshortcuts and open a palette
   // (data-sb-palette-open) or a find bar (data-sb-find-open), in the window the palette came from, else on the page
   function overlayKey(event, pal) {
@@ -793,7 +793,7 @@
   }
 
   // ------------------------------------------------------------------ the document reader (D104 (5)–(7))
-  // Steps of the zoom (provisional, agent: the browsers' steps), the value as a status, the page as a field
+  // Steps of the zoom (the browsers' steps), the value as a status, the page as a field
   var ZOOM_STEPS = [50, 67, 75, 80, 90, 100, 110, 125, 150, 175, 200, 250, 300, 400];
   function readerNum(reader, name, fallback) { var v = parseInt(reader.getAttribute(name), 10); return isFinite(v) ? v : fallback; }
   function readerSync(reader, fire) {
@@ -1260,10 +1260,10 @@
       new MutationObserver(function () { m._sbAt = 0; stampMessage(m); }).observe(m, { childList: true, characterData: true, subtree: true, attributes: true, attributeFilter: ["data-sb-message"] });
     });
   }
-  // a key or press inside the sentence (its „Details“, D102 (23)) and Tab, which only moves focus there, keep it
-  // (provisional, agent). Only the window the key or press was in (windowOf: a dialog outside the window belongs to
+  // a key or press inside the sentence (its „Details“, D102 (23)) and Tab, which only moves focus there, keep it.
+  // Only the window the key or press was in (windowOf: a dialog outside the window belongs to
   // the product's one fill window) loses its sentence: a press in another window or outside every window keeps it
-  // (review of the desktop lane, DSK-R6; provisional, agent)
+  // (review of the desktop lane, DSK-R6)
   function clearMessages(event) {
     if (event && event.type === "keydown" && event.key === "Tab") return;
     var win = event ? windowOf(event.target) : null;
@@ -1336,7 +1336,7 @@
     var el = document.elementFromPoint(x, y);
     if (dnd.row.matches("[role='tab']")) return dropTabAt(el, x);
     var row = el && el.closest("[role='treeitem'], [role='option']");
-    // the free space under the rows of a tree takes the row into the top level (spec/02 §4.22; provisional, agent)
+    // the free space under the rows of a tree takes the row into the top level (spec/02 §4.22)
     if (!row && el && el.matches("[role='tree']") && el === container(dnd.row)) return { row: el, pos: "root" };
     if (!row || row === dnd.row || container(row) !== container(dnd.row)) return null;
     var item = dnd.row.closest("li");

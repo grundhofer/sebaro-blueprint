@@ -3,7 +3,7 @@
   "render": "1.3.0",
   "inputs": {
     "src/og/pages.json": "491dbfa8bb5c40b85182c60ad0fd098f76d2fddbc9d131c7f94041f21535f166",
-    "docs/sebaro/brand/og/render.mjs": "1959330b916644e0f4d299f66699b6f55b9918ee03221e5b0e12b46ab5654e27",
+    "docs/sebaro/brand/og/render.mjs": "bc1100a0d9af592d9bc2bf4187696e78d7b3aa2b07aca233f19ca49c9e1002af",
     "docs/sebaro/brand/og/template.html": "c601ea08a1e0d98bdf206dc593085ee3bdfdbe3f5ba6f63f5ec9dc20ebbb3fe3",
     "docs/sebaro/brand/og/pages.schema.json": "833f287f913d92bf09df69185401ae4a45e4d2cd296693c3517a6c418a0be653",
     "docs/sebaro/tokens.css": "78c1fa55e484f22027ab55f4b2cfe9857002d82d8ccd6a7fd124fdc90f0b28ce",
@@ -11,8 +11,8 @@
     "docs/sebaro/fonts/web/sebaro-mono-latin-de.woff2": "2512639768811e136c441f24e94a5f365ab1c18dbceb138f181c7e67a4be5ccf",
     "docs/sebaro/fonts/web/sebaro-sans-italic-latin-de.woff2": "3334dbd7fd7c6c6a150afd76f90783572cdd1ea6e6ece5b2f42ba90a6a61fd0f",
     "docs/sebaro/fonts/web/sebaro-sans-latin-de.woff2": "589be2f709be7e198bfa223e58a9515ffcbd4f1d652f757c2c49bc05f1bcb92d",
-    "docs/sebaro/icons/sprite.svg": "a49fd15ce257750fd0f00a4da8d7b4eab2ff0821bc5908c9cd4e7493eb62cf85",
-    "docs/sebaro/icons/sprite.css": "4aa531ac61b82c59365a03caeab287e3b229a5fc3c6a41fe965da7790dc7b139",
+    "docs/sebaro/icons/sprite.svg": "93a4bc5473d2666b206a9040dd6b55a52c53d472bb12c719b19808a9789d54ab",
+    "docs/sebaro/icons/sprite.css": "11184b6dd59447e224fdb741f971910392492acfcd4fe1e6d8611e383be6c3e7",
     "docs/sebaro/brand/inline/tile-studio.svg": "4450762c4dbbab31a7a849d2daba01cf5194bfc779a84a47d84562b210e0c853",
     "docs/sebaro/brand/inline/lockup-horizontal.svg": "da498e386569f0f60f5355ef7e0a007d76fb0fd879f07006c42d597efed38cfa",
     "docs/sebaro/brand/inline/lockup-horizontal-large.svg": "6ad35c02a8f353fe17c801bd6aebf84b5529a2abda8cc9eb8f67808b65326134"

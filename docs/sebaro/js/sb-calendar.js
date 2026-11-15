@@ -30,7 +30,7 @@
 //   - choosing a day sets aria-selected, shows the list with data-sb-calendar-day="<date>" (else the one with
 //     data-sb-calendar-day=""), writes the day heading and fires "sb-calendar-select" (detail.date, ISO) on the root.
 // Words and formats per language (D87, spec/09 §6.1): month and day names come from Intl in the language of the
-// calendar (closest [lang], else <html lang>); the two-letter weekday heads (D82, spec/07 §3.1 rule 8), the week start
+// calendar (closest [lang], else <html lang>); the two-letter weekday heads (D82, spec/07 §3 rule 8), the week start
 // fallback and the hidden words „heute“, „mit Eintrag“ from MESSAGES; window.sbMessages["sb-calendar"] adds a language.
 // The week start comes from Intl.Locale weekInfo where the browser has it.
 // No motion (D80): a new month replaces the grid in place. The dot of a day with entries is a glyph (D91 Z4a) drawn by
