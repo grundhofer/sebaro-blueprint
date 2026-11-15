@@ -26,7 +26,9 @@ need the reason. Where the catalogue says something else, this file wins.
    controls or links. [D143, D145; replaces ZEI-01]
 6. No coloured fill behind text except the primary action. Grounds are the four greys of the tokens.
    [FAR-02, FAR-05]
-7. Light and dark are equal. Every view works in both and in the tones „Kühl“ and „Warm“. [FAR-09, FAR-15]
+7. Light and dark are equal. Every view works in both and in the tones „Kühl“ and „Warm“. One exception: an image a
+   machine reads (a QR code, a bar code shown at a till) stays dark on light in dark mode too, drawn in the light
+   theme's colours with a light margin around it. [FAR-09, FAR-15, D150]
 
 ## Type, space, shape
 
@@ -48,8 +50,9 @@ need the reason. Where the catalogue says something else, this file wins.
 13. Three levels: lime for the next step, at most one outlined action per area, everything else a text action.
     [AKT-06, D143]
 14. The primary action shows its own progress and result. No spinner over the view. A toast only for a reversible
-    result, with „Rückgängig“; the one toast without it says that something was copied to the clipboard. [AKT-05,
-    EBE-05]
+    result, with „Rückgängig“; the one toast without it says that something was copied to the clipboard. On
+    Android 13 and later the system confirms a copy itself: there the app shows no toast for it. [AKT-05, EBE-05,
+    D150]
 15. Deleting something saved always asks in a dialog that says what is lost. [AKT-07, AKT-08, D119]
 16. Under an action that sends data somewhere, one line says where it goes. Local only: „Bleibt auf diesem Gerät.“
     [BEL-10]
