@@ -1,6 +1,6 @@
 // generated — do not edit.
 // sebaroDesign icons · system "sebaro" · grammar "Line 1.75 round"
-// source: systems/sebaro/icons/src (175 files, sha256 0c461669dbff4b35)
+// source: systems/sebaro/icons/src (179 files, sha256 9f2cf53a9763d323)
 // builder: tools/icons.py 1.1.0 · spec: shared/ICONS-GUIDE.md §9.2
 // Strokes stay strokes (StrokeCap/StrokeJoin), never converted to fills. Icon() tints through
 // LocalContentColor, so black in the vector is correct. Properties build lazily on first access.
@@ -360,6 +360,9 @@ public object SebaroIcons {
         public val Wheel: ImageVector
             get() = _wheel ?: outline24Wheel("SebaroIcons.Outline.Wheel", 24f, 1.75f).also { _wheel = it }
         private var _wheel: ImageVector? = null
+        public val Wifi: ImageVector
+            get() = _wifi ?: outline24Wifi("SebaroIcons.Outline.Wifi", 24f, 1.75f).also { _wifi = it }
+        private var _wifi: ImageVector? = null
         public val Wrap: ImageVector
             get() = _wrap ?: outline24Wrap("SebaroIcons.Outline.Wrap", 24f, 1.75f).also { _wrap = it }
         private var _wrap: ImageVector? = null
@@ -714,6 +717,9 @@ public object SebaroIcons {
         public val Wheel: ImageVector
             get() = _wheel ?: outline24Wheel("SebaroIcons.Outline16.Wheel", 16f, 2.25f).also { _wheel = it }
         private var _wheel: ImageVector? = null
+        public val Wifi: ImageVector
+            get() = _wifi ?: outline24Wifi("SebaroIcons.Outline16.Wifi", 16f, 2.25f).also { _wifi = it }
+        private var _wifi: ImageVector? = null
         public val Wrap: ImageVector
             get() = _wrap ?: outline24Wrap("SebaroIcons.Outline16.Wrap", 16f, 2.25f).also { _wrap = it }
         private var _wrap: ImageVector? = null
@@ -1068,6 +1074,9 @@ public object SebaroIcons {
         public val Wheel: ImageVector
             get() = _wheel ?: outline24Wheel("SebaroIcons.Outline20.Wheel", 20f, 1.8f).also { _wheel = it }
         private var _wheel: ImageVector? = null
+        public val Wifi: ImageVector
+            get() = _wifi ?: outline24Wifi("SebaroIcons.Outline20.Wifi", 20f, 1.8f).also { _wifi = it }
+        private var _wifi: ImageVector? = null
         public val Wrap: ImageVector
             get() = _wrap ?: outline24Wrap("SebaroIcons.Outline20.Wrap", 20f, 1.8f).also { _wrap = it }
         private var _wrap: ImageVector? = null
@@ -1422,6 +1431,9 @@ public object SebaroIcons {
         public val Wheel: ImageVector
             get() = _wheel ?: outline24Wheel("SebaroIcons.Outline32.Wheel", 32f, 1.5f).also { _wheel = it }
         private var _wheel: ImageVector? = null
+        public val Wifi: ImageVector
+            get() = _wifi ?: outline24Wifi("SebaroIcons.Outline32.Wifi", 32f, 1.5f).also { _wifi = it }
+        private var _wifi: ImageVector? = null
         public val Wrap: ImageVector
             get() = _wrap ?: outline24Wrap("SebaroIcons.Outline32.Wrap", 32f, 1.5f).also { _wrap = it }
         private var _wrap: ImageVector? = null
@@ -1467,15 +1479,24 @@ public object SebaroIcons {
         public val Info: ImageVector
             get() = _info ?: filled24Info("SebaroIcons.Filled.Info", 24f).also { _info = it }
         private var _info: ImageVector? = null
+        public val Microphone: ImageVector
+            get() = _microphone ?: filled24Microphone("SebaroIcons.Filled.Microphone", 24f).also { _microphone = it }
+        private var _microphone: ImageVector? = null
         public val Play: ImageVector
             get() = _play ?: filled24Play("SebaroIcons.Filled.Play", 24f).also { _play = it }
         private var _play: ImageVector? = null
+        public val QrCode: ImageVector
+            get() = _qrCode ?: filled24QrCode("SebaroIcons.Filled.QrCode", 24f).also { _qrCode = it }
+        private var _qrCode: ImageVector? = null
         public val Quote: ImageVector
             get() = _quote ?: filled24Quote("SebaroIcons.Filled.Quote", 24f).also { _quote = it }
         private var _quote: ImageVector? = null
         public val Repeat: ImageVector
             get() = _repeat ?: filled24Repeat("SebaroIcons.Filled.Repeat", 24f).also { _repeat = it }
         private var _repeat: ImageVector? = null
+        public val Scan: ImageVector
+            get() = _scan ?: filled24Scan("SebaroIcons.Filled.Scan", 24f).also { _scan = it }
+        private var _scan: ImageVector? = null
         public val Settings: ImageVector
             get() = _settings ?: filled24Settings("SebaroIcons.Filled.Settings", 24f).also { _settings = it }
         private var _settings: ImageVector? = null
@@ -1533,15 +1554,24 @@ public object SebaroIcons {
         public val Info: ImageVector
             get() = _info ?: filled16Info("SebaroIcons.Filled16.Info", 16f).also { _info = it }
         private var _info: ImageVector? = null
+        public val Microphone: ImageVector
+            get() = _microphone ?: filled24Microphone("SebaroIcons.Filled16.Microphone", 16f).also { _microphone = it }
+        private var _microphone: ImageVector? = null
         public val Play: ImageVector
             get() = _play ?: filled24Play("SebaroIcons.Filled16.Play", 16f).also { _play = it }
         private var _play: ImageVector? = null
+        public val QrCode: ImageVector
+            get() = _qrCode ?: filled24QrCode("SebaroIcons.Filled16.QrCode", 16f).also { _qrCode = it }
+        private var _qrCode: ImageVector? = null
         public val Quote: ImageVector
             get() = _quote ?: filled24Quote("SebaroIcons.Filled16.Quote", 16f).also { _quote = it }
         private var _quote: ImageVector? = null
         public val Repeat: ImageVector
             get() = _repeat ?: filled24Repeat("SebaroIcons.Filled16.Repeat", 16f).also { _repeat = it }
         private var _repeat: ImageVector? = null
+        public val Scan: ImageVector
+            get() = _scan ?: filled24Scan("SebaroIcons.Filled16.Scan", 16f).also { _scan = it }
+        private var _scan: ImageVector? = null
         public val Settings: ImageVector
             get() = _settings ?: filled24Settings("SebaroIcons.Filled16.Settings", 16f).also { _settings = it }
         private var _settings: ImageVector? = null
@@ -5316,6 +5346,40 @@ private fun outline24Microphone(name: String, size: Float, strokeWidth: Float): 
         }
     }.build()
 
+private fun filled24Microphone(name: String, size: Float): ImageVector =
+    ImageVector.Builder(
+        name = name,
+        defaultWidth = size.dp,
+        defaultHeight = size.dp,
+        viewportWidth = 24.0f,
+        viewportHeight = 24.0f,
+    ).apply {
+        path(
+            fill = SolidColor(Color.Black),
+        ) {
+            moveTo(8.375f, 5.625f)
+            arcTo(3.625f, 3.625f, 0.0f, false, true, 15.625f, 5.625f)
+            lineTo(15.625f, 10.125f)
+            arcTo(3.625f, 3.625f, 0.0f, false, true, 8.375f, 10.125f)
+            close()
+            moveTo(3.875f, 9.75f)
+            arcTo(0.875f, 0.875f, 0.0f, false, true, 5.625f, 9.75f)
+            arcTo(6.375f, 6.375f, 0.0f, false, false, 18.375f, 9.75f)
+            arcTo(0.875f, 0.875f, 0.0f, false, true, 20.125f, 9.75f)
+            arcTo(8.125f, 8.125f, 0.0f, false, true, 3.875f, 9.75f)
+            close()
+            moveTo(11.125f, 17.0f)
+            lineTo(12.875f, 17.0f)
+            lineTo(12.875f, 20.25f)
+            lineTo(15.5f, 20.25f)
+            arcTo(0.875f, 0.875f, 0.0f, false, true, 15.5f, 22.0f)
+            lineTo(8.5f, 22.0f)
+            arcTo(0.875f, 0.875f, 0.0f, false, true, 8.5f, 20.25f)
+            lineTo(11.125f, 20.25f)
+            close()
+        }
+    }.build()
+
 private fun outline24Minus(name: String, size: Float, strokeWidth: Float): ImageVector =
     ImageVector.Builder(
         name = name,
@@ -6191,6 +6255,59 @@ private fun outline24QrCode(name: String, size: Float, strokeWidth: Float): Imag
         }
     }.build()
 
+private fun filled24QrCode(name: String, size: Float): ImageVector =
+    ImageVector.Builder(
+        name = name,
+        defaultWidth = size.dp,
+        defaultHeight = size.dp,
+        viewportWidth = 24.0f,
+        viewportHeight = 24.0f,
+    ).apply {
+        path(
+            fill = SolidColor(Color.Black),
+        ) {
+            moveTo(3.0f, 4.875f)
+            arcTo(1.875f, 1.875f, 0.0f, false, true, 4.875f, 3.0f)
+            lineTo(8.875f, 3.0f)
+            arcTo(1.875f, 1.875f, 0.0f, false, true, 10.75f, 4.875f)
+            lineTo(10.75f, 8.875f)
+            arcTo(1.875f, 1.875f, 0.0f, false, true, 8.875f, 10.75f)
+            lineTo(4.875f, 10.75f)
+            arcTo(1.875f, 1.875f, 0.0f, false, true, 3.0f, 8.875f)
+            close()
+            moveTo(13.25f, 4.875f)
+            arcTo(1.875f, 1.875f, 0.0f, false, true, 15.125f, 3.0f)
+            lineTo(19.125f, 3.0f)
+            arcTo(1.875f, 1.875f, 0.0f, false, true, 21.0f, 4.875f)
+            lineTo(21.0f, 8.875f)
+            arcTo(1.875f, 1.875f, 0.0f, false, true, 19.125f, 10.75f)
+            lineTo(15.125f, 10.75f)
+            arcTo(1.875f, 1.875f, 0.0f, false, true, 13.25f, 8.875f)
+            close()
+            moveTo(3.0f, 15.125f)
+            arcTo(1.875f, 1.875f, 0.0f, false, true, 4.875f, 13.25f)
+            lineTo(8.875f, 13.25f)
+            arcTo(1.875f, 1.875f, 0.0f, false, true, 10.75f, 15.125f)
+            lineTo(10.75f, 19.125f)
+            arcTo(1.875f, 1.875f, 0.0f, false, true, 8.875f, 21.0f)
+            lineTo(4.875f, 21.0f)
+            arcTo(1.875f, 1.875f, 0.0f, false, true, 3.0f, 19.125f)
+            close()
+            moveTo(19.25f, 14.125f)
+            arcTo(0.875f, 0.875f, 0.0f, false, true, 21.0f, 14.125f)
+            lineTo(21.0f, 20.125f)
+            arcTo(0.875f, 0.875f, 0.0f, false, true, 20.125f, 21.0f)
+            lineTo(14.125f, 21.0f)
+            arcTo(0.875f, 0.875f, 0.0f, false, true, 14.125f, 19.25f)
+            lineTo(19.25f, 19.25f)
+            close()
+            moveTo(14.125f, 15.375f)
+            arcTo(1.25f, 1.25f, 0.0f, true, true, 16.625f, 15.375f)
+            arcTo(1.25f, 1.25f, 0.0f, true, true, 14.125f, 15.375f)
+            close()
+        }
+    }.build()
+
 private fun outline24Quote(name: String, size: Float, strokeWidth: Float): ImageVector =
     ImageVector.Builder(
         name = name,
@@ -6816,6 +6933,74 @@ private fun outline24Scan(name: String, size: Float, strokeWidth: Float): ImageV
         ) {
             moveTo(6.5f, 12.0f)
             lineTo(17.5f, 12.0f)
+        }
+    }.build()
+
+private fun filled24Scan(name: String, size: Float): ImageVector =
+    ImageVector.Builder(
+        name = name,
+        defaultWidth = size.dp,
+        defaultHeight = size.dp,
+        viewportWidth = 24.0f,
+        viewportHeight = 24.0f,
+    ).apply {
+        path(
+            fill = SolidColor(Color.Black),
+        ) {
+            moveTo(3.0f, 8.0f)
+            lineTo(3.0f, 5.875f)
+            arcTo(2.875f, 2.875f, 0.0f, false, true, 5.875f, 3.0f)
+            lineTo(8.0f, 3.0f)
+            arcTo(0.875f, 0.875f, 0.0f, false, true, 8.0f, 4.75f)
+            lineTo(5.875f, 4.75f)
+            arcTo(1.125f, 1.125f, 0.0f, false, false, 4.75f, 5.875f)
+            lineTo(4.75f, 8.0f)
+            arcTo(0.875f, 0.875f, 0.0f, false, true, 3.0f, 8.0f)
+            close()
+            moveTo(16.0f, 3.0f)
+            lineTo(18.125f, 3.0f)
+            arcTo(2.875f, 2.875f, 0.0f, false, true, 21.0f, 5.875f)
+            lineTo(21.0f, 8.0f)
+            arcTo(0.875f, 0.875f, 0.0f, false, true, 19.25f, 8.0f)
+            lineTo(19.25f, 5.875f)
+            arcTo(1.125f, 1.125f, 0.0f, false, false, 18.125f, 4.75f)
+            lineTo(16.0f, 4.75f)
+            arcTo(0.875f, 0.875f, 0.0f, false, true, 16.0f, 3.0f)
+            close()
+            moveTo(21.0f, 16.0f)
+            lineTo(21.0f, 18.125f)
+            arcTo(2.875f, 2.875f, 0.0f, false, true, 18.125f, 21.0f)
+            lineTo(16.0f, 21.0f)
+            arcTo(0.875f, 0.875f, 0.0f, false, true, 16.0f, 19.25f)
+            lineTo(18.125f, 19.25f)
+            arcTo(1.125f, 1.125f, 0.0f, false, false, 19.25f, 18.125f)
+            lineTo(19.25f, 16.0f)
+            arcTo(0.875f, 0.875f, 0.0f, false, true, 21.0f, 16.0f)
+            close()
+            moveTo(8.0f, 21.0f)
+            lineTo(5.875f, 21.0f)
+            arcTo(2.875f, 2.875f, 0.0f, false, true, 3.0f, 18.125f)
+            lineTo(3.0f, 16.0f)
+            arcTo(0.875f, 0.875f, 0.0f, false, true, 4.75f, 16.0f)
+            lineTo(4.75f, 18.125f)
+            arcTo(1.125f, 1.125f, 0.0f, false, false, 5.875f, 19.25f)
+            lineTo(8.0f, 19.25f)
+            arcTo(0.875f, 0.875f, 0.0f, false, true, 8.0f, 21.0f)
+            close()
+            moveTo(7.0f, 11.125f)
+            lineTo(7.0f, 9.0f)
+            arcTo(2.0f, 2.0f, 0.0f, false, true, 9.0f, 7.0f)
+            lineTo(15.0f, 7.0f)
+            arcTo(2.0f, 2.0f, 0.0f, false, true, 17.0f, 9.0f)
+            lineTo(17.0f, 11.125f)
+            close()
+            moveTo(17.0f, 12.875f)
+            lineTo(17.0f, 15.0f)
+            arcTo(2.0f, 2.0f, 0.0f, false, true, 15.0f, 17.0f)
+            lineTo(9.0f, 17.0f)
+            arcTo(2.0f, 2.0f, 0.0f, false, true, 7.0f, 15.0f)
+            lineTo(7.0f, 12.875f)
+            close()
         }
     }.build()
 
@@ -8769,6 +8954,56 @@ private fun outline24Wheel(name: String, size: Float, strokeWidth: Float): Image
             moveTo(10.125f, 2.875f)
             lineTo(13.875f, 2.875f)
             lineTo(12.0f, 6.125f)
+            close()
+        }
+    }.build()
+
+private fun outline24Wifi(name: String, size: Float, strokeWidth: Float): ImageVector =
+    ImageVector.Builder(
+        name = name,
+        defaultWidth = size.dp,
+        defaultHeight = size.dp,
+        viewportWidth = 24.0f,
+        viewportHeight = 24.0f,
+    ).apply {
+        path(
+            fill = null,
+            stroke = SolidColor(Color.Black),
+            strokeLineWidth = strokeWidth,
+            strokeLineCap = StrokeCap.Round,
+            strokeLineJoin = StrokeJoin.Round,
+        ) {
+            moveTo(8.625f, 14.875f)
+            arcTo(4.773f, 4.773f, 0.0f, false, true, 15.375f, 14.875f)
+        }
+        path(
+            fill = null,
+            stroke = SolidColor(Color.Black),
+            strokeLineWidth = strokeWidth,
+            strokeLineCap = StrokeCap.Round,
+            strokeLineJoin = StrokeJoin.Round,
+        ) {
+            moveTo(5.75f, 12.0f)
+            arcTo(8.8388f, 8.8388f, 0.0f, false, true, 18.25f, 12.0f)
+        }
+        path(
+            fill = null,
+            stroke = SolidColor(Color.Black),
+            strokeLineWidth = strokeWidth,
+            strokeLineCap = StrokeCap.Round,
+            strokeLineJoin = StrokeJoin.Round,
+        ) {
+            moveTo(2.875f, 9.125f)
+            arcTo(12.9047f, 12.9047f, 0.0f, false, true, 21.125f, 9.125f)
+        }
+        path(
+            fill = SolidColor(Color.Black),
+        ) {
+            moveTo(13.25f, 18.25f)
+            arcTo(1.25f, 1.25f, 0.0f, false, true, 12.0f, 19.5f)
+            arcTo(1.25f, 1.25f, 0.0f, false, true, 10.75f, 18.25f)
+            arcTo(1.25f, 1.25f, 0.0f, false, true, 12.0f, 17.0f)
+            arcTo(1.25f, 1.25f, 0.0f, false, true, 13.25f, 18.25f)
             close()
         }
     }.build()

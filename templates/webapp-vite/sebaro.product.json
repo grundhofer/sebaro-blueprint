@@ -1,9 +1,9 @@
 {
-  "$comment": "Placeholder: the umbrella brand's declaration, so the starter has a sign, favicons and a manifest. A product writes its own id, name, tile group and sign here (src/sebaro/product/PRODUCT-CONTRACT.md); the kit of the copy then writes sebaro-product/ from it.",
+  "$comment": "Placeholder: the umbrella brand's declaration with the tile group `placeholder` (Graphit, the group of no product; the kit warns about it), so the starter has a sign, favicons and a manifest. A product writes its own id, name, tile group and sign here (src/sebaro/product/PRODUCT-CONTRACT.md); the kit of the copy then writes sebaro-product/ from it.",
   "schemaVersion": "1.0",
   "id": "studio",
   "name": "sebaro",
-  "tile": "studio",
+  "tile": "placeholder",
   "sign": {
     "glyph": [
       {

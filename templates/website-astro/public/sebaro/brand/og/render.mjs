@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // sebaro share images (W6a, WEB-09; spec/09 §18.1; D96): one 1200 x 630 PNG per page from a page list, rendered in a
-// website's own build from the one template of sebaroDesign (D96 (a)). Node 20+ and Playwright with Chromium (the
+// website's own build from the one template of the system (D96 (a)). Node 20+ and Playwright with Chromium (the
 // build's choice; Chromium only, like the CI under D96 (b)); nothing else, no network.
 //
 //   node <sebaro>/brand/og/render.mjs --pages og-pages.json --out public/og [--head build/og-head] [--keep-html DIR]
@@ -8,7 +8,8 @@
 //   node <sebaro>/brand/og/render.mjs --version
 //
 // <sebaro> is a copy with the pack share-images (this file is brand/og/render.mjs in it), the site export
-// (`export_system.py --target web`) or, in sebaroDesign, systems/sebaro staged beside the samples' tiles (gate 5d).
+// (`export_system.py --target web`) or, in the maintainers' repository (sebaro-foundry), systems/sebaro staged beside
+// the samples' tiles (gate 5d).
 // Everything is found relative to this file: tokens.css (dist/tokens.css in the workshop), fonts/fonts.css with
 // fonts/web/*.woff2, icons/sprite.svg + sprite.css (icons/dist/ in the workshop), brand/inline/tile-<id>.svg,
 // brand/og/template.html, brand/og/pages.schema.json. A copy holds no product's tile: a product runs this file through

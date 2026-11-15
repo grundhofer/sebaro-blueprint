@@ -6,10 +6,12 @@
   "scripts": {
     "js/sb-controls.js": {
       "classes": [
+        "sb-callout-area",
         "sb-callout__hide",
         "sb-chip",
         "sb-claim-row__toggle",
         "sb-code__copy",
+        "sb-dialog__body",
         "sb-enter",
         "sb-icon",
         "sb-icon--16",
@@ -25,7 +27,6 @@
       ],
       "asked": [
         "sb-callout",
-        "sb-callout-area",
         "sb-code",
         "sb-dialog",
         "sb-primary-action-bar",

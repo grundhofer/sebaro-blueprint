@@ -1,9 +1,9 @@
 {
-  "$comment": "Placeholder of the starter: an invented id and name with the umbrella's sign and tile. A product replaces all four and runs the kit again (README.md).",
+  "$comment": "Placeholder of the starter: an invented id and name with the umbrella's sign and the tile group `placeholder` (Graphit, the group of no product; the kit warns about it). A product replaces all four and runs the kit again (README.md).",
   "schemaVersion": "1.0",
   "id": "musterapp",
   "name": "Musterapp",
-  "tile": "studio",
+  "tile": "placeholder",
   "sign": {
     "glyph": [
       {
