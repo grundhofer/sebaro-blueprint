@@ -1,7 +1,7 @@
 // generated — do not edit.
 // sebaroDesign token contract 2.0 · draft "sebaro" · palette "sebaro"
 // source: systems/sebaro/tokens/tokens.json (sha256 b20394467cd8a934)
-//         palettes/sebaro.json (sha256 371d475a0f24873d)
+//         palettes/sebaro.json (sha256 49659985fc757a5f)
 // builder: tools/build_tokens.py 2.0.0 · spec: shared/TOKEN-CONTRACT.md
 // Compose bridge: SebaroTheme { } fills MaterialTheme (colorScheme, typography, shapes) and provides
 // SebaroTheme.colors / .typography / .tokens / .dataviz for everything Material 3 has no slot for.
@@ -331,7 +331,8 @@ enum class SebaroSignTile(val id: String, val displayName: String, val label: St
     Tools(id = "tools", displayName = "Orange", label = "Werkzeuge", tile = Color(0xFFC95100), glyph = Color(0xFFFFFFFF)),
     Media(id = "media", displayName = "Ziegel", label = "Medien & Kreativ", tile = Color(0xFFB62A12), glyph = Color(0xFFFFFFFF)),
     Money(id = "money", displayName = "Grün", label = "Geld & Haushalt", tile = Color(0xFF1E7942), glyph = Color(0xFFFFFFFF)),
-    System(id = "system", displayName = "Azur", label = "System & Sicherheit", tile = Color(0xFF1A89C5), glyph = Color(0xFFFFFFFF));
+    System(id = "system", displayName = "Azur", label = "System & Sicherheit", tile = Color(0xFF1A89C5), glyph = Color(0xFFFFFFFF)),
+    Placeholder(id = "placeholder", displayName = "Graphit", label = "Platzhalter", tile = Color(0xFF514946), glyph = Color(0xFFFFFFFF));
 
     companion object {
         /** Look up a group by id; throws for ids outside the checked set. */

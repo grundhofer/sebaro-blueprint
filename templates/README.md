@@ -20,11 +20,13 @@ current with `update-copy.mjs`. Each checks its copy with `verify-export.mjs --s
 place (a strings module; the web app in its i18next resources), uses only `sb-*` classes of the export plus its own `app-*` classes with `var(--sb-*)`
 tokens, runs under a strict Content-Security-Policy and has Playwright tests (Chromium) for every screen in light and
 dark at 100 % and, at the widest width, real 200 % text with axe. CI: `.github/workflows/templates.yml`. Names and content are invented
-(„Beispielseite“, „Musterapp“); the sign tile is the umbrella sign as a placeholder.
+(„Beispielseite“, „Musterapp“); the sign is the umbrella sign as a placeholder, on the tile group `placeholder`
+(Graphit, the group of no product).
 
 ## New project in five steps
 
-1. **Pick the product id** and its tile group (studio, collaboration, everyday, learning, tools, media, money, system).
+1. **Pick the product id** and its tile group (studio, collaboration, everyday, learning, tools, media, money, system);
+   a starter's `placeholder` is no group for a release, the kit warns until you replace it.
    A new product needs its sign drawn and checked in the workshop sebaro Foundry first (rules ZEI-*).
 2. **Start from a starter or get the system files**: copy `website-astro/`, `webapp-vite/` or `desktop-tauri/` (each
    brings its copy of the release); else web → copy `docs/sebaro/` of this

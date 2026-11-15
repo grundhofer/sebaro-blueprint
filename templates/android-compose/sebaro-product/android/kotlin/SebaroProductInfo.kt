@@ -5,4 +5,4 @@ import de.sebaro_ventures.design.SebaroProduct
 import de.sebaro_ventures.design.SebaroSignTile
 
 /** This product for the wrappers that take one: its id and the group of its sign tile. */
-val AppProduct = SebaroProduct("musterapp", SebaroSignTile.Studio)
+val AppProduct = SebaroProduct("musterapp", SebaroSignTile.Placeholder)

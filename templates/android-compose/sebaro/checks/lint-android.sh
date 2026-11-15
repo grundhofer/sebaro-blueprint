@@ -2,9 +2,9 @@
 SRC="$1"; bad=0
 hit() { if [ -n "$1" ]; then printf '%s\n' "$1"; bad=1; fi; }
 hit "$(grep -rnE 'SebaroTheme\([^)]*product *= *[^n )]' --include=*.kt "$SRC")"                                   # A1
-hit "$(grep -rnE 'SebaroProduct\.' --include=*.kt "$SRC" | grep -vE 'SbSignTile|SbProductArea|SbStart|SbAppFrame|SbAppPane|SbViewTemplateData|fromId|/designsystem/')"         # A2
+hit "$(grep -rnE '\bSebaroProduct\(|\bAppProduct\b' --include=*.kt "$SRC" | grep -vE 'SbSignTile|SbProductArea|SbStart|SbAppFrame|SbAppPane|SbViewTemplateData|/designsystem/|SebaroProductInfo\.kt:|class SebaroProduct\(|val [A-Za-z0-9_]+ *= *(SebaroProduct\(|AppProduct\b)|:[0-9]+:[[:space:]]*(/?\*|//|import )|product *= *AppProduct\b|(^|/)src/(test|androidTest)/')"         # A2
 hit "$(grep -rnE '(on)?[pP]rimaryAction(Hover|Pressed|Outline)?\b' --include=*.kt "$SRC" | grep -v '/designsystem/' | grep -v 'SebaroTheme.kt:' | grep -vE 'SbPrimaryActionModel|primaryAction *=')"  # A3
-hit "$(grep -rnE '\b(Button|FilledTonalButton|ElevatedButton|FloatingActionButton|ExtendedFloatingActionButton|NavigationBar|NavigationBarItem)\(' --include=*.kt "$SRC" | grep -v '/designsystem/')"  # A4
+hit "$(grep -rnE '\b(Button|FilledTonalButton|ElevatedButton|FloatingActionButton|ExtendedFloatingActionButton|NavigationBar|NavigationBarItem|TextField|OutlinedTextField|TabRow|ScrollableTabRow|PrimaryTabRow|SecondaryTabRow|PrimaryScrollableTabRow|SecondaryScrollableTabRow|SegmentedButton|SingleChoiceSegmentedButtonRow|MultiChoiceSegmentedButtonRow|ExposedDropdownMenuBox)\(' --include=*.kt "$SRC" | grep -v '/designsystem/' | grep -v 'SbRenderGallery\.kt:')"  # A4
 hit "$(grep -rnE '(accent|success|warning|danger|info)Subtle|textOn[A-Za-z]*Subtle' --include=*.kt "$SRC" | grep -v 'SebaroTheme.kt:' | sed -E '/\/designsystem\/SbDiff\.kt:/s/(success|danger)Subtle//g' | grep -E '(accent|success|warning|danger|info)Subtle|textOn[A-Za-z]*Subtle')"  # A5
 hit "$(grep -rnE '\b(Badge|BadgedBox)\(' --include=*.kt "$SRC")"                                                 # A6
 hit "$(grep -rn 'Color(0x' --include=*.kt "$SRC" | grep -v 'SebaroTheme.kt')"                                      # A7

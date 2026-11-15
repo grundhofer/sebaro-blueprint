@@ -35,6 +35,12 @@ Dunkelmodus dunkel auf hell, in den Farben des hellen Modus und mit einem hellen
 **Kernregel 14**: Ab Android 13 bestätigt das System das Kopieren selbst, dort zeigt die App dafür keine Kurzmeldung;
 EBE-05 sagt dasselbe. Geänderte Regeln: FAR-09, EBE-05.
 
+Startvorlagen auf Release `v2.0.2` und die Platzhalter-Kachel: Die vier Startvorlagen tragen die Kopie aus `v2.0.2`
+(vorher `v2.0.0`), jede mit ihrem eigenen `update-copy.mjs` geholt. Ihr `sebaro.product.json` nennt als Kachelgruppe
+`placeholder` (Graphit `#514946`, die Gruppe keines Produkts; Inhaber, 15.11.2026, D150 (4) und D151 (1)) statt
+`studio`; das Kit warnt darüber, bis ein Produkt seine Gruppe einträgt. Die Produktordner und die App-Icons der
+Desktop-Vorlage sind neu gebaut. Die Lint-Regel A2 der Kopie (`v2.0.2`) läuft auf der Android-Vorlage ohne Meldung.
+
 ## 3.0.0 · 2026-11-14
 
 Hauptversion: ZUG-07 entfällt (D149 (9)), der Katalog hat 227 Regeln; acht Regeln an die Kernregeln und den heutigen
