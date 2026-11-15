@@ -1,13 +1,14 @@
 # Product declaration contract (sebaroDesign)
 
-Status: v1.3, 2026-11-14 (the Play feature graphic `android/play-feature-1024x500.png` is an output for `android`, the
+Status: v1.4, 2026-11-15 (the tile group `placeholder`, Graphit, the starters' tile until a product picks its own:
+the kit takes it and warns, D150, sebaro CHECKS.md §133); previous v1.3, 2026-11-14 (the Play feature graphic `android/play-feature-1024x500.png` is an output for `android`, the
 look the owner accepted on 2026-11-14 for five Android apps; `tiles.json` 1.2 brings the font of its name; sebaro
 CHECKS.md §129; previous v1.2, 2026-11-12, stage 6c of the export rework, D147, D148, after the first website and
 desktop app moved: `check` compares the declaration by what it says, the small tile for web and desktop, `NOTICE.md` with the terms of
 the folder, `share` finds Playwright as the raster files do; previous v1.1, 2026-11-12, stage 6a: every profile copy
 brings the kit in `product/`, the kit writes the start of an Android app and one SVG per raster file, a renderer draws
 the raster files; v1.0, 2026-11-11, stage 2: built in the workshop, not shipped in a copy). Machine-readable twin:
-[`product.schema.json`](product.schema.json). Tools: `product_kit.py` 1.3.1 with `sign_geometry.py` (Python 3.10+,
+[`product.schema.json`](product.schema.json). Tools: `product_kit.py` 1.4.0 with `sign_geometry.py` (Python 3.10+,
 standard library) and `render.mjs` 1.3.1 (Node 20+, the product's own Playwright, or one a product without a
 Node project names: section 6). A profile copy carries all of them in `product/` (section 1); the maintainers of
 sebaro keep them in their repository, sebaro-foundry, as `tools/product_kit.py`, `tools/sign_geometry.py` and
@@ -83,13 +84,19 @@ command, `tiles` (section 9); a copy's kit does not offer it (kit 1.3.1).
 | `id` | kebab-case. The value of `data-sb-product`, part of the Android resource names (`sb_sign_<id>`, other characters become `_`) and the id in `SebaroProductInfo.kt` |
 | `name` | the product's name as it writes it: the title of the sign and tile SVGs and the manifest's `name` |
 | `shortName` | optional, default `name`: the manifest's `short_name`. Launchers cut labels longer than about 12 characters |
-| `tile` | one of the eight tile groups: `studio`, `collaboration`, `everyday`, `learning`, `tools`, `media`, `money`, `system` (palette `signTiles.groups`, D50, D51). The group gives the tile's ground and the sign's colour, the same in light and dark |
+| `tile` | one of the eight tile groups: `studio`, `collaboration`, `everyday`, `learning`, `tools`, `media`, `money`, `system` (palette `signTiles.groups`, D50, D51), or `placeholder` (below). The group gives the tile's ground and the sign's colour, the same in light and dark |
 | `sign.glyph` | the sign: a non-empty list of paths on the 24-unit grid, the format of `products[].glyph` in a `signs.json` (SIGNS-GUIDE section 2): `d` (SVG path data, arcs allowed), `paint` `"stroke"` or `"fill"`; strokes may set `width`, `cap`, `join`, fills `fillRule`. A stroke without `width` has the system's base stroke |
 | `sign.glyphSmall` | optional simpler drawing for 24 px and below (favicon, notification icon, the small tile). Drawn at the base stroke like `glyph`: the kit applies the heavier stroke of the small sizes |
 | `web` | optional, only with `"web"` in `outputs`: `name` (the manifest's `name` where it differs from `name`), `themeColor` and `backgroundColor` (`#rrggbb`; default the system's light ground), `headThemeColor` (default `true`: the head snippet carries the two `theme-color` tags) and `manifest` |
 | `web.manifest` | Web App Manifest members written as they are (`lang`, `dir`, `id`, `start_url`, `scope`, `display`, `description`, …). Not `name`, `short_name`, `theme_color`, `background_color` or `icons`. Nothing is added: a site that is not installable says `"display": "browser"` itself |
 | `outputs` | one or more of `android`, `web`, `desktop`, each once (section 5) |
 | `$schema`, `$comment` | optional strings |
+
+**The placeholder group (D150).** `placeholder` (Graphit) is the tile of the guide's starters, a neutral that no
+purpose group and no role uses, so a new product's tile and product area do not look like cobalt, which marks the
+selected place, links and focus (core rule 4). It is no purpose group: a product picks its real group before its
+first release. Until then `build` and `check` draw it like any group and print a `warning:` line that names the fix
+(set `tile` to the product's own group, then run `build` again); the warning does not change the exit code.
 
 **Why the sign is a glyph list and not an SVG file.** The geometry code draws exactly this list
 (`sign_geometry.glyph_from_json`), so nothing is lost on the way in. An SVG would pass through `signs.py glyph`, which
@@ -101,7 +108,7 @@ the list by hand, or asks for it.
 
 ## 3 Rules the schema cannot say (the kit checks them)
 
-- `tile` is a group of the copy's `product/tiles.json`. The schema lists sebaro's eight.
+- `tile` is a group of the copy's `product/tiles.json`. The schema lists sebaro's eight and `placeholder`.
 - A stroke's `width` is greater than 0. `width`, `cap` and `join` belong to strokes, `fillRule` to fills.
 - Every `d` parses and draws something.
 - The ink of `glyph` and of `glyphSmall`, stroke included, stays inside the 24-unit box at the base stroke (tolerance
@@ -326,7 +333,8 @@ has the members of `web.manifest` in the order the declaration gives them, so so
 `meaning`: `check` reads it as before, by the sha256 of the bytes, and says in the finding that a build by this kit
 compares what the declaration says. One `build` writes the record of this kit.
 
-Any finding gives exit 1. A build by another kit version whose outputs are still the same is a note, not a finding.
+Any finding gives exit 1. A build by another kit version whose outputs are still the same is a note, not a finding;
+the placeholder tile group is a warning (section 2), not a finding.
 Files in the folder that the kit did not write are not looked at. **Raster files are compared by sha256 only**, of the
 file and of its sources: `check` draws nothing and compares no pixel, so it needs no browser, and a raster drawn by
 another Chromium is up to date as long as its sources are. With `--no-raster` they are not compared at all.
@@ -334,12 +342,16 @@ another Chromium is up to date as long as its sources are. With `--no-raster` th
 ## 8 Versions
 
 `schemaVersion` `"1.0"` · `product/tiles.json` `format` `"1.2"` · record `format` `"1.2"` · raster record `format`
-`"1.0"` · kit 1.3.1 · renderer 1.3.1 (1.3.1: a copy's kit offers `build` and `check` alone, and the heads name no path of the
+`"1.0"` · kit 1.4.0 · renderer 1.3.1 (1.4.0: the warning for the tile group `placeholder`; 1.3.1: a copy's kit offers `build` and `check` alone, and the heads name no path of the
 maintainers' repository as the place of this text; 1.3.0: text in a source, the feature graphic's name; 1.2.0: `share` finds
 Playwright as the raster files do; 1.1.0: `$SEBARO_PLAYWRIGHT`, section 6). A change that makes a valid declaration fail is a major version (D16); new
 optional keys and outputs are minor. A changed output changes the kit's version, and `check` then reports the
 product's files as stale until `build` runs again.
 
+- **1.4 (2026-11-15, kit 1.4.0):** the tile group `placeholder` (Graphit, D150) in the schema's `tile` and in
+  `tiles.json`, the starters' tile until a product picks its own; `build` and `check` take it and print a warning
+  that names the fix, the exit code stays. A declaration is valid unchanged and the kit's outputs are the same; every
+  folder is stale against a copy with the new `tiles.json` (a ninth group) until `build` runs again.
 - **1.3 (2026-11-14, kit 1.3.0, renderer 1.3.0):** the Play feature graphic `android/play-feature-1024x500.png` for
   `android` (section 6), its source `render/android/play-feature-1024x500.svg`; `tiles.json` 1.2 with `font`, the name
   font; the renderer sets a text of a source in its own font and room (`data-sb-fit`). A declaration is valid
