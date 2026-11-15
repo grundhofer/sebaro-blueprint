@@ -15,10 +15,19 @@ Android-Bauplan: Module und Hilt. Inhaber, 14.11.2026: „module sollten erlaubt
 mehr funktion pflicht“ und „lass uns hilt in allen android apps einsetzen oder stark anraten bei neuen.“ Der Bauplan
 nennt jetzt die Module `:app`, `:designsystem`, `:core:*` und `:feature:*` mit einer Abhängigkeitsrichtung; Pflicht
 sind sie ab mehr als einem Bereich von Ansichten oder einem eigenen Systemdienst (Kamera, Mikrofon, Vordergrunddienst).
-Diese Schwelle ist vom Agenten formuliert, noch nicht vom Inhaber bestätigt. Abhängigkeiten kommen über Hilt mit KSP statt
+Die Schwelle hat der Agent formuliert, der Inhaber hat sie am 15.11.2026 bestätigt. Abhängigkeiten kommen über Hilt mit KSP statt
 über den `AppContainer`; die Versionen (Hilt 2.60.1, AndroidX Hilt 1.4.0) stehen im Versionskatalog der Startvorlage,
 die selbst noch ein Modul mit `AppContainer` ist. Bestehende Apps mit `AppContainer` stellen bei ihrem nächsten größeren
 Umbau um. Für Bibliotheksmodule hat der Build-Export noch kein eigenes Plugin.
+
+Android-Bauplan: Plugins, Modulliste, Kamera, Umbenennen. Inhaber, 15.11.2026, zu der Liste aus zwei
+Testapps: „alles wie von dir vorgeschlagen“. Der Build-Export hat jetzt `sebaro.android.library` für jedes weitere
+Modul (auch reines Kotlin), `sebaro.android.product` für die Produktdateien als Modul `:product` und
+`sebaro.android.rendertests` für Render-Tests; `ci` vergleicht die Berechtigungen des Release mit
+`release-permissions.txt` der App. Die Modulliste nennt `:product`, `:core:ui` und `:core:testing`, `:core:model` ist ein
+Kotlin/JVM-Modul. Neu: das Kamera-Rezept `templates/android-compose/CAMERA.md` (CameraX mit `camera-compose`, die Kamera
+gehört der Route, `uses-feature` nicht erforderlich, Erlaubnis erst beim Öffnen) und das Skript
+`templates/android-compose/tools/rename.py`, das die Vorlage in einem Schritt umbenennt.
 
 ## 3.0.0 · 2026-11-14
 

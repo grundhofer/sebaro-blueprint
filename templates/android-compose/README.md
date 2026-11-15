@@ -69,11 +69,14 @@ oder neuer für die Prüfungen der Kopie und Python 3.10 oder neuer für den Bau
 
 1. Kopier den Ordner `templates/android-compose/` in dein neues Repository.
 2. Exportier das Build-Setup der Familie in dieses Repository (Abschnitt oben).
-3. Trag `id`, `name`, `tile` und dein Zeichen in `sebaro.product.json` ein und erzeug die Produktdateien neu:
-   `python3 sebaro/product/product_kit.py build sebaro.product.json --copy sebaro --out sebaro-product`.
-4. Ersetz `de.sebaro_ventures.musterapp` (`namespace`, `applicationId`, Paket der Kotlin-Dateien), `rootProject.name`,
-   `Musterapp…` in den Klassennamen, `app_name`, die Kachel `sb_sign_musterapp` in `AboutScreen.kt` (sie heißt nach
-   deiner `id`) und die zwei Sätze in `strings_about.xml`.
+3. Benenn die Vorlage um: `python3 tools/rename.py <id> <Name>`, z. B. `python3 tools/rename.py notizweise Notizweise`.
+   Das Skript ersetzt `musterapp` und `Musterapp` in allen eigenen Dateien und Dateinamen (Paket, `applicationId`,
+   `rootProject.name`, Klassennamen, `app_name`, die Kachel in `AboutScreen.kt`), setzt `id` und `name` in
+   `sebaro.product.json`, erzeugt die Produktdateien neu und lässt `./gradlew ktlintFormat` laufen. Kopie, Build-Export
+   und Build-Ausgaben fasst es nicht an.
+4. Trag `tile` und dein Zeichen in `sebaro.product.json` ein und erzeug die Produktdateien neu
+   (`python3 sebaro/product/product_kit.py build sebaro.product.json --copy sebaro --out sebaro-product`); schreib die
+   zwei Sätze in `strings_about.xml`. Den Ordner `tools/` kannst du danach löschen.
 
 ```sh
 ./gradlew :app:assembleDebug          # ohne Kotlin-Warnungen
