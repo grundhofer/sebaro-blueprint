@@ -12,7 +12,7 @@
   "target": "web",
   "excludedProducts": 8,
   "sebaroDesign": {
-    "commit": "d96fa169ec7bc20ff40394d71c1a536f8e194dcc",
+    "commit": "ed6b9b7dc5b2248538912ff5cbc73842d6c9fc78",
     "uncommittedChanges": false
   },
   "contracts": {
@@ -94,15 +94,15 @@
     {
       "path": "css/sebaro.css",
       "source": "systems/sebaro/css/sebaro.css",
-      "sourceSha256": "b0f33ae3212a5474d27c2ef5f5eaf51b2d16c0aa556fe3c2c6a7dc46c96a37e8",
-      "sha256": "56887ff58ed564e62bba051aebe2bd2cb97423a4f0071df148f2b46eeae11b4e",
-      "bytes": 371296,
+      "sourceSha256": "da48591fda2b7c2e3f337455bb5885714405198d6ecfcf1db22022ad83fce787",
+      "sha256": "620bacf089c12917cb70b27c3bc28282e578112dc8a6d4e609f88419e3f2144f",
+      "bytes": 371668,
       "transform": "without the sb-pack marks of the export profiles (ADOPTION §2.5)"
     },
     {
       "path": "css/parts/01-base.css",
       "source": "systems/sebaro/css/sebaro.css",
-      "sourceSha256": "b0f33ae3212a5474d27c2ef5f5eaf51b2d16c0aa556fe3c2c6a7dc46c96a37e8",
+      "sourceSha256": "da48591fda2b7c2e3f337455bb5885714405198d6ecfcf1db22022ad83fce787",
       "sha256": "a392f0235a4ed1f3a86b7a7f6f3a7a38cbeb7db2aac5cf7f616dca5d4eb8cd6b",
       "bytes": 15395,
       "transform": "part 01 „base“ of css/sebaro.css (D102 (37)): its stretches in file order"
@@ -110,7 +110,7 @@
     {
       "path": "css/parts/02-prose.css",
       "source": "systems/sebaro/css/sebaro.css",
-      "sourceSha256": "b0f33ae3212a5474d27c2ef5f5eaf51b2d16c0aa556fe3c2c6a7dc46c96a37e8",
+      "sourceSha256": "da48591fda2b7c2e3f337455bb5885714405198d6ecfcf1db22022ad83fce787",
       "sha256": "214caf310911977c5fdf231800fb83c4fef7ea6e402cfac346e0a0cf24c146b2",
       "bytes": 18986,
       "transform": "part 02 „prose“ of css/sebaro.css (D102 (37)): its stretches in file order"
@@ -118,7 +118,7 @@
     {
       "path": "css/parts/03-website.css",
       "source": "systems/sebaro/css/sebaro.css",
-      "sourceSha256": "b0f33ae3212a5474d27c2ef5f5eaf51b2d16c0aa556fe3c2c6a7dc46c96a37e8",
+      "sourceSha256": "da48591fda2b7c2e3f337455bb5885714405198d6ecfcf1db22022ad83fce787",
       "sha256": "b46559dc7cef750c9709e2a57fc257b4e5f88f816968e3e5b871994742f65af4",
       "bytes": 20784,
       "transform": "part 03 „website“ of css/sebaro.css (D102 (37)): its stretches in file order"
@@ -126,15 +126,15 @@
     {
       "path": "css/parts/04-actions.css",
       "source": "systems/sebaro/css/sebaro.css",
-      "sourceSha256": "b0f33ae3212a5474d27c2ef5f5eaf51b2d16c0aa556fe3c2c6a7dc46c96a37e8",
-      "sha256": "a648de37b3516e1254ed263c5a2ec086679e3004e849522e8c9f7bf5ce032cbd",
-      "bytes": 22019,
+      "sourceSha256": "da48591fda2b7c2e3f337455bb5885714405198d6ecfcf1db22022ad83fce787",
+      "sha256": "5aee54d537c97d464535677fa8720ce35f31dd1f92f852388241b2c1d98fe16b",
+      "bytes": 22391,
       "transform": "part 04 „actions“ of css/sebaro.css (D102 (37)): its stretches in file order"
     },
     {
       "path": "css/parts/05-inputs.css",
       "source": "systems/sebaro/css/sebaro.css",
-      "sourceSha256": "b0f33ae3212a5474d27c2ef5f5eaf51b2d16c0aa556fe3c2c6a7dc46c96a37e8",
+      "sourceSha256": "da48591fda2b7c2e3f337455bb5885714405198d6ecfcf1db22022ad83fce787",
       "sha256": "58d33d2350ee76bf428a212eb66264364f18476db199d8cf3362176c1525a515",
       "bytes": 21639,
       "transform": "part 05 „inputs“ of css/sebaro.css (D102 (37)): its stretches in file order"
@@ -142,7 +142,7 @@
     {
       "path": "css/parts/06-display.css",
       "source": "systems/sebaro/css/sebaro.css",
-      "sourceSha256": "b0f33ae3212a5474d27c2ef5f5eaf51b2d16c0aa556fe3c2c6a7dc46c96a37e8",
+      "sourceSha256": "da48591fda2b7c2e3f337455bb5885714405198d6ecfcf1db22022ad83fce787",
       "sha256": "4b8272bbc01c594d7033c41521e322e2787665d3917f0538c026d00dc6403e1e",
       "bytes": 177632,
       "transform": "part 06 „display“ of css/sebaro.css (D102 (37)): its stretches in file order"
@@ -150,7 +150,7 @@
     {
       "path": "css/parts/07-window.css",
       "source": "systems/sebaro/css/sebaro.css",
-      "sourceSha256": "b0f33ae3212a5474d27c2ef5f5eaf51b2d16c0aa556fe3c2c6a7dc46c96a37e8",
+      "sourceSha256": "da48591fda2b7c2e3f337455bb5885714405198d6ecfcf1db22022ad83fce787",
       "sha256": "a932c269ae46d702d68e20a22f50bdcb8e96c64a1970da9a83940b14d17c0415",
       "bytes": 91290,
       "transform": "part 07 „window“ of css/sebaro.css (D102 (37)): its stretches in file order"
@@ -158,7 +158,7 @@
     {
       "path": "css/parts/08-forced-print.css",
       "source": "systems/sebaro/css/sebaro.css",
-      "sourceSha256": "b0f33ae3212a5474d27c2ef5f5eaf51b2d16c0aa556fe3c2c6a7dc46c96a37e8",
+      "sourceSha256": "da48591fda2b7c2e3f337455bb5885714405198d6ecfcf1db22022ad83fce787",
       "sha256": "49d286312d451265eefb6ee9cdd47d281adefe9483157a3298ecffaa1e1adbe7",
       "bytes": 4595,
       "transform": "part 08 „forced-print“ of css/sebaro.css (D102 (37)): its stretches in file order"
@@ -1017,8 +1017,8 @@
       },
       {
         "path": "css/parts/04-actions.css",
-        "bytes": 22019,
-        "gzipBytes": 6201
+        "bytes": 22391,
+        "gzipBytes": 6332
       },
       {
         "path": "css/parts/05-inputs.css",
@@ -1042,8 +1042,8 @@
       },
       {
         "path": "css/sebaro.css",
-        "bytes": 371296,
-        "gzipBytes": 85592
+        "bytes": 371668,
+        "gzipBytes": 85713
       }
     ]
   },

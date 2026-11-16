@@ -830,6 +830,10 @@ html:has(.sb-bottom-block:not(.sb-window > .sb-bottom-block)) {
 .sb-icon-button:hover, .sb-icon-button.is-hover { background: var(--sb-color-hover-fill); color: var(--sb-color-text); }
 .sb-icon-button:active, .sb-icon-button.is-pressed { background: var(--sb-color-pressed-fill); color: var(--sb-color-text); }
 .sb-icon-button[aria-pressed="true"] { color: var(--sb-color-link); }
+/* a toggle whose icon has a filled form (D150 (2), Compose SbIconToggle): both icons in the button, the outline
+   `__off` shows while off, the filled `__on` while on, so the state shows beyond colour; no script swaps them */
+.sb-icon-button[aria-pressed="true"] > .sb-icon-button__off,
+.sb-icon-button:not([aria-pressed="true"]) > .sb-icon-button__on { display: none; }
 
 /* disabled icon button (STA-03, D80; spec/02 §1.5): the icon one grey step lighter than at rest (text-muted →
    text-subtle, the palette role for inactive controls, PALETTE-CONTRACT §5; 3.40:1 light / 4.22:1 dark on bg, against
