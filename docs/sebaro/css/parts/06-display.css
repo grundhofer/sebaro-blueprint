@@ -1981,6 +1981,9 @@ dialog.sb-sheet > form { margin: 0; }
 .sb-avatar { position: relative; }
 .sb-avatar[data-sb-presence="offline"] { border-style: dashed; color: var(--sb-color-text-muted); }
 .sb-avatar__role { position: absolute; inset-block-end: calc(var(--sb-size-icon-sm) / -3); inset-inline-end: calc(var(--sb-size-icon-sm) / -3); inline-size: var(--sb-size-icon-sm); block-size: var(--sb-size-icon-sm); color: var(--sb-color-text); background: var(--sb-color-bg); border-radius: var(--sb-radius-pill); }
+/* the shield stands a third past the corner: its avatar keeps that room at the end, so the 4 px gap of sb-avatars starts
+   after the shield (Compose SbAvatar, CHECKS.md §137) */
+.sb-avatar:has(> .sb-avatar__role) { margin-inline-end: calc(var(--sb-size-icon-sm) / 3); }
 
 /* D143 (4): one noninteractive product area per view; product id resolves in tokens.css. */
 .sb-product-area { box-sizing: border-box; background: var(--sb-product-tile); color: var(--sb-product-glyph); padding: 24px; border-radius: var(--sb-radius-container); overflow-wrap: anywhere; }

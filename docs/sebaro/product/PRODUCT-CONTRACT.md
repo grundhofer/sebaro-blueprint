@@ -17,9 +17,9 @@ sebaro keep them in their repository, sebaro-foundry, as `tools/product_kit.py`,
 A product declares itself in one file of its own repository, `sebaro.product.json`. The kit draws the product's sign
 tile, launcher layers, notification icon, the start of an Android app, favicon SVG, web manifest and head snippet
 from that file and from one data file of the system, and the renderer draws the raster files. The system then no
-longer needs to know the product. Until the product list leaves the system (stage 8), `tools/brand_assets.py` draws
-the same outputs from `brand/signs.json` and `brand.config.json` through the kit's functions, and
-`tools/tests/test_product_kit.py` `Golden` compares the two for every product.
+longer needs to know the product (the product list left the system with stage 8). For the demo's samples
+(`demo/products/`), `tools/brand_assets.py` draws the same outputs from `brand/signs.json` and `brand.config.json`
+through the kit's functions, and `tools/tests/test_product_kit.py` `Golden` compares the two for every sample.
 
 ## 1 Commands
 

@@ -120,7 +120,9 @@ function sbColourCount(view) {
     return v[0] * 0.2126 + v[1] * 0.7152 + v[2] * 0.0722;
   }
   areas.forEach(function (area) {
-    var style = getComputedStyle(area), product = area.getAttribute("data-sb-product");
+    // DEMO-CHECK 1.16 (§137): an area names its product, or its tile group where the page has no product.css (spec/02 §3.33)
+    var style = getComputedStyle(area), tile = area.getAttribute("data-sb-tile");
+    var product = area.getAttribute("data-sb-product") || (tile ? "tile:" + tile : null);
     products.add(product);
     if (!product || !style.getPropertyValue("--sb-product-tile").trim()) areaErrors.push("unknown product");
     var test = document.createElement("span");
