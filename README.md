@@ -29,7 +29,7 @@ eines Produkts. Wie man dieses Repository baut, prüft, abgleicht und veröffent
 
 ## Woher die Werte kommen
 
-Die Quellen von sebaro (Paletten, Verträge, Generatoren, Prüfungen und das Entscheidungsprotokoll D1–D111) liegen in
+Die Quellen von sebaro (Paletten, Verträge, Generatoren, Prüfungen und das Entscheidungsprotokoll mit den D-Nummern) liegen in
 der Werkstatt **sebaro Foundry**, einem privaten Repository. Dieser Guide schreibt keine Farbe, Schrift und kein Icon ab:
 `docs/sebaro/` ist ein geprüfter Web-Export (`tools/sync_from_design.py`), jede Datei mit Prüfsumme. Regeln ändern sich
 nur in `rules/rules.json`. `tools/build.py` setzt die Kernregeln aus `design/KERN.de.md` in die Startseite und schreibt
