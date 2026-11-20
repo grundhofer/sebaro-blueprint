@@ -11,6 +11,9 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+README: Der Abschnitt „Woher die Werte kommen“ nennt das Entscheidungsprotokoll der Werkstatt ohne feste
+Obergrenze („mit den D-Nummern“ statt „D1–D111“); die Zahl war seit D112 veraltet, und kein Abgleich schreibt die README.
+
 Android-Bauplan: Module und Hilt. Inhaber, 14.11.2026: „module sollten erlaubt und bevorzugt sein bei apps mit etwas
 mehr funktion pflicht“ und „lass uns hilt in allen android apps einsetzen oder stark anraten bei neuen.“ Der Bauplan
 nennt jetzt die Module `:app`, `:designsystem`, `:core:*` und `:feature:*` mit einer Abhängigkeitsrichtung; Pflicht
