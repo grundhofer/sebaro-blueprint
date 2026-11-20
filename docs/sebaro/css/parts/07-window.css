@@ -442,7 +442,7 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
 }
 /* the action zone: the state sentence at the start, the one primary action last and at the end (D72, D74, D83 (5)) */
 .sb-window > .sb-bottom-block { position: static; }
-.sb-window .sb-primary-action-bar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-2) var(--sb-space-4); padding: var(--sb-space-3) var(--sb-space-4); }
+.sb-window .sb-primary-action-bar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sb-space-2) var(--sb-space-4); padding: var(--sb-space-2) var(--sb-space-4); }   /* 8 px above and below (D152 (2)) */
 .sb-window .sb-primary-action-bar__status { display: flex; flex: 1 1 auto; min-inline-size: 0; margin: 0; }
 .sb-window .sb-primary-action-bar__message { flex: 1 1 16.25rem; min-inline-size: 0; margin: 0; }   /* min 0: an overlong part of a file name breaks inside the message instead of widening the zone (spec/02 §4.8); 16.25rem = 260 px at 100 %, so at large text the sentence takes its own line instead of a column of a few words (D102 (11)) */
 /* the sentence is one span beside the glyph (spec/02 §1.1): an element inside it (a .sb-file-name) stays in the sentence's
@@ -470,6 +470,19 @@ div.sb-side-nav__head { display: flex; align-items: center; gap: var(--sb-space-
 .sb-primary-action-bar__counts[data-sb-held] { visibility: hidden; }
 .sb-window .sb-primary-action-bar:has(.sb-primary-action-bar__message:not(:empty)) .sb-primary-action-bar__status { display: none; }
 .sb-window .sb-primary-action-bar .sb-primary-action { inline-size: auto; min-inline-size: 200px; margin-inline-start: auto; padding-inline: min(var(--sb-space-6), 24px); }
+/* with a counter line, from 480 px of window (and 30em at large text) on: the counter line and below it the state sentence
+   (or the message) in one column at the start, the primary action at the end beside both, so the counter line takes no
+   row over the whole width (D152 (1)). The two rows share the action's height and stand together in its middle: the
+   spare height goes to both rows, the counter line sits at the foot of the first, the sentence at the top of the second.
+   An empty message is out of the flow and takes no cell; a message that wraps makes the second row and the zone taller */
+@container sb-window (min-width: 480px) and (min-width: 30em) {
+  .sb-window .sb-primary-action-bar:has(> .sb-primary-action-bar__counts) {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--sb-space-4); row-gap: var(--sb-space-0-5);
+  }
+  .sb-window .sb-primary-action-bar:has(> .sb-primary-action-bar__counts) > .sb-primary-action-bar__counts { grid-column: 1; grid-row: 1; align-self: end; }
+  .sb-window .sb-primary-action-bar:has(> .sb-primary-action-bar__counts) > :is(.sb-primary-action-bar__status, .sb-primary-action-bar__message) { grid-column: 1; grid-row: 2; align-self: start; }
+  .sb-window .sb-primary-action-bar:has(> .sb-primary-action-bar__counts) > .sb-primary-action { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+}
 /* overlay panes: out of the grid, over the content edge, the ink line on their inner edge stays the layer line */
 /* overlay panes below 1004 / 722 px: only a pane in the window's grid (.sb-window__body >), so a sidebar or inspector
    outside the grid stays in flow (spec/02 §4.17, D102 lane desktop) */
