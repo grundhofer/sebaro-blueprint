@@ -2,6 +2,7 @@
 """Turn the "Unveröffentlicht" section of CHANGELOG.md into a version.
 
     python3 tools/release.py 1.2.0            # sets rules.json version/date, snapshots rules/releases/1.2.0.json
+                                              # and removes the snapshot of the version before (only the last is read)
     python3 tools/release.py 1.2.0 --date 2026-10-21
 
 Refuses when the section is empty, the version is not higher than the last one, or check_site.py fails afterwards.
@@ -49,6 +50,8 @@ def main() -> int:
     data["version"], data["date"] = args.version, args.date
     out = json.dumps(data, ensure_ascii=False, indent=1) + "\n"
     RULES.write_text(out, encoding="utf-8")
+    for p in RELEASES.glob("*.json"):
+        p.unlink()
     (RELEASES / f"{args.version}.json").write_text(out, encoding="utf-8")
     CHANGELOG.write_text(text, encoding="utf-8")
     print(f"released {args.version} ({args.date}); now run python3 tools/build.py and tools/check_site.py")

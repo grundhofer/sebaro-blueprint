@@ -1,17 +1,17 @@
 # sebaro: die Kernregeln
 
 Lies das, bevor du einen Bildschirm in sebaro baust oder änderst. Diese 31 Regeln musst du im Kopf haben; der Rest
-steckt in den Bauteilen ([parts.md](parts.md) sagt, was ein Bauteil noch von dir braucht), den Ansichtstypen
-([views.md](views.md)) und den Prüfungen. `[AKT-01]` verweist auf den langen Katalog `rules/rules.json` (Begründung
-und Beispiele), `D<n>` auf eine Entscheidung des Inhabers. Schlag dort nur nach, wenn du den Grund brauchst. Wo der
-Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md](KERN.md).
+steckt in den Bauteilen (je eine Seite in [parts/](parts/)), den Ansichtstypen ([views.md](views.md)) und den
+Prüfungen. `[AKT-01]` verweist auf den langen Katalog `rules/rules.json` (Begründung und Beispiele). Schlag dort nur
+nach, wenn du den Grund brauchst. Wo der Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die
+englische Fassung [KERN.md](KERN.md).
 
 ## Das System
 
 1. Nimm die Bauteile und Tokens der sebaro-Kopie in deinem Projekt. Keine rohen Farben, Größen oder Schriften, kein
    zweites Designsystem. Ändere die Kopie nie. [HAL-07, TEC-01]
 2. Bau jeden Bildschirm aus einem Ansichtstyp. Füll seine Plätze; seine festen Punkte änderst du nur für die eine
-   Ansicht, für die es die App gibt. [D145]
+   Ansicht, für die es die App gibt.
 3. Fehlt ein Bauteil, bau es neben der Kopie aus Tokens und vorhandenen Bauteilen und trag es in die Lückenliste des
    Projekts ein. Eine Abweichung wird für das Produkt entschieden und im Produkt festgehalten. Nach sebaro kommt sie,
    wenn ein zweites Produkt sie braucht.
@@ -20,15 +20,15 @@ Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die engl
 
 4. Eine Farbe, eine Aufgabe. Kobalt: der aktuelle Ort, Link, Fokus, Auswahlmarke. Lindgrün: der eine nächste Schritt
    und das Markenschild von sebaro. Statusfarben: nur als Glyphe mit Wort. Alles andere ist grau mit Haarlinien.
-   [FAR-01, FAR-03, EIN-03, D143]
+   [FAR-01, FAR-03, EIN-03]
 5. Die Produktfarbe steht in der Zeichenkachel der App, auf dem Startbildschirm und in höchstens einer Produktfläche
    je Ansicht, und nur auf Einstieg, Übersicht (ein Wert), Detail mit einem Wert, Ergebnis und leerem Zustand. Nie
-   hinter Bedienelementen oder Links. [D143, D145; ersetzt ZEI-01]
+   hinter Bedienelementen oder Links. [ersetzt ZEI-01]
 6. Keine farbige Fläche hinter Text außer der Hauptaktion. Die Gründe sind die vier Grautöne der Tokens.
    [FAR-02, FAR-05]
 7. Hell und Dunkel sind gleichwertig. Jede Ansicht funktioniert in beiden und in den Farbtönen „Kühl“ und „Warm“.
    Eine Ausnahme: Ein Bild, das eine Maschine liest (ein QR-Code, ein Strichcode für die Kasse), bleibt auch im
-   Dunkelmodus dunkel auf hell, in den Farben des hellen Modus und mit einem hellen Rand. [FAR-09, FAR-15, D150]
+   Dunkelmodus dunkel auf hell, in den Farben des hellen Modus und mit einem hellen Rand. [FAR-09, FAR-15]
 
 ## Schrift, Raum, Form
 
@@ -38,7 +38,7 @@ Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die engl
    [RAU-01, RAU-04, RAU-05]
 10. Ebenen trennt eine 2 px breite Tintenlinie, nie Schatten, Tönung oder Höhe. Karten fassen nur Einstellungen oder
     Kennzahlen zusammen. Eine Liste bleibt eine Liste flacher Zeilen mit Haarlinien, in jeder App und bei jeder
-    Breite. [EBE-01, EBE-02, DAT-01, FOR-02, D145]
+    Breite. [EBE-01, EBE-02, DAT-01, FOR-02]
 11. Keine Verläufe, kein Leuchten, keine Texturen, kein Schmuck. Ein Radius je Klasse (4, 8, 12, 16). Die 45°-Kante
     heißt „endgültig“ und steht nur auf Aktionen, die sich nicht rückgängig machen lassen.
     [FOR-01, FOR-03, FOR-04, HAL-06]
@@ -47,15 +47,15 @@ Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die engl
 
 12. Höchstens eine lindgrüne Hauptaktion je Ansicht (ein Rahmen mit zwei Spalten ist eine Ansicht), unten in dem
     Bereich, auf den sie wirkt, beschriftet mit Ding und Verb („Eintrag anlegen“), als letzte ihrer Gruppe. Keine, wo
-    es keinen klaren nächsten Schritt gibt; eine Detailansicht hat keine. [AKT-01, AKT-02, AKT-04, AKT-11, D145]
+    es keinen klaren nächsten Schritt gibt; eine Detailansicht hat keine. [AKT-01, AKT-02, AKT-04, AKT-11]
 13. Drei Stufen: Lindgrün für den nächsten Schritt, höchstens eine umrandete Aktion je Bereich, alles andere ist eine
-    Textaktion. [AKT-06, D143]
+    Textaktion. [AKT-06]
 14. Die Hauptaktion zeigt ihren eigenen Fortschritt und ihr Ergebnis. Kein Ladekreis über der Ansicht. Eine
     Kurzmeldung nur für ein umkehrbares Ergebnis, mit „Rückgängig“; die einzige ohne sagt, dass etwas in die
     Zwischenablage kopiert wurde. Ab Android 13 bestätigt das System das Kopieren selbst: Dort zeigt die App dafür
-    keine Kurzmeldung. [AKT-05, EBE-05, D150]
+    keine Kurzmeldung. [AKT-05, EBE-05]
 15. Wer etwas Gespeichertes löscht, wird immer in einem Dialog gefragt, der sagt, was verloren geht.
-    [AKT-07, AKT-08, D119]
+    [AKT-07, AKT-08]
 16. Unter einer Aktion, die Daten irgendwohin schickt, sagt eine Zeile, wohin. Nur lokal: „Bleibt auf diesem
     Gerät.“ [BEL-10]
 
@@ -66,7 +66,7 @@ Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die engl
     sein. [NAV-01, NAV-02, NAV-10]
 18. Handy: Navigation unten mit drei bis fünf Hauptzielen, Unteransichten bekommen „Zurück“. Ab 840 dp: eine Leiste
     am Rand und zwei Spalten, die Liste am Anfang, das Detail am Ende. Die Kopfleiste trägt nie die Hauptaktion.
-    [NAV-03, NAV-04, NAV-05, D145]
+    [NAV-03, NAV-04, NAV-05]
 19. Ein Linkstil: das Wort in Textfarbe, 2 px breit in Kobalt unterstrichen. Ein Link, der die App verlässt, endet
     mit dem Icon für externe Links. [LNK-01, LNK-02]
 
@@ -103,9 +103,9 @@ Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die engl
 
 28. Die Wahl des Erscheinungsbilds heißt „Hell oder Dunkel“, daneben steht „Farbton: Kühl · Warm“. Handy-App: in den
     Einstellungen. Website: ein Knopf im Kopf. Web-App: im Menü „Mehr“. Desktop: im Menü „Darstellung“.
-    [AKT-09, D143]
+    [AKT-09]
 29. Start: die ganze Fläche in der Produktfarbe mit dem weißen Symbol, dann die App. „Über“ zeigt Kachel, Name,
-    Version und den Absender „von sebaro“. [D143, D144; ersetzt STR-01]
+    Version und den Absender „von sebaro“. [ersetzt STR-01]
 
 ## Boden der Barrierefreiheit
 

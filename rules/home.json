@@ -1,12 +1,6 @@
 {
- "$comment": "Where each rule of rules.json lives since the round-8 cleanup (D145 (6)). core = design/KERN.md (ref = rule number); view = design/views.md (ref = type key); component = carried by the parts of the sebaro copy; words = writing sheet; platform-* = platform blueprint and template; check = automatic check; extra-* = optional sheet; playbook = how to start a project; workshop = concerns only who builds the system; lowered = accessibility rule above the floor of KERN rule 30, kept as built, no longer required. Confirmed by the owner on 2026-11-11 together with the core rules; for a 'component' rule, web and android give the finding of an audit of the parts on 2026-11-11 (read from the code, nothing rendered): carried = the part keeps the rule by itself, usage = the author needs the line in design/parts.md, missing = no part yet, n/a = the rule does not apply there.",
+ "$comment": "Where each rule of rules.json lives. core = design/KERN.md (ref = rule number); view = design/views.md (ref = type key); component = carried by a part (design/parts/); words = writing sheet; platform-* = the page of the platform type (design/platforms/) and its starter; check = automatic check; extra-* = optional sheet; playbook = how to start a project; lowered = accessibility rule above the floor of KERN rule 30, kept as built, no longer required. For a 'component' rule, web and android give the finding of an audit of the parts on 2026-11-11 (read from the code, nothing rendered): carried = the part keeps the rule by itself, usage = the author needs the line in the part's page, missing = no part yet, n/a = the rule does not apply there.",
  "rules": {
-  "HAL-01": {
-   "home": "workshop"
-  },
-  "HAL-02": {
-   "home": "workshop"
-  },
   "HAL-03": {
    "home": "core",
    "ref": 27
@@ -45,9 +39,6 @@
   "FAR-03": {
    "home": "core",
    "ref": 4
-  },
-  "FAR-04": {
-   "home": "workshop"
   },
   "FAR-05": {
    "home": "core",
@@ -90,9 +81,6 @@
   "FAR-15": {
    "home": "core",
    "ref": 7
-  },
-  "FAR-13": {
-   "home": "workshop"
   },
   "SCH-01": {
    "home": "core",
@@ -578,18 +566,6 @@
    "home": "core",
    "ref": 5
   },
-  "ZEI-02": {
-   "home": "workshop"
-  },
-  "ZEI-03": {
-   "home": "workshop"
-  },
-  "ZEI-04": {
-   "home": "workshop"
-  },
-  "ZEI-05": {
-   "home": "workshop"
-  },
   "ZEI-06": {
    "home": "core",
    "ref": 25
@@ -598,30 +574,9 @@
    "home": "core",
    "ref": 25
   },
-  "ZEI-08": {
-   "home": "workshop"
-  },
-  "ZEI-09": {
-   "home": "workshop"
-  },
-  "ZEI-10": {
-   "home": "workshop"
-  },
-  "ZEI-11": {
-   "home": "workshop"
-  },
-  "ZEI-12": {
-   "home": "workshop"
-  },
   "ZEI-13": {
    "home": "view",
    "ref": "about"
-  },
-  "ICO-01": {
-   "home": "workshop"
-  },
-  "ICO-02": {
-   "home": "workshop"
   },
   "ICO-03": {
    "home": "core",
@@ -706,9 +661,6 @@
   "STR-01": {
    "home": "core",
    "ref": 29
-  },
-  "STR-02": {
-   "home": "workshop"
   },
   "STR-03": {
    "home": "view",
@@ -874,9 +826,6 @@
   "TEC-10": {
    "home": "core",
    "ref": 26
-  },
-  "TEC-11": {
-   "home": "workshop"
   }
  }
 }

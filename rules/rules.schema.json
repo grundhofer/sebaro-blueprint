@@ -2,13 +2,12 @@
  "$schema": "https://json-schema.org/draft/2020-12/schema",
  "$id": "https://github.com/grundhofer/sebaro-blueprint/rules/rules.schema.json",
  "title": "sebaro rule catalogue",
- "description": "Canonical design rules of the sebaro system. Status: entschieden = owner decision (I-row in sebaroDesign/DECISIONS.md, binding); vorläufig = agent decision or spec without an owner row; offen = proposal awaiting an owner answer.",
+ "description": "Canonical design rules of the sebaro system. Status: entschieden = owner decision (binding); vorläufig = agent decision or spec without an owner decision; offen = proposal awaiting an owner answer.",
  "type": "object",
  "required": [
   "$schema",
   "version",
   "date",
-  "source",
   "areas",
   "rules"
  ],
@@ -24,27 +23,6 @@
   "date": {
    "type": "string",
    "format": "date"
-  },
-  "source": {
-   "type": "object",
-   "required": [
-    "repo",
-    "system",
-    "decisions"
-   ],
-   "additionalProperties": false,
-   "properties": {
-    "repo": {
-     "type": "string"
-    },
-    "system": {
-     "type": "string"
-    },
-    "decisions": {
-     "type": "string",
-     "pattern": "^D\\d+-D\\d+$"
-    }
-   }
   },
   "areas": {
    "type": "array",
@@ -126,8 +104,6 @@
     "do",
     "dont",
     "numbers",
-    "decisions",
-    "source",
     "platforms",
     "status",
     "check",
@@ -162,7 +138,7 @@
     "why": {
      "type": "string",
      "minLength": 1,
-     "description": "Reason, with the owner's words where an I-row exists."
+     "description": "Reason, with the owner's words where there are any."
     },
     "do": {
      "type": "string",
@@ -175,19 +151,6 @@
     "numbers": {
      "type": "string",
      "description": "Exact values and token names; may be empty."
-    },
-    "decisions": {
-     "type": "array",
-     "uniqueItems": true,
-     "items": {
-      "type": "string",
-      "pattern": "^D\\d+$"
-     }
-    },
-    "source": {
-     "type": "string",
-     "minLength": 1,
-     "description": "Paths relative to the sebaroDesign root, with section."
     },
     "platforms": {
      "type": "array",
