@@ -138,7 +138,7 @@
     "why": {
      "type": "string",
      "minLength": 1,
-     "description": "Reason, with the owner's words where there are any."
+     "description": "The reason, in one to three plain sentences."
     },
     "do": {
      "type": "string",
@@ -183,7 +183,7 @@
     },
     "note": {
      "type": "string",
-     "description": "Optional: resolved source conflict or known gap behind this rule."
+     "description": "Optional: scope, what is provisional and what is not verified."
     },
     "changed": {
      "type": "string",
