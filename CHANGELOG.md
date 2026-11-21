@@ -32,6 +32,8 @@ Der Blueprint sagt, was gilt und warum. Technik, Startvorlagen und das Entscheid
 - DAT-13: Die Hauptaktion nennt die Spalte nur, solange die Tafel gewischt wird; breit heißt sie „Neue Karte“.
 - ZEI-13: In „Über“ folgt auf den Kopf die Absenderzeile „Ein Werkzeug von“ mit dem Markenschild, dann die Fakten.
 - STR-03, ZEI-01: Jeder Schritt der Einführung hat sein eigenes Bild; der Einstieg hat keine Produktfläche.
+- ICO-07: Ein Produkt zeichnet die Bilder seiner Einführung selbst, im Stil der Spots; sonst bleibt es bei den vier
+  Spots des Sets.
 - EBE-07, DSK-08: Ein Menü schließt sich, wenn die Seite scrollt.
 - EBE-05: Eine Taste „Kopieren“ zeigt 2 s „Kopiert“ in sich selbst; die Kurzmeldung gibt es nur, wo keine Taste
   sichtbar bleibt.

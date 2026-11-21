@@ -16,6 +16,8 @@ One step of the introduction on the first start. It has the form of the empty st
 ## Rules
 
 - Every step has its own picture, a spot. No product area heads the entry view. [STR-03, K5]
+- The product draws the pictures of its steps itself, in the style and the two colours of the set's spots. Until it
+  has them, the first step shows the set's onboarding spot. [ICO-07]
 - At most three steps, and no account. [STR-03]
 - „Weiter“ alone is not a label; name the goal of the next step. [STR-03, K12]
 - The way out stays a text action on every step. [STR-03]
