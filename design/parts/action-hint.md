@@ -21,6 +21,7 @@ Evidence.
 ## Rules
 
 - Every action with a data path carries the hint, also in a product that shows no other evidence. [K16]
+- While the facts are stale, the hint generated from them is withheld with the claims. [K27]
 - Without generated facts, write it by hand in the same form, and say only what can be shown. A reassuring word
   („verschlüsselt“, „anonym“) never stands in a hand-written hint. [K16]
 - Never in a tooltip, never as the second line of a menu row. [K16]

@@ -26,4 +26,4 @@ Shows one thing of an app on the phone's home screen. There is nothing to edit i
 - Two fixed sizes, not resizable, and no 1 × 1. [MOB-11]
 - Never the system's widget surface. [MOB-11]
 - No countdown ring and no state by colour alone. [MOB-11]
-- No text smaller than caption. [MOB-11]
+- No text smaller than 14, the caption size. [MOB-11]

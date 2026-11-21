@@ -18,5 +18,6 @@ of every claim. Shared rules: Evidence.
 
 ## Rules
 
-- When the facts are stale, no claim shows beside the notice. [K27]
+- When the facts are stale, no claim shows beside the notice, and the action hints are withheld with the claims.
+  [K27]
 - The words come from the generated notes, never typed. [BEL-06]

@@ -19,11 +19,13 @@ The rare actions of an area behind one button („Mehr“), and the choices of a
   outside closes. A chosen item closes the menu first, then acts.
 - A submenu opens on a press, → or Enter, never on hover; ← and Escape close it. It stands beside its parent; where
   no side has room it takes the parent's place with a back row „‹ <name>“ first.
-- A change of the window's width, or a scroll that takes the button out of view, closes every level.
+- A change of the window's width or a scroll of the page closes every level.
 - A shortcut stands at the end of its row and goes under the words at large text.
 
 ## Rules
 
+- A „Mehr“ menu needs several rare actions. Deleting alone is no menu: a detail view shows the danger action at the
+  end of its content. [AKT-10]
 - Name every menu and submenu. [EBE-07]
 - A delete row ends in „…“, opens the confirm dialog and never deletes directly. [EBE-07, AKT-10]
 - An item without a target is disabled, never hidden. [AKT-10]

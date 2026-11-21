@@ -13,7 +13,7 @@ Code and machine values: a block with a copy key, inline code, and keys. A diff 
 - The block stands on `surface-sunken`, with a bar that names the language and holds „Kopieren“. The code can take
   the focus, so it scrolls by keyboard.
 - A bare block without a bar keeps ground, padding and scroll, but has no language and no copy key.
-- „Kopiert“ is also announced politely, without a toast and without moving the focus.
+- „Kopiert“ is also announced politely, without a toast and without moving the focus. [K14]
 - On Android a copy key outside a code block has the form of a secondary action.
 - A key is an outlined word with a thicker bottom edge and no fill: „Strg + K“.
 

@@ -7,7 +7,7 @@ site must carry.
 
 ## Behaviour
 
-- A line on top sets it apart from the page; the copyright line stands in `text-muted`.
+- The ink line on top sets it apart from the page; the copyright line stands in caption and `text-muted`.
 - Links: „Impressum“ and „Datenschutz“ always, „Barrierefreiheit“ when the product has that page.
 - „GitHub“ stands there, with the external-link icon, only when the product has a public repository. A product under
   the AGPL always shows it, with the title „Quelltext“.
@@ -18,6 +18,7 @@ site must carry.
 
 ## Rules
 
-- „Impressum“ and „Datenschutz“ are never left out; only „GitHub“ depends on the product. [WEB-03]
+- „Impressum“ and „Datenschutz“ are never left out; „Barrierefreiheit“ and „GitHub“ depend on the product.
+  [WEB-03]
 - A link that leaves the site ends in the external-link icon. [K19]
 - The sender is no action and no link.

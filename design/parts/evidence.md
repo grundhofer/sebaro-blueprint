@@ -15,8 +15,8 @@ Each fact has one of four states.
 - Unverified outflow: data leaves, the proof is missing. The claim is still written, with „nicht belegt“.
 - Hidden: a reassuring claim without proof. The claim is not written. The full form shows only the fact's label
   with „nicht belegt“; the compact line counts it („1 nicht belegt“).
-- Stale: checked for another version, or the check is too old. The stale notice replaces every claim; the check
-  list stays.
+- Stale: checked for another version, or the check is too old. The stale notice replaces every claim and action
+  hint; the check list stays.
 
 Sample data carries the marker „Beispieldaten“ in every form.
 

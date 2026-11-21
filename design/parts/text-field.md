@@ -1,6 +1,6 @@
 # Text field
 
-`sb-field` · `SbTextField`
+`sb-field` · `SbTextField`, `SbPasswordField`
 
 Typed text, on one line or several, with a visible label above.
 
@@ -19,6 +19,7 @@ Typed text, on one line or several, with a visible label above.
 - A value too long for a one-line field runs on sideways inside it; no field, row or form grows for it. A read-only
   value that must be read whole is a sentence, not a field.
 - A placeholder that does not fit at large text may end in „…“.
+- A password field masks its value, stays on one line, takes no suggestions and has no key that shows the value.
 - The error leaves with the field's first change. The submit keeps its verb.
 - A live preview of what the fields make stands under them, before the actions, as a quiet card or a plain row,
   never a control. Without a valid value it says so in one `text-muted` sentence.

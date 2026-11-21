@@ -24,8 +24,8 @@ large text on it. It holds the one figure or the one message of the view.
 
 ## Rules
 
-- At most one product area per view, and only on entry, overview (one value), detail with one value, result and
-  the empty state. [K5]
+- At most one product area per view, and only on overview (one value), detail with one value, result and the
+  empty state. The entry view has none: each intro step shows its own picture. [K5]
 - No control, primary action or link on or inside it. A value tile with its controls never stands inside. [K5]
 - Never set its colours by hand.
 - A view never says the same thing twice: where the area carries the day's figure, leave out the summary sentence

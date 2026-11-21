@@ -21,8 +21,9 @@ to what failed; a deletion asks in a dialog.
 ## Rules
 
 - Only for the reversible result of an action outside the primary action, with „Rückgängig“. The one toast without
-  it says „In die Zwischenablage kopiert“ after a copy from the palette or a menu. On Android 13 and later the
-  system confirms a copy itself: no toast there. [K14]
+  it says „In die Zwischenablage kopiert“ after a copy from the palette or a menu, where no copy key stays visible.
+  A copy key shows „Kopiert“ in itself and gets no toast. On Android 13 and later the system confirms a copy
+  itself: no toast there. [K14]
 - Never for an error, for the result or progress of the primary action, instead of the delete dialog, or for what
   the screen already shows. [K14]
 - Never more than one action, and never as a notification for something the person did not do. [K14]

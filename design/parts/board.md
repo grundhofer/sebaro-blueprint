@@ -26,8 +26,8 @@ columns; things that only stand under a group head are a list.
 
 ## Rules
 
-- Name the column in „Neue Karte in „<Spalte>““ while the board swipes. In a wide board the new card lands in the
-  column of the current card, else in the first. [DAT-13]
+- The primary action names the column („Neue Karte in „<Spalte>““) only while the board swipes. In a wide board
+  it reads „Neue Karte“, and the new card lands in the column of the current card, else in the first. [DAT-13]
 - Always offer moving a card without dragging: „Mehr“ › „Verschieben nach …“. [DAT-13]
 - An app whose primary action is fixed to something else keeps it; each column then ends with the secondary
   action „Neue Karte in „<Spalte>““. [DAT-13]

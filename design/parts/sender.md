@@ -2,8 +2,8 @@
 
 `sb-sender`, `sb-site-footer__sender`, `sb-keymark` · `SbSenderRow`
 
-The line that says who makes a product: a few words and the sebaro key mark. It ends the „Über“ view after the about
-head, and it stands in the footer of a product website.
+The line that says who makes a product: a few words and the sebaro key mark. In „Über“ it follows the about head,
+before the facts line, and it stands in the footer of a product website.
 
 ## Behaviour
 

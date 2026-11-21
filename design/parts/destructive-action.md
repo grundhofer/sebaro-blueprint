@@ -19,9 +19,10 @@ The action that deletes something saved, or ends something for good.
 
 ## Rules
 
-- Never filled and never beside the primary action bar; it stands at the end of the form's content. [K15]
+- Never filled and never beside the primary action bar. A detail view and a form show it as „<Ding> löschen“ at
+  the end of their content. [K15]
 - It is the only control with the 45° cut. The cut means „final“. [K11]
 - A final step that deletes nothing is the same action without the trash icon. [K11]
 - It is not counted among the outlined actions and is never demoted to hide it. [K13]
-- In a „Mehr“ menu the delete row comes last, after a separator and without the cut, and opens the same dialog.
-  [AKT-10]
+- Only a view with several rare actions has a „Mehr“ menu. There the delete row comes last, after a separator and
+  without the cut, and opens the same dialog; the view shows no danger action besides. [AKT-10]
