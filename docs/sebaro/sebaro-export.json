@@ -12,7 +12,7 @@
   "target": "web",
   "excludedProducts": 8,
   "sebaroDesign": {
-    "commit": "3477d65528757fb9f7ff0384f5341a15712f63d5",
+    "commit": "8f7f322c91e7c0181225f221d0b8188cf90e72ba",
     "uncommittedChanges": false
   },
   "contracts": {
@@ -623,9 +623,9 @@
     {
       "path": "product/sign_geometry.py",
       "source": "tools/sign_geometry.py",
-      "sourceSha256": "de3d5e02db6ca4ac78b5a43ceb09cba4a5839e76c2f7fdeee8b0daf716a8971f",
-      "sha256": "de3d5e02db6ca4ac78b5a43ceb09cba4a5839e76c2f7fdeee8b0daf716a8971f",
-      "bytes": 33741
+      "sourceSha256": "2f1922933eb7bd253f404b32ba11ad07b986656f9c9a9bc6637ac1f8539486fd",
+      "sha256": "2f1922933eb7bd253f404b32ba11ad07b986656f9c9a9bc6637ac1f8539486fd",
+      "bytes": 32026
     },
     {
       "path": "product/render.mjs",
@@ -975,7 +975,7 @@
     {
       "path": "checks/lint-web.sh",
       "source": "systems/sebaro/spec/03-signature.md",
-      "sourceSha256": "6ad88373908589c1aac191be07727660db0e2ad97e4b36e9e2e5a7b9af449da0",
+      "sourceSha256": "65306b0074f53e8a42503deb2fe9c956e737900767c9dad1c2852880bb17c70e",
       "sha256": "0e5a5e7a18451ebeba63bd695751698d8cbcf8059dce63a7cb87252729388c01",
       "bytes": 3025,
       "transform": "the sh block under „### 1.4 Checks“ of spec/03-signature.md, as tools/lint_rules.py sebaro --print colour prints it"
@@ -983,9 +983,9 @@
     {
       "path": "LICENSE.md",
       "source": "LICENSE.md",
-      "sourceSha256": "8fd5cd75defc4bbe7ae38e944b9e5025cd92e6dc93978af1a97e138d40b0f988",
-      "sha256": "8fd5cd75defc4bbe7ae38e944b9e5025cd92e6dc93978af1a97e138d40b0f988",
-      "bytes": 3641
+      "sourceSha256": "92e245b6971c8fbb8029c8ff957f6f9cccf036eb983f2366d406120998547d01",
+      "sha256": "92e245b6971c8fbb8029c8ff957f6f9cccf036eb983f2366d406120998547d01",
+      "bytes": 3639
     },
     {
       "path": "README.md",
