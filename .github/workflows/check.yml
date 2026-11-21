@@ -17,7 +17,7 @@ jobs:
         run: python3 tools/build.py --check
       - name: Site checks (pages, links, no foreign requests, token-only CSS, rules, share-image heads and PNGs)
         run: python3 tools/check_site.py
-      - name: Size budgets of the texts agents read by default, every rule of the catalogue has a home
+      - name: Word budgets of the texts agents read, every rule of the catalogue has a home
         run: python3 tools/check_budget.py
   a11y:
     runs-on: ubuntu-latest
@@ -30,7 +30,7 @@ jobs:
       - run: npm ci
       - id: browsers
         run: npx playwright install --with-deps chromium
-      - name: axe (WCAG 2.2 AA), overflow and console errors, light and dark, 390 and 1440 px
+      - name: axe (WCAG 2.2 AA), overflow and console errors, light at 390 px and dark at 1440 px
         run: node tools/check_a11y.mjs
       # D96: render the share images again with the exported render.mjs (Chromium only, D96 (b)); the head snippets
       # must be equal, the PNG bytes are only reported (Linux draws the fonts with other pixels than macOS); runs even

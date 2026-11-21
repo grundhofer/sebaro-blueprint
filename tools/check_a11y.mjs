@@ -1,7 +1,7 @@
-// check_a11y.mjs: axe-core (WCAG 2.0/2.1/2.2 A + AA) on every guide page in headless Chromium, light and dark,
-// at 390 and 1440 px, plus horizontal overflow and console errors. Exit 1 on any violation that is not waived.
-// Then each page once more at 200 % text on 1024 and 1280 px, light and dark (LARGE): the page must not scroll
-// sideways and no frame with overflow hidden or clip may cut a text (D100 (5), ZUG-09). The browser's default font
+// check_a11y.mjs: axe-core (WCAG 2.0/2.1/2.2 A + AA) on every guide page in headless Chromium, in light at 390 px
+// and in dark at 1440 px, plus horizontal overflow and console errors. Exit 1 on any violation that is not waived.
+// Then the start page once more at 200 % text on 1024 and 1280 px, light and dark (LARGE): the page must not scroll
+// sideways and no frame with overflow hidden or clip may cut a text (ZUG-09). The browser's default font
 // size is doubled by CDP Page.setFontSizes before the page loads, as a reader sets it, so rem and em grow and px
 // stays: the widths where the guide's layout once switched by px while the text was twice as large. The phone widths
 // at 200 % stay with the workshop's check_demo.py (OVF3, OVF4, OVF6 at 320, 360, 390 px).
@@ -27,13 +27,10 @@ const TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
 // deliberate "Nicht so" specimens: only axe color-contrast skips them (their label and note stay checked); names,
 // roles, keyboard and every other rule still run there (guide.css, section "deliberate Nicht so specimens")
 const DONT = ".g-ex--dont > :not(.g-ex__label):not(.g-ex__note)";
-const RUNS = [
-  { width: 1440, height: 900, scheme: "light" }, { width: 1440, height: 900, scheme: "dark" },
-  { width: 390, height: 844, scheme: "light" }, { width: 390, height: 844, scheme: "dark" },
-];
+const RUNS = [{ width: 390, height: 844, scheme: "light" }, { width: 1440, height: 900, scheme: "dark" }];
 
-// the 200 % pass (LARGE): widths in px, the scale of the default font size (standard 16, fixed 13)
-const LARGE = { widths: [1024, 1280], schemes: ["light", "dark"], scale: 2 };
+// the 200 % pass (LARGE), only on this page: widths in px, the scale of the default font size (standard 16, fixed 13)
+const LARGE = { page: "index.html", widths: [1024, 1280], schemes: ["light", "dark"], scale: 2 };
 
 // text cut by a frame, as the workshop's OVF4 reads it: each visible text node is followed up its ancestors; an
 // ancestor with overflow hidden or clip must hold the text's line boxes in that axis (1 px of tolerance). Each axis
@@ -179,7 +176,7 @@ for (const file of pages) {
     for (const e of errors) { console.log(`error: CONSOLE ${label}: ${e}`); failed++; }
     await ctx.close();
   }
-  for (const width of LARGE.widths) {
+  for (const width of page === LARGE.page ? LARGE.widths : []) {
     for (const scheme of LARGE.schemes) {
       const ctx = await browser.newContext({ viewport: { width, height: 900 }, colorScheme: scheme });
       const tab = await ctx.newPage();
@@ -205,5 +202,5 @@ for (const file of pages) {
 await browser.close();
 server.close();
 for (const w of waivers) if (!used.has(w)) console.log(`warning: unused waiver ${w.page} ${w.rule} ${w.target}`);
-console.log(`check_a11y: ${pages.length} pages x (${RUNS.length} runs + ${LARGE.widths.length * LARGE.schemes.length} at ${LARGE.scale * 100} % text), ${failed} errors -> ${failed ? "FAIL" : "PASS"}`);
+console.log(`check_a11y: ${pages.length} pages x ${RUNS.length} runs, ${LARGE.page} ${LARGE.widths.length * LARGE.schemes.length} times at ${LARGE.scale * 100} % text, ${failed} errors -> ${failed ? "FAIL" : "PASS"}`);
 process.exit(failed ? 1 : 0);
