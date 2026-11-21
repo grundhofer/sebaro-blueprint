@@ -21,8 +21,8 @@ file wins.
    brand key. Status colours: only as glyph plus word. Everything else is grey with hairlines.
    [FAR-01, FAR-03, EIN-03]
 5. The product colour stands in the app's sign tile, on the start screen and in at most one product area per view,
-   and only on entry, overview (one value), detail with one value, result and the empty state. Never behind
-   controls or links. [ZEI-01]
+   and only on overview (one value), detail with one value, result and the empty state. Never behind controls or
+   links. [ZEI-01]
 6. No coloured fill behind text except the primary action. Grounds are the four greys of the tokens.
    [FAR-02, FAR-05]
 7. Light and dark are equal. Every view works in both and in the tones „Kühl“ and „Warm“. One exception: an image a
@@ -49,8 +49,9 @@ file wins.
 13. Three levels: lime for the next step, at most one outlined action per area, everything else a text action.
     [AKT-06]
 14. The primary action shows its own progress and result. No spinner over the view. A toast only for a reversible
-    result, with „Rückgängig“; the one toast without it says that something was copied to the clipboard. On
-    Android 13 and later the system confirms a copy itself: there the app shows no toast for it. [AKT-05, EBE-05]
+    result, with „Rückgängig“; the one toast without it confirms a copy where no copy key stays visible. A copy key
+    shows „Kopiert“ in itself for 2 s. On Android 13 and later the system confirms a copy itself: no toast there.
+    [AKT-05, EBE-05]
 15. Deleting something saved always asks in a dialog that says what is lost. [AKT-07, AKT-08]
 16. Under an action that sends data somewhere, one line says where it goes. Local only: „Bleibt auf diesem Gerät.“
     [BEL-10]
@@ -72,7 +73,8 @@ file wins.
 21. Fields have a visible label above. An error is a red line, a glyph and a sentence that says what is wrong and
     what to do. [EIN-01, EIN-02, TXT-07]
 22. Empty: „Noch keine <Ding>“ plus one sentence on how it fills; the action stays at the bottom. Loading: local
-    work shows nothing; remote work over 1 s says „Wird geladen …“. [DAT-07, STA-06]
+    work shows no spinner; past about 1 s, a short sentence where the result will stand („Wird gesichert …“).
+    Remote work over 1 s says „Wird geladen …“. [DAT-07, STA-06]
 23. Calm: no count badges, red dots or banners. Motion only answers an action (8 px from below, at most 200 ms)
     and follows the system's reduce-motion setting. [HAL-05, BEW-01, BEW-02, BEW-04]
 24. Charts and figures are grey; only the current period is cobalt. [DAT-04]
@@ -97,7 +99,7 @@ file wins.
     Website: a button in the header. Web app: in the „Mehr“ menu. Desktop: in the menu „Darstellung“.
     [AKT-09]
 29. Start: the whole screen in the product colour with the white symbol, then the app. „Über“ shows tile, name,
-    version and the sender „von sebaro“. [STR-01]
+    version and the sender: „Ein Werkzeug von“ (English „A tool by“), then the sebaro key mark. [STR-01]
 
 ## Accessibility floor
 

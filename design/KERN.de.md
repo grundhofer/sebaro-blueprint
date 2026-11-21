@@ -21,8 +21,8 @@ sagt, gelten diese Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md
    und das Markenschild von sebaro. Statusfarben: nur als Glyphe mit Wort. Alles andere ist grau mit Haarlinien.
    [FAR-01, FAR-03, EIN-03]
 5. Die Produktfarbe steht in der Zeichenkachel der App, auf dem Startbildschirm und in höchstens einer Produktfläche
-   je Ansicht, und nur auf Einstieg, Übersicht (ein Wert), Detail mit einem Wert, Ergebnis und leerem Zustand. Nie
-   hinter Bedienelementen oder Links. [ZEI-01]
+   je Ansicht, und nur auf Übersicht (ein Wert), Detail mit einem Wert, Ergebnis und leerem Zustand. Nie hinter
+   Bedienelementen oder Links. [ZEI-01]
 6. Keine farbige Fläche hinter Text außer der Hauptaktion. Die Gründe sind die vier Grautöne der Tokens.
    [FAR-02, FAR-05]
 7. Hell und Dunkel sind gleichwertig. Jede Ansicht funktioniert in beiden und in den Farbtönen „Kühl“ und „Warm“.
@@ -50,9 +50,9 @@ sagt, gelten diese Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md
 13. Drei Stufen: Lindgrün für den nächsten Schritt, höchstens eine umrandete Aktion je Bereich, alles andere ist eine
     Textaktion. [AKT-06]
 14. Die Hauptaktion zeigt ihren eigenen Fortschritt und ihr Ergebnis. Kein Ladekreis über der Ansicht. Eine
-    Kurzmeldung nur für ein umkehrbares Ergebnis, mit „Rückgängig“; die einzige ohne sagt, dass etwas in die
-    Zwischenablage kopiert wurde. Ab Android 13 bestätigt das System das Kopieren selbst: Dort zeigt die App dafür
-    keine Kurzmeldung. [AKT-05, EBE-05]
+    Kurzmeldung nur für ein umkehrbares Ergebnis, mit „Rückgängig“; die einzige ohne bestätigt eine Kopie, wo keine
+    Taste „Kopieren“ sichtbar bleibt. Eine Taste „Kopieren“ zeigt 2 s lang „Kopiert“ in sich selbst. Ab Android 13
+    bestätigt das System das Kopieren selbst: Dort zeigt die App dafür keine Kurzmeldung. [AKT-05, EBE-05]
 15. Wer etwas Gespeichertes löscht, wird immer in einem Dialog gefragt, der sagt, was verloren geht.
     [AKT-07, AKT-08]
 16. Unter einer Aktion, die Daten irgendwohin schickt, sagt eine Zeile, wohin. Nur lokal: „Bleibt auf diesem
@@ -76,7 +76,8 @@ sagt, gelten diese Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md
 21. Felder haben eine sichtbare Beschriftung darüber. Ein Fehler ist eine rote Linie, eine Glyphe und ein Satz, der
     sagt, was falsch ist und was zu tun ist. [EIN-01, EIN-02, TXT-07]
 22. Leer: „Noch keine <Dinge>“ und ein Satz, wie es sich füllt; die Aktion bleibt unten. Laden: Arbeit auf dem Gerät
-    zeigt nichts; Arbeit über das Netz sagt nach 1 s „Wird geladen …“. [DAT-07, STA-06]
+    zeigt keinen Ladekreis; dauert sie länger als etwa 1 s, steht ein kurzer Satz dort, wo das Ergebnis stehen wird
+    („Wird gesichert …“). Arbeit über das Netz sagt nach 1 s „Wird geladen …“. [DAT-07, STA-06]
 23. Ruhig: keine Zähler auf Icons, keine roten Punkte, keine Banner. Bewegung antwortet nur auf eine Aktion (8 px von
     unten, höchstens 200 ms) und folgt der Einstellung „Bewegung reduzieren“ des Systems.
     [HAL-05, BEW-01, BEW-02, BEW-04]
@@ -104,7 +105,7 @@ sagt, gelten diese Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md
     Einstellungen. Website: ein Knopf im Kopf. Web-App: im Menü „Mehr“. Desktop: im Menü „Darstellung“.
     [AKT-09]
 29. Start: die ganze Fläche in der Produktfarbe mit dem weißen Symbol, dann die App. „Über“ zeigt Kachel, Name,
-    Version und den Absender „von sebaro“. [STR-01]
+    Version und den Absender: „Ein Werkzeug von“ (englisch „A tool by“), dann das Markenschild von sebaro. [STR-01]
 
 ## Boden der Barrierefreiheit
 

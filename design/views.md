@@ -8,7 +8,7 @@ in and never add a second primary action.
 
 | Key | Name | For | Primary action | Product area | Way out |
 |---|---|---|---|---|---|
-| `entry` | Einstieg | introduce the app and the next setup step | „Weiter: <Ziel>“ | yes, as head | steps only, no main navigation |
+| `entry` | Einstieg | introduce the app and the next setup step | „Weiter: <Ziel>“ | no; a picture per step | steps only, no main navigation |
 | `overview` | Übersicht | the current situation and the usual next act | the app's most frequent act | yes, the one value | bottom navigation |
 | `list` | Liste | scan and open a collection | create something new | no | bottom navigation; a row opens the detail |
 | `detail` | Detail | look at one item | none; „Bearbeiten“ is outlined | only with one value | back to the collection |

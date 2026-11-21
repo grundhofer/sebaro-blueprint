@@ -13,7 +13,7 @@ https://github.com/grundhofer/sebaro-blueprint/blob/main/rules/rules.json.
 ## Colour and hierarchy
 - [ ] Cobalt only for current place, links, focus and the selected mark; lime only for the one primary action and the
       sebaro key (K4, FAR, AKT)
-- [ ] Product colour only in the sign tile, the start and at most one product area per view (entry, overview with one
+- [ ] Product colour only in the sign tile, the start and at most one product area per view (overview with one
       value, detail with one value, result, empty state), never behind controls or links; the tile shows the symbol
       alone, no code, unaltered, always beside the app's name (K5, K25)
 - [ ] User categories: a dot in one of the six tones next to the word, never a fill or the only cue; search hits
@@ -51,7 +51,7 @@ https://github.com/grundhofer/sebaro-blueprint/blob/main/rules/rules.json.
 - [ ] Motion only in answer to an action: new content enters from below; only a fade with reduced motion /
       „Bewegung immer reduzieren“ (BEW)
 - [ ] Start: the whole screen in the product colour with the white symbol, then the app; on the web only on the first
-      visit per tab. „Über“ shows tile, name, version and the sender „von sebaro“ (K29)
+      visit per tab. „Über“ shows tile, name, version and the sender „Ein Werkzeug von“ with the key mark (K29)
 - [ ] Android home-screen widget: bg with the ink line, small 2 × 1 or medium 4 × 2, the whole widget one key, text
       up to 125 %, nothing cut in its cell (MOB-11)
 - [ ] Camera: „Seite aufnehmen“ as the primary action, camera and full-screen page view always dark, corners also
