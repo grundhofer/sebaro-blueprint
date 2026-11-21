@@ -24,7 +24,8 @@ Wait for the OK.
    then `node update-copy.mjs --profile <android|website|webapp|desktop> --out <folder>`) and wire fonts, tokens and
    the theme with light, dark and the two tones. Remove the old theme. Rename the project's own tokens to sebaro's
    names; do not keep an alias layer. The app may look half old after this stage.
-2. **Frame.** Navigation, top bar, the action zone at the bottom, the start, the place of „Hell oder Dunkel“.
+2. **Frame.** Navigation, top bar, the action zone at the bottom, the start (none on a website), the place of
+   „Hell oder Dunkel“.
 3. **Standard views**, the most used first, one type at a time: list, detail, form, the four states, settings,
    about. Start from the type's template and fill its slots.
 4. **The core view.** Build it from sebaro's parts. Its form is decided with the owner, not derived from a type.

@@ -5,10 +5,10 @@ description: Build a new app, website, web app or desktop app in the sebaro styl
 
 # sebaro: build or convert a product
 
-One family of products: the same rules for all, one preferred technology per product kind.
+One family of products: the same rules for all, one preferred technology per kind.
 
-- **What and why** is the public Blueprint, the repository of this skill (its root is two folders above this file;
-  resolve a symlink first, or clone `https://github.com/grundhofer/sebaro-blueprint`). Paths below start there.
+- **What and why** is the public Blueprint, this skill's repository (root: two folders above this file, symlinks
+  resolved; or clone `https://github.com/grundhofer/sebaro-blueprint`). Paths below start there.
 - **With what and how** is the private Foundry `grundhofer/sebaro-foundry`: plan, starter and parts. Read it with `gh`.
 
 ## 1 Name the kind
@@ -20,7 +20,7 @@ One family of products: the same rules for all, one preferred technology per pro
 | application in the browser | `webapp-vite` | React, TypeScript, Vite | `design/platforms/webapp.md` |
 | desktop program | `desktop-tauri` | Tauri 2, React, Rust core | `design/platforms/desktop.md` |
 
-Take the base without asking. When the wish does not fit it (iOS, another framework, a server of its own), ask the
+Take the base without asking. When the wish does not fit it (iOS, another framework, its own server), ask the
 owner before you build; never bend the base.
 
 ## 2 Read, in this order
@@ -34,13 +34,15 @@ Look up only when needed: a part in `design/parts/<part>.md`, a rule cited as `[
 
 ## 3 A new product
 
-1. Fetch the starter and follow its README (rename, then its checks once: green before any change):
-   `gh release download -R grundhofer/sebaro-foundry -p 'sebaro-template-<kind>.tar.gz'`
+1. Unpack the starter into an empty folder and follow its README (rename, the kit builds the product files, its
+   checks once: green before any change):
+   `gh release download -R grundhofer/sebaro-foundry -p 'sebaro-template-<kind>.tar.gz' && tar xzf sebaro-template-<kind>.tar.gz -C <folder>`
 2. Paste [`AGENTS-snippet.md`](AGENTS-snippet.md) into the product's `AGENTS.md`.
-3. Write the list of views into the product: each with its view type and primary action; mark the one view that is
-   the product's reason to exist. Ask the owner only what changes what you build, at most five questions, at once.
-4. Build: frame and navigation, then list, detail and form with sample data, their four states, the core view,
-   then data and logic as the plan structures them.
+3. Write the list of views into the product: each with its view type and primary action; mark the one that is the
+   product's reason to exist. Ask the owner only what changes what you build, at most five questions, at once.
+4. Build: the starter starts empty. Keep its frame, settings, „Über“ and licences; replace its sample area (list,
+   detail, form) with the product's views, their four states and the core view, then data and logic as the plan
+   structures them.
 
 An existing project: [`convert.md`](convert.md).
 
@@ -49,5 +51,5 @@ An existing project: [`convert.md`](convert.md).
 - Parts and tokens come from the sebaro copy in the product (the folder with `sebaro-export.json`). Never edit it.
 - A missing part is built beside the copy, with one line in `docs/sebaro-luecken.md`. A deviation from a rule is
   decided with the owner ([`design-exception.md`](design-exception.md)). Nothing enters sebaro for one product.
-- Done means: the product's CI is green, every view was looked at in light and dark, narrow and wide, and you say
-  what you did not check.
+- Done: the product's CI is green, you looked at every view in light and dark, narrow and wide, and say what you
+  did not check.
