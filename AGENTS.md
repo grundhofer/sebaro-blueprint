@@ -4,6 +4,9 @@ sebaro is the design system and the technology blueprints of one family of produ
 apps and desktop apps. A product reads and copies from this repository. German overview for the owner:
 [README.md](README.md). Site: <https://grundhofer.github.io/sebaro-blueprint/>.
 
+> **Restructuring in progress (since 2026-11-21): fixes only.** This repository and the workshop swap roles and
+> are then re-created. Until that is done, only the restructuring's own pull requests and bug fixes enter here.
+
 ## Building or converting a product
 
 Read in this order and stop when you have what the task needs.
