@@ -10,7 +10,7 @@ from the settings view type.
 - Full: the sidebar shows the settings' areas („Allgemein“, „Editor“, „Tastatur“, „Über“) with icon and word and the
   place line; the path reads „Einstellungen › Allgemein“.
 - Slim: an app with up to about eight settings shows them as one group, without the area sidebar. „Über“ is then a
-  place of its own, reached from the menu „Hilfe“.
+  place of its own, reached from the menu „Hilfe“, on macOS from the app menu.
 
 ## Behaviour
 
@@ -21,6 +21,7 @@ from the settings view type.
   leads back to the place before.
 - „Hell oder Dunkel“ („Wie das System“ · „Hell“ · „Dunkel“) and „Farbton“ („Kühl“ · „Warm“) are choice rows and stay
   in step with the menu and the palette.
+- The language is a group of choice rows named „Sprache“, with „Wie das System“ first.
 - „Über“ with the claim rows is an area of the settings.
 
 ## Rules

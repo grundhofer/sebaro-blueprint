@@ -1,9 +1,9 @@
 # sebaro: die Kernregeln
 
-Lies das, bevor du einen Bildschirm in sebaro baust oder änderst. Diese 31 Regeln musst du im Kopf haben; der Rest
-steckt in den Bauteilen ([parts/](parts/)), den Ansichtstypen ([views.md](views.md)) und den Prüfungen. `[AKT-01]`
-verweist auf den Katalog `rules/rules.json`: Schlag dort nur nach, wenn du den Grund brauchst. Wo er etwas anderes
-sagt, gelten diese Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md](KERN.md).
+Die 31 Regeln, die du im Kopf haben musst, wenn du einen Bildschirm in sebaro baust oder änderst; der Rest steckt
+in den Bauteilen ([parts/](parts/)), den Ansichtstypen ([views.md](views.md)) und den Prüfungen. `[AKT-01]` verweist
+auf den Katalog `rules/rules.json`: Schlag dort nur für den Grund nach. Wo er etwas anderes sagt, gelten diese
+Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md](KERN.md).
 
 ## Das System
 
@@ -27,7 +27,7 @@ sagt, gelten diese Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md
    [FAR-02, FAR-05]
 7. Hell und Dunkel sind gleichwertig. Jede Ansicht funktioniert in beiden und in den Farbtönen „Kühl“ und „Warm“.
    Eine Ausnahme: Ein Bild, das eine Maschine liest (ein QR-Code, ein Strichcode für die Kasse), bleibt auch im
-   Dunkelmodus dunkel auf hell, in den Farben des hellen Modus und mit einem hellen Rand. [FAR-09, FAR-15]
+   Dunkelmodus dunkel auf hell, in den Farben des hellen Modus und mit hellem Rand. [FAR-09, FAR-15]
 
 ## Schrift, Raum, Form
 
@@ -36,7 +36,7 @@ sagt, gelten diese Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md
 9. Abstände nur aus der Skala. Das Layout richtet sich am Anfang aus, nie mittig. Feste Zeilenhöhen, eine Dichte.
    [RAU-01, RAU-04, RAU-05]
 10. Ebenen trennt eine 2 px breite Tintenlinie, nie Schatten, Tönung oder Höhe. Karten fassen nur Einstellungen oder
-    Kennzahlen zusammen. Eine Liste bleibt eine Liste flacher Zeilen mit Haarlinien, in jeder App und bei jeder
+    Kennzahlen zusammen. Eine Liste besteht immer aus flachen Zeilen mit Haarlinien, in jeder App und bei jeder
     Breite. [EBE-01, EBE-02, DAT-01, FOR-02]
 11. Keine Verläufe, kein Leuchten, keine Texturen, kein Schmuck. Ein Radius je Klasse (4, 8, 12, 16). Die 45°-Kante
     heißt „endgültig“ und steht nur auf Aktionen, die sich nicht rückgängig machen lassen.
@@ -51,11 +51,11 @@ sagt, gelten diese Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md
     Textaktion. [AKT-06]
 14. Die Hauptaktion zeigt ihren eigenen Fortschritt und ihr Ergebnis. Kein Ladekreis über der Ansicht. Eine
     Kurzmeldung nur für ein umkehrbares Ergebnis, mit „Rückgängig“; die einzige ohne bestätigt eine Kopie, wo keine
-    Taste „Kopieren“ sichtbar bleibt. Eine Taste „Kopieren“ zeigt 2 s lang „Kopiert“ in sich selbst. Ab Android 13
-    bestätigt das System das Kopieren selbst: Dort zeigt die App dafür keine Kurzmeldung. [AKT-05, EBE-05]
+    Taste „Kopieren“ sichtbar bleibt. Eine Taste „Kopieren“ zeigt 2 s lang „Kopiert“ in sich selbst. Android ab
+    Version 13 bestätigt das Kopieren selbst: Dort zeigt die App dafür keine Kurzmeldung. [AKT-05, EBE-05]
 15. Wer etwas Gespeichertes löscht, wird immer in einem Dialog gefragt, der sagt, was verloren geht.
     [AKT-07, AKT-08]
-16. Unter einer Aktion, die Daten irgendwohin schickt, sagt eine Zeile, wohin. Nur lokal: „Bleibt auf diesem
+16. Unter einer Aktion, die Daten verschickt, sagt eine Zeile, wohin. Nur lokal: „Bleibt auf diesem
     Gerät.“ [BEL-10]
 
 ## Navigation
@@ -84,7 +84,8 @@ sagt, gelten diese Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md
 24. Diagramme und Kennzahlen sind grau; nur der aktuelle Zeitraum steht in Kobalt. [DAT-04]
 25. Icons nur aus dem sebaro-Satz, jedes für eine Funktion. Pfeile und Winkel sind Icons, keine Schriftzeichen.
     Gefüllt nur für den aktuellen Ort, einen eingeschalteten Zustand und Status. Ein Zeichen wird nie verändert und
-    steht immer neben dem Namen der App. [ICO-03, ICO-05, ICO-06, ZEI-06, ZEI-07]
+    steht immer neben dem Namen der App oder, in der Kopfleiste, neben dem Titel der Ansicht.
+    [ICO-03, ICO-05, ICO-06, ZEI-06, ZEI-07]
 
 ## Wörter
 
@@ -104,8 +105,9 @@ sagt, gelten diese Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md
 28. Die Wahl des Erscheinungsbilds heißt „Hell oder Dunkel“, daneben steht „Farbton: Kühl · Warm“. Handy-App: in den
     Einstellungen. Website: ein Knopf im Kopf. Web-App: im Menü „Mehr“. Desktop: im Menü „Darstellung“.
     [AKT-09]
-29. Start: die ganze Fläche in der Produktfarbe mit dem weißen Symbol, dann die App. „Über“ zeigt Kachel, Name,
-    Version und den Absender: „Ein Werkzeug von“ (englisch „A tool by“), dann das Markenschild von sebaro. [STR-01]
+29. Start: die ganze Fläche in der Produktfarbe mit dem weißen Symbol, dann die App; eine Website hat keinen.
+    „Über“ zeigt Kachel, Name, Version und den Absender: „Ein Werkzeug von“ (englisch „A tool by“), dann das
+    Markenschild von sebaro. [STR-01]
 
 ## Boden der Barrierefreiheit
 
@@ -113,7 +115,7 @@ sagt, gelten diese Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md
     [ZUG-01 bis ZUG-04]
     - Der Kontrast kommt aus den Tokens (4,5:1 für Text, 3:1 für großen Text und Formen).
     - Tippziele 48 dp oder px. Kompakte Zeilen mit 32 px nur in Desktop-Fenstern, die mit einem Zeiger bedient werden.
-    - Jedes Bedienelement hat einen Namen. Status nie nur über Farbe (Regel 20).
+    - Jedes Bedienelement hat einen Namen.
     - Der Fokus ist sichtbar. Im Web und auf dem Desktop gehen die Hauptwege mit der Tastatur.
     - Text folgt der Schriftgröße des Systems. Prüf jeden Bildschirm einmal bei großer Schrift (Android Stufe 1,3, Web
       200 % Zoom bei Desktop-Breite). Er muss benutzbar bleiben; „…“ ist erlaubt.

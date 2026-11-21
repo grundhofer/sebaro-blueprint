@@ -15,7 +15,7 @@ https://github.com/grundhofer/sebaro-blueprint/blob/main/rules/rules.json.
       sebaro key (K4, FAR, AKT)
 - [ ] Product colour only in the sign tile, the start and at most one product area per view (overview with one
       value, detail with one value, result, empty state), never behind controls or links; the tile shows the symbol
-      alone, no code, unaltered, always beside the app's name (K5, K25)
+      alone, no code, unaltered, always beside the app's name or, in a top bar, the view's title (K5, K25)
 - [ ] User categories: a dot in one of the six tones next to the word, never a fill or the only cue; search hits
       and highlights: fill with an edge, the current hit with „Treffer n von m“ (FAR-12)
 - [ ] Plus and minus in number apps: colour follows the sign, always with + / − and the arrow icon (FAR-14)
@@ -50,8 +50,9 @@ https://github.com/grundhofer/sebaro-blueprint/blob/main/rules/rules.json.
       „Sichern“ in a dialog and the primary action of a window; local data: „Bleibt auf diesem Gerät.“ (BEL-10)
 - [ ] Motion only in answer to an action: new content enters from below; only a fade with reduced motion /
       „Bewegung immer reduzieren“ (BEW)
-- [ ] Start: the whole screen in the product colour with the white symbol, then the app; on the web only on the first
-      visit per tab. „Über“ shows tile, name, version and the sender „Ein Werkzeug von“ with the key mark (K29)
+- [ ] Start of an app: the whole screen in the product colour with the white symbol, then the app; in a web app only
+      on the first visit per tab; a website has none. „Über“ shows tile, name, version and the sender „Ein Werkzeug
+      von“ with the key mark (K29)
 - [ ] Android home-screen widget: bg with the ink line, small 2 × 1 or medium 4 × 2, the whole widget one key, text
       up to 125 %, nothing cut in its cell (MOB-11)
 - [ ] Camera: „Seite aufnehmen“ as the primary action, camera and full-screen page view always dark, corners also
@@ -60,7 +61,7 @@ https://github.com/grundhofer/sebaro-blueprint/blob/main/rules/rules.json.
 
 ## Light or dark (K28)
 - [ ] Website: the labelled button „Hell oder Dunkel“ in the header, after the navigation and the language switch (NAV, WEB)
-- [ ] Web app: in the „Mehr“ menu, not in the head (K28)
+- [ ] Web app: „Wie das System“ · „Hell“ · „Dunkel“ in the „Mehr“ menu of the top bar, no button (K28)
 - [ ] Phone app: „Wie das System“ · „Hell“ · „Dunkel“ in the settings, no button in the app bar (MOB-04)
 - [ ] Desktop app: menu „Darstellung“ and the settings view (DSK)
 - [ ] Tone „Farbton: Kühl · Warm“: websites in the footer under „Darstellung“, apps next to „Hell oder Dunkel“ (K28);
@@ -112,7 +113,11 @@ https://github.com/grundhofer/sebaro-blueprint/blob/main/rules/rules.json.
       apps: claim rows (BEL)
 - [ ] Nothing loads from third-party servers (K27, HAL-09)
 - [ ] Invented data carries the marker „Beispieldaten“ beside the title of its display (BEL-09)
-- [ ] Website footer: „Impressum“ and „Datenschutz“ always; „GitHub“ only with a public repository (WEB-03)
+- [ ] Website footer: „Impressum“, „Datenschutz“ and „Lizenzen“ always; „GitHub“ only with a public repository
+      (WEB-03)
+- [ ] App: „Über“ shows „Datenschutz“ and „Impressum“ (a web app links both in its footer) and leads to the licence
+      list with the licence texts; the provider text is the product's own, not the starter's placeholder (TEC-09)
 
 ## Done
-- [ ] The product's checks ran and passed; what could not be checked is written down with its reason (TEC-06)
+- [ ] The product's checks ran and passed; `CHECKS.md` holds only what no check sees and every waiver with its
+      reason, not a log of the runs (TEC-06)

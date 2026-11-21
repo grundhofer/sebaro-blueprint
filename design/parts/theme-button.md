@@ -20,5 +20,6 @@ The button in a website's header that switches between light and dark.
 - It shows the words „Hell oder Dunkel“, never an icon alone. [K28]
 - It counts as the one outlined action of its area. [K13]
 - The choice has one fixed place per kind of product: website header, phone app settings, the „Mehr“ menu of a web
-  app, the menu „Darstellung“ on the desktop. In an app it stands with „Farbton: Kühl · Warm“ and „Bewegung immer
-  reduzieren“ as one section. [K28]
+  app, the menu „Darstellung“ on the desktop. In an app it is the three rows „Wie das System“, „Hell“ and „Dunkel“
+  and stands with „Farbton: Kühl · Warm“ and „Bewegung immer reduzieren“ as one section; a web app keeps the last
+  in „Einstellungen“. [K28]

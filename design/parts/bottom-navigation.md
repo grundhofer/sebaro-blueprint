@@ -2,8 +2,8 @@
 
 `sb-bottom-block`, `sb-bottom-nav` · `SbScreen`, `SbNavigationBar`
 
-The main navigation of a phone app: three to five top-level places at the bottom edge. It stands in the bottom
-block, the sticky foot of a view, under the primary action bar.
+The main navigation of a phone app and of a web app without a window: three to five top-level places at the bottom
+edge. It stands in the bottom block, the sticky foot of a view, under the primary action bar.
 
 ## States
 

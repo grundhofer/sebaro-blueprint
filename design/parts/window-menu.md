@@ -11,6 +11,8 @@ in its native menu bar.
 - F10 and a lone Alt open it on „Datei“ (Windows and Linux), only while „Menü“ is in view; pressed again they close
   it.
 - Every item with a fixed shortcut shows it at the end of its row. Toggles and choices carry a check at the start.
+- macOS: „Über <App>“ and „Einstellungen …“ stand in the app menu instead; an item whose shortcut the page itself
+  must hear shows no key in the menu bar.
 - „Datei“: new, new window, open, last opened, close, quit.
 - „Bearbeiten“: undo and redo, cut, copy, paste, select all, „Suchen …“, „Verschieben nach …“, „Einstellungen …“,
   and last after a hairline „Löschen …“.

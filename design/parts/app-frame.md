@@ -19,6 +19,8 @@ and inspector uses the window instead.
 - The way back to the list is the detail's leading button in its top bar. It is not shown while the list stands
   beside the detail.
 - A sub-screen on a phone hides the navigation.
+- A form stands alone in the wide form too, with no list beside it and no navigation, so nothing leaves it past the
+  question about unsaved changes.
 - In the wide form the action zone puts its sentence at the start and its action at the end. The list pane keeps the
   phone form.
 - A detail's action is an outlined action: full width on a phone, at the zone's end when wide.

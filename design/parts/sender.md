@@ -7,8 +7,8 @@ before the facts line, and it stands in the footer of a product website.
 
 ## Behaviour
 
-- In „Über“ it reads „Ein Werkzeug von“ (English „A tool by“), then the small key mark.
-- In a website footer it reads „<Produkt> ist ein Werkzeug von“, then the small key mark.
+- In „Über“ and in a website footer alike it reads „Ein Werkzeug von“ (English „A tool by“), then the small key
+  mark.
 - Words and key may wrap onto two lines.
 - The key mark has a light and a dark form and is named „sebaro“ for screen readers.
 - On Android the app passes the words in its own language.

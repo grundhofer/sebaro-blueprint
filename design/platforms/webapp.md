@@ -5,19 +5,16 @@ inspector) follows [desktop.md](desktop.md); the rest of this page is the web ap
 
 ## The frame
 
-- The head holds the product's tile and name, the app's own places and, last, „Einstellungen“. It has no website
-  navigation and no theme button. [NAV-06]
-- The menu „Mehr“ holds „Hell oder Dunkel“, „Farbton“ and the language. [NAV-06]
-- „Einstellungen“ is a small view with „Bewegung immer reduzieren“ and „Über“, without an action zone. [NAV-06]
+- The frame is the [app frame](../parts/app-frame.md): three to five places like a phone app, „Einstellungen“
+  last. No website navigation, no theme button. [NAV-06]
+- The top bar of a top-level place holds the tile beside the view's title and the menu „Mehr“. [NAV-06]
+- „Mehr“ holds three groups of rows with one choice each: „Hell oder Dunkel“ („Wie das System“, „Hell“, „Dunkel“),
+  „Farbton“ and „Sprache“. The language is stored, and the app switches without a reload. [NAV-06]
+- „Einstellungen“ holds „Bewegung immer reduzieren“ and „Über“, without an action zone. [NAV-06]
 - ⌘K (Ctrl+K) opens the command palette here too. [NAV-09]
 - The first focus stop is the skip link „Zum Inhalt“. [ZUG-06]
 - Every view ends with the footer and its links „Impressum“ and „Datenschutz“; the tone stands in „Mehr“, not
   there. [WEB-03]
-
-## Language
-
-- An app with one address for all languages offers „DE / EN“ as a choice with the look of the links: it is stored,
-  and the app switches without a reload. [WEB-10]
 
 ## Layout
 

@@ -20,7 +20,7 @@ The action that deletes something saved, or ends something for good.
 ## Rules
 
 - Never filled and never beside the primary action bar. A detail view and a form show it as „<Ding> löschen“ at
-  the end of their content. [K15]
+  the end of their content, a window at the end of its inspector. [K15]
 - It is the only control with the 45° cut. The cut means „final“. [K11]
 - A final step that deletes nothing is the same action without the trash icon. [K11]
 - It is not counted among the outlined actions and is never demoted to hide it. [K13]

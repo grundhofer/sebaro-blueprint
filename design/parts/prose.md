@@ -16,8 +16,8 @@ Running text: an article, a help page, rendered Markdown. Rows of a list are not
   keyboard when it is wider than the column.
 - Jump target: the block that a link inside the page jumps to carries the 3 px `accent` place line before its text
   until the next key or press. The text does not move. A code block gets no line.
-- Markdown footnotes are the system's footnotes: the digit leads to its note and puts focus there, the back link
-  returns focus to the digit.
+- Markdown footnotes become the system's footnotes only where the product's renderer supports them: the digit
+  leads to its note and puts focus there, the back link returns focus to the digit. Otherwise a text has none.
 
 ## Rules
 

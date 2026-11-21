@@ -17,6 +17,6 @@ The tile identifies an app. Grid and list show several apps on a website.
 
 ## Rules
 
-- The tile always stands beside the app's visible name. [K25]
+- The tile always stands beside the app's visible name or, in a top bar, the view's title. [K25]
 - Never recolour, rotate, stretch or outline the sign; the tile carries only the symbol, no words. [K25]
 - The product colour lives in the tile; it is not used for the grid or the list around it. [K5]

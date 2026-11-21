@@ -10,7 +10,8 @@ Several open documents at the top of the content; they open and close. The views
 - Others: the cross shows on hover and focus, under touch on every tab.
 - Changed: a grey dot before the name and the hidden word „geändert“.
 - Pinned: always first, without a cross, not dragged; the hidden word „angeheftet“, no glyph.
-- None open: „Keine Notiz offen. Wähle eine im Ordner links.“ In an empty collection only the first sentence.
+- None open: „Keine Notiz offen. Wähle eine im Ordner links.“ In an empty collection: „Noch keine <Ding>“ and how
+  it fills. [K22]
 
 ## Behaviour
 

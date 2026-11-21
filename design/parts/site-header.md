@@ -9,15 +9,16 @@ window has the title bar instead.
 
 - The start link is the sebaro key mark alone on the sebaro website. A product website shows its whole tile and its
   name.
-- The words are „Apps“, „Projekte“, „Über“, „Kontakt“; a product website may leave them out. The current page and
-  the current language in „DE / EN“ carry the 3 px `accent` bottom edge and `link` colour.
+- A product's website carries its own few words; „Apps“, „Projekte“, „Über“, „Kontakt“ are the words of the sebaro
+  website alone. The current page and the current language in „DE / EN“ carry the 3 px `accent` bottom edge and
+  `link` colour.
 - „Hell oder Dunkel“ is a labelled button. The first visit follows the system. A press switches and stores the
   choice; a press that lands on the system's mode clears it, so two presses return to the system. The label never
   changes, and the new mode is announced.
 - From 1024 px everything stands in one row, below that in two, the words in the second. At phone width everything
   stays visible. [NAV-07]
-- A web app without a window drops the four words and the theme button: tile and name, its own places, then the
-  „Mehr“ menu with „Hell oder Dunkel“, „Farbton“, „Sprache“ and „Einstellungen“.
+- A web app without a window has no site header: its frame is the app frame, and the top bar of a top-level place
+  carries the „Mehr“ menu with „Hell oder Dunkel“, „Farbton“ and „Sprache“.
 - A long one-word product name breaks at large text where the product has set a soft hyphen in its name.
 
 ## Rules

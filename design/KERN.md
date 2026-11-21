@@ -1,9 +1,8 @@
 # sebaro core rules
 
-Read this before you build or change a sebaro screen. These 31 rules are the ones to hold in mind; the rest is
-built into the parts ([parts/](parts/)), the view types ([views.md](views.md)) and the checks. `[AKT-01]` points to
-the catalogue `rules/rules.json`: look there only when you need the reason. Where it says something else, this
-file wins.
+The 31 rules to hold in mind when you build or change a sebaro screen; the rest is built into the parts
+([parts/](parts/)), the view types ([views.md](views.md)) and the checks. `[AKT-01]` points to the catalogue
+`rules/rules.json`: look there only for the reason. Where it says something else, this file wins.
 
 ## The system
 
@@ -26,8 +25,8 @@ file wins.
 6. No coloured fill behind text except the primary action. Grounds are the four greys of the tokens.
    [FAR-02, FAR-05]
 7. Light and dark are equal. Every view works in both and in the tones „Kühl“ and „Warm“. One exception: an image a
-   machine reads (a QR code, a bar code shown at a till) stays dark on light in dark mode too, drawn in the light
-   theme's colours with a light margin around it. [FAR-09, FAR-15]
+   machine reads (a QR code, a bar code at a till) stays dark on light in dark mode too, drawn in the light
+   theme's colours with a light margin. [FAR-09, FAR-15]
 
 ## Type, space, shape
 
@@ -36,7 +35,7 @@ file wins.
 9. Spacing only from the scale. Layout is start-aligned, never centred. Fixed row heights, one density.
    [RAU-01, RAU-04, RAU-05]
 10. Layers are separated by a 2 px ink line, never by shadow, tint or elevation. Cards only group settings or
-    figures. A list stays a list of flat rows with hairlines, in every app and at every width.
+    figures. A list is always flat rows with hairlines, in every app and at every width.
     [EBE-01, EBE-02, DAT-01, FOR-02]
 11. No gradients, glow, textures or ornament. One radius per class (4, 8, 12, 16). The 45° cut means „final“ and
     stands only on actions that cannot be undone. [FOR-01, FOR-03, FOR-04, HAL-06]
@@ -50,10 +49,10 @@ file wins.
     [AKT-06]
 14. The primary action shows its own progress and result. No spinner over the view. A toast only for a reversible
     result, with „Rückgängig“; the one toast without it confirms a copy where no copy key stays visible. A copy key
-    shows „Kopiert“ in itself for 2 s. On Android 13 and later the system confirms a copy itself: no toast there.
+    shows „Kopiert“ in itself for 2 s. Android 13 and later confirms a copy itself: no toast there.
     [AKT-05, EBE-05]
 15. Deleting something saved always asks in a dialog that says what is lost. [AKT-07, AKT-08]
-16. Under an action that sends data somewhere, one line says where it goes. Local only: „Bleibt auf diesem Gerät.“
+16. Under an action that sends data, one line says where it goes. Local only: „Bleibt auf diesem Gerät.“
     [BEL-10]
 
 ## Navigation
@@ -80,7 +79,7 @@ file wins.
 24. Charts and figures are grey; only the current period is cobalt. [DAT-04]
 25. Icons only from the sebaro set, one function each. Arrows and chevrons are icons, not characters. Filled only
     for the current place, an on-state and status. A sign is never altered and always stands beside the app's
-    name. [ICO-03, ICO-05, ICO-06, ZEI-06, ZEI-07]
+    name or, in a top bar, the view's title. [ICO-03, ICO-05, ICO-06, ZEI-06, ZEI-07]
 
 ## Words
 
@@ -98,15 +97,16 @@ file wins.
 28. The theme choice is called „Hell oder Dunkel“, with „Farbton: Kühl · Warm“ beside it. Phone app: in settings.
     Website: a button in the header. Web app: in the „Mehr“ menu. Desktop: in the menu „Darstellung“.
     [AKT-09]
-29. Start: the whole screen in the product colour with the white symbol, then the app. „Über“ shows tile, name,
-    version and the sender: „Ein Werkzeug von“ (English „A tool by“), then the sebaro key mark. [STR-01]
+29. Start: the whole screen in the product colour with the white symbol, then the app; a website has none. „Über“
+    shows tile, name, version and the sender: „Ein Werkzeug von“ (English „A tool by“), then the sebaro key mark.
+    [STR-01]
 
 ## Accessibility floor
 
 30. This floor is enough. Do not add more where it makes normal use worse. [ZUG-01 to ZUG-04]
     - Contrast comes from the tokens (4.5:1 for text, 3:1 for large text and shapes).
     - Touch targets 48 dp or px. Compact 32 px rows only in desktop windows used with a pointer.
-    - Every control has a name. Status never by colour alone (rule 20).
+    - Every control has a name.
     - Focus is visible. On web and desktop the main flows work with the keyboard.
     - Text follows the system text size. Check each screen once at a large size (Android font scale 1.3, web
       200 % zoom at desktop width). It must stay usable; an ellipsis is fine.

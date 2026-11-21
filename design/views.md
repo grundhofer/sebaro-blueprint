@@ -1,7 +1,6 @@
 # sebaro view types
 
 The 21 view types of core rule 2. A type's fixed points are its primary action, its product area and its way out.
-Where your starter has a template for a type, start from it.
 
 From 840 dp `list` and `search` show two panes. The four `state-*` types replace the content of the view they occur
 in and never add a second primary action.
@@ -23,7 +22,7 @@ in and never add a second primary action.
 | `about` | Über und Rechtliches | app, sender, legal information | none | only the tile | back |
 | `state-empty` | Zustand: leer | say what is missing and the first step | the first step | yes, as head | as the containing view |
 | `state-loading` | Zustand: lädt | content or act is still loading | stays in place | no | as the containing view |
-| `state-error` | Zustand: Fehler | say what failed, offer recovery | „Noch mal versuchen“ | no | as the containing view |
+| `state-error` | Zustand: Fehler | say what failed, offer recovery | „Noch mal versuchen“; none for an unknown address or missing item | no | as the containing view |
 | `state-permission` | Zustand: keine Erlaubnis | say what the permission is for, lead to the system choice | leads to allowing | no | back |
 | `outside` | Außerhalb der App | widget, notification, share sheet | at most two actions | only the tile | opens the fitting view |
 | `account` | Anmeldung und Konto | sign in, look at the account | „Anmelden“; none on the account | no | back |

@@ -7,7 +7,7 @@ instead.
 
 ## States
 
-- Top level: the app's sign tile and the title, with an optional subtitle in `text-muted`.
+- Top level: the app's sign tile beside the view's title, with an optional subtitle in `text-muted`.
 - Sub-screen: a leading back or close button and a smaller title, no tile.
 - Search view: the search field stands in place of the title and takes its width; the view then gets its name for
   screen readers.
