@@ -7,11 +7,11 @@ change. One stage is one pull request; the app works after every stage.
 
 Write down, in the project (`docs/sebaro-umbau.md`):
 
-- every screen or page, and for each its view type from `<kit>/design/views.md`, its primary action, and what does
+- every screen or page, and for each its view type from `design/views.md`, its primary action, and what does
   not fit the type;
 - the one view that is the product's reason to exist (it may take its own form);
 - what the project has today: theme and tokens, component library, fonts, icons, tests, CI, release, update bot;
-- where it differs from the blueprint of its kind.
+- where it differs from the plan of its kind (`SKILL.md`, step 2).
 
 ## 2 Plan and questions
 
@@ -20,7 +20,8 @@ Wait for the OK.
 
 ## 3 Stages
 
-1. **Foundation.** Bring the sebaro copy into the project (`<kit>/AGENTS.md`, step 4) and wire fonts, tokens and
+1. **Foundation.** Bring the sebaro copy into the project (`gh release download -R grundhofer/sebaro-foundry -p update-copy.mjs`,
+   then `node update-copy.mjs --profile <android|website|webapp|desktop> --out <folder>`) and wire fonts, tokens and
    the theme with light, dark and the two tones. Remove the old theme. Rename the project's own tokens to sebaro's
    names; do not keep an alias layer. The app may look half old after this stage.
 2. **Frame.** Navigation, top bar, the action zone at the bottom, the start, the place of „Hell oder Dunkel“.

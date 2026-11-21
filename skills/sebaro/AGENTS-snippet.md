@@ -7,8 +7,8 @@ This product follows sebaro. The kit is `https://github.com/grundhofer/sebaro-bl
 there is one.
 
 - **Kind:** <phone app | website | web app | desktop app>. Its rules beyond the core:
-  `<kit>/design/platforms/<mobile | website | webapp | desktop>.md`. Its technology plan: the `BLUEPRINT.md` of
-  its starter in the workshop.
+  `<kit>/design/platforms/<mobile | website | webapp | desktop>.md`. Its technology plan: `templates/<kind>/BLUEPRINT.md` in
+  the private `grundhofer/sebaro-foundry` (read with `gh`).
 - **Before any UI work** read `<kit>/design/KERN.md` (31 core rules) and pick the view type of the screen in
   `<kit>/design/views.md`.
 - **The sebaro copy** is `<path of the folder with sebaro-export.json>`. Never edit it. Parts and tokens come from

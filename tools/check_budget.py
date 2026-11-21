@@ -39,11 +39,12 @@ BUDGETS = {
     "design/parts/shortcuts.md": 450,
     "design/parts/*.md": 350,
     "skills/sebaro/AGENTS-snippet.md": 200,
+    "skills/sebaro/SKILL.md": 500,
     "skills/*/*.md": 450,
 }
 # the mandatory reading of this repository for a product start, in words; the workshop's plan and starter README
 # carry the rest of the 4,000 words a start may cost
-READING = 2_500
+READING = 2_650
 READING_FILES = ("skills/sebaro/SKILL.md", "design/KERN.md", "design/views.md")
 READING_LARGEST = "design/platforms/*.md"
 HOMES = {"core", "view", "component", "words", "platform-web", "platform-android", "platform-ios",
