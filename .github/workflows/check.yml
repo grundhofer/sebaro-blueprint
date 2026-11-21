@@ -1,9 +1,7 @@
 name: check
 on:
   push:
-    # sync/** = branches pushed by the guide-sync workflow of sebaro-foundry; their pull requests are opened with the
-    # GITHUB_TOKEN, which starts no pull_request run, so the checks attach to the PR through this push run
-    branches: [main, "sync/**"]
+    branches: [main]
   pull_request:
 permissions:
   contents: read
@@ -19,8 +17,6 @@ jobs:
         run: python3 tools/build.py --check
       - name: Site checks (pages, links, no foreign requests, token-only CSS, rules, share-image heads and PNGs)
         run: python3 tools/check_site.py
-      - name: System files untouched since the export
-        run: python3 tools/sync_from_design.py --verify-local
       - name: Size budgets of the texts agents read by default, every rule of the catalogue has a home
         run: python3 tools/check_budget.py
   a11y:

@@ -51,7 +51,7 @@ function inputs() {
     path.join(SEBARO, "brand", "inline", "tile-studio.svg"), path.join(SEBARO, "brand", "inline", "lockup-horizontal.svg"),
     path.join(SEBARO, "brand", "inline", "lockup-horizontal-large.svg")];
   const missing = files.filter((f) => !existsSync(f));
-  if (missing.length) { console.error(`error: missing ${missing.map(rel).join(", ")} (python3 tools/build.py; tools/sync_from_design.py)`); process.exit(2); }
+  if (missing.length) { console.error(`error: missing ${missing.map(rel).join(", ")} (python3 tools/build.py)`); process.exit(2); }
   return { $comment: "written by tools/og.mjs after a successful render; tools/check_site.py compares it (OG); do not edit",
     render: readFileSync(RENDER, "utf8").match(/export const VERSION = "([^"]+)"/)?.[1] ?? "?",
     inputs: Object.fromEntries(files.map((f) => [rel(f), sha(f)])) };

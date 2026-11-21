@@ -59,7 +59,7 @@ OG_MISSING: list[str] = []               # pages whose snippet is missing (build
 
 # file, label, icon (sprite id), one line for llms.txt
 PAGES = [
-    ("index.html", "Start", "home", "Einstieg: was sebaro ist, die 31 Kernregeln auf Deutsch, die Baupläne und Startvorlagen je Produktart"),
+    ("index.html", "Start", "home", "Einstieg: was sebaro ist, die 31 Kernregeln auf Deutsch, was je Produktart dazukommt"),
     ("bauteile.html", "Bauteile", "copy", "Alle Komponenten mit Zuständen und Markup"),
     ("daten.html", "Daten", "chart-bar", "Jede Datenart einmal dargestellt: Text, Zahlen, Zeit, Status, Listen, Tabellen, Diagramme, Code …"),
 ]
@@ -75,25 +75,21 @@ MOVED = [
     ("grundlagen.html", "Grundlagen", "Farben, Schrift, Raum und Form kommen als Tokens aus der sebaro-Kopie in "
      "deinem Projekt. Was du davon im Kopf haben musst, sagen die Kernregeln auf der Startseite.",
      [("Die 31 Kernregeln", "index.html#kern"), _HOME]),
-    ("plattformen.html", "Plattformen", "Für jede Produktart gibt es einen Bauplan und eine Startvorlage: Website, "
-     "Web-App, Desktop-App und Android-App.",
-     [("Baupläne und Vorlagen", "index.html#vorlagen"), _HOME]),
-    ("web.html", "Web", "Das Beispiel für eine Website ist ihre Startvorlage, ein kleines fertiges Projekt mit Bauplan.",
-     [("Startvorlage für Websites", _BLOB + "templates/website-astro/README.md"), _HOME]),
-    ("app.html", "App", "Das Beispiel für eine Handy-App ist die Startvorlage für Android, ein kleines fertiges Projekt "
-     "mit Bauplan.",
-     [("Startvorlage für Android-Apps", _BLOB + "templates/android-compose/README.md"), _HOME]),
-    ("ios.html", "iOS", "Die Startvorlage für iOS ist eingefroren. Sie bleibt, wie sie ist, bis eine iOS-App ansteht.",
-     [("Startvorlage für iOS", _BLOB + "templates/ios-swiftui/README.md"), _HOME]),
-    ("desktop.html", "Desktop", "Das Beispiel für eine Desktop-App ist ihre Startvorlage, ein kleines fertiges Projekt "
-     "mit Bauplan.",
-     [("Startvorlage für Desktop-Apps", _BLOB + "templates/desktop-tauri/README.md"), _HOME]),
+    ("plattformen.html", "Plattformen", "Was für eine Produktart über die Kernregeln hinaus gilt, steht auf der "
+     "Startseite. Baupläne und Startvorlagen liegen in der privaten Werkstatt.",
+     [("Produktarten", "index.html#produktarten"), _HOME]),
+    ("web.html", "Web", "Was für Websites und Web-Apps über die Kernregeln hinaus gilt, steht je auf einer Seite.",
+     [("Website", _BLOB + "design/platforms/website.md"), ("Web-App", _BLOB + "design/platforms/webapp.md"), _HOME]),
+    ("app.html", "App", "Was für Handy-Apps über die Kernregeln hinaus gilt, steht auf einer Seite.",
+     [("Handy-App", _BLOB + "design/platforms/mobile.md"), _HOME]),
+    ("ios.html", "iOS", "sebaro führt iOS zurzeit nicht weiter.", [_HOME]),
+    ("desktop.html", "Desktop", "Was für Desktop-Apps über die Kernregeln hinaus gilt, steht auf einer Seite.",
+     [("Desktop-App", _BLOB + "design/platforms/desktop.md"), _HOME]),
     ("gedanken.html", "Gedanken", "Was gilt, sagen die Kernregeln auf der Startseite. Was sich wann geändert hat, "
      "steht im Änderungsprotokoll.",
      [("Die 31 Kernregeln", "index.html#kern"), ("Änderungsprotokoll", _BLOB + "CHANGELOG.md"), _HOME]),
-    ("ausblick.html", "Ausblick", "Was eine Startvorlage noch nicht kann, steht in ihrer README. Was sich geändert "
-     "hat, steht im Änderungsprotokoll.",
-     [("Baupläne und Vorlagen", "index.html#vorlagen"), ("Änderungsprotokoll", _BLOB + "CHANGELOG.md"), _HOME]),
+    ("ausblick.html", "Ausblick", "Was sich geändert hat, steht im Änderungsprotokoll.",
+     [("Änderungsprotokoll", _BLOB + "CHANGELOG.md"), _HOME]),
 ]
 
 
@@ -262,7 +258,7 @@ def block_head(_attrs: dict) -> str:
         '<link rel="stylesheet" href="assets/vendor/demo.css">',
         '<link rel="stylesheet" href="assets/vendor/pages.css">',
         '<link rel="stylesheet" href="assets/guide.css">',
-        # the guide's own files from the product kit (sebaro.product.json, tools/sync_from_design.py)
+        # the guide's own files from the product kit (sebaro.product.json)
         '<link rel="icon" href="sebaro-product/web/favicon.ico" sizes="32x32">',
         '<link rel="icon" href="sebaro-product/web/icon.svg" type="image/svg+xml">',
         '<script defer src="sebaro/js/theme-button.js"></script>',
@@ -540,19 +536,21 @@ def moved_page(name: str, sentences: str, links: list[tuple[str, str]]) -> str:
 
 def llms_txt() -> str:
     lines = ["# sebaro Blueprint", "",
-             "> The design guide of every sebaro app, website, web app and desktop app: the 31 core rules, one "
-             "blueprint and starter per product kind, components and data display. German UI language (du).", "",
+             "> The design guide of every sebaro app, website, web app and desktop app: the 31 core rules, the view "
+             "types, one concept page per part, the rules per platform type, components and data display. German UI "
+             "language (du). Technology plans and starters live in the private workshop.", "",
              f"Machine-readable rules: {SITE_URL}rules.json · Agent entry: {REPO_URL}/blob/main/AGENTS.md", "",
              "## Building a product", "",
              f"- [Core rules]({REPO_URL}/blob/main/design/KERN.md) and [view types]({REPO_URL}/blob/main/design/views.md): "
              "the 31 rules and 21 view types to read before any UI work",
+             f"- [Platform types]({REPO_URL}/tree/main/design/platforms): what holds for a phone app, a website, a web "
+             "app or a desktop app beyond the core rules",
+             f"- [Parts]({REPO_URL}/tree/main/design/parts): one concept page per part",
              f"- [Playbooks]({REPO_URL}/blob/main/skills/sebaro/SKILL.md): start a new product or convert an existing "
              "project, as an agent skill",
-             f"- [Agent snippet]({REPO_URL}/blob/main/templates/AGENTS-snippet.md): five lines to paste into the "
+             f"- [Agent snippet]({REPO_URL}/blob/main/skills/sebaro/AGENTS-snippet.md): the section to paste into the "
              "product's AGENTS.md",
-             f"- [Starters]({REPO_URL}/blob/main/templates/README.md): website (Astro), web app (Vite), desktop (Tauri), "
-             "Android (Compose); each README lists what the starter itself does not do yet",
-             f"- [Screen checklist]({REPO_URL}/blob/main/templates/screen-checklist.md): walk it before a screen is done; "
+             f"- [Screen checklist]({REPO_URL}/blob/main/design/checklist.md): walk it before a screen is done; "
              "record every check in CHECKS.md (TEC-06)",
              f"- [Agent test 2026-10]({REPO_URL}/blob/main/docs/agenten-test-2026-10.md): the rules agents missed most "
              "(TEC-06, TXT-04 U+00A0, EBE-05, BEL-10, NAV-06) and why",

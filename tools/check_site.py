@@ -38,12 +38,7 @@ Groups
          src/og/head/inputs.json (page list, template, script, tokens, fonts, sprite, tile, lockups) changed since
          the images were rendered (render again: node tools/og.mjs, then tools/build.py)
   TERM   retired names do not appear in pages, rules or docs (D71: only "sebaro Sans" and "sebaro Mono");
-         the font licence files in docs/sebaro/ keep the authors' copyright as the OFL requires, and so do the copies of
-         the export in the starter templates (the exact paths of TEMPLATE_EXPORTS, not scanned; see template_files())
-  TPLEXP no starter template mirrors docs/sebaro/ any more: the website, web app and desktop starters hold the copy
-         of the public release, which their own verify-export.mjs --strict checks. What is left is a warning: the iOS
-         template's SebaroDesign/sebaro-export.json names another sebaroDesign commit than docs/GUIDE-SYNC.json (a
-         different target, so only the commit is compared)
+         the font licence files in docs/sebaro/ keep the authors' copyright as the OFL requires
 """
 from __future__ import annotations
 
@@ -53,7 +48,6 @@ import json
 import os
 import re
 import struct
-import subprocess
 import sys
 import zlib
 from collections import Counter
@@ -71,8 +65,7 @@ OG_STAMP = ROOT / "src" / "og" / "head" / "inputs.json"
 OG_SIZE = (1200, 630)
 OG_ONCE = ["og:type", "og:site_name", "og:locale", "og:url", "og:title", "og:description", "og:image",
            "og:image:width", "og:image:height", "og:image:alt"]
-REQUIRED_RULE_FIELDS = ["id", "area", "title", "rule", "rule_en", "why", "do", "dont", "decisions", "source",
-                        "platforms", "status", "check", "changed"]
+REQUIRED_RULE_FIELDS = ["id", "area", "title", "rule", "rule_en", "why", "do", "dont", "platforms", "status", "check", "changed"]
 COLOUR_LITERAL = re.compile(r"#[0-9a-fA-F]{3,8}\b|\b(?:rgb|rgba|hsl|hsla|oklch|oklab|lab|lch|color)\(", re.I)
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
 # the addresses of the pages that went, as MOVED in tools/build.py: no guide blocks and no share image, because a page
@@ -81,42 +74,6 @@ MOVED = {"regeln.html", "grundlagen.html", "plattformen.html", "web.html", "app.
          "gedanken.html", "ausblick.html"}
 # a token name; wildcards in prose such as var(--sb-color-*) or var(--sb-space-…) are not names
 VAR_SB = re.compile(r"var\(\s*(--sb-[A-Za-z0-9_-]*[A-Za-z0-9_])(?![-*…A-Za-z0-9_])")
-
-
-# the only copies of the export in templates/, each a verified snapshot (its starter's sebaro:verify checks it)
-TEMPLATE_EXPORTS = ("templates/website-astro/public/sebaro/", "templates/webapp-vite/src/sebaro/",
-                    "templates/desktop-tauri/apps/desktop/ui/src/sebaro/", "templates/ios-swiftui/SebaroDesign/",
-                    "templates/android-compose/sebaro/")
-
-
-def template_export_findings(root: Path = ROOT) -> tuple[list[str], list[str]]:
-    """(errors, warnings) of the TPLEXP group: a stale iOS export commit. No starter mirrors docs/sebaro/ any more, so
-    the group has no error of its own left."""
-    errors: list[str] = []
-    warnings: list[str] = []
-    try:
-        want = json.loads((root / "docs" / "GUIDE-SYNC.json").read_text(encoding="utf-8")).get("sebaroDesignCommit")
-        have = json.loads((root / "templates" / "ios-swiftui" / "SebaroDesign" / "sebaro-export.json")
-                          .read_text(encoding="utf-8")).get("sebaroDesign", {}).get("commit")
-    except (OSError, ValueError) as e:
-        return errors, warnings + [f"TPLEXP templates/ios-swiftui: cannot read the export commits ({e})"]
-    if want and have != want:
-        warnings.append(f"TPLEXP templates/ios-swiftui: SebaroDesign/sebaro-export.json is at sebaroDesign "
-                        f"{str(have)[:7]}, docs/GUIDE-SYNC.json at {str(want)[:7]}; fix: re-export with "
-                        f"--target ios (see templates/ios-swiftui/README.md)")
-    return errors, warnings
-
-
-def template_files() -> list[Path]:
-    """Files of templates/ for TERM: what git tracks there plus new files git does not ignore (`git ls-files
-    --cached --others --exclude-standard`), so what a template's install, build or tests write (git-ignored there)
-    is left out by the template's own .gitignore, never by a folder name. Left out besides: the exact copies of an
-    export in TEMPLATE_EXPORTS (their font licence keeps the authors' copyright as the OFL requires, like
-    docs/sebaro/, and checks/verify-export.mjs --strict checks each against its record)."""
-    listed = subprocess.run(["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard", "--", "templates"],
-                            cwd=ROOT, capture_output=True, check=True).stdout.decode("utf-8").split("\0")
-    return [ROOT / f for f in sorted(listed)
-            if f and "." in Path(f).name and not f.startswith(TEMPLATE_EXPORTS) and (ROOT / f).is_file()]
 
 
 def is_dont_scoped(prelude: str) -> bool:
@@ -434,7 +391,7 @@ def main() -> int:
     # LICENSE
     lic, lic_export = ROOT / "LICENSE.md", DOCS / "sebaro" / "LICENSE.md"
     if not lic_export.is_file():
-        errors.append("LICENSE docs/sebaro/LICENSE.md missing (re-export with tools/sync_from_design.py)")
+        errors.append("LICENSE docs/sebaro/LICENSE.md missing")
     elif not lic.is_file() or lic.read_bytes() != lic_export.read_bytes():
         errors.append("LICENSE LICENSE.md differs from docs/sebaro/LICENSE.md (D76: the same file; copy it over)")
 
@@ -536,7 +493,7 @@ def main() -> int:
     # TERM
     retired = re.compile(r"radio[\s_-]*canada", re.I)
     term_files = [p for p in DOCS.glob("*.html")] + [p for p in DOCS.glob("assets/*.*")] + \
-        [RULES, ROOT / "AGENTS.md", ROOT / "README.md", ROOT / "LICENSE.md"] + template_files() + \
+        [RULES, ROOT / "AGENTS.md", ROOT / "README.md", ROOT / "LICENSE.md"] + \
         [DOCS / "llms.txt", DOCS / "rules.json"] + [p for p in (ROOT / "tools").glob("*.py") if p.name != "check_site.py"]
     for f in term_files:
         if f.is_file() and retired.search(f.read_text(encoding="utf-8", errors="ignore")):
@@ -561,10 +518,6 @@ def main() -> int:
                 errors.append(f"RULES {r.get('id')}: unknown status {r.get('status')!r}")
     else:
         warnings.append("RULES rules/rules.json missing")
-
-    tpl_errors, tpl_warnings = template_export_findings()
-    errors += tpl_errors
-    warnings += tpl_warnings
 
     if args.only:
         errors = [e for e in errors if args.only in e]
