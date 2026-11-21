@@ -39,7 +39,7 @@
   });
 })();
 
-// 4) D100 (5): at large text an example's stage or a data specimen may scroll sideways in its own frame (a phone
+// 4) at large text an example's stage or a data specimen may scroll sideways in its own frame (a phone
 //    frame keeps 320 px, a window row keeps its status word). While it scrolls, it gets tabindex="0", role="region"
 //    and a name, so the keyboard reaches what lies past its edge; when it fits again, they go. A frame whose page
 //    already gives it a tabindex is left alone.

@@ -1,17 +1,16 @@
 # sebaro: die Kernregeln
 
-Lies das, bevor du einen Bildschirm in sebaro baust oder änderst. Diese 31 Regeln musst du im Kopf haben; der Rest
-steckt in den Bauteilen ([parts.md](parts.md) sagt, was ein Bauteil noch von dir braucht), den Ansichtstypen
-([views.md](views.md)) und den Prüfungen. `[AKT-01]` verweist auf den langen Katalog `rules/rules.json` (Begründung
-und Beispiele), `D<n>` auf eine Entscheidung des Inhabers. Schlag dort nur nach, wenn du den Grund brauchst. Wo der
-Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md](KERN.md).
+Die 31 Regeln, die du im Kopf haben musst, wenn du einen Bildschirm in sebaro baust oder änderst; der Rest steckt
+in den Bauteilen ([parts/](parts/)), den Ansichtstypen ([views.md](views.md)) und den Prüfungen. `[AKT-01]` verweist
+auf den Katalog `rules/rules.json`: Schlag dort nur für den Grund nach. Wo er etwas anderes sagt, gelten diese
+Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md](KERN.md).
 
 ## Das System
 
 1. Nimm die Bauteile und Tokens der sebaro-Kopie in deinem Projekt. Keine rohen Farben, Größen oder Schriften, kein
    zweites Designsystem. Ändere die Kopie nie. [HAL-07, TEC-01]
 2. Bau jeden Bildschirm aus einem Ansichtstyp. Füll seine Plätze; seine festen Punkte änderst du nur für die eine
-   Ansicht, für die es die App gibt. [D145]
+   Ansicht, für die es die App gibt.
 3. Fehlt ein Bauteil, bau es neben der Kopie aus Tokens und vorhandenen Bauteilen und trag es in die Lückenliste des
    Projekts ein. Eine Abweichung wird für das Produkt entschieden und im Produkt festgehalten. Nach sebaro kommt sie,
    wenn ein zweites Produkt sie braucht.
@@ -20,15 +19,15 @@ Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die engl
 
 4. Eine Farbe, eine Aufgabe. Kobalt: der aktuelle Ort, Link, Fokus, Auswahlmarke. Lindgrün: der eine nächste Schritt
    und das Markenschild von sebaro. Statusfarben: nur als Glyphe mit Wort. Alles andere ist grau mit Haarlinien.
-   [FAR-01, FAR-03, EIN-03, D143]
+   [FAR-01, FAR-03, EIN-03]
 5. Die Produktfarbe steht in der Zeichenkachel der App, auf dem Startbildschirm und in höchstens einer Produktfläche
-   je Ansicht, und nur auf Einstieg, Übersicht (ein Wert), Detail mit einem Wert, Ergebnis und leerem Zustand. Nie
-   hinter Bedienelementen oder Links. [D143, D145; ersetzt ZEI-01]
+   je Ansicht, und nur auf Übersicht (ein Wert), Detail mit einem Wert, Ergebnis und leerem Zustand. Nie hinter
+   Bedienelementen oder Links. [ZEI-01]
 6. Keine farbige Fläche hinter Text außer der Hauptaktion. Die Gründe sind die vier Grautöne der Tokens.
    [FAR-02, FAR-05]
 7. Hell und Dunkel sind gleichwertig. Jede Ansicht funktioniert in beiden und in den Farbtönen „Kühl“ und „Warm“.
    Eine Ausnahme: Ein Bild, das eine Maschine liest (ein QR-Code, ein Strichcode für die Kasse), bleibt auch im
-   Dunkelmodus dunkel auf hell, in den Farben des hellen Modus und mit einem hellen Rand. [FAR-09, FAR-15, D150]
+   Dunkelmodus dunkel auf hell, in den Farben des hellen Modus und mit hellem Rand. [FAR-09, FAR-15]
 
 ## Schrift, Raum, Form
 
@@ -37,8 +36,8 @@ Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die engl
 9. Abstände nur aus der Skala. Das Layout richtet sich am Anfang aus, nie mittig. Feste Zeilenhöhen, eine Dichte.
    [RAU-01, RAU-04, RAU-05]
 10. Ebenen trennt eine 2 px breite Tintenlinie, nie Schatten, Tönung oder Höhe. Karten fassen nur Einstellungen oder
-    Kennzahlen zusammen. Eine Liste bleibt eine Liste flacher Zeilen mit Haarlinien, in jeder App und bei jeder
-    Breite. [EBE-01, EBE-02, DAT-01, FOR-02, D145]
+    Kennzahlen zusammen. Eine Liste besteht immer aus flachen Zeilen mit Haarlinien, in jeder App und bei jeder
+    Breite. [EBE-01, EBE-02, DAT-01, FOR-02]
 11. Keine Verläufe, kein Leuchten, keine Texturen, kein Schmuck. Ein Radius je Klasse (4, 8, 12, 16). Die 45°-Kante
     heißt „endgültig“ und steht nur auf Aktionen, die sich nicht rückgängig machen lassen.
     [FOR-01, FOR-03, FOR-04, HAL-06]
@@ -47,16 +46,16 @@ Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die engl
 
 12. Höchstens eine lindgrüne Hauptaktion je Ansicht (ein Rahmen mit zwei Spalten ist eine Ansicht), unten in dem
     Bereich, auf den sie wirkt, beschriftet mit Ding und Verb („Eintrag anlegen“), als letzte ihrer Gruppe. Keine, wo
-    es keinen klaren nächsten Schritt gibt; eine Detailansicht hat keine. [AKT-01, AKT-02, AKT-04, AKT-11, D145]
+    es keinen klaren nächsten Schritt gibt; eine Detailansicht hat keine. [AKT-01, AKT-02, AKT-04, AKT-11]
 13. Drei Stufen: Lindgrün für den nächsten Schritt, höchstens eine umrandete Aktion je Bereich, alles andere ist eine
-    Textaktion. [AKT-06, D143]
+    Textaktion. [AKT-06]
 14. Die Hauptaktion zeigt ihren eigenen Fortschritt und ihr Ergebnis. Kein Ladekreis über der Ansicht. Eine
-    Kurzmeldung nur für ein umkehrbares Ergebnis, mit „Rückgängig“; die einzige ohne sagt, dass etwas in die
-    Zwischenablage kopiert wurde. Ab Android 13 bestätigt das System das Kopieren selbst: Dort zeigt die App dafür
-    keine Kurzmeldung. [AKT-05, EBE-05, D150]
+    Kurzmeldung nur für ein umkehrbares Ergebnis, mit „Rückgängig“; die einzige ohne bestätigt eine Kopie, wo keine
+    Taste „Kopieren“ sichtbar bleibt. Eine Taste „Kopieren“ zeigt 2 s lang „Kopiert“ in sich selbst. Android ab
+    Version 13 bestätigt das Kopieren selbst: Dort zeigt die App dafür keine Kurzmeldung. [AKT-05, EBE-05]
 15. Wer etwas Gespeichertes löscht, wird immer in einem Dialog gefragt, der sagt, was verloren geht.
-    [AKT-07, AKT-08, D119]
-16. Unter einer Aktion, die Daten irgendwohin schickt, sagt eine Zeile, wohin. Nur lokal: „Bleibt auf diesem
+    [AKT-07, AKT-08]
+16. Unter einer Aktion, die Daten verschickt, sagt eine Zeile, wohin. Nur lokal: „Bleibt auf diesem
     Gerät.“ [BEL-10]
 
 ## Navigation
@@ -66,7 +65,7 @@ Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die engl
     sein. [NAV-01, NAV-02, NAV-10]
 18. Handy: Navigation unten mit drei bis fünf Hauptzielen, Unteransichten bekommen „Zurück“. Ab 840 dp: eine Leiste
     am Rand und zwei Spalten, die Liste am Anfang, das Detail am Ende. Die Kopfleiste trägt nie die Hauptaktion.
-    [NAV-03, NAV-04, NAV-05, D145]
+    [NAV-03, NAV-04, NAV-05]
 19. Ein Linkstil: das Wort in Textfarbe, 2 px breit in Kobalt unterstrichen. Ein Link, der die App verlässt, endet
     mit dem Icon für externe Links. [LNK-01, LNK-02]
 
@@ -77,14 +76,16 @@ Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die engl
 21. Felder haben eine sichtbare Beschriftung darüber. Ein Fehler ist eine rote Linie, eine Glyphe und ein Satz, der
     sagt, was falsch ist und was zu tun ist. [EIN-01, EIN-02, TXT-07]
 22. Leer: „Noch keine <Dinge>“ und ein Satz, wie es sich füllt; die Aktion bleibt unten. Laden: Arbeit auf dem Gerät
-    zeigt nichts; Arbeit über das Netz sagt nach 1 s „Wird geladen …“. [DAT-07, STA-06]
+    zeigt keinen Ladekreis; dauert sie länger als etwa 1 s, steht ein kurzer Satz dort, wo das Ergebnis stehen wird
+    („Wird gesichert …“). Arbeit über das Netz sagt nach 1 s „Wird geladen …“. [DAT-07, STA-06]
 23. Ruhig: keine Zähler auf Icons, keine roten Punkte, keine Banner. Bewegung antwortet nur auf eine Aktion (8 px von
     unten, höchstens 200 ms) und folgt der Einstellung „Bewegung reduzieren“ des Systems.
     [HAL-05, BEW-01, BEW-02, BEW-04]
 24. Diagramme und Kennzahlen sind grau; nur der aktuelle Zeitraum steht in Kobalt. [DAT-04]
 25. Icons nur aus dem sebaro-Satz, jedes für eine Funktion. Pfeile und Winkel sind Icons, keine Schriftzeichen.
     Gefüllt nur für den aktuellen Ort, einen eingeschalteten Zustand und Status. Ein Zeichen wird nie verändert und
-    steht immer neben dem Namen der App. [ICO-03, ICO-05, ICO-06, ZEI-06, ZEI-07]
+    steht immer neben dem Namen der App oder, in der Kopfleiste, neben dem Titel der Ansicht.
+    [ICO-03, ICO-05, ICO-06, ZEI-06, ZEI-07]
 
 ## Wörter
 
@@ -94,7 +95,7 @@ Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die engl
     und Englisch: je Sprache eine Datei oder ein Ordner, die Sprachen an einer Stelle benannt, so dass eine weitere
     Sprache ihre Dateien und ein Eintrag sind; eine Prüfung schlägt fehl, wenn einer Sprache ein Text fehlt. Eine
     Inhaltsseite mit Artikeln bleibt in ihrer einen Sprache, Deutsch oder Englisch.
-    [TXT-01, TXT-03, TXT-04, TXT-12, TEC-10, Inhaber 2026-11-13]
+    [TXT-01, TXT-03, TXT-04, TXT-12, TEC-10]
 27. Ehrlich: keine Behauptung ohne Beleg, konkrete Fakten statt Werbesätzen, Fehler und fehlende Werte in Worten,
     Beispieldaten als „Beispieldaten“ markiert. Nichts lädt von fremden Servern.
     [HAL-03, HAL-04, HAL-09, BEL-01, BEL-09, TXT-02]
@@ -103,17 +104,18 @@ Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die engl
 
 28. Die Wahl des Erscheinungsbilds heißt „Hell oder Dunkel“, daneben steht „Farbton: Kühl · Warm“. Handy-App: in den
     Einstellungen. Website: ein Knopf im Kopf. Web-App: im Menü „Mehr“. Desktop: im Menü „Darstellung“.
-    [AKT-09, D143]
-29. Start: die ganze Fläche in der Produktfarbe mit dem weißen Symbol, dann die App. „Über“ zeigt Kachel, Name,
-    Version und den Absender „von sebaro“. [D143, D144; ersetzt STR-01]
+    [AKT-09]
+29. Start: die ganze Fläche in der Produktfarbe mit dem weißen Symbol, dann die App; eine Website hat keinen.
+    „Über“ zeigt Kachel, Name, Version und den Absender: „Ein Werkzeug von“ (englisch „A tool by“), dann das
+    Markenschild von sebaro. [STR-01]
 
 ## Boden der Barrierefreiheit
 
 30. Dieser Boden reicht. Leg nichts darauf, wo es die normale Bedienung schlechter macht.
-    [ZUG-01 bis ZUG-04, Inhaber 2026-11-11]
+    [ZUG-01 bis ZUG-04]
     - Der Kontrast kommt aus den Tokens (4,5:1 für Text, 3:1 für großen Text und Formen).
     - Tippziele 48 dp oder px. Kompakte Zeilen mit 32 px nur in Desktop-Fenstern, die mit einem Zeiger bedient werden.
-    - Jedes Bedienelement hat einen Namen. Status nie nur über Farbe (Regel 20).
+    - Jedes Bedienelement hat einen Namen.
     - Der Fokus ist sichtbar. Im Web und auf dem Desktop gehen die Hauptwege mit der Tastatur.
     - Text folgt der Schriftgröße des Systems. Prüf jeden Bildschirm einmal bei großer Schrift (Android Stufe 1,3, Web
       200 % Zoom bei Desktop-Breite). Er muss benutzbar bleiben; „…“ ist erlaubt.

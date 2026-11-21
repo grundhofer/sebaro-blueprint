@@ -4,14 +4,14 @@
 
 /* ------------------------------------------------------------------ header and footer */
 .g-header__suffix { font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); color: var(--sb-color-text-muted); }
-/* D100 (5): at 200 % text on 320 px the lockup is wider than the row; „Blueprint“ then goes under „sebaro“ */
+/* at 200 % text on 320 px the lockup is wider than the row; „Blueprint“ then goes under „sebaro“ */
 .g-header .sb-lockup { min-inline-size: 0; }
 .g-header__name { display: inline-flex; flex-wrap: wrap; column-gap: var(--sb-space-2); min-inline-size: 0; }
 .g-nav { row-gap: 0; }
 /* every page listed in the footer, on a line of its own above the version line */
 .g-footer__pages { flex-basis: 100%; }
 .g-footer code { font-size: 0.875em; }
-/* a flex item takes its longest word as its minimum; the version line wraps instead (D100 (5)) */
+/* a flex item takes its longest word as its minimum; the version line wraps instead */
 .g-footer > p { min-inline-size: 0; }
 /* NAV-07 order is lockup, navigation, theme button (no language switch: the guide is German only). Lockup plus
  * "Blueprint" (206 px in dark) and the button (163 px) need 409 px with the gutters; on narrower pages the button label
@@ -37,31 +37,30 @@
 .g-ex__stage { box-sizing: border-box; min-inline-size: 0; padding: var(--sb-space-6) var(--sb-space-4); border: var(--sb-border-width-hairline) solid var(--sb-color-border); border-radius: var(--sb-radius-container); background: var(--sb-color-bg); overflow-x: auto; }
 .g-ex--do .g-ex__stage { border-block-start: var(--sb-border-width-strong) solid var(--sb-color-success); }
 .g-ex--dont .g-ex__stage { border-block-start: var(--sb-border-width-strong) solid var(--sb-color-danger); }
-/* D100 (5), D99 (1), D102 lane narrow: a stage is narrower than the screen its specimen stands for. Until 2.10.0 a phone
- * frame, a window shot, a video and the stage's direct content kept min(320px, 12rem) and scrolled in the stage at
- * large text; since the workshop's narrow-column parts (sebaro.css after D102: list rows, board, actions, dialogs,
- * changelog, top bar and menus stack instead of squeezing their words) most specimens reflow in the stage's own
- * width, so the minimum stays only where they do not (the rule below). A part that cannot reflow scrolls in its
- * own frame (a table, code, a wide window, the menus below); guide.js gives a stage that scrolls tabindex, role and name. A word that alone does not fit its line breaks
- * there (sb-fit.js gives that word, and only it, a hyphen) instead of being cut by a frame */
+/* a stage is narrower than the screen its specimen stands for. Most specimens reflow in the stage's own width
+ * (in sebaro.css list rows, board, actions, dialogs, changelog, top bar and menus stack instead of squeezing their
+ * words), so a minimum width stays only where they do not (the rule below). A part that cannot reflow scrolls in its
+ * own frame (a table, code, a wide window, the menus below); guide.js gives a stage that scrolls tabindex, role and
+ * name. A word that alone does not fit its line breaks there (sb-fit.js gives that word, and only it, a hyphen)
+ * instead of being cut by a frame */
 /* a phone frame stands for a screen of at least 320 px (so does a window shot and a video): it keeps that width at large
  * text (12rem is 320 px from 167 % text on) and the stage scrolls, instead of squeezing the view to a column no phone
- * has (provisional, agent, since 2.10.0) */
+ * has (provisional) */
 .g-ex__stage :is(.sb-phone, .sb-video, .sb-shots--window) { min-inline-size: min(320px, 12rem); }
 /* on a narrow screen at large text (24rem is 768 px at 200 %, 384 px at 100 %) the stage keeps 8 px at its sides
  * instead of 16 px that grow with the text (32 px at 200 %), so a specimen gets nearly the width of a phone's
- * content at 320 px (provisional, agent, 2.11.0) */
+ * content at 320 px (provisional) */
 @media (max-width: 24rem) { .g-ex__stage { padding-inline: min(var(--sb-space-4), 8px); } }
 .g-ex__stage { position: relative; }   /* positioned: an absolute part inside (visually hidden words) scrolls with the stage instead of widening the page */
 /* a stage breaks a word only where it alone does not fit its line (sebaro's break-word), never at any letter (that
  * squeezed toasts and buttons to columns of letters). Where a frame of an example cuts its content (overflow: hidden)
- * and a word is the only content of its part, that part may break the word instead of being cut (OVF4, D101 (9)):
+ * and a word is the only content of its part, that part may break the word instead of being cut:
  * the copy button of a code block at 320 px and 200 % */
 .g-ex__stage .sb-code__copy { max-inline-size: 100%; overflow-wrap: anywhere; }
 .g-ex__note { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); max-inline-size: 42em; }
 
 /* ------------------------------------------------------------------ specimens: sources, swatches, page cards */
-.g-source { margin-block-start: var(--sb-space-3); min-inline-size: 0; }   /* an open block never widens a grid parent: its code scrolls in its own frame (D100 (5)) */
+.g-source { margin-block-start: var(--sb-space-3); min-inline-size: 0; }   /* an open block never widens a grid parent: its code scrolls in its own frame */
 .g-source > summary { display: inline-flex; align-items: center; min-block-size: var(--sb-size-target-pointer); cursor: pointer; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
 .g-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, max(260px, 16.25rem)), 1fr)); gap: var(--sb-space-6) var(--sb-spacing-group); align-items: start; }
 
@@ -88,15 +87,15 @@
 }
 
 /* long names in inline code break instead of pushing a column or the page sideways (code blocks keep their lines); a
- * file name (sb-file-name) breaks only after - . _ / where the page wrote <wbr>, an identifier (sb-id) never (D101 (6), D80) */
+ * file name (sb-file-name) breaks only after - . _ / where the page wrote <wbr>, an identifier (sb-id) never */
 main :is(code, .sb-code-inline):not(pre code, .sb-file-name, .sb-id) { overflow-wrap: anywhere; }
 /* a meta-list value whose one word is wider than the whole row (a path, a command, an address) goes under its label and
- * breaks there instead of widening the page (D100 (5)): the flex item's minimum is clamped to the row. Workshop request:
- * sebaro.css .sb-meta-list has no such clamp yet */
+ * breaks there instead of widening the page: the flex item's minimum is clamped to the row (sebaro.css
+ * .sb-meta-list has no such clamp yet) */
 main .sb-meta-list > div > :is(dt, dd) { max-inline-size: 100%; }
 /* the changelog's 7rem date column leaves its entry about 48 px at 200 % text on 360 px, so names and words broke into
  * letters; from 22rem down (352 px at 100 %, 704 px at 200 %) the date stands above its entry, as the timeline does
- * (D100 (5); provisional, agent; workshop request: sebaro.css .sb-changelog has no such form yet) */
+ * (provisional; sebaro.css .sb-changelog has no such form yet) */
 @media (max-width: 22rem) { main .sb-changelog li { grid-template-columns: minmax(0, 1fr); row-gap: var(--sb-space-1); } }
 /* the contents of the page frame keep their 200 px (demo.css); at 200 % a long word („Mehrfachauswahl“) breaks in its
  * link instead of scrolling the list sideways: sb-toc's link is a flex box, whose text otherwise keeps its widest
@@ -105,14 +104,14 @@ main .sb-meta-list > div > :is(dt, dd) { max-inline-size: 100%; }
 /* the page frame's two columns start at 1024 px (demo.css, in px); at large text a window of 1024 px or more holds
  * less than 64rem (1024 px at 100 %, 2048 px at 200 %), so the page keeps the one column of a narrower screen, its
  * contents above the text: in 200 px the area counts stood on lines of their own and the text column shrank to half
- * (D100 (5), ZUG-09; provisional, agent). Every layout query of the guide's own CSS is in rem for the same reason,
+ * (ZUG-09; provisional). Every layout query of the guide's own CSS is in rem for the same reason,
  * and every grid's least column is max(<px>, <the same in rem>): equal at 100 %, twice as wide at 200 % */
 @media (min-width: 1024px) and (max-width: 63.99rem) {
   .demo-layout { display: block; padding-inline: var(--sb-spacing-gutter); }
   .demo-toc { position: static; max-block-size: none; overflow-y: visible; }
 }
-/* a tree outside a window keeps its one-line rows and its status words (D67 (2), sb-row__meta never shrinks); at
- * 200 % text its box scrolls sideways in its own frame instead of the page (D100 (5)); a box that scrolls has
+/* a tree outside a window keeps its one-line rows and its status words (sb-row__meta never shrinks); at
+ * 200 % text its box scrolls sideways in its own frame instead of the page; a box that scrolls has
  * tabindex="0", role="region" and a name, so the keyboard reaches it */
 main .demo-box:has(> .sb-tree) { overflow-x: auto; }
 /* a header specimen is the page of its header (sebaro.css switches the header by the sb-page container): in a frame

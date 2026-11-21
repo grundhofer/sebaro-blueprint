@@ -1,6 +1,6 @@
 /* daten.css: page chrome and proposal patterns of daten.html. Not part of the system; products never load it.
  * Same discipline as sebaro.css: only var(--sb-*) tokens, no raw colours, no shadows, no tinted card grounds.
- * Classes start with "g-daten-". Since D91 every specimen here is a system class; the chrome only frames them and draws
+ * Classes start with "g-daten-". Every specimen here is a system class; the chrome only frames them and draws
  * the deliberate "Nicht so" cases. */
 
 /* ------------------------------------------------------------------ item grid: specimen + rule + rule ids */
@@ -10,7 +10,7 @@
 .g-daten-item > h3 { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
 .g-daten-item > .g-mark-proposal { margin-block-start: calc(-1 * var(--sb-space-2)); }
 .g-daten-specimen { min-inline-size: 0; max-inline-size: 100%; padding-block: var(--sb-space-2); overflow-x: auto; }
-/* the heatmap reaches 6 px past its box on both sides (sb-heatmap's negative margin, the cell gap since D92) and the
+/* the heatmap reaches 6 px past its box on both sides (sb-heatmap's negative margin, the cell gap) and the
    focus ring sits 4 px outside a cell: room at the end keeps the box from scrolling and the ring of the last column
    whole at 320 and 390 px. The start needs none: the row names stand there, flush with the text */
 .g-daten-specimen--heatmap { padding-inline-end: calc(var(--sb-space-1) + var(--sb-space-0-5)); }
@@ -23,7 +23,7 @@
 /* sample lines: value on the left, what it is on the right */
 .g-daten-samples { display: grid; gap: var(--sb-space-2); margin: 0; padding: 0; list-style: none; container: g-daten-samples / inline-size; }
 .g-daten-samples li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--sb-space-3); align-items: baseline; }
-/* large text (D99 (1), D102 lane narrow): below 22em of the list (352 px at 100 %, 704 px at 200 %) value and label
+/* large text: below 22em of the list (352 px at 100 %, 704 px at 200 %) value and label
  * stand one under the other instead of squeezing their words into half a column each */
 @container g-daten-samples (width < 22em) { .g-daten-samples li { grid-template-columns: minmax(0, 1fr); gap: 0; } }
 .g-daten-samples__value { font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); font-variant-numeric: var(--sb-type-numeric-variant); overflow-wrap: anywhere; }
@@ -31,7 +31,7 @@
 
 /* ------------------------------------------------------------------ text */
 /* the narrow column of „Silbentrennung“ stands for a phone and is narrow on purpose, so its titles need their manual
- * hyphens at every screen width; the markup carries data-sb-narrow-ok (check_demo.py 1.8.0: OVF6 counts its squeezed
+ * hyphens at every screen width; the markup carries data-sb-narrow-ok (the workshop's check counts its squeezed
  * words in one info line instead of reporting them; an unneeded break is still an error) */
 .g-daten-narrow { box-sizing: border-box; inline-size: 11rem; max-inline-size: 100%; padding: var(--sb-space-3) var(--sb-space-3) var(--sb-space-3) 0; border-inline-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
 .g-daten-title-sample + .g-daten-title-sample { margin-block-start: var(--sb-space-3); }
@@ -55,7 +55,7 @@
 .g-daten-dot { display: inline-block; inline-size: 10px; block-size: 10px; border-radius: var(--sb-radius-pill); background: var(--sb-color-success); vertical-align: middle; }
 
 
-/* ------------------------------------------------------------------ code tones under the code block (FAR-11, D69) */
+/* ------------------------------------------------------------------ code tones under the code block (FAR-11) */
 .g-daten-tones { margin-block-start: var(--sb-space-4); }
 .g-daten-tones li { grid-template-columns: 6rem minmax(0, 1fr); }
 @container g-daten-samples (width < 22em) { .g-daten-tones li { grid-template-columns: minmax(0, 1fr); gap: 0; } }

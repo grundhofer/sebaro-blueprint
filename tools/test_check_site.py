@@ -1,53 +1,60 @@
 #!/usr/bin/env python3
-"""Self-test of check_site.py's TPLEXP group: python3 tools/test_check_site.py"""
-import json
-import shutil
+"""Self-test of check_site.py's helpers: python3 tools/test_check_site.py"""
+import struct
 import sys
-import tempfile
 import unittest
+import zlib
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import check_site as cs
 
 
-class TemplateExports(unittest.TestCase):
-    def setUp(self):
-        self.tmp = Path(tempfile.mkdtemp())
-        self.addCleanup(shutil.rmtree, self.tmp, True)
-        src = self.tmp / "docs" / "sebaro"
-        src.mkdir(parents=True)
-        (src / "tokens.css").write_text("t")
-        ios = self.tmp / "templates" / "ios-swiftui" / "SebaroDesign"
-        ios.mkdir(parents=True)
-        (ios / "sebaro-export.json").write_text(json.dumps({"sebaroDesign": {"commit": "abc1234"}}))
-        (self.tmp / "docs" / "GUIDE-SYNC.json").write_text(json.dumps({"sebaroDesignCommit": "abc1234"}))
-
-    def test_same_ios_commit_passes(self):
-        self.assertEqual(cs.template_export_findings(self.tmp), ([], []))
-
-    def test_release_copies_are_not_compared(self):
-        # the website, web app, desktop and Android starters hold the copy of the public release (a profile), not a
-        # mirror of docs/sebaro/; the iOS starter's export is the one setUp wrote
-        for rel in (r for r in cs.TEMPLATE_EXPORTS if "ios-swiftui" not in r):
-            copy = self.tmp / rel
-            copy.mkdir(parents=True)
-            (copy / "tokens.css").write_text("release")
-        self.assertEqual(cs.template_export_findings(self.tmp), ([], []))
-
-    def test_ios_commit_is_only_a_warning(self):
-        (self.tmp / "docs" / "GUIDE-SYNC.json").write_text(json.dumps({"sebaroDesignCommit": "def5678"}))
-        errors, warnings = cs.template_export_findings(self.tmp)
-        self.assertEqual(errors, [])
-        self.assertEqual(len(warnings), 1)
-        self.assertIn("templates/ios-swiftui", warnings[0])
+def png(width, height, rows, colour_type=2):
+    """A PNG of 8-bit rows, each row given with its filter byte."""
+    def chunk(kind, body):
+        return struct.pack(">I", len(body)) + kind + body + struct.pack(">I", zlib.crc32(kind + body))
+    head = struct.pack(">IIBBBBB", width, height, 8, colour_type, 0, 0, 0)
+    return b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", head) + chunk(b"IDAT", zlib.compress(b"".join(rows))) + chunk(b"IEND", b"")
 
 
-class TemplateFiles(unittest.TestCase):
-    def test_copies_are_left_out_and_the_starters_own_files_are_scanned(self):
-        files = [f.relative_to(cs.ROOT).as_posix() for f in cs.template_files()]
-        self.assertIn("templates/android-compose/BLUEPRINT.md", files)
-        self.assertEqual([f for f in files if f.startswith(cs.TEMPLATE_EXPORTS)], [])
+class DontSpecimen(unittest.TestCase):
+    """CSS and STYLE let a colour literal pass only inside a „Nicht so“ specimen."""
+
+    def exempt(self, css):
+        return cs.dont_exempt(cs.css_blocks(css), css.index("#"))
+
+    def test_only_the_inside_of_a_specimen_is_exempt(self):
+        self.assertTrue(self.exempt(".g-ex--dont .x { color: #f00 }"))
+        self.assertTrue(self.exempt("@media (min-width: 1px) { .g-ex--dont .x { color: #f00 } }"))
+        self.assertFalse(self.exempt(".x { color: #f00 }"))
+        self.assertFalse(self.exempt(".g-ex--dont .x, .y { color: #f00 }"))
+        self.assertFalse(self.exempt(".g-ex--dont .g-ex__label { color: #f00 }"))
+
+    def test_inline_style(self):
+        page = cs.Page()
+        page.feed('<div class="g-ex--dont"><p style="color: #f00">a</p><p class="g-ex__note" style="color: #0f0">b</p>'
+                  '</div><p style="color: #00f">c</p>')
+        self.assertEqual(page.dont_styles, 1)
+        self.assertEqual(page.styles, ["color: #0f0", "color: #00f"])
+
+
+class ShareImage(unittest.TestCase):
+    """OG reads size, colour type and the most frequent colour of a PNG."""
+
+    def test_ground_of_an_rgb_image(self):
+        white, red = b"\xff\xff\xff", b"\xff\x00\x00"
+        data = png(3, 2, [b"\x00" + white + white + red, b"\x02" + bytes(9)])   # second row: filter Up, the same pixels
+        width, height, depth, colour_type, kinds, idat = cs.png_info(data)
+        self.assertEqual((width, height, depth, colour_type, "tRNS" in kinds), (3, 2, 8, 2, False))
+        self.assertEqual(cs.png_ground(width, height, zlib.decompress(idat)), (white, 4 / 6))
+        data = png(2, 1, [b"\x01" + white + bytes(3)])                  # filter Sub: two white pixels
+        width, height, *_rest, idat = cs.png_info(data)
+        self.assertEqual(cs.png_ground(width, height, zlib.decompress(idat)), (white, 1.0))
+
+    def test_not_a_png(self):
+        with self.assertRaises(ValueError):
+            cs.png_info(b"GIF89a")
 
 
 if __name__ == "__main__":

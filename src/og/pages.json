@@ -1,6 +1,6 @@
 {
   "$schema": "../../docs/sebaro/brand/og/pages.schema.json",
-  "$comment": "written by tools/build.py from the pages (h1, meta description); do not edit. tools/og.mjs renders it with docs/sebaro/brand/og/render.mjs (D96 (a), WEB-09).",
+  "$comment": "written by tools/build.py from the pages (h1, meta description); do not edit. tools/og.mjs renders it with docs/sebaro/brand/og/render.mjs (WEB-09).",
   "site": {
     "product": "studio",
     "name": "sebaro Blueprint",
@@ -13,7 +13,7 @@
       "id": "index",
       "url": "/sebaro-blueprint/",
       "title": "Eine Gestaltung für alles, was sebaro baut.",
-      "description": "Die 31 Kernregeln von sebaro, die Baupläne und Startvorlagen je Produktart und wo du Bauteile und Daten nachschlägst.",
+      "description": "Die 31 Kernregeln von sebaro, was je Produktart dazukommt und wo du Bauteile und Daten nachschlägst.",
       "type": "website"
     },
     {

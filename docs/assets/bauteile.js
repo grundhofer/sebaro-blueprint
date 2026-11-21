@@ -1,6 +1,6 @@
 // bauteile.js: behaviour of bauteile.html that the system scripts do not cover. Classic script, no modules, no network.
 // [data-g-bauteile-enter="<id>"] replays the entry motion (.sb-enter) on that element, so the specimen can be watched again.
-// #b-canvas: places the free canvas through the CSSOM as an app does (spec/02 §3.29, CSP-safe, no style attribute);
+// #b-canvas: places the free canvas through the CSSOM as an app does (CSP-safe, no style attribute);
 // the same places and steps as the entry's JavaScript block.
 (function () {
   document.addEventListener("click", function (event) {

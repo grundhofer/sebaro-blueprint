@@ -1,49 +1,55 @@
 ---
 name: sebaro
-description: Build a new app, website, web app or desktop app in the sebaro style, or convert an existing project to sebaro (design system plus technology blueprint). Use when the user says "im sebaro-Stil", "sebaro style", "auf sebaro umbauen", "sebaro übernehmen", or starts a product of the sebaro family. Not for changing the sebaro system itself.
+description: Build a new app, website, web app or desktop app in the sebaro style, or convert an existing project to sebaro (design rules plus the technology plan of the product kind). Use when the user says "im sebaro-Stil", "sebaro style", "auf sebaro umbauen", "sebaro übernehmen", or starts a product of the sebaro family. Not for changing the sebaro system itself.
 ---
 
 # sebaro: build or convert a product
 
-sebaro is one design system and one technology blueprint per platform for a family of products. This skill is the
-way in. Everything it names lives in the sebaro kit, the repository that contains this skill.
+One family of products: the same rules for all, one preferred technology per kind.
 
-## Find the kit
+- **What and why** is the public Blueprint, this skill's repository (root: two folders above this file, symlinks
+  resolved; or clone `https://github.com/grundhofer/sebaro-blueprint`). Paths below start there.
+- **With what and how** is the private Foundry `grundhofer/sebaro-foundry`: plan, starter and parts. Read it with `gh`.
 
-The kit root is two folders above this file (`skills/sebaro/` inside it; resolve a symlink first). If the kit is not
-on this machine, clone `https://github.com/grundhofer/sebaro-blueprint` (public) and use that copy.
+## 1 Name the kind
 
-## Read first
+| The wish | Kind | Preferred base | Rules of the kind |
+|---|---|---|---|
+| phone app | `android-compose` | Kotlin, Jetpack Compose | `design/platforms/mobile.md` |
+| site that informs | `website-astro` | Astro, static | `design/platforms/website.md` |
+| application in the browser | `webapp-vite` | React, TypeScript, Vite | `design/platforms/webapp.md` |
+| desktop program | `desktop-tauri` | Tauri 2, React, Rust core | `design/platforms/desktop.md` |
 
-1. `<kit>/AGENTS.md`: the map.
-2. `<kit>/design/KERN.md`: the 31 core rules.
-3. `<kit>/design/views.md`: the 21 view types.
+Take the base without asking. When the wish does not fit it (iOS, another framework, its own server), ask the
+owner before you build; never bend the base.
 
-Read nothing else until a step below sends you there.
+## 2 Read, in this order
 
-## Name the product kind
+1. `design/KERN.md`, the core rules, and `design/views.md`: every screen takes one view type.
+2. The rules of the kind (table above).
+3. The plan of the kind:
+   `gh api repos/grundhofer/sebaro-foundry/contents/templates/<kind>/BLUEPRINT.md -H "Accept: application/vnd.github.raw"`
 
-| Kind | Starter and blueprint |
-|---|---|
-| Android app | `<kit>/templates/android-compose/` |
-| Website | `<kit>/templates/website-astro/` |
-| Web app | `<kit>/templates/webapp-vite/` |
-| Desktop app | `<kit>/templates/desktop-tauri/` |
+Look up only when needed: a part in `design/parts/<part>.md`, a rule cited as `[AKT-01]` in `rules/rules.json`.
 
-A starter's `BLUEPRINT.md`, where it has one, holds the technology rules. Its README names what the starter does
-not do yet.
+## 3 A new product
 
-## Then follow one playbook
+1. Unpack the starter into an empty folder and follow its README (rename, the kit builds the product files, its
+   checks once: green before any change):
+   `gh release download -R grundhofer/sebaro-foundry -p 'sebaro-template-<kind>.tar.gz' && tar xzf sebaro-template-<kind>.tar.gz -C <folder>`
+2. Paste [`AGENTS-snippet.md`](AGENTS-snippet.md) into the product's `AGENTS.md`.
+3. Write the list of views into the product: each with its view type and primary action; mark the one that is the
+   product's reason to exist. Ask the owner only what changes what you build, at most five questions, at once.
+4. Build: the starter starts empty. Keep its frame, settings, „Über“ and licences; replace its sample area (list,
+   detail, form) with the product's views, their four states and the core view, then data and logic as the plan
+   structures them.
 
-- A new product: [`new.md`](new.md).
-- An existing project that should become sebaro: [`convert.md`](convert.md).
+An existing project: [`convert.md`](convert.md).
 
-## What always holds
+## Always
 
-- **Plan first.** Write the plan, show it to the owner, build after the OK. Ask at most five questions, and only
-  those whose answer changes what you build.
-- **Use what is there.** Parts and tokens come from the sebaro copy in the project. Never edit the copy.
-- **Only when needed.** A missing part is built beside the copy and written into the project's gap list
-  (`docs/sebaro-luecken.md`). A deviation is decided with the owner and recorded in the product.
-- **Do not grow the system.** Nothing goes into sebaro because one product needs it.
-- **Say what you did not check.** Done means: checks green, looked at in light and dark, on the phone and wide.
+- Parts and tokens come from the sebaro copy in the product (the folder with `sebaro-export.json`). Never edit it.
+- A missing part is built beside the copy, with one line in `docs/sebaro-luecken.md`. A deviation from a rule is
+  decided with the owner ([`design-exception.md`](design-exception.md)). Nothing enters sebaro for one product.
+- Done: the product's CI is green, you looked at every view in light and dark, narrow and wide, and say what you
+  did not check.

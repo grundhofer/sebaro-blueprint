@@ -1,17 +1,15 @@
 # sebaro core rules
 
-Read this before you build or change a sebaro screen. These 31 rules are the ones you have to hold in mind; the
-rest is built into the parts ([parts.md](parts.md) says what a part still needs from you), the view templates
-([views.md](views.md)) and the checks. `[AKT-01]` points to the
-long catalogue `rules/rules.json` (reason and examples), `D<n>` to an owner decision. Look them up only when you
-need the reason. Where the catalogue says something else, this file wins.
+The 31 rules to hold in mind when you build or change a sebaro screen; the rest is built into the parts
+([parts/](parts/)), the view types ([views.md](views.md)) and the checks. `[AKT-01]` points to the catalogue
+`rules/rules.json`: look there only for the reason. Where it says something else, this file wins.
 
 ## The system
 
 1. Use the parts and tokens of the sebaro copy in your project. No raw colours, sizes or fonts, no second design
    system. Never edit the copy. [HAL-07, TEC-01]
 2. Build every screen from a view type. Fill its slots; change its fixed points only for the one view that is the
-   app's reason to exist. [D145]
+   app's reason to exist.
 3. If a part is missing, build it beside the copy from tokens and existing parts and write it into the project's
    gap list. A deviation is decided for the product and recorded in the product. It moves into sebaro when a second
    product needs it.
@@ -20,15 +18,15 @@ need the reason. Where the catalogue says something else, this file wins.
 
 4. One colour, one job. Cobalt: current place, link, focus, selected mark. Lime: the one next step, and the sebaro
    brand key. Status colours: only as glyph plus word. Everything else is grey with hairlines.
-   [FAR-01, FAR-03, EIN-03, D143]
+   [FAR-01, FAR-03, EIN-03]
 5. The product colour stands in the app's sign tile, on the start screen and in at most one product area per view,
-   and only on entry, overview (one value), detail with one value, result and the empty state. Never behind
-   controls or links. [D143, D145; replaces ZEI-01]
+   and only on overview (one value), detail with one value, result and the empty state. Never behind controls or
+   links. [ZEI-01]
 6. No coloured fill behind text except the primary action. Grounds are the four greys of the tokens.
    [FAR-02, FAR-05]
 7. Light and dark are equal. Every view works in both and in the tones „Kühl“ and „Warm“. One exception: an image a
-   machine reads (a QR code, a bar code shown at a till) stays dark on light in dark mode too, drawn in the light
-   theme's colours with a light margin around it. [FAR-09, FAR-15, D150]
+   machine reads (a QR code, a bar code at a till) stays dark on light in dark mode too, drawn in the light
+   theme's colours with a light margin. [FAR-09, FAR-15]
 
 ## Type, space, shape
 
@@ -37,8 +35,8 @@ need the reason. Where the catalogue says something else, this file wins.
 9. Spacing only from the scale. Layout is start-aligned, never centred. Fixed row heights, one density.
    [RAU-01, RAU-04, RAU-05]
 10. Layers are separated by a 2 px ink line, never by shadow, tint or elevation. Cards only group settings or
-    figures. A list stays a list of flat rows with hairlines, in every app and at every width.
-    [EBE-01, EBE-02, DAT-01, FOR-02, D145]
+    figures. A list is always flat rows with hairlines, in every app and at every width.
+    [EBE-01, EBE-02, DAT-01, FOR-02]
 11. No gradients, glow, textures or ornament. One radius per class (4, 8, 12, 16). The 45° cut means „final“ and
     stands only on actions that cannot be undone. [FOR-01, FOR-03, FOR-04, HAL-06]
 
@@ -46,15 +44,15 @@ need the reason. Where the catalogue says something else, this file wins.
 
 12. At most one lime primary action per view (a frame with two panes is one view), at the bottom of the area it
     acts on, labelled verb plus thing, last in its group. None where no clear next step exists; a detail view has
-    none. [AKT-01, AKT-02, AKT-04, AKT-11, D145]
+    none. [AKT-01, AKT-02, AKT-04, AKT-11]
 13. Three levels: lime for the next step, at most one outlined action per area, everything else a text action.
-    [AKT-06, D143]
+    [AKT-06]
 14. The primary action shows its own progress and result. No spinner over the view. A toast only for a reversible
-    result, with „Rückgängig“; the one toast without it says that something was copied to the clipboard. On
-    Android 13 and later the system confirms a copy itself: there the app shows no toast for it. [AKT-05, EBE-05,
-    D150]
-15. Deleting something saved always asks in a dialog that says what is lost. [AKT-07, AKT-08, D119]
-16. Under an action that sends data somewhere, one line says where it goes. Local only: „Bleibt auf diesem Gerät.“
+    result, with „Rückgängig“; the one toast without it confirms a copy where no copy key stays visible. A copy key
+    shows „Kopiert“ in itself for 2 s. Android 13 and later confirms a copy itself: no toast there.
+    [AKT-05, EBE-05]
+15. Deleting something saved always asks in a dialog that says what is lost. [AKT-07, AKT-08]
+16. Under an action that sends data, one line says where it goes. Local only: „Bleibt auf diesem Gerät.“
     [BEL-10]
 
 ## Navigation
@@ -63,7 +61,7 @@ need the reason. Where the catalogue says something else, this file wins.
     icon plus word; only tools that act in place may be icon-only. [NAV-01, NAV-02, NAV-10]
 18. Phone: bottom navigation with three to five top-level places, sub-screens get „back“. From 840 dp: a rail at
     the edge and two panes, list at the start, detail at the end. The top bar never carries the primary action.
-    [NAV-03, NAV-04, NAV-05, D145]
+    [NAV-03, NAV-04, NAV-05]
 19. One link style: the word in text colour with a 2 px cobalt underline. A link that leaves the app ends in the
     external-link icon. [LNK-01, LNK-02]
 
@@ -74,13 +72,14 @@ need the reason. Where the catalogue says something else, this file wins.
 21. Fields have a visible label above. An error is a red line, a glyph and a sentence that says what is wrong and
     what to do. [EIN-01, EIN-02, TXT-07]
 22. Empty: „Noch keine <Ding>“ plus one sentence on how it fills; the action stays at the bottom. Loading: local
-    work shows nothing; remote work over 1 s says „Wird geladen …“. [DAT-07, STA-06]
+    work shows no spinner; past about 1 s, a short sentence where the result will stand („Wird gesichert …“).
+    Remote work over 1 s says „Wird geladen …“. [DAT-07, STA-06]
 23. Calm: no count badges, red dots or banners. Motion only answers an action (8 px from below, at most 200 ms)
     and follows the system's reduce-motion setting. [HAL-05, BEW-01, BEW-02, BEW-04]
 24. Charts and figures are grey; only the current period is cobalt. [DAT-04]
 25. Icons only from the sebaro set, one function each. Arrows and chevrons are icons, not characters. Filled only
     for the current place, an on-state and status. A sign is never altered and always stands beside the app's
-    name. [ICO-03, ICO-05, ICO-06, ZEI-06, ZEI-07]
+    name or, in a top bar, the view's title. [ICO-03, ICO-05, ICO-06, ZEI-06, ZEI-07]
 
 ## Words
 
@@ -88,8 +87,7 @@ need the reason. Where the catalogue says something else, this file wins.
     „08:00–22:00“. No text built in code; every string comes from the string table. Every app and website ships in
     German and English from its first version: one file or folder per language, the languages named in one place,
     so a further language is its files plus one entry; a check fails when a language lacks a string. A content site
-    (articles) stays in its one language, German or English. [TXT-01, TXT-03, TXT-04, TXT-12, TEC-10, owner
-    2026-11-13]
+    (articles) stays in its one language, German or English. [TXT-01, TXT-03, TXT-04, TXT-12, TEC-10]
 27. Honest: no claim without proof, concrete facts instead of slogans, failures and missing values said in words,
     sample data marked „Beispieldaten“. Nothing loads from third-party servers.
     [HAL-03, HAL-04, HAL-09, BEL-01, BEL-09, TXT-02]
@@ -98,16 +96,17 @@ need the reason. Where the catalogue says something else, this file wins.
 
 28. The theme choice is called „Hell oder Dunkel“, with „Farbton: Kühl · Warm“ beside it. Phone app: in settings.
     Website: a button in the header. Web app: in the „Mehr“ menu. Desktop: in the menu „Darstellung“.
-    [AKT-09, D143]
-29. Start: the whole screen in the product colour with the white symbol, then the app. „Über“ shows tile, name,
-    version and the sender „von sebaro“. [D143, D144; replaces STR-01]
+    [AKT-09]
+29. Start: the whole screen in the product colour with the white symbol, then the app; a website has none. „Über“
+    shows tile, name, version and the sender: „Ein Werkzeug von“ (English „A tool by“), then the sebaro key mark.
+    [STR-01]
 
 ## Accessibility floor
 
-30. This floor is enough. Do not add more where it makes normal use worse. [ZUG-01 to ZUG-04, owner 2026-11-11]
+30. This floor is enough. Do not add more where it makes normal use worse. [ZUG-01 to ZUG-04]
     - Contrast comes from the tokens (4.5:1 for text, 3:1 for large text and shapes).
     - Touch targets 48 dp or px. Compact 32 px rows only in desktop windows used with a pointer.
-    - Every control has a name. Status never by colour alone (rule 20).
+    - Every control has a name.
     - Focus is visible. On web and desktop the main flows work with the keyboard.
     - Text follows the system text size. Check each screen once at a large size (Android font scale 1.3, web
       200 % zoom at desktop width). It must stay usable; an ellipsis is fine.

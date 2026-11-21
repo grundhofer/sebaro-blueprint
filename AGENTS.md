@@ -1,76 +1,33 @@
-# AGENTS.md: sebaro
+# AGENTS.md: sebaro Blueprint
 
-sebaro is the design system and the technology blueprints of one family of products: phone apps, websites, web
-apps and desktop apps. A product reads and copies from this repository. German overview for the owner:
-[README.md](README.md). Site: <https://grundhofer.github.io/sebaro-blueprint/>.
+The rules of the sebaro family of products: what a product looks like and how it behaves, and why. German overview
+for the owner: [README.md](README.md). Site: <https://grundhofer.github.io/sebaro-blueprint/>.
 
-> **Restructuring in progress (since 2026-11-21): fixes only.** This repository and the workshop swap roles and
-> are then re-created. Until that is done, only the restructuring's own pull requests and bug fixes enter here.
+> **Restructuring in progress (since 2026-11-21): fixes only.** Until it is done, only the restructuring's own pull
+> requests and bug fixes enter here.
 
 ## Building or converting a product
 
-Read in this order and stop when you have what the task needs.
+Start at [`skills/sebaro/SKILL.md`](skills/sebaro/SKILL.md). It names the product kind, what to read here and how to
+fetch the technology plan, the starter and the parts from the private workshop, sebaro Foundry. `skills/sebaro/` is
+an agent skill: link the folder into `~/.claude/skills/` and `~/.agents/skills/`.
 
-1. [`design/KERN.md`](design/KERN.md): the 31 core rules. Always. [`design/KERN.de.md`](design/KERN.de.md) is the
-   same text in German, for people; the site's start page shows it.
-2. [`design/views.md`](design/views.md): the 21 view types. Pick one for every screen.
-3. The starter of your product kind. It is the model for structure, wiring, tests and release:
-
-   | Product kind | Starter | Technology |
-   |---|---|---|
-   | Android app | [`templates/android-compose/`](templates/android-compose/README.md) | Kotlin, Jetpack Compose |
-   | Website | [`templates/website-astro/`](templates/website-astro/README.md) | Astro |
-   | Web app | [`templates/webapp-vite/`](templates/webapp-vite/README.md) | React, Vite, TypeScript |
-   | Desktop app | [`templates/desktop-tauri/`](templates/desktop-tauri/README.md) | Tauri 2 with the web app's UI stack |
-   | iOS app | [`templates/ios-swiftui/`](templates/ios-swiftui/README.md) | frozen: kept as it is until an iOS app is scheduled |
-
-   Each starter's `BLUEPRINT.md` holds the technology rules (stack, structure, tests, release, updates) and ends
-   with where the starter itself still differs; do not copy those parts. iOS has no blueprint.
-4. The sebaro copy inside the product, the folder with `sebaro-export.json`: parts, tokens, fonts, icons. Its README
-   says how it is wired; search it by name (`Sb…` in Kotlin, `sb-…` in CSS). Some parts leave one choice to you:
-   [`design/parts.md`](design/parts.md) has a line for each of them. Never edit the copy. Get it and keep it
-   current with its updater (Node 20 or newer, nothing else):
-
-   ```sh
-   curl -fsSLO https://github.com/grundhofer/sebaro-blueprint/releases/latest/download/update-copy.mjs
-   node update-copy.mjs --profile android --out sebaro   # or website, webapp, desktop; --packs a,b adds packs
-   node sebaro/checks/update-copy.mjs                    # later: the newest release, same profile and packs
-   ```
-
-   A copy holds the core of its product kind; its README lists the packs. The product's own files (launcher
-   icon, sign tile, favicons) are made by the kit in the copy from a `sebaro.product.json`
-   (`sebaro/product/PRODUCT-CONTRACT.md`).
-
-In short (core rules 1 to 3): use what the copy has, build what is missing beside the copy, record gaps and
-deviations in the product.
-
-The two jobs as playbooks: [`skills/sebaro/new.md`](skills/sebaro/new.md) for a new product,
-[`skills/sebaro/convert.md`](skills/sebaro/convert.md) for an existing project. `skills/sebaro/` is an agent skill:
-link the folder into `~/.claude/skills/` (Claude Code) and `~/.agents/skills/` (Codex), and „bau das im
-sebaro-Stil um“ is enough in any project. The section a product pastes into its own `AGENTS.md`:
-[`templates/AGENTS-snippet.md`](templates/AGENTS-snippet.md).
-
-## Look up only when needed
-
-| Need | Where |
+| Here | What |
 |---|---|
-| reason and examples of a rule cited as `[AKT-01]` | `rules/rules.json`; `rules/home.json` says where each of its 227 rules lives now |
-| markup of a web part with all its states, display of every kind of data | `docs/bauteile.html`, `docs/daten.html` |
-| a whole working example of a product | the starter of its kind (step 3): every screen, its tests and its release |
-| a review list per screen | [`templates/screen-checklist.md`](templates/screen-checklist.md) |
-| what changed between versions | [CHANGELOG.md](CHANGELOG.md) |
+| `design/KERN.md` (German: `KERN.de.md`) | the 31 core rules |
+| `design/views.md` | the 21 view types |
+| `design/platforms/` | rules per product kind |
+| `design/parts/` | one page per part: purpose, states, behaviour, rules |
+| `design/checklist.md` | a review list per screen |
+| `rules/rules.json` | the catalogue behind citations such as `[AKT-01]`, each rule with its reason |
 
 ## Changing this repository
 
-Build, checks, release and the sync with the workshop: [MAINTAINING.md](MAINTAINING.md). For the texts an agent reads
-by default these rules hold:
+Build, checks and releases: [MAINTAINING.md](MAINTAINING.md). For the texts an agent reads:
 
-- **Budgets in bytes**, checked in CI by `tools/check_budget.py`: this file 6,000, `design/KERN.md` 8,000 (its
-  German text `design/KERN.de.md` 9,000, kept in step by the same tool), `design/views.md` 4,500, `design/parts.md` 8,000, a starter's `BLUEPRINT.md` 10,000, a file of a skill 5,000, the product snippet 1,500. To add something, remove
-  something.
+- **Budgets in words**, checked by `tools/check_budget.py`. To add something, remove something.
 - **A new rule goes into a part, a starter or a check first.** It becomes a core rule only when none of those can
   carry it.
-- **No history in these files.** Who decided what and when stands in `CHANGELOG.md` and in the workshop's decision
-  log, not here.
-- **Two products.** Something enters sebaro when a second product needs it. Until then it lives in the product
-  that needs it.
+- **No history in these files**, and nothing a part, a starter or a check already enforces.
+- **Two products.** Something enters sebaro when a second product needs it. Until then it lives in the product.
+- **Public repository:** no personal data, local paths, accounts, decision numbers or names of unreleased products.
