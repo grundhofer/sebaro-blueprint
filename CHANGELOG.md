@@ -39,6 +39,20 @@ Der Blueprint sagt, was gilt und warum. Technik, Startvorlagen und das Entscheid
   sichtbar bleibt.
 - BEL-10, BEL-05: Mit veralteten Fakten entfällt der erzeugte Hinweis unter der Aktion; die Zusammenfassung zählt in
   der Folge bestanden, offen, übersprungen, nicht bestanden.
+- STR-01, HAL-07: Den Start in der Produktfarbe haben nur Apps (Handy, Web-App, Desktop); eine Website ist sofort
+  lesbar.
+- TEC-06: `CHECKS.md` eines Produkts ist kurz: nur, was keine Prüfung sieht, und jede Ausnahme mit ihrem Grund, kein
+  Protokoll der Läufe.
+- TEC-09, WEB-03: Ein Produkt liefert die Lizenztexte dessen mit, was es enthält: Eine App führt aus „Über“ zur
+  Lizenzliste, eine Website verlinkt „Lizenzen“ im Fuß. Der Anbietertext der Startvorlage ist ein markierter
+  Platzhalter, der jedes Release aufhält.
+- NAV-06: Eine Produkt-Website trägt ihre eigenen wenigen Wörter im Kopf; die vier Wörter gehören der Website der
+  Familie. Eine Web-App ohne Fenster hat den App-Rahmen mit drei bis fünf Orten; Hell oder Dunkel, Farbton und
+  Sprache wählt sie im Menü „Mehr“.
+- TEC-02: „Ohne Skript richtig, klassische Skripte“ gilt für die Skripte der Kopie und für Websites; ein Produkt aus
+  einem Framework rendert durch dieses.
+- DSK-10: Eine leere Sammlung sagt auch dort, wo Dokument-Reiter stehen, „Noch keine …“ und wie sie sich füllt.
+- Kernregel 25: In der oberen Leiste steht die Kachel neben dem Titel der Ansicht.
 - Zuordnung (`rules/home.json`): FOR-05 und STA-08 haben auch in Compose ein Bauteil.
 
 ## Frühere Versionen

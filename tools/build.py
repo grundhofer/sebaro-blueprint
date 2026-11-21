@@ -551,7 +551,7 @@ def llms_txt() -> str:
              f"- [Agent snippet]({REPO_URL}/blob/main/skills/sebaro/AGENTS-snippet.md): the section to paste into the "
              "product's AGENTS.md",
              f"- [Screen checklist]({REPO_URL}/blob/main/design/checklist.md): walk it before a screen is done; "
-             "record every check in CHECKS.md (TEC-06)",
+             "the product's CHECKS.md holds only what no check sees and every waiver with its reason (TEC-06)",
              "", "## Pages", ""]
     for file, label, _icon, desc in PAGES:
         lines.append(f"- [{label}]({SITE_URL}{file}): {desc}")

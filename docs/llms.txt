@@ -11,7 +11,7 @@ Machine-readable rules: https://grundhofer.github.io/sebaro-blueprint/rules.json
 - [Parts](https://github.com/grundhofer/sebaro-blueprint/tree/main/design/parts): one concept page per part
 - [Playbooks](https://github.com/grundhofer/sebaro-blueprint/blob/main/skills/sebaro/SKILL.md): start a new product or convert an existing project, as an agent skill
 - [Agent snippet](https://github.com/grundhofer/sebaro-blueprint/blob/main/skills/sebaro/AGENTS-snippet.md): the section to paste into the product's AGENTS.md
-- [Screen checklist](https://github.com/grundhofer/sebaro-blueprint/blob/main/design/checklist.md): walk it before a screen is done; record every check in CHECKS.md (TEC-06)
+- [Screen checklist](https://github.com/grundhofer/sebaro-blueprint/blob/main/design/checklist.md): walk it before a screen is done; the product's CHECKS.md holds only what no check sees and every waiver with its reason (TEC-06)
 
 ## Pages
 
