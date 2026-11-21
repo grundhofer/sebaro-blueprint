@@ -1,12 +1,10 @@
 # sebaro view types
 
-Every screen of a sebaro app is one of these 21 types. Pick the type, start from its template, fill the slots. The
-three fixed points of a type (primary action, product area, way out) stay as they are. Only the one view that is
-the app's reason to exist may take its own form, built from the system's parts.
+The 21 view types of core rule 2. A type's fixed points are its primary action, its product area and its way out.
+Where your starter has a template for a type, start from it.
 
-For all types: at most one lime primary action per view, at the bottom. A list stays a list. Light and dark are
-equal. Below 840 dp one pane with bottom navigation; from 840 dp a rail and, for `list` and `search`, two panes.
-The four `state-*` types replace the content of the view they occur in and never add a second primary action.
+From 840 dp `list` and `search` show two panes. The four `state-*` types replace the content of the view they occur
+in and never add a second primary action.
 
 | Key | Name | For | Primary action | Product area | Way out |
 |---|---|---|---|---|---|
@@ -31,6 +29,3 @@ The four `state-*` types replace the content of the view they occur in and never
 | `account` | Anmeldung und Konto | sign in, look at the account | „Anmelden“; none on the account | no | back |
 | `import` | Import und Teilen-Ziel | review incoming content before storing it | „Sichern in <Ziel>“ or „Importieren“ | no | back cancels and returns to the sending app |
 | `help` | Hilfe und Rückmeldung | find an answer, send feedback | none on the list; „Senden“ on feedback | no | back |
-
-Templates: where the starter of your platform type has one for a type, start from it; otherwise this table is the
-reference.

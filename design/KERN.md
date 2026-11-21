@@ -1,9 +1,9 @@
 # sebaro core rules
 
-Read this before you build or change a sebaro screen. These 31 rules are the ones you have to hold in mind; the
-rest is built into the parts (one page each in [parts/](parts/)), the view types ([views.md](views.md)) and the
-checks. `[AKT-01]` points to the long catalogue `rules/rules.json` (reason and examples). Look it up only when you
-need the reason. Where the catalogue says something else, this file wins.
+Read this before you build or change a sebaro screen. These 31 rules are the ones to hold in mind; the rest is
+built into the parts ([parts/](parts/)), the view types ([views.md](views.md)) and the checks. `[AKT-01]` points to
+the catalogue `rules/rules.json`: look there only when you need the reason. Where it says something else, this
+file wins.
 
 ## The system
 
@@ -22,7 +22,7 @@ need the reason. Where the catalogue says something else, this file wins.
    [FAR-01, FAR-03, EIN-03]
 5. The product colour stands in the app's sign tile, on the start screen and in at most one product area per view,
    and only on entry, overview (one value), detail with one value, result and the empty state. Never behind
-   controls or links. [replaces ZEI-01]
+   controls or links. [ZEI-01]
 6. No coloured fill behind text except the primary action. Grounds are the four greys of the tokens.
    [FAR-02, FAR-05]
 7. Light and dark are equal. Every view works in both and in the tones „Kühl“ and „Warm“. One exception: an image a
@@ -86,8 +86,7 @@ need the reason. Where the catalogue says something else, this file wins.
     „08:00–22:00“. No text built in code; every string comes from the string table. Every app and website ships in
     German and English from its first version: one file or folder per language, the languages named in one place,
     so a further language is its files plus one entry; a check fails when a language lacks a string. A content site
-    (articles) stays in its one language, German or English. [TXT-01, TXT-03, TXT-04, TXT-12, TEC-10, owner
-    2026-11-13]
+    (articles) stays in its one language, German or English. [TXT-01, TXT-03, TXT-04, TXT-12, TEC-10]
 27. Honest: no claim without proof, concrete facts instead of slogans, failures and missing values said in words,
     sample data marked „Beispieldaten“. Nothing loads from third-party servers.
     [HAL-03, HAL-04, HAL-09, BEL-01, BEL-09, TXT-02]
@@ -98,11 +97,11 @@ need the reason. Where the catalogue says something else, this file wins.
     Website: a button in the header. Web app: in the „Mehr“ menu. Desktop: in the menu „Darstellung“.
     [AKT-09]
 29. Start: the whole screen in the product colour with the white symbol, then the app. „Über“ shows tile, name,
-    version and the sender „von sebaro“. [replaces STR-01]
+    version and the sender „von sebaro“. [STR-01]
 
 ## Accessibility floor
 
-30. This floor is enough. Do not add more where it makes normal use worse. [ZUG-01 to ZUG-04, owner 2026-11-11]
+30. This floor is enough. Do not add more where it makes normal use worse. [ZUG-01 to ZUG-04]
     - Contrast comes from the tokens (4.5:1 for text, 3:1 for large text and shapes).
     - Touch targets 48 dp or px. Compact 32 px rows only in desktop windows used with a pointer.
     - Every control has a name. Status never by colour alone (rule 20).

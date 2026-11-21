@@ -251,7 +251,7 @@
 
     <div class="g-kern-all" id="kern">
 <!-- guide:kern -->
-<p class="g-kern__intro">Lies das, bevor du einen Bildschirm in sebaro baust oder änderst. Diese 31 Regeln musst du im Kopf haben; der Rest steckt in den Bauteilen (je eine Seite in <a href="https://github.com/grundhofer/sebaro-blueprint/blob/main/design/parts/">parts/<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a>), den Ansichtstypen (<a href="https://github.com/grundhofer/sebaro-blueprint/blob/main/design/views.md"><code class="sb-file-name">views.md</code><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a>) und den Prüfungen. <code class="sb-code-inline">[AKT-01]</code> verweist auf den langen Katalog <code class="sb-code-inline sb-file-name">rules/<wbr>rules.json</code> (Begründung und Beispiele). Schlag dort nur nach, wenn du den Grund brauchst. Wo der Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die englische Fassung <a href="https://github.com/grundhofer/sebaro-blueprint/blob/main/design/KERN.md"><code class="sb-file-name">KERN.md</code><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a>.</p>
+<p class="g-kern__intro">Lies das, bevor du einen Bildschirm in sebaro baust oder änderst. Diese 31 Regeln musst du im Kopf haben; der Rest steckt in den Bauteilen (<a href="https://github.com/grundhofer/sebaro-blueprint/blob/main/design/parts/">parts/<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a>), den Ansichtstypen (<a href="https://github.com/grundhofer/sebaro-blueprint/blob/main/design/views.md"><code class="sb-file-name">views.md</code><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a>) und den Prüfungen. <code class="sb-code-inline">[AKT-01]</code> verweist auf den Katalog <code class="sb-code-inline sb-file-name">rules/<wbr>rules.json</code>: Schlag dort nur nach, wenn du den Grund brauchst. Wo er etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die englische Fassung <a href="https://github.com/grundhofer/sebaro-blueprint/blob/main/design/KERN.md"><code class="sb-file-name">KERN.md</code><svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a>.</p>
 <section class="sb-section g-kern" id="kern-das-system" aria-labelledby="kern-das-system-h">
 <h2 class="sb-section__title" id="kern-das-system-h">Das System</h2>
 <ol class="g-kern__rules" start="1">
@@ -264,7 +264,7 @@
 <h2 class="sb-section__title" id="kern-farbe-h">Farbe</h2>
 <ol class="g-kern__rules" start="4">
 <li id="regel-4">Eine Farbe, eine Aufgabe. Kobalt: der aktuelle Ort, Link, Fokus, Auswahlmarke. Lindgrün: der eine nächste Schritt und das Markenschild von sebaro. Statusfarben: nur als Glyphe mit Wort. Alles andere ist grau mit Haarlinien. <span class="g-kern__refs">[<span class="sb-id">FAR-01</span>, <span class="sb-id">FAR-03</span>, <span class="sb-id">EIN-03</span>]</span></li>
-<li id="regel-5">Die Produktfarbe steht in der Zeichenkachel der App, auf dem Startbildschirm und in höchstens einer Produktfläche je Ansicht, und nur auf Einstieg, Übersicht (ein Wert), Detail mit einem Wert, Ergebnis und leerem Zustand. Nie hinter Bedienelementen oder Links. <span class="g-kern__refs">[ersetzt <span class="sb-id">ZEI-01</span>]</span></li>
+<li id="regel-5">Die Produktfarbe steht in der Zeichenkachel der App, auf dem Startbildschirm und in höchstens einer Produktfläche je Ansicht, und nur auf Einstieg, Übersicht (ein Wert), Detail mit einem Wert, Ergebnis und leerem Zustand. Nie hinter Bedienelementen oder Links. <span class="g-kern__refs">[<span class="sb-id">ZEI-01</span>]</span></li>
 <li id="regel-6">Keine farbige Fläche hinter Text außer der Hauptaktion. Die Gründe sind die vier Grautöne der Tokens. <span class="g-kern__refs">[<span class="sb-id">FAR-02</span>, <span class="sb-id">FAR-05</span>]</span></li>
 <li id="regel-7">Hell und Dunkel sind gleichwertig. Jede Ansicht funktioniert in beiden und in den Farbtönen „Kühl“ und „Warm“. Eine Ausnahme: Ein Bild, das eine Maschine liest (ein QR-Code, ein Strichcode für die Kasse), bleibt auch im Dunkelmodus dunkel auf hell, in den Farben des hellen Modus und mit einem hellen Rand. <span class="g-kern__refs">[<span class="sb-id">FAR-09</span>, <span class="sb-id">FAR-15</span>]</span></li>
 </ol>
@@ -310,7 +310,7 @@
 <section class="sb-section g-kern" id="kern-woerter" aria-labelledby="kern-woerter-h">
 <h2 class="sb-section__title" id="kern-woerter-h">Wörter</h2>
 <ol class="g-kern__rules" start="26">
-<li id="regel-26">Deutsche Oberflächen sagen „du“. Titel sind kurze Substantive. Zahlen: ein geschütztes Leerzeichen (U+00A0) zwischen Zahl und Einheit, „10.000“, „12,90&nbsp;€“, „08:00–22:00“. Kein Text wird im Code zusammengesetzt; jede Zeichenkette kommt aus der Texttabelle. Jede App und jede Website erscheint ab der ersten Version auf Deutsch und Englisch: je Sprache eine Datei oder ein Ordner, die Sprachen an einer Stelle benannt, so dass eine weitere Sprache ihre Dateien und ein Eintrag sind; eine Prüfung schlägt fehl, wenn einer Sprache ein Text fehlt. Eine Inhaltsseite mit Artikeln bleibt in ihrer einen Sprache, Deutsch oder Englisch. <span class="g-kern__refs">[<span class="sb-id">TXT-01</span>, <span class="sb-id">TXT-03</span>, <span class="sb-id">TXT-04</span>, <span class="sb-id">TXT-12</span>, <span class="sb-id">TEC-10</span>, Inhaber <span class="sb-id">2026-11-13</span>]</span></li>
+<li id="regel-26">Deutsche Oberflächen sagen „du“. Titel sind kurze Substantive. Zahlen: ein geschütztes Leerzeichen (U+00A0) zwischen Zahl und Einheit, „10.000“, „12,90&nbsp;€“, „08:00–22:00“. Kein Text wird im Code zusammengesetzt; jede Zeichenkette kommt aus der Texttabelle. Jede App und jede Website erscheint ab der ersten Version auf Deutsch und Englisch: je Sprache eine Datei oder ein Ordner, die Sprachen an einer Stelle benannt, so dass eine weitere Sprache ihre Dateien und ein Eintrag sind; eine Prüfung schlägt fehl, wenn einer Sprache ein Text fehlt. Eine Inhaltsseite mit Artikeln bleibt in ihrer einen Sprache, Deutsch oder Englisch. <span class="g-kern__refs">[<span class="sb-id">TXT-01</span>, <span class="sb-id">TXT-03</span>, <span class="sb-id">TXT-04</span>, <span class="sb-id">TXT-12</span>, <span class="sb-id">TEC-10</span>]</span></li>
 <li id="regel-27">Ehrlich: keine Behauptung ohne Beleg, konkrete Fakten statt Werbesätzen, Fehler und fehlende Werte in Worten, Beispieldaten als „Beispieldaten“ markiert. Nichts lädt von fremden Servern. <span class="g-kern__refs">[<span class="sb-id">HAL-03</span>, <span class="sb-id">HAL-04</span>, <span class="sb-id">HAL-09</span>, <span class="sb-id">BEL-01</span>, <span class="sb-id">BEL-09</span>, <span class="sb-id">TXT-02</span>]</span></li>
 </ol>
 </section>
@@ -318,13 +318,13 @@
 <h2 class="sb-section__title" id="kern-feste-orte-h">Feste Orte</h2>
 <ol class="g-kern__rules" start="28">
 <li id="regel-28">Die Wahl des Erscheinungsbilds heißt „Hell oder Dunkel“, daneben steht „Farbton: Kühl · Warm“. Handy-App: in den Einstellungen. Website: ein Knopf im Kopf. Web-App: im Menü „Mehr“. Desktop: im Menü „Darstellung“. <span class="g-kern__refs">[<span class="sb-id">AKT-09</span>]</span></li>
-<li id="regel-29">Start: die ganze Fläche in der Produktfarbe mit dem weißen Symbol, dann die App. „Über“ zeigt Kachel, Name, Version und den Absender „von sebaro“. <span class="g-kern__refs">[ersetzt <span class="sb-id">STR-01</span>]</span></li>
+<li id="regel-29">Start: die ganze Fläche in der Produktfarbe mit dem weißen Symbol, dann die App. „Über“ zeigt Kachel, Name, Version und den Absender „von sebaro“. <span class="g-kern__refs">[<span class="sb-id">STR-01</span>]</span></li>
 </ol>
 </section>
 <section class="sb-section g-kern" id="kern-boden-der-barrierefreiheit" aria-labelledby="kern-boden-der-barrierefreiheit-h">
 <h2 class="sb-section__title" id="kern-boden-der-barrierefreiheit-h">Boden der Barrierefreiheit</h2>
 <ol class="g-kern__rules" start="30">
-<li id="regel-30">Dieser Boden reicht. Leg nichts darauf, wo es die normale Bedienung schlechter macht. <span class="g-kern__refs">[<span class="sb-id">ZUG-01</span> bis <span class="sb-id">ZUG-04</span>, Inhaber <span class="sb-id">2026-11-11</span>]</span>
+<li id="regel-30">Dieser Boden reicht. Leg nichts darauf, wo es die normale Bedienung schlechter macht. <span class="g-kern__refs">[<span class="sb-id">ZUG-01</span> bis <span class="sb-id">ZUG-04</span>]</span>
 <ul>
 <li>Der Kontrast kommt aus den Tokens (4,5:1 für Text, 3:1 für großen Text und Formen).</li>
 <li>Tippziele 48&nbsp;dp oder px. Kompakte Zeilen mit 32&nbsp;px nur in Desktop-Fenstern, die mit einem Zeiger bedient werden.</li>
@@ -351,19 +351,19 @@
       <ul class="g-index-paths">
         <li>
           <h3><a href="https://github.com/grundhofer/sebaro-blueprint/blob/main/design/platforms/mobile.md">Handy-App<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a></h3>
-          <p>Navigation unten, Gesten, Mitteilungen, Widget, Kamera.</p>
+          <p>Rahmen, Haptik, Mitteilungen, Widget, Kamera.</p>
         </li>
         <li>
           <h3><a href="https://github.com/grundhofer/sebaro-blueprint/blob/main/design/platforms/website.md">Website<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a></h3>
-          <p>Kopf und Fuß, Lesespalte, Druck, Vorschaubild.</p>
+          <p>Kopf und Fuß, Sprache, Druck, Vorschaubild.</p>
         </li>
         <li>
           <h3><a href="https://github.com/grundhofer/sebaro-blueprint/blob/main/design/platforms/webapp.md">Web-App<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a></h3>
-          <p>Rahmen mit Navigation, das Menü „Mehr“, Kopfleiste.</p>
+          <p>Kopf, das Menü „Mehr“, Sprache.</p>
         </li>
         <li>
           <h3><a href="https://github.com/grundhofer/sebaro-blueprint/blob/main/design/platforms/desktop.md">Desktop-App<svg class="sb-icon sb-icon--16" aria-hidden="true" focusable="false"><use href="#external-link--16"/></svg></a></h3>
-          <p>Fenster, Menü, Tastatur, Dichte.</p>
+          <p>Fenster, Menü, Tastatur, Dokumente.</p>
         </li>
       </ul>
     </section>

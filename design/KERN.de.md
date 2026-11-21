@@ -1,10 +1,9 @@
 # sebaro: die Kernregeln
 
 Lies das, bevor du einen Bildschirm in sebaro baust oder änderst. Diese 31 Regeln musst du im Kopf haben; der Rest
-steckt in den Bauteilen (je eine Seite in [parts/](parts/)), den Ansichtstypen ([views.md](views.md)) und den
-Prüfungen. `[AKT-01]` verweist auf den langen Katalog `rules/rules.json` (Begründung und Beispiele). Schlag dort nur
-nach, wenn du den Grund brauchst. Wo der Katalog etwas anderes sagt, gelten diese Regeln. Sie sagen dasselbe wie die
-englische Fassung [KERN.md](KERN.md).
+steckt in den Bauteilen ([parts/](parts/)), den Ansichtstypen ([views.md](views.md)) und den Prüfungen. `[AKT-01]`
+verweist auf den Katalog `rules/rules.json`: Schlag dort nur nach, wenn du den Grund brauchst. Wo er etwas anderes
+sagt, gelten diese Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md](KERN.md).
 
 ## Das System
 
@@ -23,7 +22,7 @@ englische Fassung [KERN.md](KERN.md).
    [FAR-01, FAR-03, EIN-03]
 5. Die Produktfarbe steht in der Zeichenkachel der App, auf dem Startbildschirm und in höchstens einer Produktfläche
    je Ansicht, und nur auf Einstieg, Übersicht (ein Wert), Detail mit einem Wert, Ergebnis und leerem Zustand. Nie
-   hinter Bedienelementen oder Links. [ersetzt ZEI-01]
+   hinter Bedienelementen oder Links. [ZEI-01]
 6. Keine farbige Fläche hinter Text außer der Hauptaktion. Die Gründe sind die vier Grautöne der Tokens.
    [FAR-02, FAR-05]
 7. Hell und Dunkel sind gleichwertig. Jede Ansicht funktioniert in beiden und in den Farbtönen „Kühl“ und „Warm“.
@@ -94,7 +93,7 @@ englische Fassung [KERN.md](KERN.md).
     und Englisch: je Sprache eine Datei oder ein Ordner, die Sprachen an einer Stelle benannt, so dass eine weitere
     Sprache ihre Dateien und ein Eintrag sind; eine Prüfung schlägt fehl, wenn einer Sprache ein Text fehlt. Eine
     Inhaltsseite mit Artikeln bleibt in ihrer einen Sprache, Deutsch oder Englisch.
-    [TXT-01, TXT-03, TXT-04, TXT-12, TEC-10, Inhaber 2026-11-13]
+    [TXT-01, TXT-03, TXT-04, TXT-12, TEC-10]
 27. Ehrlich: keine Behauptung ohne Beleg, konkrete Fakten statt Werbesätzen, Fehler und fehlende Werte in Worten,
     Beispieldaten als „Beispieldaten“ markiert. Nichts lädt von fremden Servern.
     [HAL-03, HAL-04, HAL-09, BEL-01, BEL-09, TXT-02]
@@ -105,12 +104,12 @@ englische Fassung [KERN.md](KERN.md).
     Einstellungen. Website: ein Knopf im Kopf. Web-App: im Menü „Mehr“. Desktop: im Menü „Darstellung“.
     [AKT-09]
 29. Start: die ganze Fläche in der Produktfarbe mit dem weißen Symbol, dann die App. „Über“ zeigt Kachel, Name,
-    Version und den Absender „von sebaro“. [ersetzt STR-01]
+    Version und den Absender „von sebaro“. [STR-01]
 
 ## Boden der Barrierefreiheit
 
 30. Dieser Boden reicht. Leg nichts darauf, wo es die normale Bedienung schlechter macht.
-    [ZUG-01 bis ZUG-04, Inhaber 2026-11-11]
+    [ZUG-01 bis ZUG-04]
     - Der Kontrast kommt aus den Tokens (4,5:1 für Text, 3:1 für großen Text und Formen).
     - Tippziele 48 dp oder px. Kompakte Zeilen mit 32 px nur in Desktop-Fenstern, die mit einem Zeiger bedient werden.
     - Jedes Bedienelement hat einen Namen. Status nie nur über Farbe (Regel 20).
