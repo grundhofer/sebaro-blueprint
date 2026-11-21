@@ -53,6 +53,9 @@ Der Blueprint sagt, was gilt und warum. Technik, Startvorlagen und das Entscheid
   einem Framework rendert durch dieses.
 - DSK-10: Eine leere Sammlung sagt auch dort, wo Dokument-Reiter stehen, „Noch keine …“ und wie sie sich füllt.
 - Kernregel 25: In der oberen Leiste steht die Kachel neben dem Titel der Ansicht.
+- ZEI-06, WEB-10: Der Wortlaut folgt dem: Die Kachel steht neben dem Namen oder, in der oberen Leiste einer App,
+  neben dem Titel der Ansicht; DE / EN als Auswahl gilt für Websites mit einer Hülle, eine Web-App wählt die Sprache
+  in „Mehr“.
 - Zuordnung (`rules/home.json`): FOR-05 und STA-08 haben auch in Compose ein Bauteil.
 
 ## Frühere Versionen
