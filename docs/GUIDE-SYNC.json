@@ -1,8 +1,8 @@
 {
-  "$comment": "written by tools/sync_from_design.py; do not edit",
+  "$comment": "the state of the checked-in copy of the workshop's export; do not edit",
   "system": "sebaro",
-  "sebaroDesignCommit": "8f7f322c91e7c0181225f221d0b8188cf90e72ba",
-  "sebaroDesignUncommitted": false,
+  "foundryCommit": "8f7f322c91e7c0181225f221d0b8188cf90e72ba",
+  "foundryUncommitted": false,
   "exportTool": "export_system.py 1.36.0",
   "contracts": {
     "tokens": "2.0",

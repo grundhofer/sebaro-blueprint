@@ -100,7 +100,7 @@
 /* a live specimen right after a do/don't pair (Kurzmeldung) */
 .g-examples + .g-bauteile-states { margin-block-start: var(--sb-space-6); }
 
-/* ------------------------------------------------------------------ D91 entries */
+/* ------------------------------------------------------------------ further entries */
 /* footer „Darstellung“: the system styles an h2 there; on this page it is a paragraph so the outline stays intact */
 /* a form of its own keeps the specimen radios apart from the footer of this page (same name="sb-tone") */
 .g-bauteile-tone-form { display: contents; }

@@ -21,13 +21,13 @@ Groups
          that docs/sebaro/tokens.css or docs/sebaro/css/sebaro.css defines or reads (removed tokens fail here; prose
          like "--sb-space-" without var() is not checked)
   STYLE  inline style="" attributes contain no colour literals, except inside a .g-ex--dont specimen
-  LICENSE LICENSE.md is byte-identical to docs/sebaro/LICENSE.md (D76: one licence file for workshop, guide, export)
+  LICENSE LICENSE.md is byte-identical to docs/sebaro/LICENSE.md (one licence file for workshop, Blueprint, export)
   RULES  rules/rules.json: unique ids, required fields, known areas/status
-  TEXT   U+202F / U+2009 are not used in page text (D22: U+00A0 between number and unit)
+  TEXT   U+202F / U+2009 are not used in page text (U+00A0 between number and unit)
   CHANGE every rule that differs from the last snapshot in rules/releases/ (new, changed, removed) is named under
          "Unveröffentlicht" in CHANGELOG.md and carries a newer "changed" date (a rule already dated on the day of the
          last release may keep that day, it cannot move further the same day); the version is the last release's
-  OG     share images (D96 (a), WEB-09): every page except those of MOVED has exactly one canonical and one each of og:type (website on the
+  OG     share images (WEB-09): every page except those of MOVED has exactly one canonical and one each of og:type (website on the
          start page, else article), og:site_name, og:locale de_DE, og:url, og:title, og:description, og:image with
          width 1200, height 630 and a non-empty alt, twitter:card summary_large_image, and one meta description;
          canonical = og:url = the page's address under SITE_URL, og:title = its <h1>, og:description = its meta
@@ -37,7 +37,7 @@ Groups
          macOS render the fonts with other pixels (tools/og.mjs --check). Warning: an input recorded in
          src/og/head/inputs.json (page list, template, script, tokens, fonts, sprite, tile, lockups) changed since
          the images were rendered (render again: node tools/og.mjs, then tools/build.py)
-  TERM   retired names do not appear in pages, rules or docs (D71: only "sebaro Sans" and "sebaro Mono");
+  TERM   retired names do not appear in pages, rules or docs (only "sebaro Sans" and "sebaro Mono");
          the font licence files in docs/sebaro/ keep the authors' copyright as the OFL requires
 """
 from __future__ import annotations
@@ -357,7 +357,7 @@ def main() -> int:
                 dont_css += 1
                 continue
             line = body[: m.start()].count("\n") + 1
-            errors.append(f"CSS {css.name}:{line}: box-shadow (D46: ink lines instead of shadows)")
+            errors.append(f"CSS {css.name}:{line}: box-shadow (ink lines instead of shadows)")
         for m in re.finditer(r"url\(\s*['\"]?https?:", body):
             errors.append(f"NET {css.name}: remote url()")
         for m in re.finditer(r"@import\s+['\"]?https?:", body):
@@ -393,14 +393,14 @@ def main() -> int:
     if not lic_export.is_file():
         errors.append("LICENSE docs/sebaro/LICENSE.md missing")
     elif not lic.is_file() or lic.read_bytes() != lic_export.read_bytes():
-        errors.append("LICENSE LICENSE.md differs from docs/sebaro/LICENSE.md (D76: the same file; copy it over)")
+        errors.append("LICENSE LICENSE.md differs from docs/sebaro/LICENSE.md (the same file; copy it over)")
 
     # TEXT
     for name, pg in parsed.items():
         text = "".join(pg.text)
         for ch, label in ((" ", "U+202F"), (" ", "U+2009")):
             if ch in text:
-                errors.append(f"TEXT {name}: {label} in text (D22: use U+00A0)")
+                errors.append(f"TEXT {name}: {label} in text (use U+00A0)")
 
     # CHANGE
     releases = sorted((ROOT / "rules" / "releases").glob("*.json"), key=lambda p: tuple(int(x) for x in p.stem.split(".")))
@@ -498,7 +498,7 @@ def main() -> int:
     for f in term_files:
         if f.is_file() and retired.search(f.read_text(encoding="utf-8", errors="ignore")):
             n = len(retired.findall(f.read_text(encoding="utf-8", errors="ignore")))
-            errors.append(f"TERM {f.relative_to(ROOT)}: {n}x retired font name (D71: only sebaro Sans / sebaro Mono)")
+            errors.append(f"TERM {f.relative_to(ROOT)}: {n}x retired font name (only sebaro Sans / sebaro Mono)")
 
     # RULES
     if RULES.is_file():

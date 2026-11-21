@@ -32,7 +32,7 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: axe (WCAG 2.2 AA), overflow and console errors, light at 390 px and dark at 1440 px
         run: node tools/check_a11y.mjs
-      # D96: render the share images again with the exported render.mjs (Chromium only, D96 (b)); the head snippets
+      # render the share images again with the exported render.mjs (Chromium only); the head snippets
       # must be equal, the PNG bytes are only reported (Linux draws the fonts with other pixels than macOS); runs even
       # when the axe step failed, so one failure does not hide the other
       - name: Share images render here too, head snippets equal the committed ones

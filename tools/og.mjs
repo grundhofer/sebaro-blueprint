@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// og.mjs: the guide's share images (D96 (a), WEB-09), rendered from the guide's own page list with the exported
+// og.mjs: the guide's share images (WEB-09), rendered from the guide's own page list with the exported
 // docs/sebaro/brand/og/render.mjs. The template and the script come only from the export; this file never copies,
 // fills or edits the template, it only calls the script and moves its output into place.
 //
@@ -18,11 +18,11 @@
 // Check: the fresh render must pass render.mjs' own checks on this machine (exit 0); every head snippet and head.json
 // must equal the committed ones byte for byte (they are text and do not depend on fonts); docs/og/ must hold exactly
 // the pages' PNGs. inputs.json is compared but only reported (note): an input that changed without changing a snippet
-// (a synced token or font) is check_site.py's OG warning, so a sync PR is not blocked. The PNG bytes are compared and
+// (a token or font of a newer copy) is check_site.py's OG warning, so replacing the copy is not blocked. The PNG bytes are compared and
 // reported, but they fail the check only with --png-bytes: Linux and macOS draw the same fonts with slightly
 // different pixels, so CI never fails on them.
 // Exit codes: 0 ok · 1 render failed or something differs · 2 usage error or missing file. Needs Node 20+ and Playwright
-// with Chromium (npm ci, then npx playwright install chromium), Chromium only (D96 (b)).
+// with Chromium (npm ci, then npx playwright install chromium), Chromium only.
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
@@ -42,7 +42,7 @@ const rel = (p) => path.relative(ROOT, p).split(path.sep).join("/");
 const sha = (p) => createHash("sha256").update(readFileSync(p)).digest("hex");
 const list = (dir, ext) => (existsSync(dir) ? readdirSync(dir).filter((n) => n.endsWith(ext)).sort() : []);
 
-// every file the images and snippets are made from (render.mjs finds them relative to itself, spec/09 §18.1)
+// every file the images and snippets are made from (render.mjs finds them relative to itself)
 function inputs() {
   const files = [PAGES, RENDER, path.join(SEBARO, "brand", "og", "template.html"),
     path.join(SEBARO, "brand", "og", "pages.schema.json"), path.join(SEBARO, "tokens.css"),
