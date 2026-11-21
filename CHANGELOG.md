@@ -22,6 +22,22 @@ Der Blueprint sagt, was gilt und warum. Technik, Startvorlagen und das Entscheid
   ZEI-08, ZEI-09, ZEI-10, ZEI-11, ZEI-12, ICO-01, ICO-02, STR-02, TEC-11.
 - Neu: eine Seite je Bauteil (`design/parts/`) und je Produktart (`design/platforms/`). Die Startvorlagen,
   `design/parts.md` und der Abgleich mit der Werkstatt entfallen hier.
+- STA-06: Lokale Arbeit zeigt nie einen Kreisel; dauert sie länger als etwa 1 s, steht ein kurzer Satz dort, wo das
+  Ergebnis stehen wird.
+- AKT-07, AKT-10: Eine Detailansicht zeigt „… löschen“ sichtbar am Ende ihres Inhalts; ein „Mehr“-Menü gibt es erst
+  bei mehreren seltenen Aktionen, dann mit dem Löschen zuletzt.
+- FOR-03: Gestrichelt nur, wo der Strich etwas bedeutet: „offen“, Ziellinie, zweite Datenreihe, „offline“ am Avatar.
+- MOB-12: Der Blitz ist eine Taste mit dem Menü „Auto“, „An“, „Aus“; dunkel sind nur die Kamera und die Seitenansicht
+  im Vollbild.
+- DAT-13: Die Hauptaktion nennt die Spalte nur, solange die Tafel gewischt wird; breit heißt sie „Neue Karte“.
+- ZEI-13: In „Über“ folgt auf den Kopf die Absenderzeile „Ein Werkzeug von“ mit dem Markenschild, dann die Fakten.
+- STR-03, ZEI-01: Jeder Schritt der Einführung hat sein eigenes Bild; der Einstieg hat keine Produktfläche.
+- EBE-07, DSK-08: Ein Menü schließt sich, wenn die Seite scrollt.
+- EBE-05: Eine Taste „Kopieren“ zeigt 2 s „Kopiert“ in sich selbst; die Kurzmeldung gibt es nur, wo keine Taste
+  sichtbar bleibt.
+- BEL-10, BEL-05: Mit veralteten Fakten entfällt der erzeugte Hinweis unter der Aktion; die Zusammenfassung zählt in
+  der Folge bestanden, offen, übersprungen, nicht bestanden.
+- Zuordnung (`rules/home.json`): FOR-05 und STA-08 haben auch in Compose ein Bauteil.
 
 ## Frühere Versionen
 
