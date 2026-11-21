@@ -819,9 +819,7 @@
    "home": "platform-web"
   },
   "TEC-09": {
-   "home": "component",
-   "web": "usage",
-   "android": "carried"
+   "home": "check"
   },
   "TEC-10": {
    "home": "core",

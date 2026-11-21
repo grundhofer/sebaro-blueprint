@@ -19,5 +19,5 @@ site must carry.
 ## Rules
 
 - „Impressum“ and „Datenschutz“ are never left out; only „GitHub“ depends on the product. [WEB-03]
-- A link that leaves the site ends in the external-link icon. [K19, LNK-02]
+- A link that leaves the site ends in the external-link icon. [K19]
 - The sender is no action and no link.

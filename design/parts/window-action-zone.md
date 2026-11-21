@@ -28,5 +28,5 @@ The foot of a window across its whole width: the state sentence at the start, th
 - The total of the states appears exactly once, here, never at the foot of the sidebar. It speaks only about what is
   open. [STA-07]
 - The zone spans the window under sidebar and content, with one continuous ink line. [EBE-08]
-- One primary action, last and at the end. [K12, AKT-11]
+- One primary action, last and at the end. [K12]
 - A place that is nothing open (where the files live) goes into the inspector or under „Über“.

@@ -22,6 +22,6 @@ instead.
 ## Rules
 
 - Never a primary action or „Sichern“ in the top bar. In a phone editor „Sichern“ stands at the bottom, and only
-  while something is unsaved. [K18, NAV-05]
-- The bar stands on `bg`: no fill, no shadow, no elevation. [NAV-05]
+  while something is unsaved. [K18]
+- The bar stands on `bg`: no fill, no shadow, no elevation. [K18]
 - The title is a short noun. It wraps and is never cut with an ellipsis. [K26, SCH-06]

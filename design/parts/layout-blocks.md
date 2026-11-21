@@ -24,6 +24,6 @@ wraps, a form grid for fields.
 ## Rules
 
 - Space siblings with these, never with margins or padding on the children. [RAU-07]
-- Actions come last, the primary action last of all; on Android they go into `SbScreen`. [RAU-07, AKT-11]
+- Actions come last, the primary action last of all; on Android they go into `SbScreen`. [K12, RAU-07]
 - In an app view the primary action stays in the bottom block, not in the form. [K12]
 - Every gap is a spacing step of the scale. [K9]

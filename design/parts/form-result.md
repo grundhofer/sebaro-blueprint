@@ -28,6 +28,6 @@ saves through the primary action of the bottom block instead.
 ## Rules
 
 - No primary action in the result, no toast, no tinted box. [WEB-05]
-- Required is the norm and unmarked; a voluntary field ends its label in „(optional)“. [STA-03]
-- The submit button is the section's primary action, last in its group. [K12, AKT-11]
+- Required is the norm and unmarked; a voluntary field ends its label in „(optional)“. [K20]
+- The submit button is the section's primary action, last in its group. [K12]
 - Other field errors are the server's and stand at their fields. [K21]

@@ -19,8 +19,8 @@ block, the sticky foot of a view, under the primary action bar.
 
 ## Rules
 
-- Three to five places, top level only. A sub-screen gets „back“ and shows no bottom navigation. [K18, NAV-03]
-- Every place shows icon and word. [K17, NAV-02]
-- The current place is the line plus a second cue, never a fill, a pill or a tint. [K17, NAV-01]
-- No hamburger menu on phones. [NAV-03]
+- Three to five places, top level only. A sub-screen gets „back“ and shows no bottom navigation. [K18]
+- Every place shows icon and word. [K17]
+- The current place is the line plus a second cue, never a fill, a pill or a tint. [K17]
+- No hamburger menu on phones. [K18]
 - No count badges and no red dots on an item. [K23]

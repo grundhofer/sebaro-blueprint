@@ -23,10 +23,10 @@ frame the bottom navigation becomes the rail, so no second side navigation stand
 
 ## Rules
 
-- Use it from 840 dp on tablets and from 1024 px in windows. [K18, NAV-04]
-- Every place shows icon and word. [K17, NAV-02]
+- Use it from 840 dp on tablets and from 1024 px in windows. [K18]
+- Every place shows icon and word. [K17]
 - One place line per place: a place that only opens a document carries no mark while the tree shows that document's
   row.
-- The foot holds only „Einstellungen“, never a total of states. [NAV-04, STA-07]
+- The foot holds only „Einstellungen“, never a total of states. [K18, STA-07]
 - A tool that does not act on the group stays the primary action of the action zone and is not repeated in a group
-  head. [NAV-04]
+  head. [K18]

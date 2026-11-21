@@ -23,7 +23,7 @@ Sample data carries the marker „Beispieldaten“ in every form.
 ## Rules
 
 - A reassuring claim appears only with a passed, current check. A disclosure (data that leaves or is collected)
-  always appears. [K27, BEL-01]
+  always appears. [K27]
 - Note text is generated from the product's facts, never typed. The claim itself states exactly the value of the
   fact. [BEL-06]
 - Every note names who checked („Eigene Prüfung, automatisch“, „Eigene Prüfung, von Hand“, or both) and what
@@ -39,5 +39,5 @@ Sample data carries the marker „Beispieldaten“ in every form.
   „Bleibt auf diesem Gerät.“, „Beispieldaten“, „Wie geprüft?“. [K20]
 - Name the facts, not a vague term: „ohne Analyse-Skripte, ohne Werbe-IDs, ohne Cookies“ instead of „ohne
   Tracking“. An app without ads says „Keine Werbe-SDKs · Keine Werbe-ID“, never „Ohne Werbung“ or „werbefrei“.
-  [BEL-01]
+  [K27]
 - Never ship invented sample facts in a product. [BEL-08]

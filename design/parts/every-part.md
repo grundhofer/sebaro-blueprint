@@ -6,7 +6,7 @@ What holds for all parts. A part's own page only adds what differs.
 
 ## Names
 
-- Names say the function, never a story. [HAL-02]
+- Names say the function, never a story.
 - A state lives in the platform's own state (ARIA or native on the web, semantics on Android), never in a parallel
   class; where the platform has no word for it, in `data-sb-state`. [TEC-02]
 
@@ -14,7 +14,8 @@ What holds for all parts. A part's own page only adds what differs.
 
 - Default: `text` on `bg`, control boundaries `border-strong`, hairlines `border`. A hairline is never a control's
   only boundary. [FAR-07]
-- Secondary text is `text-muted`; `text-subtle` only for large text or text nobody needs to read. [FAR-06]
+- Secondary text is `text-muted`; `text-subtle` only from 24 px (18.66 px bold) or for text nobody needs
+  to read. [FAR-06]
 - Hover: `hover-fill`, or the underline on links and text actions. Pressed: `pressed-fill`. Never a tint, shadow,
   ripple or motion. On Android your own clickable sets `indication = null` and draws `hoverFill` or `pressedFill`
   itself. [FAR-08]

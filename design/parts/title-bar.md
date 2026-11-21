@@ -22,7 +22,7 @@ end. A phone view has a top bar instead.
 ## Rules
 
 - Places are reached through the sidebar, the tree and the palette; a breadcrumb navigation is for pages. [DSK-06]
-- A tool that acts in place may show only an icon. Whatever opens a place shows icon and word. [K17, NAV-10]
+- A tool that acts in place may show only an icon. Whatever opens a place shows icon and word. [K17]
 - No theme button in the title bar. [DSK-05]
 - The update shows no dot, no badge and no lime, never opens a window at start, and nothing restarts without the
   press. [DSK-13]

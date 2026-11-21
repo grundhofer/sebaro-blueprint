@@ -23,4 +23,5 @@ Code and machine values: a block with a copy key, inline code, and keys. A diff 
 - Only keywords, strings, constants and comments get a look; the rest stays plain. No bold, no italic; code reads
   without colour. On Android the app splits the code into these. [TXT-10, FAR-11]
 - An error in code is the wavy underline plus its message in a line of its own. [TXT-11]
+- Compose has no error look in code yet; an app that needs one builds it beside the copy. [K3, TXT-11]
 - sebaro Mono is for code, IDs and versions only. [K8]

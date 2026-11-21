@@ -37,4 +37,4 @@ Fifteen shortcuts are the same in every desktop app and web app with a window.
 - No shortcut needs a key that the German keyboard makes only with ⌥ or AltGr (`\ [ ] { } @ | ~`). On Windows, never
   Strg+Alt with a key that gives a character under AltGr. [DSK-09]
 - Never a chord the system keeps, such as ⌘Q, ⌘H, Alt+F4 or any chord with the Windows key.
-- „Löschen …“ always opens the dialog; with a trash it reads „In den Papierkorb legen …“. [K15, AKT-08]
+- „Löschen …“ always opens the dialog; with a trash it reads „In den Papierkorb legen …“. [K15]

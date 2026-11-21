@@ -17,7 +17,7 @@ to what the control already says.
 
 ## Rules
 
-- It only adds; it is never the one place of an information. The element needs `popover="manual"`. [EBE-06]
+- It only adds; it is never the one place of an information. [EBE-06]
 - The trigger keeps its own name. An icon button still needs its label; a trigger without a name shows no tooltip.
   [EBE-06]
-- The line that says where data goes never stands in a tooltip. [BEL-10]
+- The line that says where data goes never stands in a tooltip. [K16]

@@ -22,7 +22,7 @@ content.
 ## Rules
 
 - A tool that acts in place may be icon-only. Whatever opens a place („Einstellungen“, „Heute“, „Suche“) always
-  shows icon and word. [K17, NAV-10]
+  shows icon and word. [K17]
 - Pressed is never a fill. [EIN-04]
 - An area that takes keys of its own while it has focus, beyond Tab and the arrows of its role, says them once in
   its description, and in the app's keyboard help where there is one.

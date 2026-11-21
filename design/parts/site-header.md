@@ -24,7 +24,7 @@ window has the title bar instead.
 
 - No menu button on a website: all words stay visible. [NAV-06]
 - The theme choice is called „Hell oder Dunkel“, never a sun or moon icon, never hidden in a menu on a website.
-  [K28, AKT-09]
+  [K28]
 - „DE / EN“ leads to the same page in the other language, never to a start page. A missing page shows its code grey
   and unlinked. No flags, no redirect by browser language. [WEB-10]
 - The key mark is the brand, never a second primary action. [K4]

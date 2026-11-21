@@ -24,7 +24,7 @@ four short options of a setting are a segmented control.
 
 ## Rules
 
-- Selected is the edge plus colour and weight, never a fill. [K17, NAV-01]
+- Selected is the edge plus colour and weight, never a fill. [K17]
 - Do not stretch the tabs over the width. [NAV-08]
 - A selected tab is never disabled alone. A tab list that is disabled as a whole is not shown.
 - In a window, the switch between two views of one file is a compact switch in the content head, not a second row of
