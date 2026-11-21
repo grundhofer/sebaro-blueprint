@@ -10,17 +10,14 @@
 .g-kern__rules > li { padding-inline-start: var(--sb-space-1); }
 .g-kern__rules > li::marker { font-variant-numeric: var(--sb-type-numeric-variant); color: var(--sb-color-text-muted); }
 .g-kern__rules ul { display: grid; gap: var(--sb-space-2); margin: var(--sb-space-3) 0 0; padding-inline-start: var(--sb-space-6); }
-/* the references of a rule ([AKT-01], D145): small, in mono, no links */
+/* the references of a rule ([AKT-01]): small, in mono, no links */
 .g-kern__refs { font: var(--sb-type-code); letter-spacing: var(--sb-type-code-tracking); color: var(--sb-color-text-muted); }
 
-/* blueprints and starters, places to look things up */
+/* platform types, places to look things up */
 .g-index-paths { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, max(280px, 17.5rem)), 1fr)); gap: var(--sb-space-8) var(--sb-spacing-group); margin: 0; padding: 0; list-style: none; }
 .g-index-paths h3 { margin: 0 0 var(--sb-space-2); font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
 .g-index-paths p { margin: 0; color: var(--sb-color-text-muted); }
-.g-index-paths p + p { margin-block-start: var(--sb-space-2); }
-.g-index-paths .g-index-links { color: var(--sb-color-text); }
 
 .g-index-note { margin: var(--sb-space-4) 0 0; max-inline-size: 42em; color: var(--sb-color-text-muted); }
 .g-index-note + .g-index-paths { margin-block-start: var(--sb-space-6); }
-.g-index-paths + .g-index-note { margin-block-start: var(--sb-space-8); }
 .sb-section__title + .g-index-note { margin-block-start: 0; }
