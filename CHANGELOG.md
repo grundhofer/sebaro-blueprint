@@ -23,8 +23,11 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
   Hash des Wiederherstellungscodes), langsam gesalzen gehasht und mit einem eigenen Keystore-Schlüssel versiegelt. Nie
   im Klartext, ohne Cloud-Sicherung und ohne Übertragung auf ein neues Gerät (Speicher, Passphrase und Sperre unter
   `<device-transfer>` ausgeschlossen), mit Fehlerzustand statt stillem Löschen und einem Test gegen Klartext; ein
-  lesbarer Export nur auf ausdrückliche Wahl der Person; FLAG_SECURE, wo ein Bildschirm sensible Inhalte zeigt;
-  Android ohne `androidx.security:security-crypto`; dazu Web-App, Desktop und Website und die Grenzen jedes Wegs.
+  lesbarer Export nur auf ausdrückliche Wahl der Person; FLAG_SECURE, wo ein Bildschirm sensible Inhalte zeigt, nie
+  ohne einen Schalter in den Einstellungen, der Bildschirmfotos erlaubt (den Standard legt das Produkt fest und
+  begründet ihn; keine Ansicht ist immer gesperrt; Desktop mit dem Inhaltsschutz des Fensters ebenso, die Web-App kann
+  nichts sperren und hat keinen Schalter); Android ohne `androidx.security:security-crypto`; dazu Web-App, Desktop und
+  Website und die Grenzen jedes Wegs.
 - Zuordnung (`rules/home.json`): TEC-12 gehört zum Start eines Produkts, TEC-13 zu seinen Prüfungen.
 
 ## 4.0.0 · 2026-11-21
