@@ -824,6 +824,12 @@
   "TEC-10": {
    "home": "core",
    "ref": 26
+  },
+  "TEC-12": {
+   "home": "playbook"
+  },
+  "TEC-13": {
+   "home": "check"
   }
  }
 }

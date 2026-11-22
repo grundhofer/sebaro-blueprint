@@ -13,6 +13,16 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 - Ansichtstyp `list` (`design/views.md`): Eine Liste zum Abhaken ist eine Form der Liste. Ein Druck auf die Zeile
   hakt den Eintrag ab, statt das Detail zu öffnen.
 - MOB-02: Das Lint-Skript für Android hat die Regeln A1–A8, nicht A1–A9.
+- Neu: TEC-12. Alles, was ein Produkt speichert, hat eine von drei Klassen: sensibel (besondere Kategorien nach
+  Art. 9 DSGVO, Zugangsdaten, Tokens, Kopplungsschlüssel, genaue Standortverläufe und alles, woraus sie sich ableiten
+  lassen), normal (App-eigener Speicher, keine Cloud-Sicherung) oder technisch (Klartext erlaubt).
+- Neu: TEC-13. Sensible Daten liegen nur verschlüsselt mit einem hardwaregestützten Schlüssel, in einem
+  verschlüsselten Datenspeicher je App; getrennt davon dürfen nur die Geheimnisse der Zugangssperre liegen (PIN-Hash,
+  Hash des Wiederherstellungscodes), langsam gesalzen gehasht und mit einem eigenen Keystore-Schlüssel versiegelt. Nie
+  im Klartext, ohne Cloud-Sicherung, mit Fehlerzustand statt stillem Löschen und einem Test gegen Klartext; ein
+  lesbarer Export nur auf ausdrückliche Wahl der Person; FLAG_SECURE, wo ein Bildschirm sensible Inhalte zeigt;
+  Android ohne `androidx.security:security-crypto`; dazu Web-App, Desktop und Website und die Grenzen jedes Wegs.
+- Zuordnung (`rules/home.json`): TEC-12 gehört zum Start eines Produkts, TEC-13 zu seinen Prüfungen.
 
 ## 4.0.0 · 2026-11-21
 
