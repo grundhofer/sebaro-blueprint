@@ -16,6 +16,8 @@ to what failed; a deletion asks in a dialog.
 - Large text: the sentence wraps, and the action goes under it at the end once it no longer fits beside it. A long
   file name breaks inside the toast.
 - In a window the toast stands at the top of the action zone, never over the text.
+- Where a field belongs to the primary action and stands directly above it, the toast stands above the field,
+  never over it.
 - It enters from below and is announced politely.
 
 ## Rules

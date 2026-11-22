@@ -10,6 +10,10 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+- Toast (`design/parts/toast.md`): Gehört ein Feld zur Hauptaktion und steht direkt über ihr, steht der Toast über
+  dem Feld, nie darauf.
+- Skill: Die Startvorlagen bringen `AGENTS.md` mit dem sebaro-Abschnitt und `docs/ansichten.md` für die Liste der
+  Ansichten mit; der Skill verweist darauf, statt den Abschnitt einfügen zu lassen.
 - Ansichtstyp `list` (`design/views.md`): Eine Liste zum Abhaken ist eine Form der Liste. Ein Druck auf die Zeile
   hakt den Eintrag ab, statt das Detail zu öffnen.
 - MOB-02: Das Lint-Skript für Android hat die Regeln A1–A8, nicht A1–A9.
