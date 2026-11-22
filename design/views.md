@@ -2,14 +2,14 @@
 
 The 21 view types of core rule 2. A type's fixed points are its primary action, its product area and its way out.
 
-From 840 dp `list` and `search` show two panes. The four `state-*` types replace the content of the view they occur
-in and never add a second primary action.
+From 840 dp `list` and `search` show two panes. The four `state-*` types replace a view's content and add no second
+primary action.
 
 | Key | Name | For | Primary action | Product area | Way out |
 |---|---|---|---|---|---|
 | `entry` | Einstieg | introduce the app and the next setup step | „Weiter: <Ziel>“ | no; a picture per step | steps only, no main navigation |
 | `overview` | Übersicht | the current situation and the usual next act | the app's most frequent act | yes, the one value | bottom navigation |
-| `list` | Liste | scan and open a collection | create something new | no | bottom navigation; a row opens the detail |
+| `list` | Liste | scan and open a collection | create something new | no | bottom navigation; a row opens the detail or checks its item off |
 | `detail` | Detail | look at one item | none; „Bearbeiten“ is outlined | only with one value | back to the collection |
 | `form` | Formular | edit a draft, then save | „Sichern“ | no | back; asks about unsaved changes |
 | `flow` | Ablauf in Schritten | a finite task, one step at a time | „Weiter: <nächster Schritt>“ | no | steps above the content; back through the steps |

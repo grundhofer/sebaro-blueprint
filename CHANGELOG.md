@@ -10,6 +10,10 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+- Ansichtstyp `list` (`design/views.md`): Eine Liste zum Abhaken ist eine Form der Liste. Ein Druck auf die Zeile
+  hakt den Eintrag ab, statt das Detail zu öffnen.
+- MOB-02: Das Lint-Skript für Android hat die Regeln A1–A8, nicht A1–A9.
+
 ## 4.0.0 · 2026-11-21
 
 Der Blueprint sagt, was gilt und warum. Technik, Startvorlagen und das Entscheidungsprotokoll liegen in der Werkstatt.
