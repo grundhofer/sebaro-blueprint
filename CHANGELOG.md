@@ -10,6 +10,8 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+## 4.1.0 · 2026-11-22
+
 - Toast (`design/parts/toast.md`): Gehört ein Feld zur Hauptaktion und steht direkt über ihr, steht der Toast über
   dem Feld, nie darauf.
 - Skill: Die Startvorlagen bringen `AGENTS.md` mit dem sebaro-Abschnitt und `docs/ansichten.md` für die Liste der
