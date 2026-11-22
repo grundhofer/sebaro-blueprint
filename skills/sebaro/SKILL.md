@@ -37,9 +37,9 @@ Look up only when needed: a part in `design/parts/<part>.md`, a rule cited as `[
 1. Unpack the starter into an empty folder and follow its README (rename, the kit builds the product files, its
    checks once: green before any change):
    `gh release download -R grundhofer/sebaro-foundry -p 'sebaro-template-<kind>.tar.gz' && tar xzf sebaro-template-<kind>.tar.gz -C <folder>`
-2. Paste [`AGENTS-snippet.md`](AGENTS-snippet.md) into the product's `AGENTS.md`.
-3. Write the list of views into the product: each with its view type and primary action; mark the one that is the
-   product's reason to exist. Ask the owner only what changes what you build, at most five questions, at once.
+2. Keep the starter's `AGENTS.md`: it holds [`AGENTS-snippet.md`](AGENTS-snippet.md).
+3. Write the list of views into `docs/ansichten.md`: each with its view type and primary action; mark the one that
+   is the product's reason to exist. Ask the owner only what changes what you build, at most five questions, at once.
 4. Build: the starter starts empty. Keep its frame, settings, „Über“ and licences; replace its sample area (list,
    detail, form) with the product's views, their four states and the core view, then data and logic as the plan
    structures them.
