@@ -1,0 +1,32 @@
+{
+  "$schema": "../../docs/sebaro/brand/og/pages.schema.json",
+  "$comment": "written by tools/build.py from the pages (h1, meta description); do not edit. tools/og.mjs renders it with docs/sebaro/product/render.mjs share (WEB-09).",
+  "site": {
+    "product": "studio",
+    "name": "sebaro Blueprint",
+    "origin": "https://grundhofer.github.io",
+    "lang": "de",
+    "imageBase": "/sebaro-blueprint/og/"
+  },
+  "pages": [
+    {
+      "id": "index",
+      "url": "/sebaro-blueprint/",
+      "title": "Eine Gestaltung für alles, was sebaro baut.",
+      "description": "Die 31 Kernregeln von sebaro, was je Produktart dazukommt und wo du Bauteile und Daten nachschlägst.",
+      "type": "website"
+    },
+    {
+      "id": "bauteile",
+      "url": "/sebaro-blueprint/bauteile.html",
+      "title": "Alle Bauteile mit ihren Zuständen",
+      "description": "Alle Bauteile von sebaro mit ihren Zuständen, Regeln und dem genauen Markup zum Kopieren."
+    },
+    {
+      "id": "daten",
+      "url": "/sebaro-blueprint/daten.html",
+      "title": "Daten zeigen",
+      "description": "Jede Datenart einmal so, wie sebaro sie zeigt: Text, Zahlen, Zeit, Zustand, Kategorien, Personen, Technisches, Sammlungen, Diagramme, Medien, Orte, Leeres und Belege, jeweils mit Regel."
+    }
+  ]
+}

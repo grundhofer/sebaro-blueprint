@@ -1,0 +1,48 @@
+name: check
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      # no token and no network here: the copy is only compared with its record, never with a newer release
+      - name: The sebaro copy is unchanged (every file against sebaro-export.json)
+        run: node docs/sebaro/checks/verify-export.mjs --strict
+      - name: The Blueprint's own product files are what sebaro.product.json and the copy give
+        run: python3 docs/sebaro/product/product_kit.py check sebaro.product.json --copy docs/sebaro --out docs/sebaro-product
+      - name: Generated blocks and outputs are fresh
+        run: python3 tools/build.py --check
+      - name: Site checks (pages, links, no foreign requests, token-only CSS, rules, share-image heads and PNGs)
+        run: python3 tools/check_site.py
+      - name: Word budgets of the texts agents read, every rule of the catalogue has a home
+        run: python3 tools/check_budget.py
+  a11y:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - id: browsers
+        run: npx playwright install --with-deps chromium
+      - name: axe (WCAG 2.2 AA), overflow and console errors, light at 390 px and dark at 1440 px
+        run: node tools/check_a11y.mjs
+      # render the share images again with the copy's render.mjs (Chromium only); the head snippets
+      # must be equal, the PNG bytes are only reported (Linux draws the fonts with other pixels than macOS); runs even
+      # when the axe step failed, so one failure does not hide the other
+      - name: Share images render here too, head snippets equal the committed ones
+        if: ${{ !cancelled() && steps.browsers.outcome == 'success' }}
+        run: node tools/og.mjs --check

@@ -1,0 +1,29 @@
+/* products.css: the sample products the pages show (invented data, not part of the system): each sample's id on the
+   tile colours of its group. The Blueprint's own file, kept by hand. Load it after tokens.css. The Blueprint's own
+   id has its rule in sebaro-product/sign/product.css, written by the product kit. */
+
+[data-sb-product="novalis"],
+[data-sb-product="retrobeam"] {
+  --sb-product-tile: var(--sb-tile-collaboration);
+  --sb-product-glyph: var(--sb-tile-collaboration-glyph);
+}
+
+[data-sb-product="habittracker"],
+[data-sb-product="intervaltimer"],
+[data-sb-product="tagwerk"],
+[data-sb-product="waterreminder"] {
+  --sb-product-tile: var(--sb-tile-everyday);
+  --sb-product-glyph: var(--sb-tile-everyday-glyph);
+}
+
+[data-sb-product="coden"] {
+  --sb-product-tile: var(--sb-tile-learning);
+  --sb-product-glyph: var(--sb-tile-learning-glyph);
+}
+
+[data-sb-product="compass"],
+[data-sb-product="tally"] {
+  --sb-product-tile: var(--sb-tile-tools);
+  --sb-product-glyph: var(--sb-tile-tools-glyph);
+}
+

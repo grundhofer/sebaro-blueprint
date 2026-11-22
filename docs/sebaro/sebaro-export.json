@@ -1,0 +1,1211 @@
+{
+  "$comment": "the record of this copy, generated — do not edit. Check that the folder is unchanged: node checks/verify-export.mjs --strict. Update it: node checks/update-copy.mjs (README.md, section Keep in sync)",
+  "format": "1.0",
+  "tool": "export_system.py 1.42.1",
+  "date": "2026-11-22",
+  "system": {
+    "slug": "sebaro",
+    "name": "sebaro",
+    "status": "draft",
+    "palette": "sebaro"
+  },
+  "profile": "webapp",
+  "packs": [
+    "window",
+    "board",
+    "charts",
+    "table",
+    "calendar",
+    "media",
+    "diff",
+    "notes",
+    "facts",
+    "menu",
+    "tooltip",
+    "tabs",
+    "controls",
+    "search",
+    "sticky",
+    "form",
+    "print",
+    "tree",
+    "window-script",
+    "editor-shiki",
+    "editor-codemirror",
+    "share-images"
+  ],
+  "packsAvailable": [
+    "window",
+    "board",
+    "charts",
+    "table",
+    "calendar",
+    "media",
+    "diff",
+    "notes",
+    "facts",
+    "menu",
+    "tooltip",
+    "tabs",
+    "controls",
+    "search",
+    "sticky",
+    "form",
+    "print",
+    "tree",
+    "window-script",
+    "editor-shiki",
+    "editor-codemirror",
+    "share-images"
+  ],
+  "release": {
+    "tag": "v3.0.2",
+    "asset": "sebaro-webapp.tar.gz",
+    "sha256": "fbcad48abebfb05d32df1a6fd0cfa536c9c4971e710fe0aa91a03b77b3f65733",
+    "updater": "update-copy.mjs 2.0.0",
+    "from": "https://github.com/grundhofer/sebaro-foundry/releases"
+  },
+  "sebaroDesign": {
+    "commit": "12116473cecaa136c98ed05a454ecbfce3eeec1e",
+    "uncommittedChanges": false,
+    "fromCommit": true
+  },
+  "contracts": {
+    "tokens": "2.0",
+    "palette": "3.0",
+    "fontsConfig": 1,
+    "iconSet": "sebaro-icon-set/1",
+    "brandAssetsTool": "1.12.0",
+    "facts": "1.3"
+  },
+  "generators": {
+    "build_tokens.py": "2.0.0",
+    "icons.py": "1.1.0",
+    "fonts.py": "1.2.0",
+    "fontTools": "4.55.3",
+    "brand_assets.py": "1.12.0",
+    "brandRenderer": {
+      "playwright": "1.63.0",
+      "browser": "153.0.8010.12"
+    },
+    "brand/og/render.mjs": "1.3.0"
+  },
+  "tools": {
+    "export_system.py": "1.42.1",
+    "check_palette.py": "3.0.0",
+    "build_tokens.py": "2.0.0",
+    "fonts.py": "1.2.0",
+    "icons.py": "1.1.0",
+    "brand_assets.py": "1.12.0",
+    "check_facts.py": "1.3.1"
+  },
+  "gates": [
+    {
+      "id": "palette",
+      "check": "python3 tools/check_palette.py palettes/sebaro.json",
+      "state": "passed"
+    },
+    {
+      "id": "tokens",
+      "check": "python3 tools/build_tokens.py sebaro --check",
+      "state": "passed"
+    },
+    {
+      "id": "fonts",
+      "check": "fonts/fonts.build.json hashes (drift part of fonts.py verify)",
+      "state": "passed"
+    },
+    {
+      "id": "icons",
+      "check": "python3 tools/icons.py lint sebaro && python3 tools/icons.py build sebaro --check",
+      "state": "passed"
+    },
+    {
+      "id": "brand",
+      "check": "brand/dist/build-manifest.json hashes (drift part of brand_assets.py check)",
+      "state": "passed"
+    }
+  ],
+  "files": [
+    {
+      "path": "tokens.css",
+      "source": "systems/sebaro/dist/tokens.css",
+      "sourceSha256": "e8987e6732203ffc666366163088d03fa42c853278f8e5a7b9d0f914c28a43af",
+      "sha256": "e8987e6732203ffc666366163088d03fa42c853278f8e5a7b9d0f914c28a43af",
+      "bytes": 45348
+    },
+    {
+      "path": "tokens.tailwind.css",
+      "source": "systems/sebaro/dist/tokens.tailwind.css",
+      "sourceSha256": "56fab988b3f4ae075ae43f64a3e8284b0c9aadf376d526de4b67d37eaca8cdd0",
+      "sha256": "56fab988b3f4ae075ae43f64a3e8284b0c9aadf376d526de4b67d37eaca8cdd0",
+      "bytes": 9795
+    },
+    {
+      "path": "css/sebaro.css",
+      "source": "systems/sebaro/css/sebaro.css",
+      "sourceSha256": "b7676992896fdc4844ae035492a8fa914094a6b239fd8f6c9104a8a8dc76f733",
+      "sha256": "9e4920dfcdf44cddf3be1271f961a431402276844262a2c2b16053989ad6fddb",
+      "bytes": 369586,
+      "transform": "the rules of the profile's core and of the copy's packs (the parts and stretches that export/profiles.json gives them) of css/sebaro.css, in their order there, without the marks"
+    },
+    {
+      "path": "fonts/fonts.css",
+      "source": "systems/sebaro/fonts/fonts.css",
+      "sourceSha256": "a484341b981db4df24d631697a7f786c187ab895722b76d85e4f235105bf4b2f",
+      "sha256": "a484341b981db4df24d631697a7f786c187ab895722b76d85e4f235105bf4b2f",
+      "bytes": 2130
+    },
+    {
+      "path": "fonts/web/sebaro-sans-latin-de.woff2",
+      "source": "systems/sebaro/fonts/web/sebaro-sans-latin-de.woff2",
+      "sourceSha256": "589be2f709be7e198bfa223e58a9515ffcbd4f1d652f757c2c49bc05f1bcb92d",
+      "sha256": "589be2f709be7e198bfa223e58a9515ffcbd4f1d652f757c2c49bc05f1bcb92d",
+      "bytes": 22116
+    },
+    {
+      "path": "fonts/web/sebaro-sans-italic-latin-de.woff2",
+      "source": "systems/sebaro/fonts/web/sebaro-sans-italic-latin-de.woff2",
+      "sourceSha256": "3334dbd7fd7c6c6a150afd76f90783572cdd1ea6e6ece5b2f42ba90a6a61fd0f",
+      "sha256": "3334dbd7fd7c6c6a150afd76f90783572cdd1ea6e6ece5b2f42ba90a6a61fd0f",
+      "bytes": 22992
+    },
+    {
+      "path": "fonts/web/sebaro-mono-latin-de.woff2",
+      "source": "systems/sebaro/fonts/web/sebaro-mono-latin-de.woff2",
+      "sourceSha256": "2512639768811e136c441f24e94a5f365ab1c18dbceb138f181c7e67a4be5ccf",
+      "sha256": "2512639768811e136c441f24e94a5f365ab1c18dbceb138f181c7e67a4be5ccf",
+      "bytes": 16824
+    },
+    {
+      "path": "fonts/web/sebaro-mono-OFL.txt",
+      "source": "systems/sebaro/fonts/web/sebaro-mono-OFL.txt",
+      "sourceSha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da",
+      "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da",
+      "bytes": 4456
+    },
+    {
+      "path": "fonts/web/sebaro-sans-OFL.txt",
+      "source": "systems/sebaro/fonts/web/sebaro-sans-OFL.txt",
+      "sourceSha256": "86b4932ef0e19f8fd573ec941c3e121ae80771187ad1b854ae2b52525d452544",
+      "sha256": "86b4932ef0e19f8fd573ec941c3e121ae80771187ad1b854ae2b52525d452544",
+      "bytes": 4396
+    },
+    {
+      "path": "icons/sprite.svg",
+      "source": "systems/sebaro/icons/dist/sprite.svg",
+      "sourceSha256": "e8d1e8d72983cda5ba674f92f764c86c598bc7126f904206edc00df0d711cdab",
+      "sha256": "e8d1e8d72983cda5ba674f92f764c86c598bc7126f904206edc00df0d711cdab",
+      "bytes": 59325
+    },
+    {
+      "path": "icons/sprite.css",
+      "source": "systems/sebaro/icons/dist/sprite.css",
+      "sourceSha256": "1472fb1ad7874c0c4940ce251be0f4569bd0ff3ab8027ce7b6bce0038ef34b88",
+      "sha256": "1472fb1ad7874c0c4940ce251be0f4569bd0ff3ab8027ce7b6bce0038ef34b88",
+      "bytes": 1831
+    },
+    {
+      "path": "icons/icons.json",
+      "source": "systems/sebaro/icons/dist/icons.json",
+      "sourceSha256": "15175790a329f0e62d4b763adc3624d0be5347c1145ca7e89152feaa00567507",
+      "sha256": "f02016434546aaa32c298e6176fd88c17b7ff9f9dd74910dfc8e0518efa0f29d",
+      "bytes": 113878,
+      "transform": "product names in icon descriptions, aliases and tags left out: a profile copy knows no product"
+    },
+    {
+      "path": "brand/logo/keymark-small.dark.svg",
+      "source": "systems/sebaro/brand/src/keymark-small.dark.svg",
+      "sourceSha256": "22d804c4ccb439d91acee9fb0106ebfe87c8ed193dfe7e117c875997fe7f7c1f",
+      "sha256": "22d804c4ccb439d91acee9fb0106ebfe87c8ed193dfe7e117c875997fe7f7c1f",
+      "bytes": 3570
+    },
+    {
+      "path": "brand/logo/keymark-small.svg",
+      "source": "systems/sebaro/brand/src/keymark-small.svg",
+      "sourceSha256": "47edce20d893f8f8f229f891ec71f41774d1db2e1112a2dd6738015e8e9b1783",
+      "sha256": "47edce20d893f8f8f229f891ec71f41774d1db2e1112a2dd6738015e8e9b1783",
+      "bytes": 3615
+    },
+    {
+      "path": "brand/logo/keymark.dark.svg",
+      "source": "systems/sebaro/brand/src/keymark.dark.svg",
+      "sourceSha256": "246d512d7bc1a403cb80aa07f63e27761788b1c1d4c4eed68fdb1968771dd23c",
+      "sha256": "246d512d7bc1a403cb80aa07f63e27761788b1c1d4c4eed68fdb1968771dd23c",
+      "bytes": 3579
+    },
+    {
+      "path": "brand/logo/keymark.svg",
+      "source": "systems/sebaro/brand/src/keymark.svg",
+      "sourceSha256": "224fee152c7b7a4185d8d8d8e97a53c9d49ef8c149e3354181cc739ec4321d3a",
+      "sha256": "224fee152c7b7a4185d8d8d8e97a53c9d49ef8c149e3354181cc739ec4321d3a",
+      "bytes": 3622
+    },
+    {
+      "path": "brand/logo/lockup-horizontal.dark.svg",
+      "source": "systems/sebaro/brand/src/lockup-horizontal.dark.svg",
+      "sourceSha256": "7587b34e9297496df7d5a7e9e885f5e8eea33b318e863b5b7e5d1ad0b39270ea",
+      "sha256": "7587b34e9297496df7d5a7e9e885f5e8eea33b318e863b5b7e5d1ad0b39270ea",
+      "bytes": 4284
+    },
+    {
+      "path": "brand/logo/lockup-horizontal.svg",
+      "source": "systems/sebaro/brand/src/lockup-horizontal.svg",
+      "sourceSha256": "a2fda53c5ec392f849d8c4ee2f99d70652df22740c59c96ec69847144fbf4afa",
+      "sha256": "a2fda53c5ec392f849d8c4ee2f99d70652df22740c59c96ec69847144fbf4afa",
+      "bytes": 5823
+    },
+    {
+      "path": "brand/logo/lockup-stacked.dark.svg",
+      "source": "systems/sebaro/brand/src/lockup-stacked.dark.svg",
+      "sourceSha256": "4f5e9f651622901f1110f6c5cee03e16c235d693389b41b2cc444968b03bf367",
+      "sha256": "4f5e9f651622901f1110f6c5cee03e16c235d693389b41b2cc444968b03bf367",
+      "bytes": 4237
+    },
+    {
+      "path": "brand/logo/lockup-stacked.svg",
+      "source": "systems/sebaro/brand/src/lockup-stacked.svg",
+      "sourceSha256": "ff43ac579633354497cda0eee6b1ddb61b3d2acbdca82d65d52fca8d19a4f810",
+      "sha256": "ff43ac579633354497cda0eee6b1ddb61b3d2acbdca82d65d52fca8d19a4f810",
+      "bytes": 5779
+    },
+    {
+      "path": "brand/logo/mark.dark.svg",
+      "source": "systems/sebaro/brand/src/mark.dark.svg",
+      "sourceSha256": "37d9c46d602ddbab3365b29402b1c78401842ab8ff8e59f73859cf3754cdba7f",
+      "sha256": "37d9c46d602ddbab3365b29402b1c78401842ab8ff8e59f73859cf3754cdba7f",
+      "bytes": 1087
+    },
+    {
+      "path": "brand/logo/mark.svg",
+      "source": "systems/sebaro/brand/src/mark.svg",
+      "sourceSha256": "e6d27992243ecfb0d215ec6b9847cebb4d7191db1d8296999118e6694bc41d41",
+      "sha256": "e6d27992243ecfb0d215ec6b9847cebb4d7191db1d8296999118e6694bc41d41",
+      "bytes": 1088
+    },
+    {
+      "path": "brand/logo/wordmark.dark.svg",
+      "source": "systems/sebaro/brand/src/wordmark.dark.svg",
+      "sourceSha256": "4d9bd3e562b0cb544c071ea70b7d5ef39255be258963f881aabd1ae28d651d50",
+      "sha256": "4d9bd3e562b0cb544c071ea70b7d5ef39255be258963f881aabd1ae28d651d50",
+      "bytes": 3984
+    },
+    {
+      "path": "brand/logo/wordmark.svg",
+      "source": "systems/sebaro/brand/src/wordmark.svg",
+      "sourceSha256": "da634eebc27886c7217123dc5aa3f8fe4accbf0fead96e90ed99d93efec84f33",
+      "sha256": "da634eebc27886c7217123dc5aa3f8fe4accbf0fead96e90ed99d93efec84f33",
+      "bytes": 5522
+    },
+    {
+      "path": "brand/logo/variants/lockup-horizontal-large.dark.svg",
+      "source": "systems/sebaro/brand/src/variants/lockup-horizontal-large.dark.svg",
+      "sourceSha256": "c3cd7ef44ed35f755906290d496019b6bcf2623fab69341f5b7bf2cc552649a4",
+      "sha256": "c3cd7ef44ed35f755906290d496019b6bcf2623fab69341f5b7bf2cc552649a4",
+      "bytes": 4203
+    },
+    {
+      "path": "brand/logo/variants/lockup-horizontal-large.svg",
+      "source": "systems/sebaro/brand/src/variants/lockup-horizontal-large.svg",
+      "sourceSha256": "69cef89914628fcfe908c5c1628da257f559c0980b82bcfb2cd43b22844c7312",
+      "sha256": "69cef89914628fcfe908c5c1628da257f559c0980b82bcfb2cd43b22844c7312",
+      "bytes": 5742
+    },
+    {
+      "path": "brand/logo/variants/lockup-horizontal-mono.svg",
+      "source": "systems/sebaro/brand/src/variants/lockup-horizontal-mono.svg",
+      "sourceSha256": "66320b261e107b2ab89a8ec11abedcbe8a4aeb637ee86e4f81709621b55b427c",
+      "sha256": "66320b261e107b2ab89a8ec11abedcbe8a4aeb637ee86e4f81709621b55b427c",
+      "bytes": 5639
+    },
+    {
+      "path": "brand/logo/variants/mark-large.dark.svg",
+      "source": "systems/sebaro/brand/src/variants/mark-large.dark.svg",
+      "sourceSha256": "11d509598bd0dbaba56d72b9163fab88ed0bdd1994a663f5409571436643c739",
+      "sha256": "11d509598bd0dbaba56d72b9163fab88ed0bdd1994a663f5409571436643c739",
+      "bytes": 1013
+    },
+    {
+      "path": "brand/logo/variants/mark-large.svg",
+      "source": "systems/sebaro/brand/src/variants/mark-large.svg",
+      "sourceSha256": "d98fa0cf902c8f0835f5f443a616ff1ee01eae3431d3fe9f945667fc36c35399",
+      "sha256": "d98fa0cf902c8f0835f5f443a616ff1ee01eae3431d3fe9f945667fc36c35399",
+      "bytes": 1014
+    },
+    {
+      "path": "brand/logo/variants/mark-mono.svg",
+      "source": "systems/sebaro/brand/src/variants/mark-mono.svg",
+      "sourceSha256": "74c0114c34c8e0c1a0a8fc3ed9c4a24ae1f00da6cb41cc0eb0adcc6a9cd4c39b",
+      "sha256": "74c0114c34c8e0c1a0a8fc3ed9c4a24ae1f00da6cb41cc0eb0adcc6a9cd4c39b",
+      "bytes": 883
+    },
+    {
+      "path": "brand/inline/keymark-small.dark.svg",
+      "source": "systems/sebaro/brand/inline/keymark-small.dark.svg",
+      "sourceSha256": "22d804c4ccb439d91acee9fb0106ebfe87c8ed193dfe7e117c875997fe7f7c1f",
+      "sha256": "22d804c4ccb439d91acee9fb0106ebfe87c8ed193dfe7e117c875997fe7f7c1f",
+      "bytes": 3570
+    },
+    {
+      "path": "brand/inline/keymark-small.svg",
+      "source": "systems/sebaro/brand/inline/keymark-small.svg",
+      "sourceSha256": "47edce20d893f8f8f229f891ec71f41774d1db2e1112a2dd6738015e8e9b1783",
+      "sha256": "47edce20d893f8f8f229f891ec71f41774d1db2e1112a2dd6738015e8e9b1783",
+      "bytes": 3615
+    },
+    {
+      "path": "brand/inline/keymark.dark.svg",
+      "source": "systems/sebaro/brand/inline/keymark.dark.svg",
+      "sourceSha256": "246d512d7bc1a403cb80aa07f63e27761788b1c1d4c4eed68fdb1968771dd23c",
+      "sha256": "246d512d7bc1a403cb80aa07f63e27761788b1c1d4c4eed68fdb1968771dd23c",
+      "bytes": 3579
+    },
+    {
+      "path": "brand/inline/keymark.svg",
+      "source": "systems/sebaro/brand/inline/keymark.svg",
+      "sourceSha256": "224fee152c7b7a4185d8d8d8e97a53c9d49ef8c149e3354181cc739ec4321d3a",
+      "sha256": "224fee152c7b7a4185d8d8d8e97a53c9d49ef8c149e3354181cc739ec4321d3a",
+      "bytes": 3622
+    },
+    {
+      "path": "brand/inline/lockup-horizontal-large.svg",
+      "source": "systems/sebaro/brand/inline/lockup-horizontal-large.svg",
+      "sourceSha256": "6ad35c02a8f353fe17c801bd6aebf84b5529a2abda8cc9eb8f67808b65326134",
+      "sha256": "6ad35c02a8f353fe17c801bd6aebf84b5529a2abda8cc9eb8f67808b65326134",
+      "bytes": 5870
+    },
+    {
+      "path": "brand/inline/lockup-horizontal.svg",
+      "source": "systems/sebaro/brand/inline/lockup-horizontal.svg",
+      "sourceSha256": "da498e386569f0f60f5355ef7e0a007d76fb0fd879f07006c42d597efed38cfa",
+      "sha256": "da498e386569f0f60f5355ef7e0a007d76fb0fd879f07006c42d597efed38cfa",
+      "bytes": 5865
+    },
+    {
+      "path": "brand/inline/wordmark-dark-cut.svg",
+      "source": "systems/sebaro/brand/inline/wordmark-dark-cut.svg",
+      "sourceSha256": "cc8b5c025640115985446dd55d9487c18d1564d0ea6d07e77c70b3429c51aa14",
+      "sha256": "cc8b5c025640115985446dd55d9487c18d1564d0ea6d07e77c70b3429c51aa14",
+      "bytes": 3989
+    },
+    {
+      "path": "brand/inline/wordmark.svg",
+      "source": "systems/sebaro/brand/inline/wordmark.svg",
+      "sourceSha256": "267f86ca4d6b19dca792aebdb07529a12fc6f537aecf0dfa48279816487143e7",
+      "sha256": "267f86ca4d6b19dca792aebdb07529a12fc6f537aecf0dfa48279816487143e7",
+      "bytes": 5527
+    },
+    {
+      "path": "brand/og/pages.schema.json",
+      "source": "systems/sebaro/brand/og/pages.schema.json",
+      "sourceSha256": "1077397089d8d491b7dab2160b1ae84d0d319cff6d47600acaf6e1725e578ca4",
+      "sha256": "1077397089d8d491b7dab2160b1ae84d0d319cff6d47600acaf6e1725e578ca4",
+      "bytes": 7227,
+      "pack": "share-images"
+    },
+    {
+      "path": "brand/og/render.mjs",
+      "source": "systems/sebaro/brand/og/render.mjs",
+      "sourceSha256": "69fa5ebeafb90bd39b365843d48a02f75588d2a9e90afbd10dcdc1eeeb318dec",
+      "sha256": "69fa5ebeafb90bd39b365843d48a02f75588d2a9e90afbd10dcdc1eeeb318dec",
+      "bytes": 39401,
+      "pack": "share-images"
+    },
+    {
+      "path": "brand/og/template.html",
+      "source": "systems/sebaro/brand/og/template.html",
+      "sourceSha256": "c601ea08a1e0d98bdf206dc593085ee3bdfdbe3f5ba6f63f5ec9dc20ebbb3fe3",
+      "sha256": "c601ea08a1e0d98bdf206dc593085ee3bdfdbe3f5ba6f63f5ec9dc20ebbb3fe3",
+      "bytes": 3791,
+      "pack": "share-images"
+    },
+    {
+      "path": "js/theme-init.js",
+      "source": "systems/sebaro/demo/assets/theme-init.js",
+      "sourceSha256": "a5035a1dcb543425a31e92ae0d71de8c5af6af0de49037c1f3d74b065dcf534b",
+      "sha256": "a5035a1dcb543425a31e92ae0d71de8c5af6af0de49037c1f3d74b065dcf534b",
+      "bytes": 3480
+    },
+    {
+      "path": "js/theme-button.js",
+      "source": "systems/sebaro/demo/assets/theme-button.js",
+      "sourceSha256": "782892ed396150f92db07c4d8cfff52afa879c34e4c9014cb486818610140bc2",
+      "sha256": "782892ed396150f92db07c4d8cfff52afa879c34e4c9014cb486818610140bc2",
+      "bytes": 2245
+    },
+    {
+      "path": "js/sb-tone.js",
+      "source": "systems/sebaro/demo/assets/sb-tone.js",
+      "sourceSha256": "5c8fe412e965d965a16fa85438470c80be2b62f4d3084fe49a2c4a319f92df34",
+      "sha256": "5c8fe412e965d965a16fa85438470c80be2b62f4d3084fe49a2c4a319f92df34",
+      "bytes": 3903
+    },
+    {
+      "path": "js/sb-notes.js",
+      "source": "systems/sebaro/demo/assets/sb-notes.js",
+      "sourceSha256": "4445cb16e6a2dff954b8916200aa51d1966d2c6b84715403b6da1082ceb72e64",
+      "sha256": "4445cb16e6a2dff954b8916200aa51d1966d2c6b84715403b6da1082ceb72e64",
+      "bytes": 3259,
+      "pack": "notes"
+    },
+    {
+      "path": "js/sb-controls.js",
+      "source": "systems/sebaro/demo/assets/sb-controls.js",
+      "sourceSha256": "b6a2ac763035c985ce6ab1b456b633415efcd185053a5f4374f046a9fbdfc4cd",
+      "sha256": "b6a2ac763035c985ce6ab1b456b633415efcd185053a5f4374f046a9fbdfc4cd",
+      "bytes": 39392,
+      "pack": "controls"
+    },
+    {
+      "path": "js/sb-facts.js",
+      "source": "systems/sebaro/demo/assets/sb-facts.js",
+      "sourceSha256": "bc0b05c7e008b3b803fbb089afad277301b92f1ed2ce87970b3f21cb277879ef",
+      "sha256": "bc0b05c7e008b3b803fbb089afad277301b92f1ed2ce87970b3f21cb277879ef",
+      "bytes": 36859,
+      "pack": "facts"
+    },
+    {
+      "path": "js/sb-start.js",
+      "source": "systems/sebaro/demo/assets/sb-start.js",
+      "sourceSha256": "eead2f26bc7cd7a147d7d64ace017637eb38e475541354a60a28d31c927ea3bc",
+      "sha256": "eead2f26bc7cd7a147d7d64ace017637eb38e475541354a60a28d31c927ea3bc",
+      "bytes": 6069
+    },
+    {
+      "path": "js/sb-menu.js",
+      "source": "systems/sebaro/demo/assets/sb-menu.js",
+      "sourceSha256": "01ab692186bef781a0d1bfc593114d0774adfc257e4be6a0cd29ae51a0cff73c",
+      "sha256": "01ab692186bef781a0d1bfc593114d0774adfc257e4be6a0cd29ae51a0cff73c",
+      "bytes": 28922,
+      "pack": "menu"
+    },
+    {
+      "path": "js/sb-tabs.js",
+      "source": "systems/sebaro/demo/assets/sb-tabs.js",
+      "sourceSha256": "f5ff6b799dda62d9a8dbb1a9fbd9d122e4761a89cd91579b5eddc47ed564c43f",
+      "sha256": "f5ff6b799dda62d9a8dbb1a9fbd9d122e4761a89cd91579b5eddc47ed564c43f",
+      "bytes": 3277,
+      "pack": "tabs"
+    },
+    {
+      "path": "js/sb-tooltip.js",
+      "source": "systems/sebaro/demo/assets/sb-tooltip.js",
+      "sourceSha256": "3e618e256b99c1a3a305bd09f8918ef8a4c7d8b4e9462a787ba574abfcdb72fd",
+      "sha256": "3e618e256b99c1a3a305bd09f8918ef8a4c7d8b4e9462a787ba574abfcdb72fd",
+      "bytes": 6040,
+      "pack": "tooltip"
+    },
+    {
+      "path": "js/sb-sheet.js",
+      "source": "systems/sebaro/demo/assets/sb-sheet.js",
+      "sourceSha256": "7986a049e0d8eb0ffdca453689c1841ac1e2673bf33a7e3f028265b91bc37a13",
+      "sha256": "7986a049e0d8eb0ffdca453689c1841ac1e2673bf33a7e3f028265b91bc37a13",
+      "bytes": 5056
+    },
+    {
+      "path": "js/sb-search.js",
+      "source": "systems/sebaro/demo/assets/sb-search.js",
+      "sourceSha256": "c459d39798998ada21f036166fcb36616ef94ec9e4c4376fed7ae244ccf2222f",
+      "sha256": "c459d39798998ada21f036166fcb36616ef94ec9e4c4376fed7ae244ccf2222f",
+      "bytes": 4159,
+      "pack": "search"
+    },
+    {
+      "path": "js/sb-tree.js",
+      "source": "systems/sebaro/demo/assets/sb-tree.js",
+      "sourceSha256": "d42856ea79888914189375610e292d8aff57675dc4407d5ae769625e70cd485e",
+      "sha256": "d42856ea79888914189375610e292d8aff57675dc4407d5ae769625e70cd485e",
+      "bytes": 9359,
+      "pack": "tree"
+    },
+    {
+      "path": "js/sb-window.js",
+      "source": "systems/sebaro/demo/assets/sb-window.js",
+      "sourceSha256": "0c60b645189293afa7a02cba0dcacb21412ad58f65fb48bebd8f90ce2df0f818",
+      "sha256": "0c60b645189293afa7a02cba0dcacb21412ad58f65fb48bebd8f90ce2df0f818",
+      "bytes": 112247,
+      "pack": "window-script"
+    },
+    {
+      "path": "js/sb-board.js",
+      "source": "systems/sebaro/demo/assets/sb-board.js",
+      "sourceSha256": "38eca9727e6dc764330c9f3eee3b44809c12dec9081b22848959b69fcd62c301",
+      "sha256": "38eca9727e6dc764330c9f3eee3b44809c12dec9081b22848959b69fcd62c301",
+      "bytes": 17512,
+      "pack": "board"
+    },
+    {
+      "path": "js/sb-sticky.js",
+      "source": "systems/sebaro/demo/assets/sb-sticky.js",
+      "sourceSha256": "db96d76263e185ad53f7919f087bd10ca4d193209b8bd37c5c68dffee59fcccb",
+      "sha256": "db96d76263e185ad53f7919f087bd10ca4d193209b8bd37c5c68dffee59fcccb",
+      "bytes": 4347,
+      "pack": "sticky"
+    },
+    {
+      "path": "js/sb-table.js",
+      "source": "systems/sebaro/demo/assets/sb-table.js",
+      "sourceSha256": "40e3725f5a56066b57686ec6ef0bd82e1a4b3cf2b9d36862da660a9dde4b61bf",
+      "sha256": "40e3725f5a56066b57686ec6ef0bd82e1a4b3cf2b9d36862da660a9dde4b61bf",
+      "bytes": 8633,
+      "pack": "table"
+    },
+    {
+      "path": "js/sb-chart.js",
+      "source": "systems/sebaro/demo/assets/sb-chart.js",
+      "sourceSha256": "8ad5ada825c14e1e042e6da2859b6735c5c0ece277ee01d6afc8afd7741cd6ef",
+      "sha256": "8ad5ada825c14e1e042e6da2859b6735c5c0ece277ee01d6afc8afd7741cd6ef",
+      "bytes": 6457,
+      "pack": "charts"
+    },
+    {
+      "path": "js/sb-calendar.js",
+      "source": "systems/sebaro/demo/assets/sb-calendar.js",
+      "sourceSha256": "828467303dcbe9d39813e78eb7996c6b92cf5224693b91f4ee39a1f3e187af0f",
+      "sha256": "828467303dcbe9d39813e78eb7996c6b92cf5224693b91f4ee39a1f3e187af0f",
+      "bytes": 13201,
+      "pack": "calendar"
+    },
+    {
+      "path": "js/sb-media.js",
+      "source": "systems/sebaro/demo/assets/sb-media.js",
+      "sourceSha256": "8dfb5f163ad80374cc9eb8b6c06ff4c6b2554ba5128166ffaa9cffa6713a0087",
+      "sha256": "8dfb5f163ad80374cc9eb8b6c06ff4c6b2554ba5128166ffaa9cffa6713a0087",
+      "bytes": 13215,
+      "pack": "media"
+    },
+    {
+      "path": "js/sb-form.js",
+      "source": "systems/sebaro/demo/assets/sb-form.js",
+      "sourceSha256": "1d16edde21ae4519b432afcab90deda0abf4ce88339942d87c52d831df729a2b",
+      "sha256": "1d16edde21ae4519b432afcab90deda0abf4ce88339942d87c52d831df729a2b",
+      "bytes": 14646,
+      "pack": "form"
+    },
+    {
+      "path": "js/sb-print.js",
+      "source": "systems/sebaro/demo/assets/sb-print.js",
+      "sourceSha256": "8fdde304a2183bd9e0eef1db0002fda2a0975640e93c346e436b24f6ed0f7719",
+      "sha256": "8fdde304a2183bd9e0eef1db0002fda2a0975640e93c346e436b24f6ed0f7719",
+      "bytes": 1295,
+      "pack": "print"
+    },
+    {
+      "path": "js/sb-fit.js",
+      "source": "systems/sebaro/demo/assets/sb-fit.js",
+      "sourceSha256": "aec4b892f6b2caa62061a181e7f0813c80100252caea1a8824644242b5abf5a6",
+      "sha256": "aec4b892f6b2caa62061a181e7f0813c80100252caea1a8824644242b5abf5a6",
+      "bytes": 47315
+    },
+    {
+      "path": "checks/sb-colour-count.js",
+      "source": "systems/sebaro/demo/assets/sb-colour-count.js",
+      "sourceSha256": "c54cfe9b3fc47d98a12a66973e05fd391427e8f11f0cb7ce6b237315dc5be50a",
+      "sha256": "c54cfe9b3fc47d98a12a66973e05fd391427e8f11f0cb7ce6b237315dc5be50a",
+      "bytes": 16073
+    },
+    {
+      "path": "editor/sebaro-shiki.json",
+      "source": "systems/sebaro/editor/sebaro-shiki.json",
+      "sourceSha256": "ee07a944a87ce2d27822d57e08727584b0d8d35296054a754299f26add28b26d",
+      "sha256": "ee07a944a87ce2d27822d57e08727584b0d8d35296054a754299f26add28b26d",
+      "bytes": 3779,
+      "pack": "editor-shiki"
+    },
+    {
+      "path": "editor/sebaro-codemirror.ts",
+      "source": "systems/sebaro/editor/sebaro-codemirror.ts",
+      "sourceSha256": "f086ace61f8ea20146bfc873fcd1b60415a2204a9e4eca0bee785df1219d9b4a",
+      "sha256": "f086ace61f8ea20146bfc873fcd1b60415a2204a9e4eca0bee785df1219d9b4a",
+      "bytes": 13477,
+      "pack": "editor-codemirror"
+    },
+    {
+      "path": "react/ActionZone.tsx",
+      "source": "systems/sebaro/react/ActionZone.tsx",
+      "sourceSha256": "589cf66b5f2a373311ea59896fca1359ff7a219030be17bfad6107a8cb9e4840",
+      "sha256": "589cf66b5f2a373311ea59896fca1359ff7a219030be17bfad6107a8cb9e4840",
+      "bytes": 1584
+    },
+    {
+      "path": "react/AppFrame.tsx",
+      "source": "systems/sebaro/react/AppFrame.tsx",
+      "sourceSha256": "37a499cb285e5967746ca08c341010e885e4759655d29edb250698e124833ec2",
+      "sha256": "37a499cb285e5967746ca08c341010e885e4759655d29edb250698e124833ec2",
+      "bytes": 1732
+    },
+    {
+      "path": "react/Calendar.tsx",
+      "source": "systems/sebaro/react/Calendar.tsx",
+      "sourceSha256": "3425009f1e12103916772a525fd90b4217ddc3cb412c49d35b73f276491823c3",
+      "sha256": "3425009f1e12103916772a525fd90b4217ddc3cb412c49d35b73f276491823c3",
+      "bytes": 7018,
+      "pack": "calendar"
+    },
+    {
+      "path": "react/Chips.tsx",
+      "source": "systems/sebaro/react/Chips.tsx",
+      "sourceSha256": "fa73e36f330496df3cd00853df463d5a5202d97494359ee76abd7f9a6ee0a2d3",
+      "sha256": "fa73e36f330496df3cd00853df463d5a5202d97494359ee76abd7f9a6ee0a2d3",
+      "bytes": 744
+    },
+    {
+      "path": "react/ClaimRow.tsx",
+      "source": "systems/sebaro/react/ClaimRow.tsx",
+      "sourceSha256": "6c3df902eb6852982f7cf5e3c288d0dc0d18f191f1951bf9371b406a06155c6f",
+      "sha256": "6c3df902eb6852982f7cf5e3c288d0dc0d18f191f1951bf9371b406a06155c6f",
+      "bytes": 1003,
+      "pack": "facts"
+    },
+    {
+      "path": "react/CodeBlock.tsx",
+      "source": "systems/sebaro/react/CodeBlock.tsx",
+      "sourceSha256": "683a9314af8b6ed6f5e9ea026da97e5ab4eddf04a983e525a6534da14c5233c2",
+      "sha256": "683a9314af8b6ed6f5e9ea026da97e5ab4eddf04a983e525a6534da14c5233c2",
+      "bytes": 1608
+    },
+    {
+      "path": "react/Dialog.tsx",
+      "source": "systems/sebaro/react/Dialog.tsx",
+      "sourceSha256": "09f653147d946227afbe4ffc3e467d6560e808be7385d8cdd6b82d52d3716452",
+      "sha256": "09f653147d946227afbe4ffc3e467d6560e808be7385d8cdd6b82d52d3716452",
+      "bytes": 4002
+    },
+    {
+      "path": "react/Divider.tsx",
+      "source": "systems/sebaro/react/Divider.tsx",
+      "sourceSha256": "9a8c78bcf5ad5081b13f27ccacf1c0b5a88d8fda939263433bbeee8567dedf18",
+      "sha256": "9a8c78bcf5ad5081b13f27ccacf1c0b5a88d8fda939263433bbeee8567dedf18",
+      "bytes": 2904,
+      "pack": "window"
+    },
+    {
+      "path": "react/DocTabs.tsx",
+      "source": "systems/sebaro/react/DocTabs.tsx",
+      "sourceSha256": "ecfa16974a8a8aa37ef0e7767d7c1c98bb72ea39517ebe46e9979fa81cacf0c5",
+      "sha256": "ecfa16974a8a8aa37ef0e7767d7c1c98bb72ea39517ebe46e9979fa81cacf0c5",
+      "bytes": 3647,
+      "pack": "window"
+    },
+    {
+      "path": "react/Field.tsx",
+      "source": "systems/sebaro/react/Field.tsx",
+      "sourceSha256": "4f5fc58cb8103c4556a14547ffe11a591e30a75500c5d8c1e5ad6138f0ab8caf",
+      "sha256": "4f5fc58cb8103c4556a14547ffe11a591e30a75500c5d8c1e5ad6138f0ab8caf",
+      "bytes": 1766
+    },
+    {
+      "path": "react/Heatmap.tsx",
+      "source": "systems/sebaro/react/Heatmap.tsx",
+      "sourceSha256": "34f907ed96f9c2d1c8eec6e37747b291d4d8898f0eb6bfbefaeedc744c3283a7",
+      "sha256": "34f907ed96f9c2d1c8eec6e37747b291d4d8898f0eb6bfbefaeedc744c3283a7",
+      "bytes": 3976,
+      "pack": "charts"
+    },
+    {
+      "path": "react/Icon.tsx",
+      "source": "systems/sebaro/react/Icon.tsx",
+      "sourceSha256": "363887696738a011d25c0f5f4d793f656366a9c1c6022d27435b977863edcdc8",
+      "sha256": "363887696738a011d25c0f5f4d793f656366a9c1c6022d27435b977863edcdc8",
+      "bytes": 454
+    },
+    {
+      "path": "react/Keys.tsx",
+      "source": "systems/sebaro/react/Keys.tsx",
+      "sourceSha256": "a28eade56a8a578c3d8c3a36fa34783aa9846be359c72ac810af2640913e8788",
+      "sha256": "a28eade56a8a578c3d8c3a36fa34783aa9846be359c72ac810af2640913e8788",
+      "bytes": 649,
+      "pack": "window"
+    },
+    {
+      "path": "react/Listbox.tsx",
+      "source": "systems/sebaro/react/Listbox.tsx",
+      "sourceSha256": "96d2929e80fe39c4bb40123d884a57e23d713063812a73c7449b0cb5f418089b",
+      "sha256": "96d2929e80fe39c4bb40123d884a57e23d713063812a73c7449b0cb5f418089b",
+      "bytes": 2206,
+      "pack": "window"
+    },
+    {
+      "path": "react/Menu.tsx",
+      "source": "systems/sebaro/react/Menu.tsx",
+      "sourceSha256": "54b626e58e238d854b5557b749f89e8838184c7228e470d392518a2dd9eda162",
+      "sha256": "54b626e58e238d854b5557b749f89e8838184c7228e470d392518a2dd9eda162",
+      "bytes": 17104,
+      "pack": "menu"
+    },
+    {
+      "path": "react/Notes.tsx",
+      "source": "systems/sebaro/react/Notes.tsx",
+      "sourceSha256": "14909c9789fb970f93bfc936ae9b6c6386c522c3f59a12830cf0e9ddcb411368",
+      "sha256": "14909c9789fb970f93bfc936ae9b6c6386c522c3f59a12830cf0e9ddcb411368",
+      "bytes": 3879,
+      "pack": "notes"
+    },
+    {
+      "path": "react/Palette.tsx",
+      "source": "systems/sebaro/react/Palette.tsx",
+      "sourceSha256": "8d5a9d5eebe94ae3568fe3bd5abf91b5278ace496f30569321fb089d1604ea4a",
+      "sha256": "8d5a9d5eebe94ae3568fe3bd5abf91b5278ace496f30569321fb089d1604ea4a",
+      "bytes": 7571,
+      "pack": "window"
+    },
+    {
+      "path": "react/SearchField.tsx",
+      "source": "systems/sebaro/react/SearchField.tsx",
+      "sourceSha256": "7d2684a9ec7a2a9c3ff22351b5828d514a6681ccedeb54fef52212e673fe2b58",
+      "sha256": "7d2684a9ec7a2a9c3ff22351b5828d514a6681ccedeb54fef52212e673fe2b58",
+      "bytes": 1584
+    },
+    {
+      "path": "react/SortTable.tsx",
+      "source": "systems/sebaro/react/SortTable.tsx",
+      "sourceSha256": "3c23b7688e5808d81cb52f80dae4a7217a991acd47ebe9e3906a45baeb6b66ad",
+      "sha256": "3c23b7688e5808d81cb52f80dae4a7217a991acd47ebe9e3906a45baeb6b66ad",
+      "bytes": 3444,
+      "pack": "table"
+    },
+    {
+      "path": "react/Status.tsx",
+      "source": "systems/sebaro/react/Status.tsx",
+      "sourceSha256": "1a92052fb158e9d5bdae038bb5a0535916154266105fbbca4143a50ab61b967f",
+      "sha256": "1a92052fb158e9d5bdae038bb5a0535916154266105fbbca4143a50ab61b967f",
+      "bytes": 485
+    },
+    {
+      "path": "react/Switch.tsx",
+      "source": "systems/sebaro/react/Switch.tsx",
+      "sourceSha256": "eee7cbce471e26a209537efd231e7c6c4b4a38135b5546b1861f7c370e3ad446",
+      "sha256": "eee7cbce471e26a209537efd231e7c6c4b4a38135b5546b1861f7c370e3ad446",
+      "bytes": 1057
+    },
+    {
+      "path": "react/Toast.tsx",
+      "source": "systems/sebaro/react/Toast.tsx",
+      "sourceSha256": "0f1917d7d7c896fc925e48970dd9213b37643adbbdaa2f9abebb3f6674455e0f",
+      "sha256": "0f1917d7d7c896fc925e48970dd9213b37643adbbdaa2f9abebb3f6674455e0f",
+      "bytes": 3199
+    },
+    {
+      "path": "react/Tool.tsx",
+      "source": "systems/sebaro/react/Tool.tsx",
+      "sourceSha256": "21d974613e1a09724fd4870348890215d018eab138d9c6ddb25707a12d6a858d",
+      "sha256": "21d974613e1a09724fd4870348890215d018eab138d9c6ddb25707a12d6a858d",
+      "bytes": 3284,
+      "pack": "window"
+    },
+    {
+      "path": "react/Tree.tsx",
+      "source": "systems/sebaro/react/Tree.tsx",
+      "sourceSha256": "5aef0e16281a0a1963d7b39e50b0779ff629069616d301955ca48b63328b393e",
+      "sha256": "5aef0e16281a0a1963d7b39e50b0779ff629069616d301955ca48b63328b393e",
+      "bytes": 5350,
+      "pack": "window"
+    },
+    {
+      "path": "react/chords.ts",
+      "source": "systems/sebaro/react/chords.ts",
+      "sourceSha256": "80b59ca13faf6c773bb324ecde1e694d8452ed11d06b865b23633924991356b0",
+      "sha256": "80b59ca13faf6c773bb324ecde1e694d8452ed11d06b865b23633924991356b0",
+      "bytes": 2947,
+      "pack": "window"
+    },
+    {
+      "path": "react/dates.ts",
+      "source": "systems/sebaro/react/dates.ts",
+      "sourceSha256": "b4b90b8c91dfa48333237524cb92aa7b3189d1b5057d229fce56a704e60db0a8",
+      "sha256": "b4b90b8c91dfa48333237524cb92aa7b3189d1b5057d229fce56a704e60db0a8",
+      "bytes": 1871,
+      "pack": "calendar"
+    },
+    {
+      "path": "react/panes.ts",
+      "source": "systems/sebaro/react/panes.ts",
+      "sourceSha256": "19bb7fb30ea3ebc5f6e66450c55214d8501f6ff2e4bee578a0544692574f17d2",
+      "sha256": "19bb7fb30ea3ebc5f6e66450c55214d8501f6ff2e4bee578a0544692574f17d2",
+      "bytes": 1048,
+      "pack": "window"
+    },
+    {
+      "path": "react/reveal.ts",
+      "source": "systems/sebaro/react/reveal.ts",
+      "sourceSha256": "21ea6bc99c9449992891e99bacf94208a51c25b79ec227bd7e359c79bbff1bff",
+      "sha256": "21ea6bc99c9449992891e99bacf94208a51c25b79ec227bd7e359c79bbff1bff",
+      "bytes": 716,
+      "pack": "window"
+    },
+    {
+      "path": "react/sort.ts",
+      "source": "systems/sebaro/react/sort.ts",
+      "sourceSha256": "3426a5bdcd563ec2b72408f3b9b18bdf1b9ac8ec607d3abd08db34eaf17d327a",
+      "sha256": "3426a5bdcd563ec2b72408f3b9b18bdf1b9ac8ec607d3abd08db34eaf17d327a",
+      "bytes": 1381,
+      "pack": "table"
+    },
+    {
+      "path": "checks/verify-export.mjs",
+      "source": "tools/verify-export.mjs",
+      "sourceSha256": "8ffc6f222c8f52e0f629505912827d1613f086502909278c6502ac8576293429",
+      "sha256": "8ffc6f222c8f52e0f629505912827d1613f086502909278c6502ac8576293429",
+      "bytes": 7316
+    },
+    {
+      "path": "checks/update-copy.mjs",
+      "source": "tools/update-copy.mjs",
+      "sourceSha256": "3a0eb5a8ad4321ac41707e7732c84f427b285b0206c9ffbbf912994aaf6919e6",
+      "sha256": "3a0eb5a8ad4321ac41707e7732c84f427b285b0206c9ffbbf912994aaf6919e6",
+      "bytes": 43438
+    },
+    {
+      "path": "checks/lint-web.sh",
+      "source": "systems/sebaro/checks/lint-web.sh",
+      "sourceSha256": "0e5a5e7a18451ebeba63bd695751698d8cbcf8059dce63a7cb87252729388c01",
+      "sha256": "0e5a5e7a18451ebeba63bd695751698d8cbcf8059dce63a7cb87252729388c01",
+      "bytes": 3025
+    },
+    {
+      "path": "product/product_kit.py",
+      "source": "tools/product_kit.py",
+      "sourceSha256": "979e0acf1decf97bd397b4c93461fbc066b71f19f2fc8cc68493de142b26f08f",
+      "sha256": "979e0acf1decf97bd397b4c93461fbc066b71f19f2fc8cc68493de142b26f08f",
+      "bytes": 98879
+    },
+    {
+      "path": "product/sign_geometry.py",
+      "source": "tools/sign_geometry.py",
+      "sourceSha256": "2f1922933eb7bd253f404b32ba11ad07b986656f9c9a9bc6637ac1f8539486fd",
+      "sha256": "2f1922933eb7bd253f404b32ba11ad07b986656f9c9a9bc6637ac1f8539486fd",
+      "bytes": 32026
+    },
+    {
+      "path": "product/render.mjs",
+      "source": "tools/product_render.mjs",
+      "sourceSha256": "8383bf63e6cbae14661da38bf1062e6f357be1831537377b3f9c881b659b7fb8",
+      "sha256": "8383bf63e6cbae14661da38bf1062e6f357be1831537377b3f9c881b659b7fb8",
+      "bytes": 29338
+    },
+    {
+      "path": "product/product.schema.json",
+      "source": "shared/product.schema.json",
+      "sourceSha256": "fe91a402a989b5a2152f6a4906d4ec3e00a2509c7df52a937779531eb7868d26",
+      "sha256": "fe91a402a989b5a2152f6a4906d4ec3e00a2509c7df52a937779531eb7868d26",
+      "bytes": 6124
+    },
+    {
+      "path": "product/PRODUCT-CONTRACT.md",
+      "source": "shared/PRODUCT-CONTRACT.md",
+      "sourceSha256": "a10378effd17523006e4b378050ed24b554f2f42ef2f25b0489a6971aa1f3a89",
+      "sha256": "a10378effd17523006e4b378050ed24b554f2f42ef2f25b0489a6971aa1f3a89",
+      "bytes": 35012
+    },
+    {
+      "path": "product/tiles.json",
+      "source": "systems/sebaro/dist/tokens.json",
+      "sourceSha256": "d1748242595673f3fef2c8fc8b942823504f8da72718132c9da4918ac2d9cd5f",
+      "sha256": "2bca87769097cba6090b7abab7ce9f1189cddcd8d78bda28b6215b7af01aabea",
+      "bytes": 32070,
+      "transform": "generated: what the product kit needs of the system (tools/product_kit.py tiles, from dist/tokens.json, brand/brand.config.json, brand/signs.json and fonts/): tile groups, foot colours, grounds, stroke masters, raster measures, the name font; no product"
+    },
+    {
+      "path": "facts/tools/check_facts.py",
+      "source": "tools/check_facts.py",
+      "sourceSha256": "f121ed29d8637a3829c07c63fee3336ada5c6a30535ff25aa0665a2659d69ab8",
+      "sha256": "f121ed29d8637a3829c07c63fee3336ada5c6a30535ff25aa0665a2659d69ab8",
+      "bytes": 92717,
+      "pack": "facts"
+    },
+    {
+      "path": "facts/tools/check_palette.py",
+      "source": "tools/check_palette.py",
+      "sourceSha256": "be18ed93cdf64638fee2f51ee9f32db61adf68e30786bf8b108e6638cce6f3df",
+      "sha256": "be18ed93cdf64638fee2f51ee9f32db61adf68e30786bf8b108e6638cce6f3df",
+      "bytes": 106640,
+      "pack": "facts"
+    },
+    {
+      "path": "facts/tools/color.py",
+      "source": "tools/color.py",
+      "sourceSha256": "e30dcf572213eb6ef96657b0141e54b5d3a382a73f2dbe2a030931a54d346094",
+      "sha256": "e30dcf572213eb6ef96657b0141e54b5d3a382a73f2dbe2a030931a54d346094",
+      "bytes": 28271,
+      "pack": "facts"
+    },
+    {
+      "path": "facts/shared/facts.schema.json",
+      "source": "shared/facts.schema.json",
+      "sourceSha256": "9380abd3474b2d033f2fd0068fe5d51fedc51419ddffe5e07cd944d73a125331",
+      "sha256": "9380abd3474b2d033f2fd0068fe5d51fedc51419ddffe5e07cd944d73a125331",
+      "bytes": 20178,
+      "pack": "facts"
+    },
+    {
+      "path": "facts/shared/FACTS-CONTRACT.md",
+      "source": "shared/FACTS-CONTRACT.md",
+      "sourceSha256": "7874b0aaa868bf1e25e61152cb241096708662a6c64ceb1560c27f3229eb3788",
+      "sha256": "7874b0aaa868bf1e25e61152cb241096708662a6c64ceb1560c27f3229eb3788",
+      "bytes": 54826,
+      "pack": "facts"
+    },
+    {
+      "path": "CHANGES.md",
+      "source": "systems/sebaro/CHANGES.md",
+      "sourceSha256": "ba788450f0c15fc85e3f78051ec3dfe987ba069091a4b90d94bcd7e4d7eccba1",
+      "sha256": "ba788450f0c15fc85e3f78051ec3dfe987ba069091a4b90d94bcd7e4d7eccba1",
+      "bytes": 35999
+    },
+    {
+      "path": "LICENSE.md",
+      "source": "LICENSE.md",
+      "sourceSha256": "46693c38768891ad1979482bbfde047f08207b484faf4faaeb4586522e2f1509",
+      "sha256": "46693c38768891ad1979482bbfde047f08207b484faf4faaeb4586522e2f1509",
+      "bytes": 3645
+    },
+    {
+      "path": "css/runtime-names.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "e2370fbe284b53f309f8eabd54caeca67673c48308270895fab17b13f2b92a1d",
+      "bytes": 5617,
+      "transform": "generated: the names that exist only at run time (what the scripts of the core set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.window.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "98086b121e40116f19c1a483bbb1a8dc0c57edbc03373493af19a40330c7a82a",
+      "bytes": 2373,
+      "pack": "window",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack window set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.board.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "5d8d917f73d52550ad82963cb0e43f37e7b9a0ae037fbd75cc98153d0ce2cac4",
+      "bytes": 2902,
+      "pack": "board",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack board set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.charts.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "442e0993ba4a06c1b6af4dcf727b82e38dfb7cc01cc1cd338e75281200af7551",
+      "bytes": 2502,
+      "pack": "charts",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack charts set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.table.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "d9e1ac02108f0c361559900c23f53763224d1f49bf6e571e5c29fbf430a4a377",
+      "bytes": 2843,
+      "pack": "table",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack table set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.calendar.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "71032ee5cbf5b95c76c4597ea7d1ef0a4919c15a3e553102a497e3f57feee807",
+      "bytes": 2723,
+      "pack": "calendar",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack calendar set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.media.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "aeaaab609b139af878c431f773278cf8829143c1a19d6ad51126c3ad0c0db90a",
+      "bytes": 2854,
+      "pack": "media",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack media set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.diff.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "3c4acf7e37f47bf62c55614a8e290317725e988b310622c3096128fd10d62c3f",
+      "bytes": 2140,
+      "pack": "diff",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack diff set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.notes.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "6a18bd9529710fb166f76b5f76831fdbddabf99eb8c1a80165328c2797677cd6",
+      "bytes": 2578,
+      "pack": "notes",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack notes set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.facts.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "4b3c11b1597e79ed260b18a0bcb965b48a6e673e7e355c2c07addde88288d0c9",
+      "bytes": 4337,
+      "pack": "facts",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack facts set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.menu.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "f31bbcba3294badc88bd55698891b594f885b3931acbdf60a7ed56828192867a",
+      "bytes": 2798,
+      "pack": "menu",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack menu set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.tooltip.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "fd1f8ab40bc3bed6b029ee1f37cacf2a0e878718abcc17446373291a2f03d1c0",
+      "bytes": 2355,
+      "pack": "tooltip",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack tooltip set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.tabs.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "1e1227c57a00804bffdf11d3a5b300ffd919e603ef9082f6b3ececf04ce63a81",
+      "bytes": 2413,
+      "pack": "tabs",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack tabs set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.controls.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "334f1a57beee82c53cb7c10173f6392ad1d4f5fa14b790aa3ef70b59d6fc72f8",
+      "bytes": 3715,
+      "pack": "controls",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack controls set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.search.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "e319595a38b879abb4b46a13e1bfc0ede318735cdace405e846b04aff2278368",
+      "bytes": 2525,
+      "pack": "search",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack search set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.sticky.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "c824c0527103c21a25f6660e24d990010b0504d9f03d40d2f73c5ae1d26253c4",
+      "bytes": 2437,
+      "pack": "sticky",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack sticky set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.form.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "301ad32d09d8d774ba790b9e7b789ba17a7be8efd046cba928810fe1c726d7ea",
+      "bytes": 2960,
+      "pack": "form",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack form set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.print.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "b487f2c0fa26e693c84c2ea7e2e082b7b15b33293c3b772284ba5c1e39e47a4c",
+      "bytes": 2320,
+      "pack": "print",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack print set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.tree.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "e42820c346ec0e964df6331cc85e3978ce155d45922aa8f93ca10357447cb93e",
+      "bytes": 2565,
+      "pack": "tree",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack tree set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "css/runtime-names.window-script.json",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "509ac105a3ad343f19fa121069f0abf300e0c331525d1ca50bbb39ae0990ac67",
+      "bytes": 4919,
+      "pack": "window-script",
+      "transform": "generated: the names that exist only at run time (what the scripts of the pack window-script set and the state names of its rules), for cutting the stylesheet"
+    },
+    {
+      "path": "README.md",
+      "source": null,
+      "sourceSha256": null,
+      "sha256": "e8ef46c3878e15887c4a956cffd4f966291e8cc83330e6e23af7123e87359aa2",
+      "bytes": 71257,
+      "transform": "generated"
+    }
+  ],
+  "cssSizes": {
+    "$comment": "bytes per file for a CSS budget: as shipped and minified (comments and white space removed, nothing rewritten; a bundler's minifier gets a little less), each also gzip'ed; written when the copy is written; --verify compares the bytes, not the gzip figures (the machine's)",
+    "gzip": "gzip level 9, mtime 0, zlib 1.3.1-e00f703",
+    "files": [
+      {
+        "path": "css/sebaro.css",
+        "bytes": 369586,
+        "gzipBytes": 84785,
+        "minifiedBytes": 222334,
+        "minifiedGzipBytes": 31390
+      },
+      {
+        "path": "tokens.css",
+        "bytes": 45348,
+        "gzipBytes": 6540,
+        "minifiedBytes": 38367,
+        "minifiedGzipBytes": 4144
+      }
+    ]
+  },
+  "omitted": [
+    {
+      "what": "`tokens.json`",
+      "reason": "not in the profile webapp: read by a desktop app's build script (profile desktop); a page reads tokens.css"
+    },
+    {
+      "what": "`css/parts`",
+      "reason": "in no profile: a profile copy has one stylesheet, css/sebaro.css with the rules it chose"
+    },
+    {
+      "what": "`brand/site-root`",
+      "reason": "in no profile: favicons, web manifest and head snippet of one product: the product's own, from its declaration (product/PRODUCT-CONTRACT.md of a copy)"
+    },
+    {
+      "what": "`brand/social`",
+      "reason": "in no profile: avatar and banner of one product"
+    },
+    {
+      "what": "`brand/og/*.png`",
+      "reason": "in no profile: the workshop's rendered share images of its own products"
+    },
+    {
+      "what": "`brand/inline/sign-*.svg`",
+      "reason": "in no profile: the sign of one product"
+    },
+    {
+      "what": "`brand/inline/tile-*.svg`",
+      "reason": "in no profile: the sign tile of one product"
+    },
+    {
+      "what": "`tauri`",
+      "reason": "in no profile: the app icon of one product"
+    },
+    {
+      "what": "demo-only files in demo/assets/",
+      "reason": "`demo-completion.js`: the keys of one specimen; the app or its editor owns the keys; `demo.css`: specimen chrome and phone stand-ins; `pages.css`: reference page layout; `views.css`: Ansichten specimen frames and overflow box; `views.js`: Ansichten specimen wiring; app state belongs to the app"
+    }
+  ],
+  "notes": [
+    "`brand/inline/` comes from systems/sebaro/brand/inline/, which no gate of sebaro-foundry checks for freshness (it is written by a script of the system, not by tools/brand_assets.py)."
+  ]
+}

@@ -1,0 +1,77 @@
+/* daten.css: page chrome and proposal patterns of daten.html. Not part of the system; products never load it.
+ * Same discipline as sebaro.css: only var(--sb-*) tokens, no raw colours, no shadows, no tinted card grounds.
+ * Classes start with "g-daten-". Every specimen here is a system class; the chrome only frames them and draws
+ * the deliberate "Nicht so" cases. */
+
+/* ------------------------------------------------------------------ item grid: specimen + rule + rule ids */
+.g-daten-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, max(320px, 20rem)), 1fr)); gap: var(--sb-space-10) var(--sb-spacing-group); align-items: start; }
+.g-daten-item { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sb-space-3); min-inline-size: 0; padding-block-start: var(--sb-space-4); border-block-start: var(--sb-border-width-hairline) solid var(--sb-color-border); scroll-margin-block-start: var(--sb-space-4); }
+.g-daten-item--wide { grid-column: 1 / -1; }
+.g-daten-item > h3 { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
+.g-daten-item > .g-mark-proposal { margin-block-start: calc(-1 * var(--sb-space-2)); }
+.g-daten-specimen { min-inline-size: 0; max-inline-size: 100%; padding-block: var(--sb-space-2); overflow-x: auto; }
+/* the heatmap reaches 6 px past its box on both sides (sb-heatmap's negative margin, the cell gap) and the
+   focus ring sits 4 px outside a cell: room at the end keeps the box from scrolling and the ring of the last column
+   whole at 320 and 390 px. The start needs none: the row names stand there, flush with the text */
+.g-daten-specimen--heatmap { padding-inline-end: calc(var(--sb-space-1) + var(--sb-space-0-5)); }
+.g-daten-rule { margin: 0; max-inline-size: var(--sb-size-measure-prose); }
+.g-daten-refs { margin: 0; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.g-daten-refs a { font-family: var(--sb-font-family-mono); font-weight: var(--sb-type-code-weight); color: var(--sb-color-text); }
+/* where the component, its states and its markup live (bauteile.html), and which script it needs */
+.g-daten-more { margin: 0; max-inline-size: var(--sb-size-measure-prose); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+
+/* sample lines: value on the left, what it is on the right */
+.g-daten-samples { display: grid; gap: var(--sb-space-2); margin: 0; padding: 0; list-style: none; container: g-daten-samples / inline-size; }
+.g-daten-samples li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--sb-space-3); align-items: baseline; }
+/* large text: below 22em of the list (352 px at 100 %, 704 px at 200 %) value and label
+ * stand one under the other instead of squeezing their words into half a column each */
+@container g-daten-samples (width < 22em) { .g-daten-samples li { grid-template-columns: minmax(0, 1fr); gap: 0; } }
+.g-daten-samples__value { font: var(--sb-type-body-strong); letter-spacing: var(--sb-type-body-strong-tracking); font-variant-numeric: var(--sb-type-numeric-variant); overflow-wrap: anywhere; }
+.g-daten-samples__label { font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+
+/* ------------------------------------------------------------------ text */
+/* the narrow column of „Silbentrennung“ stands for a phone and is narrow on purpose, so its titles need their manual
+ * hyphens at every screen width; the markup carries data-sb-narrow-ok (the workshop's check counts its squeezed
+ * words in one info line instead of reporting them; an unneeded break is still an error) */
+.g-daten-narrow { box-sizing: border-box; inline-size: 11rem; max-inline-size: 100%; padding: var(--sb-space-3) var(--sb-space-3) var(--sb-space-3) 0; border-inline-end: var(--sb-border-width-hairline) solid var(--sb-color-border); }
+.g-daten-title-sample + .g-daten-title-sample { margin-block-start: var(--sb-space-3); }
+.g-daten-title-sample { margin: 0; font: var(--sb-type-title); letter-spacing: var(--sb-type-title-tracking); }
+.g-daten-plain { margin: 0; }
+
+/* ------------------------------------------------------------------ charts beyond sb-chart */
+/* charts keep their drawn width (≤ 356 px, the content width at 390 px), so caption text stays 14 px (DAT-04);
+   they shrink only on screens narrower than that */
+.g-daten-item .sb-chart > svg[width] { inline-size: auto; max-inline-size: 100%; }
+.g-daten-cat-1 { fill: var(--sb-dataviz-categorical-1); }
+.g-daten-cat-2 { fill: var(--sb-dataviz-categorical-2); }
+.g-daten-cat-3 { fill: var(--sb-dataviz-categorical-3); }
+.g-daten-cat-4 { fill: var(--sb-dataviz-categorical-4); }
+.g-daten-legend { display: flex; flex-wrap: wrap; gap: var(--sb-space-1) var(--sb-space-4); margin: var(--sb-space-2) 0 0; padding: 0; list-style: none; font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); }
+.g-daten-legend svg { display: inline-block; inline-size: 12px; block-size: 12px; vertical-align: -1px; margin-inline-end: var(--sb-space-1); }
+.g-daten-stars { display: inline-flex; gap: 2px; color: var(--sb-color-text); }
+.g-daten-stars svg { inline-size: 20px; block-size: 20px; }
+.g-daten-wrong-up { color: var(--sb-color-success); }
+.g-daten-wrong-down { color: var(--sb-color-danger); }
+.g-daten-dot { display: inline-block; inline-size: 10px; block-size: 10px; border-radius: var(--sb-radius-pill); background: var(--sb-color-success); vertical-align: middle; }
+
+
+/* ------------------------------------------------------------------ code tones under the code block (FAR-11) */
+.g-daten-tones { margin-block-start: var(--sb-space-4); }
+.g-daten-tones li { grid-template-columns: 6rem minmax(0, 1fr); }
+@container g-daten-samples (width < 22em) { .g-daten-tones li { grid-template-columns: minmax(0, 1fr); gap: 0; } }
+
+/* ------------------------------------------------------------------ media */
+.g-daten-figure { margin: 0; }
+.g-daten-figure img { display: block; inline-size: 100%; max-inline-size: 480px; block-size: auto; border-radius: var(--sb-radius-control); }
+.g-daten-figure figcaption { margin-block-start: var(--sb-space-2); font: var(--sb-type-caption); letter-spacing: var(--sb-type-caption-tracking); color: var(--sb-color-text-muted); max-inline-size: 480px; }
+
+/* ------------------------------------------------------------------ small frames and lists */
+/* a plain list of system rows or cards (sb-row, sb-card--item) without list bullets */
+.g-daten-rows { margin: 0; padding: 0; list-style: none; }
+.g-daten-place { display: inline-flex; align-items: center; gap: var(--sb-space-1); }
+.g-daten-place .sb-icon { flex: none; color: var(--sb-color-text-muted); }
+.g-daten-frame { box-sizing: border-box; inline-size: 100%; max-inline-size: 390px; border: var(--sb-border-width-control) solid var(--sb-color-border-strong); border-radius: var(--sb-radius-sheet); overflow: hidden; background: var(--sb-color-bg); }
+.g-daten-frame .sb-bottom-block { position: relative; }
+.g-daten-address { font-style: normal; }
+.g-daten-overview td a { font-family: var(--sb-font-family-mono); font-weight: var(--sb-type-code-weight); white-space: nowrap; }
+.g-daten-overview code { overflow-wrap: anywhere; }

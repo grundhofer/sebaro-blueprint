@@ -1,0 +1,829 @@
+{
+ "$comment": "Where each rule of rules.json lives. core = design/KERN.md (ref = rule number); view = design/views.md (ref = type key); component = carried by a part (design/parts/); words = writing sheet; platform-* = the page of the platform type (design/platforms/) and its starter; check = automatic check; extra-* = optional sheet; playbook = how to start a project; lowered = accessibility rule above the floor of KERN rule 30, kept as built, no longer required. For a 'component' rule, web and android give the finding of an audit of the parts on 2026-11-11 (read from the code, nothing rendered): carried = the part keeps the rule by itself, usage = the author needs the line in the part's page, missing = no part yet, n/a = the rule does not apply there.",
+ "rules": {
+  "HAL-03": {
+   "home": "core",
+   "ref": 27
+  },
+  "HAL-04": {
+   "home": "core",
+   "ref": 27
+  },
+  "HAL-05": {
+   "home": "core",
+   "ref": 23
+  },
+  "HAL-06": {
+   "home": "core",
+   "ref": 11
+  },
+  "HAL-07": {
+   "home": "core",
+   "ref": 1
+  },
+  "HAL-08": {
+   "home": "playbook"
+  },
+  "HAL-09": {
+   "home": "core",
+   "ref": 27
+  },
+  "FAR-01": {
+   "home": "core",
+   "ref": 4
+  },
+  "FAR-02": {
+   "home": "core",
+   "ref": 6
+  },
+  "FAR-03": {
+   "home": "core",
+   "ref": 4
+  },
+  "FAR-05": {
+   "home": "core",
+   "ref": 6
+  },
+  "FAR-06": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "FAR-07": {
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
+  },
+  "FAR-08": {
+   "home": "component",
+   "web": "carried",
+   "android": "usage"
+  },
+  "FAR-09": {
+   "home": "core",
+   "ref": 7
+  },
+  "FAR-11": {
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
+  },
+  "FAR-12": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "FAR-14": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "FAR-15": {
+   "home": "core",
+   "ref": 7
+  },
+  "SCH-01": {
+   "home": "core",
+   "ref": 8
+  },
+  "SCH-02": {
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
+  },
+  "SCH-03": {
+   "home": "core",
+   "ref": 8
+  },
+  "SCH-04": {
+   "home": "core",
+   "ref": 8
+  },
+  "SCH-05": {
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
+  },
+  "SCH-06": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "SCH-07": {
+   "home": "platform-web"
+  },
+  "RAU-01": {
+   "home": "core",
+   "ref": 9
+  },
+  "RAU-02": {
+   "home": "component",
+   "web": "usage",
+   "android": "missing"
+  },
+  "RAU-03": {
+   "home": "platform-web"
+  },
+  "RAU-04": {
+   "home": "core",
+   "ref": 9
+  },
+  "RAU-05": {
+   "home": "core",
+   "ref": 9
+  },
+  "RAU-06": {
+   "home": "platform-desktop"
+  },
+  "RAU-07": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "FOR-01": {
+   "home": "core",
+   "ref": 11
+  },
+  "FOR-02": {
+   "home": "core",
+   "ref": 10
+  },
+  "FOR-03": {
+   "home": "core",
+   "ref": 11
+  },
+  "FOR-04": {
+   "home": "core",
+   "ref": 11
+  },
+  "FOR-05": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "FOR-06": {
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
+  },
+  "EBE-01": {
+   "home": "core",
+   "ref": 10
+  },
+  "EBE-02": {
+   "home": "core",
+   "ref": 10
+  },
+  "EBE-03": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "EBE-04": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "EBE-05": {
+   "home": "core",
+   "ref": 14
+  },
+  "EBE-06": {
+   "home": "component",
+   "web": "usage",
+   "android": "n/a"
+  },
+  "EBE-07": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "EBE-08": {
+   "home": "platform-desktop"
+  },
+  "BEW-01": {
+   "home": "core",
+   "ref": 23
+  },
+  "BEW-02": {
+   "home": "core",
+   "ref": 23
+  },
+  "BEW-03": {
+   "home": "component",
+   "web": "carried",
+   "android": "usage"
+  },
+  "BEW-04": {
+   "home": "core",
+   "ref": 23
+  },
+  "AKT-01": {
+   "home": "core",
+   "ref": 12
+  },
+  "AKT-02": {
+   "home": "core",
+   "ref": 12
+  },
+  "AKT-03": {
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
+  },
+  "AKT-04": {
+   "home": "core",
+   "ref": 12
+  },
+  "AKT-05": {
+   "home": "core",
+   "ref": 14
+  },
+  "AKT-06": {
+   "home": "core",
+   "ref": 13
+  },
+  "AKT-07": {
+   "home": "core",
+   "ref": 15
+  },
+  "AKT-08": {
+   "home": "core",
+   "ref": 15
+  },
+  "AKT-09": {
+   "home": "core",
+   "ref": 28
+  },
+  "AKT-10": {
+   "home": "view",
+   "ref": "detail"
+  },
+  "AKT-11": {
+   "home": "core",
+   "ref": 12
+  },
+  "NAV-01": {
+   "home": "core",
+   "ref": 17
+  },
+  "NAV-02": {
+   "home": "core",
+   "ref": 17
+  },
+  "NAV-03": {
+   "home": "core",
+   "ref": 18
+  },
+  "NAV-04": {
+   "home": "core",
+   "ref": 18
+  },
+  "NAV-05": {
+   "home": "core",
+   "ref": 18
+  },
+  "NAV-06": {
+   "home": "platform-web"
+  },
+  "NAV-07": {
+   "home": "platform-web"
+  },
+  "NAV-08": {
+   "home": "component",
+   "web": "carried",
+   "android": "missing"
+  },
+  "NAV-09": {
+   "home": "platform-desktop"
+  },
+  "NAV-10": {
+   "home": "core",
+   "ref": 17
+  },
+  "NAV-11": {
+   "home": "component",
+   "web": "carried",
+   "android": "n/a"
+  },
+  "LNK-01": {
+   "home": "core",
+   "ref": 19
+  },
+  "LNK-02": {
+   "home": "core",
+   "ref": 19
+  },
+  "STA-01": {
+   "home": "core",
+   "ref": 20
+  },
+  "STA-02": {
+   "home": "core",
+   "ref": 20
+  },
+  "STA-03": {
+   "home": "core",
+   "ref": 20
+  },
+  "STA-04": {
+   "home": "component",
+   "web": "usage",
+   "android": "carried"
+  },
+  "STA-05": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "STA-06": {
+   "home": "core",
+   "ref": 22
+  },
+  "STA-07": {
+   "home": "platform-desktop"
+  },
+  "STA-08": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "STA-09": {
+   "home": "words"
+  },
+  "EIN-01": {
+   "home": "core",
+   "ref": 21
+  },
+  "EIN-02": {
+   "home": "core",
+   "ref": 21
+  },
+  "EIN-03": {
+   "home": "core",
+   "ref": 4
+  },
+  "EIN-04": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "EIN-05": {
+   "home": "view",
+   "ref": "search"
+  },
+  "EIN-06": {
+   "home": "component",
+   "web": "n/a",
+   "android": "usage"
+  },
+  "DAT-01": {
+   "home": "core",
+   "ref": 10
+  },
+  "DAT-02": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "DAT-03": {
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
+  },
+  "DAT-04": {
+   "home": "core",
+   "ref": 24
+  },
+  "DAT-05": {
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
+  },
+  "DAT-06": {
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
+  },
+  "DAT-07": {
+   "home": "core",
+   "ref": 22
+  },
+  "DAT-08": {
+   "home": "component",
+   "web": "carried",
+   "android": "n/a"
+  },
+  "DAT-09": {
+   "home": "component",
+   "web": "usage",
+   "android": "carried"
+  },
+  "DAT-10": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "DAT-11": {
+   "home": "component",
+   "web": "usage",
+   "android": "carried"
+  },
+  "DAT-12": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "DAT-13": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "DAT-14": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "DAT-15": {
+   "home": "view",
+   "ref": "history"
+  },
+  "DAT-16": {
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
+  },
+  "DAT-17": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "TXT-01": {
+   "home": "core",
+   "ref": 26
+  },
+  "TXT-02": {
+   "home": "core",
+   "ref": 27
+  },
+  "TXT-03": {
+   "home": "core",
+   "ref": 26
+  },
+  "TXT-04": {
+   "home": "core",
+   "ref": 26
+  },
+  "TXT-05": {
+   "home": "words"
+  },
+  "TXT-06": {
+   "home": "component",
+   "web": "carried",
+   "android": "missing"
+  },
+  "TXT-07": {
+   "home": "core",
+   "ref": 21
+  },
+  "TXT-08": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "TXT-09": {
+   "home": "component",
+   "web": "usage",
+   "android": "n/a"
+  },
+  "TXT-10": {
+   "home": "component",
+   "web": "carried",
+   "android": "usage"
+  },
+  "TXT-11": {
+   "home": "component",
+   "web": "usage",
+   "android": "missing"
+  },
+  "TXT-12": {
+   "home": "core",
+   "ref": 26
+  },
+  "TXT-13": {
+   "home": "words"
+  },
+  "TXT-14": {
+   "home": "words"
+  },
+  "TXT-15": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "TXT-16": {
+   "home": "words"
+  },
+  "TXT-17": {
+   "home": "component",
+   "web": "carried",
+   "android": "carried"
+  },
+  "BEL-01": {
+   "home": "core",
+   "ref": 27
+  },
+  "BEL-02": {
+   "home": "extra-evidence"
+  },
+  "BEL-03": {
+   "home": "extra-evidence"
+  },
+  "BEL-04": {
+   "home": "extra-evidence"
+  },
+  "BEL-05": {
+   "home": "extra-evidence"
+  },
+  "BEL-06": {
+   "home": "extra-evidence"
+  },
+  "BEL-07": {
+   "home": "extra-evidence"
+  },
+  "BEL-08": {
+   "home": "extra-evidence"
+  },
+  "BEL-09": {
+   "home": "core",
+   "ref": 27
+  },
+  "BEL-10": {
+   "home": "core",
+   "ref": 16
+  },
+  "ZEI-01": {
+   "home": "core",
+   "ref": 5
+  },
+  "ZEI-06": {
+   "home": "core",
+   "ref": 25
+  },
+  "ZEI-07": {
+   "home": "core",
+   "ref": 25
+  },
+  "ZEI-13": {
+   "home": "view",
+   "ref": "about"
+  },
+  "ICO-03": {
+   "home": "core",
+   "ref": 25
+  },
+  "ICO-04": {
+   "home": "platform-web"
+  },
+  "ICO-05": {
+   "home": "core",
+   "ref": 25
+  },
+  "ICO-06": {
+   "home": "core",
+   "ref": 25
+  },
+  "ICO-07": {
+   "home": "view",
+   "ref": "state-empty"
+  },
+  "ICO-08": {
+   "home": "platform-desktop"
+  },
+  "BIL-01": {
+   "home": "extra-images"
+  },
+  "BIL-02": {
+   "home": "extra-images"
+  },
+  "BIL-03": {
+   "home": "extra-images"
+  },
+  "BIL-04": {
+   "home": "extra-images"
+  },
+  "BIL-05": {
+   "home": "extra-images"
+  },
+  "BIL-06": {
+   "home": "component",
+   "web": "carried",
+   "android": "usage"
+  },
+  "BIL-07": {
+   "home": "component",
+   "web": "usage",
+   "android": "usage"
+  },
+  "BIL-08": {
+   "home": "component",
+   "web": "n/a",
+   "android": "usage"
+  },
+  "ZUG-01": {
+   "home": "core",
+   "ref": 30
+  },
+  "ZUG-02": {
+   "home": "core",
+   "ref": 30
+  },
+  "ZUG-03": {
+   "home": "core",
+   "ref": 30
+  },
+  "ZUG-04": {
+   "home": "core",
+   "ref": 30
+  },
+  "ZUG-05": {
+   "home": "lowered"
+  },
+  "ZUG-06": {
+   "home": "platform-web"
+  },
+  "ZUG-08": {
+   "home": "lowered"
+  },
+  "ZUG-09": {
+   "home": "lowered"
+  },
+  "STR-01": {
+   "home": "core",
+   "ref": 29
+  },
+  "STR-03": {
+   "home": "view",
+   "ref": "entry"
+  },
+  "WEB-01": {
+   "home": "platform-web"
+  },
+  "WEB-02": {
+   "home": "platform-web"
+  },
+  "WEB-03": {
+   "home": "platform-web"
+  },
+  "WEB-04": {
+   "home": "platform-web"
+  },
+  "WEB-05": {
+   "home": "view",
+   "ref": "form"
+  },
+  "WEB-06": {
+   "home": "component",
+   "web": "usage",
+   "android": "n/a"
+  },
+  "WEB-07": {
+   "home": "component",
+   "web": "usage",
+   "android": "n/a"
+  },
+  "WEB-08": {
+   "home": "component",
+   "web": "usage",
+   "android": "n/a"
+  },
+  "WEB-09": {
+   "home": "platform-web"
+  },
+  "WEB-10": {
+   "home": "platform-web"
+  },
+  "WEB-11": {
+   "home": "platform-web"
+  },
+  "MOB-01": {
+   "home": "platform-android"
+  },
+  "MOB-02": {
+   "home": "platform-android"
+  },
+  "MOB-03": {
+   "home": "platform-android"
+  },
+  "MOB-04": {
+   "home": "view",
+   "ref": "settings"
+  },
+  "MOB-05": {
+   "home": "platform-ios"
+  },
+  "MOB-06": {
+   "home": "platform-ios"
+  },
+  "MOB-07": {
+   "home": "platform-ios"
+  },
+  "MOB-08": {
+   "home": "platform-ios"
+  },
+  "MOB-09": {
+   "home": "view",
+   "ref": "outside"
+  },
+  "MOB-10": {
+   "home": "platform-android"
+  },
+  "MOB-11": {
+   "home": "view",
+   "ref": "outside"
+  },
+  "MOB-12": {
+   "home": "component",
+   "web": "n/a",
+   "android": "usage"
+  },
+  "DSK-01": {
+   "home": "platform-desktop"
+  },
+  "DSK-02": {
+   "home": "platform-desktop"
+  },
+  "DSK-03": {
+   "home": "platform-desktop"
+  },
+  "DSK-04": {
+   "home": "platform-desktop"
+  },
+  "DSK-05": {
+   "home": "platform-desktop"
+  },
+  "DSK-06": {
+   "home": "platform-desktop"
+  },
+  "DSK-07": {
+   "home": "platform-desktop"
+  },
+  "DSK-08": {
+   "home": "platform-desktop"
+  },
+  "DSK-09": {
+   "home": "platform-desktop"
+  },
+  "DSK-10": {
+   "home": "platform-desktop"
+  },
+  "DSK-11": {
+   "home": "platform-desktop"
+  },
+  "DSK-12": {
+   "home": "platform-desktop"
+  },
+  "DSK-13": {
+   "home": "platform-desktop"
+  },
+  "DSK-14": {
+   "home": "platform-desktop"
+  },
+  "DSK-15": {
+   "home": "platform-desktop"
+  },
+  "TEC-01": {
+   "home": "core",
+   "ref": 1
+  },
+  "TEC-02": {
+   "home": "platform-web"
+  },
+  "TEC-03": {
+   "home": "check"
+  },
+  "TEC-04": {
+   "home": "check"
+  },
+  "TEC-05": {
+   "home": "platform-web"
+  },
+  "TEC-06": {
+   "home": "core",
+   "ref": 31
+  },
+  "TEC-07": {
+   "home": "platform-web"
+  },
+  "TEC-08": {
+   "home": "platform-web"
+  },
+  "TEC-09": {
+   "home": "check"
+  },
+  "TEC-10": {
+   "home": "core",
+   "ref": 26
+  }
+ }
+}

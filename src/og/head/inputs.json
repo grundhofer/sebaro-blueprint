@@ -1,0 +1,22 @@
+{
+  "$comment": "written by tools/og.mjs after a successful render; tools/check_site.py compares it (OG); do not edit",
+  "render": "1.3.0",
+  "inputs": {
+    "src/og/pages.json": "f49f9b2ae6941f05abce1a435988e59f52379e8d6f140780a2a9e3538ed4af62",
+    "docs/sebaro/brand/og/render.mjs": "69fa5ebeafb90bd39b365843d48a02f75588d2a9e90afbd10dcdc1eeeb318dec",
+    "docs/sebaro/product/render.mjs": "8383bf63e6cbae14661da38bf1062e6f357be1831537377b3f9c881b659b7fb8",
+    "docs/sebaro/brand/og/template.html": "c601ea08a1e0d98bdf206dc593085ee3bdfdbe3f5ba6f63f5ec9dc20ebbb3fe3",
+    "docs/sebaro/brand/og/pages.schema.json": "1077397089d8d491b7dab2160b1ae84d0d319cff6d47600acaf6e1725e578ca4",
+    "docs/sebaro/tokens.css": "e8987e6732203ffc666366163088d03fa42c853278f8e5a7b9d0f914c28a43af",
+    "docs/sebaro/fonts/fonts.css": "a484341b981db4df24d631697a7f786c187ab895722b76d85e4f235105bf4b2f",
+    "docs/sebaro/fonts/web/sebaro-mono-latin-de.woff2": "2512639768811e136c441f24e94a5f365ab1c18dbceb138f181c7e67a4be5ccf",
+    "docs/sebaro/fonts/web/sebaro-sans-italic-latin-de.woff2": "3334dbd7fd7c6c6a150afd76f90783572cdd1ea6e6ece5b2f42ba90a6a61fd0f",
+    "docs/sebaro/fonts/web/sebaro-sans-latin-de.woff2": "589be2f709be7e198bfa223e58a9515ffcbd4f1d652f757c2c49bc05f1bcb92d",
+    "docs/sebaro/icons/sprite.svg": "e8d1e8d72983cda5ba674f92f764c86c598bc7126f904206edc00df0d711cdab",
+    "docs/sebaro/icons/sprite.css": "1472fb1ad7874c0c4940ce251be0f4569bd0ff3ab8027ce7b6bce0038ef34b88",
+    "docs/sebaro-product/sebaro-product.json": "212fab9f20d4554bfbc18c9a1693f778b01d418101713bc3b0b34edd934ccf52",
+    "docs/sebaro-product/sign/tile.svg": "3721c88b0c724b06612f0e9a1d518846b8c1faca6ce173c0ab4c21c01784a881",
+    "docs/sebaro/brand/inline/lockup-horizontal.svg": "da498e386569f0f60f5355ef7e0a007d76fb0fd879f07006c42d597efed38cfa",
+    "docs/sebaro/brand/inline/lockup-horizontal-large.svg": "6ad35c02a8f353fe17c801bd6aebf84b5529a2abda8cc9eb8f67808b65326134"
+  }
+}
