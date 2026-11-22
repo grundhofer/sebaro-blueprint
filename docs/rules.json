@@ -3388,7 +3388,7 @@
    "area": "plattform-mobile",
    "title": "Material 3 nur gezähmt",
    "rule": "Nutze keine Stock-M3-Buttons, FABs, NavigationBar, TopAppBar, Badges oder AlertDialogs. Neutralisiere die tonale Elevation (surfaceTint = bg, shadowElevation 0 dp). Switch, Radio, Checkbox und Slider sind erlaubt in sebaro-Farben (an = accent, nie Lindgrün), Chips nur mit 3-dp-Kante, Fortschrittsanzeigen nur für Netzarbeit über 1 s.",
-   "rule_en": "No stock M3 Button/FAB/NavigationBar/TopAppBar/Badge/AlertDialog; neutralise tonal elevation (surfaceTint = bg, shadowElevation 0 dp); controls in sebaro colours (on = accent); chips 3 dp edge; progress only for remote work > 1 s; lint A1–A9.",
+   "rule_en": "No stock M3 Button/FAB/NavigationBar/TopAppBar/Badge/AlertDialog; neutralise tonal elevation (surfaceTint = bg, shadowElevation 0 dp); controls in sebaro colours (on = accent); chips 3 dp edge; progress only for remote work > 1 s; lint A1–A8.",
    "why": "M3 kennt keine Hauptaktionsrolle, eine gefüllte primary-Taste wäre eine Kobaltfläche; Material tönt Ebenen sonst automatisch und bricht EBE-01.",
    "do": "SebaroTheme.tokens.elevation.<level>; Felder gefüllt mit surface-sunken, 1-dp-Grundlinie, Fehler 2 dp danger; lint-sebaro-android.sh <kotlin source dir>.",
    "dont": "BadgedBox, ElevatedCard für Listen, Card mit tonalElevation, Color(0xFF…) in Screens.",
@@ -3397,9 +3397,9 @@
     "mobile"
    ],
    "status": "entschieden",
-   "check": "lint-sebaro-android.sh A1–A9 Exit 0 (Grep, an einer echten App nicht geprüft).",
+   "check": "lint-sebaro-android.sh A1–A8 Exit 0 (Grep, an einer echten App nicht geprüft).",
    "example_hint": "Tabelle M3-Komponente → sebaro-Ersatz; falsch: Screen mit BadgedBox und ElevatedCard.",
-   "changed": "2026-11-21"
+   "changed": "2026-11-22"
   },
   {
    "id": "MOB-03",
