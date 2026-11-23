@@ -189,9 +189,9 @@
    "id": "HAL-05",
    "area": "haltung",
    "title": "Leise gestalten, laut ist nur eins",
-   "rule": "Halte jede Ansicht ruhig: höchstens eine laute Fläche (die lindgrüne Hauptaktion), keine Zahlen an Seitenleiste, Reitern und unterer Navigation, also keine Zähl-Badges und keine roten Punkte; Zahlen stehen im Listenkopf und im Stand-Satz. Schreib sachlich, mit Zahlen, ohne Ausrufezeichen, Hype, Druck oder Schuld; Erinnerungen nur, wenn die Person sie eingeschaltet hat. Emoji gibt es in keinem Text der Oberfläche; was Teilnehmende selbst schreiben oder wählen, etwa eine Reaktion, darf eins sein, und die Oberfläche nennt dazu die Zahl als Text und den Namen in Worten. Kein Countdown, der drängt (Angebot, Frist, Serie); eine Zeitbox, die die Beteiligten selbst gestartet haben, darf ihre Restzeit ruhig nennen: „noch 3 Min.“, in ganzen Minuten, ohne Farbe, Puls oder Ton. Ein Countdown bis zu einem Tag ist die Zahl und ihr Satz („noch 61 Tage“), ohne Ring und ohne Balken für die vergangene Zeit.",
-   "rule_en": "Calm views and copy: at most one loud element (the lime primary action), no numbers on sidebar, tabs or bottom navigation (no count badges or red dots; numbers go into the list head and the state sentence), no exclamation marks, hype, pressure or guilt; reminders only when turned on. No emoji in interface text; what participants write or choose themselves (a reaction) may be one, with its count as text and its name in words. No pressure countdown (offer, deadline, streak); a timebox the people started themselves may show its remaining time calmly: „noch 3 Min.“, whole minutes, no colour, pulse or sound.",
-   "why": "Was leise ist, lässt die eine Hauptaktion auffallen; Zähler, Emoji und Druck ziehen Aufmerksamkeit ab, ohne zu helfen. Eine ruhige Restzeit, die die Beteiligten selbst gestartet haben, ist kein Druck-Countdown.",
+   "rule": "Halte jede Ansicht ruhig: höchstens eine laute Fläche (die lindgrüne Hauptaktion), keine Zahlen an Seitenleiste, Reitern und unterer Navigation, also keine Zähl-Badges und keine roten Punkte; Zahlen stehen im Listenkopf und im Stand-Satz. Schreib sachlich, mit Zahlen, ohne Ausrufezeichen, Hype, Druck oder Schuld; Erinnerungen nur, wenn die Person sie eingeschaltet hat. Emoji gibt es in keinem Text der Oberfläche; was Teilnehmende selbst schreiben oder wählen, etwa eine Reaktion, darf eins sein, und die Oberfläche nennt dazu die Zahl als Text und den Namen in Worten. Kein Countdown, der drängt (Angebot, Frist, Serie); eine Zeitbox, die die Beteiligten selbst gestartet haben, darf ihre Restzeit ruhig nennen: „noch 3 Min.“, in ganzen Minuten, ohne Farbe oder Puls; ein Ton nur am Ende, einmal und leise, als persönlicher Schalter in der Einstellungsansicht, ab Werk aus. Ein Countdown bis zu einem Tag ist die Zahl und ihr Satz („noch 61 Tage“), ohne Ring und ohne Balken für die vergangene Zeit.",
+   "rule_en": "Calm views and copy: at most one loud element (the lime primary action), no numbers on sidebar, tabs or bottom navigation (no count badges or red dots; numbers go into the list head and the state sentence), no exclamation marks, hype, pressure or guilt; reminders only when turned on. No emoji in interface text; what participants write or choose themselves (a reaction) may be one, with its count as text and its name in words. No pressure countdown (offer, deadline, streak); a timebox the people started themselves may show its remaining time calmly: „noch 3 Min.“, whole minutes, no colour or pulse; a sound only at the end, once and soft, as a personal switch in the settings view, off by default.",
+   "why": "Was leise ist, lässt die eine Hauptaktion auffallen; Zähler, Emoji und Druck ziehen Aufmerksamkeit ab, ohne zu helfen. Eine ruhige Restzeit, die die Beteiligten selbst gestartet haben, ist kein Druck-Countdown. Ein Ton am Ende ist eine Erinnerung: Es gibt ihn nur, wenn die Person ihn eingeschaltet hat, denn wer auf die Karten schaut, sieht den Satz nicht.",
    "do": "„3 von 5 erledigt, 60 %. Noch 2 offen.“; „Mehr steht heute nicht an.“; Erinnerung „Zeit für: Wasser trinken (5 von 8)“; Reaktion: das Emoji der Person mit „3“ daneben und dem zugänglichen Namen „Daumen hoch, 3“; Zeitbox: „Abstimmen · noch 3 Min.“, am Ende „Zeit um“.",
    "dont": "„Super!“, „Ups“, „revolutionär“, „Du hast 3 verpasst“, „Deine Serie ist in Gefahr“, Countdowns, die drängen („Nur noch 2 Stunden!“), Emoji in Titeln, Tasten und Meldungen, eine Restzeit, die rot wird, pulsiert oder tickt, Konfetti als Standard, pulsierende Knöpfe. Ein Ring, der sich bis zum Tag füllt.",
    "numbers": "höchstens 1 Hauptaktion je Ansicht; 0 Zähl-Badges",
@@ -202,7 +202,7 @@
    "check": "grep -rn '!' in Strings; Bannwort-grep; Review je Ansicht: höchstens eine lindgrüne Fläche, keine Zahl an Seitenleiste, Reitern oder unterer Navigation. check_demo.py der Werkstatt meldet TXT9 für ein Emoji in Oberflächentexten.",
    "example_hint": "Heute-Liste mit sb-day-summary „3 von 5 erledigt, 60 %. Noch 2 offen.“ und einer sb-primary-action, dazu eine Zeitbox „Abstimmen · noch 3 Min.“; falsch: rote Badge „3“ am Reiter und „Du hast 3 verpasst!“.",
    "note": "Vorläufig: „noch 1 Min.“, „noch unter 1 Min.“, „Zeit um“, das Aufrunden der Minuten, die Restzeit ohne Live-Region, der zugängliche Name einer Reaktion und die Form „noch 61 Tage · Donnerstag, 24.12.2026“ für alle Produkte. Ein relativer Tag steht nie allein, sondern mit dem Datum daneben (TXT-04).",
-   "changed": "2026-11-21"
+   "changed": "2026-11-23"
   },
   {
    "id": "HAL-06",
@@ -280,8 +280,8 @@
    "id": "FAR-01",
    "area": "farbe",
    "title": "Jede Farbe hat genau einen Job",
-   "rule": "Gib jeder Farbe genau einen Job: Ort (Kobalt), nächster Schritt (Lindgrün, nur die Hauptaktion), Zustand (Statusfarben, nur mit Glyphe und Wort), Produkt (Kachelfarbe, nur in der App-Kachel). Alles andere ist Grau. Datenfarben sind ein lokaler Job nur im Diagramm, Codetöne nur im Code (FAR-11); Kategorie und Markierung sind zwei eigene Jobs mit eigenen Tönen (FAR-12), Plus und Minus färben sich nur mit Zeichen und Pfeil (FAR-14). Der warme Farbton ändert nur die Graus (FAR-15).",
-   "rule_en": "Every colour has exactly one job: place = cobalt, next step = lime (primary action only), state = status colours (with glyph + word), product = tile colour (inside the app tile only), everything else grey; dataviz colours only inside charts, code tones only in code (FAR-11); category and mark have their own tones (FAR-12); plus/minus are coloured only with sign and arrow (FAR-14); the warm tone moves only the greys (FAR-15).",
+   "rule": "Gib jeder Farbe genau einen Job: Ort (Kobalt), nächster Schritt (Lindgrün, nur die Hauptaktion), Zustand (Statusfarben, nur mit Glyphe und Wort), Produkt (Kachelfarbe, nur in der App-Kachel). Alles andere ist Grau. Datenfarben sind ein lokaler Job nur im Diagramm, Codetöne nur im Code (FAR-11); Kategorie und Markierung sind zwei eigene Jobs mit eigenen Tönen (FAR-12), Personen ein weiterer (FAR-16), Plus und Minus färben sich nur mit Zeichen und Pfeil (FAR-14). Der warme Farbton ändert nur die Graus (FAR-15).",
+   "rule_en": "Every colour has exactly one job: place = cobalt, next step = lime (primary action only), state = status colours (with glyph + word), product = tile colour (inside the app tile only), everything else grey; dataviz colours only inside charts, code tones only in code (FAR-11); category and mark have their own tones (FAR-12), people too (FAR-16); plus/minus are coloured only with sign and arrow (FAR-14); the warm tone moves only the greys (FAR-15).",
    "why": "Wer die Farbe sieht, weiß sofort, was sie bedeutet. Eine Farbregel wirkt auf jedem Alltagsbildschirm.",
    "do": "M1 „Heute“: einzige Farben sind die 3-px-Kante über „Heute“, das lindgrüne „Neue Gewohnheit“, zwei Statusglyphen und die App-Kachel.",
    "dont": "Deko-Farbe, farbige Köpfe oder Kartenflächen, Tasten in Marken- oder Produktfarbe, Kobalt als Buttonfläche, Farben ohne Rolle.",
@@ -293,7 +293,7 @@
    "check": "Jede Farbe einer Rolle zuordnen; Farblint L1–L8; Graustufen-Screenshot bleibt lesbar.",
    "example_hint": "Zwei sb-phone nebeneinander: richtig graue Liste, 3-px-Ortslinie, eine sb-primary-action unten, sb-status mit Glyphe+Wort; falsch blauer Kopf, getönte Karten, grüner Chip, rote Zählpunkte.",
    "note": "Kobalt hat einen weiteren Job: Zeichen auf Fotos (Rahmen und Griffe) sind eine 2-px-Linie in accent auf einem Saum in bg (BIL-08).",
-   "changed": "2026-11-21"
+   "changed": "2026-11-23"
   },
   {
    "id": "FAR-02",
@@ -494,6 +494,25 @@
    "example_hint": "Fuß mit „Darstellung“ und „Farbton: Kühl · Warm“; falsch: dritte Taste im Kopf und warm gefärbte Hauptaktion.",
    "note": "Der Startbildschirm des Systems auf iOS ist statisch und immer kühl; mit Warm ist der Schritt zum ersten Bild sichtbar.",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "FAR-16",
+   "area": "farbe",
+   "title": "Person: eine eigene Farbaufgabe",
+   "rule": "Gib Personen in einer App, in der mehrere zusammenarbeiten, auf Wunsch des Produkts die Aufgabe Person: einen festen Ton je Person aus den Personen-Tönen der Tokens, in der ganzen App gleich. Er steht nur als 2-px-Ring um die Initialen (DAT-06) oder, wo kein Avatar Platz hat (Karte, Stimme, Namensschild des Zeigers), als kleiner Ring vor dem Namen; nie als Fläche, als Textfarbe oder als einziges Merkmal, der Name steht immer daneben oder am Element. Wo keine Person genannt wird (anonyme Karten), gibt es keinen Ring. Ohne Personen-Töne bleibt der Ring border-strong und die Namen machen den Unterschied.",
+   "rule_en": "Person (apps where several people work together, if the product wants it): one fixed tone per person from the person tones of the tokens, the same across the app; only as a 2 px ring around the initials (DAT-06) or, where no avatar fits (card, vote, pointer label), a small ring before the name; never a fill, a text colour or the only cue, the name always beside it or on the element; no ring where no person is named (anonymous cards). Without person tones the ring stays border-strong and the names tell people apart.",
+   "why": "In einer Runde findet man die eigenen Karten und die einer anderen Person schneller an einem Ton als am Namen allein. Als Ring ohne Fläche bleibt die Farbe leise, und weil der Name immer dabei ist, trägt sie keine Aussage allein. Die Töne kommen aus den Tokens, damit sie in Hell, Dunkel, Kühl und Warm denselben Kontrast halten.",
+   "do": "Avatar „Anna Keller“ mit 2-px-Ring im Ton der Person, derselbe Ton als kleiner Ring vor „Anna“ auf ihrer Karte und am Namensschild ihres Zeigers.",
+   "dont": "Ein Avatar als farbige Scheibe; der Name in der Farbe der Person; eine Karte mit farbiger Fläche je Person; ein Ring ohne Namen; Töne aus der Kategorie-, Diagramm- oder Kachelpalette als Personenfarben; eine eigene Palette des Produkts.",
+   "numbers": "Ring 2 px; jeder Personen-Ton mindestens 3,0 : 1 auf jedem Grund in Hell, Dunkel, Kühl und Warm; die Zahl der Töne legt die Werkstatt fest.",
+   "platforms": [
+    "alle"
+   ],
+   "status": "entschieden",
+   "check": "Jeder Ring hat einen Namen am Element oder daneben; Graustufen-Screenshot: Personen am Namen unterscheidbar; Farbzählung der Werkstatt ohne Farben ohne Rolle.",
+   "example_hint": "Avatar-Reihe und zwei Karten mit Personenring vor dem Namen; falsch: farbige Avatar-Scheiben und farbige Namen.",
+   "note": "Die Personen-Töne gibt es noch nicht in den Tokens; bis die Werkstatt sie liefert, bleibt der Ring border-strong. Vorlage aus der ersten App mit Personenfarben: zwölf Töne bei gleicher Helligkeit, ein Wert hält 3 : 1 gegen alle Gründe.",
+   "changed": "2026-11-23"
   },
   {
    "id": "SCH-01",
@@ -1920,19 +1939,19 @@
    "id": "DAT-06",
    "area": "daten",
    "title": "Personen als Initialen im Kreis",
-   "rule": "Zeig Personen als Initialen im Kreis (40 px, klein 32 px) mit 1-px-border-strong-Ring, ohne Füllung. Das Element trägt den Namen als aria-label, die Initialen sind aria-hidden.",
-   "rule_en": "Avatar: initials in a 40 (32) px circle, 1 px ring, no fill; aria-label with the name, initials aria-hidden.",
+   "rule": "Zeig Personen als Initialen im Kreis (40 px, klein 32 px) mit 1-px-border-strong-Ring, ohne Füllung; gibt das Produkt Personen Farben, ist der Ring 2 px im Ton der Person (FAR-16). Das Element trägt den Namen als aria-label, die Initialen sind aria-hidden.",
+   "rule_en": "Avatar: initials in a 40 (32) px circle, 1 px ring, no fill (2 px in the person's tone where the product gives people colours, FAR-16); aria-label with the name, initials aria-hidden.",
    "why": "Der Kreis unterscheidet Menschen von App-Zeichen (abgerundete Quadrate).",
    "do": "<li class='sb-avatar' aria-label='Anna Keller'><span aria-hidden='true'>AK</span></li>",
-   "dont": "Farbige Avatar-Scheiben.",
-   "numbers": "40px / 32px; Ring 1px",
+   "dont": "Farbige Avatar-Scheiben; ein Ton der Person als Füllung oder ohne Name.",
+   "numbers": "40px / 32px; Ring 1px, im Ton der Person 2px",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "axe; Review.",
    "example_hint": "Avatar-Reihe „Im Board“; falsch: bunte Kreise mit weißen Initialen.",
-   "changed": "2026-11-21"
+   "changed": "2026-11-23"
   },
   {
    "id": "DAT-07",
