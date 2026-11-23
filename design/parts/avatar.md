@@ -17,5 +17,5 @@ A person, shown as initials in a circle. The circle tells people from app signs,
 
 ## Rules
 
-- Initials in a ring, no fill. [DAT-06]
+- Initials in a ring, no fill. With person colours the ring is 2 px in the person's tone. [DAT-06, FAR-16]
 - The circle is one of the four pill shapes. [FOR-06]

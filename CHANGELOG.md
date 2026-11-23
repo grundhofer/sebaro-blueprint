@@ -10,6 +10,17 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+- HAL-05 und Zusammenarbeit (`design/parts/collaboration.md`): Die Zeitbox darf am Ende einmal leise einen Ton
+  geben, aber nur über einen persönlichen Schalter in der Einstellungsansicht, ab Werk aus. Während sie läuft, bleibt
+  sie ohne Ton.
+- Neu: FAR-16. Personen sind eine eigene Farbaufgabe: In einer App, in der mehrere zusammenarbeiten, darf das Produkt
+  jeder Person einen festen Ton aus den Personen-Tönen der Tokens geben, nur als 2-px-Ring um die Initialen oder als
+  kleiner Ring vor dem Namen, nie als Fläche, Textfarbe oder einziges Merkmal. Bis die Werkstatt die Töne liefert,
+  bleibt der Ring `border-strong`. FAR-01 nennt die Aufgabe, DAT-06 den 2-px-Ring; Zusammenarbeit und Person
+  (`avatar.md`) verweisen darauf.
+- Zusammenarbeit: Ein Stapel bekommt eine Stimme als Ganzes, in seinem Rahmen; seine Karten haben dann keine.
+- Zuordnung (`rules/home.json`): FAR-16 gehört zu den Bauteilen, im Web und auf Android noch ohne Teil.
+
 ## 4.1.0 · 2026-11-22
 
 - Toast (`design/parts/toast.md`): Gehört ein Feld zur Hauptaktion und steht direkt über ihr, steht der Toast über
