@@ -340,14 +340,14 @@
    "why": "Grau trägt alles ohne Aufgabe. Ebenen trennt die Tintenlinie, nicht der Grundton.",
    "do": "Feld auf --sb-color-surface-sunken, Seite auf --sb-color-bg.",
    "dont": "Karten oder Abschnitte mit eigenem Grundton absetzen; Feld auf eigenem sunken-Abschnitt.",
-   "numbers": "--sb-color-bg #F4F5F8 / #13161C; --sb-color-surface #FBFCFE / #1B1E24; --sb-color-surface-raised #FFFFFF / #212429; --sb-color-surface-sunken #E9EBEE / #090C11 (hell / dunkel)",
+   "numbers": "--sb-color-bg #F4F5F8 / #1B1E24; --sb-color-surface #FBFCFE / #1E2126; --sb-color-surface-raised #FFFFFF / #212429; --sb-color-surface-sunken #E9EBEE / #101419 (hell / dunkel)",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Computed background der Seite = --sb-color-bg in beiden Modi; keine Hex-Werte im Code.",
    "example_hint": "Formular mit sb-field auf bg; falsch: dasselbe Formular in einem surface-sunken-Kasten (engstes Paar 3,05 : 1).",
-   "changed": "2026-11-21"
+   "changed": "2026-11-25"
   },
   {
    "id": "FAR-06",
@@ -355,17 +355,17 @@
    "title": "Drei Textgrau mit klaren Grenzen",
    "rule": "Setz Inhalt in text und Nebentext (Datum, Zähler, Meta, nicht gewählte Icons) in text-muted. text-subtle nur für großen (≥ 24 px oder ≥ 18,66 px bei ≥ 700) oder nicht wesentlichen Text.",
    "rule_en": "text for content, text-muted for secondary text (≥ 4.5:1), text-subtle only for large (≥ 24 px / ≥ 18.66 px bold) or non-essential text.",
-   "why": "text-subtle erreicht nur 3,40 / 4,22 : 1 auf bg und trägt darum nur Verzichtbares.",
+   "why": "text-subtle erreicht nur 3,40 / 3,89 : 1 auf bg und trägt darum nur Verzichtbares.",
    "do": "Datum und Zähler in --sb-color-text-muted.",
    "dont": "Hinweise oder Fehlermeldungen in --sb-color-text-subtle.",
-   "numbers": "--sb-color-text #1C1E22 / #EBEDEF; --sb-color-text-muted #66696E / #9D9EA1 (5.05 / 6.76 auf bg); --sb-color-text-subtle #828589 / #797A7D (3.40 / 4.22 auf bg)",
+   "numbers": "--sb-color-text #1C1E22 / #EBEDEF; --sb-color-text-muted #66696E / #9D9EA1 (5.05 / 6.23 auf bg); --sb-color-text-subtle #828589 / #797A7D (3.40 / 3.89 auf bg)",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "tools/color.py contrast je genutztem Paar; text-subtle nur an Elementen ≥ 24 px oder ≥ 18.66 px/700 bzw. dekorativ.",
    "example_hint": "Listenzeile mit Meta „Gestern, 3 Einträge“ in text-muted; falsch: dieselbe Meta in 14 px text-subtle.",
-   "changed": "2026-11-21"
+   "changed": "2026-11-25"
   },
   {
    "id": "FAR-07",
@@ -373,17 +373,17 @@
    "title": "Haarlinie gliedert, border-strong begrenzt",
    "rule": "Trenne Zeilen und Abschnitte mit 1 px border. Begrenze Bedienelemente (Nebenaktionen, Tags, Feldgrundlinien, Schalter aus, Radio-Ring) und Chart-Achsen mit border-strong (≥ 3 : 1). Eine Haarlinie ist nie die einzige Grenze eines Bedienelements.",
    "rule_en": "border = decorative 1 px hairline; border-strong = control boundaries and chart axes (≥ 3:1); a hairline is never a control's only boundary.",
-   "why": "border hat nur 1,29 / 1,47 : 1 auf bg; Bediengrenzen brauchen 3 : 1 (WCAG 1.4.11).",
+   "why": "border hat nur 1,29 / 1,55 : 1 auf bg; Bediengrenzen brauchen 3 : 1 (WCAG 1.4.11).",
    "do": "Feldgrundlinie und Nebenaktion in --sb-color-border-strong.",
    "dont": "Eingabefeld nur mit --sb-color-border umrahmen.",
-   "numbers": "--sb-color-border #D7D9DD / #32353C; --sb-color-border-strong #84868A / #707379 (hell 3.34/3.55/3.64/3.05, dunkel 3.81/3.51/3.27/4.11 auf bg/surface/surface-raised/surface-sunken)",
+   "numbers": "--sb-color-border #D7D9DD / #3B3E45; --sb-color-border-strong #84868A / #76797F (hell 3.34/3.55/3.64/3.05, dunkel 3.82/3.69/3.56/4.23 auf bg/surface/surface-raised/surface-sunken)",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Kontrast border-strong gegen den Grund jedes Bedienelements ≥ 3 : 1; kein Bedienelement, dessen einzige Kante --sb-color-border ist.",
    "example_hint": "sb-secondary-action mit border-strong-Rand; falsch: gleiche Taste mit hellgrauer Haarlinie, die im Hellmodus kaum sichtbar ist.",
-   "changed": "2026-11-21"
+   "changed": "2026-11-25"
   },
   {
    "id": "FAR-08",
@@ -393,7 +393,7 @@
    "rule_en": "Hover = --sb-color-hover-fill, pressed = --sb-color-pressed-fill (lighter than bg in dark mode); never tint, shadow, ripple or motion as state.",
    "why": "Eine farbige Hover-Fläche wäre eine Rolle ohne Job; ein dunklerer Hover wirkt im Dunkelmodus wie ein Loch. Antippen zeigt auf allen Plattformen dieselbe kurze graue Füllung, auf Android also keine Welle.",
    "do": "background: var(--sb-color-hover-fill) an Listenzeilen und ruhigen Bedienelementen.",
-   "dont": "box-shadow beim Hover, accent-subtle als Hover, opacity-Overlays, surface-sunken als Hover (dunkel #090C11).",
+   "dont": "box-shadow beim Hover, accent-subtle als Hover, opacity-Overlays, surface-sunken als Hover (dunkel #101419).",
    "numbers": "--sb-color-hover-fill #E9EBEE / #212429; --sb-color-pressed-fill #E7E9EC / #25282F; Übergang 120 ms (--sb-motion-duration-short)",
    "platforms": [
     "alle"
@@ -401,7 +401,7 @@
    "status": "entschieden",
    "check": "Hover-Regeln nutzen hover-fill; Texte darauf ≥ 4,5 : 1; grep box-shadow zeigt nur Danger-Inset und forced-colors.",
    "example_hint": "sb-list-row und sb-secondary-action in Ruhe/Zeiger/Gedrückt (is-hover, is-pressed) in beiden Modi; falsch: Schatten und Blautönung beim Hover.",
-   "changed": "2026-11-21"
+   "changed": "2026-11-25"
   },
   {
    "id": "FAR-09",
@@ -412,14 +412,14 @@
    "why": "Beide Modi sind eigene Paletten mit denselben Rollen; keiner ist vom anderen abgeleitet. Maschinenlesbare Bilder bleiben dunkel auf hell, weil Scanner umgekehrte Codes schlecht lesen.",
    "do": "Screenshots hell und dunkel für jede Ansicht; Kontraste in beiden Modi messen.",
    "dont": "Dunkelmodus als Nachtrag; Dunkel-Sonderfarben im Komponentencode; helle Akzentfarbe ins Dunkle durchreichen.",
-   "numbers": "Dunkler Grund --sb-color-bg #13161C",
+   "numbers": "Dunkler Grund --sb-color-bg #1B1E24",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "shot.py --scheme both; check_palette.py; axe/CTR1 in beiden Modi.",
    "example_hint": "Dieselbe sb-card hell und dunkel nebeneinander mit gemessenen Kontrasten; falsch: Dunkelmodus mit unleserlicher heller Akzentfarbe.",
-   "changed": "2026-11-21"
+   "changed": "2026-11-25"
   },
   {
    "id": "FAR-11",
@@ -430,7 +430,7 @@
    "why": "Nur in Grau ist längerer Code zu flach: Zeichenketten und Schlüsselwörter sehen gleich aus. Blassere Töne waren schwer zu erkennen. Die drei Töne werden geprüft wie die Kachelfarben.",
    "do": "Schlüsselwort #54258C, Zeichenkette #1B490F, Zahl #951D52 (hell); #BC98F9, #7BB76E, #FAA6B2 (dunkel); im Code über die Tokens des Abschnitts syntax, nie als Rohwert.",
    "dont": "Kobalt, Lindgrün oder Statusfarben im Code; Kommentare in text-subtle (hell nur 3,10 : 1); Codetöne außerhalb von Codeblöcken.",
-   "numbers": "Hell: Indigo #54258C, Waldgrün #1B490F, Himbeere #951D52; dunkel: #BC98F9, #7BB76E, #FAA6B2; Kommentar text-muted; Y1 hell 6,82–10,17 : 1, dunkel 6,55–10,20 : 1 auf allen vier Gründen",
+   "numbers": "Hell: Indigo #54258C, Waldgrün #1B490F, Himbeere #951D52; dunkel: #BC98F9, #7BB76E, #FAA6B2; Kommentar text-muted; Y1 hell 6,82–10,17 : 1, dunkel 6,55–9,82 : 1 auf allen vier Gründen",
    "platforms": [
     "alle"
    ],
@@ -438,7 +438,7 @@
    "check": "check_palette.py 2.4.0 palettes/sebaro.json: Y1 (≥ 4,5 auf bg, surface, surface-raised, surface-sunken), Y2/Y2-cvd (untereinander und gegen text, text-muted ≥ 0,08 / ≥ 0,04), Y3 (gegen accent, link, Status, primary-action ≥ 0,08) mit Exit 0; Farbprüfung je Ansicht lässt die Codetöne nur in Code zu.",
    "example_hint": "Derselbe sb-code-Block hell und dunkel mit den drei Tönen; falsch: Code in Kobalt und Lindgrün.",
    "note": "Tokens: --sb-syntax-keyword, --sb-syntax-string, --sb-syntax-constant. Highlighter siehe TEC-08.",
-   "changed": "2026-11-21"
+   "changed": "2026-11-25"
   },
   {
    "id": "FAR-12",
@@ -499,12 +499,12 @@
    "id": "FAR-16",
    "area": "farbe",
    "title": "Person: eine eigene Farbaufgabe",
-   "rule": "Gib Personen in einer App, in der mehrere zusammenarbeiten, auf Wunsch des Produkts die Aufgabe Person: einen festen Ton je Person aus den Personen-Tönen der Tokens, in der ganzen App gleich. Er steht nur als 2-px-Ring um die Initialen (DAT-06) oder, wo kein Avatar Platz hat (Karte, Stimme, Namensschild des Zeigers), als kleiner Ring vor dem Namen; nie als Fläche, als Textfarbe oder als einziges Merkmal, der Name steht immer daneben oder am Element. Wo keine Person genannt wird (anonyme Karten), gibt es keinen Ring. Ohne Personen-Töne bleibt der Ring border-strong und die Namen machen den Unterschied.",
-   "rule_en": "Person (apps where several people work together, if the product wants it): one fixed tone per person from the person tones of the tokens, the same across the app; only as a 2 px ring around the initials (DAT-06) or, where no avatar fits (card, vote, pointer label), a small ring before the name; never a fill, a text colour or the only cue, the name always beside it or on the element; no ring where no person is named (anonymous cards). Without person tones the ring stays border-strong and the names tell people apart.",
+   "rule": "Gib Personen in einer App, in der mehrere zusammenarbeiten, auf Wunsch des Produkts die Aufgabe Person: einen festen Ton je Person aus den Personen-Tönen der Tokens, in der ganzen App gleich. Er steht nur als 2-px-Ring um die Initialen (DAT-06) oder, wo kein Avatar Platz hat (Karte, Stimme, Namensschild des Zeigers), als kleiner Ring vor dem Namen; nie als Fläche, als Textfarbe oder als einziges Merkmal, der Name steht immer daneben oder am Element. Wo keine Person genannt wird (anonyme Karten), gibt es keinen Ring.",
+   "rule_en": "Person (apps where several people work together, if the product wants it): one fixed tone per person from the person tones of the tokens, the same across the app; only as a 2 px ring around the initials (DAT-06) or, where no avatar fits (card, vote, pointer label), a small ring before the name; never a fill, a text colour or the only cue, the name always beside it or on the element; no ring where no person is named (anonymous cards).",
    "why": "In einer Runde findet man die eigenen Karten und die einer anderen Person schneller an einem Ton als am Namen allein. Als Ring ohne Fläche bleibt die Farbe leise, und weil der Name immer dabei ist, trägt sie keine Aussage allein. Die Töne kommen aus den Tokens, damit sie in Hell, Dunkel, Kühl und Warm denselben Kontrast halten.",
    "do": "Avatar „Anna Keller“ mit 2-px-Ring im Ton der Person, derselbe Ton als kleiner Ring vor „Anna“ auf ihrer Karte und am Namensschild ihres Zeigers.",
    "dont": "Ein Avatar als farbige Scheibe; der Name in der Farbe der Person; eine Karte mit farbiger Fläche je Person; ein Ring ohne Namen; Töne aus der Kategorie-, Diagramm- oder Kachelpalette als Personenfarben; eine eigene Palette des Produkts.",
-   "numbers": "Ring 2 px; jeder Personen-Ton mindestens 3,0 : 1 auf jedem Grund in Hell, Dunkel, Kühl und Warm; die Zahl der Töne legt die Werkstatt fest.",
+   "numbers": "Ring 2 px; jeder Personen-Ton mindestens 3,0 : 1 auf jedem Grund in Hell, Dunkel, Kühl und Warm; zwölf Töne in der Reihenfolge, in der die App sie vergibt, danach von vorn; untereinander und zu Kobalt, Lindgrün und Status mindestens ΔE OK 0,08.",
    "platforms": [
     "alle"
    ],
@@ -512,7 +512,7 @@
    "check": "Jeder Ring hat einen Namen am Element oder daneben; Graustufen-Screenshot: Personen am Namen unterscheidbar; Farbzählung der Werkstatt ohne Farben ohne Rolle.",
    "example_hint": "Avatar-Reihe und zwei Karten mit Personenring vor dem Namen; falsch: farbige Avatar-Scheiben und farbige Namen.",
    "note": "Die Personen-Töne gibt es noch nicht in den Tokens; bis die Werkstatt sie liefert, bleibt der Ring border-strong. Vorlage aus der ersten App mit Personenfarben: zwölf Töne bei gleicher Helligkeit, ein Wert hält 3 : 1 gegen alle Gründe.",
-   "changed": "2026-11-23"
+   "changed": "2026-11-25"
   },
   {
    "id": "SCH-01",
@@ -889,17 +889,17 @@
    "title": "Ebenen durch Tintenlinien, nie Schatten",
    "rule": "Trenne Ebenen (Karte, Einstellungsgruppe, klebende Leiste, Fensterteile, Popover, Dialog, Menü, Toast, Tooltip, Sheet) durch eine 2-px-Linie in Tinte auf bg, nie durch Grundton oder Schatten. Innerhalb einer Ebene (Zeilen, Abschnitte, Tabellenzeilen, Hinweisrahmen) bleibt die 1-px-Haarlinie in border.",
    "rule_en": "Layers are separated by a 2 px ink line on bg (text by day, border-strong by night), never by ground tone or shadow; inside a layer only the 1 px border hairline.",
-   "why": "Linien statt Flächen: eine Ebene erkennt man an ihrer Tintenlinie, nicht an einem Schatten. Ein textfarbiger Rahmen blendet auf dunklem Grund, daher nachts border-strong (3,81 : 1).",
+   "why": "Linien statt Flächen: eine Ebene erkennt man an ihrer Tintenlinie, nicht an einem Schatten. Ein textfarbiger Rahmen blendet auf dunklem Grund, daher nachts border-strong (3,82 : 1).",
    "do": "Karte und Dialog ringsum; Sheet und Popover nur oben; Fußblock oben; Site-Kopf unten; Site-Fuß oben; Seitenleiste an der Endkante; Gruppe mit 2-px-Rahmen außen, 1-px-Haarlinien innen.",
    "dont": "box-shadow an Karten, Menüs oder Overlays; getönte Seitenleiste; 2-px-Linien zwischen Listenzeilen; Haarlinie als Ebenenkante.",
-   "numbers": "--sb-x-sebaro-layer-line-width 2px; --sb-x-sebaro-layer-line-color #1C1E22 / #707379 (15,31 / 3,81 : 1); --sb-elevation-<level>-surface = bg; --sb-elevation-<level>-shadow none; Haarlinie 1px --sb-color-border",
+   "numbers": "--sb-x-sebaro-layer-line-width 2px; --sb-x-sebaro-layer-line-color #1C1E22 / #76797F (15,31 / 3,82 : 1); --sb-elevation-<level>-surface = bg; --sb-elevation-<level>-shadow none; Haarlinie 1px --sb-color-border",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "grep -n 'box-shadow' css/sebaro.css zeigt nur das gedrückte Inset der Gefahrtaste und forced-colors; Compose shadowElevation 0 dp; Dunkelrahmen nicht heller als Text.",
    "example_hint": "sb-card und sb-menu mit Tintenlinie, darin Zeilen mit Haarlinie; falsch: weiße Karte mit Schatten auf grauem Grund.",
-   "changed": "2026-11-21"
+   "changed": "2026-11-25"
   },
   {
    "id": "EBE-02",
@@ -1533,14 +1533,14 @@
    "why": "Ein Link sieht überall gleich aus. link gegen text hat nur 2,08 / 1,72 : 1, darum ist die Linie Pflicht (WCAG 1.4.1).",
    "do": "text-decoration-color: var(--sb-color-link); text-decoration-thickness: var(--sb-x-sebaro-link-underline-width); Compose SbLinkText/sbLinkStyles.",
    "dont": "Blauer Text ohne Linie; Kasten oder Hintergrund hinter dem Link; link-visited in der Navigation.",
-   "numbers": "--sb-x-sebaro-link-underline-width 2px; Offset 0.2em; Wort 15,31 : 1 hell / 15,43 : 1 dunkel; Linie link auf bg 7.34 / 8.95; link-visited 5.97 / 9.75",
+   "numbers": "--sb-x-sebaro-link-underline-width 2px; Offset 0.2em; Wort 15,31 : 1 hell / 14,22 : 1 dunkel; Linie link auf bg 7.34 / 8.25; link-visited 5.97 / 8.98",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Komponentenblatt „Links und Fokusring“ (Standard, Zeigen, besucht, Fokus, extern) in beiden Modi; alle <a> haben die 2-px-Linie.",
    "example_hint": "Absatz mit Link in Ruhe, Zeiger (is-hover), besucht (is-visited) und Fokus; falsch: blauer Link ohne Linie.",
-   "changed": "2026-11-21"
+   "changed": "2026-11-25"
   },
   {
    "id": "LNK-02",
@@ -1606,7 +1606,7 @@
    "why": "Mit Deckkraft fällt der Kontrast unter die Grenze; Lindgrün heißt „weiter“ und darf das nicht versprechen. Eine gesperrte Taste sagt nicht, was fehlt; die Meldung am Feld und der Fokus darauf sagen es. Pflichtfelder sind der Normalfall, darum zeigt „(optional)“ an den übrigen, was leer bleiben darf.",
    "do": "<button class='sb-primary-action' disabled> nur, solange die Aktion gar nicht geht; fehlt eine Eingabe, bleibt die Taste aktiv und ihr Druck zeigt „Nachricht fehlt.“ unter dem Feld (p.sb-field__error mit Fehlerglyphe, aria-invalid, aria-describedby) mit dem Fokus auf dem ersten fehlenden Feld; auf Websites macht das sb-form.js an required-Feldern; ein freiwilliges Feld (ohne required) trägt <span class='sb-optional'>(optional)</span> in seiner Beschriftung, außer es hat immer einen Wert (EIN-01), und bekommt nie eine Meldung.",
    "dont": "opacity: .4; blasses Lindgrün; Statusfarbe für gesperrt; eine gesperrte Hauptaktion, weil ein Feld noch leer ist; ein Sternchen an Pflichtfeldern oder eine Legende „* Pflichtfeld“.",
-   "numbers": "Label text-muted auf surface-sunken 4.61 hell / 7.31 dunkel",
+   "numbers": "Label text-muted auf surface-sunken 4.61 hell / 6.89 dunkel",
    "platforms": [
     "alle"
    ],
@@ -1614,7 +1614,7 @@
    "check": "grep opacity: nicht für disabled; Farbprüfung zählt gesperrte Taste nicht als Hauptaktion. Formular mit leeren Pflichtfeldern absenden: nichts wird gesendet, jedes leere Feld sagt „… fehlt.“, der Fokus steht auf dem ersten, ein Feld ohne required bekommt keine Meldung (Werkstatt: tools/tests/test_form.py und eine Probe mit einem freiwilligen Feld, nur Chromium).",
    "example_hint": "Haupt-, Neben-, Gefahr- und Icon-Taste jeweils aktiv und gesperrt; falsch: halbtransparente lindgrüne Taste.",
    "note": "Gesperrt heißt eine Graustufe heller, nie Deckkraft. Auf Websites prüft sb-form.js leere required-Felder selbst; andere Fehler meldet der Browser (reportValidity) oder der Server. In Apps setzt die Ansicht Fehler und Fokus selbst.",
-   "changed": "2026-11-21"
+   "changed": "2026-11-25"
   },
   {
    "id": "STA-04",
@@ -1701,7 +1701,7 @@
    "why": "Zeichen und Wort stehen in der Zeile (STA-01); höchstens zwei Wörter, nie abgekürzt, halten sie lesbar. Ein Status, der nur informiert, hat ein graues Zeichen; einer, der etwas verlangt, das Warnzeichen, darum auch „Konflikt“.",
    "do": "„Einkauf“ mit grauem Zeichen und „nur online“ (sb-status--neutral); eine Zeile, die eine Antwort braucht, mit Warnzeichen und Wort; „Wochenplan (Kopie)“ mit Warnzeichen und „Konflikt“.",
    "dont": "„Konfl.“ oder „n. ges.“; Status nur als Farbe oder nur als Zeichen; Statuswort in Warnfarbe; „Konflikt“ mit dem grauen Zeichen.",
-   "numbers": "Statuswort ≤ 2 Wörter; graues Zeichen --sb-color-text-muted (5,05 : 1 hell, 6,76 : 1 dunkel auf bg)",
+   "numbers": "Statuswort ≤ 2 Wörter; graues Zeichen --sb-color-text-muted (5,05 : 1 hell, 6,23 : 1 dunkel auf bg)",
    "platforms": [
     "desktop",
     "web"
@@ -1710,7 +1710,7 @@
    "check": "Graustufen-Screenshot: jeder Status ohne Farbe lesbar; Statuswörter zählen (höchstens zwei).",
    "example_hint": "Baum mit „nur online“ (graues Zeichen), „nicht gesichert“ und „Konflikt“ (Warnzeichen); falsch: abgekürztes „n. ges.“ in roter Schrift ohne Zeichen.",
    "note": "Das graue Zeichen ist sb-status--neutral in text-muted.",
-   "changed": "2026-11-21"
+   "changed": "2026-11-25"
   },
   {
    "id": "STA-09",
@@ -1758,14 +1758,14 @@
    "why": "Status lebt nur auf Glyphen; die Meldung muss voll lesbar bleiben; Fehler nie nur über Farbe.",
    "do": "<p class='sb-field__error' id='x'><svg …#error--filled-16/>Notiz ist zu lang (134 / 120).</p>",
    "dont": "Rote Fehlermeldung; rot gefülltes Feld; nur rote Umrandung ohne Text.",
-   "numbers": "Grundlinie 2px; Glyphe 16px; danger auf surface-sunken 5.52 / 6.04; dunkel danger auf pressed-fill 4.55",
+   "numbers": "Grundlinie 2px; Glyphe 16px; danger auf surface-sunken 5.52 / 5.70; dunkel danger auf pressed-fill 4.55",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "Fehlerfall: aria-invalid und aria-describedby gesetzt; Meldung in text-Farbe.",
    "example_hint": "Textfeld im Fehler mit „Notiz ist zu lang (134 / 120).“; falsch: rote Schrift ohne Glyphe.",
-   "changed": "2026-11-21"
+   "changed": "2026-11-25"
   },
   {
    "id": "EIN-03",
@@ -2036,7 +2036,7 @@
    "why": "Stufen, die man nicht unterscheidet, zeigen nichts: Sieben Stufen lagen nur 1,37 bis 1,55 : 1 auseinander. Vier Stufen haben 1,61 bis 1,65 : 1 zwischen Nachbarn und mindestens 3,03 : 1 über jedem Grund, auch mit dem warmen Farbton. Der Kobalt-Rahmen für „heute“ muss sich vom Fokusring unterscheiden und hat erst mit der Fuge in Grundfarbe auf jeder Stufe mindestens 3 : 1 (WCAG 1.4.11).",
    "do": "<ul class='sb-scale-legend'><li><span class='sb-scale-cell sb-scale-cell--seq-1' aria-hidden='true'></span>0–2</li>…<li><span class='sb-scale-cell sb-scale-cell--none' aria-hidden='true'></span>keine Angabe</li><li><span class='sb-scale-cell sb-heatmap__today-key' aria-hidden='true'></span>Rahmen: heute</li></ul>; Zelle <td><span class='sb-scale-cell sb-scale-cell--seq-3'></span><span class='sb-visually-hidden'>Dienstag, 29.09.: 6 Gläser</span></td>; heute <td aria-current='date'><span class='sb-scale-cell sb-scale-cell--seq-2'></span><span class='sb-visually-hidden'>Samstag, 10.10., heute: 4 Gläser</span></td>; Rahmen und Fuge für heute zeichnet sebaro.css (border: calc(var(--sb-border-width-strong) + var(--sb-border-width-hairline)) solid var(--sb-color-accent) und innen 1 px var(--sb-color-bg)), nie eigenes CSS; sb-chart.js für Pfeiltasten und Anzeige.",
    "dont": "Sieben feine Stufen oder ein Verlauf; eine erste Stufe fast wie der Grund; ein Tag ohne Daten in Stufe 1; Zahlen auf der Farbfläche; Kobaltrahmen direkt auf der Farbe (1,1 : 1); heute als abgesetzter 2-px-Ring, der wie der Fokusring aussieht; heute als Linie unter der Zelle.",
-   "numbers": "fortlaufend höchstens 4 Stufen, zweiseitig 5; Stufe 1 ab 3,0 : 1 zu bg, surface, surface-raised und surface-sunken; Nachbarn ab 1,6 : 1 und ΔE OK 0,10 (normal, Protanopie, Deuteranopie, Tritanopie); zu accent und primary-action ab ΔE OK 0,08; gemessen fortlaufend hell 1,61–1,64 : 1, dunkel 1,64–1,65 : 1, zweiseitig Arme 1,62–1,64 : 1; heute: Rahmen 4 px accent (border-width-strong + border-width-hairline) auf der Zellkante, innen 1 px Fuge in bg; Fuge gegen Füllung gemessen hell 3,35–14,70 : 1, dunkel 3,53–15,76 : 1, warm hell 3,34–14,68 : 1, warm dunkel 3,54–15,84 : 1 (Stufe 1 bis 4); Kobalt gegen bg und surface ab 6,15 : 1; vorher Kobalt direkt auf der Füllung 1,11–2,38 : 1; in Zwangsfarben Rahmen CanvasText, Fuge Canvas; Fokus 2 px focus, 2 px außen; Zellabstand 6 px; Legende „Rahmen: heute“; Handy (Compose): Zellen etwa 30 dp, ein Tab-Halt je Tag, Hinweis „Tipp auf einen Tag, um seinen Wert zu sehen.“ (englisch „Tap a day to see its value.“)",
+   "numbers": "fortlaufend höchstens 4 Stufen, zweiseitig 5; Stufe 1 ab 3,0 : 1 zu bg, surface, surface-raised und surface-sunken; Nachbarn ab 1,6 : 1 und ΔE OK 0,10 (normal, Protanopie, Deuteranopie, Tritanopie); zu accent und primary-action ab ΔE OK 0,08; gemessen fortlaufend hell 1,61–1,64 : 1, dunkel 1,64–1,65 : 1, zweiseitig Arme 1,62–1,64 : 1; heute: Rahmen 4 px accent (border-width-strong + border-width-hairline) auf der Zellkante, innen 1 px Fuge in bg; Fuge gegen Füllung gemessen hell 3,35–14,70 : 1, dunkel 3,25–14,53 : 1, warm hell 3,34–14,68 : 1, warm dunkel 3,26–14,58 : 1 (Stufe 1 bis 4); Kobalt gegen bg und surface ab 6,15 : 1; vorher Kobalt direkt auf der Füllung 1,11–2,38 : 1; in Zwangsfarben Rahmen CanvasText, Fuge Canvas; Fokus 2 px focus, 2 px außen; Zellabstand 6 px; Legende „Rahmen: heute“; Handy (Compose): Zellen etwa 30 dp, ein Tab-Halt je Tag, Hinweis „Tipp auf einen Tag, um seinen Wert zu sehen.“ (englisch „Tap a day to see its value.“)",
    "platforms": [
     "alle"
    ],
@@ -2044,7 +2044,7 @@
    "check": "python3 tools/check_palette.py palettes/sebaro.json mit Exit 0 (die fünf Punkte sind Fehler, keine Warnungen; die Grenzen 4 und 5 von sebaro stehen als dataviz.maxClasses in der Palette und werden mitgeprüft); Heatmap mit Tab und Pfeiltasten: die Anzeige nennt Tag und Wert. Fokus auf heute und auf den Nachbartag: Rahmen mit Fuge auf der Zelle, Ring abgesetzt außen; heute auf jeder Stufe in hell, dunkel und warm: Fuge gegen Füllung ab 3 : 1. Compose: SbHeatmap zeigt den Hinweis unter dem Gitter (auf dem Rechner gezeichnet).",
    "example_hint": "Heatmap mit vier Stufen, einer Legende mit Zahlen und dem Kobaltrahmen mit Fuge für heute; falsch: sieben feine Stufen ohne Zahlen, heute als abgesetzter Ring wie der Fokus und ein Kobaltrahmen direkt auf der Farbe.",
    "note": "Die Fuge ist eine harte 1-px-Linie nach innen in einer flachen Farbe, kein Schatten (EBE-01). Gemessen ist nur der Kontrast nach WCAG 2 in Chromium; APCA und eine Simulation der Farbsehschwächen für die Fuge fehlen.",
-   "changed": "2026-11-21"
+   "changed": "2026-11-25"
   },
   {
    "id": "DAT-12",
@@ -2742,7 +2742,7 @@
    "why": "Kein Schmuck ohne Daten (HAL-06): Icons benennen Handlung oder Zustand, Zeichen bedeuten „dieses Produkt“.",
    "do": "Haus = Start, zwei Schieberegler = Einstellungen; .sb-status--done .sb-icon { color: var(--sb-color-success); }; gefüllte Formen nur als Punkte (d 2,5 / 3) und der Halbkreis von progress.",
    "dont": "Icon mit Markendetail oder Akzentpunkt; Icon in Lindgrün außerhalb der Hauptaktion; Hex im Icon; Zahnrad als App-Symbol auf Gruppenfarbe; Info-Icon in border (1,29 : 1).",
-   "numbers": "signature.name = none; text-muted 5.05 / 6.76; accent 6.16 / 8.39; warning 4.13 / 7.88; info 8.65 / 13.04 auf bg (abgeschnitten)",
+   "numbers": "signature.name = none; text-muted 5.05 / 6.23; accent 6.16 / 7.73; warning 4.13 / 7.26; info 8.65 / 12.01 auf bg (abgeschnitten)",
    "platforms": [
     "alle"
    ],
@@ -2750,7 +2750,7 @@
    "check": "Review der Icons; tools/color.py contrast; keine Hex-Literale in Komponenten.",
    "example_hint": "Neutrales Icon neben einer App-Kachel mit Symbol; falsch: UI-Icon mit Glanz auf farbiger Kachel.",
    "note": "Vorläufig: Kontrast und Trennung von App-Zeichen.",
-   "changed": "2026-11-21"
+   "changed": "2026-11-25"
   },
   {
    "id": "ICO-04",
@@ -2815,15 +2815,15 @@
    "rule_en": "Spots (128×96, stroke 2) illustrate one state, one per empty state; ink text-muted + tone border only; aria-hidden; nothing reassuring, no scene or figure. The set has four spots (empty-stats, facts, offline, onboarding). A product draws its own only for the steps of its introduction (STR-03), in the same style and the same two colours, never for an empty state; until it has them, the first step shows the spot onboarding.",
    "why": "Eine Farbe ohne Aufgabe gibt es nicht; Spots enthalten keine Metapher, Szene oder Figur. Der leere Zustand kommt mit Titel und einem Satz aus. Was ein Produkt tut, kann nur das Produkt zeigen; darum zeichnet es die Bilder seiner Einführung selbst.",
    "do": "empty-stats bei „Noch keine Statistik“, offline, facts, onboarding.",
-   "dont": "Reihe von Spots; Maskottchen; Linien im Ton (border auf bg nur 1,47 : 1 im Dunkelmodus); ein eigener Spot eines Produkts für seine leere Liste.",
-   "numbers": "viewBox 128 × 96; Strich 2; Rand 4; Raster 0.25; Lücke 2.5; Radius 3 (≥ 12) / 1.5; text-muted auf bg 5.05 / 6.76",
+   "dont": "Reihe von Spots; Maskottchen; Linien im Ton (border auf bg nur 1,55 : 1 im Dunkelmodus); ein eigener Spot eines Produkts für seine leere Liste.",
+   "numbers": "viewBox 128 × 96; Strich 2; Rand 4; Raster 0.25; Lücke 2.5; Radius 3 (≥ 12) / 1.5; text-muted auf bg 5.05 / 6.23",
    "platforms": [
     "alle"
    ],
    "status": "entschieden",
    "check": "aria-hidden='true'; Ton im Dunkelmodus sichtbar; Überschrift und Satz tragen die Bedeutung.",
    "example_hint": "Leerzustand mit empty-stats-Spot; falsch: bunte Szene mit Figur.",
-   "changed": "2026-11-21"
+   "changed": "2026-11-25"
   },
   {
    "id": "ICO-08",

@@ -35,21 +35,21 @@ if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 import color as C  # noqa: E402
 
-TOOL_VERSION = "3.0.0"   # 3.0.0 (PALETTE-CONTRACT 3.0, D147 (2)): a palette's sign tiles list no product (signTiles.productMap is gone); major 3 accepts "3.0" alone and has every optional section of 2.1 to 2.7 without a version of its own
-SCHEMA_VERSION = "3.0"   # the current contract version: last entry of palette.schema.json properties.schemaVersion.enum
+TOOL_VERSION = "3.1.0"   # 3.1.0 (PALETTE-CONTRACT 3.1, FAR-16): persons (H1-H6); 3.0.0 (PALETTE-CONTRACT 3.0, D147 (2)): a palette's sign tiles list no product (signTiles.productMap is gone); major 3 accepts "3.0" alone and has every optional section of 2.1 to 2.7 without a version of its own
+SCHEMA_VERSION = "3.1"   # the current contract version: last entry of palette.schema.json properties.schemaVersion.enum
 # Versions a palette may declare (schema enum). Major 3 starts with "3.0" alone: the 2.x versions left the enum with
 # the change that can fail a passing palette (signTiles.productMap is no key any more), PALETTE-CONTRACT section 15.
-SCHEMA_VERSIONS_ACCEPTED = ("3.0",)
+SCHEMA_VERSIONS_ACCEPTED = ("3.0", "3.1")
 # The optional sections that came with a minor version of major 2 (productMap of a palette with productAccents 2.1,
 # signTiles 2.2, tiles only 2.3, syntax 2.4, categories, mark, variants and dataviz.classed 2.5, dataviz.maxClasses
-# 2.6, signTiles.foot 2.7) belong to 3.0 as a whole: no "needs schemaVersion" check can fire in major 3. The names
-# stay for the next minor that adds one.
+# 2.6, signTiles.foot 2.7) belong to 3.0 as a whole: their "needs schemaVersion" checks cannot fire in major 3.
 PRODUCT_MAP_SINCE = "3.0"   # productMap of a palette with productAccents (accent families, D34; contract section 8.1)
 SIGN_TILES_SINCE = "3.0"    # signTiles (app-sign tile colours, D50, D51; contract section 8.2)
 TILES_ONLY_SINCE = "3.0"    # a palette without productAccents (D54; contract section 8.3)
 SYNTAX_SINCE = "3.0"        # syntax (code colours, D67; contract section 8.4)
 COLOUR_JOBS_SINCE = "3.0"   # categories, mark, variants and dataviz.classed (D73, D90, D91; sections 8.5-8.7, 9.1)
 MAX_CLASSES_SINCE = "3.0"   # dataviz.maxClasses: a palette's own, lower class limits (D92; section 9.1)
+PERSONS_SINCE = "3.1"       # persons (person tones, FAR-16; section 8.5a)
 SCHEMA_PATH = ROOT / "shared" / "palette.schema.json"
 # What changed per major contract version; appended to the schemaVersion error of an older file.
 MIGRATION_HINTS = {
@@ -86,6 +86,10 @@ CATEGORY_JOBS = ("accent", "link", "success", "warning", "danger", "info")
 CATEGORY_JOBS_EXTRAS = ("primary-action",)   # checked when the palette declares it in extras
 CATEGORY_GREYS = ("text", "text-muted", "border-strong")
 DE_GREY = 0.05
+# persons (contract 3.1 section 8.5a, FAR-16): a ring beside the name, so UI_MIN on every ground; apart from each other
+# and from the colours with a job under normal vision (0.08), from the greys by DE_GREY. Under CVD, and against the
+# categories and the sign tiles, the distances are reported only (section 8.5a says why).
+PERSON_JOBS, PERSON_JOBS_EXTRAS, PERSON_GREYS = CATEGORY_JOBS, CATEGORY_JOBS_EXTRAS, CATEGORY_GREYS
 # mark (contract 2.5 section 8.6, D73, D91 C2a): text on the fill; the edge carries the shape on every ground and must
 # not look like a link underline or an error line; the fill stays apart from selection and the primary action.
 MARK_TEXT = ("text", "text-muted", "link")
@@ -580,6 +584,32 @@ def _since(pal: dict, version: str) -> bool:
     return SCHEMA_VERSIONS_ACCEPTED.index(pal["schemaVersion"]) >= SCHEMA_VERSIONS_ACCEPTED.index(version)
 
 
+def person_findings(pal: dict) -> list[Finding]:
+    """Contract 3.1, section 8.5a: the declared version, unique names, and no tone taken from another palette."""
+    out: list[Finding] = []
+    if not _since(pal, PERSONS_SINCE):
+        out.append(Finding("error", "$.persons", f"persons needs \"schemaVersion\": \"{PERSONS_SINCE}\" (PALETTE-CONTRACT "
+                                                 f"section 8.5a); the file declares \"{pal['schemaVersion']}\""))
+    tones = pal["persons"]["tones"]
+    names = [t["name"] for t in tones]
+    dupes = sorted({x for x in names if names.count(x) > 1})
+    if dupes:
+        out.append(Finding("error", "$.persons.tones", f"duplicate name(s): {dupes}"))
+    taken = {C.normalize_hex(g["tile"]): f"the tile {g['id']}" for g in pal.get("signTiles", {}).get("groups", [])}
+    for mode in ("light", "dark"):
+        for kind in ("categorical", "sequential", "diverging"):
+            taken.update({C.normalize_hex(h): f"dataviz.{mode}.{kind}" for h in pal["dataviz"][mode][kind]})
+        taken.update({C.normalize_hex(t[mode]): f"category-{i}"
+                      for i, t in enumerate(pal.get("categories", {}).get("tones", []), 1)})
+    for i, t in enumerate(tones):
+        for mode in ("light", "dark"):
+            source = taken.get(C.normalize_hex(t[mode]))
+            if source:
+                out.append(Finding("error", f"$.persons.tones[{i}].{mode}", f"{t[mode]} is the colour of {source}; a "
+                                   "person tone comes from no other palette (FAR-16, section 8.5a)"))
+    return out
+
+
 def colour_job_findings(pal: dict) -> list[Finding]:
     """Contract 2.5, sections 8.5-8.7 and 9.1: categories, mark, variants and dataviz.classed. The schema checks the
     shapes; this checks the declared version, unique tone names and the roles a variant may replace."""
@@ -604,6 +634,8 @@ def colour_job_findings(pal: dict) -> list[Finding]:
         dupes = sorted({x for x in names if names.count(x) > 1})
         if dupes:
             out.append(Finding("error", "$.categories.tones", f"duplicate name(s): {dupes}"))
+    if "persons" in pal:
+        out += person_findings(pal)
     extra_roles = set(pal.get("extras", {}).get("light", {}))
     for vid, var in pal.get("variants", {}).items():
         lk, dk = set(var["light"]), set(var["dark"])
@@ -939,6 +971,41 @@ class Matrix:
             self._kin("C6", f"category-{i} ({t['name']})", C.normalize_hex(t["light"]), C.normalize_hex(t["dark"]),
                       False)
 
+    # -- persons (contract 3.1, section 8.5a) ------------------------------------------
+    def persons(self) -> None:
+        ps = self.pal.get("persons")
+        if not ps:
+            return
+        cats = (self.pal.get("categories") or {}).get("tones", [])
+        tiles = (self.pal.get("signTiles") or {}).get("groups", [])
+        for mode in ("light", "dark"):
+            group = f"persons:{mode}"
+            rs = self.roles(mode)
+            hexes = [(f"person-{i}", C.normalize_hex(t[mode])) for i, t in enumerate(ps["tones"], 1)]
+            for i, (lab, h) in enumerate(hexes, 1):
+                for s in SURFACES:
+                    c = self.contrast("H1", group, mode, lab, s, h, self.eff(mode, s), UI_MIN, "error", APCA_NONTEXT,
+                                      "ui", note="ring beside the name")
+                    c.data["person"] = i
+            for (la, a), (lb, b) in combinations(hexes, 2):
+                self.distinct("H2", group, mode, la, lb, a, b, ("normal",) + CVD_KINDS, DE_DISTINCT, None,
+                              "error", "info")
+            jobs = list(PERSON_JOBS) + [x for x in PERSON_JOBS_EXTRAS if x in rs]
+            others = [(f"category-{i}", t[mode]) for i, t in enumerate(cats, 1)]
+            others += [(f"tile-{g['id']}", g["tile"]) for g in tiles]
+            for lab, h in hexes:
+                for j in jobs:
+                    self.distinct("H3", group, mode, lab, j, h, self.eff(mode, j), ("normal",) + CVD_KINDS,
+                                  DE_DISTINCT, None, "error", "info")
+                for name, other in others:
+                    self.distinct("H4", group, mode, lab, name, h, C.normalize_hex(other), ("normal",) + CVD_KINDS,
+                                  None, None, "info", "info")
+                for gr in PERSON_GREYS:
+                    self.distinct("H5", group, mode, lab, gr, h, self.eff(mode, gr), ("normal",), DE_GREY, None,
+                                  "error", "error")
+        for i, t in enumerate(ps["tones"], 1):
+            self._kin("H6", f"person-{i} ({t['name']})", C.normalize_hex(t["light"]), C.normalize_hex(t["dark"]), False)
+
     # -- mark (contract 2.5, section 8.6) ------------------------------------------------
     def mark(self) -> None:
         mk = self.pal.get("mark")
@@ -1165,6 +1232,7 @@ class Matrix:
         self.sign_tiles()
         self.syntax()
         self.categories()
+        self.persons()
         self.mark()
         self.dataviz()
         self.extras()
@@ -1489,6 +1557,33 @@ def render_markdown(res: PaletteResult) -> str:
             L += _distinct_summary([c for c in by(f"categories:{mode}") if c.metric.startswith("deltaE")])
             L.append("")
 
+    if pal.get("persons"):
+        L.append("## 3c-2. Persons")
+        L.append("")
+        L.append(f"`persons` (contract {PERSONS_SINCE} section 8.5a): ring beside the name. H1 each tone on every surface >= "
+                 "3.0; H2 tones pairwise, H3 vs accent, link, status and primary-action, deltaE OK >= 0.08 (under CVD "
+                 f"reported only); H5 vs text, text-muted, border-strong >= {DE_GREY:g} (errors); H4 vs categories and sign "
+                 "tiles reported only.")
+        L.append("")
+        L.append("| No. | Name | light | dark | H1 worst light | H1 worst dark | Result |")
+        L.append("|---|---|---|---|---|---|---|")
+        for i, t in enumerate(pal["persons"]["tones"], 1):
+            lab = f"person-{i}"
+            mine = [c for c in res.checks if c.group.startswith("persons:")
+                    and (c.data.get("person") == i or lab in c.data.get("pair", []))]
+            worst = {m: min((c for c in mine if c.id == "H1" and c.mode == m), key=lambda c: c.value, default=None)
+                     for m in ("light", "dark")}
+            bad = [c for c in mine if c.outcome == "error"]
+            w = lambda c: "—" if c is None else f"{C.format_ratio(c.value)} on `{c.data['bgRole']}`"
+            L.append(f"| {i} | {_md(t['name'])} | `{C.normalize_hex(t['light'])}` | `{C.normalize_hex(t['dark'])}` | "
+                     f"{w(worst['light'])} | {w(worst['dark'])} | {'**FAIL**' if bad else 'pass'} |")
+        L.append("")
+        for mode in ("light", "dark"):
+            L.append(f"Distinctness, {mode} (H2, H3, H5; H4 and -cvd are info):")
+            L.append("")
+            L += _distinct_summary([c for c in by(f"persons:{mode}") if c.metric.startswith("deltaE")])
+            L.append("")
+
     if pal.get("mark"):
         L.append("## 3d. Mark")
         L.append("")
@@ -1651,6 +1746,7 @@ def render_json(res: PaletteResult) -> dict:
         **({"tileGroups": [g["id"] for g in pal["signTiles"]["groups"]]} if res.matrix_ran and pal.get("signTiles") else {}),
         **({"syntaxRoles": [r["id"] for r in pal["syntax"]["roles"]]} if res.matrix_ran and pal.get("syntax") else {}),
         **({"categories": [t["name"] for t in pal["categories"]["tones"]]} if res.matrix_ran and pal.get("categories") else {}),
+        **({"persons": [t["name"] for t in pal["persons"]["tones"]]} if res.matrix_ran and pal.get("persons") else {}),
         **({"variants": list(pal["variants"])} if res.matrix_ran and pal.get("variants") else {}),
     }
 
@@ -1834,6 +1930,13 @@ def render_html(res: PaletteResult) -> str:
                 h = C.normalize_hex(t[mode])
                 parts.append(f"<span><span style=\"display:inline-block;width:10px;height:10px;border-radius:50%;"
                              f"background:{h}\"></span> {_e(t['name'])} {C.format_ratio(C.wcag_contrast(h, R['bg']))}</span>")
+            parts.append("</div>")
+        if pal.get("persons"):   # persons (contract 3.1): rings before the name on this mode's ground
+            parts.append("<h3>Personen</h3><div class=\"row\">")
+            for t in pal["persons"]["tones"]:
+                h = C.normalize_hex(t[mode])
+                parts.append(f"<span><span style=\"display:inline-block;width:8px;height:8px;border-radius:50%;"
+                             f"border:2px solid {h}\"></span> {_e(t['name'])} {C.format_ratio(C.wcag_contrast(h, R['bg']))}</span>")
             parts.append("</div>")
         if pal.get("mark"):   # mark (contract 2.5): fill with edge behind text
             f_, e_ = C.normalize_hex(pal["mark"][mode]["fill"]), C.normalize_hex(pal["mark"][mode]["edge"])
