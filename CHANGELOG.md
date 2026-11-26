@@ -10,6 +10,9 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+- FAR-02: eine zweite Ausnahme. Die drei Arten der Rückmeldung (EIN-07) stehen als Icon in einem Kreis auf
+  danger-subtle, success-subtle und accent-subtle; Text steht nie auf dieser Fläche.
+
 - Neues Bauteil Rückmeldung (`design/parts/feedback.md`): Fehler, Wunsch oder Frage aus dem Produkt, ohne Konto, als
   öffentliches Issue des Produkts. Panel auf dem Desktop, Sheet in zwei Schritten auf dem Telefon, nur das Textfeld
   ist Pflicht; ein Bild mit geschwärzten privaten Elementen geht erst nach einem Blick mit, in Produkten mit
