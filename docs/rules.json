@@ -1525,6 +1525,24 @@
    "changed": "2026-11-21"
   },
   {
+   "id": "NAV-12",
+   "area": "navigation",
+   "title": "Rückmeldung geben: im Menü jeder Ansicht",
+   "rule": "Biete in jeder Ansicht „Rückmeldung geben“ im Menü „Mehr“ an, im vorletzten Block vor „Hilfe“; auf einer Website im Fuß jeder Seite, auf jeder Fehlerseite mit dem Fehler schon eingetragen. Auf Android darf Schütteln das Formular öffnen, nur wenn die Person es eingeschaltet hat. Nie ein schwebender Knopf.",
+   "rule_en": "Every view offers „Rückmeldung geben“ in its „Mehr“ menu, in the second last block before „Hilfe“; a website in the footer of every page, an error page with the error filled in. On Android shaking may open it only when the person switched it on. Never a floating button.",
+   "why": "Wer etwas melden will, sucht es dort, wo die seltenen Aktionen stehen. Ein schwebender Knopf liegt immer über dem Inhalt und ist die zweite laute Fläche (HAL-05); Schütteln geht aus Versehen los und bleibt darum aus, bis die Person es will.",
+   "do": "Menü „Mehr“: … · „Rückmeldung geben“ · „Hilfe“; Fehlerseite „Seite nicht gefunden“ mit „Rückmeldung geben“, im Formular steht die Adresse schon.",
+   "dont": "Ein runder Knopf „Feedback“ am Bildschirmrand; Schütteln ab Werk an; „Rückmeldung geben“ nur in den Einstellungen.",
+   "numbers": "Eintrag im vorletzten Block des Menüs; Schütteln ab Werk aus",
+   "platforms": [
+    "alle"
+   ],
+   "status": "vorläufig",
+   "check": "Jede Ansicht mit Menü „Mehr“ hat den Eintrag vor „Hilfe“; Website: Fuß und Fehlerseiten haben ihn; Android: die Einstellung zum Schütteln steht auf aus.",
+   "example_hint": "Menü „Mehr“ mit „Rückmeldung geben“ vor „Hilfe“; falsch: schwebender Knopf unten rechts.",
+   "changed": "2026-11-26"
+  },
+  {
    "id": "LNK-01",
    "area": "links",
    "title": "Ein Link-Stil überall",
@@ -1841,6 +1859,24 @@
    "example_hint": "Kein Live-Beispiel (nur in Compose gebaut): Tabelle Teil → Form (richtig) neben Zahlenfeld, Zifferblatt und freier Minute (falsch).",
    "note": "Vorläufig: kein Weiterzählen bei langem Drücken, 24 Stunden auch im Englischen, das Blatt öffnet ganz und seine Liste ist höchstens halb so hoch wie der Bildschirm. Nicht geprüft: auf einem Gerät, mit TalkBack.",
    "changed": "2026-11-21"
+  },
+  {
+   "id": "EIN-07",
+   "area": "eingaben",
+   "title": "Rückmeldung: ein Textfeld, ein Bild erst nach dem Blick",
+   "rule": "Bau die Rückmeldung als Panel unten am Ende (Desktop) oder als Sheet in zwei Schritten, erst die Art, dann der Text (Telefon). Die Art ist „Fehler“, „Wunsch“ oder „Frage“ mit denselben drei Icons im Kreis, auf dem Desktop freiwillig. Pflicht ist nur das Textfeld. Die App nimmt die eigene Ansicht beim Öffnen auf; was das Produkt als privat markiert, ist darin schon geschwärzt, „Bearbeiten“ schwärzt und markiert mehr, „Weglassen“ lässt es weg, höchstens drei Bilder. Ein Bild geht nur mit, wenn die Person es angesehen hat; ein Produkt mit sensiblen Daten (TEC-12) schickt keines, außer es erlaubt Bilder ausdrücklich. Was automatisch mitgeht, ist vor dem Senden einsehbar. Eine App ohne INTERNET öffnet das Formular des Dienstes im Browser, ohne Bild. Am Fuß steht „Öffentlich auf GitHub, ohne deinen Namen. Keine persönlichen Daten hineinschreiben.“, danach „Danke, ist angekommen.“ mit dem Link zum Issue.",
+   "rule_en": "Feedback is a panel at the bottom end (desktop) or a sheet in two steps, kind then text (phone). Kind „Fehler“, „Wunsch“, „Frage“ with the same three icons in a circle, optional on the desktop. Only the text is required. The app captures its own view on opening with every element the product marks private blacked out; „Bearbeiten“ blacks out and marks more, „Weglassen“ drops it, at most three pictures. A picture goes along only after the person looked at it; a product with sensitive data (TEC-12) sends none unless it allows them on purpose. What goes along by itself can be read before sending. An app without INTERNET opens the service's form in the browser, without a picture. The foot says „Öffentlich auf GitHub, ohne deinen Namen. Keine persönlichen Daten hineinschreiben.“; afterwards „Danke, ist angekommen.“ with the issue's link.",
+   "why": "Eine Rückmeldung kostet Mühe; je weniger Pflicht, desto mehr kommen an. Das Issue ist öffentlich: Was das Produkt vergisst zu markieren, stünde sonst auf GitHub, darum entscheidet ein Blick über jedes Bild, und wo Gesundheits- oder vergleichbare Daten zu sehen sein können, bleibt es ohne Bild.",
+   "do": "Sheet Schritt 1: drei Zeilen mit Käfer, Glühbirne, Fragezeichen; Schritt 2: Textfeld, Bild mit „Bearbeiten“ und „Weglassen“, „Was mitgeht“ zum Aufklappen, „Senden“.",
+   "dont": "Name und E-Mail als Pflichtfelder; ein Bild, das ungesehen mitgeht; ein Bildschirmfoto mit den Einträgen einer Zyklus-App; Metadaten im Bild.",
+   "numbers": "1 Pflichtfeld; höchstens 3 Bilder; Desktop ab 640 px Panel, darunter Sheet",
+   "platforms": [
+    "alle"
+   ],
+   "status": "vorläufig",
+   "check": "Senden geht mit Text allein; ohne angesehenes Bild geht keins mit; im Bild eines Musters sind alle privat markierten Elemente schwarz; ein gesendetes Bild trägt keine EXIF- oder anderen Metadaten.",
+   "example_hint": "Panel unten rechts mit Art, Textfeld, Bild und „Was mitgeht“; falsch: Formular mit Pflichtfeld E-Mail.",
+   "changed": "2026-11-26"
   },
   {
    "id": "DAT-01",
@@ -4124,6 +4160,24 @@
    "example_hint": "Tabelle Ort → Inhalt (sb-table): Datenbank „verschlüsselt“, Sperre „PIN-Hash, versiegelt“, DataStore nur „Hell oder Dunkel“, Mitteilung „Erinnerung“; falsch: eine Zeile „DataStore: modus = schwangerschaft“ und eine Mitteilung mit dem Wert.",
    "note": "Grenzen. Android: Hardwaregestützt ist der Keystore nur auf Geräten mit TEE oder StrongBox; solange die App läuft, hält sie den Datenbankschlüssel im Arbeitsspeicher, und Schadcode mit Root auf dem entsperrten Gerät liest mit. Web-App: Der nicht exportierbare Schlüssel liegt im Profil des Browsers neben den Daten. Er schützt davor, dass ein Skript den Rohschlüssel abzieht, und vor dem Lesen gespeicherter Werte ohne den Browser; wer das ganze Profil hat oder ein Skript in der Seite ausführt, liest mit. Mehr Schutz braucht ein Geheimnis außerhalb des Browsers: ein Passwort der Person, einen Passkey mit PRF oder einen Server. Desktop: Der Schlüsselbund bindet den Schlüssel an das Konto im Betriebssystem, hardwaregestützt nur, wo das System es tut; unter Linux braucht er einen laufenden Secret Service, sonst gilt der Fehlerzustand. Stronghold (tauri-plugin-stronghold) nimmt ein neues Produkt nicht: Ein Tauri-Maintainer schrieb am 18.09.2023, es werde nicht mehr empfohlen und in Tauri v3 entfernt. Beleg zu security-crypto: Versionshinweise von androidx.security, 1.1.0-alpha07 und 1.1.0-beta01: „Deprecated all APIs in favour of existing platform APIs and direct use of Android Keystore.“ (https://developer.android.com/jetpack/androidx/releases/security) Desktop: Den Inhaltsschutz des Fensters setzt Tauri unter Windows und macOS; unter Linux ist er nicht unterstützt (tao, set_content_protection: „iOS / Android / Linux: Unsupported.“). Eine Webseite hat keinen Weg, Bildschirmfotos zu verhindern.",
    "changed": "2026-11-22"
+  },
+  {
+   "id": "TEC-14",
+   "area": "technik",
+   "title": "So wenige Berechtigungen wie möglich",
+   "rule": "Verlang so wenige Berechtigungen wie möglich, besonders INTERNET. Wo der Zweck der App davon profitiert, ist INTERNET erlaubt; die App führt es dann in ihrer Liste der Berechtigungen und sagt in ihren Fakten, wohin sie sich verbindet.",
+   "rule_en": "As few permissions as possible, INTERNET above all. Where the app's purpose gains from it, INTERNET is allowed; the app then lists it with its permissions and states in its facts where it connects to.",
+   "why": "Jede Berechtigung ist ein Versprechen weniger; ohne INTERNET kann eine App nichts senden, und das lässt sich prüfen. Wo eine Verbindung der App wirklich nützt, wäre ein Verbot schlechter für die Person als eine offen genannte Verbindung.",
+   "do": "Eine Notiz-App ohne INTERNET; eine App, die Rückmeldungen mit Bild senden soll oder eine Fernbedienung im WLAN ist, mit INTERNET in release-permissions.txt und dem Ziel in den Fakten.",
+   "dont": "INTERNET für eine Bibliothek, die die App nicht braucht; INTERNET ohne Eintrag in der Liste und ohne Ziel in den Fakten.",
+   "numbers": "INTERNET nur mit Eintrag in release-permissions.txt",
+   "platforms": [
+    "mobile"
+   ],
+   "status": "entschieden",
+   "check": "Die Release-Prüfung des Starters bricht ab, wenn INTERNET im Release steht und release-permissions.txt es nicht nennt; die Fakten nennen jedes Ziel einer Verbindung.",
+   "example_hint": "Liste der Berechtigungen einer App mit INTERNET und dem Ziel in den Fakten; falsch: INTERNET, das keine Liste nennt.",
+   "changed": "2026-11-26"
   }
  ]
 }

@@ -29,6 +29,7 @@ The rare actions of an area behind one button („Mehr“), and the choices of a
 - Name every menu and submenu. [EBE-07]
 - A delete row ends in „…“, opens the confirm dialog and never deletes directly. [EBE-07, AKT-10]
 - An item without a target is disabled, never hidden. [AKT-10]
+- „Rückmeldung geben“ stands in the second last block, before „Hilfe“. [NAV-12]
 - Group headings only for two or more groups that a separator alone does not explain. A heading is text, never an
   item.
 - On macOS a desktop app uses the native context menu: order, hairline and „…“ hold, danger colour and icon do not.
