@@ -1,6 +1,6 @@
 # Avatar
 
-`sb-avatar`, `sb-avatars` · `SbAvatar`, `SbAvatars`
+`sb-avatar`, `sb-avatars`, `sb-person` · `SbAvatar`, `SbAvatars`, `SbPerson`
 
 A person, shown as initials in a circle. The circle tells people from app signs, which are rounded squares.
 
@@ -17,5 +17,6 @@ A person, shown as initials in a circle. The circle tells people from app signs,
 
 ## Rules
 
-- Initials in a ring, no fill. With person colours the ring is 2 px in the person's tone. [DAT-06, FAR-16]
+- Initials in a ring, no fill. With person colours the ring is 2 px in the person's tone (`data-sb-person`,
+  `tone`). Where no avatar fits, `sb-person` puts a small ring before the name. [DAT-06, FAR-16]
 - The circle is one of the four pill shapes. [FOR-06]

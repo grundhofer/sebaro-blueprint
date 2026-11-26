@@ -10,6 +10,15 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+- Kopie des Systems auf sebaro Foundry v3.1.2: dunkles Thema mit hellerem Grund, Personen-Töne, Stimme für einen
+  Stapel, 12 px zwischen den Karten eines Boards.
+- Neue Werte des dunklen Themas (kühl `bg` `#1B1E24`, `surface` `#1E2126`, `surface-sunken` `#101419`, `border`
+  `#3B3E45`, `border-strong` `#76797F`) und die neu gemessenen Kontraste in FAR-05, FAR-06, FAR-07, FAR-08, FAR-09,
+  FAR-11, EBE-01, LNK-01, STA-03, STA-08, EIN-02, ICO-03, ICO-07 und DAT-11. Die Grenzen bleiben.
+- FAR-16: Die Werkstatt liefert zwölf Personen-Töne; der Satz über die Zeit ohne Töne entfällt. Teile: `sb-person`
+  und `data-sb-person` im Web, `SbAvatar(tone)` und `SbPerson` auf Android (`avatar.md`, Zuordnung in
+  `rules/home.json`).
+
 - HAL-05 und Zusammenarbeit (`design/parts/collaboration.md`): Die Zeitbox darf am Ende einmal leise einen Ton
   geben, aber nur über einen persönlichen Schalter in der Einstellungsansicht, ab Werk aus. Während sie läuft, bleibt
   sie ohne Ton.

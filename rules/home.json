@@ -84,8 +84,8 @@
   },
   "FAR-16": {
    "home": "component",
-   "web": "missing",
-   "android": "missing"
+   "web": "usage",
+   "android": "usage"
   },
   "SCH-01": {
    "home": "core",
