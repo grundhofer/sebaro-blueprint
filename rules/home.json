@@ -835,6 +835,19 @@
   },
   "TEC-13": {
    "home": "check"
+  },
+  "NAV-12": {
+   "home": "component",
+   "web": "missing",
+   "android": "missing"
+  },
+  "EIN-07": {
+   "home": "component",
+   "web": "missing",
+   "android": "missing"
+  },
+  "TEC-14": {
+   "home": "check"
   }
  }
 }

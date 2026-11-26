@@ -10,6 +10,18 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+- Neues Bauteil Rückmeldung (`design/parts/feedback.md`): Fehler, Wunsch oder Frage aus dem Produkt, ohne Konto, als
+  öffentliches Issue des Produkts. Panel auf dem Desktop, Sheet in zwei Schritten auf dem Telefon, nur das Textfeld
+  ist Pflicht; ein Bild mit geschwärzten privaten Elementen geht erst nach einem Blick mit, in Produkten mit
+  sensiblen Daten keines. Im Web und auf Android noch ohne Teil.
+- Neu, vorläufig: NAV-12. „Rückmeldung geben“ steht im Menü „Mehr“ jeder Ansicht vor „Hilfe“, auf Websites im Fuß
+  und auf Fehlerseiten; Schütteln auf Android nur, wenn eingeschaltet; nie ein schwebender Knopf. Das Menü
+  (`menu.md`) nennt den Platz.
+- Neu, vorläufig: EIN-07. Das Formular der Rückmeldung: ein Pflichtfeld, höchstens drei Bilder, ein Bild erst nach
+  dem Blick, was mitgeht ist einsehbar; eine App ohne INTERNET öffnet das Formular im Browser, ohne Bild.
+- Neu: TEC-14. So wenige Berechtigungen wie möglich, besonders INTERNET; wo der Zweck der App davon profitiert, ist
+  INTERNET erlaubt, mit Eintrag in der Liste der Berechtigungen und dem Ziel in den Fakten.
+
 - Kopie des Systems auf sebaro Foundry v3.1.2: dunkles Thema mit hellerem Grund, Personen-Töne, Stimme für einen
   Stapel, 12 px zwischen den Karten eines Boards.
 - Neue Werte des dunklen Themas (kühl `bg` `#1B1E24`, `surface` `#1E2126`, `surface-sunken` `#101419`, `border`
