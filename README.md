@@ -21,7 +21,7 @@ je eine kleine Seite, die sagt, wo der Inhalt jetzt steht; Suchmaschinen sollen 
 |---|---|
 | [design/KERN.md](design/KERN.md) | die 31 Kernregeln; auf Deutsch in [design/KERN.de.md](design/KERN.de.md), `tools/check_budget.py` hält beide gleich |
 | [design/views.md](design/views.md) | die 21 Ansichtstypen |
-| [design/platforms/](design/platforms/) | je Produktart eine Seite: Handy-App, Website, Web-App, Desktop-App |
+| [design/platforms/](design/platforms/) | je Produktart eine Seite: Handy-App, Website, Web-App, Desktop-App, Browser-Erweiterung |
 | [design/parts/](design/parts/) | je Bauteil eine Seite: was es ist, wie es sich verhält, welche Regeln es trägt |
 | [design/checklist.md](design/checklist.md) | Prüfliste je Bildschirm |
 | [rules/rules.json](rules/rules.json) | der ganze Katalog zum Nachschlagen, jede Regel mit ihrem Grund; [rules/home.json](rules/home.json) sagt, wo jede Regel wirkt |

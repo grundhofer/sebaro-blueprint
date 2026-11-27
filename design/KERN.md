@@ -95,10 +95,12 @@ The 31 rules to hold in mind when you build or change a sebaro screen; the rest 
 ## Fixed places
 
 28. The theme choice is called „Hell oder Dunkel“, with „Farbton: Kühl · Warm“ beside it. Phone app: in settings.
-    Website: a button in the header. Web app: in the „Mehr“ menu. Desktop: in the menu „Darstellung“.
+    Website: a button in the header. Web app and an extension's options page: in the „Mehr“ menu. Desktop: in the menu
+    „Darstellung“.
     [AKT-09]
-29. Start: the whole screen in the product colour with the white symbol, then the app; a website has none. „Über“
-    shows tile, name, version and the sender: „Ein Werkzeug von“ (English „A tool by“), then the sebaro key mark.
+29. Start: the whole screen in the product colour with the white symbol, then the app; a website and an extension's
+    popup have none. „Über“ shows tile, name, version and the sender: „Ein Werkzeug von“ (English „A tool by“), then
+    the sebaro key mark.
     [STR-01]
 
 ## Accessibility floor

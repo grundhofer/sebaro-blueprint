@@ -848,6 +848,15 @@
   },
   "TEC-14": {
    "home": "check"
+  },
+  "ERW-01": {
+   "home": "platform-extension"
+  },
+  "ERW-02": {
+   "home": "platform-extension"
+  },
+  "ERW-03": {
+   "home": "platform-extension"
   }
  }
 }

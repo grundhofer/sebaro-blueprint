@@ -142,6 +142,12 @@
    "intro": "Was nur für Desktop-Apps (Tauri) und Web-Apps mit Fenster gilt: Fenstergerüst, Titelleiste je System, ausblendbare und ziehbare Fensterteile, die Taste „Menü“, feste Kürzel, Dokument-Reiter, Ziehen und Ablegen, mehrere Fenster, Einstellungen als Ansicht."
   },
   {
+   "id": "plattform-erweiterung",
+   "prefix": "ERW",
+   "title": "Plattform Erweiterung",
+   "intro": "Was nur für Browser-Erweiterungen (Chrome und Firefox) gilt: das Popup als eine Ansicht, Berechtigungen erst beim Bedarf und nur für eine Seite, die eigene Oberfläche eines Inhaltsskripts. Optionsseite, Meldungen und Store-Text folgen den Regeln der Web-App (NAV-06), des Telefons (MOB-09) und der Ehrlichkeit."
+  },
+  {
    "id": "technik",
    "prefix": "TEC",
    "title": "Technik",
@@ -4178,6 +4184,63 @@
    "check": "Die Release-Prüfung des Starters bricht ab, wenn INTERNET im Release steht und release-permissions.txt es nicht nennt; die Fakten nennen jedes Ziel einer Verbindung.",
    "example_hint": "Liste der Berechtigungen einer App mit INTERNET und dem Ziel in den Fakten; falsch: INTERNET, das keine Liste nennt.",
    "changed": "2026-11-26"
+  },
+  {
+   "id": "ERW-01",
+   "area": "plattform-erweiterung",
+   "title": "Popup: eine Ansicht, kein Rahmen, kein Start",
+   "rule": "Bau das Popup einer Erweiterung als eine Ansicht: oben Kachel und Titel, dann der Inhalt, unten höchstens eine Hauptaktion mit ihrer Zeile zum Datenweg. Keine Navigation, kein Menü „Mehr“, kein Start in der Produktfarbe. Ein Link führt zur Optionsseite, die alles Weitere trägt. Auf einer Seite, auf der die Erweiterung nichts tun kann, zeigt das Popup seinen leeren Zustand, keinen Fehler.",
+   "rule_en": "The popup of an extension is one view: tile and title on top, the content, at most one primary action at the bottom with its data-path line. No navigation, no „Mehr“ menu, no start in the product colour. A link leads to the options page, which carries the rest. On a page the extension cannot act on, the popup shows its empty state, not an error.",
+   "why": "Das Popup öffnet sich bei jedem Klick auf das Symbol und schließt, sobald man daneben klickt: Es ist ein Blick und ein Handgriff. Ein Start bei jedem Öffnen hielte genau diesen Handgriff auf, ein Rahmen mit Orten passt nicht in rund 380 px.",
+   "do": "Popup auf einer Produktseite: Titel „Diese Seite“, Feld mit dem erkannten Namen, unten „Sichern in Einträge“ und „Bleibt auf diesem Gerät.“; darunter der Link „Alle Einträge“.",
+   "dont": "Eine untere Navigation im Popup; das Menü „Mehr“ im Popup; der Start in der Produktfarbe bei jedem Öffnen; „Fehler“ auf einer Browser-Seite wie dem neuen Tab.",
+   "numbers": "Breite des Popups rund 380 px; eine Hauptaktion",
+   "platforms": [
+    "extension"
+   ],
+   "status": "vorläufig",
+   "check": "Das Popup hat genau eine Ansicht mit data-sb-view, keine Navigation und kein .sb-start; der Screens-Test der Vorlage prüft es in Hell bei 390 px und in Dunkel bei 1440 px.",
+   "example_hint": "Popup mit Kachel, Titel, zwei Feldern und der Hauptaktion unten; falsch: Popup mit drei Orten unten.",
+   "note": "Vorläufig, mit der Produktart browser-extension angelegt; noch kein Produkt veröffentlicht.",
+   "changed": "2026-11-28"
+  },
+  {
+   "id": "ERW-02",
+   "area": "plattform-erweiterung",
+   "title": "Berechtigung erst beim Bedarf, für genau eine Seite",
+   "rule": "Frag nur nach Berechtigungen, die die Erweiterung für das braucht, was sie tut. Den Zugriff auf Seiten fragst du nie bei der Installation, sondern erst, wenn die Person die Handlung auslöst, die ihn braucht, und nur für den Ursprung der offenen Seite (https://beispiel.de/*), nie für alle Seiten. Unter der Aktion steht eine Zeile, wofür: „Nur für beispiel.de: damit <App> die Seite auch lesen kann, wenn sie nicht offen ist.“ Ist der Zugriff erteilt, steht er als Glyphe und Wort da.",
+   "rule_en": "Ask only for the permissions the extension needs for what it does. Never ask for site access at install: ask when the person starts the act that needs it, and only for the origin of the open page (https://example.org/*), never for all sites. A line under the action says what for. Once granted, it shows as glyph and word.",
+   "why": "Eine Erweiterung, die bei der Installation alle Seiten lesen will, verlangt Vertrauen, das sie noch nicht verdient hat, und die Stores prüfen sie strenger. Wer einen Zugriff im Moment der Handlung für genau eine Seite gewährt, weiß, wofür.",
+   "do": "Im Popup die Zeile „Zugriff auf beispiel.de“ mit „Erlauben“ und darunter der Satz, wofür; danach „erlaubt“ mit Glyphe. Im Manifest optional_host_permissions, keine host_permissions.",
+   "dont": "host_permissions: [\"<all_urls>\"] bei der Installation; ein Inhaltsskript auf jeder Seite ab Werk; eine Anfrage ohne Satz, wofür; eine Anfrage beim Öffnen des Popups statt beim Druck.",
+   "numbers": "ein Ursprung je Anfrage",
+   "platforms": [
+    "extension"
+   ],
+   "status": "vorläufig",
+   "check": "Das Manifest hat keine host_permissions und optional_host_permissions für den Bedarf; die Anfrage nennt genau ein Muster <Ursprung>/*; die Prüfung des Builds der Vorlage lehnt host_permissions ab.",
+   "example_hint": "„Zugriff auf beispiel.de · Erlauben“ mit dem Satz darunter; falsch: der Dialog „Alle Ihre Daten auf allen Websites lesen“ bei der Installation.",
+   "note": "Vorläufig. In Firefox muss die Anfrage der erste Aufruf im Klick der Person sein; dort kann sich das Popup beim Dialog schließen (nicht geprüft).",
+   "changed": "2026-11-28"
+  },
+  {
+   "id": "ERW-03",
+   "area": "plattform-erweiterung",
+   "title": "Inhaltsskript: eigene Oberfläche im Shadow DOM, die Seite bleibt",
+   "rule": "Lass ein Inhaltsskript nur laufen, wenn die Person es auslöst. Seine eigene Oberfläche steht in einem geschlossenen Shadow DOM an einem einzigen Element, mit den Tokens von sebaro und ohne die Stile der Seite; die Seite selbst ändert es nicht. Esc beendet es, ein Knopf auch, und danach ist die Seite wie vorher.",
+   "rule_en": "A content script runs only when the person starts it. Its own interface stands in a closed shadow root on one host element, with sebaro's tokens and without the page's styles; it does not change the page. Esc ends it, and so does a button; afterwards the page is as before.",
+   "why": "Die Seite gehört ihrem Anbieter und der Person, nicht der Erweiterung: Was sie hineinschreibt, kann die Seite brechen, und die Stile der Seite würden die eigene Oberfläche verbiegen. Ein Ausweg mit der Tastatur gehört zu jedem Modus.",
+   "do": "Auswahlmodus: ein Rahmen in Kobalt folgt dem Zeiger, eine Leiste unten sagt „Klick einen Text auf der Seite. Esc bricht ab.“ mit „Abbrechen“; der Klick erreicht die Seite nicht.",
+   "dont": "Stile oder Elemente in die Seite schreiben, die bleiben; ein Overlay ohne Esc; ein Inhaltsskript auf jeder Seite ab Werk.",
+   "numbers": "ein Host-Element; Esc beendet",
+   "platforms": [
+    "extension"
+   ],
+   "status": "vorläufig",
+   "check": "Nach Esc ist document.documentElement.outerHTML wie vorher; der Klick im Auswahlmodus löst keine Navigation aus (Test der Vorlage auf einer Testseite).",
+   "example_hint": "Leiste unten mit einem Satz und „Abbrechen“ über einer fremden Seite; falsch: eine eingefärbte Seite, die nach dem Schließen so bleibt.",
+   "note": "Vorläufig. Die Schrift sebaro Sans lädt nicht in eine fremde Seite; die Leiste nimmt dort system-ui.",
+   "changed": "2026-11-28"
   }
  ]
 }

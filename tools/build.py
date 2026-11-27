@@ -543,15 +543,15 @@ def moved_page(name: str, sentences: str, links: list[tuple[str, str]]) -> str:
 
 def llms_txt() -> str:
     lines = ["# sebaro Blueprint", "",
-             "> The design guide of every sebaro app, website, web app and desktop app: the 31 core rules, the view "
-             "types, one concept page per part, the rules per platform type, components and data display. German UI "
-             "language (du). Technology plans and starters live in the private workshop.", "",
+             "> The design guide of every sebaro app, website, web app, desktop app and browser extension: the 31 core "
+             "rules, the view types, one concept page per part, the rules per platform type, components and data "
+             "display. German UI language (du). Technology plans and starters live in the private workshop.", "",
              f"Machine-readable rules: {SITE_URL}rules.json · Agent entry: {REPO_URL}/blob/main/AGENTS.md", "",
              "## Building a product", "",
              f"- [Core rules]({REPO_URL}/blob/main/design/KERN.md) and [view types]({REPO_URL}/blob/main/design/views.md): "
              "the 31 rules and 21 view types to read before any UI work",
              f"- [Platform types]({REPO_URL}/tree/main/design/platforms): what holds for a phone app, a website, a web "
-             "app or a desktop app beyond the core rules",
+             "app, a desktop app or a browser extension beyond the core rules",
              f"- [Parts]({REPO_URL}/tree/main/design/parts): one concept page per part",
              f"- [Playbooks]({REPO_URL}/blob/main/skills/sebaro/SKILL.md): start a new product or convert an existing "
              "project, as an agent skill",

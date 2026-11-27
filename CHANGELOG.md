@@ -10,6 +10,18 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+- Neue Produktart Browser-Erweiterung (Chrome und Firefox, Manifest V3): Seite `design/platforms/extension.md`, Zeile
+  `browser-extension` in der Tabelle des Skills und im Abschnitt für die `AGENTS.md`. Neuer Bereich „Plattform
+  Erweiterung“ (ERW) im Katalog.
+- Neu, vorläufig: ERW-01. Das Popup ist eine Ansicht ohne Navigation, ohne Menü „Mehr“ und ohne Start; unten
+  höchstens eine Hauptaktion, ein Link führt zur Optionsseite; auf einer Seite ohne Wirkung der leere Zustand.
+- Neu, vorläufig: ERW-02. Berechtigungen nur für das, was die Erweiterung tut; Zugriff auf Seiten erst beim Auslösen
+  und nur für den Ursprung der offenen Seite, mit einer Zeile, wofür.
+- Neu, vorläufig: ERW-03. Ein Inhaltsskript läuft nur auf Auslösen; seine Oberfläche steht in einem geschlossenen
+  Shadow DOM, Esc beendet es, die Seite bleibt unverändert.
+- Kernregeln 28 und 29: „Hell oder Dunkel“ steht in einer Erweiterung im Menü „Mehr“ ihrer Optionsseite; das Popup
+  einer Erweiterung hat keinen Start.
+
 - FAR-02: eine zweite Ausnahme. Die drei Arten der Rückmeldung (EIN-07) stehen als Icon in einem Kreis auf
   danger-subtle, success-subtle und accent-subtle; Text steht nie auf dieser Fläche.
 
