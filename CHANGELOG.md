@@ -10,6 +10,13 @@ Regeln, geänderte Werte und neue Seiten; **Korrektur** für Wortlaut, Beispiele
 
 ## Unveröffentlicht
 
+- Neu, vorläufig: TEC-15. Jede App mit Inhalten der Person sichert sie von selbst in einen Ordner, den die Person
+  über die Ordnerwahl des Systems gewählt hat, verschlüsselt mit einem einmal aus ihrem Passwort abgeleiteten
+  Schlüssel (PBKDF2-HMAC-SHA256, Salt je Reihe), den ein Keystore-Schlüssel versiegelt; das Passwort wird nie
+  gespeichert, jede Datei geht allein mit dem Passwort auf. Täglich oder wöchentlich und kurz nach einer Änderung,
+  die neuesten Dateien bleiben, neutrale Namen, ein ruhiger Hinweis; „Aus Sicherung wiederherstellen“ neben der
+  Hauptaktion der leeren Kernansicht. Neue Seite `design/parts/backup.md`.
+
 - Neue Produktart Browser-Erweiterung (Chrome und Firefox, Manifest V3): Seite `design/platforms/extension.md`, Zeile
   `browser-extension` in der Tabelle des Skills und im Abschnitt für die `AGENTS.md`. Neuer Bereich „Plattform
   Erweiterung“ (ERW) im Katalog.
