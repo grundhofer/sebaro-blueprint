@@ -48,7 +48,7 @@ READING = 2_650
 READING_FILES = ("skills/sebaro/SKILL.md", "design/KERN.md", "design/views.md")
 READING_LARGEST = "design/platforms/*.md"
 HOMES = {"core", "view", "component", "words", "platform-web", "platform-android", "platform-ios",
-         "platform-desktop", "check", "extra-evidence", "extra-images", "playbook", "lowered"}
+         "platform-desktop", "platform-extension", "check", "extra-evidence", "extra-images", "playbook", "lowered"}
 CORE_SECTIONS, CORE_RULES = 10, 31
 
 

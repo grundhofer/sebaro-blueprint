@@ -6,8 +6,8 @@
 This product follows sebaro. The kit is `https://github.com/grundhofer/sebaro-blueprint`; use a local checkout where
 there is one.
 
-- **Kind:** <phone app | website | web app | desktop app>. Its rules beyond the core:
-  `<kit>/design/platforms/<mobile | website | webapp | desktop>.md`. Its technology plan: `templates/<kind>/BLUEPRINT.md` in
+- **Kind:** <phone app | website | web app | desktop app | browser extension>. Its rules beyond the core:
+  `<kit>/design/platforms/<mobile | website | webapp | desktop | extension>.md`. Its technology plan: `templates/<kind>/BLUEPRINT.md` in
   the private `grundhofer/sebaro-foundry` (read with `gh`).
 - **Before any UI work** read `<kit>/design/KERN.md` (31 core rules) and pick the view type of the screen in
   `<kit>/design/views.md`.

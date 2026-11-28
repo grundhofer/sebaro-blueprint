@@ -103,11 +103,12 @@ Regeln. Sie sagen dasselbe wie die englische Fassung [KERN.md](KERN.md).
 ## Feste Orte
 
 28. Die Wahl des Erscheinungsbilds heißt „Hell oder Dunkel“, daneben steht „Farbton: Kühl · Warm“. Handy-App: in den
-    Einstellungen. Website: ein Knopf im Kopf. Web-App: im Menü „Mehr“. Desktop: im Menü „Darstellung“.
+    Einstellungen. Website: ein Knopf im Kopf. Web-App und Optionsseite einer Erweiterung: im Menü „Mehr“. Desktop: im
+    Menü „Darstellung“.
     [AKT-09]
-29. Start: die ganze Fläche in der Produktfarbe mit dem weißen Symbol, dann die App; eine Website hat keinen.
-    „Über“ zeigt Kachel, Name, Version und den Absender: „Ein Werkzeug von“ (englisch „A tool by“), dann das
-    Markenschild von sebaro. [STR-01]
+29. Start: die ganze Fläche in der Produktfarbe mit dem weißen Symbol, dann die App; eine Website und das Popup
+    einer Erweiterung haben keinen. „Über“ zeigt Kachel, Name, Version und den Absender: „Ein Werkzeug von“ (englisch
+    „A tool by“), dann das Markenschild von sebaro. [STR-01]
 
 ## Boden der Barrierefreiheit
 

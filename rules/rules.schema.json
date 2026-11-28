@@ -89,6 +89,7 @@
     "plattform-web",
     "plattform-mobile",
     "plattform-desktop",
+    "plattform-erweiterung",
     "technik"
    ]
   },
@@ -114,7 +115,7 @@
    "properties": {
     "id": {
      "type": "string",
-     "pattern": "^(HAL|FAR|SCH|RAU|FOR|EBE|BEW|AKT|NAV|LNK|STA|EIN|DAT|TXT|BEL|ZEI|ICO|BIL|ZUG|STR|WEB|MOB|DSK|TEC)-\\d{2}$",
+     "pattern": "^(HAL|FAR|SCH|RAU|FOR|EBE|BEW|AKT|NAV|LNK|STA|EIN|DAT|TXT|BEL|ZEI|ICO|BIL|ZUG|STR|WEB|MOB|DSK|ERW|TEC)-\\d{2}$",
      "description": "Stable id: area prefix + two-digit number."
     },
     "area": {
@@ -161,7 +162,8 @@
        "alle",
        "web",
        "mobile",
-       "desktop"
+       "desktop",
+       "extension"
       ]
      }
     },
